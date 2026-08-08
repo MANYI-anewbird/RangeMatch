@@ -1,0 +1,38 @@
+{
+  "parcel_id": "XPV_REYNOLDS_001",
+  "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+  "path_statuses": {
+    "F01_TOPOGRAPHY": {
+      "status": "SUCCESS",
+      "error": null
+    },
+    "F02_HERBACEOUS_RESOURCE": {
+      "status": "SUCCESS",
+      "error": null
+    },
+    "F03_LIVESTOCK_WATER": {
+      "status": "SUCCESS",
+      "error": null
+    },
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+      "status": "DEGRADED",
+      "error": "SSLError: HTTPSConnectionPool(host='api.mireye.com', port=443): Max retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1, '[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)')))"
+    },
+    "F05_CLIMATE_DROUGHT_EXPOSURE": {
+      "status": "DEGRADED",
+      "error": "SSLError: HTTPSConnectionPool(host='api.mireye.com', port=443): Max retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1, '[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)')))"
+    }
+  },
+  "operation_labels": {
+    "COW_CALF_OPERATION": "HOLD",
+    "SHEEP_GRAZING": "HOLD"
+  },
+  "factor_signals": {
+    "F01_TOPOGRAPHY": "CONTEXT_DEPENDENT",
+    "F02_HERBACEOUS_RESOURCE": "NEEDS_VERIFICATION",
+    "F03_LIVESTOCK_WATER": "NEEDS_VERIFICATION",
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE": "CONTEXT_DEPENDENT",
+    "F05_CLIMATE_DROUGHT_EXPOSURE": "CONTEXT_DEPENDENT"
+  },
+  "validation_result_path": "test-data/cross-parcel-validation/XPV_REYNOLDS_001/validation_result.yaml"
+}

@@ -1,0 +1,71 @@
+test_suite_id: RANGEMATCH_LAND_FACT_GATE_GOLDEN_TESTS
+schema_version: 0.1.0
+status: REVIEW_CANDIDATE
+
+cases:
+  - test_id: LF_GATE_001
+    description: Applicable aggregate RAP value is limited context when coverage is unquantified.
+    input:
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COVERAGE_UNQUANTIFIED
+      provenance_complete: true
+    expected:
+      use_as_context: true
+      use_as_strong_factor_evidence: false
+      confidence_cap: LIMITED_BY_UNQUANTIFIED_COVERAGE
+
+  - test_id: LF_GATE_002
+    description: Numeric API result outside product scope is not primary evidence.
+    input:
+      value_present: true
+      applicability_status: OUTSIDE_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COMPLETE
+    expected:
+      use_as_primary_factor_evidence: false
+      factor_state: NEEDS_VERIFICATION
+
+  - test_id: LF_GATE_003
+    description: Unknown applicability requires verification before scientific interpretation.
+    input:
+      value_present: true
+      applicability_status: UNKNOWN
+    expected:
+      factor_state: NEEDS_VERIFICATION
+      diligence_action: VERIFY_PRODUCT_DOMAIN
+
+  - test_id: LF_GATE_004
+    description: Raster adapter success does not automatically establish complete coverage.
+    input:
+      adapter_status: RASTER_VERIFIED
+      valid_coverage_fraction: null
+    expected:
+      coverage_status_must_not_equal: COMPLETE
+
+  - test_id: LF_GATE_005
+    description: Missing provenance prevents verified Land Fact promotion.
+    input:
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COMPLETE
+      provenance_complete: false
+    expected:
+      land_fact_verification_status: NEEDS_VERIFICATION
+
+  - test_id: LF_GATE_006
+    description: Complete applicable and provenance-backed data can reach scientific evaluation.
+    input:
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COMPLETE
+      provenance_complete: true
+    expected:
+      next_gate: VARIABLE_DERIVATION
+
+prohibited_behavior_tests:
+  - test_id: LF_NEG_001
+    prohibited_behavior: API_VALUE_IMPLIES_APPLICABILITY
+  - test_id: LF_NEG_002
+    prohibited_behavior: MASKED_OR_NODATA_AREA_IMPUTED_ZERO
+  - test_id: LF_NEG_003
+    prohibited_behavior: RASTER_ADAPTER_SUCCESS_IMPLIES_COMPLETE_COVERAGE
+  - test_id: LF_NEG_004
+    prohibited_behavior: COVERAGE_UNQUANTIFIED_EMITS_STRONG_SIGNAL
+

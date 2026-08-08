@@ -1,0 +1,5 @@
+{
+  "fields": {},
+  "error": "SSLError: HTTPSConnectionPool(host='api.mireye.com', port=443): Max retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1, '[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)')))",
+  "role": "POINT_QA_OPTIONAL"
+}

@@ -1,0 +1,60 @@
+{
+  "type": "FeatureCollection",
+  "name": "ENGINEERING_TEST_GEOMETRY_KONZA_001",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ENGINEERING_TEST_GEOMETRY_KONZA_001",
+      "properties": {
+        "site_name": "Konza Prairie Biological Station coverage extent",
+        "geometry_role": "ENGINEERING_TEST_GEOMETRY",
+        "official_pasture_boundary": false,
+        "purchasable_parcel": false,
+        "suitability_ground_truth": false,
+        "known_operation_outcome_required": false,
+        "reference_operation": null,
+        "synthetic_subpolygon": true,
+        "approximate_geodesic_area_ha": 143.94,
+        "area_method": "WGS84 spherical rectangle approximation for test documentation",
+        "intended_validation_slots": [
+          "SLOT_HUMID_STRONG_HERB"
+        ],
+        "source_extent_id": "KONZA_PRAIRIE_BIOLOGICAL_STATION_PUBLIC_EXTENT",
+        "source_citations": [
+          "https://en.wikipedia.org/wiki/Konza_Prairie",
+          "https://www.neonscience.org/field-sites/konz",
+          "https://doi.org/10.6073/pasta/2716ff680705925ddd5a37a4523f0020"
+        ],
+        "selection_rationale": "Humid/subhumid tallgrass prairie research extent with substantially higher long-term precip than CPER; stresses F02 herbaceous contrast and F05 precip contrast. Engineering subpolygon only.",
+        "created_on": "2026-08-08"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.57,
+              39.1
+            ],
+            [
+              -96.555,
+              39.1
+            ],
+            [
+              -96.555,
+              39.09
+            ],
+            [
+              -96.57,
+              39.09
+            ],
+            [
+              -96.57,
+              39.1
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

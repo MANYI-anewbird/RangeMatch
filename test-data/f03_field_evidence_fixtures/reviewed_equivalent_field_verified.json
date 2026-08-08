@@ -1,0 +1,68 @@
+{
+  "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+  "evidence_use_limit": "TEST_ONLY",
+  "package_id": "SYNTH_PKG_REVIEWED_EQUIVALENT",
+  "evidence_class": "REVIEWED_EQUIVALENT",
+  "candidate_id": "SYNTHETIC:pond:001",
+  "source_feature_id": "SYNTH_FEAT_001",
+  "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+  "attempted_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+  "parcel_context": {
+    "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+    "parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "candidate_linkage": {
+    "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+    "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+    "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "evidence_hashes": {
+    "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "observed_or_fetched_at": "2026-07-01T15:00:00Z",
+  "as_of": "2026-07-01T15:00:00Z",
+  "review_date": "2026-08-08",
+  "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1",
+  "limitations": [],
+  "dimensions": {
+    "feature_identity": {
+      "type": "pond",
+      "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+      "source_feature_id": "SYNTH_FEAT_001"
+    },
+    "physical_presence": {
+      "status": "confirmed",
+      "source": "reviewed_equivalent",
+      "observation_date": "2026-07-10",
+      "review_note": "Synthetic reviewed-equivalent package treated as field/operational equivalent for TEST_ONLY demo."
+    },
+    "seasonal_reliability": {
+      "status": "intermittent",
+      "observation_period": "2024-2026"
+    },
+    "livestock_accessibility": {
+      "status": "supported"
+    },
+    "capacity_and_quality": {
+      "capacity": {
+        "status": "documented",
+        "value": 25000,
+        "unit": "gallon_storage",
+        "scenario_reference": "summer_stock_water_2026",
+        "unknown_rationale": null
+      },
+      "water_quality": {
+        "status": "verified",
+        "diligence_required": false,
+        "evidence_source_ids": [
+          "SYNTH_LAB_RESULT_001"
+        ]
+      }
+    },
+    "legal_access": {
+      "status": "verified",
+      "basis": "owned_deed_stock_water"
+    }
+  },
+  "scenario_label": "REVIEWED_EQUIVALENT_FIELD_VERIFIED"
+}

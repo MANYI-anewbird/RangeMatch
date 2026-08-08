@@ -1,0 +1,2002 @@
+{
+  "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+  "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+  "input_quality_state": "PARCEL_COMPLETE",
+  "source_fixture_references": [
+    "test-data/live-results/cper/cper_sda_spatial_coverage_2026-08-07.json",
+    "test-data/live-results/cper/cper_sda_mapunit_component_ecosite_2026-08-07.json",
+    "test-data/live-results/cper/cper_sda_horizons_2026-08-07.json",
+    "test-data/live-results/cper/cper_sda_restrictions_2026-08-07.json",
+    "test-data/live-results/cper/cper_sda_monthly_wetness_2026-08-07.json",
+    "test-data/live-results/cper/cper_ecological_site_access_2026-08-07.json"
+  ],
+  "parcel_coverage": {
+    "status": "COMPLETE",
+    "detail": "COMPLETE_WITH_NUMERIC_TOLERANCE",
+    "requested_area_m2": 1404078.7002779155,
+    "covered_area_m2": 1404078.7002779734,
+    "uncovered_area_m2": 0.0,
+    "coverage_fraction": 1.0,
+    "coverage_calculated_from_polygon_intersection": true,
+    "successful_query_implies_complete_coverage": false,
+    "intersecting_mapunit_count": 5
+  },
+  "mapunit_area_distribution": {
+    "95111": 0.09539280003713739,
+    "95132": 0.1551515998998313,
+    "95134": 0.2642193495724037,
+    "95143": 0.06314209034847544,
+    "95151": 0.42209416014219336
+  },
+  "component_support_weights": [
+    {
+      "mukey": "95134",
+      "cokey": "26599152",
+      "compname": "Nunn",
+      "comppct_r": 85.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.2642193495724037,
+      "component_support_weight": 0.2245864471365431,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R067BY042CO",
+      "ecoclassname": "Clayey Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95151",
+      "cokey": "26599213",
+      "compname": "Renohill",
+      "comppct_r": 50.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.42209416014219336,
+      "component_support_weight": 0.21104708007109668,
+      "drainagecl": "Well drained",
+      "hydgrp": "D",
+      "ecoclassid": "R067BY002CO",
+      "ecoclassname": "Loamy Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95151",
+      "cokey": "26599214",
+      "compname": "Shingle",
+      "comppct_r": 35.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.42209416014219336,
+      "component_support_weight": 0.14773295604976766,
+      "drainagecl": "Well drained",
+      "hydgrp": "D",
+      "ecoclassid": "R067BY045CO",
+      "ecoclassname": "Shaly Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95132",
+      "cokey": "26599030",
+      "compname": "Ascalon",
+      "comppct_r": 85.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.1551515998998313,
+      "component_support_weight": 0.1318788599148566,
+      "drainagecl": "Well drained",
+      "hydgrp": "B",
+      "ecoclassid": "R067BY024CO",
+      "ecoclassname": "Sandy Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95111",
+      "cokey": "26599076",
+      "compname": "Cascajo",
+      "comppct_r": 85.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.09539280003713739,
+      "component_support_weight": 0.08108388003156677,
+      "drainagecl": "Excessively drained",
+      "hydgrp": "A",
+      "ecoclassid": "R067BY063CO",
+      "ecoclassname": "Gravel Breaks",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95143",
+      "cokey": "26599032",
+      "compname": "Ascalon",
+      "comppct_r": 85.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.06314209034847544,
+      "component_support_weight": 0.05367077679620412,
+      "drainagecl": "Well drained",
+      "hydgrp": "B",
+      "ecoclassid": "R067BY024CO",
+      "ecoclassname": "Sandy Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95151",
+      "cokey": "26599212",
+      "compname": "Midway",
+      "comppct_r": 8.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.42209416014219336,
+      "component_support_weight": 0.03376753281137547,
+      "drainagecl": null,
+      "hydgrp": null,
+      "ecoclassid": null,
+      "ecoclassname": null,
+      "ecoclasstypename": null
+    },
+    {
+      "mukey": "95151",
+      "cokey": "26599211",
+      "compname": "Tassel",
+      "comppct_r": 7.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.42209416014219336,
+      "component_support_weight": 0.029546591209953538,
+      "drainagecl": null,
+      "hydgrp": null,
+      "ecoclassid": null,
+      "ecoclassname": null,
+      "ecoclasstypename": null
+    },
+    {
+      "mukey": "95134",
+      "cokey": "26599150",
+      "compname": "Manzanst",
+      "comppct_r": 10.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.2642193495724037,
+      "component_support_weight": 0.026421934957240368,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R067BY042CO",
+      "ecoclassname": "Clayey Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95111",
+      "cokey": "26599075",
+      "compname": "Stoneham",
+      "comppct_r": 14.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.09539280003713739,
+      "component_support_weight": 0.013354992005199236,
+      "drainagecl": null,
+      "hydgrp": null,
+      "ecoclassid": null,
+      "ecoclassname": null,
+      "ecoclasstypename": null
+    },
+    {
+      "mukey": "95134",
+      "cokey": "26599151",
+      "compname": "Avar",
+      "comppct_r": 5.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.2642193495724037,
+      "component_support_weight": 0.013210967478620184,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R067BY033CO",
+      "ecoclassname": "Salt Flat",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95132",
+      "cokey": "26599031",
+      "compname": "Olnest",
+      "comppct_r": 8.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.1551515998998313,
+      "component_support_weight": 0.012412127991986504,
+      "drainagecl": "Well drained",
+      "hydgrp": "B",
+      "ecoclassid": "R067BY024CO",
+      "ecoclassname": "Sandy Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95132",
+      "cokey": "26599029",
+      "compname": "Otero",
+      "comppct_r": 7.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.1551515998998313,
+      "component_support_weight": 0.01086061199298819,
+      "drainagecl": "Well drained",
+      "hydgrp": "A",
+      "ecoclassid": "R067BY024CO",
+      "ecoclassname": "Sandy Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95143",
+      "cokey": "26599033",
+      "compname": "Stoneham",
+      "comppct_r": 10.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.06314209034847544,
+      "component_support_weight": 0.0063142090348475444,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R067BY002CO",
+      "ecoclassname": "Loamy Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95143",
+      "cokey": "26599034",
+      "compname": "Manter",
+      "comppct_r": 5.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.06314209034847544,
+      "component_support_weight": 0.0031571045174237722,
+      "drainagecl": "Well drained",
+      "hydgrp": "A",
+      "ecoclassid": "R067BY024CO",
+      "ecoclassname": "Sandy Plains",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "95111",
+      "cokey": "26599074",
+      "compname": "Otero",
+      "comppct_r": 1.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.09539280003713739,
+      "component_support_weight": 0.0009539280003713739,
+      "drainagecl": null,
+      "hydgrp": null,
+      "ecoclassid": null,
+      "ecoclassname": null,
+      "ecoclasstypename": null
+    }
+  ],
+  "known_component_share": 1.0,
+  "unaccounted_component_share": 0.0,
+  "component_percentages_renormalized": false,
+  "drainage_class_distribution": {
+    "Excessively drained": 0.08108388003156677,
+    "UNKNOWN": 0.07762304402689962,
+    "Well drained": 0.8412930759415748
+  },
+  "hydrologic_soil_group_distribution": {
+    "A": 0.09510159654197874,
+    "B": 0.19796176470304724,
+    "C": 0.27053355860725115,
+    "D": 0.35878003612086434,
+    "UNKNOWN": 0.07762304402689962
+  },
+  "ponding_frequency_distribution": {
+    "None": 0.9223769559731433,
+    "UNKNOWN": 0.07762304402689965
+  },
+  "flooding_frequency_distribution": {
+    "None": 0.9223769559731433,
+    "UNKNOWN": 0.07762304402689965
+  },
+  "monthly_wetness_records": [
+    {
+      "cokey": "26599029",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599029",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599030",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599031",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599032",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599033",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599034",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 1,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 2,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 3,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 4,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 5,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 6,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 7,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 8,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 9,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 10,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 11,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599074",
+      "monthseq": 12,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 1,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 2,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 3,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 4,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 5,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 6,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 7,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 8,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 9,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 10,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 11,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599075",
+      "monthseq": 12,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599076",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599150",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599151",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599152",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 1,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 2,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 3,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 4,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 5,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 6,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 7,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 8,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 9,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 10,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 11,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599211",
+      "monthseq": 12,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 1,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 2,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 3,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 4,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 5,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 6,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 7,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 8,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 9,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 10,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 11,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599212",
+      "monthseq": 12,
+      "pondfreqcl": "UNKNOWN",
+      "flodfreqcl": "UNKNOWN",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599213",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26599214",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    }
+  ],
+  "restrictive_layer_records": [
+    {
+      "cokey": "26599152",
+      "component_support_weight": 0.2245864471365431,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599213",
+      "component_support_weight": 0.21104708007109668,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Paralithic bedrock",
+      "resdept_r_cm": 74.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599214",
+      "component_support_weight": 0.14773295604976766,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Paralithic bedrock",
+      "resdept_r_cm": 28.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599030",
+      "component_support_weight": 0.1318788599148566,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599076",
+      "component_support_weight": 0.08108388003156677,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599032",
+      "component_support_weight": 0.05367077679620412,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599212",
+      "component_support_weight": 0.03376753281137547,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599211",
+      "component_support_weight": 0.029546591209953538,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599150",
+      "component_support_weight": 0.026421934957240368,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599075",
+      "component_support_weight": 0.013354992005199236,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599151",
+      "component_support_weight": 0.013210967478620184,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Natric",
+      "resdept_r_cm": 8.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599031",
+      "component_support_weight": 0.012412127991986504,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599029",
+      "component_support_weight": 0.01086061199298819,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599033",
+      "component_support_weight": 0.0063142090348475444,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599034",
+      "component_support_weight": 0.0031571045174237722,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26599074",
+      "component_support_weight": 0.0009539280003713739,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    }
+  ],
+  "restrictive_layer_distribution": {
+    "Natric|8.0": 0.013210967478620184,
+    "Paralithic bedrock|28.0": 0.14773295604976766,
+    "Paralithic bedrock|74.0": 0.21104708007109668,
+    "UNKNOWN": 0.6280089964005565
+  },
+  "ecological_site_references": [
+    {
+      "ecological_site_id": "R067BY042CO",
+      "ecological_site_name": "Clayey Plains",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.25100838209378346,
+      "public_description_access_status": "UNKNOWN",
+      "access_error_type": "TimeoutError",
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY042CO",
+      "retrieval_timestamp": "2026-08-07T22:30:00Z",
+      "response_hash": null,
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R067BY002CO",
+      "ecological_site_name": "Loamy Plains",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.21736128910594424,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY002CO",
+      "retrieval_timestamp": "2026-08-07T22:30:00Z",
+      "response_hash": "b841012aa705fb9924be575bf2c84cbc365cddbe7d141ac8fe147291f57c78b0",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R067BY024CO",
+      "ecological_site_name": "Sandy Plains",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.2119794812134592,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY024CO",
+      "retrieval_timestamp": "2026-08-07T22:30:00Z",
+      "response_hash": "055940266eef154d2eaa2d4c019d3073bf074d3bdbb52edf2745d01129eceb47",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R067BY045CO",
+      "ecological_site_name": "Shaly Plains",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.14773295604976766,
+      "public_description_access_status": "UNKNOWN",
+      "access_error_type": "TimeoutError",
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY045CO",
+      "retrieval_timestamp": "2026-08-07T22:30:00Z",
+      "response_hash": null,
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R067BY063CO",
+      "ecological_site_name": "Gravel Breaks",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.08108388003156677,
+      "public_description_access_status": "UNKNOWN",
+      "access_error_type": "TimeoutError",
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY063CO",
+      "retrieval_timestamp": "2026-08-07T22:30:00Z",
+      "response_hash": null,
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R067BY033CO",
+      "ecological_site_name": "Salt Flat",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.013210967478620184,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY033CO",
+      "retrieval_timestamp": "2026-08-07T22:30:00Z",
+      "response_hash": "1b1f762297e56f2a2be0da7527e5266ccbbb68e151c95a219317ad1737d52762",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    }
+  ],
+  "ecological_site_unknown_share": 0.07762304402689962,
+  "available_water_storage": {
+    "status": "METHOD_INPUT_REQUIRED",
+    "derived_storage_mm": null,
+    "target_depth_cm": null,
+    "represented_depth_cm": null,
+    "depth_coverage_fraction": null,
+    "component_support_coverage_fraction": null,
+    "component_results": [],
+    "limitations": [
+      "Available-water storage requires an explicitly declared depth interval.",
+      "AWC is not forage production or operation suitability."
+    ]
+  },
+  "mireye_point_qa": {
+    "role": "POINT_DISPLAY_AND_QA_ONLY",
+    "may_represent_whole_parcel": false,
+    "fetched_at": "2026-08-07T21:57:00.329871+00:00",
+    "fields": {
+      "soil_map_unit_name": {
+        "value": "Renohill-Shingle complex, 3 to 9 percent slopes",
+        "unit": null,
+        "source": "NRCS_gNATSGO",
+        "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+        "confidence": "high",
+        "fetched_at": "2026-08-07T21:53:47.376701+00:00",
+        "dataset_vintage": null,
+        "ttl_seconds": 31536000,
+        "notes": null,
+        "status": "ok"
+      },
+      "soil_drainage_class": {
+        "value": "Well drained",
+        "unit": null,
+        "source": "NRCS_gNATSGO",
+        "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+        "confidence": "high",
+        "fetched_at": "2026-08-07T21:53:47.376724+00:00",
+        "dataset_vintage": null,
+        "ttl_seconds": 31536000,
+        "notes": null,
+        "status": "ok"
+      },
+      "soil_ponding_frequency_class": {
+        "value": "None",
+        "unit": null,
+        "source": "NRCS_gNATSGO",
+        "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+        "confidence": "medium",
+        "fetched_at": "2026-08-07T21:53:47.376828+00:00",
+        "dataset_vintage": null,
+        "ttl_seconds": 31536000,
+        "notes": "dominant-component worst-case ponding frequency across its monthly SSURGO records (comonth.pondfreqcl); 'None' is a real value meaning the component does not pond, not missing data",
+        "status": "ok"
+      },
+      "soil_hydrologic_group": {
+        "value": "D",
+        "unit": null,
+        "source": "NRCS_gNATSGO",
+        "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+        "confidence": "high",
+        "fetched_at": "2026-08-07T21:53:47.376713+00:00",
+        "dataset_vintage": null,
+        "ttl_seconds": 31536000,
+        "notes": null,
+        "status": "ok"
+      },
+      "soil_restrictive_layer_depth_cm": {
+        "value": 74.0,
+        "unit": "cm",
+        "source": "NRCS_gNATSGO",
+        "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+        "confidence": "medium",
+        "fetched_at": "2026-08-07T21:53:47.376802+00:00",
+        "dataset_vintage": null,
+        "ttl_seconds": 31536000,
+        "notes": null,
+        "status": "ok"
+      },
+      "soil_restrictive_layer_kind": {
+        "value": "Paralithic bedrock",
+        "unit": null,
+        "source": "NRCS_gNATSGO",
+        "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+        "confidence": "medium",
+        "fetched_at": "2026-08-07T21:53:47.376813+00:00",
+        "dataset_vintage": null,
+        "ttl_seconds": 31536000,
+        "notes": null,
+        "status": "ok"
+      },
+      "soil_available_water_capacity": {
+        "value": 0.14,
+        "unit": "cm/cm",
+        "source": "NRCS_gNATSGO",
+        "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+        "confidence": "medium",
+        "fetched_at": "2026-08-07T21:53:47.376736+00:00",
+        "dataset_vintage": null,
+        "ttl_seconds": 31536000,
+        "notes": null,
+        "status": "ok"
+      }
+    },
+    "partial_failures": []
+  },
+  "applicability": {
+    "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+    "review_status": "VERIFIED",
+    "basis": [
+      "F04_SOIL_SITE_ATOMICITY_AND_SOURCE_AUDIT",
+      "CPER_LIVE_DATA_GATE"
+    ],
+    "notes": "F04 v0.1 is data-quality and context only; no directional suitability signal is approved."
+  },
+  "coverage": {
+    "status": "COMPLETE",
+    "requested_area_m2": 1404078.7002779155,
+    "valid_area_m2": 1404078.7002779734,
+    "valid_coverage_fraction": 1.0,
+    "adapter_status": "SDA_POLYGON_AND_TABULAR_VERIFIED"
+  },
+  "quality": {
+    "confidence_state": "SUPPORTED",
+    "modeled": false,
+    "component_count": 16,
+    "horizon_record_count": 56,
+    "restriction_record_count": 16,
+    "monthly_wetness_record_count": 192,
+    "components_with_ecological_site_linkage": 12,
+    "derivation_contract_verified": true,
+    "numeric_average_of_controlled_categories": false
+  },
+  "provenance": {
+    "source_reference": "USDA_NRCS_SDA_SSURGO_AND_EDIT",
+    "fetched_at": "2026-08-07T22:30:00Z",
+    "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "response_or_artifact_hash": "2807be243bc959b2eab4e2177986aa8cf88f0defd7b7694b001c95ab837dc4b8",
+    "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+    "primary_path": "OFFICIAL_SDA_PARCEL_POLYGONS_COMPONENTS_HORIZONS",
+    "mireye_role": "POINT_DISPLAY_AND_QA_ONLY"
+  },
+  "limitations": [
+    "No composite soil score is created.",
+    "Controlled categories are preserved as distributions, not ordinal averages.",
+    "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+    "Ecological-site names do not imply current vegetation or operation ranking.",
+    "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+    "Available-water storage is omitted from profile evidence until a depth interval is approved."
+  ],
+  "unknowns": [
+    "Within-map-unit component locations are unknown.",
+    "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+    "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+    "Ecological-site references do not establish current vegetation state.",
+    "No approved depth interval exists for parcel available-water storage in the Land Profile.",
+    "Some components lack ecological-site linkage; absent linkage remains UNKNOWN."
+  ],
+  "ranking_effect": "NONE",
+  "directional_signal_allowed": false
+}

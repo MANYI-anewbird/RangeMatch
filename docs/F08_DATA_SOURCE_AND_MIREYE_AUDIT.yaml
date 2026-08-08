@@ -1,0 +1,207 @@
+audit_id: RANGEMATCH_F08_WOODY_DATA_SOURCE_AND_MIREYE_AUDIT
+version: 0.1.0
+language: English
+status: FROZEN_V0_1
+audit_date: 2026-08-08
+factor_id: F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE
+implementation_status: FROZEN_V0_1
+f08_audit_package: APPROVED_V0_1_FOR_IMPLEMENTATION
+f08_runtime_authorization: AUTHORIZED
+f08_freeze_status: FROZEN_V0_1
+f09_authorization: NOT_AUTHORIZED
+demo_factor_scope: CLOSED
+f07_freeze_status: FROZEN_V0_1
+f02_coverage_upgrade: DEFERRED_FOR_DEMO
+unit_policy:
+  runtime_land_fact_unit: fraction
+  valid_range: [0.0, 1.0]
+  rap_native_unit: percent_cover
+  conversion: fraction = RAP_percent / 100
+  preserve_raw_rap_percent_in_provenance: REQUIRED
+
+purpose: >-
+  Identify candidate woody/shrub data sources for F08, define Mireye’s point-only
+  role, and lock shared RAP acquisition/coverage design with F02 before any
+  runtime adapter work.
+
+mireye:
+  catalog_version: 0.14.0
+  role: POINT_QA_AND_FAST_CONTEXT_ONLY
+  parcel_aggregation_supported: false
+  may_replace_rap_shr_tre: false
+  fields_of_interest:
+    - field_id: lcms_class
+      source: USFS_LCMS
+      semantics: POINT life-form / cover-class sample (~120 m context)
+      permitted_use: Point vegetation-structure QA and discovery only
+      prohibited_use:
+        - Parcel shrub or tree fractional cover
+        - Browse availability
+        - Replacement for RAP SHR/TRE
+    - field_id: tree_canopy_pct
+      source: USFS_NLCD_TCC
+      unit: percent
+      semantics: POINT tree canopy percent from NLCD TCC grid
+      permitted_use: Point tree-canopy QA only when explicitly fetched
+      prohibited_use:
+        - Parcel RAP TRE Land Fact
+        - Automatic grazing obstruction class
+    - field_id: land_use_class
+      source: USFS_LCMS
+      semantics: POINT land-use class
+      permitted_use: Context only
+      prohibited_use: Woody fractional cover or suitability
+  exact_rap_fields_in_mireye: []
+  exact_numeric_f08_rap_fields: []
+  note: >-
+    Existing CPER Mireye point fixture includes lcms_class
+    "Grass/Forb/Herb & Shrubs Mix" and does not establish parcel SHR/TRE.
+    Do not issue unnecessary duplicate Mireye fetches for F08 if a recent
+    point QA artifact already exists for the same coordinate/request set.
+
+canonical_source_proposal:
+  source_id: USDA_ARS_RAP_V3_COVER
+  product: Rangeland Analysis Platform vegetation cover v3
+  endpoint: coverV3
+  bands_for_f08:
+    - SHR
+    - TRE
+  shared_with_f02_bands_not_owned_by_f08:
+    - AFG
+    - PFG
+    - BGR
+  deferred_band:
+    - LTR
+  vintage_or_year: required_on_every_result
+  mask_default: true
+  role: PROPOSED_CANONICAL_PARCEL_WOODY_COVER
+  permitted_use:
+    - Parcel-mean shrub and tree cover as normalized fractions [0,1]
+    - Derived combined_modeled_woody_cover_fraction = SHR_fraction + TRE_fraction
+    - Shared applicability and coverage context with F02
+  prohibited_use:
+    - Browse availability, palatability, nutrition, toxicity
+    - Automatic obstruction or brush-management decision
+    - Proof of low herbaceous production
+    - Cow-Calf versus Sheep ranking
+    - Forced sum-to-100 repair
+    - Treating combined modeled woody as an independent RAP canopy band
+    - Upgrading shared COVERAGE_UNQUANTIFIED to COMPLETE in F08 alone
+
+shared_rap_acquisition_with_f02:
+  one_coverV3_request_per_geometry_year_mask: REQUIRED_WHEN_BOTH_FACTORS_PRESENT
+  share_response_or_artifact_hash: REQUIRED_WHEN_REUSING_SAME_RESPONSE
+  same_artifact: REQUIRED
+  same_geometry_hash: REQUIRED
+  same_source_year: REQUIRED
+  same_mask: REQUIRED
+  same_applicability_status: REQUIRED
+  same_coverage_status: REQUIRED
+  share_applicability_gate: true
+  share_coverage_record: true
+  share_mask_behavior: true
+  duplicate_api_when_artifact_exists: PROHIBITED
+  f02_coverage_deepening: DEFERRED_FOR_DEMO_DO_NOT_FORK
+  separate_factor_storage: true
+  demo_when_coverage_unquantified:
+    input_quality_state: WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED
+    signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+  note: >-
+    F08 reads SHR/TRE from the same coverV3 artifact F02 uses for AFG/PFG/BGR
+    context. Do not create a second contradictory RAP coverage state machine.
+    COVERAGE_UNQUANTIFIED must not become COMPLETE / CONTEXT_DEPENDENT in F08.
+
+secondary_source_candidates:
+  - source_id: USFS_LCMS
+    role: POINT_QA_VIA_MIREYE_ONLY_IN_V0_1
+    distinct_necessary_parcel_context: false
+  - source_id: USFS_NLCD_TCC
+    role: POINT_QA_VIA_MIREYE_ONLY_IN_V0_1
+    distinct_necessary_parcel_context: false
+  - source_id: NLCD_OR_LCMS_PARCEL_AGGREGATE
+    role: DEFER
+    note: >-
+      Not required for F08 v0.1 while RAP coverV3 already provides parcel
+      SHR/TRE. If later introduced, never average with RAP.
+
+rap_component_sum_policy:
+  force_sum_to_100: PROHIBITED
+  include_combined_modeled_woody_in_composition_sum: PROHIBITED
+  treat_null_shr_or_tre_as_zero: PROHIBITED
+  observed_sum_as_qa_note_only: ALLOWED
+  rationale: >-
+    RAP natively returns percent cover. Runtime Land Facts normalize to
+    fraction. Product materials describe six cover components as percent
+    partitions that often approach 100%, but existing CPER aggregate fixtures
+    do not sum exactly to 100. Missing mass remains unknown. Combined modeled
+    woody is derived context only and must not participate in a composition
+    identity.
+
+combined_modeled_woody_policy:
+  variable: combined_modeled_woody_cover_fraction
+  formula: shrub_cover_fraction + tree_cover_fraction
+  if_either_null: null
+  independence: DERIVED_NOT_INDEPENDENT_RAP_BAND
+  renamed_from: woody_canopy_cover_fraction
+
+explicit_non_equivalences:
+  - SHRUB_COVER_IS_NOT_PALATABLE_BROWSE_AVAILABILITY
+  - TREE_COVER_IS_NOT_AUTOMATIC_GRAZING_OBSTRUCTION
+  - WOODY_COVER_IS_NOT_PROOF_OF_LOW_HERBACEOUS_PRODUCTION
+  - MIREYE_POINT_IS_NOT_PARCEL_WOODY_DISTRIBUTION
+  - LCMS_OR_NLCD_IS_NOT_RAP_FRACTIONAL_COVER
+
+species_evidence_audit:
+  cow_calf:
+    requirement_id: COW_F08_001
+    status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    supported_narrow_claim: >-
+      Cattle diets are often grass-dominated on western ranges; shrub use is
+      typically lower than sheep in some mountain common-use studies and is
+      site/species dependent.
+    unsupported:
+      - RAP SHR as cattle browse quantity
+      - RAP TRE as cattle exclusion threshold
+      - ranking versus Sheep
+    example_sources:
+      - title: Forage Use by Cattle and Sheep Grazing Separately and Together on Summer Range in Southwestern Utah
+        type: peer_reviewed_journal
+        applicability: mountain summer range; not universal CONUS rule
+        limitation: Local species mix (e.g., snowberry); not RAP validation
+      - title: Increasing Shrub Use by Livestock in a World with Less Grass (Estell et al. 2012)
+        type: peer_reviewed_journal
+        doi_or_url: https://doi.org/10.2111/REM-D-11-00132.1
+        limitation: Management essay/review of constraints; no numeric RAP threshold
+  sheep:
+    requirement_id: SHEEP_F08_001
+    status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    supported_narrow_claim: >-
+      Sheep often consume more forbs/browse than cattle in some western mountain
+      comparisons, but shrub fractional cover still does not equal palatable
+      browse availability.
+    unsupported:
+      - RAP SHR as sheep browse adequacy
+      - Sheep-above-Cattle ranking from woody cover
+    example_sources:
+      - title: Forage Use by Cattle and Sheep Grazing Separately and Together on Summer Range in Southwestern Utah
+        type: peer_reviewed_journal
+        applicability: mountain summer range; not universal CONUS rule
+      - title: NRCS grazing land management guidance (Managed Grazing / inventory balance)
+        type: usda_nrcs_directive
+        limitation: Requires forage inventory and animal demand; remote woody cover is not a feed balance
+
+gate_decision:
+  audit_complete_for_source_candidates: true
+  required_contract_fixes_applied:
+    - normalize_percent_vs_fraction_semantics
+    - rename_woody_canopy_to_combined_modeled_woody_cover
+    - align_f02_f08_coverage_signal_behavior
+  f08_audit_package: APPROVED_V0_1_FOR_IMPLEMENTATION
+  ready_for_implementation_authorization: true
+  canonical_rap_shr_tre_human_approved: true
+  runtime_implementation_authorized: true
+  cper_data_reuse_gate: DATA_REUSE_VERIFIED
+  f09_authorized: false
+  mireye_can_complete_f08_alone: false
+  mireye_can_support_point_qa: true

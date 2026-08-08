@@ -1,0 +1,59 @@
+{
+  "type": "FeatureCollection",
+  "name": "ENGINEERING_TEST_GEOMETRY_REYNOLDS_001",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ENGINEERING_TEST_GEOMETRY_REYNOLDS_001",
+      "properties": {
+        "site_name": "Reynolds Creek Experimental Watershed coverage extent",
+        "geometry_role": "ENGINEERING_TEST_GEOMETRY",
+        "official_pasture_boundary": false,
+        "purchasable_parcel": false,
+        "suitability_ground_truth": false,
+        "known_operation_outcome_required": false,
+        "reference_operation": null,
+        "synthetic_subpolygon": true,
+        "approximate_geodesic_area_ha": 135.42,
+        "area_method": "WGS84 spherical rectangle approximation for test documentation",
+        "intended_validation_slots": [
+          "SLOT_RUGGED_SHEEP_RELEVANT"
+        ],
+        "source_extent_id": "REYNOLDS_CREEK_EXPERIMENTAL_WATERSHED_PUBLIC_EXTENT",
+        "source_citations": [
+          "https://ltar.ars.usda.gov/sites/gb/",
+          "https://www.ars.usda.gov/pacific-west-area/boise-id/northwest-watershed-research-center/"
+        ],
+        "selection_rationale": "Mountainous USDA-ARS experimental watershed with documented high local relief; selected to stress F01 terrain context for sheep-relevant ruggedness literature without assigning a Sheep known-operation outcome or ranking expectation.",
+        "created_on": "2026-08-08"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -116.76,
+              43.105
+            ],
+            [
+              -116.745,
+              43.105
+            ],
+            [
+              -116.745,
+              43.095
+            ],
+            [
+              -116.76,
+              43.095
+            ],
+            [
+              -116.76,
+              43.105
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

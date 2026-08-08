@@ -1,0 +1,35 @@
+{
+  "type": "Feature",
+  "id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "properties": {
+    "mask": true,
+    "year": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -104.770000,
+          40.830000
+        ],
+        [
+          -104.755000,
+          40.830000
+        ],
+        [
+          -104.755000,
+          40.820000
+        ],
+        [
+          -104.770000,
+          40.820000
+        ],
+        [
+          -104.770000,
+          40.830000
+        ]
+      ]
+    ]
+  }
+}

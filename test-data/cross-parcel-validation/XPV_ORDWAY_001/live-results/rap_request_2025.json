@@ -1,0 +1,35 @@
+{
+  "type": "Feature",
+  "id": "ENGINEERING_TEST_GEOMETRY_ORDWAY_001",
+  "properties": {
+    "mask": true,
+    "year": 2025
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -82.0,
+          29.695
+        ],
+        [
+          -81.985,
+          29.695
+        ],
+        [
+          -81.985,
+          29.685
+        ],
+        [
+          -82.0,
+          29.685
+        ],
+        [
+          -82.0,
+          29.695
+        ]
+      ]
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+test_suite_id: RANGEMATCH_F01_TOPOGRAPHY_GOLDEN_TESTS
+rule_spec_version: 0.1.0
+status: REVIEW_CANDIDATE
+
+cases:
+  - test_id: F01_TEST_001
+    description: Complete parcel distribution remains context dependent.
+    input_quality_state: PARCEL_COMPLETE
+    expected:
+      cow_calf_signal: CONTEXT_DEPENDENT
+      sheep_signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+
+  - test_id: F01_TEST_002
+    description: One Mireye point cannot stand in for the parcel.
+    input_quality_state: POINT_ONLY
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      diligence_action: F01_DIL_001
+
+  - test_id: F01_TEST_003
+    description: Missing parcel terrain remains unknown.
+    input_quality_state: MISSING
+    expected:
+      cow_calf_signal: UNKNOWN
+      sheep_signal: UNKNOWN
+      ranking_effect: NONE
+      diligence_action: F01_DIL_001
+
+  - test_id: F01_TEST_004
+    description: Conflicting terrain sources are not silently reconciled.
+    input_quality_state: CONFLICTING_SOURCES
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      diligence_action: F01_DIL_002
+
+  - test_id: F01_TEST_005
+    description: Incomplete derivation provenance requires verification.
+    input_quality_state: PARCEL_INCOMPLETE
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      diligence_action: F01_DIL_001
+
+prohibited_behavior_tests:
+  - test_id: F01_NEG_001
+    prohibited_output: numeric_suitability_score
+  - test_id: F01_NEG_002
+    prohibited_output: universal_slope_cutoff
+  - test_id: F01_NEG_003
+    prohibited_output: automatic_sheep_terrain_advantage
+  - test_id: F01_NEG_004
+    prohibited_output: hard_reject_from_topography_alone
+  - test_id: F01_NEG_005
+    prohibited_output: parcel_conclusion_from_point_sample
+

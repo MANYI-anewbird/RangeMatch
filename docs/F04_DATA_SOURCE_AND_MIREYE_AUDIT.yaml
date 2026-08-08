@@ -1,0 +1,82 @@
+audit_id: RANGEMATCH_F04_DATA_SOURCE_AUDIT
+version: 0.1.0
+language: English
+status: CPER_LIVE_GATE_PASSED_WITH_POINT_VS_PARCEL_LIMITATION
+factor_id: F04_SOIL_WETNESS_ECOLOGICAL_SITE
+
+source_priority:
+  - source: USDA_NRCS_SOIL_DATA_ACCESS_SSURGO
+    role: PRIMARY_SOIL_MAP_AND_TABULAR_SOURCE
+    live_status: VERIFIED_FOR_CPER_TABULAR_AND_SPATIAL
+  - source: USDA_NRCS_EDIT
+    role: ECOLOGICAL_SITE_DESCRIPTION_REFERENCE
+    live_status: COMPONENT_LINKAGE_AND_SIX_OF_SIX_PUBLIC_DESCRIPTIONS_VERIFIED
+  - source: MIREYE
+    role: FAST_POINT_CONTEXT_OR_ADAPTER_IF_FIELDS_ARE_VERIFIED
+    live_status: VERIFIED_POINT_CONTEXT_ONLY
+
+cper_live_result:
+  geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_001
+  geometry_sha256: 932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309
+  sda:
+    parcel_coverage_status: COMPLETE_WITH_NUMERIC_TOLERANCE
+    mapunit_count: 5
+    component_count: 16
+    components_with_ecological_site_linkage: 12
+    distinct_ecological_site_ids: 6
+    horizon_record_count: 56
+    restriction_record_count: 16
+    monthly_wetness_record_count: 192
+    horizon_records_with_missing_awc_ec_ph: 2
+    components_without_restrictive_layer_record: 13
+    monthly_records_with_missing_ponding_and_flooding_class: 48
+  edit:
+    public_description_urls_tested: 6
+    public_description_urls_accessible: 6
+  mireye:
+    spatial_semantics: POINT_AT_PARCEL_CENTROID
+    returned_requested_field_count: 7
+    partial_failure_count: 0
+    may_represent_whole_parcel: false
+  interpretation: >-
+    Official SDA parcel data are the primary F04 path. Mireye point fields are
+    useful for display and QA but cannot replace parcel map-unit/component
+    distributions or coverage calculations.
+
+required_capability_checks:
+  - parcel_mapunit_intersection
+  - mapunit_component_composition
+  - component_and_horizon_provenance
+  - drainage_class
+  - hydrologic_soil_group
+  - available_water_storage_with_declared_depth
+  - restrictive_layer_depth_with_feature_definition
+  - electrical_conductivity_with_declared_depth
+  - soil_reaction_with_declared_depth
+  - ponding_and_flooding_context
+  - component_to_ecological_site_correlation
+  - public_ecological_site_description_availability
+
+aggregation_rules_not_yet_frozen:
+  - continuous_horizon_depth_integration
+  - component_weighting
+  - mapunit_to_parcel_weighting
+  - controlled_category_distribution
+  - null_and_not_rated_handling
+  - minimum_coverage_requirements
+
+prohibited_shortcuts:
+  - dominant_component_equals_mapunit
+  - mapunit_equals_homogeneous_parcel
+  - drainage_class_as_current_moisture
+  - available_water_storage_as_forage_production
+  - ecological_site_as_current_state
+  - ecological_site_as_operation_score
+  - soil_survey_flooding_as_fema_hazard
+  - successful_api_response_as_complete_coverage
+
+next_live_gate:
+  parcel: ENGINEERING_TEST_GEOMETRY_CPER_001
+  actions:
+    - implement_frozen_depth_and_component_aggregation_methods
+    - build_data_quality_rules_before_any_signal

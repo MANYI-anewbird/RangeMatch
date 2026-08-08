@@ -1,0 +1,1496 @@
+{
+  "demo_id": "F03_FIELD_EVIDENCE_INGESTION_DEMO",
+  "suite": {
+    "suite_id": "F03_FIELD_EVIDENCE_SYNTHETIC_DEMO",
+    "ingestion_spec_version": "0.1.0",
+    "contract_version": "0.1.1",
+    "outcome_count": 12,
+    "outcomes": [
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_VALID_FIELD_VERIFIED",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.642253331875004,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+        "reason_codes": [
+          "FIELD_VERIFIED_CRITERIA_MET"
+        ],
+        "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "reason_codes": [
+            "FIELD_VERIFIED_CRITERIA_MET"
+          ],
+          "promoted_to_remotely_supported": true,
+          "promoted_to_field_verified": true,
+          "transition_allowed": true,
+          "ranking_effect": "NONE"
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "evidence_class": "FIELD_OBSERVATION",
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "field",
+              "observation_date": "2026-07-01"
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "documented",
+                "value": 25000,
+                "unit": "gallon_storage",
+                "scenario_reference": "summer_stock_water_2026",
+                "unknown_rationale": null
+              },
+              "water_quality": {
+                "status": "verified",
+                "diligence_required": false,
+                "evidence_source_ids": [
+                  "SYNTH_LAB_RESULT_001"
+                ]
+              }
+            },
+            "legal_access": {
+              "status": "verified",
+              "basis": "owned_deed_stock_water"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2026-07-01T15:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": []
+        }
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_PHYSICAL_SOURCE_UNVERIFIED",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225333490741,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+        "reason_codes": [
+          "FIELD_VERIFIED_CRITERIA_MET"
+        ],
+        "factor_input_quality_state": "PHYSICAL_SOURCE_UNVERIFIED_SYSTEM",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "reason_codes": [
+            "FIELD_VERIFIED_CRITERIA_MET"
+          ],
+          "promoted_to_remotely_supported": true,
+          "promoted_to_field_verified": true,
+          "transition_allowed": true,
+          "ranking_effect": "NONE"
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "evidence_class": "FIELD_OBSERVATION",
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "field",
+              "observation_date": "2026-07-01"
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "unknown",
+                "value": null,
+                "unit": null,
+                "scenario_reference": null,
+                "unknown_rationale": "Pond storage not gauged during field visit; operator estimates only."
+              },
+              "water_quality": {
+                "status": "unknown",
+                "diligence_required": true,
+                "evidence_source_ids": []
+              }
+            },
+            "legal_access": {
+              "status": "verified",
+              "basis": "owned_deed_stock_water"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2026-07-01T15:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": []
+        }
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_VERIFIED_SYSTEM_CONTEXT",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "OPERATOR_OWNER_OPERATIONAL_RECORD",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225333631945,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+        "reason_codes": [
+          "FIELD_VERIFIED_CRITERIA_MET"
+        ],
+        "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "reason_codes": [
+            "FIELD_VERIFIED_CRITERIA_MET"
+          ],
+          "promoted_to_remotely_supported": true,
+          "promoted_to_field_verified": true,
+          "transition_allowed": true,
+          "ranking_effect": "NONE"
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "evidence_class": "OPERATOR_OWNER_OPERATIONAL_RECORD",
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "operator_record_equivalent",
+              "observation_date": "2026-06-15"
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "documented",
+                "value": 25000,
+                "unit": "gallon_storage",
+                "scenario_reference": "summer_stock_water_2026",
+                "unknown_rationale": null
+              },
+              "water_quality": {
+                "status": "verified",
+                "diligence_required": false,
+                "evidence_source_ids": [
+                  "SYNTH_LAB_RESULT_001"
+                ]
+              }
+            },
+            "legal_access": {
+              "status": "verified",
+              "basis": "owned_deed_stock_water"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2026-07-01T15:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": []
+        }
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_CONFLICTING_SOURCES",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": true,
+          "conflicts": [
+            {
+              "conflict_id": "OPERATOR_ACTIVE_TROUGH_VS_FIELD_ABSENT",
+              "dimensions": [
+                "physical_presence"
+              ]
+            },
+            {
+              "conflict_id": "DECLARED_UNRESOLVED_MATERIAL_CONFLICT",
+              "dimensions": [
+                "unspecified"
+              ]
+            }
+          ]
+        },
+        "freshness": {
+          "age_days": 37.64225333770833,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [
+          "Material source conflict; promotion held/demoted."
+        ],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "reason_codes": [
+          "CONFLICTING_SOURCES"
+        ],
+        "factor_input_quality_state": "CONFLICTING_SOURCES",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_MISSING_LEGAL_ACCESS",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225334146991,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "reason_codes": [
+          "LEGAL_ACCESS_UNRESOLVED",
+          "INCOMPLETE_FIELD_VERIFIED_PROMOTION_REJECTED"
+        ],
+        "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "reason_codes": [
+            "LEGAL_ACCESS_UNRESOLVED"
+          ],
+          "promoted_to_remotely_supported": true,
+          "promoted_to_field_verified": false,
+          "transition_allowed": true,
+          "ranking_effect": "NONE"
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "evidence_class": "FIELD_OBSERVATION",
+          "verification_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "field",
+              "observation_date": "2026-07-01"
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "documented",
+                "value": 25000,
+                "unit": "gallon_storage",
+                "scenario_reference": "summer_stock_water_2026",
+                "unknown_rationale": null
+              },
+              "water_quality": {
+                "status": "verified",
+                "diligence_required": false,
+                "evidence_source_ids": [
+                  "SYNTH_LAB_RESULT_001"
+                ]
+              }
+            },
+            "legal_access": {
+              "status": "unresolved"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2026-07-01T15:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": []
+        }
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_MISSING_CAPACITY_RATIONALE",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": false,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": false,
+          "issues": [
+            "capacity.unknown_rationale_missing"
+          ],
+          "blocking_issues": [
+            "capacity.unknown_rationale_missing"
+          ],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225334251157,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "reason_codes": [
+          "EVIDENCE_PACKAGE_INVALID",
+          "capacity.unknown_rationale_missing"
+        ],
+        "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_INVALID_HASH",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": false,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": false,
+          "issues": [
+            "evidence_hashes.response_or_artifact_hash_or_record_hash_invalid"
+          ],
+          "blocking_issues": [
+            "evidence_hashes.response_or_artifact_hash_or_record_hash_invalid"
+          ],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225334310185,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "reason_codes": [
+          "EVIDENCE_PACKAGE_INVALID",
+          "evidence_hashes.response_or_artifact_hash_or_record_hash_invalid"
+        ],
+        "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_STALE_EVIDENCE",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 1300.5,
+          "stale": true,
+          "preferred_max_age_days": 365,
+          "limitations": [
+            "STALE_FIELD_OR_OPERATOR_EVIDENCE retained with review note",
+            "STALE_FIELD_OR_OPERATOR_EVIDENCE age_days=1300.5 preferred_max_age_days=365"
+          ],
+          "staleness_review_note": "Field note older than 365 days retained with explicit staleness limitation; operator corroborated continued pond use in 2026.",
+          "allows_field_verified_with_limitation": true
+        },
+        "limitations": [
+          "STALE_FIELD_OR_OPERATOR_EVIDENCE retained with review note",
+          "STALE_FIELD_OR_OPERATOR_EVIDENCE age_days=1300.5 preferred_max_age_days=365"
+        ],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+        "reason_codes": [
+          "STALE_EVIDENCE_RECORDED_AS_LIMITATION",
+          "FIELD_VERIFIED_CRITERIA_MET"
+        ],
+        "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "reason_codes": [
+            "FIELD_VERIFIED_CRITERIA_MET"
+          ],
+          "promoted_to_remotely_supported": true,
+          "promoted_to_field_verified": true,
+          "transition_allowed": true,
+          "ranking_effect": "NONE"
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "evidence_class": "FIELD_OBSERVATION",
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "field",
+              "observation_date": "2026-07-01"
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "documented",
+                "value": 25000,
+                "unit": "gallon_storage",
+                "scenario_reference": "summer_stock_water_2026",
+                "unknown_rationale": null
+              },
+              "water_quality": {
+                "status": "verified",
+                "diligence_required": false,
+                "evidence_source_ids": [
+                  "SYNTH_LAB_RESULT_001"
+                ]
+              }
+            },
+            "legal_access": {
+              "status": "verified",
+              "basis": "owned_deed_stock_water"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2023-01-15T12:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": [
+            "STALE_FIELD_OR_OPERATOR_EVIDENCE retained with review note",
+            "STALE_FIELD_OR_OPERATOR_EVIDENCE age_days=1300.5 preferred_max_age_days=365"
+          ]
+        }
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_GEOMETRY_MISMATCH",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": false,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": true,
+          "reason": "PARCEL_GEOMETRY_HASH_CHANGED",
+          "expected_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "current_parcel_geometry_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225334480324,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "reason_codes": [
+          "GEOMETRY_MISMATCH_REQUIRES_RELINK",
+          "PARCEL_GEOMETRY_HASH_CHANGED"
+        ],
+        "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_REVIEWED_EQUIVALENT",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "REVIEWED_EQUIVALENT",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225334537037,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+        "reason_codes": [
+          "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+          "FIELD_VERIFIED_CRITERIA_MET"
+        ],
+        "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "reason_codes": [
+            "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+            "FIELD_VERIFIED_CRITERIA_MET"
+          ],
+          "promoted_to_remotely_supported": true,
+          "promoted_to_field_verified": true,
+          "transition_allowed": true,
+          "ranking_effect": "NONE",
+          "provenance_missing_fields": [
+            "provider",
+            "product_name",
+            "source_url",
+            "item_id_or_artifact_reference",
+            "imagery_acquisition_date",
+            "review_date",
+            "reviewer_or_adapter_id",
+            "candidate_geometry_hash",
+            "parcel_geometry_hash",
+            "response_or_artifact_hash",
+            "supported_claim",
+            "unsupported_claims",
+            "limitations",
+            "freshness_status"
+          ]
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "evidence_class": "REVIEWED_EQUIVALENT",
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "reviewed_equivalent",
+              "observation_date": "2026-07-10",
+              "review_note": "Synthetic reviewed-equivalent package treated as field/operational equivalent for TEST_ONLY demo."
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "documented",
+                "value": 25000,
+                "unit": "gallon_storage",
+                "scenario_reference": "summer_stock_water_2026",
+                "unknown_rationale": null
+              },
+              "water_quality": {
+                "status": "verified",
+                "diligence_required": false,
+                "evidence_source_ids": [
+                  "SYNTH_LAB_RESULT_001"
+                ]
+              }
+            },
+            "legal_access": {
+              "status": "verified",
+              "basis": "owned_deed_stock_water"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2026-07-01T15:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": []
+        }
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_MIXED_QUALIFIED",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "MIXED",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225334635417,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+        "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+        "reason_codes": [
+          "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+          "FIELD_VERIFIED_CRITERIA_MET"
+        ],
+        "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "reason_codes": [
+            "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+            "FIELD_VERIFIED_CRITERIA_MET"
+          ],
+          "promoted_to_remotely_supported": true,
+          "promoted_to_field_verified": true,
+          "transition_allowed": true,
+          "ranking_effect": "NONE",
+          "provenance_missing_fields": [
+            "provider",
+            "product_name",
+            "source_url",
+            "item_id_or_artifact_reference",
+            "imagery_acquisition_date",
+            "review_date",
+            "reviewer_or_adapter_id",
+            "candidate_geometry_hash",
+            "parcel_geometry_hash",
+            "response_or_artifact_hash",
+            "supported_claim",
+            "unsupported_claims",
+            "limitations",
+            "freshness_status"
+          ]
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+          "evidence_class": "MIXED",
+          "verification_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "reviewed_equivalent",
+              "observation_date": "2026-07-01",
+              "qualified_field_basis": {
+                "source": "field",
+                "as_of": "2026-07-20T18:00:00Z",
+                "record_or_observation_hash": "9999999999999999999999999999999999999999999999999999999999999999"
+              }
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "documented",
+                "value": 25000,
+                "unit": "gallon_storage",
+                "scenario_reference": "summer_stock_water_2026",
+                "unknown_rationale": null
+              },
+              "water_quality": {
+                "status": "verified",
+                "diligence_required": false,
+                "evidence_source_ids": [
+                  "SYNTH_LAB_RESULT_001"
+                ]
+              }
+            },
+            "legal_access": {
+              "status": "verified",
+              "basis": "owned_deed_stock_water"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2026-07-01T15:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": []
+        }
+      },
+      {
+        "ingestion_spec_version": "0.1.0",
+        "contract_version": "0.1.1",
+        "package_id": "SYNTH_PKG_SKIP_REMOTE_REJECTED",
+        "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+        "evidence_use_limit": "TEST_ONLY",
+        "parcel_id": "SYNTHETIC_PARCEL_F03_001",
+        "candidate_id": "SYNTHETIC:pond:001",
+        "evidence_class": "FIELD_OBSERVATION",
+        "accepted": true,
+        "live_parcel_write_attempted": false,
+        "package_validation": {
+          "ok": true,
+          "issues": [],
+          "blocking_issues": [],
+          "contract_version": "0.1.1",
+          "ingestion_spec_version": "0.1.0"
+        },
+        "geometry_check": {
+          "mismatch": false,
+          "reason": null,
+          "expected_parcel_geometry_hash": null,
+          "current_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "linked_parcel_geometry_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "conflict_check": {
+          "has_conflict": false,
+          "conflicts": []
+        },
+        "freshness": {
+          "age_days": 37.64225334759259,
+          "stale": false,
+          "preferred_max_age_days": 365,
+          "limitations": [],
+          "staleness_review_note": null,
+          "allows_field_verified_with_limitation": false
+        },
+        "limitations": [],
+        "prior_level": "MAPPED_CANDIDATE",
+        "verification_level": "MAPPED_CANDIDATE",
+        "reason_codes": [
+          "SKIP_REMOTELY_SUPPORTED_PROHIBITED",
+          "INCOMPLETE_FIELD_VERIFIED_PROMOTION_REJECTED"
+        ],
+        "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "ranking_effect": "NONE",
+        "suitability_thresholds_added": false,
+        "cow_sheep_ranking_added": false,
+        "wrote_to_live_parcel_profile": false,
+        "promotion_evaluation": {
+          "contract_version": "0.1.1",
+          "schema_validation": {
+            "ok": true,
+            "issues": [],
+            "blocking_issues": [],
+            "contract_version": "0.1.1"
+          },
+          "verification_level": "MAPPED_CANDIDATE",
+          "reason_codes": [
+            "SKIP_REMOTELY_SUPPORTED_PROHIBITED"
+          ],
+          "promoted_to_remotely_supported": false,
+          "promoted_to_field_verified": false,
+          "transition_allowed": false,
+          "ranking_effect": "NONE"
+        },
+        "normalized_record": {
+          "candidate_id": "SYNTHETIC:pond:001",
+          "prior_level": "MAPPED_CANDIDATE",
+          "evidence_class": "FIELD_OBSERVATION",
+          "verification_level": "MAPPED_CANDIDATE",
+          "dimensions": {
+            "feature_identity": {
+              "type": "pond",
+              "geometry_or_point_reference": "2222222222222222222222222222222222222222222222222222222222222222",
+              "source_feature_id": "SYNTH_FEAT_001"
+            },
+            "physical_presence": {
+              "status": "confirmed",
+              "source": "field",
+              "observation_date": "2026-07-01"
+            },
+            "seasonal_reliability": {
+              "status": "intermittent",
+              "observation_period": "2024-2026"
+            },
+            "livestock_accessibility": {
+              "status": "supported"
+            },
+            "capacity_and_quality": {
+              "capacity": {
+                "status": "documented",
+                "value": 25000,
+                "unit": "gallon_storage",
+                "scenario_reference": "summer_stock_water_2026",
+                "unknown_rationale": null
+              },
+              "water_quality": {
+                "status": "verified",
+                "diligence_required": false,
+                "evidence_source_ids": [
+                  "SYNTH_LAB_RESULT_001"
+                ]
+              }
+            },
+            "legal_access": {
+              "status": "verified",
+              "basis": "owned_deed_stock_water"
+            }
+          },
+          "provenance": {
+            "candidate_id": "SYNTHETIC:pond:001",
+            "geometry_or_point_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "source_reference": "SYNTHETIC_FIELD_LOG:visit_001",
+            "fetched_or_observed_at": "2026-07-01T15:00:00Z",
+            "response_or_artifact_hash_or_record_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "geometry_hash_of_parcel_context": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "reviewer_or_adapter_id": "rangematch.f03_field_evidence_test/v1"
+          },
+          "limitations": []
+        }
+      }
+    ],
+    "level_histogram": {
+      "FIELD_VERIFIED_LIVESTOCK_WATER": 6,
+      "MAPPED_CANDIDATE": 1,
+      "REMOTELY_SUPPORTED_CANDIDATE": 5
+    },
+    "aggregate_factor_input_quality_state": "CONFLICTING_SOURCES",
+    "field_verified_count": 6,
+    "live_parcel_write_attempts": 0,
+    "live_parcel_profiles_written": 0,
+    "runtime_rules_changed": false,
+    "ranking_effect": "NONE",
+    "suitability_thresholds_added": false,
+    "cow_sheep_ranking_added": false,
+    "synthetic_live_separation_ok": true
+  },
+  "state_transitions": [
+    {
+      "fixture": "valid_FIELD_VERIFIED_LIVESTOCK_WATER",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+      "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+      "accepted": true,
+      "reason_codes": [
+        "FIELD_VERIFIED_CRITERIA_MET"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "PHYSICAL_SOURCE_UNVERIFIED_SYSTEM",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+      "factor_input_quality_state": "PHYSICAL_SOURCE_UNVERIFIED_SYSTEM",
+      "accepted": true,
+      "reason_codes": [
+        "FIELD_VERIFIED_CRITERIA_MET"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "VERIFIED_WATER_SYSTEM_CONTEXT",
+      "evidence_class": "OPERATOR_OWNER_OPERATIONAL_RECORD",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+      "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+      "accepted": true,
+      "reason_codes": [
+        "FIELD_VERIFIED_CRITERIA_MET"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "CONFLICTING_SOURCES",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "factor_input_quality_state": "CONFLICTING_SOURCES",
+      "accepted": true,
+      "reason_codes": [
+        "CONFLICTING_SOURCES"
+      ],
+      "limitations": [
+        "Material source conflict; promotion held/demoted."
+      ],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "missing_legal_access",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "accepted": true,
+      "reason_codes": [
+        "LEGAL_ACCESS_UNRESOLVED",
+        "INCOMPLETE_FIELD_VERIFIED_PROMOTION_REJECTED"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "missing_capacity_rationale",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "accepted": false,
+      "reason_codes": [
+        "EVIDENCE_PACKAGE_INVALID",
+        "capacity.unknown_rationale_missing"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "invalid_evidence_hash",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "accepted": false,
+      "reason_codes": [
+        "EVIDENCE_PACKAGE_INVALID",
+        "evidence_hashes.response_or_artifact_hash_or_record_hash_invalid"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "stale_evidence",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+      "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+      "accepted": true,
+      "reason_codes": [
+        "STALE_EVIDENCE_RECORDED_AS_LIMITATION",
+        "FIELD_VERIFIED_CRITERIA_MET"
+      ],
+      "limitations": [
+        "STALE_FIELD_OR_OPERATOR_EVIDENCE retained with review note",
+        "STALE_FIELD_OR_OPERATOR_EVIDENCE age_days=1300.5 preferred_max_age_days=365"
+      ],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "geometry_mismatch",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "accepted": false,
+      "reason_codes": [
+        "GEOMETRY_MISMATCH_REQUIRES_RELINK",
+        "PARCEL_GEOMETRY_HASH_CHANGED"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "REVIEWED_EQUIVALENT_FIELD_VERIFIED",
+      "evidence_class": "REVIEWED_EQUIVALENT",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+      "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+      "accepted": true,
+      "reason_codes": [
+        "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+        "FIELD_VERIFIED_CRITERIA_MET"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "MIXED_with_qualified_field_basis",
+      "evidence_class": "MIXED",
+      "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+      "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+      "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+      "accepted": true,
+      "reason_codes": [
+        "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+        "FIELD_VERIFIED_CRITERIA_MET"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    },
+    {
+      "fixture": "mapped_to_field_verified_jump_rejected",
+      "evidence_class": "FIELD_OBSERVATION",
+      "prior_level": "MAPPED_CANDIDATE",
+      "after_level": "MAPPED_CANDIDATE",
+      "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "accepted": true,
+      "reason_codes": [
+        "SKIP_REMOTELY_SUPPORTED_PROHIBITED",
+        "INCOMPLETE_FIELD_VERIFIED_PROMOTION_REJECTED"
+      ],
+      "limitations": [],
+      "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+      "evidence_use_limit": "TEST_ONLY"
+    }
+  ],
+  "live_parcel_separation": {
+    "all_field_verified_counts_zero": true,
+    "parcels": [
+      {
+        "parcel_id": "XPV_CPER_001",
+        "remote_pilot_result_present": true,
+        "field_verified_count": 0,
+        "unchanged_zero": true
+      },
+      {
+        "parcel_id": "XPV_KBS_MCSE_001",
+        "remote_pilot_result_present": true,
+        "field_verified_count": 0,
+        "unchanged_zero": true
+      },
+      {
+        "parcel_id": "XPV_KONZA_001",
+        "remote_pilot_result_present": true,
+        "field_verified_count": 0,
+        "unchanged_zero": true
+      },
+      {
+        "parcel_id": "XPV_ORDWAY_001",
+        "remote_pilot_result_present": true,
+        "field_verified_count": 0,
+        "unchanged_zero": true
+      },
+      {
+        "parcel_id": "XPV_REYNOLDS_001",
+        "remote_pilot_result_present": true,
+        "field_verified_count": 0,
+        "unchanged_zero": true
+      }
+    ]
+  },
+  "expectation_failures": [],
+  "field_evidence_workflow_gate": {
+    "passed": true,
+    "criteria": [
+      "synthetic_fixtures_only",
+      "live_parcel_profiles_not_written",
+      "live_field_verified_count_remains_0",
+      "runtime_rules_unchanged",
+      "ranking_effect_none",
+      "deterministic_transitions_match_expectations"
+    ]
+  }
+}

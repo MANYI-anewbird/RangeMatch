@@ -1,0 +1,59 @@
+{
+  "type": "FeatureCollection",
+  "name": "ENGINEERING_TEST_GEOMETRY_ORDWAY_001",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ENGINEERING_TEST_GEOMETRY_ORDWAY_001",
+      "properties": {
+        "site_name": "Ordway-Swisher Biological Station coverage extent",
+        "geometry_role": "ENGINEERING_TEST_GEOMETRY",
+        "official_pasture_boundary": false,
+        "purchasable_parcel": false,
+        "suitability_ground_truth": false,
+        "known_operation_outcome_required": false,
+        "reference_operation": null,
+        "synthetic_subpolygon": true,
+        "approximate_geodesic_area_ha": 161.117,
+        "area_method": "WGS84 spherical rectangle approximation for test documentation",
+        "intended_validation_slots": [
+          "SLOT_WATER_CANDIDATE_RICH"
+        ],
+        "source_extent_id": "ORDWAY_SWISHER_BIOLOGICAL_STATION_NEON_PUBLIC_EXTENT",
+        "source_citations": [
+          "https://www.neonscience.org/field-sites/osbs",
+          "https://ordway-swisher.ufl.edu/"
+        ],
+        "selection_rationale": "Public research station colocated with NEON aquatic sites (lakes/wetland mosaic); selected to stress dense mapped hydrography candidates while keeping verified livestock-water systems at zero until field/legal verification. Not a flood-suitability case and not a known ranch operation success case.",
+        "created_on": "2026-08-08"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -82.0,
+              29.695
+            ],
+            [
+              -81.985,
+              29.695
+            ],
+            [
+              -81.985,
+              29.685
+            ],
+            [
+              -82.0,
+              29.685
+            ],
+            [
+              -82.0,
+              29.695
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

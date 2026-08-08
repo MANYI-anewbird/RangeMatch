@@ -1,0 +1,47 @@
+[
+  {
+    "ecological_site_id": "R067BY002CO",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY002CO",
+    "final_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY002CO",
+    "http_status": 200,
+    "title": "Ecological site R067BY002CO",
+    "response_sha256": "b841012aa705fb9924be575bf2c84cbc365cddbe7d141ac8fe147291f57c78b0",
+    "public_description_accessible": true
+  },
+  {
+    "ecological_site_id": "R067BY024CO",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY024CO",
+    "final_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY024CO",
+    "http_status": 200,
+    "title": "Ecological site R067BY024CO",
+    "response_sha256": "055940266eef154d2eaa2d4c019d3073bf074d3bdbb52edf2745d01129eceb47",
+    "public_description_accessible": true
+  },
+  {
+    "ecological_site_id": "R067BY033CO",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY033CO",
+    "final_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY033CO",
+    "http_status": 200,
+    "title": "Ecological site R067BY033CO",
+    "response_sha256": "1b1f762297e56f2a2be0da7527e5266ccbbb68e151c95a219317ad1737d52762",
+    "public_description_accessible": true
+  },
+  {
+    "ecological_site_id": "R067BY042CO",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY042CO",
+    "public_description_accessible": false,
+    "error_type": "TimeoutError"
+  },
+  {
+    "ecological_site_id": "R067BY045CO",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY045CO",
+    "public_description_accessible": false,
+    "error_type": "TimeoutError"
+  },
+  {
+    "ecological_site_id": "R067BY063CO",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY063CO",
+    "public_description_accessible": false,
+    "error_type": "TimeoutError"
+  }
+]

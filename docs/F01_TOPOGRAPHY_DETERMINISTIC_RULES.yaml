@@ -1,0 +1,142 @@
+spec_id: RANGEMATCH_F01_TOPOGRAPHY_RULES
+version: 0.1.0
+language: English
+status: REVIEW_CANDIDATE
+factor_id: F01_TOPOGRAPHY
+derivation_spec: F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0
+approved_numeric_thresholds: []
+approved_weights: []
+approved_hard_constraints: []
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  missing_values_are_unknown: true
+  point_sample_may_represent_parcel: false
+  operation_ranking_effect: NONE_IN_V0_1
+  rationale: >-
+    Reviewed evidence supports a qualitative relationship between topography
+    and grazing distribution, but does not support a national response curve,
+    threshold, weight, hard exclusion, or reliable Cow-Calf versus Sheep rank.
+
+required_variables:
+  minimum_for_context_evaluation:
+    - VAR_F01_SLOPE_DISTRIBUTION
+  supporting_context:
+    - VAR_F01_TERRAIN_RUGGEDNESS
+    - VAR_F01_TOPOGRAPHIC_POSITION
+    - VAR_F01_ELEVATION
+    - VAR_F01_ASPECT
+  interacting_factors_not_yet_joined:
+    - livestock_water_distribution
+    - wetness_and_flood_exposure
+    - forage_distribution
+    - season
+    - management_and_herding
+
+input_quality_states:
+  PARCEL_COMPLETE:
+    definition: >-
+      Parcel slope distribution is available with parcel geometry, source,
+      units, resolution, method version, and valid-area coverage. Supporting
+      context variables may remain unknown.
+  POINT_ONLY:
+    definition: Only point-level slope, elevation, or aspect is available.
+  PARCEL_INCOMPLETE:
+    definition: >-
+      A parcel-derived value exists, but geometry, coverage, resolution,
+      units, provenance, or derivation version is missing.
+  CONFLICTING_SOURCES:
+    definition: >-
+      Material disagreement exists between sources and no reviewed
+      reconciliation method resolves it.
+  MISSING:
+    definition: No valid parcel topography evidence is available.
+
+evaluation_order:
+  - rule_id: F01_QC_001
+    when: input_quality_state == CONFLICTING_SOURCES
+    output_signal: NEEDS_VERIFICATION
+    confidence_effect: LIMITS_FACTOR_CONFIDENCE
+    ranking_effect: NONE
+    explanation_code: F01_EXPL_CONFLICT
+
+  - rule_id: F01_QC_002
+    when: input_quality_state == POINT_ONLY
+    output_signal: NEEDS_VERIFICATION
+    confidence_effect: LIMITS_FACTOR_CONFIDENCE
+    ranking_effect: NONE
+    explanation_code: F01_EXPL_POINT_NOT_PARCEL
+
+  - rule_id: F01_QC_003
+    when: input_quality_state == PARCEL_INCOMPLETE
+    output_signal: NEEDS_VERIFICATION
+    confidence_effect: LIMITS_FACTOR_CONFIDENCE
+    ranking_effect: NONE
+    explanation_code: F01_EXPL_INCOMPLETE_PROVENANCE
+
+  - rule_id: F01_QC_004
+    when: input_quality_state == MISSING
+    output_signal: UNKNOWN
+    confidence_effect: LIMITS_FACTOR_CONFIDENCE
+    ranking_effect: NONE
+    explanation_code: F01_EXPL_MISSING
+
+  - rule_id: F01_REL_001
+    when: input_quality_state == PARCEL_COMPLETE
+    output_signal: CONTEXT_DEPENDENT
+    confidence_effect: NONE
+    ranking_effect: NONE
+    explanation_code: F01_EXPL_CONTEXT_REQUIRED
+
+operation_explanations:
+  COW_CALF_OPERATION:
+    requirement_id: COW_F01_001
+    allowed_claim: >-
+      Topography can affect cattle grazing distribution and effective parcel
+      use, but direction and magnitude depend on water distribution, wetness,
+      vegetation, stocking, and management context.
+    prohibited_claims:
+      - Steep terrain automatically makes the parcel unsuitable for cattle.
+      - A national slope cutoff or penalty curve applies.
+      - Lowlands are always preferred.
+
+  SHEEP_GRAZING:
+    requirement_id: SHEEP_F01_001
+    allowed_claim: >-
+      Topographic variables can affect sheep resource selection. Terrain
+      response depends on breed, season, forage, water, and herding or
+      management context.
+    prohibited_claims:
+      - Sheep can use all terrain up to a universal 45 percent slope threshold.
+      - Ruggedness automatically produces a positive sheep signal.
+      - Sheep receive a fixed terrain advantage over cattle.
+
+diligence_actions:
+  F01_DIL_001:
+    trigger: input_quality_state in [POINT_ONLY, PARCEL_INCOMPLETE, MISSING]
+    action: Obtain parcel-wide elevation data and compute a versioned slope distribution.
+  F01_DIL_002:
+    trigger: input_quality_state == CONFLICTING_SOURCES
+    action: Reconcile terrain sources using a reviewed source-priority and resolution policy.
+  F01_DIL_003:
+    trigger: input_quality_state == PARCEL_COMPLETE
+    action: Evaluate topography jointly with livestock water, wetness, forage distribution, and management before directional interpretation.
+
+explanation_templates:
+  F01_EXPL_CONFLICT: >-
+    Available terrain sources disagree materially. RangeMatch does not select
+    a preferred value without an approved reconciliation method.
+  F01_EXPL_POINT_NOT_PARCEL: >-
+    Mireye point terrain fields cannot represent the distribution of terrain
+    across the parcel. Parcel-wide terrain analysis is required.
+  F01_EXPL_INCOMPLETE_PROVENANCE: >-
+    A parcel terrain result exists, but its coverage or derivation provenance
+    is incomplete and must be verified.
+  F01_EXPL_MISSING: >-
+    Parcel-wide topography is unavailable, so F01 remains unknown.
+  F01_EXPL_CONTEXT_REQUIRED: >-
+    Parcel-wide topography is known, but current reviewed science does not
+    support interpreting it directionally without water, wetness, forage, and
+    management context.

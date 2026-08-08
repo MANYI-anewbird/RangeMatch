@@ -1,0 +1,163 @@
+gate_id: RANGEMATCH_F03_DEMO_COMPLETION_GATE
+version: 0.1.0
+language: English
+status: PASSED
+date: "2026-08-08"
+contract: docs/F03_VERIFIED_WATER_EVIDENCE_CONTRACT.yaml@0.1.1
+workflow_results: docs/F03_COMPLETE_WORKFLOW_RESULTS.md
+f06_authorized_to_begin: false
+f07_authorized_to_begin: false
+
+scope:
+  include:
+    - F03_evidence_contract_v0_1_1
+    - deterministic_verification_core
+    - five_parcel_remote_collection
+    - field_operator_evidence_ingestion_workflow
+    - synthetic_state_transition_fixtures
+    - existing_F03_runtime_rules_and_demo_output
+  exclude:
+    - new_F03_research
+    - new_F03_adapters
+    - F06
+    - F07
+
+audit_items:
+  - id: F03_CG_001
+    requirement: MAPPED, REMOTELY_SUPPORTED, and FIELD_VERIFIED states are implemented
+    result: PASS
+    evidence:
+      - src/rangematch/f03_verification.py
+      - tests/test_f03_verified_water.py
+      - test-data/f03_field_evidence_demo/field_evidence_demo_result.json
+
+  - id: F03_CG_002
+    requirement: remote/open adapters can never produce FIELD_VERIFIED
+    result: PASS
+    evidence:
+      - src/rangematch/f03_verification.py apply_remote_enrichment REMOTE_PILOT_CEILING
+      - five frozen parcel f03_remote_pilot results field_verified_count 0
+
+  - id: F03_CG_003
+    requirement: five frozen parcels retain field_verified_count 0
+    result: PASS
+    evidence:
+      - test-data/cross-parcel-validation/*/f03_remote_pilot/remote_pilot_result.json
+
+  - id: F03_CG_004
+    requirement: synthetic evidence is isolated from all real Land Profiles
+    result: PASS
+    evidence:
+      - fixture_type SYNTHETIC_ENGINEERING_TEST
+      - evidence_use_limit TEST_ONLY
+      - LIVE_PARCEL_WRITE_PROHIBITED in f03_field_evidence.py
+      - CPER remote_evidence_summary.synthetic_field_evidence_demo.part_of_cper_live_profile false
+
+  - id: F03_CG_005
+    requirement: no synthetic result appears in live validation statistics
+    result: PASS
+    evidence:
+      - test-data/cross-parcel-validation/f03_five_parcel_remote_collection_summary.json
+      - field_verified_count_total 0
+
+  - id: F03_CG_006
+    requirement: provenance-complete remote evidence is reproducible
+    result: PASS
+    evidence:
+      - NAIP STAC item JSON + local GeoTIFF crops under each f03_remote_pilot/artifacts
+      - presence_provenance_*.json for promoted candidates
+
+  - id: F03_CG_007
+    requirement: candidate sampling disclosed as 15 reviewed out of 80 available
+    result: PASS
+    evidence:
+      - selection_method STABLE_CANDIDATE_ID_ORDER_MAX_3
+      - five-parcel summary available=80 sampled=15
+
+  - id: F03_CG_008
+    requirement: unreviewed candidates are not treated as failed or absent
+    result: PASS
+    evidence:
+      - unreviewed_status UNREVIEWED_NOT_ABSENT_OR_REJECTED
+      - CPER demo statements and unknowns
+
+  - id: F03_CG_009
+    requirement: missing/conflicting/stale/geometry-mismatch behavior is deterministic
+    result: PASS
+    evidence:
+      - src/rangematch/f03_field_evidence.py
+      - synthetic fixtures and demo transitions
+
+  - id: F03_CG_010
+    requirement: verified_count == 0 is not interpreted as no water
+    result: PASS
+    evidence:
+      - CPER demo_statements and explanation narrative_constraints
+      - F03_GOV_008
+
+  - id: F03_CG_011
+    requirement: runtime rules remain unchanged
+    result: PASS
+    evidence:
+      - docs/F03_WATER_DETERMINISTIC_RULES.yaml unchanged in this gate
+      - runtime_rules_changed false in remote collection and field demo
+
+  - id: F03_CG_012
+    requirement: ranking_effect remains NONE
+    result: PASS
+    evidence:
+      - MatchResult F03 ranking_effect NONE
+      - Cow-Calf and Sheep peer HOLD
+
+  - id: F03_CG_013
+    requirement: no count/distance/capacity/quality/species thresholds exist
+    result: PASS
+    evidence:
+      - F03_WATER_DETERMINISTIC_RULES approved_numeric_thresholds []
+      - no Cow/Sheep ranking from water
+
+  - id: F03_CG_014
+    requirement: Cow-Calf and Sheep remain peers
+    result: PASS
+    evidence:
+      - both operations HOLD
+      - cross_profile_comparison.ranking_permitted false
+
+  - id: F03_CG_015
+    requirement: geometry replacement invalidates or requires relinking F03 evidence
+    result: PASS
+    evidence:
+      - src/rangematch/geometry_replace.py f03_evidence_relink_required
+
+  - id: F03_CG_016
+    requirement: all tests pass
+    result: PASS
+    evidence:
+      - PYTHONPATH=src python3 -m unittest discover -s tests
+
+blocking_defects_found: []
+new_adapters_added: false
+new_research_started: false
+
+cper_demo_summary:
+  total_mapped_candidates: 9
+  deterministically_sampled_for_remote_review: 3
+  remotely_supported: 2
+  sampled_but_still_mapped: 1
+  field_verified: 0
+  unreviewed_candidates: 6
+  sample_coverage_limitation: Only 3 of 9 candidates were remotely reviewed
+  factor_state: MAPPED_CANDIDATES_ONLY
+  signal: NEEDS_VERIFICATION
+  ranking_effect: NONE
+
+decision:
+  f03_evidence_depth_upgrade_complete: true
+  # Product-owner demo priority update (2026-08-08):
+  f02_coverage_upgrade: DEFERRED_FOR_DEMO
+  f06_parcel_configuration: AUTHORIZED_FOR_FIRST_STAGE_AUDIT
+  f07_road_physical_access: NOT_YET_AUTHORIZED
+  next_authorized_work:
+    - F06 Parcel Configuration first-stage audit / then implementation after audit acceptance
+    - F07 only after explicit authorization
+    - F02 coverage/scope deepening after demo; preserve current limitations until then

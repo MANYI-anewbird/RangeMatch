@@ -1,0 +1,69 @@
+{
+  "factor_id": "F06_PARCEL_CONFIGURATION",
+  "derivation_spec": "F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0",
+  "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+  "source_crs": "EPSG:4326",
+  "derived_at": "2026-08-08T06:00:00Z",
+  "ranking_effect": "NONE",
+  "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+  "display_conversions": {
+    "area_ha_formula": "area_m2 / 10000",
+    "area_acre_formula": "area_m2 / 4046.8564224",
+    "acre_convention": "international_acre",
+    "are_land_facts": false
+  },
+  "limitations": [
+    "Parcel area is geometric context, not grazable area or carrying capacity.",
+    "Parcel perimeter is not fencing cost.",
+    "Compactness is not operational efficiency or suitability.",
+    "Measurements use projected UTM meters; not a legal survey acreage.",
+    "v0.1 perimeter excludes interior rings/holes.",
+    "v0.1 does not automatically repair invalid geometry.",
+    "Geodesic QA is deferred and not required for v0.1."
+  ],
+  "unknowns": [],
+  "prohibited_interpretations_applied": true,
+  "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+  "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+  "geometry_validity": "VALID",
+  "geometry_type": "Polygon",
+  "working_crs": "EPSG:32613",
+  "crs_selection": {
+    "ok": true,
+    "reason": null,
+    "working_crs": "EPSG:32613",
+    "utm_zone": 13,
+    "centroid_wgs84": [
+      -104.76249999999999,
+      40.82500000000001
+    ],
+    "bounds_wgs84": [
+      -104.77,
+      40.82,
+      -104.755,
+      40.83
+    ]
+  },
+  "polygon_part_count": 1,
+  "area_m2": 1404078.7002779155,
+  "perimeter_m": 4749.852971191508,
+  "compactness": 0.7820616361495341,
+  "has_holes": false,
+  "automatic_repair_applied": false,
+  "display_only": {
+    "area_ha": 140.40787002779155,
+    "area_acre_international": 346.955402842096
+  },
+  "provenance": {
+    "source_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+    "fetched_at": "2026-08-08T06:00:00Z",
+    "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "response_or_artifact_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+    "working_crs": "EPSG:32613",
+    "source_crs": "EPSG:4326"
+  },
+  "measured_geometry_geojson_hash": "f8a30e95954bc6c7a7a827420828eb499962a3be75c5edf75f227344a37059ac"
+}

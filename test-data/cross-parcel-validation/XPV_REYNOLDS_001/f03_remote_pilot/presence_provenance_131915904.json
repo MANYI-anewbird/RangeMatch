@@ -1,0 +1,41 @@
+{
+  "provider": "USDA Farm Service Agency (via Microsoft Planetary Computer STAC)",
+  "product_name": "NAIP 2023 ? m orthoimagery",
+  "source_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/id_m_4311658_ne_11_060_20230711_20230928",
+  "item_id_or_artifact_reference": "stac:naip/id_m_4311658_ne_11_060_20230711_20230928; local_artifact=test-data/cross-parcel-validation/XPV_REYNOLDS_001/f03_remote_pilot/artifacts/naip_crop_131915904.tif; stac_fixture=test-data/cross-parcel-validation/XPV_REYNOLDS_001/f03_remote_pilot/artifacts/naip_stac_item_id_m_4311658_ne_11_060_20230711_20230928.json",
+  "imagery_acquisition_date": "2023-07-11",
+  "review_date": "2026-08-08",
+  "reviewer_or_adapter_id": "rangematch.f03_five_parcel_remote_collection/v1",
+  "candidate_geometry_hash": "b6ed61afbd70e6519bfd9e33c0834c9841d925a383caf3b1c374749bde907178",
+  "parcel_geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+  "response_or_artifact_hash": "b9e1a45c0a47f1a41e5d94e5ce2486ddf7eb6e36d639a73fd9e883a6344742b3",
+  "supporting_artifact_hashes": {
+    "naip_crop_geotiff": "b9e1a45c0a47f1a41e5d94e5ce2486ddf7eb6e36d639a73fd9e883a6344742b3",
+    "stac_item_json": "82ed2f36e445b467a9f7137097be54faa825613abe3a0de4a6a756e8af6e5535"
+  },
+  "supported_claim": "Physical hydrographic feature context visible in NAIP imagery within the exported bbox covering source_feature_id=131915904.",
+  "unsupported_claims": [
+    "livestock_accessibility",
+    "seasonal_reliability_beyond_nhd_fcode",
+    "legal_access",
+    "deliverable_capacity",
+    "water_quality",
+    "operable_livestock_water_system",
+    "field_verification"
+  ],
+  "limitations": [
+    "Remote orthoimagery confirms landscape presence context only.",
+    "Feature visibility is not proof of usable livestock water.",
+    "Single NAIP date does not establish seasonal class by itself.",
+    "SAS-signed COG URLs expire; reproducible package is local GeoTIFF + STAC JSON."
+  ],
+  "freshness_status": "ACQUISITION_2023-07-11_OLDER_THAN_THREE_YEARS",
+  "bbox_wgs84_export": [
+    -116.77305859637693,
+    43.09488399972849,
+    -116.76873312884089,
+    43.1216259329789
+  ],
+  "stac_item_id": "id_m_4311658_ne_11_060_20230711_20230928",
+  "producer_url": "https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/"
+}

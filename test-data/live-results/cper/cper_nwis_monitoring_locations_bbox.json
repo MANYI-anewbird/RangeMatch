@@ -1,0 +1,207 @@
+{
+    "type":"FeatureCollection",
+    "features":[
+        {
+            "type":"Feature",
+            "properties":{
+                "id":"USGS-06753600",
+                "agency_code":"USGS",
+                "agency_name":"U.S. Geological Survey",
+                "monitoring_location_number":"06753600",
+                "monitoring_location_name":"LITTLE OWL CREEK NEAR NUNN, CO",
+                "district_code":"08",
+                "country_code":"US",
+                "country_name":"United States of America",
+                "state_code":"08",
+                "state_name":"Colorado",
+                "county_code":"123",
+                "county_name":"Weld County",
+                "minor_civil_division_code":"90190",
+                "site_type_code":"ST",
+                "site_type":"Stream",
+                "hydrologic_unit_code":"101900080302",
+                "basin_code":null,
+                "altitude":5345.0,
+                "altitude_accuracy":4.3,
+                "altitude_method_code":"N",
+                "altitude_method_name":"Interpolated from Digital Elevation Model",
+                "vertical_datum":"NAVD88",
+                "vertical_datum_name":"North American Vertical Datum of 1988",
+                "horizontal_positional_accuracy_code":"1",
+                "horizontal_positional_accuracy":"Accurate to + or - .1 sec (Differentially-Corrected GPS).",
+                "horizontal_position_method_code":"D",
+                "horizontal_position_method_name":"Differentially corrected Global Positioning System.",
+                "original_horizontal_datum":"NAD83",
+                "original_horizontal_datum_name":"North American Datum of 1983",
+                "drainage_area":16.3,
+                "contributing_drainage_area":null,
+                "time_zone_abbreviation":"MST",
+                "uses_daylight_savings":"Y",
+                "construction_date":null,
+                "aquifer_code":null,
+                "national_aquifer_code":null,
+                "aquifer_type_code":null,
+                "well_constructed_depth":null,
+                "hole_constructed_depth":null,
+                "depth_source_code":null,
+                "revision_note":null,
+                "revision_created":null,
+                "revision_modified":null
+            },
+            "id":"USGS-06753600",
+            "geometry":{
+                "type":"Point",
+                "coordinates":[
+                    -104.762194444444,
+                    40.80525
+                ]
+            }
+        },
+        {
+            "type":"Feature",
+            "properties":{
+                "id":"USGS-404848104461501",
+                "agency_code":"USGS",
+                "agency_name":"U.S. Geological Survey",
+                "monitoring_location_number":"404848104461501",
+                "monitoring_location_name":"SB01006622CCC",
+                "district_code":"08",
+                "country_code":"US",
+                "country_name":"United States of America",
+                "state_code":"08",
+                "state_name":"Colorado",
+                "county_code":"123",
+                "county_name":"Weld County",
+                "minor_civil_division_code":"90190",
+                "site_type_code":"GW",
+                "site_type":"Well",
+                "hydrologic_unit_code":"101900080302",
+                "basin_code":null,
+                "altitude":5414.0,
+                "altitude_accuracy":4.3,
+                "altitude_method_code":"N",
+                "altitude_method_name":"Interpolated from Digital Elevation Model",
+                "vertical_datum":"NAVD88",
+                "vertical_datum_name":"North American Vertical Datum of 1988",
+                "horizontal_positional_accuracy_code":"M",
+                "horizontal_positional_accuracy":"Accurate to + or - 1 min.",
+                "horizontal_position_method_code":"M",
+                "horizontal_position_method_name":"Interpolated from map",
+                "original_horizontal_datum":"NAD27",
+                "original_horizontal_datum_name":"North American Datum of 1927",
+                "drainage_area":null,
+                "contributing_drainage_area":null,
+                "time_zone_abbreviation":"MST",
+                "uses_daylight_savings":"Y",
+                "construction_date":null,
+                "aquifer_code":"111VLFL",
+                "national_aquifer_code":null,
+                "aquifer_type_code":null,
+                "well_constructed_depth":45.0,
+                "hole_constructed_depth":null,
+                "depth_source_code":null,
+                "revision_note":null,
+                "revision_created":null,
+                "revision_modified":null
+            },
+            "id":"USGS-404848104461501",
+            "geometry":{
+                "type":"Point",
+                "coordinates":[
+                    -104.771357651623,
+                    40.8133144509944
+                ]
+            }
+        },
+        {
+            "type":"Feature",
+            "properties":{
+                "id":"USGS-405029104450301",
+                "agency_code":"USGS",
+                "agency_name":"U.S. Geological Survey",
+                "monitoring_location_number":"405029104450301",
+                "monitoring_location_name":"SB01006622CCC1",
+                "district_code":"08",
+                "country_code":"US",
+                "country_name":"United States of America",
+                "state_code":"08",
+                "state_name":"Colorado",
+                "county_code":"123",
+                "county_name":"Weld County",
+                "minor_civil_division_code":null,
+                "site_type_code":"GW",
+                "site_type":"Well",
+                "hydrologic_unit_code":"101900080301",
+                "basin_code":null,
+                "altitude":5350.0,
+                "altitude_accuracy":1.0,
+                "altitude_method_code":"M",
+                "altitude_method_name":"Interpolated from topographic map.",
+                "vertical_datum":"NGVD29",
+                "vertical_datum_name":"National Geodetic Vertical Datum of 1929",
+                "horizontal_positional_accuracy_code":"M",
+                "horizontal_positional_accuracy":"Accurate to + or - 1 min.",
+                "horizontal_position_method_code":"M",
+                "horizontal_position_method_name":"Interpolated from map",
+                "original_horizontal_datum":"NAD27",
+                "original_horizontal_datum_name":"North American Datum of 1927",
+                "drainage_area":null,
+                "contributing_drainage_area":null,
+                "time_zone_abbreviation":"MST",
+                "uses_daylight_savings":"Y",
+                "construction_date":null,
+                "aquifer_code":"211LRMI",
+                "national_aquifer_code":null,
+                "aquifer_type_code":null,
+                "well_constructed_depth":44.7,
+                "hole_constructed_depth":null,
+                "depth_source_code":null,
+                "revision_note":null,
+                "revision_created":null,
+                "revision_modified":null
+            },
+            "id":"USGS-405029104450301",
+            "geometry":{
+                "type":"Point",
+                "coordinates":[
+                    -104.751357175004,
+                    40.8413700614766
+                ]
+            }
+        }
+    ],
+    "numberReturned":3,
+    "links":[
+        {
+            "type":"application/geo+json",
+            "rel":"self",
+            "title":"This document as GeoJSON",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/monitoring-locations/items?f=json&bbox=-104.79,40.80,-104.735,40.85&limit=100"
+        },
+        {
+            "rel":"alternate",
+            "type":"application/ld+json",
+            "title":"This document as RDF (JSON-LD)",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/monitoring-locations/items?f=jsonld&bbox=-104.79,40.80,-104.735,40.85&limit=100"
+        },
+        {
+            "type":"text/html",
+            "rel":"alternate",
+            "title":"This document as HTML",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/monitoring-locations/items?f=html&bbox=-104.79,40.80,-104.735,40.85&limit=100"
+        },
+        {
+            "type":"text/csv; charset=utf-8",
+            "rel":"alternate",
+            "title":"This document as CSV",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/monitoring-locations/items?f=csv&bbox=-104.79,40.80,-104.735,40.85&limit=100"
+        },
+        {
+            "type":"application/json",
+            "title":"Monitoring locations",
+            "rel":"collection",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/monitoring-locations"
+        }
+    ],
+    "timeStamp":"2026-08-07T21:38:01.781713Z"
+}

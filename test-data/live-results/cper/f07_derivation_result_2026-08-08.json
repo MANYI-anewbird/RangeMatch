@@ -1,0 +1,172 @@
+{
+  "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+  "derivation_spec": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0",
+  "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+  "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+  "road_product": "TIGER/Line 2025 All Roads",
+  "edges_fallback_used": false,
+  "road_product_vintage": "2025",
+  "search_window_m": 5000.0,
+  "source_crs": "EPSG:4326",
+  "derived_at": "2026-08-08T06:57:21Z",
+  "ranking_effect": "NONE",
+  "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+  "county_coverage": {
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ],
+    "missing_county_fips": [],
+    "status": "COMPLETE"
+  },
+  "osm_consulted": false,
+  "limitations": [
+    "Mapped road proximity/contact is physical context only.",
+    "Mapped roads do not establish legal access, easement, or deeded right-of-way.",
+    "Centerline contact does not prove a usable driveway, gate, or entrance.",
+    "Euclidean parcel-to-centerline distance is not network drive distance or travel time.",
+    "Search window is a retrieval parameter, not a too-far suitability threshold.",
+    "Absence of mapped roads in the window does not prove the parcel is landlocked.",
+    "OSM is deferred from F07 v0.1 and was not consulted."
+  ],
+  "unknowns": [],
+  "prohibited_interpretations_applied": true,
+  "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+  "road_source_coverage_status": "ROAD_CONTEXT_COMPLETE",
+  "geometry_validity": "VALID",
+  "geometry_type": "Polygon",
+  "working_crs": "EPSG:32613",
+  "crs_selection": {
+    "ok": true,
+    "reason": null,
+    "working_crs": "EPSG:32613",
+    "utm_zone": 13,
+    "centroid_wgs84": [
+      -104.76249999999999,
+      40.82500000000001
+    ],
+    "bounds_wgs84": [
+      -104.77,
+      40.82,
+      -104.755,
+      40.83
+    ]
+  },
+  "mapped_road_feature_count_in_search_window": 45,
+  "road_parcel_contact_status": "INTERSECTS",
+  "road_parcel_contact_detail": {
+    "intersects_feature_count": 4,
+    "touches_feature_count": 0,
+    "no_contact_feature_count": 41
+  },
+  "nearest_mapped_road_distance_m": 0.0,
+  "nearest_road_feature_id": "110417652669",
+  "nearest_road_class_context": "S1400",
+  "nearest_road_fullname": null,
+  "nearest_feature_tie_break": {
+    "primary": "distance_m_ascending",
+    "secondary": "stable_feature_id_ascending",
+    "preferred_stable_id": "LINEARID"
+  },
+  "road_artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+  "provenance": {
+    "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+    "road_product_vintage": "2025",
+    "fetched_at": "2026-08-08T06:57:21Z",
+    "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "response_or_artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+    "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+    "working_crs": "EPSG:32613",
+    "source_crs": "EPSG:4326",
+    "search_window_m": 5000.0,
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ]
+  },
+  "measured_parcel_geojson_hash": "f8a30e95954bc6c7a7a827420828eb499962a3be75c5edf75f227344a37059ac",
+  "adapter": {
+    "adapter_id": "F07_TIGER_LINE_2025_ALL_ROADS_ADAPTER@0.1.0",
+    "osm_consulted": false,
+    "edges_fallback_used": false,
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ],
+    "missing_county_fips": [],
+    "county_downloads": [
+      {
+        "county_fips": "08123",
+        "ok": true,
+        "feature_count_in_window": 45,
+        "download": {
+          "url": "https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_08123_roads.zip",
+          "path": "test-data/live-results/cper/tiger2025_cache/tl_2025_08123_roads.zip",
+          "sha256": "4d2f5e066e5f56779293b3eb64ef051dfd43cacc3c75ed7f98600d4d2097dc8c",
+          "bytes": 1899906,
+          "cache_hit": false,
+          "fetched_at": "2026-08-08T06:57:20Z"
+        },
+        "url": "https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_08123_roads.zip"
+      }
+    ],
+    "county_resolution": {
+      "fetch_region_bounds_wgs84": [
+        -104.82929963053661,
+        40.77495742634188,
+        -104.69570055268339,
+        40.875042142889086
+      ],
+      "county_download": {
+        "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+        "path": "test-data/live-results/cper/tiger2025_cache/tl_2025_us_county.zip",
+        "sha256": "9c6e9d9076abce2670d1de255de3710c35ecca00a7005d88e012dec52d95f763",
+        "bytes": 83989800,
+        "cache_hit": false,
+        "fetched_at": "2026-08-08T06:57:13Z"
+      },
+      "counties": [
+        {
+          "county_fips": "08123",
+          "name": "Weld",
+          "statefp": "08",
+          "countyfp": "123"
+        }
+      ]
+    },
+    "feature_count_in_window": 45,
+    "collection_ok": true
+  },
+  "result_reference": "test-data/live-results/cper/f07_derivation_result_2026-08-08.json",
+  "source_fixture_references": [
+    "test-data/live-results/cper/f07_tiger2025_all_roads_search_window.geojson"
+  ],
+  "live_gate": {
+    "live_gate_id": "F07_TIGER2025_ALL_ROADS_CPER",
+    "status": "LIVE_VERIFIED",
+    "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+    "osm_consulted": false,
+    "edges_fallback_used": false,
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ],
+    "county_coverage_status": "COMPLETE",
+    "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+    "signal": "CONTEXT_DEPENDENT",
+    "ranking_effect": "NONE",
+    "adapter_id": "F07_TIGER_LINE_2025_ALL_ROADS_ADAPTER@0.1.0",
+    "derived_at": "2026-08-08T06:57:21Z",
+    "explanation_code": "F07_EXPL_CONTEXT_ONLY"
+  }
+}

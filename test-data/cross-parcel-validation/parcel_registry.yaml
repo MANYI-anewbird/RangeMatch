@@ -1,0 +1,203 @@
+registry_id: RANGEMATCH_CROSS_PARCEL_REGISTRY
+version: 0.3.0
+status: CROSS_PARCEL_VALIDATION_PASSED_NEXT_PHASE_F02_F03_DEPTH
+plan: docs/CROSS_PARCEL_VALIDATION_PLAN.md
+selection_criteria: docs/CROSS_PARCEL_SELECTION_CRITERIA.yaml
+result_schema: docs/CROSS_PARCEL_VALIDATION_RESULT_SCHEMA.yaml
+preflight_record: test-data/cross-parcel-validation/slot_preflight_2026-08-08.yaml
+aggregate_review: docs/CROSS_PARCEL_FIVE_PARCEL_AGGREGATE_REVIEW.md
+locked_conclusion: docs/CROSS_PARCEL_VALIDATION_CONCLUSION.yaml
+next_phase: docs/F02_F03_EVIDENCE_DEPTH_UPGRADE_PLAN.md
+mireye_incident: docs/MIREYE_SSL_ADAPTER_INCIDENT_2026-08-08.md
+runner: scripts/run_cross_parcel_validation.py
+selection_frozen_on: "2026-08-08"
+runs_completed_on: "2026-08-08"
+conclusion_locked_on: "2026-08-08"
+
+slot_fill_status:
+  SLOT_HUMID_STRONG_HERB: XPV_KONZA_001
+  SLOT_ARID_UNCERTAIN_WATER: XPV_CPER_001
+  SLOT_RUGGED_SHEEP_RELEVANT: XPV_REYNOLDS_001
+  SLOT_WATER_CANDIDATE_RICH: XPV_ORDWAY_001
+  SLOT_RAP_SCOPE_BOUNDARY: XPV_KBS_MCSE_001
+
+registration_rules_snapshot:
+  geometry_accessible: true
+  public_reproducible_boundary: true
+  environment_slot_supported_by_measured_data: true
+  f01_f05_data_paths_plausible: true
+  known_operation_outcome_required: false
+  selection_reason_does_not_predict_ranking: true
+  reference_operation_separated_from_validation_parcel: true
+  no_replacement_for_unattractive_results: true
+
+parcels:
+  - parcel_id: XPV_CPER_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_001
+    geometry_path: test-data/engineering_test_geometry_cper_001.geojson
+    geometry_hash: 932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309
+    assigned_slots: [SLOT_ARID_UNCERTAIN_WATER]
+    selection_status: SELECTED_BASELINE
+    reference_operation: null
+    selection_rationale: >-
+      Existing frozen F01–F05 vertical-slice baseline on semi-arid plains
+      engineering geometry; used for arid/uncertain-water slot contrast, not as
+      a universal template for all slots.
+    contrasted_against: []
+    prohibited_expectations:
+      - Expect ADVANCE from completed F01–F05 context
+      - Treat 345.74 mm/year as unsuitable climate
+      - Treat nine mapped water candidates as verified livestock water
+    known_limitations:
+      - Baseline only for SLOT_ARID_UNCERTAIN_WATER
+      - Not a success-case ranch reference operation
+    selected_on: "2026-08-08"
+    selected_by: portfolio_review_followup
+    existing_artifacts:
+      land_profile: test-data/land-profiles/land_profile_cper_001.json
+      match_result: test-data/land-profiles/match_result_cper_001.json
+      validation_result: test-data/cross-parcel-validation/XPV_CPER_001/validation_result.yaml
+
+  - parcel_id: XPV_KONZA_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_KONZA_001
+    geometry_path: test-data/engineering_test_geometry_konza_001.geojson
+    geometry_hash: f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d
+    assigned_slots: [SLOT_HUMID_STRONG_HERB]
+    selection_status: SELECTED_FROZEN
+    reference_operation: null
+    selection_rationale: >-
+      Humid/subhumid tallgrass prairie research extent with substantially higher
+      long-term precip than CPER; stresses F02 herbaceous contrast and F05 precip
+      contrast. Engineering subpolygon only.
+    contrasted_against: [XPV_CPER_001]
+    prohibited_expectations:
+      - Reverse-select for expected Cow-Calf ADVANCE
+      - Treat Konza place name as suitability input
+      - Replace parcel if F01–F05 returns many UNKNOWN
+    known_limitations:
+      - Synthetic engineering subpolygon inside a larger public research extent
+      - Preflight precip used ACIS secondary series only for slot contrast
+      - No known-operation outcome assigned
+    selected_on: "2026-08-08"
+    selected_by: cross_parcel_slot_preflight_2026-08-08
+    preflight_record: test-data/cross-parcel-validation/slot_preflight_2026-08-08.yaml
+    existing_artifacts:
+      land_profile: test-data/cross-parcel-validation/XPV_KONZA_001/land_profile.json
+      match_result: test-data/cross-parcel-validation/XPV_KONZA_001/match_result.json
+      validation_result: test-data/cross-parcel-validation/XPV_KONZA_001/validation_result.yaml
+
+  - parcel_id: XPV_REYNOLDS_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_REYNOLDS_001
+    geometry_path: test-data/engineering_test_geometry_reynolds_001.geojson
+    geometry_hash: e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c
+    assigned_slots: [SLOT_RUGGED_SHEEP_RELEVANT]
+    selection_status: SELECTED_FROZEN
+    reference_operation: null
+    selection_rationale: >-
+      Mountainous USDA-ARS experimental watershed with documented high local
+      relief; selected to stress F01 terrain context for sheep-relevant
+      ruggedness literature without assigning a Sheep known-operation outcome or
+      ranking expectation.
+    contrasted_against: [XPV_CPER_001]
+    prohibited_expectations:
+      - Assume Sheep ranking advantage from rugged terrain
+      - Treat Reynolds Creek grazing research as a Sheep success reference case
+      - Replace parcel if Cow-Calf and Sheep remain peer-identical
+    known_limitations:
+      - Synthetic engineering subpolygon inside Reynolds Creek Experimental Watershed
+      - Sheep-relevant means terrain-literature relevance only
+      - Reference operation remains null
+    selected_on: "2026-08-08"
+    selected_by: cross_parcel_slot_preflight_2026-08-08
+    preflight_record: test-data/cross-parcel-validation/slot_preflight_2026-08-08.yaml
+    existing_artifacts:
+      land_profile: test-data/cross-parcel-validation/XPV_REYNOLDS_001/land_profile.json
+      match_result: test-data/cross-parcel-validation/XPV_REYNOLDS_001/match_result.json
+      validation_result: test-data/cross-parcel-validation/XPV_REYNOLDS_001/validation_result.yaml
+
+  - parcel_id: XPV_ORDWAY_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_ORDWAY_001
+    geometry_path: test-data/engineering_test_geometry_ordway_001.geojson
+    geometry_hash: e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a
+    assigned_slots: [SLOT_WATER_CANDIDATE_RICH]
+    selection_status: SELECTED_FROZEN
+    reference_operation: null
+    selection_rationale: >-
+      Public research station colocated with NEON aquatic sites (lakes/wetland
+      mosaic); selected to stress dense mapped hydrography candidates while
+      keeping verified livestock-water systems at zero until field/legal
+      verification. Not a flood-suitability case and not a known ranch operation
+      success case.
+    contrasted_against: [XPV_CPER_001]
+    prohibited_expectations:
+      - Interpret candidate count as water adequacy
+      - Promote flood as the next Factor because of lakes/wetlands
+      - Treat Ordway as a verified livestock-water success case
+    known_limitations:
+      - Candidate richness must be confirmed at F03 collection time
+      - Dense mapped water ≠ verified livestock water
+      - Not a flood Factor case
+    selected_on: "2026-08-08"
+    selected_by: cross_parcel_slot_preflight_2026-08-08
+    preflight_record: test-data/cross-parcel-validation/slot_preflight_2026-08-08.yaml
+    existing_artifacts:
+      land_profile: test-data/cross-parcel-validation/XPV_ORDWAY_001/land_profile.json
+      match_result: test-data/cross-parcel-validation/XPV_ORDWAY_001/match_result.json
+      validation_result: test-data/cross-parcel-validation/XPV_ORDWAY_001/validation_result.yaml
+
+  - parcel_id: XPV_KBS_MCSE_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_KBS_MCSE_001
+    geometry_path: test-data/engineering_test_geometry_kbs_mcse_001.geojson
+    geometry_hash: d2ae26983a61e4a7f712cec0952c178c278dd5954285d64cedc9938586de2eb9
+    assigned_slots: [SLOT_RAP_SCOPE_BOUNDARY]
+    selection_status: SELECTED_FROZEN
+    reference_operation: null
+    selection_rationale: >-
+      Published KBS LTER cropping-system experimental extent used to stress F02
+      RAP documented rangeland-domain applicability (expected
+      OUTSIDE_DOCUMENTED_PRODUCT_SCOPE or equivalent discipline), not to score
+      forage suitability. Not selected to predict Cow-Calf or Sheep ranking.
+    contrasted_against: [XPV_CPER_001]
+    prohibited_expectations:
+      - Score forage suitability from RAP on improved cropland
+      - Replace parcel if F02 returns OUTSIDE_DOCUMENTED_PRODUCT_SCOPE or UNKNOWN
+      - Treat KBS as an improved-pasture success case
+    known_limitations:
+      - Synthetic rectangle approximating MCSE extent; not official plot polygons
+      - Outside-RAP-scope / UNKNOWN-heavy F02 outcomes are acceptable validation results
+      - Not selected to predict Cow-Calf or Sheep ranking
+    selected_on: "2026-08-08"
+    selected_by: cross_parcel_slot_preflight_2026-08-08
+    preflight_record: test-data/cross-parcel-validation/slot_preflight_2026-08-08.yaml
+    existing_artifacts:
+      land_profile: test-data/cross-parcel-validation/XPV_KBS_MCSE_001/land_profile.json
+      match_result: test-data/cross-parcel-validation/XPV_KBS_MCSE_001/match_result.json
+      validation_result: test-data/cross-parcel-validation/XPV_KBS_MCSE_001/validation_result.yaml
+
+  - parcel_id: XPV_CPER_002_REPLACEMENT_ONLY
+    geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_002
+    geometry_path: test-data/engineering_test_geometry_cper_002.geojson
+    assigned_slots: []
+    selection_status: GEOMETRY_REPLACEMENT_STRESS_ONLY
+    reference_operation: null
+    selection_rationale: >-
+      Near-duplicate CPER subpolygon used only to prove geometry replacement
+      invalidates Factor evidence. Does not fill an environment slot.
+    contrasted_against: [XPV_CPER_001]
+    prohibited_expectations:
+      - Count as a new environment for portfolio validation
+    known_limitations:
+      - Not an environment-slot parcel
+    selected_on: "2026-08-08"
+    selected_by: portfolio_review_followup
+    existing_artifacts:
+      land_profile: null
+      match_result: null
+      validation_result: null
+
+open_execution_todos: []
+completed_execution_notes:
+  - Unified F01–F05 runs completed for Konza, Reynolds, Ordway, and KBS MCSE.
+  - No geometry replacement; runtime_rule_changed remained false.
+  - Aggregate review recommends deepen F02/F03; F06 remains unselected.
+  - Mireye point-QA transport failure recorded as data-path degradation only.

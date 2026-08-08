@@ -1,0 +1,211 @@
+spec_id: RANGEMATCH_F08_WOODY_SHRUB_RULES
+version: 0.1.0
+language: English
+status: FROZEN_V0_1
+factor_id: F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE
+derivation_spec: F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0
+atomicity_audit: F08_WOODY_SHRUB_ATOMICITY_AND_SOURCE_AUDIT.md
+data_source_audit: F08_DATA_SOURCE_AND_MIREYE_AUDIT.yaml@0.1.0
+approved_numeric_thresholds: []
+approved_weights: []
+approved_hard_constraints: []
+implementation_status: FROZEN_V0_1
+f08_audit_package: APPROVED_V0_1_FOR_IMPLEMENTATION
+f08_runtime_authorization: AUTHORIZED
+f08_freeze_status: FROZEN_V0_1
+f09_authorization: NOT_AUTHORIZED
+demo_factor_scope: CLOSED
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  missing_values_are_unknown: true
+  operation_ranking_effect: NONE
+  directional_signal_allowed: false
+  suitability_factor: false
+  browse_factor: false
+  obstruction_factor: false
+  unit_policy: fraction_normalized_0_1
+  rationale: >-
+    Woody fractional cover provides vegetation-structure context only. Reviewed
+    evidence does not support browse, obstruction, herbaceous-failure, or
+    Cow-Calf versus Sheep ranking thresholds from RAP SHR/TRE.
+
+required_variables:
+  minimum_for_context_evaluation:
+    - VAR_F08_SHRUB_COVER_FRACTION
+    - VAR_F08_TREE_COVER_FRACTION
+    - VAR_F08_SOURCE_YEAR
+    - VAR_F08_APPLICABILITY_STATUS
+    - VAR_F08_COVERAGE_STATUS
+  supporting_context:
+    - VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION
+  deferred_not_required:
+    - VAR_F08_WOODY_COVER_SPATIAL_DISTRIBUTION
+    - VAR_F08_WOODY_COVER_TEMPORAL_CHANGE
+    - VAR_F08_LITTER_COVER_FRACTION
+  superseded:
+    - VAR_F08_WOODY_CANOPY_COVER_FRACTION
+
+unit_and_null_rules:
+  land_fact_unit: fraction
+  valid_range: [0.0, 1.0]
+  rap_percent_to_fraction: value / 100
+  preserve_raw_rap_percent_in_provenance: REQUIRED
+  combined_modeled_woody_cover_fraction:
+    formula: shrub_cover_fraction + tree_cover_fraction
+    if_either_null: null
+    treat_null_as_zero: PROHIBITED
+    clamp_or_truncate: PROHIBITED
+    repair_residual_mass: PROHIBITED
+    include_in_composition_sum: PROHIBITED
+
+shared_f02_f08_quality_alignment:
+  same_artifact: REQUIRED
+  same_geometry_hash: REQUIRED
+  same_source_year: REQUIRED
+  same_mask: REQUIRED
+  same_applicability_status: REQUIRED
+  same_coverage_status: REQUIRED
+  coverage_unquantified_must_not_become_complete_in_f08: REQUIRED
+
+input_quality_states:
+  WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED:
+    definition: >-
+      Parcel RAP SHR and TRE values are available (normalized to fraction) for a
+      declared year with shared applicability IN_DOCUMENTED_PRODUCT_SCOPE and a
+      shared provenance-complete coverV3 artifact, but shared coverage_status is
+      COVERAGE_UNQUANTIFIED. This is the demo default when the aggregate API
+      cannot quantify coverage. Must not be labeled COMPLETE.
+    demo_default: true
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+  WOODY_CONTEXT_COMPLETE:
+    definition: >-
+      Parcel RAP SHR/TRE present with year, applicability in scope, and shared
+      coverage quantified as usable (not COVERAGE_UNQUANTIFIED). Not available
+      for the current demo aggregate-API path until F02 coverage deepening is
+      authorized and verified.
+    demo_available: false
+  RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY:
+    definition: >-
+      Shared RAP applicability is OUTSIDE_DOCUMENTED_PRODUCT_SCOPE or UNKNOWN.
+      Preserve the state; do not invent woody suitability.
+  COVERAGE_MISSING:
+    definition: >-
+      Shared RAP coverage status is missing/unknown such that woody values cannot
+      be attached to a usable coverage record.
+  POINT_ONLY_SECONDARY:
+    definition: Only Mireye/LCMS/NLCD point woody-related fields are available.
+  CONFLICTING_SOURCES:
+    definition: >-
+      Material disagreement between RAP woody bands and a secondary land-cover
+      source without reviewed reconciliation.
+  MISSING:
+    definition: No woody RAP inputs are available.
+
+evaluation_order:
+  - rule_id: F08_QC_001
+    when: input_quality_state == CONFLICTING_SOURCES
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F08_EXPL_CONFLICT
+    note: Do not average RAP with LCMS/NLCD.
+
+  - rule_id: F08_QC_002
+    when: input_quality_state == POINT_ONLY_SECONDARY
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F08_EXPL_POINT_ONLY
+    note: Mireye point cannot represent parcel woody distribution.
+
+  - rule_id: F08_QC_003
+    when: input_quality_state == RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F08_EXPL_APPLICABILITY
+
+  - rule_id: F08_QC_004
+    when: input_quality_state == COVERAGE_MISSING
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F08_EXPL_COVERAGE
+
+  - rule_id: F08_QC_005
+    when: input_quality_state == MISSING
+    output_signal: UNKNOWN
+    ranking_effect: NONE
+    explanation_code: F08_EXPL_MISSING
+
+  - rule_id: F08_QC_006
+    when: input_quality_state == WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F08_EXPL_COVERAGE_UNQUANTIFIED
+    note: >-
+      Aligns with F02 NEEDS_VERIFICATION for the same unquantified coverV3
+      artifact. Must not emit CONTEXT_DEPENDENT / COMPLETE for that artifact.
+
+  - rule_id: F08_QC_007
+    when: input_quality_state == WOODY_CONTEXT_COMPLETE
+    output_signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F08_EXPL_CONTEXT_ONLY
+    note: >-
+      Reserved for future quantified shared coverage. Not the demo path.
+
+allowed_signals:
+  - CONTEXT_DEPENDENT
+  - NEEDS_VERIFICATION
+  - UNKNOWN
+
+prohibited_outputs:
+  - browse_availability
+  - palatability_or_nutrition_from_woody_cover
+  - tree_obstruction_class
+  - low_herbaceous_certainty_from_woody_cover
+  - universal_woody_threshold_decision_label
+  - cow_calf_vs_sheep_rank
+  - forced_sum_to_100
+  - averaged_rap_lcms_nlcd
+  - carrying_capacity
+  - profitability
+  - woody_canopy_as_independent_band
+  - coverage_unquantified_upgraded_to_complete
+
+operation_explanations:
+  COW_CALF_OPERATION:
+    requirement_id: COW_F08_001
+    requirement_status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    note: >-
+      Woody cover may matter operationally for cattle enterprises, but no
+      reviewed browse/obstruction threshold or ranking rule is approved.
+  SHEEP_GRAZING:
+    requirement_id: SHEEP_F08_001
+    requirement_status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    note: >-
+      Sheep may use more browse than cattle in some settings, but RAP SHR/TRE
+      still do not establish browse availability or peer ranking.
+
+diligence_actions:
+  - diligence_id: F08_DIL_001
+    when: input_quality_state in [POINT_ONLY_SECONDARY, CONFLICTING_SOURCES, RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY]
+    action: Obtain provenance-complete RAP coverV3 SHR/TRE for a rangeland-applicable parcel year before using F08 as screening context.
+  - diligence_id: F08_DIL_002
+    when: always_for_context
+    action: >-
+      Do not interpret shrub/tree fractional cover as browse, palatability,
+      toxicity, obstruction, or herbaceous failure; verify botanical composition
+      and animal use in field/records when operationally material.
+  - diligence_id: F08_DIL_003
+    when: shared_f02_artifact_present
+    action: >-
+      Keep F02/F08 RAP year, mask, geometry_hash, response hash, applicability,
+      and coverage_status consistent; do not refetch contradictory coverV3
+      artifacts or upgrade shared COVERAGE_UNQUANTIFIED in F08 alone.
+
+geometry_replacement_policy:
+  on_geometry_hash_change: INVALIDATE_F08_AND_REQUIRE_RECOMPUTE
+  silently_reuse_prior_woody_measurements: PROHIBITED
+  shared_f02_artifact_also_invalidated: true

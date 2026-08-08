@@ -1,0 +1,108 @@
+spec_id: RANGEMATCH_F04_SOIL_SITE_DERIVATION
+version: 0.1.0
+language: English
+status: APPROVED_FOR_DATA_DERIVATION_NOT_SUITABILITY
+factor_id: F04_SOIL_WETNESS_ECOLOGICAL_SITE
+
+source_contract:
+  spatial: USDA_NRCS_SDA_WFS_MAPUNITPOLY
+  tabular: USDA_NRCS_SDA_SSURGO
+  ecological_site: USDA_NRCS_EDIT
+  mireye_role: POINT_DISPLAY_AND_QA_ONLY
+
+parcel_coverage:
+  method: INTERSECT_OFFICIAL_MAPUNIT_POLYGONS_WITH_PARCEL_IN_EQUAL_AREA_OR_LOCAL_PROJECTED_CRS
+  outputs:
+    - requested_area_m2
+    - covered_area_m2
+    - coverage_fraction
+    - mapunit_area_distribution
+    - uncovered_area_m2
+  numeric_tolerance_policy: CLAMP_ONLY_FLOATING_POINT_OVERSHOOT_ABOVE_ONE
+  successful_query_implies_complete_coverage: false
+
+component_distribution:
+  method: >-
+    For each map unit, preserve every component and comppct_r. Calculate each
+    component's parcel support weight as mapunit_parcel_area_fraction multiplied
+    by comppct_r divided by 100.
+  renormalize_known_components: false
+  required_outputs:
+    - component_support_weights
+    - known_component_share
+    - unaccounted_component_share
+  dominant_component_substitutes_for_mapunit: false
+
+controlled_categories:
+  variables:
+    - VAR_F04_DRAINAGE_CLASS
+    - VAR_F04_HYDROLOGIC_SOIL_GROUP
+    - VAR_F04_PONDING_FREQUENCY
+    - VAR_F04_FLOODING_FREQUENCY
+  method: WEIGHTED_CATEGORY_DISTRIBUTION_USING_COMPONENT_SUPPORT_WEIGHTS
+  ordinal_numeric_average_allowed: false
+  null_handling: PRESERVE_AS_UNKNOWN_SHARE
+
+available_water_storage:
+  source_property: chorizon.awc_r
+  source_unit: cm_per_cm
+  required_parameter: declared_depth_interval_cm
+  component_formula: >-
+    Sum awc_r times horizon overlap thickness in centimeters, then multiply by
+    10 to express millimeters of water over the declared interval.
+  horizon_overlap_formula: max(0, min(hzdepb_r, interval_bottom) - max(hzdept_r, interval_top))
+  missing_horizon_property: EXCLUDE_FROM_NUMERATOR_AND_REPORT_DEPTH_COVERAGE
+  required_quality_outputs:
+    - target_depth_cm
+    - represented_depth_cm
+    - depth_coverage_fraction
+    - component_support_coverage_fraction
+  default_depth_interval: null
+  rationale: No biological or operational depth interval is approved yet.
+
+restrictive_layers:
+  method: PRESERVE_SHALLOWEST_REPORTED_DEPTH_AND_KIND_PER_COMPONENT
+  no_record_interpretation: UNKNOWN_NOT_NO_RESTRICTION
+  value_200_interpretation: RIGHT_CENSORED_WHEN_SOURCE_DOCUMENTATION_SO_STATES
+  parcel_output: WEIGHTED_DISTRIBUTION_NOT_ARITHMETIC_MEAN
+
+electrical_conductivity:
+  source_property: chorizon.ec_r
+  method_status: DEPTH_INTERVAL_REQUIRED
+  null_handling: PRESERVE_UNKNOWN
+  suitability_interpretation: NOT_APPROVED
+
+soil_reaction:
+  source_property: chorizon.ph1to1h2o_r
+  method_status: AGGREGATION_REVIEW_REQUIRED
+  arithmetic_mean_allowed: false
+  rationale: pH is logarithmic; preserve horizon values until a reviewed transformation and use case are approved.
+
+monthly_wetness:
+  method: PRESERVE_MONTHLY_COMPONENT_RECORDS_AND_CONTROLLED_CLASS_DISTRIBUTIONS
+  null_interpretation: UNKNOWN_NOT_NONE
+  worst_case_reduction_status: NOT_APPROVED_FOR_RANGEMATCH_V0_1
+  flooding_role: SOIL_SITE_CONTEXT_ONLY
+
+ecological_site:
+  join: component.cokey_to_coecoclass_to_EDIT
+  outputs:
+    - ecological_site_id
+    - ecological_site_name
+    - ecological_site_type
+    - component_support_weight
+    - public_description_access_status
+    - source_url
+    - retrieval_timestamp
+    - response_hash
+  absent_link_interpretation: UNKNOWN_NOT_NO_ECOLOGICAL_SITE
+  reference_community_is_current_state: false
+  site_name_has_operation_ranking_effect: false
+
+factor_runtime_boundary:
+  directional_signal_allowed: false
+  numeric_thresholds: []
+  weights: []
+  hard_constraints: []
+  cross_species_ranking_effect: NONE
+

@@ -1,0 +1,198 @@
+spec_id: RANGEMATCH_F08_WOODY_SHRUB_DERIVATION
+version: 0.1.0
+language: English
+status: FROZEN_V0_1
+factor_id: F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE
+atomicity_audit: F08_WOODY_SHRUB_ATOMICITY_AND_SOURCE_AUDIT.md
+data_source_audit: F08_DATA_SOURCE_AND_MIREYE_AUDIT.yaml@0.1.0
+implementation_status: FROZEN_V0_1
+f08_audit_package: APPROVED_V0_1_FOR_IMPLEMENTATION
+f08_runtime_authorization: AUTHORIZED
+f08_freeze_status: FROZEN_V0_1
+f09_authorization: NOT_AUTHORIZED
+demo_factor_scope: CLOSED
+scope: US_RANGELAND_ENGINEERING_DEMO_FIRST
+
+purpose: >-
+  Convert RAP v3 parcel woody-layer cover bands into reproducible vegetation-
+  structure context. F08 is not browse, obstruction, herbaceous replacement,
+  carrying capacity, profitability, or species ranking.
+
+canonical_inputs:
+  rap_cover_v3:
+    source_id: USDA_ARS_RAP_V3_COVER
+    endpoint: coverV3
+    bands:
+      shrub: SHR
+      tree: TRE
+    year_required: true
+    mask_default: true
+    geometry_hash_required: true
+    response_or_artifact_hash_required: true
+  shared_with_f02:
+    reuse_same_coverV3_artifact_when_available: REQUIRED
+    share_applicability_and_coverage_records: REQUIRED
+    duplicate_fetch_when_artifact_exists: PROHIBITED
+  mireye:
+    role: POINT_QA_ONLY
+    may_supply_land_facts: false
+
+algorithm_versioning:
+  algorithm_version: F08_WOODY_SHRUB_DERIVATION@0.1.0
+  must_be_written_on_every_result: true
+
+unit_policy:
+  runtime_land_fact_unit: fraction
+  valid_range: [0.0, 1.0]
+  rap_native_unit: percent_cover
+  conversion: fraction = RAP_percent / 100
+  preserve_raw_rap_percent_in_provenance: REQUIRED
+  display_percent_allowed: true
+  display_percent_is_land_fact: false
+
+frozen_derivations:
+  - variable_id: VAR_F08_SHRUB_COVER_FRACTION
+    name: shrub_cover_fraction
+    method: RAP_COVERV3_PARCEL_MEAN_BAND_NORMALIZED
+    formula: shrub_cover_fraction = RAP.coverV3.SHR_percent / 100
+    output_unit: fraction
+    valid_range: [0.0, 1.0]
+    temporal_semantics: annual_year
+    required_outputs:
+      - shrub_cover_fraction
+      - raw_rap_shr_percent
+      - source_year
+      - response_or_artifact_hash
+
+  - variable_id: VAR_F08_TREE_COVER_FRACTION
+    name: tree_cover_fraction
+    method: RAP_COVERV3_PARCEL_MEAN_BAND_NORMALIZED
+    formula: tree_cover_fraction = RAP.coverV3.TRE_percent / 100
+    output_unit: fraction
+    valid_range: [0.0, 1.0]
+    temporal_semantics: annual_year
+    required_outputs:
+      - tree_cover_fraction
+      - raw_rap_tre_percent
+      - source_year
+      - response_or_artifact_hash
+
+  - variable_id: VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION
+    name: combined_modeled_woody_cover_fraction
+    method: SUM_OF_NORMALIZED_SHR_AND_TRE
+    formula: >-
+      combined_modeled_woody_cover_fraction =
+        shrub_cover_fraction + tree_cover_fraction
+      if either shrub_cover_fraction or tree_cover_fraction is null,
+      combined_modeled_woody_cover_fraction = null
+    output_unit: fraction
+    valid_range: [0.0, 1.0]
+    independence: DERIVED_NOT_INDEPENDENT_RAP_BAND
+    null_policy:
+      null_plus_value: null
+      treat_null_as_zero: PROHIBITED
+      clamp_or_truncate: PROHIBITED
+      repair_residual_mass: PROHIBITED
+      include_in_composition_sum_identity: PROHIBITED
+    notes: >-
+      Derived modeled woody context only. Not an independently measured canopy
+      band and not a third RAP class.
+
+  - variable_id: VAR_F08_SOURCE_YEAR
+    name: source_year
+    method: RAP_REQUEST_OR_RESPONSE_YEAR
+    output_unit: year
+    shared_default_with_f02_cover_year: true
+
+  - variable_id: VAR_F08_APPLICABILITY_STATUS
+    name: applicability_status
+    method: SHARED_RAP_APPLICABILITY_GATE_WITH_F02
+    output_unit: categorical
+    enum:
+      - IN_DOCUMENTED_PRODUCT_SCOPE
+      - OUTSIDE_DOCUMENTED_PRODUCT_SCOPE
+      - UNKNOWN
+    notes: Do not invent a second RAP domain rule for F08.
+
+  - variable_id: VAR_F08_COVERAGE_STATUS
+    name: coverage_status
+    method: SHARED_RAP_COVERAGE_RECORD_WITH_F02
+    output_unit: categorical
+    enum:
+      - COVERAGE_UNQUANTIFIED
+      - COMPLETE_RANGELAND_COVERAGE
+      - PARTIAL_RANGELAND_COVERAGE
+      - MISSING
+      - UNKNOWN
+    notes: >-
+      Must equal the shared F02 coverage_status for the same coverV3 artifact.
+      F02 coverage deepening remains DEFERRED_FOR_DEMO. F08 must not upgrade
+      COVERAGE_UNQUANTIFIED to COMPLETE.
+
+shared_rap_quality_alignment_with_f02:
+  same_artifact: REQUIRED
+  same_geometry_hash: REQUIRED
+  same_source_year: REQUIRED
+  same_mask: REQUIRED
+  same_applicability_status: REQUIRED
+  same_coverage_status: REQUIRED
+  demo_aggregate_api_behavior:
+    when_coverage_unquantified:
+      input_quality_state: WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED
+      signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+    note: >-
+      F08 must not emit WOODY_CONTEXT_COMPLETE / CONTEXT_DEPENDENT for the same
+      unquantified artifact that yields F02 NEEDS_VERIFICATION.
+
+composition_policy:
+  force_afg_pfg_shr_tre_ltr_bgr_sum_to_100: PROHIBITED
+  record_observed_component_sum_as_qa_note: ALLOWED
+  allocate_missing_mass_to_woody_or_herbaceous: PROHIBITED
+  include_combined_modeled_woody_in_composition_sum: PROHIBITED
+  treat_null_shr_or_tre_as_zero_in_combined: PROHIBITED
+
+deferred_variables:
+  - variable_id: VAR_F08_WOODY_COVER_SPATIAL_DISTRIBUTION
+    reason: No frozen pixel/patch distribution method for v0.1.
+  - variable_id: VAR_F08_WOODY_COVER_TEMPORAL_CHANGE
+    reason: No frozen multi-year change window or uncertainty policy.
+  - variable_id: VAR_F08_LITTER_COVER_FRACTION
+    reason: Litter is not woody structure; deferred from F08 v0.1.
+
+rejected_variables:
+  - variable_id: VAR_F08_BROWSE_AVAILABILITY
+    reason: Not supported by fractional shrub cover alone.
+  - variable_id: VAR_F08_WOODY_OBSTRUCTION_CLASS
+    reason: No reviewed universal obstruction threshold.
+
+provenance_requirements:
+  required_on_every_result:
+    - geometry_hash
+    - source_product_and_version
+    - endpoint
+    - source_year
+    - mask_setting
+    - response_or_artifact_hash
+    - applicability_status
+    - coverage_status
+    - algorithm_version
+    - derived_at
+    - limitations
+    - raw_rap_shr_percent
+    - raw_rap_tre_percent
+  shared_artifact_with_f02_when_same_request: true
+  note: >-
+    Runtime Land Facts are fractions; raw RAP percent measurements remain in
+    provenance/raw measurement fields.
+
+prohibited_derivations:
+  - browse_from_shrub_cover
+  - obstruction_class_from_tree_cover
+  - low_herbaceous_proof_from_woody_cover
+  - universal_woody_thresholds
+  - cow_calf_vs_sheep_ranking_from_woody_cover
+  - forced_sum_to_100
+  - average_rap_with_lcms_or_nlcd
+  - mireye_point_as_parcel_woody_distribution
+  - duplicate_contradictory_rap_coverage_logic

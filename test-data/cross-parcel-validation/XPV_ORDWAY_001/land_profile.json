@@ -1,0 +1,2669 @@
+{
+  "land_profile_id": "LAND_PROFILE_XPV_ORDWAY_001",
+  "version": "0.2.0",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_ORDWAY_001",
+  "geometry_reference": "test-data/engineering_test_geometry_ordway_001.geojson",
+  "geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+  "supported_use": "ENGINEERING_VALIDATION_ONLY",
+  "cross_parcel_validation": {
+    "parcel_id": "XPV_ORDWAY_001",
+    "assigned_slots": [
+      "SLOT_WATER_CANDIDATE_RICH"
+    ],
+    "selection_frozen_on": "2026-08-08",
+    "reference_operation": null,
+    "runtime_rule_changed": false
+  },
+  "factors": {
+    "F01_TOPOGRAPHY": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/f01_derivation_result.json",
+      "summary": {
+        "elevation_median_m": 44.94297409057617,
+        "slope_median_degrees": 1.2862736147638558,
+        "slope_p90_degrees": 3.779473496429733,
+        "mean_eastness": 0.042909941109141286,
+        "mean_northness": -0.015238953542133228
+      }
+    },
+    "F02_HERBACEOUS_RESOURCE": {
+      "derivation_spec": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+      "limitations": [
+        "RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.",
+        "Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity."
+      ],
+      "unknowns": [
+        "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+        "Botanical composition is not verified.",
+        "Operation-specific palatability is not verified.",
+        "Nutritive value is not verified."
+      ],
+      "land_facts": [
+        {
+          "variable_id": "VAR_F02_PERENNIAL_HERB_COVER",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 15.388535934873808,
+            "unit": "percent_cover",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "UNKNOWN",
+            "review_status": "NEEDS_VERIFICATION",
+            "basis": [
+              "NON_RANGELAND_OR_MIXED_RESEARCH_STATION_CONTEXT",
+              "RAP_RANGELAND_PRODUCT_SCOPE_NOT_ESTABLISHED"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1611169.425824493,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_coverV3",
+            "fetched_at": "2026-08-08T05:07:39Z",
+            "geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+            "response_or_artifact_hash": "a8d104b3410b622d6e49f469e12497e33da03d22685ddaec345ff3fd7c01c535",
+            "endpoint": "coverV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "PFG combines perennial grasses and forbs.",
+            "Modeled cover is not standing biomass, available forage, palatability, or nutritive value."
+          ]
+        },
+        {
+          "variable_id": "VAR_F02_ANNUAL_HERB_PRODUCTION",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 1246.4622189270253,
+            "unit": "pound_per_acre",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_accumulated_new_growth_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "UNKNOWN",
+            "review_status": "NEEDS_VERIFICATION",
+            "basis": [
+              "NON_RANGELAND_OR_MIXED_RESEARCH_STATION_CONTEXT",
+              "RAP_RANGELAND_PRODUCT_SCOPE_NOT_ESTABLISHED"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1611169.425824493,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_productionV3",
+            "fetched_at": "2026-08-08T05:07:39Z",
+            "geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+            "response_or_artifact_hash": "90181308ab28738ba76495eb027238da3ea998996834d939f15414e3726039a8",
+            "endpoint": "productionV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "Production is modeled new growth, not standing biomass.",
+            "Production is not available forage, carrying capacity, or stocking rate."
+          ]
+        }
+      ]
+    },
+    "F03_LIVESTOCK_WATER": {
+      "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "derivation_spec": "F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/f03_candidate_distance_result.json",
+      "mapped_candidate_count": 24,
+      "verified_livestock_water_system_count": 0,
+      "euclidean_distance_to_mapped_candidate_m": {
+        "minimum": 0.0,
+        "median": 505.3398811506022,
+        "p90": 758.3436041183727,
+        "maximum": 946.8607410100931
+      },
+      "euclidean_distance_to_verified_livestock_water_m": null,
+      "limitations": [
+        "Mapped NHD hydrography features are candidate context, not verified livestock-water sources.",
+        "Euclidean distance is not traversable animal-access distance.",
+        "Reliability, capacity, quality, legal access, infrastructure, and seasonal operation are unknown."
+      ]
+    },
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/f04_derivation_result.json",
+      "source_fixture_references": [
+        "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/sda_spatial_coverage.json",
+        "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/sda_mapunit_component_ecosite.json",
+        "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/sda_horizons.json",
+        "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/sda_restrictions.json",
+        "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/sda_monthly_wetness.json",
+        "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/ecological_site_access.json",
+        "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/mireye_f04_centroid.json"
+      ],
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_WITH_NUMERIC_TOLERANCE",
+        "requested_area_m2": 1608327.1903942095,
+        "covered_area_m2": 1608327.1903941806,
+        "uncovered_area_m2": 2.8870999813079834e-08,
+        "coverage_fraction": 0.999999999999982,
+        "coverage_calculated_from_polygon_intersection": true,
+        "successful_query_implies_complete_coverage": false,
+        "intersecting_mapunit_count": 6
+      },
+      "mapunit_area_distribution": {
+        "1530343": 0.02610868117254271,
+        "323372": 0.8561159806782183,
+        "323378": 0.06288949408346808,
+        "323383": 0.14227661446696963,
+        "323416": 0.003287558606986611,
+        "323427": 0.0036186847833836813
+      },
+      "component_support_weights": [
+        {
+          "mukey": "323372",
+          "cokey": "26572147",
+          "compname": "Candler",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.7276985835764855,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572147",
+          "compname": "Candler",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.7276985835764855,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XX001FL",
+          "ecoclassname": "Yellow Sands Xeric Uplands",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572147",
+          "compname": "Candler",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.7276985835764855,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572200",
+          "compname": "Candler",
+          "comppct_r": 90.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.12804895302027267,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572200",
+          "compname": "Candler",
+          "comppct_r": 90.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.12804895302027267,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XX001FL",
+          "ecoclassname": "Yellow Sands Xeric Uplands",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572200",
+          "compname": "Candler",
+          "comppct_r": 90.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.12804895302027267,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572176",
+          "compname": "Apopka",
+          "comppct_r": 80.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.05031159526677447,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572176",
+          "compname": "Apopka",
+          "comppct_r": 80.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.05031159526677447,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572176",
+          "compname": "Apopka",
+          "comppct_r": 80.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.05031159526677447,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572176",
+          "compname": "Apopka",
+          "comppct_r": 80.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.05031159526677447,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY008FL",
+          "ecoclassname": "Upland Hardwood Hammock",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572141",
+          "compname": "Astatula",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.03424463922712873,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572141",
+          "compname": "Astatula",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.03424463922712873,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XX001FL",
+          "ecoclassname": "Yellow Sands Xeric Uplands",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1530343",
+          "cokey": "26572455",
+          "compname": "Water",
+          "comppct_r": 100.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.02610868117254271,
+          "component_support_weight": 0.02610868117254271,
+          "drainagecl": null,
+          "hydgrp": null,
+          "ecoclassid": "G155XB999FL",
+          "ecoclassname": "Forage suitability group not assigned",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572142",
+          "compname": "Adamsville",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.025683479420346548,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572142",
+          "compname": "Adamsville",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.025683479420346548,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB131FL",
+          "ecoclassname": "Sandy soils on rises and knolls of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572142",
+          "compname": "Adamsville",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.025683479420346548,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY008FL",
+          "ecoclassname": "Upland Hardwood Hammock",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572143",
+          "compname": "Apopka",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.025683479420346548,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572143",
+          "compname": "Apopka",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.025683479420346548,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572143",
+          "compname": "Apopka",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.025683479420346548,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572144",
+          "compname": "Tavares",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.017122319613564366,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572144",
+          "compname": "Tavares",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.017122319613564366,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB121FL",
+          "ecoclassname": "Sandy soils on rises, knolls, and ridges of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572144",
+          "compname": "Tavares",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.017122319613564366,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY001FL",
+          "ecoclassname": "Sand Pine Scrub",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572144",
+          "compname": "Tavares",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.017122319613564366,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572145",
+          "compname": "Arredondo",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.017122319613564366,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572145",
+          "compname": "Arredondo",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.017122319613564366,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572145",
+          "compname": "Arredondo",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.017122319613564366,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572146",
+          "compname": "Millhopper",
+          "comppct_r": 1.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.008561159806782183,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323372",
+          "cokey": "26572146",
+          "compname": "Millhopper",
+          "comppct_r": 1.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.8561159806782183,
+          "component_support_weight": 0.008561159806782183,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB121FL",
+          "ecoclassname": "Sandy soils on rises, knolls, and ridges of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572198",
+          "compname": "Tavares",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.007113830723348482,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572198",
+          "compname": "Tavares",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.007113830723348482,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB121FL",
+          "ecoclassname": "Sandy soils on rises, knolls, and ridges of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572198",
+          "compname": "Tavares",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.007113830723348482,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY001FL",
+          "ecoclassname": "Sand Pine Scrub",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572198",
+          "compname": "Tavares",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.007113830723348482,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572199",
+          "compname": "Apopka",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.0042682984340090884,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572199",
+          "compname": "Apopka",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.0042682984340090884,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572199",
+          "compname": "Apopka",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.0042682984340090884,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572173",
+          "compname": "Sparr",
+          "comppct_r": 6.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.003773369645008085,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572173",
+          "compname": "Sparr",
+          "comppct_r": 6.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.003773369645008085,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB131FL",
+          "ecoclassname": "Sandy soils on rises and knolls of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572173",
+          "compname": "Sparr",
+          "comppct_r": 6.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.003773369645008085,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY008FL",
+          "ecoclassname": "Upland Hardwood Hammock",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572172",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0031444747041734044,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572172",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0031444747041734044,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572172",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0031444747041734044,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XX001FL",
+          "ecoclassname": "Yellow Sands Xeric Uplands",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572172",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0031444747041734044,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572172",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0031444747041734044,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R155XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572174",
+          "compname": "Jumper",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0031444747041734044,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "B",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572174",
+          "compname": "Jumper",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0031444747041734044,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "B",
+          "ecoclassid": "G154XB231FL",
+          "ecoclassname": "Sandy over loamy soils on rises and knolls of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572415",
+          "compname": "Tavares",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.003075882065876129,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572415",
+          "compname": "Tavares",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.003075882065876129,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB121FL",
+          "ecoclassname": "Sandy soils on rises, knolls, and ridges of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572415",
+          "compname": "Tavares",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.003075882065876129,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572197",
+          "compname": "Placid",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.0028455322893393927,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "F154XA015FL",
+          "ecoclassname": "Mineral Depressional Wetlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572197",
+          "compname": "Placid",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.0028455322893393927,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "G155XB145FL",
+          "ecoclassname": "Sandy soils on stream terraces, flood plains, or in depressions",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323383",
+          "cokey": "26572197",
+          "compname": "Placid",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.14227661446696963,
+          "component_support_weight": 0.0028455322893393927,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY010FL",
+          "ecoclassname": "Freshwater Marshes and Ponds",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572353",
+          "compname": "Placid",
+          "comppct_r": 80.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.002630046885589289,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "G155XB145FL",
+          "ecoclassname": "Sandy soils on stream terraces, flood plains, or in depressions",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572353",
+          "compname": "Placid",
+          "comppct_r": 80.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.002630046885589289,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY010FL",
+          "ecoclassname": "Freshwater Marshes and Ponds",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572353",
+          "compname": "Placid",
+          "comppct_r": 80.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.002630046885589289,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY070FL",
+          "ecoclassname": "Sandy Freshwater Isolated Marshes and Swamps",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572175",
+          "compname": "Jonesville",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0025155797633387234,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA009FL",
+          "ecoclassname": "Moist Basic Pine Uplands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323378",
+          "cokey": "26572175",
+          "compname": "Jonesville",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06288949408346808,
+          "component_support_weight": 0.0025155797633387234,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB521FL",
+          "ecoclassname": "Shallow or moderately deep, sandy or loamy soils on rises and ridges of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572356",
+          "compname": "Basinger",
+          "comppct_r": 7.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.0002301291024890628,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "G155XB141FL",
+          "ecoclassname": "Sandy soils on flats of mesic or hydric lowlands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572356",
+          "compname": "Basinger",
+          "comppct_r": 7.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.0002301291024890628,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY070FL",
+          "ecoclassname": "Sandy Freshwater Isolated Marshes and Swamps",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572416",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00018093423916918408,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572416",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00018093423916918408,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XX001FL",
+          "ecoclassname": "Yellow Sands Xeric Uplands",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572416",
+          "compname": "Candler",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00018093423916918408,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572354",
+          "compname": "Myakka",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.00016437793034933056,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "F155XY120FL",
+          "ecoclassname": "Sandy Flatwoods and Hammocks",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572354",
+          "compname": "Myakka",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.00016437793034933056,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "G155XB141FL",
+          "ecoclassname": "Sandy soils on flats of mesic or hydric lowlands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572354",
+          "compname": "Myakka",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 0.00016437793034933056,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY003FL",
+          "ecoclassname": "South Florida Flatwoods",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572417",
+          "compname": "Apopka",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00014474739133534727,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA004FL",
+          "ecoclassname": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572417",
+          "compname": "Apopka",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00014474739133534727,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "G154XB111FL",
+          "ecoclassname": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572417",
+          "compname": "Apopka",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00014474739133534727,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY002FL",
+          "ecoclassname": "Longleaf Pine-Turkey Oak Hills",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572418",
+          "compname": "Narcoossee",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00010856054350151043,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA008FL",
+          "ecoclassname": "Moist Sandy Scrubby Flatwoods",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572418",
+          "compname": "Narcoossee",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00010856054350151043,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB131FL",
+          "ecoclassname": "Sandy soils on rises and knolls of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572418",
+          "compname": "Narcoossee",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00010856054350151043,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY008FL",
+          "ecoclassname": "Upland Hardwood Hammock",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572419",
+          "compname": "Zolfo",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00010856054350151043,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "F154XA008FL",
+          "ecoclassname": "Moist Sandy Scrubby Flatwoods",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572419",
+          "compname": "Zolfo",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00010856054350151043,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "G155XB131FL",
+          "ecoclassname": "Sandy soils on rises and knolls of mesic uplands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323427",
+          "cokey": "26572419",
+          "compname": "Zolfo",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.0036186847833836813,
+          "component_support_weight": 0.00010856054350151043,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "A",
+          "ecoclassid": "R154XY004FL",
+          "ecoclassname": "North Florida Flatwoods",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572351",
+          "compname": "Gentry",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 9.862675820959832e-05,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "C/D",
+          "ecoclassid": "G155XB245FL",
+          "ecoclassname": "Sandy over loamy soils on stream terraces, flood plains, or in depressions",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572351",
+          "compname": "Gentry",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 9.862675820959832e-05,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "C/D",
+          "ecoclassid": "R155XY010FL",
+          "ecoclassname": "Freshwater Marshes and Ponds",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572351",
+          "compname": "Gentry",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 9.862675820959832e-05,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "C/D",
+          "ecoclassid": "R155XY080FL",
+          "ecoclassname": "Sandy over Loamy Freshwater Isolated Marshes and Swamps",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572352",
+          "compname": "Samsula",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 9.862675820959832e-05,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "G155XB645FL",
+          "ecoclassname": "Organic soils in depressions and on flood plains",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572352",
+          "compname": "Samsula",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 9.862675820959832e-05,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY010FL",
+          "ecoclassname": "Freshwater Marshes and Ponds",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572352",
+          "compname": "Samsula",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 9.862675820959832e-05,
+          "drainagecl": "Very poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY100FL",
+          "ecoclassname": "Organic Freshwater Isolated Marshes and Swamps",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572355",
+          "compname": "Felda",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 6.575117213973223e-05,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "F155XY130FL",
+          "ecoclassname": "Sandy over Loamy Flatwoods and Hammocks",
+          "ecoclasstypename": "NRCS Forestland Site"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572355",
+          "compname": "Felda",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 6.575117213973223e-05,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "G155XB241FL",
+          "ecoclassname": "Sandy over loamy soils on flats of hydric or mesic lowlands",
+          "ecoclasstypename": "Forage Suitability Groups"
+        },
+        {
+          "mukey": "323416",
+          "cokey": "26572355",
+          "compname": "Felda",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.003287558606986611,
+          "component_support_weight": 6.575117213973223e-05,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "A/D",
+          "ecoclassid": "R155XY011FL",
+          "ecoclassname": "Slough",
+          "ecoclasstypename": "Florida Legacy Range Site"
+        }
+      ],
+      "known_component_share": 3.2628143914377463,
+      "unaccounted_component_share": 0.0,
+      "component_percentages_renormalized": false,
+      "drainage_class_distribution": {
+        "Excessively drained": 2.6519970644829067,
+        "Moderately well drained": 0.12329456715884413,
+        "Poorly drained": 0.0006903873074671883,
+        "Somewhat poorly drained": 0.09531085986541982,
+        "UNKNOWN": 0.02610868117254271,
+        "Very poorly drained": 0.01747875627902175,
+        "Well drained": 0.34793407517154146
+      },
+      "hydrologic_soil_group_distribution": {
+        "A": 3.212247617270367,
+        "A/D": 0.017873263311860146,
+        "B": 0.006288949408346809,
+        "C/D": 0.00029588027462879496,
+        "UNKNOWN": 0.02610868117254271
+      },
+      "ponding_frequency_distribution": {
+        "Frequent": 0.004451878034930106,
+        "None": 1.0622853708251891,
+        "UNKNOWN": 0.027559764931449546
+      },
+      "flooding_frequency_distribution": {
+        "None": 1.0681883326190234,
+        "UNKNOWN": 0.02610868117254271
+      },
+      "restrictive_layer_records": [
+        {
+          "cokey": "26572147",
+          "component_support_weight": 0.7276985835764855,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572147",
+          "component_support_weight": 0.7276985835764855,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572147",
+          "component_support_weight": 0.7276985835764855,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572200",
+          "component_support_weight": 0.12804895302027267,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572200",
+          "component_support_weight": 0.12804895302027267,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572200",
+          "component_support_weight": 0.12804895302027267,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572176",
+          "component_support_weight": 0.05031159526677447,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572176",
+          "component_support_weight": 0.05031159526677447,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572176",
+          "component_support_weight": 0.05031159526677447,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572176",
+          "component_support_weight": 0.05031159526677447,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572141",
+          "component_support_weight": 0.03424463922712873,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572141",
+          "component_support_weight": 0.03424463922712873,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572455",
+          "component_support_weight": 0.02610868117254271,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572142",
+          "component_support_weight": 0.025683479420346548,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572142",
+          "component_support_weight": 0.025683479420346548,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572142",
+          "component_support_weight": 0.025683479420346548,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572143",
+          "component_support_weight": 0.025683479420346548,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572143",
+          "component_support_weight": 0.025683479420346548,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572143",
+          "component_support_weight": 0.025683479420346548,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572144",
+          "component_support_weight": 0.017122319613564366,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572144",
+          "component_support_weight": 0.017122319613564366,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572144",
+          "component_support_weight": 0.017122319613564366,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572144",
+          "component_support_weight": 0.017122319613564366,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572145",
+          "component_support_weight": 0.017122319613564366,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572145",
+          "component_support_weight": 0.017122319613564366,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572145",
+          "component_support_weight": 0.017122319613564366,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572146",
+          "component_support_weight": 0.008561159806782183,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572146",
+          "component_support_weight": 0.008561159806782183,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572198",
+          "component_support_weight": 0.007113830723348482,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572198",
+          "component_support_weight": 0.007113830723348482,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572198",
+          "component_support_weight": 0.007113830723348482,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572198",
+          "component_support_weight": 0.007113830723348482,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572199",
+          "component_support_weight": 0.0042682984340090884,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572199",
+          "component_support_weight": 0.0042682984340090884,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572199",
+          "component_support_weight": 0.0042682984340090884,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572173",
+          "component_support_weight": 0.003773369645008085,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572173",
+          "component_support_weight": 0.003773369645008085,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572173",
+          "component_support_weight": 0.003773369645008085,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572172",
+          "component_support_weight": 0.0031444747041734044,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572172",
+          "component_support_weight": 0.0031444747041734044,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572172",
+          "component_support_weight": 0.0031444747041734044,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572172",
+          "component_support_weight": 0.0031444747041734044,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572172",
+          "component_support_weight": 0.0031444747041734044,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572174",
+          "component_support_weight": 0.0031444747041734044,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572174",
+          "component_support_weight": 0.0031444747041734044,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572415",
+          "component_support_weight": 0.003075882065876129,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572415",
+          "component_support_weight": 0.003075882065876129,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572415",
+          "component_support_weight": 0.003075882065876129,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572197",
+          "component_support_weight": 0.0028455322893393927,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572197",
+          "component_support_weight": 0.0028455322893393927,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572197",
+          "component_support_weight": 0.0028455322893393927,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572353",
+          "component_support_weight": 0.002630046885589289,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572353",
+          "component_support_weight": 0.002630046885589289,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572353",
+          "component_support_weight": 0.002630046885589289,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572175",
+          "component_support_weight": 0.0025155797633387234,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 84.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572175",
+          "component_support_weight": 0.0025155797633387234,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 84.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572356",
+          "component_support_weight": 0.0002301291024890628,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572356",
+          "component_support_weight": 0.0002301291024890628,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572416",
+          "component_support_weight": 0.00018093423916918408,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572416",
+          "component_support_weight": 0.00018093423916918408,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572416",
+          "component_support_weight": 0.00018093423916918408,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572354",
+          "component_support_weight": 0.00016437793034933056,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572354",
+          "component_support_weight": 0.00016437793034933056,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572354",
+          "component_support_weight": 0.00016437793034933056,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572417",
+          "component_support_weight": 0.00014474739133534727,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572417",
+          "component_support_weight": 0.00014474739133534727,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572417",
+          "component_support_weight": 0.00014474739133534727,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572418",
+          "component_support_weight": 0.00010856054350151043,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572418",
+          "component_support_weight": 0.00010856054350151043,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572418",
+          "component_support_weight": 0.00010856054350151043,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572419",
+          "component_support_weight": 0.00010856054350151043,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572419",
+          "component_support_weight": 0.00010856054350151043,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572419",
+          "component_support_weight": 0.00010856054350151043,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572351",
+          "component_support_weight": 9.862675820959832e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572351",
+          "component_support_weight": 9.862675820959832e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572351",
+          "component_support_weight": 9.862675820959832e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572352",
+          "component_support_weight": 9.862675820959832e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572352",
+          "component_support_weight": 9.862675820959832e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572352",
+          "component_support_weight": 9.862675820959832e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572355",
+          "component_support_weight": 6.575117213973223e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572355",
+          "component_support_weight": 6.575117213973223e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26572355",
+          "component_support_weight": 6.575117213973223e-05,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        }
+      ],
+      "restrictive_layer_distribution": {
+        "Lithic bedrock|84.0": 0.005031159526677447,
+        "UNKNOWN": 3.2577832319110684
+      },
+      "ecological_site_references": [
+        {
+          "ecological_site_id": "R154XY002FL",
+          "ecological_site_name": "Longleaf Pine-Turkey Oak Hills",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.9297274898776511,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XY002FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G154XB111FL",
+          "ecological_site_name": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.9266516078117749,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R154XX001FL",
+          "ecological_site_name": "Yellow Sands Xeric Uplands",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.8933175847672296,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XX001FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": "5664541924089e747b76259b7278f0f431f345d6a408e3ace5893899059a7640",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "F154XA004FL",
+          "ecological_site_name": "Moist Sandy Pine-Hardwood Woodlands",
+          "ecological_site_type": "NRCS Forestland Site",
+          "component_support_weight": 0.166004956105129,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB111FL",
+          "ecological_site_name": "Sandy soils on ridges and dunes of xeric uplands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.06734089178565777,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY002FL",
+          "ecological_site_name": "Longleaf Pine-Turkey Oak Hills",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.057332402895441885,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY002FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R154XY008FL",
+          "ecological_site_name": "Upland Hardwood Hammock",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.05419352545528407,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XY008FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB121FL",
+          "ecological_site_name": "Sandy soils on rises, knolls, and ridges of mesic uplands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.03279731014369503,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB131FL",
+          "ecological_site_name": "Sandy soils on rises and knolls of mesic uplands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.029673970152357655,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB999FL",
+          "ecological_site_name": "Forage suitability group not assigned",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.02610868117254271,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY008FL",
+          "ecological_site_name": "Upland Hardwood Hammock",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.025683479420346548,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY008FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY001FL",
+          "ecological_site_name": "Sand Pine Scrub",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.02423615033691285,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY001FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY010FL",
+          "ecological_site_name": "Freshwater Marshes and Ponds",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.005672832691347879,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY010FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB145FL",
+          "ecological_site_name": "Sandy soils on stream terraces, flood plains, or in depressions",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.005475579174928682,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G154XB231FL",
+          "ecological_site_name": "Sandy over loamy soils on rises and knolls of mesic uplands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.0031444747041734044,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G154XB121FL",
+          "ecological_site_name": "Sandy soils on rises, knolls, and ridges of mesic uplands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.003075882065876129,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY070FL",
+          "ecological_site_name": "Sandy Freshwater Isolated Marshes and Swamps",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.0028601759880783517,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY070FL",
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": "44863908374b1bafa2a82d1c92c7e4ded7fbdc6e760024fff61c940a65a8abe9",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "F154XA015FL",
+          "ecological_site_name": "Mineral Depressional Wetlands",
+          "ecological_site_type": "NRCS Forestland Site",
+          "component_support_weight": 0.0028455322893393927,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "F154XA009FL",
+          "ecological_site_name": "Moist Basic Pine Uplands",
+          "ecological_site_type": "NRCS Forestland Site",
+          "component_support_weight": 0.0025155797633387234,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G154XB521FL",
+          "ecological_site_name": "Shallow or moderately deep, sandy or loamy soils on rises and ridges of mesic uplands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.0025155797633387234,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB141FL",
+          "ecological_site_name": "Sandy soils on flats of mesic or hydric lowlands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 0.00039450703283839335,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "F154XA008FL",
+          "ecological_site_name": "Moist Sandy Scrubby Flatwoods",
+          "ecological_site_type": "NRCS Forestland Site",
+          "component_support_weight": 0.00021712108700302086,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "F155XY120FL",
+          "ecological_site_name": "Sandy Flatwoods and Hammocks",
+          "ecological_site_type": "NRCS Forestland Site",
+          "component_support_weight": 0.00016437793034933056,
+          "public_description_access_status": "NOT_ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY003FL",
+          "ecological_site_name": "South Florida Flatwoods",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.00016437793034933056,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R154XY004FL",
+          "ecological_site_name": "North Florida Flatwoods",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 0.00010856054350151043,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB245FL",
+          "ecological_site_name": "Sandy over loamy soils on stream terraces, flood plains, or in depressions",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 9.862675820959832e-05,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB645FL",
+          "ecological_site_name": "Organic soils in depressions and on flood plains",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 9.862675820959832e-05,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY080FL",
+          "ecological_site_name": "Sandy over Loamy Freshwater Isolated Marshes and Swamps",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 9.862675820959832e-05,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY100FL",
+          "ecological_site_name": "Organic Freshwater Isolated Marshes and Swamps",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 9.862675820959832e-05,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "F155XY130FL",
+          "ecological_site_name": "Sandy over Loamy Flatwoods and Hammocks",
+          "ecological_site_type": "NRCS Forestland Site",
+          "component_support_weight": 6.575117213973223e-05,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "G155XB241FL",
+          "ecological_site_name": "Sandy over loamy soils on flats of hydric or mesic lowlands",
+          "ecological_site_type": "Forage Suitability Groups",
+          "component_support_weight": 6.575117213973223e-05,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R155XY011FL",
+          "ecological_site_name": "Slough",
+          "ecological_site_type": "Florida Legacy Range Site",
+          "component_support_weight": 6.575117213973223e-05,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": null,
+          "source_url": null,
+          "retrieval_timestamp": "2026-08-08T05:08:16Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        }
+      ],
+      "ecological_site_unknown_share": 0.0,
+      "available_water_storage": {
+        "status": "METHOD_INPUT_REQUIRED",
+        "derived_storage_mm": null,
+        "note": "Reusable AWC derivation exists; no approved depth interval is applied in this Land Profile."
+      },
+      "mireye_point_qa": {
+        "role": "POINT_DISPLAY_AND_QA_ONLY",
+        "may_represent_whole_parcel": false,
+        "fetched_at": null,
+        "fields": {},
+        "partial_failures": []
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "F04_SOIL_SITE_ATOMICITY_AND_SOURCE_AUDIT",
+          "CPER_LIVE_DATA_GATE"
+        ],
+        "notes": "F04 v0.1 is data-quality and context only; no directional suitability signal is approved."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "requested_area_m2": 1608327.1903942095,
+        "valid_area_m2": 1608327.1903941806,
+        "valid_coverage_fraction": 0.999999999999982,
+        "adapter_status": "SDA_POLYGON_AND_TABULAR_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": false,
+        "component_count": 82,
+        "horizon_record_count": 85,
+        "restriction_record_count": 28,
+        "monthly_wetness_record_count": 325,
+        "components_with_ecological_site_linkage": 82,
+        "derivation_contract_verified": true,
+        "numeric_average_of_controlled_categories": false
+      },
+      "provenance": {
+        "source_reference": "USDA_NRCS_SDA_SSURGO_AND_EDIT",
+        "fetched_at": "2026-08-08T05:08:16Z",
+        "geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+        "response_or_artifact_hash": "7f5e42b022af903ffb1043679925ebb44e133d3f1d3ce3af79d1eb2f9649950c",
+        "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+        "primary_path": "OFFICIAL_SDA_PARCEL_POLYGONS_COMPONENTS_HORIZONS",
+        "mireye_role": "POINT_DISPLAY_AND_QA_ONLY"
+      },
+      "limitations": [
+        "No composite soil score is created.",
+        "Controlled categories are preserved as distributions, not ordinal averages.",
+        "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+        "Ecological-site names do not imply current vegetation or operation ranking.",
+        "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+        "Available-water storage is omitted from profile evidence until a depth interval is approved."
+      ],
+      "unknowns": [
+        "Within-map-unit component locations are unknown.",
+        "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+        "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+        "Ecological-site references do not establish current vegetation state.",
+        "No approved depth interval exists for parcel available-water storage in the Land Profile."
+      ],
+      "ranking_effect": "NONE"
+    },
+    "F05_CLIMATE_DROUGHT_EXPOSURE": {
+      "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+      "input_quality_state": "CLIMATE_CONTEXT_COMPLETE",
+      "derivation_spec": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+      "canonical_precipitation": {
+        "variable_id": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+        "value_mm": 1342.19,
+        "value_inches": 52.842,
+        "unit": "millimeter",
+        "unit_normalized": "mm/year",
+        "normals_period": "1991-2020",
+        "spatial_resolution": {
+          "nominal": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+          "delta_lat_deg": 0.041667938232421875,
+          "delta_lon_deg": 0.04166412353515625
+        },
+        "aggregation": {
+          "method": "bbox_intersecting_cell_centers_mean",
+          "cell_count": 1,
+          "cell_values_mm": [
+            1342.19
+          ],
+          "cells": [
+            {
+              "lat": 29.687532424926758,
+              "lon": -81.97916412353516,
+              "annprcp_norm_mm": 1342.192138671875
+            }
+          ],
+          "note": "Mean of NOAA NCEI gridded annual precipitation normals for grid cells intersecting the engineering rectangle."
+        },
+        "source": {
+          "organization": "NOAA National Centers for Environmental Information (NCEI)",
+          "product": "1991-2020 Gridded Monthly/Annual Precipitation Normals (derived from nClimGrid)",
+          "variable": "annprcp_norm",
+          "file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+          "source_url": "https://www.ncei.noaa.gov/data/oceans/archive/arc0196/0245564/1.1/data/0-data/prcp-1991_2020-monthly-normals-v1.0.nc",
+          "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "units_in_file": "millimeter",
+          "alternate_not_used": "ACIS retained as secondary QA only; never canonical Land Fact."
+        },
+        "role": "CANONICAL_LAND_FACT",
+        "suitability_signal": null
+      },
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+        "spatial_support": "PARCEL_BBOX_INTERSECTING_GRID_CELLS",
+        "parcel_bbox": [
+          -82.0,
+          29.685,
+          -81.985,
+          29.695
+        ],
+        "intersecting_cell_count": 1,
+        "coverage_calculated_from_polygon_intersection": false,
+        "successful_query_implies_complete_coverage": false
+      },
+      "mireye_point_qa": {},
+      "secondary_comparisons": [],
+      "source_conflicts": [],
+      "validation": {
+        "complete": true,
+        "issues": [
+          "non_canonical_precip_access_path"
+        ],
+        "coverage_confirmed": true,
+        "unit_ok": true,
+        "period_ok": true,
+        "value_ok": true,
+        "provenance_ok": true,
+        "provenance_fields": {
+          "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "fetched_at": "2026-08-08T05:08:16Z",
+          "geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+          "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2"
+        }
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED_FOR_DATA_CAPABILITY",
+        "basis": [
+          "F05_CLIMATE_DROUGHT_ATOMICITY_AND_SOURCE_AUDIT",
+          "F05_CLIMATE_DROUGHT_EVIDENCE_REGISTRY",
+          "CROSS_PARCEL_VALIDATION_NOAA_CANONICAL_PATH"
+        ],
+        "notes": "F05 v0.1 is data-quality and context only; annprcp_norm is retained as a Land Fact and is not converted into suitability."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+        "adapter_status": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": true,
+        "canonical_precip_complete": true,
+        "directional_signal_approved": false,
+        "numeric_thresholds_approved": false
+      },
+      "provenance": {
+        "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+        "fetched_at": "2026-08-08T05:08:16Z",
+        "geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+        "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+        "derivation_spec_version": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+        "primary_path": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF",
+        "canonical_variable": "annprcp_norm",
+        "acis_role": "SECONDARY_QA_OR_FALLBACK",
+        "mireye_role": "POINT_QA_AND_FAST_CONTEXT"
+      },
+      "limitations": [
+        "Mean annual precipitation is a Land Fact, not a suitability score.",
+        "Current USDM class is current-condition context only, not drought history.",
+        "Mireye point climate fields must not replace canonical NOAA parcel precipitation.",
+        "ACIS precipitation series is secondary QA/fallback and is not the canonical runtime source.",
+        "No precipitation, temperature, heat-day, or USDM suitability threshold is approved.",
+        "F05 must not alter F02 forage, F03 livestock-water, or F04 wetness signals.",
+        "Flood/FEMA hazard is out of scope for F05."
+      ],
+      "unknowns": [
+        "Drought-history summary method is not frozen.",
+        "Precipitation seasonality and interannual variability methods are not frozen.",
+        "No biological heat-stress threshold is approved for Cow-Calf or Sheep."
+      ],
+      "ranking_effect": "NONE",
+      "result_reference": "test-data/cross-parcel-validation/XPV_ORDWAY_001/live-results/f05_derivation_result.json"
+    }
+  }
+}

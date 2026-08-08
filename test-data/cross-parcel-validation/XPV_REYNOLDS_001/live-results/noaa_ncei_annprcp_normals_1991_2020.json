@@ -1,0 +1,63 @@
+{
+  "variable_id": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_REYNOLDS_001",
+  "geometry_sha256": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+  "value_mm": 462.55,
+  "value_inches": 18.211,
+  "unit": "millimeter",
+  "aggregation": {
+    "method": "bbox_intersecting_cell_centers_mean",
+    "cell_count": 2,
+    "cell_values_mm": [
+      455.58,
+      469.52
+    ],
+    "cells": [
+      {
+        "lat": 43.10419845581055,
+        "lon": -116.77083587646484,
+        "annprcp_norm_mm": 455.5770263671875
+      },
+      {
+        "lat": 43.10419845581055,
+        "lon": -116.72916412353516,
+        "annprcp_norm_mm": 469.52056884765625
+      }
+    ],
+    "note": "Mean of NOAA NCEI gridded annual precipitation normals for grid cells intersecting the engineering rectangle."
+  },
+  "normals_period": "1991-2020",
+  "spatial_resolution": {
+    "nominal": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+    "delta_lat_deg": 0.041667938232421875,
+    "delta_lon_deg": 0.04166412353515625
+  },
+  "parcel_coverage": {
+    "parcel_bbox": [
+      -116.76,
+      43.095,
+      -116.745,
+      43.105
+    ],
+    "parcel_area_m2_approx": 1354196.84,
+    "intersecting_cell_count": 2,
+    "approx_cell_area_m2": 15673096.18,
+    "coverage_status": "COMPLETE_CELLS_INTERSECT_PARCEL_BBOX",
+    "spatial_support": "PARCEL_BBOX_INTERSECTING_GRID_CELLS"
+  },
+  "source": {
+    "organization": "NOAA National Centers for Environmental Information (NCEI)",
+    "product": "1991-2020 Gridded Monthly/Annual Precipitation Normals (derived from nClimGrid)",
+    "variable": "annprcp_norm",
+    "file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/archive/arc0196/0245564/1.1/data/0-data/prcp-1991_2020-monthly-normals-v1.0.nc",
+    "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+    "units_in_file": "millimeter",
+    "alternate_not_used": "ACIS retained as secondary QA only; never canonical Land Fact."
+  },
+  "fetched_at": "2026-08-08T05:07:31Z",
+  "local_cache_path": "test-data/live-results/cper/cache/prcp-1991_2020-monthly-normals-v1.0.nc",
+  "file_sha256": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+  "file_bytes": 280673972,
+  "role": "CANONICAL_LAND_FACT"
+}

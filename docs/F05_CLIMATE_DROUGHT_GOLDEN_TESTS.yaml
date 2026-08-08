@@ -1,0 +1,75 @@
+spec_id: RANGEMATCH_F05_CLIMATE_DROUGHT_GOLDEN_TESTS
+version: 0.1.0
+language: English
+status: EXECUTABLE_IN_tests/test_f05_climate.py
+factor_id: F05_CLIMATE_DROUGHT_EXPOSURE
+rules_spec: docs/F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml
+notes:
+  - Tests assert data-quality and context outcomes only.
+  - No precipitation mm cutoff, USDM class penalty, or species ranking assertions are permitted.
+
+tests:
+  - test_id: F05_GT_001_CPER_CANONICAL_PRECIP
+    description: CPER NOAA/NCEI annprcp_norm with provenance is climate context only.
+    input_quality_state: CLIMATE_CONTEXT_COMPLETE
+    fixtures:
+      - test-data/live-results/cper/cper_noaa_ncei_annprcp_normals_1991_2020_2026-08-07.json
+      - test-data/live-results/cper/cper_mireye_f05_centroid_2026-08-07.json
+    expect:
+      signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+      explanation_code: F05_EXPL_CONTEXT_ONLY
+      precip_mm_is_suitability_signal: false
+
+  - test_id: F05_GT_002_POINT_ONLY
+    description: Mireye drought/temp/heat without canonical precip stays NEEDS_VERIFICATION.
+    input_quality_state: POINT_CLIMATE_ONLY
+    expect:
+      signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      explanation_code: F05_EXPL_POINT_NOT_PARCEL_PRECIP
+
+  - test_id: F05_GT_003_PRECIPITABLE_WATER_PROXY
+    description: Atmospheric precipitable water must not act as rainfall.
+    input_quality_state: PROHIBITED_PRECIP_PROXY
+    expect:
+      signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      explanation_code: F05_EXPL_PRECIP_PROXY_PROHIBITED
+
+  - test_id: F05_GT_004_MISSING
+    description: Missing climate evidence remains UNKNOWN.
+    input_quality_state: MISSING
+    expect:
+      signal: UNKNOWN
+      ranking_effect: NONE
+      explanation_code: F05_EXPL_MISSING
+
+  - test_id: F05_GT_005_CONFLICT
+    description: Conflicting climate semantics require verification.
+    input_quality_state: CONFLICTING_SOURCES
+    expect:
+      signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      explanation_code: F05_EXPL_CONFLICT
+
+  - test_id: F05_GT_006_NO_CROSS_FACTOR_MUTATION
+    description: F05 context must not change F02 or F03 signals.
+    input_quality_state: CLIMATE_CONTEXT_COMPLETE
+    expect:
+      signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+      mutates_f02: false
+      mutates_f03: false
+
+  - test_id: F05_GT_007_ACIS_NOT_CANONICAL
+    description: ACIS series availability does not by itself satisfy canonical precip completeness.
+    notes: >-
+      ACIS may support QA or future variability methods, but CLIMATE_CONTEXT_COMPLETE
+      still requires NOAA/NCEI direct normals (or an explicitly reviewed upgrade path).
+    input_quality_state: POINT_CLIMATE_ONLY
+    acis_series_available: true
+    expect:
+      signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      canonical_runtime_source: NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF

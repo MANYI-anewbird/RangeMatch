@@ -1,0 +1,96 @@
+{
+  "result_id": "CPER_F01_DERIVATION_2026_08_07",
+  "derivation_spec": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+  "quality_state": "PARCEL_COMPLETE",
+  "quality_reason": "The export was locked to the queried 1/3 arc-second catalog item and includes source identifier, acquisition date, publication date, datum, service publication date, request contract, and raster hash.",
+  "processing_timestamp": "2026-08-07T21:11:38.385050+00:00",
+  "source": {
+    "product": "USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM",
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage",
+    "service_current_version": 11.3,
+    "service_data_published_through": "2026-07-20",
+    "service_copyright_date": "2026-07-23",
+    "surface": "bare_earth",
+    "mosaic_method": "esriMosaicLockRaster",
+    "source_object_id": 4878,
+    "source_tile_ids": [
+      "USGS_13_n41w105"
+    ],
+    "source_tile_name": "n41w105",
+    "source_title": "USGS 1/3 Arc Second n41w105 20260708",
+    "source_url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w105/USGS_13_n41w105.tif",
+    "source_acquisition_date": "2021-09-22",
+    "source_publication_date": "2026-07-08",
+    "source_start_date": "1948-01-01",
+    "source_end_date": "2021-09-22",
+    "vertical_datum": "North American Vertical Datum of 1988 (NAVD 88)",
+    "source_raster_sha256": "a2785fc6042508e6576a39f482656fad2b9dccc377ca0d47404b6c27235b7821",
+    "source_width": 140,
+    "source_height": 120,
+    "source_crs": "EPSG:32613",
+    "source_bounds": [
+      519325.46706785687,
+      4518756.624447115,
+      520728.3579862685,
+      4519959.102377182
+    ],
+    "source_dtype": "float32",
+    "source_nodata": null
+  },
+  "geometry": {
+    "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+    "geometry_sha256": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "input_crs": "EPSG:4326",
+    "working_crs": "EPSG:32613",
+    "parcel_cell_count": 13904,
+    "cell_area_m2": 100.41341474294822,
+    "represented_cell_center_area_m2": 1396148.118585952
+  },
+  "algorithm": {
+    "target_cell_size_x_m": 10.020649417225753,
+    "target_cell_size_y_m": 10.020649417225892,
+    "slope": "Horn 3x3; degrees; edges excluded",
+    "aspect": "Horn 3x3 downhill azimuth clockwise from north; flat cells undefined; edges excluded",
+    "parcel_inclusion": "cell center inside parcel",
+    "percentile_method": "linear interpolation (NumPy method=linear; Hyndman-Fan type 7)",
+    "numpy_version": "2.5.1",
+    "rasterio_version": "1.5.0"
+  },
+  "elevation_m": {
+    "valid_cell_count": 13904,
+    "coverage_fraction": 1.0,
+    "minimum": 1642.6004638671875,
+    "maximum": 1673.9375,
+    "mean": 1653.886711682494,
+    "median": 1653.8697509765625,
+    "p10": 1645.141943359375,
+    "p25": 1648.4893493652344,
+    "p75": 1658.2291870117188,
+    "p90": 1662.9478881835937
+  },
+  "slope_degrees": {
+    "valid_cell_count": 13904,
+    "coverage_fraction": 1.0,
+    "minimum": 0.007808418630414449,
+    "maximum": 15.240698617612289,
+    "mean": 2.7665328388681374,
+    "median": 2.395727249934432,
+    "p10": 0.5253871920323744,
+    "p25": 1.0526741928089216,
+    "p75": 4.009050010603154,
+    "p90": 5.255732540463456
+  },
+  "aspect": {
+    "valid_cell_count": 13904,
+    "undefined_flat_cell_count": 0,
+    "coverage_fraction": 1.0,
+    "mean_eastness": 0.09129856760794036,
+    "mean_northness": -0.28668371218180433
+  },
+  "prohibited_interpretation": [
+    "species suitability score",
+    "slope rejection threshold",
+    "usable grazing area",
+    "hard exclusion"
+  ]
+}

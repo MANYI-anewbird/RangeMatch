@@ -1,0 +1,1136 @@
+{
+  "land_profile_id": "LAND_PROFILE_XPV_KONZA_001",
+  "version": "0.2.0",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_KONZA_001",
+  "geometry_reference": "test-data/engineering_test_geometry_konza_001.geojson",
+  "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+  "supported_use": "ENGINEERING_VALIDATION_ONLY",
+  "cross_parcel_validation": {
+    "parcel_id": "XPV_KONZA_001",
+    "assigned_slots": [
+      "SLOT_HUMID_STRONG_HERB"
+    ],
+    "selection_frozen_on": "2026-08-08",
+    "reference_operation": null,
+    "runtime_rule_changed": false
+  },
+  "factors": {
+    "F01_TOPOGRAPHY": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/f01_derivation_result.json",
+      "summary": {
+        "elevation_median_m": 408.6128692626953,
+        "slope_median_degrees": 6.917120720760842,
+        "slope_p90_degrees": 13.011964845398815,
+        "mean_eastness": -0.2536880301649536,
+        "mean_northness": 0.020645632259975708
+      }
+    },
+    "F02_HERBACEOUS_RESOURCE": {
+      "derivation_spec": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+      "limitations": [
+        "RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.",
+        "Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity."
+      ],
+      "unknowns": [
+        "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+        "Botanical composition is not verified.",
+        "Operation-specific palatability is not verified.",
+        "Nutritive value is not verified."
+      ],
+      "land_facts": [
+        {
+          "variable_id": "VAR_F02_PERENNIAL_HERB_COVER",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 78.10825692252465,
+            "unit": "percent_cover",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "TALLGRASS_PRAIRIE_RESEARCH_CONTEXT",
+              "RAP_RANGELAND_PRODUCT_SCOPE"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1439397.9967141035,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_coverV3",
+            "fetched_at": "2026-08-08T05:06:25Z",
+            "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+            "response_or_artifact_hash": "9f33f7c31c30b9f0d2b12d1bc657484c4225640585b4bee0c607ead4a8cee0d8",
+            "endpoint": "coverV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "PFG combines perennial grasses and forbs.",
+            "Modeled cover is not standing biomass, available forage, palatability, or nutritive value."
+          ]
+        },
+        {
+          "variable_id": "VAR_F02_ANNUAL_HERB_PRODUCTION",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 3207.906719986884,
+            "unit": "pound_per_acre",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_accumulated_new_growth_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "TALLGRASS_PRAIRIE_RESEARCH_CONTEXT",
+              "RAP_RANGELAND_PRODUCT_SCOPE"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1439397.9967141035,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_productionV3",
+            "fetched_at": "2026-08-08T05:06:25Z",
+            "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+            "response_or_artifact_hash": "b65f616966789cbb76e1df01a61ee094ab34351b21eb6b17c698d493182d32d9",
+            "endpoint": "productionV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "Production is modeled new growth, not standing biomass.",
+            "Production is not available forage, carrying capacity, or stocking rate."
+          ]
+        }
+      ]
+    },
+    "F03_LIVESTOCK_WATER": {
+      "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "derivation_spec": "F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/f03_candidate_distance_result.json",
+      "mapped_candidate_count": 34,
+      "verified_livestock_water_system_count": 0,
+      "euclidean_distance_to_mapped_candidate_m": {
+        "minimum": 0.03671408421833281,
+        "median": 133.42948383780333,
+        "p90": 316.58210551242365,
+        "maximum": 473.92475650424785
+      },
+      "euclidean_distance_to_verified_livestock_water_m": null,
+      "limitations": [
+        "Mapped NHD hydrography features are candidate context, not verified livestock-water sources.",
+        "Euclidean distance is not traversable animal-access distance.",
+        "Reliability, capacity, quality, legal access, infrastructure, and seasonal operation are unknown."
+      ]
+    },
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/f04_derivation_result.json",
+      "source_fixture_references": [
+        "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/sda_spatial_coverage.json",
+        "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/sda_mapunit_component_ecosite.json",
+        "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/sda_horizons.json",
+        "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/sda_restrictions.json",
+        "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/sda_monthly_wetness.json",
+        "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/ecological_site_access.json",
+        "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/mireye_f04_centroid.json"
+      ],
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_WITH_NUMERIC_TOLERANCE",
+        "requested_area_m2": 1441047.4180882142,
+        "covered_area_m2": 1441047.4180886536,
+        "uncovered_area_m2": 0.0,
+        "coverage_fraction": 1.0,
+        "coverage_calculated_from_polygon_intersection": true,
+        "successful_query_implies_complete_coverage": false,
+        "intersecting_mapunit_count": 4
+      },
+      "mapunit_area_distribution": {
+        "1472297": 0.08944407087336359,
+        "1472305": 0.799011598237845,
+        "1472309": 0.07602652300160026,
+        "2668810": 0.11154433088892976
+      },
+      "component_support_weights": [
+        {
+          "mukey": "1472305",
+          "cokey": "26334566",
+          "compname": "Benfield",
+          "comppct_r": 45.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.35955521920703026,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY115KS",
+          "ecoclassname": "Loamy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334567",
+          "compname": "Florence",
+          "comppct_r": 30.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.23970347947135348,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R076XY109KS",
+          "ecoclassname": "Gravelly Flint Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472297",
+          "cokey": "26334933",
+          "compname": "Ivan",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.08944407087336359,
+          "component_support_weight": 0.07602746024235905,
+          "drainagecl": "Well drained",
+          "hydgrp": "B",
+          "ecoclassid": "R076XY113KS",
+          "ecoclassname": "Loamy Lowland",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "2668810",
+          "cokey": "26334514",
+          "compname": "Clime",
+          "comppct_r": 60.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.11154433088892976,
+          "component_support_weight": 0.06692659853335785,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY112KS",
+          "ecoclassname": "Limy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334568",
+          "compname": "Clime",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.03995057991189225,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY112KS",
+          "ecoclassname": "Limy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334570",
+          "compname": "Labette",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.03995057991189225,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY115KS",
+          "ecoclassname": "Loamy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334572",
+          "compname": "Sogn",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.03995057991189225,
+          "drainagecl": "Somewhat excessively drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY128KS",
+          "ecoclassname": "Shallow Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472309",
+          "cokey": "26334767",
+          "compname": "Dwight",
+          "comppct_r": 45.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.07602652300160026,
+          "component_support_weight": 0.03421193535072012,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY103KS",
+          "ecoclassname": "Sodic Claypan",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334571",
+          "compname": "Tully",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.0319604639295138,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R076XY115KS",
+          "ecoclassname": "Loamy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472309",
+          "cokey": "26334770",
+          "compname": "Irwin",
+          "comppct_r": 40.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.07602652300160026,
+          "component_support_weight": 0.030410609200640107,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY107KS",
+          "ecoclassname": "Clay Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "2668810",
+          "cokey": "26334518",
+          "compname": "Sogn",
+          "comppct_r": 25.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.11154433088892976,
+          "component_support_weight": 0.02788608272223244,
+          "drainagecl": "Somewhat excessively drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY128KS",
+          "ecoclassname": "Shallow Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334569",
+          "compname": "Konza",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.02397034794713535,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY103KS",
+          "ecoclassname": "Sodic Claypan",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334573",
+          "compname": "Pawnee",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.0159802319647569,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY107KS",
+          "ecoclassname": "Clay Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472297",
+          "cokey": "26334937",
+          "compname": "Reading",
+          "comppct_r": 10.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.08944407087336359,
+          "component_support_weight": 0.00894440708733636,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R076XY113KS",
+          "ecoclassname": "Loamy Lowland",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472305",
+          "cokey": "26334574",
+          "compname": "Aquolls",
+          "comppct_r": 1.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.799011598237845,
+          "component_support_weight": 0.00799011598237845,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "D",
+          "ecoclassid": "R074XY132KS",
+          "ecoclassname": "Subirrigated",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "2668810",
+          "cokey": "26334515",
+          "compname": "Labette",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.11154433088892976,
+          "component_support_weight": 0.005577216544446488,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY115KS",
+          "ecoclassname": "Loamy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "2668810",
+          "cokey": "26334516",
+          "compname": "Martin",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.11154433088892976,
+          "component_support_weight": 0.005577216544446488,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY115KS",
+          "ecoclassname": "Loamy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472309",
+          "cokey": "26334768",
+          "compname": "Clime",
+          "comppct_r": 6.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.07602652300160026,
+          "component_support_weight": 0.004561591380096016,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY112KS",
+          "ecoclassname": "Limy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472309",
+          "cokey": "26334769",
+          "compname": "Wymore",
+          "comppct_r": 6.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.07602652300160026,
+          "component_support_weight": 0.004561591380096016,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R106XY074NE",
+          "ecoclassname": "Clayey Upland",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "2668810",
+          "cokey": "26334517",
+          "compname": "Rock outcrop",
+          "comppct_r": 4.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.11154433088892976,
+          "component_support_weight": 0.0044617732355571905,
+          "drainagecl": null,
+          "hydgrp": null,
+          "ecoclassid": null,
+          "ecoclassname": null,
+          "ecoclasstypename": null
+        },
+        {
+          "mukey": "1472309",
+          "cokey": "26334766",
+          "compname": "Rock outcrop",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.07602652300160026,
+          "component_support_weight": 0.002280795690048008,
+          "drainagecl": null,
+          "hydgrp": null,
+          "ecoclassid": null,
+          "ecoclassname": null,
+          "ecoclasstypename": null
+        },
+        {
+          "mukey": "1472297",
+          "cokey": "26334934",
+          "compname": "Chase",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.08944407087336359,
+          "component_support_weight": 0.0017888814174672719,
+          "drainagecl": "Somewhat poorly drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY113KS",
+          "ecoclassname": "Loamy Lowland",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472297",
+          "cokey": "26334935",
+          "compname": "Martin",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.08944407087336359,
+          "component_support_weight": 0.0017888814174672719,
+          "drainagecl": "Moderately well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY115KS",
+          "ecoclassname": "Loamy Hills",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "2668810",
+          "cokey": "26334519",
+          "compname": "Aquolls",
+          "comppct_r": 1.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.11154433088892976,
+          "component_support_weight": 0.0011154433088892976,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "D",
+          "ecoclassid": "R074XY132KS",
+          "ecoclassname": "Subirrigated",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "1472297",
+          "cokey": "26334936",
+          "compname": "Osage",
+          "comppct_r": 1.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.08944407087336359,
+          "component_support_weight": 0.0008944407087336359,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "D",
+          "ecoclassid": "R076XY104KS",
+          "ecoclassname": "Clay Lowland",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        }
+      ],
+      "known_component_share": 1.0760265230017387,
+      "unaccounted_component_share": 0.0,
+      "component_percentages_renormalized": false,
+      "drainage_class_distribution": {
+        "Moderately well drained": 0.11650081380526224,
+        "Poorly drained": 0.010000000000001385,
+        "Somewhat excessively drained": 0.06783666263412469,
+        "Somewhat poorly drained": 0.0017888814174672719,
+        "UNKNOWN": 0.006742568925605198,
+        "Well drained": 0.8731575962192778
+      },
+      "hydrologic_soil_group_distribution": {
+        "B": 0.07602746024235905,
+        "C": 0.28060835048820365,
+        "D": 0.7126481433455709,
+        "UNKNOWN": 0.006742568925605198
+      },
+      "ponding_frequency_distribution": {
+        "None": 1.0601783947848664,
+        "Occasional": 0.009105559291267749,
+        "UNKNOWN": 0.006742568925605198
+      },
+      "flooding_frequency_distribution": {
+        "Frequent": 0.07602746024235907,
+        "None": 0.9816287646202387,
+        "Occasional": 0.0008944407087336359,
+        "Rare": 0.010733288504803633,
+        "UNKNOWN": 0.006742568925605198
+      },
+      "restrictive_layer_records": [
+        {
+          "cokey": "26334566",
+          "component_support_weight": 0.35955521920703026,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Paralithic bedrock",
+          "resdept_r_cm": 97.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334567",
+          "component_support_weight": 0.23970347947135348,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 112.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334933",
+          "component_support_weight": 0.07602746024235905,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334514",
+          "component_support_weight": 0.06692659853335785,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Paralithic bedrock",
+          "resdept_r_cm": 78.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334568",
+          "component_support_weight": 0.03995057991189225,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Paralithic bedrock",
+          "resdept_r_cm": 78.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334570",
+          "component_support_weight": 0.03995057991189225,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 91.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334572",
+          "component_support_weight": 0.03995057991189225,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 18.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334767",
+          "component_support_weight": 0.03421193535072012,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 110.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334571",
+          "component_support_weight": 0.0319604639295138,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334770",
+          "component_support_weight": 0.030410609200640107,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Paralithic bedrock",
+          "resdept_r_cm": 160.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334518",
+          "component_support_weight": 0.02788608272223244,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 18.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334569",
+          "component_support_weight": 0.02397034794713535,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334573",
+          "component_support_weight": 0.0159802319647569,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334937",
+          "component_support_weight": 0.00894440708733636,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334574",
+          "component_support_weight": 0.00799011598237845,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334515",
+          "component_support_weight": 0.005577216544446488,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 91.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334516",
+          "component_support_weight": 0.005577216544446488,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334768",
+          "component_support_weight": 0.004561591380096016,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Paralithic bedrock",
+          "resdept_r_cm": 78.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334769",
+          "component_support_weight": 0.004561591380096016,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334517",
+          "component_support_weight": 0.0044617732355571905,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 0.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334766",
+          "component_support_weight": 0.002280795690048008,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 0.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334934",
+          "component_support_weight": 0.0017888814174672719,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334935",
+          "component_support_weight": 0.0017888814174672719,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334519",
+          "component_support_weight": 0.0011154433088892976,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26334936",
+          "component_support_weight": 0.0008944407087336359,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        }
+      ],
+      "restrictive_layer_distribution": {
+        "Lithic bedrock|0.0": 0.006742568925605198,
+        "Lithic bedrock|110.0": 0.03421193535072012,
+        "Lithic bedrock|112.0": 0.23970347947135348,
+        "Lithic bedrock|18.0": 0.06783666263412469,
+        "Lithic bedrock|91.0": 0.04552779645633874,
+        "Paralithic bedrock|160.0": 0.030410609200640107,
+        "Paralithic bedrock|78.0": 0.11143876982534612,
+        "Paralithic bedrock|97.0": 0.35955521920703026,
+        "UNKNOWN": 0.18059948193057987
+      },
+      "ecological_site_references": [
+        {
+          "ecological_site_id": "R076XY115KS",
+          "ecological_site_name": "Loamy Hills",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.44440957755479654,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY115KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R076XY109KS",
+          "ecological_site_name": "Gravelly Flint Hills",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.23970347947135348,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY109KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R076XY112KS",
+          "ecological_site_name": "Limy Hills",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.11143876982534612,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY112KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R076XY113KS",
+          "ecological_site_name": "Loamy Lowland",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.08676074874716269,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY113KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R076XY128KS",
+          "ecological_site_name": "Shallow Hills",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.06783666263412469,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY128KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R076XY103KS",
+          "ecological_site_name": "Sodic Claypan",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.058182283297855464,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY103KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R076XY107KS",
+          "ecological_site_name": "Clay Hills",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.046390841165397004,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY107KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R074XY132KS",
+          "ecological_site_name": "Subirrigated",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.009105559291267749,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/074X/R074XY132KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R106XY074NE",
+          "ecological_site_name": "Clayey Upland",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.004561591380096016,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/106X/R106XY074NE",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": "4b3194dfe1431c345ad339633e62b691dfa6f40187544c4771aabebcdfb81c0b",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R076XY104KS",
+          "ecological_site_name": "Clay Lowland",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.0008944407087336359,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "HTTPError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY104KS",
+          "retrieval_timestamp": "2026-08-08T05:06:50Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        }
+      ],
+      "ecological_site_unknown_share": 0.006742568925605198,
+      "available_water_storage": {
+        "status": "METHOD_INPUT_REQUIRED",
+        "derived_storage_mm": null,
+        "note": "Reusable AWC derivation exists; no approved depth interval is applied in this Land Profile."
+      },
+      "mireye_point_qa": {
+        "role": "POINT_DISPLAY_AND_QA_ONLY",
+        "may_represent_whole_parcel": false,
+        "fetched_at": null,
+        "fields": {},
+        "partial_failures": []
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "F04_SOIL_SITE_ATOMICITY_AND_SOURCE_AUDIT",
+          "CPER_LIVE_DATA_GATE"
+        ],
+        "notes": "F04 v0.1 is data-quality and context only; no directional suitability signal is approved."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "requested_area_m2": 1441047.4180882142,
+        "valid_area_m2": 1441047.4180886536,
+        "valid_coverage_fraction": 1.0,
+        "adapter_status": "SDA_POLYGON_AND_TABULAR_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": false,
+        "component_count": 25,
+        "horizon_record_count": 107,
+        "restriction_record_count": 25,
+        "monthly_wetness_record_count": 278,
+        "components_with_ecological_site_linkage": 23,
+        "derivation_contract_verified": true,
+        "numeric_average_of_controlled_categories": false
+      },
+      "provenance": {
+        "source_reference": "USDA_NRCS_SDA_SSURGO_AND_EDIT",
+        "fetched_at": "2026-08-08T05:06:50Z",
+        "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+        "response_or_artifact_hash": "7d4746ed4b11194b91f168fc260feef540c34c79ca50c0592878119b8a5b693e",
+        "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+        "primary_path": "OFFICIAL_SDA_PARCEL_POLYGONS_COMPONENTS_HORIZONS",
+        "mireye_role": "POINT_DISPLAY_AND_QA_ONLY"
+      },
+      "limitations": [
+        "No composite soil score is created.",
+        "Controlled categories are preserved as distributions, not ordinal averages.",
+        "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+        "Ecological-site names do not imply current vegetation or operation ranking.",
+        "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+        "Available-water storage is omitted from profile evidence until a depth interval is approved."
+      ],
+      "unknowns": [
+        "Within-map-unit component locations are unknown.",
+        "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+        "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+        "Ecological-site references do not establish current vegetation state.",
+        "No approved depth interval exists for parcel available-water storage in the Land Profile.",
+        "Some components lack ecological-site linkage; absent linkage remains UNKNOWN."
+      ],
+      "ranking_effect": "NONE"
+    },
+    "F05_CLIMATE_DROUGHT_EXPOSURE": {
+      "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+      "input_quality_state": "CLIMATE_CONTEXT_COMPLETE",
+      "derivation_spec": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+      "canonical_precipitation": {
+        "variable_id": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+        "value_mm": 879.57,
+        "value_inches": 34.629,
+        "unit": "millimeter",
+        "unit_normalized": "mm/year",
+        "normals_period": "1991-2020",
+        "spatial_resolution": {
+          "nominal": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+          "delta_lat_deg": 0.041667938232421875,
+          "delta_lon_deg": 0.04166412353515625
+        },
+        "aggregation": {
+          "method": "bbox_intersecting_cell_centers_mean",
+          "cell_count": 1,
+          "cell_values_mm": [
+            879.57
+          ],
+          "cells": [
+            {
+              "lat": 39.10419845581055,
+              "lon": -96.5625,
+              "annprcp_norm_mm": 879.5655517578125
+            }
+          ],
+          "note": "Mean of NOAA NCEI gridded annual precipitation normals for grid cells intersecting the engineering rectangle."
+        },
+        "source": {
+          "organization": "NOAA National Centers for Environmental Information (NCEI)",
+          "product": "1991-2020 Gridded Monthly/Annual Precipitation Normals (derived from nClimGrid)",
+          "variable": "annprcp_norm",
+          "file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+          "source_url": "https://www.ncei.noaa.gov/data/oceans/archive/arc0196/0245564/1.1/data/0-data/prcp-1991_2020-monthly-normals-v1.0.nc",
+          "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "units_in_file": "millimeter",
+          "alternate_not_used": "ACIS retained as secondary QA only; never canonical Land Fact."
+        },
+        "role": "CANONICAL_LAND_FACT",
+        "suitability_signal": null
+      },
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+        "spatial_support": "PARCEL_BBOX_INTERSECTING_GRID_CELLS",
+        "parcel_bbox": [
+          -96.57,
+          39.09,
+          -96.555,
+          39.1
+        ],
+        "intersecting_cell_count": 1,
+        "coverage_calculated_from_polygon_intersection": false,
+        "successful_query_implies_complete_coverage": false
+      },
+      "mireye_point_qa": {},
+      "secondary_comparisons": [],
+      "source_conflicts": [],
+      "validation": {
+        "complete": true,
+        "issues": [
+          "non_canonical_precip_access_path"
+        ],
+        "coverage_confirmed": true,
+        "unit_ok": true,
+        "period_ok": true,
+        "value_ok": true,
+        "provenance_ok": true,
+        "provenance_fields": {
+          "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "fetched_at": "2026-08-08T05:06:50Z",
+          "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+          "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2"
+        }
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED_FOR_DATA_CAPABILITY",
+        "basis": [
+          "F05_CLIMATE_DROUGHT_ATOMICITY_AND_SOURCE_AUDIT",
+          "F05_CLIMATE_DROUGHT_EVIDENCE_REGISTRY",
+          "CROSS_PARCEL_VALIDATION_NOAA_CANONICAL_PATH"
+        ],
+        "notes": "F05 v0.1 is data-quality and context only; annprcp_norm is retained as a Land Fact and is not converted into suitability."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+        "adapter_status": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": true,
+        "canonical_precip_complete": true,
+        "directional_signal_approved": false,
+        "numeric_thresholds_approved": false
+      },
+      "provenance": {
+        "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+        "fetched_at": "2026-08-08T05:06:50Z",
+        "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+        "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+        "derivation_spec_version": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+        "primary_path": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF",
+        "canonical_variable": "annprcp_norm",
+        "acis_role": "SECONDARY_QA_OR_FALLBACK",
+        "mireye_role": "POINT_QA_AND_FAST_CONTEXT"
+      },
+      "limitations": [
+        "Mean annual precipitation is a Land Fact, not a suitability score.",
+        "Current USDM class is current-condition context only, not drought history.",
+        "Mireye point climate fields must not replace canonical NOAA parcel precipitation.",
+        "ACIS precipitation series is secondary QA/fallback and is not the canonical runtime source.",
+        "No precipitation, temperature, heat-day, or USDM suitability threshold is approved.",
+        "F05 must not alter F02 forage, F03 livestock-water, or F04 wetness signals.",
+        "Flood/FEMA hazard is out of scope for F05."
+      ],
+      "unknowns": [
+        "Drought-history summary method is not frozen.",
+        "Precipitation seasonality and interannual variability methods are not frozen.",
+        "No biological heat-stress threshold is approved for Cow-Calf or Sheep."
+      ],
+      "ranking_effect": "NONE",
+      "result_reference": "test-data/cross-parcel-validation/XPV_KONZA_001/live-results/f05_derivation_result.json"
+    }
+  }
+}

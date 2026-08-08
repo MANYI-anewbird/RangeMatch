@@ -1,0 +1,59 @@
+{
+  "type": "FeatureCollection",
+  "name": "ENGINEERING_TEST_GEOMETRY_KBS_MCSE_001",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ENGINEERING_TEST_GEOMETRY_KBS_MCSE_001",
+      "properties": {
+        "site_name": "KBS LTER Main Cropping System Experiment coverage extent",
+        "geometry_role": "ENGINEERING_TEST_GEOMETRY",
+        "official_pasture_boundary": false,
+        "purchasable_parcel": false,
+        "suitability_ground_truth": false,
+        "known_operation_outcome_required": false,
+        "reference_operation": null,
+        "synthetic_subpolygon": true,
+        "approximate_geodesic_area_ha": 136.938,
+        "area_method": "WGS84 spherical rectangle approximation for test documentation",
+        "intended_validation_slots": [
+          "SLOT_RAP_SCOPE_BOUNDARY"
+        ],
+        "source_extent_id": "KBS_LTER_MCSE_PUBLIC_PLOT_EXTENT",
+        "source_citations": [
+          "https://lter.kbs.msu.edu/research/site-description-and-maps/general-description/",
+          "https://lter.kbs.msu.edu/maps/GIS/plot_polygons_mainsite_fgdc.htm"
+        ],
+        "selection_rationale": "Published KBS LTER cropping-system experimental extent used to stress F02 RAP documented rangeland-domain applicability (expected OUTSIDE_DOCUMENTED_PRODUCT_SCOPE or equivalent discipline), not to score forage suitability. Not selected to predict Cow-Calf or Sheep ranking.",
+        "created_on": "2026-08-08"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.376,
+              42.414
+            ],
+            [
+              -85.361,
+              42.414
+            ],
+            [
+              -85.361,
+              42.404
+            ],
+            [
+              -85.376,
+              42.404
+            ],
+            [
+              -85.376,
+              42.414
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

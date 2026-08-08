@@ -1,0 +1,34 @@
+{
+  "type": "FeatureCollection",
+  "name": "CPER_PUBLIC_COVERAGE_EXTENT",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "CPER_PUBLIC_COVERAGE_EXTENT",
+      "properties": {
+        "site_name": "Central Plains Experimental Range",
+        "geometry_role": "PUBLIC_DATASET_GEOGRAPHIC_COVERAGE_EXTENT",
+        "official_cadastral_boundary": false,
+        "official_pasture_boundary": false,
+        "purchasable_parcel": false,
+        "suitability_ground_truth": false,
+        "source": "USDA Agricultural Research Service metadata via Data.gov",
+        "source_url": "https://catalog.data.gov/dataset/sgs-lter-standard-met-data-cr21x-station-12-hourly-meteorological-data-on-the-central-plai",
+        "source_accessed_on": "2026-08-07"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-104.785833, 40.857500],
+            [-104.730556, 40.857500],
+            [-104.730556, 40.800278],
+            [-104.785833, 40.800278],
+            [-104.785833, 40.857500]
+          ]
+        ]
+      }
+    }
+  ]
+}
+

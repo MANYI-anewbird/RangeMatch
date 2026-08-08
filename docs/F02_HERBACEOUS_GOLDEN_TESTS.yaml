@@ -1,0 +1,94 @@
+test_suite_id: RANGEMATCH_F02_HERBACEOUS_GOLDEN_TESTS
+rule_spec_version: 0.1.0
+derivation_spec_version: 0.1.0
+status: REVIEW_CANDIDATE
+
+cases:
+  - test_id: F02_TEST_001
+    description: Complete modeled rangeland data remains context dependent.
+    input_quality_state: COMPLETE_RANGELAND_COVERAGE
+    expected:
+      cow_calf_signal: CONTEXT_DEPENDENT
+      sheep_signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+
+  - test_id: F02_TEST_002
+    description: Successful aggregate API response without pixel-area accounting is not complete coverage.
+    input_quality_state: COVERAGE_UNQUANTIFIED
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      diligence_action: F02_DIL_001
+
+  - test_id: F02_TEST_003
+    description: Missing required series remains unknown.
+    input_quality_state: MISSING
+    expected:
+      cow_calf_signal: UNKNOWN
+      sheep_signal: UNKNOWN
+
+  - test_id: F02_TEST_004
+    description: Improved pasture outside reviewed RAP scope cannot inherit rangeland interpretation.
+    input_quality_state: OUTSIDE_DOCUMENTED_PRODUCT_SCOPE
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      diligence_action: F02_DIL_003
+
+  - test_id: F02_TEST_005
+    description: Annual and 16-day totals outside tolerance create a conflict.
+    input_quality_state: CONFLICTING_SOURCES
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      diligence_action: F02_DIL_004
+
+  - test_id: F02_TEST_006
+    description: Ten aligned complete years satisfy the baseline target.
+    valid_aligned_year_count: 10
+    expected:
+      baseline_status: COMPLETE
+
+  - test_id: F02_TEST_007
+    description: Eight aligned complete years satisfy the minimum with reduced temporal context.
+    valid_aligned_year_count: 8
+    expected:
+      baseline_status: MINIMUM_VALID
+
+  - test_id: F02_TEST_008
+    description: Seven valid years cannot be silently expanded or interpolated.
+    valid_aligned_year_count: 7
+    expected:
+      baseline_status: NEEDS_VERIFICATION
+      interpolation_permitted: false
+
+  - test_id: F02_TEST_009
+    description: A full 16-day year contains 23 ordered intervals and matches the annual total.
+    interval_count: 23
+    annual_consistency_within_tolerance: true
+    expected:
+      interval_series_status: COMPLETE
+
+  - test_id: F02_TEST_010
+    description: Calendar-season labels are not inferred from interval dates.
+    interval_count: 23
+    expected:
+      allowed_outputs: [ordered_16day_series, peak_HER_interval_date, cumulative_HER_fraction_by_interval]
+      prohibited_output: universal_growing_season
+
+prohibited_behavior_tests:
+  - test_id: F02_NEG_001
+    prohibited_output: numeric_suitability_score
+  - test_id: F02_NEG_002
+    prohibited_output: carrying_capacity_from_RAP_alone
+  - test_id: F02_NEG_003
+    prohibited_output: stocking_rate_from_RAP_alone
+  - test_id: F02_NEG_004
+    prohibited_output: automatic_positive_signal_from_high_production
+  - test_id: F02_NEG_005
+    prohibited_output: missing_or_masked_area_as_zero
+  - test_id: F02_NEG_006
+    prohibited_output: fixed_sheep_or_cattle_advantage
+  - test_id: F02_NEG_007
+    prohibited_output: grass_species_composition_from_AFG_or_PFG
+

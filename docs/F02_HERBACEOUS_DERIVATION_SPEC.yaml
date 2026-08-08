@@ -1,0 +1,164 @@
+spec_id: RANGEMATCH_F02_HERBACEOUS_DERIVATION
+version: 0.1.0
+language: English
+status: REVIEW_CANDIDATE
+factor_id: F02_HERBACEOUS_RESOURCE
+source_product: USDA_ARS_RAP_V3
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  method_outputs_are_context_only: true
+  suitability_thresholds_approved: false
+  carrying_capacity_method_approved: false
+  stocking_rate_method_approved: false
+
+source_contract:
+  geometry_crs: EPSG:4326
+  accepted_geometry_types: [POLYGON, MULTIPOLYGON]
+  endpoints:
+    cover: coverV3
+    annual_production: productionV3
+    interval_production: production16dayV3
+  mask_setting: true
+  mask_excludes: [cropland, development, water]
+  source_resolution_m: 30
+  source_year_start: 1986
+  latest_year_rule: PREVIOUS_COMPLETE_CALENDAR_YEAR
+  modeled_data_warning: >-
+    RAP values are modeled estimates aggregated to the AOI. They are not field
+    observations of botanical composition, standing biomass, palatability,
+    nutritive value, available forage, carrying capacity, or stocking rate.
+
+annual_baseline:
+  baseline_id: MOST_RECENT_10_COMPLETE_YEARS_V0_1
+  selection_rule: >-
+    Select the ten most recent complete calendar years available from all
+    required annual cover and annual production series, excluding the current
+    incomplete calendar year.
+  target_year_count: 10
+  minimum_valid_year_count: 8
+  year_alignment_required: true
+  nonconsecutive_years_allowed: false
+  insufficient_year_behavior: NEEDS_VERIFICATION
+  rationale: >-
+    This is a versioned engineering baseline for recent-condition context, not
+    a biological threshold. It may not be reinterpreted as a climate normal or
+    long-term ecological reference period.
+
+annual_cover_outputs:
+  variables: [AFG, PFG, SHR, TRE, LTR, BGR]
+  outputs_per_variable:
+    - valid_year_count
+    - minimum
+    - maximum
+    - mean
+    - median
+    - p25
+    - p75
+  percentile_method: LINEAR_INTERPOLATION_TYPE_7
+  prohibited_combination: >-
+    AFG and PFG may be reported individually and summed as total modeled
+    herbaceous functional-group cover, but the sum must not be labeled grass
+    cover, forage cover, or palatable cover.
+
+annual_production_outputs:
+  variables: [AFG, PFG, HER]
+  unit: pounds_per_acre
+  outputs_per_variable:
+    - valid_year_count
+    - minimum
+    - maximum
+    - mean
+    - median
+    - p25
+    - p75
+  percentile_method: LINEAR_INTERPOLATION_TYPE_7
+
+interannual_variability:
+  source_variable: HER
+  baseline: MOST_RECENT_10_COMPLETE_YEARS_V0_1
+  primary_metric:
+    name: relative_interquartile_range
+    formula: (p75 - p25) / median
+    minimum_valid_year_count: 8
+    valid_only_when_median_gt_zero: true
+  supporting_metrics:
+    - annual_minimum
+    - annual_maximum
+    - annual_median
+    - annual_p25
+    - annual_p75
+  trend_adjustment: NONE_IN_V0_1
+  directional_interpretation: NOT_APPROVED
+  warning: >-
+    The metric describes dispersion within the selected baseline. It does not
+    by itself establish drought resilience, forage reliability, risk level, or
+    an operation-specific penalty.
+
+within_year_production:
+  required_interval_count: 23
+  required_fields: [date, year, doy, AFG, PFG, HER]
+  calendar_season_labels_allowed: false
+  reason: >-
+    Winter, spring, summer, and fall labels do not represent equivalent growing
+    or grazing seasons across U.S. environments.
+  preserved_outputs:
+    - ordered_16day_series
+    - interval_count
+    - first_interval_date
+    - last_interval_date
+    - peak_HER_interval_date
+    - peak_HER_interval_value
+    - cumulative_HER_fraction_by_interval
+  annual_consistency_check:
+    formula: sum(interval_HER) approximately_equals annual_HER
+    absolute_tolerance_lbs_per_acre: 0.000001
+    relative_tolerance: 0.000000001
+    failure_behavior: CONFLICTING_SOURCES
+  prohibited_outputs:
+    - universal_growing_season_start
+    - universal_grazing_season_length
+    - seasonal_feed_adequacy
+
+coverage_and_missing_data:
+  required_coverage_outputs:
+    - requested_aoi_area_m2
+    - eligible_unmasked_area_m2
+    - masked_area_m2
+    - no_data_area_m2
+    - valid_coverage_fraction
+  aggregate_api_limitation: >-
+    The reviewed RAP time-series responses return AOI means and mask state but
+    do not return eligible, masked, no-data, or valid pixel areas. Therefore a
+    successful aggregate API response alone has COVERAGE_UNQUANTIFIED status.
+  coverage_completion_path: >-
+    Calculate pixel counts and areas from the version-matched RAP raster/GEE
+    assets under the same AOI and mask definition, then bind that result to the
+    aggregate response by source version, geometry hash, years, and mask state.
+  quality_states:
+    COMPLETE_RANGELAND_COVERAGE: Required series, provenance, and quantified eligible/masked/no-data areas are present.
+    COVERAGE_UNQUANTIFIED: Required series are returned but pixel-area coverage is not quantified.
+    PARTIAL_RANGELAND_COVERAGE: Valid data cover only part of the reviewed eligible AOI.
+    OUTSIDE_DOCUMENTED_PRODUCT_SCOPE: The AOI is outside reviewed RAP rangeland application scope.
+    CONFLICTING_SOURCES: Annual and interval totals or version-bound sources disagree beyond tolerance.
+    MISSING: No valid required response.
+  missing_year_behavior: DO_NOT_INTERPOLATE
+  masked_area_behavior: DO_NOT_IMPUTE_ZERO
+  no_data_behavior: DO_NOT_IMPUTE_ZERO
+  api_failure_behavior: UNKNOWN
+
+required_provenance:
+  - geometry_hash
+  - source_product_and_version
+  - endpoint
+  - request_years
+  - returned_years
+  - mask_setting
+  - request_timestamp
+  - response_hash
+  - units
+  - temporal_semantics
+  - coverage_quality_state
+

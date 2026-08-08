@@ -1,0 +1,16 @@
+{
+  "href": "https://elevation.nationalmap.gov/arcgis/rest/directories/elevation_output/3DEPElevation_ImageServer/_ags_842a37db_1d6a_4996_823b_57f8ac1bd2ab.tif",
+  "width": 159,
+  "height": 125,
+  "extent": {
+    "xmin": 403186.652164231,
+    "ymin": 3284226.2451291257,
+    "xmax": 404767.4629284625,
+    "ymax": 3285469.020887169,
+    "spatialReference": {
+      "wkid": 32617,
+      "latestWkid": 32617
+    }
+  },
+  "scale": 0
+}

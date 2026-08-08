@@ -1,0 +1,44 @@
+conclusion_id: RANGEMATCH_CROSS_PARCEL_VALIDATION_CONCLUSION
+version: 1.0.0
+language: English
+status: LOCKED
+date: "2026-08-08"
+related:
+  plan: docs/CROSS_PARCEL_VALIDATION_PLAN.md
+  aggregate_review: docs/CROSS_PARCEL_FIVE_PARCEL_AGGREGATE_REVIEW.md
+  registry: test-data/cross-parcel-validation/parcel_registry.yaml
+  next_phase: docs/F02_F03_EVIDENCE_DEPTH_UPGRADE_PLAN.md
+
+cross_parcel_validation: PASSED
+rule_behavior_across_environments: STABLE
+species_differentiation: NOT_YET_ESTABLISHED
+primary_bottlenecks:
+  - F02_COVERAGE_AND_SCOPE
+  - F03_VERIFIED_WATER
+f06_selection: DEFERRED
+
+interpretation:
+  - >-
+    Cross-environment runs did not expose runaway or environment-tuned rules.
+  - >-
+    The primary bottleneck is evidence depth of existing Factors, not absence of
+    a sixth Factor.
+  - >-
+    Identical Cow-Calf and Sheep signals remain a missing reviewed differential
+    rule, not a defect to patch with unreviewed ranking.
+  - >-
+    Place names were not used as suitability inputs; CPER contrasts are
+    observational only.
+
+frozen_parcels_for_before_after_rerun:
+  - XPV_CPER_001
+  - XPV_KONZA_001
+  - XPV_REYNOLDS_001
+  - XPV_ORDWAY_001
+  - XPV_KBS_MCSE_001
+
+explicit_non_goals_retained:
+  - No F06 selection in the next phase
+  - No unreviewed Cow-Sheep ranking rules
+  - No geometry replacement to chase prettier MatchResults
+  - No interpreting mapped NHD or RAP aggregates as verified adequacy

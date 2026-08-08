@@ -1,0 +1,35 @@
+{
+  "type": "Feature",
+  "id": "ENGINEERING_TEST_GEOMETRY_REYNOLDS_001",
+  "properties": {
+    "mask": true,
+    "year": 2025
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -116.76,
+          43.105
+        ],
+        [
+          -116.745,
+          43.105
+        ],
+        [
+          -116.745,
+          43.095
+        ],
+        [
+          -116.76,
+          43.095
+        ],
+        [
+          -116.76,
+          43.105
+        ]
+      ]
+    ]
+  }
+}

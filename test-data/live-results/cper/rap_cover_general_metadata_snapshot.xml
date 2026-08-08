@@ -1,0 +1,203 @@
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>United States Department of Agriculture, Agricultural Research Service (USDA-ARS)</origin>
+				<pubdate>20200801</pubdate>
+				<title>Rangeland Analysis Platform (RAP) Vegetation Cover, version 2.0</title>
+				<edition>2.0</edition>
+				<geoform>raster digital data</geoform>
+				<othercit>Supporting journal article: Allred, B. W., Bestelmeyer, B. T., Boyd, C. S., Brown, C., Davies, K. W., Duniway, M. C., … Uden, D. R. (2021). Improving Landsat predictions of rangeland fractional cover with multitask learning and uncertainty. Methods in Ecology and Evolution, 00, 2041-210X.13564. https://doi.org/10.1111/2041-210X.13564</othercit>
+				<onlink>http://rangelands.app</onlink>
+			</citeinfo>
+		</citation>
+		<descript>
+			<abstract>Rangeland Analysis Platform (RAP) Vegetation Cover, version 2.0 consists of gridded fractional estimates of plant functional groups for rangelands in the western United States. The estimates are produced at 30-meter spatial resolution for each year between 1984–present. The five plant functional groups are Annual Forbs and Grasses, Perennial Forbs and Grasses, Shrubs, Trees, and Bare Ground. Cover values are reported as percentages on a pixel-by-pixel basis. The estimates were produced using a temporal convolutional network using field measures of plant functional groups collected by the Natural Resources Conservation Service Natural Resources Inventory (NRI) program and the Bureau of Land Management Assessment, Inventory, and Monitoring (AIM) program alongside spatially continuous earth observations from Landsat TM, ETM, and OLI.</abstract>
+		</descript>
+		<timeperd>
+			<timeinfo>
+				<rngdates>
+					<begdate>19840101</begdate>
+					<enddate>20201231</enddate>
+				</rngdates>
+			</timeinfo>
+		</timeperd>
+		<status>
+			<progress>Complete</progress>
+			<update>Data updated annually</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>-126.0</westbc>
+				<eastbc>-92.0</eastbc>
+				<northbc>50.5</northbc>
+				<southbc>24.0</southbc>
+			</bounding>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekt>ISO 19115 Topic Category</themekt>
+				<themekey>biota</themekey>
+				<themekey>agriculture</themekey>
+				<themekey>environment</themekey>
+				<themekey>geoscientificInformation</themekey>
+				<themekey>imageryBaseMapsEarthCover</themekey>
+			</theme>
+			<theme>
+				<themekt>GCMD Science Keywords</themekt>
+				<themekey>Vegetation cover</themekey>
+				<themekey>Exotic vegetation</themekey>
+				<themekey>Litter characteristics</themekey>
+				<themekey>Vegetation</themekey>
+				<themekey>Landscape patterns</themekey>
+				<themekey>Landscape management</themekey>
+				<themekey>Dynamic vegetation/ecosystem models</themekey>
+				<themekey>Web-based geographic information systems</themekey>
+			</theme>
+			<theme>
+				<themekt>GCMD Platforms</themekt>
+				<themekey>Landsat-7</themekey>
+				<themekey>Landsat-8</themekey>
+			</theme>
+			<place>
+				<placekt>Common geographic names</placekt>
+				<placekey>United States</placekey>
+				<placekey>California</placekey>
+				<placekey>Oregon</placekey>
+				<placekey>Washington</placekey>
+				<placekey>Idaho</placekey>
+				<placekey>Nevada</placekey>
+				<placekey>Arizona</placekey>
+				<placekey>Utah</placekey>
+				<placekey>Montana</placekey>
+				<placekey>Colorado</placekey>
+				<placekey>New Mexico</placekey>
+				<placekey>Texas</placekey>
+				<placekey>Oklahoma</placekey>
+				<placekey>Kansas</placekey>
+				<placekey>Nebraska</placekey>
+				<placekey>South Dakota</placekey>
+				<placekey>North Dakota</placekey>
+			</place>
+			<place>
+				<placekt>None</placekt>
+				<placekey>Great Basin</placekey>
+				<placekey>Columbia Plateau</placekey>
+				<placekey>Southern Rocky Mountains</placekey>
+				<placekey>Northern Rocky Mountains</placekey>
+				<placekey>Sonoran Desert</placekey>
+				<placekey>Mojave Desert</placekey>
+				<placekey>Chihuahuan desert</placekey>
+				<placekey>Colorado Plateau</placekey>
+				<placekey>Snake River Plain</placekey>
+				<placekey>Western US</placekey>
+				<placekey>Great Plains</placekey>
+			</place>
+		</keywords>
+		<accconst>None</accconst>
+		<useconst>None</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntperp>
+					<cntper>Sarah McCord</cntper>
+					<cntorg>USDA Agricultural Research Service</cntorg>
+				</cntperp>
+				<cntemail>sarah.mccord@usda.gov</cntemail>
+			</cntinfo>
+		</ptcontac>
+		<datacred>Brady Allred, brady.allred@umontana.edu</datacred>
+		<datacred>Matt Jones, matt.jones@umontana.edu</datacred>
+		<native>Rangeland Analysis Platform, version 2.0</native>
+	</idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>Accuracy assessment was conducted by setting aside 10% of the combined NRI and AIM plots. The relationship between the completed product and the validation dataset was reported as R2, root mean square error (RMSE), and mean absolute error (MAE). Validation statistics — Annual Forb and Grass: r-squared: 0.58, RMSE: 11.0%, MAE: 7.0%; Perennial Forb and Grass: r-squared: 0.77, RMSE: 14.0%, MAE: 10.3%; Shrub: r-squared: 0.57, RMSE: 8.3%, MAE: 5.8%; Tree: r-squared: 0.65, RMSE: 6.8%, MAE: 2.8%; Bare Ground : r-squared: 0.73, RMSE: 9.8%, MAE: 6.7%</attraccr>
+		</attracc>
+		<logic>Topology is consistent with Landsat TM, ETM, and OLI. Percent cover values are bound between 0–100. NA values are set to -99.</logic>
+		<complete>The dataset is spatially comprehensive for the western United States and temporally complete for the period of Landsat TM, ETM, and OLI.</complete>
+		<posacc>
+			<horizpa>
+				<horizpar>Horizontal positional accuracy is equal to the accuracy of Landsat TM, ETM+, and OLI.</horizpar>
+			</horizpa>
+		</posacc>
+		<lineage>
+			<srcinfo>
+				<typesrc>Landsat TM, ETM+, and OLI and Natural Resources Conservation Service's Natural Resources Inventory and Bureau of Land Management's Assessment, Inventory, and Monitoring datasets.</typesrc>
+			</srcinfo>
+			<procstep>
+				<procdesc>Landsat TM, ETM, and OLI Tier 1, Collection 1 Surface Reflectance data were acquired and processed using Google Earth Engine. Imagery was harmonized between the TM, ETM, and OLI sensors, masked for clouds, and converted into six seasonal composites with bands equivalent to those of TM and ETM plus an NDVI band calculated from the red and NIR bands. Concurrently, values of Annual Forbs and Grasses, Perennial Forbs and Grasses, Shrubs, Trees, and Bare Ground were calculated for each of the 57,792 Bureau of Land Management AIM and Natural Resources Conservation Service NRI field plots collected between 2004–2019. 10% of those plots (5,780) were set aside for model validation. Both the Landsat composite and field AIM and NRI datasets were matched to the year of field data collection and were then used to train a temporal convolutional network model. That model was then applied to each year of the Landsat data to produce the vegetation cover dataset. The validation set was used to calculate accuracy statistics as described in the Attribute accuracy report section.</procdesc>
+				<proccont>
+					<cntinfo>
+						<cntperp>
+							<cntper>Sarah McCord</cntper>
+							<cntorg>USDA Agricultural Research Service</cntorg>
+						</cntperp>
+						<cntemail>sarah.mccord@usda.gov</cntemail>
+					</cntinfo>
+				</proccont>
+			</procstep>
+		</lineage>
+		<cloud>0</cloud>
+	</dataqual>
+	<spdoinfo>
+		<indspref>latitude-longitude</indspref>
+		<direct>Raster</direct>
+		<rastinfo>
+			<rasttype>Grid cell</rasttype>
+		</rastinfo>
+	</spdoinfo>
+	<spref>
+		<horizsys>
+			<geograph>
+				<latres>30</latres>
+				<longres>30</longres>
+				<geogunit>meters</geogunit>
+			</geograph>
+			<geodetic>
+				<horizdn>World Geodetic System 1984 (WGS84)</horizdn>
+			</geodetic>
+		</horizsys>
+	</spref>
+	<eainfo>
+		<detailed>
+			<attr>
+				<attrdef>The Rangeland Analysis Platform fractional vegetation cover dataset estimates percentage vegetation classes Annual Forbs and Grasses, Perennial Forbs and Grasses, Shrubs, Trees, and Bare Ground</attrdef>
+				<attrdomv>
+					<rdom>
+						<rdommin>0</rdommin>
+						<rdommax>100</rdommax>
+					</rdom>
+				</attrdomv>
+			</attr>
+		</detailed>
+		<overview></overview>
+	</eainfo>
+	<distinfo>
+		<distrib>
+			<cntinfo>
+				<cntperp>
+					<cntper>Sarah McCord</cntper>
+					<cntorg>USDA Agricultural Research Service</cntorg>
+				</cntperp>
+				<cntemail>sarah.mccord@usda.gov</cntemail>
+			</cntinfo>
+		</distrib>
+		<distliab>USDA-ARS follows procedures designed to ensure that data disseminated by USDA-ARS are of reasonable quality. If, despite these procedures, users encounter apparent errors or misstatements in the data, they can contact USDA-ARS via email at sarah.mccord@usda.gov. USDA-ARS does not guarantee the accuracy, reliability, or completeness of any data provided. USDA-ARS provides this data without warranty of any kind whatsoever, either express or implied. USDA-ARS shall not be liable for incidental, consequential, or special damages arising out of the use of any data provided by USDA-ARS.</distliab>
+	</distinfo>
+	<metainfo>
+		<metd>20210316</metd>
+		<metc>
+			<cntinfo>
+				<cntperp>
+					<cntper>Sarah McCord</cntper>
+					<cntorg>USDA Agricultural Research Service</cntorg>
+				</cntperp>
+				<cntemail>sarah.mccord@usda.gov</cntemail>
+			</cntinfo>
+		</metc>
+		<metstdn>Content Standard for Digital Geospatial Metadata</metstdn>
+		<metstdv>As of Oct 2002: FGDC-STD-001-1998</metstdv>
+		<metac>None</metac>
+		<metuc>None</metuc>
+	</metainfo>
+</metadata>

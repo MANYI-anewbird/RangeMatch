@@ -1,0 +1,372 @@
+{
+  "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+  "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED",
+  "derivation_spec": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+  "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+  "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+  "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+  "source_year": 2025,
+  "mask": true,
+  "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+  "coverage_status": "COVERAGE_UNQUANTIFIED",
+  "applicability": {
+    "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+    "review_status": "VERIFIED",
+    "basis": [
+      "CPER_RANGELAND_TEST_CONTEXT"
+    ]
+  },
+  "coverage": {
+    "status": "COVERAGE_UNQUANTIFIED",
+    "requested_area_m2": 1406580,
+    "eligible_area_m2": null,
+    "masked_area_m2": null,
+    "no_data_area_m2": null,
+    "valid_area_m2": null,
+    "valid_coverage_fraction": null,
+    "adapter_status": "AGGREGATE_API_VERIFIED"
+  },
+  "shrub_cover_fraction": 0.06727234043361567,
+  "tree_cover_fraction": 0.0010557150211526738,
+  "combined_modeled_woody_cover_fraction": 0.06832805545476835,
+  "unit": "fraction",
+  "valid_range": [
+    0.0,
+    1.0
+  ],
+  "raw_rap_shr_percent": 6.727234043361567,
+  "raw_rap_tre_percent": 0.10557150211526739,
+  "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+  "reused_existing_artifact": true,
+  "duplicate_coverV3_fetch": false,
+  "ranking_effect": "NONE",
+  "derived_at": "2026-08-08T12:51:59Z",
+  "land_facts": [
+    {
+      "variable_id": "VAR_F08_SHRUB_COVER_FRACTION",
+      "name": "shrub_cover_fraction",
+      "observation": {
+        "value_state": "KNOWN",
+        "value": 0.06727234043361567,
+        "unit": "fraction",
+        "valid_range": [
+          0.0,
+          1.0
+        ],
+        "spatial_semantics": "parcel_mean",
+        "temporal_semantics": "annual_2025"
+      },
+      "source": {
+        "provider": "USDA_ARS",
+        "product": "RAP",
+        "version": "v3",
+        "data_kind": "MODELED",
+        "adapter_id": "RAP_AGGREGATE_API_REUSE",
+        "modeled": true,
+        "derived_not_independent_band": false
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "CPER_RANGELAND_TEST_CONTEXT"
+        ]
+      },
+      "coverage": {
+        "status": "COVERAGE_UNQUANTIFIED",
+        "requested_area_m2": 1406580,
+        "eligible_area_m2": null,
+        "masked_area_m2": null,
+        "no_data_area_m2": null,
+        "valid_area_m2": null,
+        "valid_coverage_fraction": null,
+        "adapter_status": "AGGREGATE_API_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+        "modeled": true,
+        "resolution": "30_meters_nominal"
+      },
+      "provenance": {
+        "source_reference": "RAP_coverV3",
+        "source_product_and_version": "RAP_v3",
+        "endpoint": "coverV3",
+        "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+        "fetched_at": "2026-08-07T21:03:00Z",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "request_parameters": {
+          "mask": true,
+          "year": 2025
+        },
+        "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+        "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+        "raw_rap_shr_percent": 6.727234043361567,
+        "raw_rap_tre_percent": 0.10557150211526739,
+        "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+        "reused_existing_artifact": true,
+        "duplicate_coverV3_fetch": false
+      },
+      "limitations": [
+        "Shrub and tree cover are modeled RAP fractional cover context only.",
+        "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+        "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+        "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+        "Woody cover does not prove low herbaceous production.",
+        "F08 must not replace F02 herbaceous Land Facts.",
+        "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+        "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+      ]
+    },
+    {
+      "variable_id": "VAR_F08_TREE_COVER_FRACTION",
+      "name": "tree_cover_fraction",
+      "observation": {
+        "value_state": "KNOWN",
+        "value": 0.0010557150211526738,
+        "unit": "fraction",
+        "valid_range": [
+          0.0,
+          1.0
+        ],
+        "spatial_semantics": "parcel_mean",
+        "temporal_semantics": "annual_2025"
+      },
+      "source": {
+        "provider": "USDA_ARS",
+        "product": "RAP",
+        "version": "v3",
+        "data_kind": "MODELED",
+        "adapter_id": "RAP_AGGREGATE_API_REUSE",
+        "modeled": true,
+        "derived_not_independent_band": false
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "CPER_RANGELAND_TEST_CONTEXT"
+        ]
+      },
+      "coverage": {
+        "status": "COVERAGE_UNQUANTIFIED",
+        "requested_area_m2": 1406580,
+        "eligible_area_m2": null,
+        "masked_area_m2": null,
+        "no_data_area_m2": null,
+        "valid_area_m2": null,
+        "valid_coverage_fraction": null,
+        "adapter_status": "AGGREGATE_API_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+        "modeled": true,
+        "resolution": "30_meters_nominal"
+      },
+      "provenance": {
+        "source_reference": "RAP_coverV3",
+        "source_product_and_version": "RAP_v3",
+        "endpoint": "coverV3",
+        "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+        "fetched_at": "2026-08-07T21:03:00Z",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "request_parameters": {
+          "mask": true,
+          "year": 2025
+        },
+        "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+        "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+        "raw_rap_shr_percent": 6.727234043361567,
+        "raw_rap_tre_percent": 0.10557150211526739,
+        "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+        "reused_existing_artifact": true,
+        "duplicate_coverV3_fetch": false
+      },
+      "limitations": [
+        "Shrub and tree cover are modeled RAP fractional cover context only.",
+        "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+        "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+        "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+        "Woody cover does not prove low herbaceous production.",
+        "F08 must not replace F02 herbaceous Land Facts.",
+        "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+        "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+      ]
+    },
+    {
+      "variable_id": "VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION",
+      "name": "combined_modeled_woody_cover_fraction",
+      "observation": {
+        "value_state": "KNOWN",
+        "value": 0.06832805545476835,
+        "unit": "fraction",
+        "valid_range": [
+          0.0,
+          1.0
+        ],
+        "spatial_semantics": "parcel_mean",
+        "temporal_semantics": "annual_2025"
+      },
+      "source": {
+        "provider": "USDA_ARS",
+        "product": "RAP",
+        "version": "v3",
+        "data_kind": "MODELED",
+        "adapter_id": "RAP_AGGREGATE_API_REUSE",
+        "modeled": true,
+        "derived_not_independent_band": true
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "CPER_RANGELAND_TEST_CONTEXT"
+        ]
+      },
+      "coverage": {
+        "status": "COVERAGE_UNQUANTIFIED",
+        "requested_area_m2": 1406580,
+        "eligible_area_m2": null,
+        "masked_area_m2": null,
+        "no_data_area_m2": null,
+        "valid_area_m2": null,
+        "valid_coverage_fraction": null,
+        "adapter_status": "AGGREGATE_API_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+        "modeled": true,
+        "resolution": "30_meters_nominal"
+      },
+      "provenance": {
+        "source_reference": "RAP_coverV3",
+        "source_product_and_version": "RAP_v3",
+        "endpoint": "coverV3",
+        "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+        "fetched_at": "2026-08-07T21:03:00Z",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "request_parameters": {
+          "mask": true,
+          "year": 2025
+        },
+        "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+        "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+        "raw_rap_shr_percent": 6.727234043361567,
+        "raw_rap_tre_percent": 0.10557150211526739,
+        "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+        "reused_existing_artifact": true,
+        "duplicate_coverV3_fetch": false
+      },
+      "limitations": [
+        "Shrub and tree cover are modeled RAP fractional cover context only.",
+        "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+        "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+        "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+        "Woody cover does not prove low herbaceous production.",
+        "F08 must not replace F02 herbaceous Land Facts.",
+        "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+        "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+      ]
+    }
+  ],
+  "provenance": {
+    "source_reference": "RAP_coverV3",
+    "source_product_and_version": "RAP_v3",
+    "endpoint": "coverV3",
+    "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+    "fetched_at": "2026-08-07T21:03:00Z",
+    "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+    "request_parameters": {
+      "mask": true,
+      "year": 2025
+    },
+    "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+    "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+    "raw_rap_shr_percent": 6.727234043361567,
+    "raw_rap_tre_percent": 0.10557150211526739,
+    "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+    "reused_existing_artifact": true,
+    "duplicate_coverV3_fetch": false
+  },
+  "limitations": [
+    "Shrub and tree cover are modeled RAP fractional cover context only.",
+    "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+    "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+    "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+    "Woody cover does not prove low herbaceous production.",
+    "F08 must not replace F02 herbaceous Land Facts.",
+    "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+    "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+  ],
+  "unknowns": [
+    "Shared RAP eligible/masked/no-data/valid parcel areas are not quantified.",
+    "Botanical composition of woody cover is not verified.",
+    "Browse availability is not established.",
+    "Woody obstruction class is not established."
+  ],
+  "prohibited_interpretations_applied": true,
+  "mireye_used_as_parcel_land_fact": false,
+  "browse_inferred": false,
+  "obstruction_inferred": false,
+  "forced_sum_to_100": false,
+  "null_treated_as_zero": false,
+  "combined_included_in_composition_sum": false,
+  "shared_with_f02": {
+    "same_artifact": true,
+    "same_geometry_hash": true,
+    "same_source_year": true,
+    "same_mask": true,
+    "same_applicability_status": true,
+    "same_coverage_status": true,
+    "f02_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+    "f08_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+    "f02_source_year": 2025,
+    "f02_mask": true,
+    "f02_applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+    "f02_coverage_status": "COVERAGE_UNQUANTIFIED"
+  },
+  "live_gate": {
+    "live_gate_id": "F08_RAP_COVERV3_DATA_REUSE_CPER",
+    "status": "DATA_REUSE_VERIFIED",
+    "network_rap_request_issued": false,
+    "reused_existing_artifact": true,
+    "duplicate_coverV3_fetch": false,
+    "artifact_path": "test-data/live-results/cper/rap_coverV3_2025.json",
+    "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+    "shared_with_f02": {
+      "same_artifact": true,
+      "same_geometry_hash": true,
+      "same_source_year": true,
+      "same_mask": true,
+      "same_applicability_status": true,
+      "same_coverage_status": true,
+      "f02_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+      "f08_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+      "f02_source_year": 2025,
+      "f02_mask": true,
+      "f02_applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+      "f02_coverage_status": "COVERAGE_UNQUANTIFIED"
+    },
+    "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED",
+    "signal": "NEEDS_VERIFICATION",
+    "explanation_code": "F08_EXPL_COVERAGE_UNQUANTIFIED",
+    "ranking_effect": "NONE",
+    "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+    "derived_at": "2026-08-08T12:51:59Z",
+    "shrub_cover_fraction": 0.06727234043361567,
+    "tree_cover_fraction": 0.0010557150211526738,
+    "combined_modeled_woody_cover_fraction": 0.06832805545476835,
+    "raw_rap_shr_percent": 6.727234043361567,
+    "raw_rap_tre_percent": 0.10557150211526739
+  },
+  "result_reference": "test-data/live-results/cper/f08_derivation_result_2026-08-08.json",
+  "source_fixture_references": [
+    "test-data/live-results/cper/rap_coverV3_2025.json",
+    "test-data/live-results/cper/rap_request_2025.json"
+  ]
+}

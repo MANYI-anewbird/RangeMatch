@@ -1,0 +1,23 @@
+{
+  "OBJECTID": 25,
+  "Name": "Ov_i02_L01_R0000002D_C0000000A",
+  "MinPS": 152.8,
+  "MaxPS": 305.6,
+  "Category": 2,
+  "CenterX": -11822972.3501,
+  "CenterY": 5355322.809500001,
+  "State": null,
+  "Year": null,
+  "raster_name": null,
+  "download_url": null,
+  "acquisition_date": null,
+  "agency": null,
+  "vendor": null,
+  "resolution_value": null,
+  "resolution_units": null,
+  "band_count": null,
+  "sensor_type": null,
+  "projection_name": null,
+  "projection_zone": null,
+  "datum": null
+}

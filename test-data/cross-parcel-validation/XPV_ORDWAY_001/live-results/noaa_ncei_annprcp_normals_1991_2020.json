@@ -1,0 +1,57 @@
+{
+  "variable_id": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_ORDWAY_001",
+  "geometry_sha256": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+  "value_mm": 1342.19,
+  "value_inches": 52.842,
+  "unit": "millimeter",
+  "aggregation": {
+    "method": "bbox_intersecting_cell_centers_mean",
+    "cell_count": 1,
+    "cell_values_mm": [
+      1342.19
+    ],
+    "cells": [
+      {
+        "lat": 29.687532424926758,
+        "lon": -81.97916412353516,
+        "annprcp_norm_mm": 1342.192138671875
+      }
+    ],
+    "note": "Mean of NOAA NCEI gridded annual precipitation normals for grid cells intersecting the engineering rectangle."
+  },
+  "normals_period": "1991-2020",
+  "spatial_resolution": {
+    "nominal": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+    "delta_lat_deg": 0.041667938232421875,
+    "delta_lon_deg": 0.04166412353515625
+  },
+  "parcel_coverage": {
+    "parcel_bbox": [
+      -82.0,
+      29.685,
+      -81.985,
+      29.695
+    ],
+    "parcel_area_m2_approx": 1611169.43,
+    "intersecting_cell_count": 1,
+    "approx_cell_area_m2": 18647225.16,
+    "coverage_status": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+    "spatial_support": "PARCEL_BBOX_INTERSECTING_GRID_CELLS"
+  },
+  "source": {
+    "organization": "NOAA National Centers for Environmental Information (NCEI)",
+    "product": "1991-2020 Gridded Monthly/Annual Precipitation Normals (derived from nClimGrid)",
+    "variable": "annprcp_norm",
+    "file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/archive/arc0196/0245564/1.1/data/0-data/prcp-1991_2020-monthly-normals-v1.0.nc",
+    "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+    "units_in_file": "millimeter",
+    "alternate_not_used": "ACIS retained as secondary QA only; never canonical Land Fact."
+  },
+  "fetched_at": "2026-08-08T05:08:16Z",
+  "local_cache_path": "test-data/live-results/cper/cache/prcp-1991_2020-monthly-normals-v1.0.nc",
+  "file_sha256": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+  "file_bytes": 280673972,
+  "role": "CANONICAL_LAND_FACT"
+}

@@ -1,0 +1,135 @@
+{
+  "derivation_spec": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+  "limitations": [
+    "RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.",
+    "Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity."
+  ],
+  "unknowns": [
+    "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+    "Botanical composition is not verified.",
+    "Operation-specific palatability is not verified.",
+    "Nutritive value is not verified."
+  ],
+  "land_facts": [
+    {
+      "variable_id": "VAR_F02_PERENNIAL_HERB_COVER",
+      "observation": {
+        "value_state": "KNOWN",
+        "value": 78.10825692252465,
+        "unit": "percent_cover",
+        "spatial_semantics": "parcel_mean",
+        "temporal_semantics": "annual_2025"
+      },
+      "source": {
+        "provider": "USDA_ARS",
+        "product": "RAP",
+        "version": "v3",
+        "data_kind": "MODELED",
+        "adapter_id": "RAP_AGGREGATE_API",
+        "modeled": true
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "TALLGRASS_PRAIRIE_RESEARCH_CONTEXT",
+          "RAP_RANGELAND_PRODUCT_SCOPE"
+        ]
+      },
+      "coverage": {
+        "status": "COVERAGE_UNQUANTIFIED",
+        "requested_area_m2": 1439397.9967141035,
+        "eligible_area_m2": null,
+        "masked_area_m2": null,
+        "no_data_area_m2": null,
+        "valid_area_m2": null,
+        "valid_coverage_fraction": null,
+        "adapter_status": "AGGREGATE_API_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+        "modeled": true,
+        "resolution": "30_meters_nominal",
+        "api_contract_verified": true,
+        "temporal_contract_verified": true,
+        "derivation_contract_verified": true
+      },
+      "provenance": {
+        "source_reference": "RAP_coverV3",
+        "fetched_at": "2026-08-08T05:06:25Z",
+        "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+        "response_or_artifact_hash": "9f33f7c31c30b9f0d2b12d1bc657484c4225640585b4bee0c607ead4a8cee0d8",
+        "endpoint": "coverV3",
+        "request_parameters": {
+          "mask": true,
+          "year": 2025
+        },
+        "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+      },
+      "limitations": [
+        "PFG combines perennial grasses and forbs.",
+        "Modeled cover is not standing biomass, available forage, palatability, or nutritive value."
+      ]
+    },
+    {
+      "variable_id": "VAR_F02_ANNUAL_HERB_PRODUCTION",
+      "observation": {
+        "value_state": "KNOWN",
+        "value": 3207.906719986884,
+        "unit": "pound_per_acre",
+        "spatial_semantics": "parcel_mean",
+        "temporal_semantics": "annual_accumulated_new_growth_2025"
+      },
+      "source": {
+        "provider": "USDA_ARS",
+        "product": "RAP",
+        "version": "v3",
+        "data_kind": "MODELED",
+        "adapter_id": "RAP_AGGREGATE_API",
+        "modeled": true
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "TALLGRASS_PRAIRIE_RESEARCH_CONTEXT",
+          "RAP_RANGELAND_PRODUCT_SCOPE"
+        ]
+      },
+      "coverage": {
+        "status": "COVERAGE_UNQUANTIFIED",
+        "requested_area_m2": 1439397.9967141035,
+        "eligible_area_m2": null,
+        "masked_area_m2": null,
+        "no_data_area_m2": null,
+        "valid_area_m2": null,
+        "valid_coverage_fraction": null,
+        "adapter_status": "AGGREGATE_API_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+        "modeled": true,
+        "resolution": "30_meters_nominal",
+        "api_contract_verified": true,
+        "temporal_contract_verified": true,
+        "derivation_contract_verified": true
+      },
+      "provenance": {
+        "source_reference": "RAP_productionV3",
+        "fetched_at": "2026-08-08T05:06:25Z",
+        "geometry_hash": "f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d",
+        "response_or_artifact_hash": "b65f616966789cbb76e1df01a61ee094ab34351b21eb6b17c698d493182d32d9",
+        "endpoint": "productionV3",
+        "request_parameters": {
+          "mask": true,
+          "year": 2025
+        },
+        "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+      },
+      "limitations": [
+        "Production is modeled new growth, not standing biomass.",
+        "Production is not available forage, carrying capacity, or stocking rate."
+      ]
+    }
+  ]
+}

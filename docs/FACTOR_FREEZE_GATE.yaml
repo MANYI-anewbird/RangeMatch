@@ -1,0 +1,63 @@
+gate_id: RANGEMATCH_FACTOR_FREEZE_GATE
+version: 0.1.0
+language: English
+status: CANONICAL
+last_updated: 2026-08-08
+
+purpose: >-
+  Unified stop condition for every Factor. When this gate is satisfied, Factor
+  research stops. Additional papers, thresholds, or refinements require a new
+  reviewed version rather than unbounded expansion of the current Factor.
+
+applies_to:
+  - Tier_1_full_vertical_slice_Factors
+  - Tier_2_reliable_data_and_qualitative_rule_Factors
+  - Tier_3_diligence_or_verification_Factors
+
+factor_freeze_gate:
+  authoritative_relationship_reviewed: true
+  atomic_variables_defined: true
+  primary_data_path_live_tested: true
+  applicability_and_coverage_behavior_defined: true
+  missing_data_behavior_defined: true
+  prohibited_interpretations_recorded: true
+  deterministic_behavior_tested: true
+  numeric_thresholds:
+    required: false
+    allowed_only_if_evidence_approved: true
+
+required_evidence_of_completion:
+  - reviewed_requirement_records_or_explicit_diligence_only_status
+  - variable_ids_in_UNIFIED_LAND_VARIABLE_REGISTRY
+  - data_source_or_Mireye_audit_for_primary_path
+  - golden_or_executable_tests_for_missing_unknown_and_deterministic_behavior
+  - prohibited_interpretations_listed_in_Factor_docs_or_rules
+
+explicitly_not_required_to_freeze:
+  - national_numeric_score
+  - approved_hard_constraint
+  - complete_ontology_coverage
+  - LLM_explanation_layer
+  - production_UI
+  - exhaustive_literature_review_beyond_narrow_accepted_claims
+
+tier_depth_policy:
+  Tier_1:
+    examples: [F01_TOPOGRAPHY, F02_HERBACEOUS_RESOURCE, F03_LIVESTOCK_WATER, F04_SOIL_WETNESS_ECOLOGICAL_SITE]
+    depth: full_vertical_slice_through_deterministic_engine
+  Tier_2:
+    examples: [F05_CLIMATE_DROUGHT_EXPOSURE, Flood_Wetness, Parcel_configuration]
+    depth: reliable_data_path_plus_qualitative_rules
+    note: >-
+      F05 is wired as data-quality/context only with no climate suitability
+      thresholds. Flood_Wetness must remain isolated from F04 soil-survey wetness
+      context and from F05.
+  Tier_3:
+    examples: [Road_access, Fencing, Infrastructure, Legal]
+    depth: diligence_and_verification_Factors_by_default
+    ranking_effect_default: NONE
+
+stop_rule: >-
+  Do not continue Factor research after the freeze gate is met. Open a new
+  versioned change request if additional evidence would alter relationships,
+  variables, data paths, missing-data behavior, or prohibited interpretations.

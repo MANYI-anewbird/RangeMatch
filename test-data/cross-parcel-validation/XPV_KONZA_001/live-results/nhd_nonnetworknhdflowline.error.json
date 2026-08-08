@@ -1,0 +1,3 @@
+{
+  "error": "TypeError: Session.request() got an unexpected keyword argument 'trust_env'"
+}

@@ -1,0 +1,206 @@
+<metadata>
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>United States Department of Agriculture, Agricultural Research Service (USDA-ARS)</origin>
+				<pubdate>20200801</pubdate>
+				<title>Rangeland Analysis Platform (RAP) Herbaceous Biomass, version 1.0</title>
+				<edition>1.0</edition>
+				<geoform>raster digital data</geoform>
+				<othercit>Supporting journal article: Jones, M. O., Robinson, N. P., Naugle, D. E., Maestas, J. D., Reeves, M. C., Lankston, R. W., &amp; Allred, B. W. (2020, November 8). Annual and 16-day rangeland production estimates for the western united states. BioRxiv. bioRxiv. https://doi.org/10.1101/2020.11.06.343038</othercit>
+				<onlink>http://rangelands.app</onlink>
+			</citeinfo>
+		</citation>
+		<descript>
+			<abstract>Rangeland Analysis Platform (RAP) Herbaceous Biomass, version 1.0 consists of gridded estimates of herbaceous aboveground biomass, partitioned by annual forbs and grasses and perennial forbs and grasses. The estimates are produced at 30m spatial resolution from 1986-present. Estimates are provided annually and at 16-day intervals. Values are reported in pounds per acre and represent new growth of biomass – estimates do not reflect standing biomass from previous years. Estimates are calculated using a light use efficiency model (to estimate net primary production in terms of carbon) which is then allocated to above ground and below ground pools (based on mean annual temperature) and further converted to biomass using a carbon to dry matter ratio.</abstract>
+		</descript>
+		<timeperd>
+			<timeinfo>
+				<rngdates>
+					<begdate>19860101</begdate>
+					<enddate>20201231</enddate>
+				</rngdates>
+			</timeinfo>
+		</timeperd>
+		<status>
+			<progress>Complete</progress>
+			<update>Data updated every 16 days (16-day product) annually (annual product)</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>-126.0</westbc>
+				<eastbc>-92.0</eastbc>
+				<northbc>50.5</northbc>
+				<southbc>24.0</southbc>
+			</bounding>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekt>ISO 19115 Topic Category</themekt>
+				<themekey>biota</themekey>
+				<themekey>agriculture</themekey>
+				<themekey>environment</themekey>
+				<themekey>geoscientificInformation</themekey>
+				<themekey>imageryBaseMapsEarthCover</themekey>
+			</theme>
+			<theme>
+				<themekt>GCMD Science Keywords</themekt>
+				<themekey>Biomass</themekey>
+				<themekey>Litter characteristics</themekey>
+				<themekey>Vegetation</themekey>
+				<themekey>Landscape patterns</themekey>
+				<themekey>Landscape management</themekey>
+				<themekey>Dynamic vegetation/ecosystem models</themekey>
+				<themekey>Web-based geographic information systems</themekey>
+			</theme>
+			<theme>
+				<themekt>GCMD Platforms</themekt>
+				<themekey>Landsat-7</themekey>
+				<themekey>Landsat-8</themekey>
+				<themekey>Landsat-5</themekey>
+			</theme>
+			<place>
+				<placekt>Common geographic names</placekt>
+				<placekey>United States</placekey>
+				<placekey>California</placekey>
+				<placekey>Oregon</placekey>
+				<placekey>Washington</placekey>
+				<placekey>Idaho</placekey>
+				<placekey>Nevada</placekey>
+				<placekey>Arizona</placekey>
+				<placekey>Utah</placekey>
+				<placekey>Montana</placekey>
+				<placekey>Colorado</placekey>
+				<placekey>New Mexico</placekey>
+				<placekey>Texas</placekey>
+				<placekey>Oklahoma</placekey>
+				<placekey>Kansas</placekey>
+				<placekey>Nebraska</placekey>
+				<placekey>South Dakota</placekey>
+				<placekey>North Dakota</placekey>
+			</place>
+			<place>
+				<placekt>None</placekt>
+				<placekey>Great Basin</placekey>
+				<placekey>Columbia Plateau</placekey>
+				<placekey>Southern Rocky Mountains</placekey>
+				<placekey>Northern Rocky Mountains</placekey>
+				<placekey>Sonoran Desert</placekey>
+				<placekey>Mojave Desert</placekey>
+				<placekey>Chihuahuan desert</placekey>
+				<placekey>Colorado Plateau</placekey>
+				<placekey>Snake River Plain</placekey>
+				<placekey>Western US</placekey>
+				<placekey>Great Plains</placekey>
+			</place>
+		</keywords>
+		<accconst>None</accconst>
+		<useconst>None</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntperp>
+					<cntper>Sarah McCord</cntper>
+					<cntorg>USDA Agricultural Research Service</cntorg>
+				</cntperp>
+				<cntemail>sarah.mccord@usda.gov</cntemail>
+			</cntinfo>
+		</ptcontac>
+		<datacred>Brady Allred, brady.allred@umontana.edu</datacred>
+		<datacred>Matt Jones, matt.jones@umontana.edu</datacred>
+		<native>Rangeland Analysis Platform, version 2.0</native>
+	</idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>Accuracy assessment was conducted using field sampled Natural Resources Conservation Service Natural Resources Inventory (NRI) plots, as well as spatial gridded annual production datasets from the gridded Soil Survey Geographic (gSSURGO) database and the United States Forest Service Rangeland Production Monitoring Service (RPMS) data. The RAP estimates had a Pearson correlation coefficient of 0.63 when compared with field-based NRI measurements. When compared with RPMS the Pearson correlation was 0.79 and with gSSURGO the Pearson correlation was 0.82.</attraccr>
+		</attracc>
+		<logic>Topology is consistent with Landsat TM, ETM, and OLI</logic>
+		<complete>The dataset is spatially comprehensive for the western United States and temporally complete for the period of Landsat TM, ETM, and OLI.</complete>
+		<posacc>
+			<horizpa>
+				<horizpar>Horizontal positional accuracy is equal to the accuracy of Landsat TM, ETM+, and OLI.</horizpar>
+			</horizpa>
+		</posacc>
+		<lineage>
+			<srcinfo>
+				<typesrc>Landsat TM, ETM+, and OLI, GridMet meterogrological data, and Rangeland Analysis Platform Vegetation Cover, Version 2.0 are all used in the analysis.</typesrc>
+			</srcinfo>
+			<procstep>
+				<procdesc>"We produced spatially contiguous 16-day Landsat NDVI composites (Robinson et al., 2017) using Landsat 5 TM, 7 ETM+, and 8 OLI surface reflectance. Using the 16-day NDVI and the Rangeland Analysis Platform (RAP) Vegetation Cover, version 2.0 (Allred et al., 2021), we disaggregated pixel level NDVI using linear mixing theory to its sub-pixel PFT components. To capture and incorporate the geographically specific PFT NDVI phenological characteristics, we built an overdetermined set of linear equations (Robinson et al., 2019) to solve for each PFT NDVI value within US EPA Level IV regions. The PFT specific NDVI values are then used in the MOD17 NPP model adapted for Landsat (Robinson et al., 2018). Using linear interpolation we calculated daily NDVI values between each 16-day composite. We then calculated daily NPP for each PFT present in the pixel using the daily PFT NDVI values, daily GRIDMET meteorology (Abatzoglou, 2013), and that the specific PFT’s biophysical properties (Robinson et al., 2018). We multiplied NPP estimates by the PFT fractional cover estimates, resulting in total grams of carbon assimilated per PFT per pixel per day (g C m-2 day-1). Daily values are summed to 16-day values (g C m-2 16days-1) and to annual values (g C m-2 year-1). The herbaceous partitioned NPP of(partitioned to perennial grasses/forbs and annual grasses/forbs) are allocated to aboveground (ANPP) pools using the equations:
+fANPP = 0.129 * MAT + 0.171
+ANPP = fANPP * NPP
+where the fANPP is the fraction partitioned to ANPP and MAT is mean annual temperature (Hui and Jackson, 2006). We convert ANPP (g C m-2 16 days-1) to biomass (kg ha-1 or lbs acre-1) using the pixel area and a 47.5% carbon content of vegetation estimate (Eggleston et al., 2006).</procdesc>
+				<proccont>
+					<cntinfo>
+						<cntperp>
+							<cntper>Sarah McCord</cntper>
+							<cntorg>USDA Agricultural Research Service</cntorg>
+						</cntperp>
+						<cntemail>sarah.mccord@usda.gov</cntemail>
+					</cntinfo>
+				</proccont>
+			</procstep>
+		</lineage>
+		<cloud>0</cloud>
+	</dataqual>
+	<spdoinfo>
+		<indspref>latitude-longitude</indspref>
+		<direct>Raster</direct>
+		<rastinfo>
+			<rasttype>Grid cell</rasttype>
+		</rastinfo>
+	</spdoinfo>
+	<spref>
+		<horizsys>
+			<geograph>
+				<latres>30</latres>
+				<longres>30</longres>
+				<geogunit>meters</geogunit>
+			</geograph>
+			<geodetic>
+				<horizdn>World Geodetic System 1984 (WGS84)</horizdn>
+			</geodetic>
+		</horizsys>
+	</spref>
+	<eainfo>
+		<detailed>
+			<attr>
+				<attrdef>The Rangeland Analysis Platform Herbaceous Biomass dataset provides annual and 16-day biomass production estimates for vegetation classes of Annual Herbaceous, Perennial Herbaceous, and Total Herbaceous in units of lbs/acre.</attrdef>
+				<attrdomv>
+					<rdom>
+						<rdommin>0</rdommin>
+						<rdommax>Inf</rdommax>
+					</rdom>
+				</attrdomv>
+			</attr>
+		</detailed>
+		<overview/>
+	</eainfo>
+	<distinfo>
+		<distrib>
+			<cntinfo>
+				<cntperp>
+					<cntper>Sarah McCord</cntper>
+					<cntorg>USDA Agricultural Research Service</cntorg>
+				</cntperp>
+				<cntemail>sarah.mccord@usda.gov</cntemail>
+			</cntinfo>
+		</distrib>
+		<distliab>USDA-ARS follows procedures designed to ensure that data disseminated by USDA-ARS are of reasonable quality. If, despite these procedures, users encounter apparent errors or misstatements in the data, they can contact USDA-ARS via email at sarah.mccord@usda.gov. USDA-ARS does not guarantee the accuracy, reliability, or completeness of any data provided. USDA-ARS provides this data without warranty of any kind whatsoever, either express or implied. USDA-ARS shall not be liable for incidental, consequential, or special damages arising out of the use of any data provided by USDA-ARS.</distliab>
+	</distinfo>
+	<metainfo>
+		<metd>20210316</metd>
+		<metc>
+			<cntinfo>
+				<cntperp>
+					<cntper>Sarah McCord</cntper>
+					<cntorg>USDA Agricultural Research Service</cntorg>
+				</cntperp>
+				<cntemail>sarah.mccord@usda.gov</cntemail>
+			</cntinfo>
+		</metc>
+		<metstdn>Content Standard for Digital Geospatial Metadata</metstdn>
+		<metstdv>As of Oct 2002: FGDC-STD-001-1998</metstdv>
+		<metac>None</metac>
+		<metuc>None</metuc>
+	</metainfo>
+</metadata>

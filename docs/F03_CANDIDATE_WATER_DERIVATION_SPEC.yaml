@@ -1,0 +1,108 @@
+spec_id: RANGEMATCH_F03_CANDIDATE_WATER_DERIVATION
+version: 0.1.0
+language: English
+status: REVIEW_CANDIDATE
+factor_id: F03_LIVESTOCK_WATER
+
+scope:
+  output_role: REMOTE_CANDIDATE_INVENTORY_AND_EUCLIDEAN_DISTANCE_CONTEXT
+  verifies_livestock_water_source: false
+  computes_traversable_distance: false
+  authorizes_numeric_suitability_threshold: false
+
+inputs:
+  parcel_geometry:
+    accepted_types: [POLYGON, MULTIPOLYGON]
+    input_crs: EPSG:4326
+  candidate_sources:
+    - source: USGS_NHDPLUS_HR
+      layers: [NetworkNHDFlowline, NonNetworkNHDFlowline, NHDWaterbody, NHDArea]
+      geometry_required: true
+      permanent_identifier_preserved: true
+      source_attributes_preserved: [ftype, fcode, gnis_name, fdate, reachcode, resolution]
+  optional_future_sources:
+    - owner_or_operator_verified_water_points
+    - state_well_records
+    - verified_springs_troughs_tanks_and_pipelines
+
+candidate_inventory_schema:
+  required_fields:
+    - candidate_id
+    - source
+    - source_layer
+    - source_feature_id
+    - geometry_type
+    - geometry_hash
+    - intersects_parcel
+    - verification_status
+    - permitted_interpretation
+  verification_status_enum:
+    - MAPPED_CANDIDATE
+    - REMOTELY_SUPPORTED_CANDIDATE
+    - FIELD_VERIFIED_LIVESTOCK_WATER
+    - FIELD_VERIFIED_PHYSICAL_SOURCE  # legacy alias; prefer FIELD_VERIFIED_LIVESTOCK_WATER
+    - VERIFIED_LIVESTOCK_WATER_SYSTEM  # legacy parcel-system aggregate alias
+    - REJECTED_AS_SOURCE
+    - UNKNOWN
+  default_remote_status: MAPPED_CANDIDATE
+  promotion_contract: docs/F03_VERIFIED_WATER_EVIDENCE_CONTRACT.yaml@0.1.1
+  promotion_note: >-
+    Remote/open data must not skip REMOTELY_SUPPORTED_CANDIDATE. Field/operational
+    evidence is required for FIELD_VERIFIED_LIVESTOCK_WATER.
+
+working_grid:
+  grid_reference: F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0
+  horizontal_crs: LOCAL_UTM_ZONE_FROM_PARCEL_CENTROID
+  target_cell_size_m: 10
+  parcel_inclusion_rule: CELL_CENTER_INSIDE_PARCEL
+  reason: Reuse the F01 parcel grid so cross-Factor spatial facts share geometry, projection, alignment, and cell-center semantics.
+
+euclidean_distance:
+  eligible_candidate_statuses:
+    context_surface: [MAPPED_CANDIDATE, FIELD_VERIFIED_PHYSICAL_SOURCE, VERIFIED_LIVESTOCK_WATER_SYSTEM]
+    verified_water_surface: [VERIFIED_LIVESTOCK_WATER_SYSTEM]
+  method: PLANAR_DISTANCE_IN_LOCAL_UTM_FROM_EACH_PARCEL_CELL_CENTER_TO_NEAREST_CANDIDATE_GEOMETRY
+  unit: meter
+  outputs:
+    - valid_cell_count
+    - minimum
+    - maximum
+    - mean
+    - median
+    - p10
+    - p25
+    - p75
+    - p90
+  percentile_method: LINEAR_INTERPOLATION_TYPE_7
+  class_bins: []
+  search_buffer_policy: >-
+    No universal search radius is frozen. The query extent must be declared and
+    recorded. Parcel-intersecting candidates are sufficient for the first CPER
+    test; off-parcel sources require legal-access review before interpretation.
+
+quality_states:
+  CANDIDATE_INVENTORY_COMPLETE: Declared source layers returned successfully and all intersecting features were normalized with provenance.
+  CANDIDATE_INVENTORY_INCOMPLETE: One or more declared layers, geometry records, identifiers, or provenance fields are missing.
+  NO_MAPPED_CANDIDATES: Queries succeeded and returned no candidate features in the declared extent.
+  CONFLICTING_SOURCES: Candidate identities or geometries conflict materially across sources.
+  MISSING: Required source queries failed or no valid inventory can be formed.
+
+prohibited_interpretations:
+  - mapped_candidate_is_verified_livestock_water
+  - distance_to_candidate_is_distance_to_usable_water
+  - euclidean_distance_is_traversable_distance
+  - parcel_intersection_proves_flow_or_permanence
+  - physical_water_proves_legal_access
+  - no_mapped_candidate_proves_no_water_source
+
+required_provenance:
+  - source_service_and_version
+  - source_layer_ids
+  - query_geometry_hash
+  - query_timestamp
+  - raw_response_hashes
+  - working_crs
+  - grid_origin_and_resolution
+  - derivation_code_hash
+  - result_hash
+

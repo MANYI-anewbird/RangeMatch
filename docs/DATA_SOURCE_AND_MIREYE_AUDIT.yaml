@@ -1,0 +1,141 @@
+audit_id: RANGEMATCH_DATA_SOURCE_AND_MIREYE_AUDIT
+version: 0.2.0-draft
+language: English
+status: ACTIVE_AUDIT
+mireye_catalog_version: v0.14.0
+catalog_endpoint: https://api.mireye.com/v1/meta/fields
+audit_date: 2026-08-07
+f01_parcel_derivation_spec: F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0
+f02_data_audit: F02_DATA_SOURCE_AUDIT.yaml@0.1.0
+catalog_status_update: >-
+  Live access was verified on 2026-08-07. GET /v1/meta/fields returned HTTP 200,
+  catalog version 0.14.0, and 304 field definitions. POST /v1/fetch returned
+  HTTP 200 for the CPER engineering test point. The catalog endpoint is public;
+  the deterministic fetch endpoint was called with a Bearer token. No credential
+  is stored in this audit or its fixtures.
+
+live_api_contract:
+  api_base_url: https://api.mireye.com
+  openapi_endpoint: /v1/openapi.json
+  docs_endpoint: /v1/docs
+  health_endpoint: /healthz
+  ready_endpoint: /readyz
+  deterministic_fetch_endpoint: /v1/fetch
+  catalog_endpoint: /v1/meta/fields
+  verified_api_version: 0.14.0
+  verified_at_utc: 2026-08-07T20:55:50Z
+  request_semantics: POINT_LOOKUP_BY_LAT_LNG
+  parcel_aggregation_supported_by_test: false
+  test_coordinate: {lat: 40.825, lng: -104.7625}
+  test_geometry_reference: test-data/engineering_test_geometry_cper_001.geojson
+  fixtures:
+    catalog: mireye/fixtures/field_catalog_v0.14.0.json
+    openapi: mireye/fixtures/openapi_v0.14.0.json
+    point_response: mireye/fixtures/cper_001_point_response_2026-08-07.json
+  security_note: API keys are read only from local .env and are excluded from fixtures.
+
+f01_parcel_live_gate:
+  geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_001
+  status: PARCEL_COMPLETE
+  source_service: USGS_3DEP_ImageServer
+  source_product: USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM
+  source_lock_method: esriMosaicLockRaster
+  source_object_id: 4878
+  source_tile_id: USGS_13_n41w105
+  source_acquisition_date: 2021-09-22
+  source_publication_date: 2026-07-08
+  vertical_datum: NAVD88
+  working_crs: EPSG:32613
+  coverage_fraction: 1.0
+  result_fixture: test-data/live-results/cper/f01_derivation_result_2026-08-07.json
+  warning: >-
+    A requested 10-meter output grid does not prove that a dynamic mosaic used
+    the 1/3 arc-second source. The source catalog item must be queried and locked
+    explicitly before export.
+
+fields:
+  - variable_id: VAR_F01_SLOPE_POINT
+    scientifically_required: true
+    mireye_field: slope_degrees
+    availability: VERIFIED
+    directness: MIREYE_POINT_FIELD_SOURCE_DERIVED_FROM_TERRAIN_DATA
+    parcel_derivation_required: true
+    external_source_candidate: USGS_3DEP
+    live_test_value: {value: 0.9686843752861023, unit: degrees, confidence: medium}
+    live_test_source: USGS_3DEP_COG
+    live_test_dataset_vintage: null
+    limitation: A point value cannot represent parcel slope distribution; the live response supplied no dataset vintage for this derived field.
+
+  - variable_id: VAR_F01_SLOPE_DISTRIBUTION
+    scientifically_required: true
+    mireye_field: null
+    availability: NOT_VERIFIED_AS_DIRECT_FIELD
+    directness: PARCEL_DERIVATION_REQUIRED
+    external_source_candidate: USGS_3DEP
+    limitation: Requires parcel geometry, USGS 3DEP coverage, declared projection/resolution, and deterministic aggregation under the versioned F01 derivation spec.
+
+  - variable_id: VAR_F01_TERRAIN_RUGGEDNESS
+    scientifically_required: true
+    mireye_field: null
+    availability: NOT_VERIFIED
+    directness: DERIVATION_REQUIRED
+    external_source_candidate: USGS_3DEP
+    limitation: Algorithm, neighborhood, resolution, and aggregation remain method-review items and are not frozen in derivation spec v0.1.0.
+
+  - variable_id: VAR_F01_TOPOGRAPHIC_POSITION
+    scientifically_required: true
+    mireye_field: null
+    availability: NOT_VERIFIED
+    directness: DERIVATION_REQUIRED
+    external_source_candidate: USGS_3DEP
+    limitation: Classification method and neighborhood scale remain method-review items and are not frozen in derivation spec v0.1.0.
+
+  - variable_id: VAR_F01_ELEVATION
+    scientifically_required: true
+    mireye_field: elevation
+    availability: VERIFIED
+    directness: MIREYE_POINT_FIELD_SOURCE_DERIVED_FROM_TERRAIN_DATA
+    parcel_derivation_required: true
+    external_source_candidate: USGS_3DEP
+    live_test_value: {value: 1646.923095703125, unit: meters, confidence: medium}
+    live_test_source: USGS_3DEP_COG
+    live_test_dataset_vintage: 3DEP 1/3 arc-second seamless DEM
+    limitation: The live response did not declare vertical datum; parcel aggregation remains required.
+
+  - variable_id: VAR_F01_ASPECT
+    scientifically_required: true
+    mireye_fields: [aspect_degrees, aspect_cardinal]
+    availability: VERIFIED
+    directness: MIREYE_POINT_FIELDS_SOURCE_DERIVED_FROM_TERRAIN_DATA
+    parcel_derivation_required: true
+    external_source_candidate: USGS_3DEP
+    live_test_value: {degrees: 301.71868896484375, cardinal: NW, confidence: medium}
+    live_test_source: USGS_3DEP_COG
+    live_test_dataset_vintage: null
+    limitation: Circular statistics and flat or undefined pixels require explicit handling; point aspect cannot represent a parcel.
+
+mireye_f02_catalog_findings:
+  exact_numeric_herbaceous_cover_field_verified: false
+  exact_numeric_herbaceous_production_field_verified: false
+  exact_rap_field_verified: false
+  contextual_point_fields:
+    - field: lcms_class
+      live_value: Grass/Forb/Herb & Shrubs Mix
+      source: USFS_LCMS
+      dataset_vintage: USFS LCMS Land_Cover CONUS v2025-11 (2025 annual), ~120 m block-mode CONUS COG
+      permitted_use: POINT_LEVEL_LAND_COVER_CONTEXT_AND_QA_ONLY
+    - field: cdl_class
+      live_value: Grass/Pasture
+      source: USDA_NASS_CDL
+      dataset_vintage: USDA CDL 2025 (~120 m block-mode CONUS COG)
+      permitted_use: POINT_LEVEL_LAND_COVER_CONTEXT_AND_QA_ONLY
+  prohibited_inference: >-
+    LCMS or CDL categorical point classes must not be converted into herbaceous
+    cover, herbaceous production, available forage, palatability, nutritive value,
+    carrying capacity, or a parcel-wide F02 signal.
+
+explicit_non_equivalences:
+  - NHD_FEATURE_IS_NOT_VERIFIED_LIVESTOCK_WATER_SOURCE
+  - SHRUB_COVER_IS_NOT_PALATABLE_BROWSE_AVAILABILITY
+  - USGS_3DEP_IS_NOT_ROCK_OUTCROP_COVER
+  - PARCEL_TO_WATER_MINIMUM_DISTANCE_IS_NOT_LIVESTOCK_WATER_ACCESSIBILITY

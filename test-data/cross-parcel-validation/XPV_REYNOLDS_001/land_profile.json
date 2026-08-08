@@ -1,0 +1,766 @@
+{
+  "land_profile_id": "LAND_PROFILE_XPV_REYNOLDS_001",
+  "version": "0.2.0",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_REYNOLDS_001",
+  "geometry_reference": "test-data/engineering_test_geometry_reynolds_001.geojson",
+  "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+  "supported_use": "ENGINEERING_VALIDATION_ONLY",
+  "cross_parcel_validation": {
+    "parcel_id": "XPV_REYNOLDS_001",
+    "assigned_slots": [
+      "SLOT_RUGGED_SHEEP_RELEVANT"
+    ],
+    "selection_frozen_on": "2026-08-08",
+    "reference_operation": null,
+    "runtime_rule_changed": false
+  },
+  "factors": {
+    "F01_TOPOGRAPHY": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/f01_derivation_result.json",
+      "summary": {
+        "elevation_median_m": 1846.0726928710938,
+        "slope_median_degrees": 11.126496777681837,
+        "slope_p90_degrees": 24.100269745062732,
+        "mean_eastness": -0.10193635795931082,
+        "mean_northness": 0.3035107942107814
+      }
+    },
+    "F02_HERBACEOUS_RESOURCE": {
+      "derivation_spec": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+      "limitations": [
+        "RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.",
+        "Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity."
+      ],
+      "unknowns": [
+        "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+        "Botanical composition is not verified.",
+        "Operation-specific palatability is not verified.",
+        "Nutritive value is not verified."
+      ],
+      "land_facts": [
+        {
+          "variable_id": "VAR_F02_PERENNIAL_HERB_COVER",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 34.87387018507445,
+            "unit": "percent_cover",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "MOUNTAIN_RANGELAND_WATERSHED_CONTEXT",
+              "RAP_RANGELAND_PRODUCT_SCOPE"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1354196.8392011055,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_coverV3",
+            "fetched_at": "2026-08-08T05:06:57Z",
+            "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+            "response_or_artifact_hash": "56159d9b26c2ee20521923d68959f0feec3c01aa23f8a9c5bd4fc1ccf0631c1c",
+            "endpoint": "coverV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "PFG combines perennial grasses and forbs.",
+            "Modeled cover is not standing biomass, available forage, palatability, or nutritive value."
+          ]
+        },
+        {
+          "variable_id": "VAR_F02_ANNUAL_HERB_PRODUCTION",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 871.8114704022014,
+            "unit": "pound_per_acre",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_accumulated_new_growth_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "MOUNTAIN_RANGELAND_WATERSHED_CONTEXT",
+              "RAP_RANGELAND_PRODUCT_SCOPE"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1354196.8392011055,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_productionV3",
+            "fetched_at": "2026-08-08T05:06:57Z",
+            "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+            "response_or_artifact_hash": "806fabf58b3a5f858a4dfc594236c7a439bb48e7e39f67a4064c8a91a02d13a0",
+            "endpoint": "productionV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "Production is modeled new growth, not standing biomass.",
+            "Production is not available forage, carrying capacity, or stocking rate."
+          ]
+        }
+      ]
+    },
+    "F03_LIVESTOCK_WATER": {
+      "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "derivation_spec": "F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/f03_candidate_distance_result.json",
+      "mapped_candidate_count": 8,
+      "verified_livestock_water_system_count": 0,
+      "euclidean_distance_to_mapped_candidate_m": {
+        "minimum": 0.027240722231765324,
+        "median": 529.2675727602991,
+        "p90": 890.3490617942917,
+        "maximum": 1010.7510375443402
+      },
+      "euclidean_distance_to_verified_livestock_water_m": null,
+      "limitations": [
+        "Mapped NHD hydrography features are candidate context, not verified livestock-water sources.",
+        "Euclidean distance is not traversable animal-access distance.",
+        "Reliability, capacity, quality, legal access, infrastructure, and seasonal operation are unknown."
+      ]
+    },
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/f04_derivation_result.json",
+      "source_fixture_references": [
+        "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_spatial_coverage.json",
+        "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_mapunit_component_ecosite.json",
+        "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_horizons.json",
+        "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_restrictions.json",
+        "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_monthly_wetness.json",
+        "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/ecological_site_access.json",
+        "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/mireye_f04_centroid.json"
+      ],
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_WITH_NUMERIC_TOLERANCE",
+        "requested_area_m2": 1355538.0042752558,
+        "covered_area_m2": 1355538.0042754635,
+        "uncovered_area_m2": 0.0,
+        "coverage_fraction": 1.0,
+        "coverage_calculated_from_polygon_intersection": true,
+        "successful_query_implies_complete_coverage": false,
+        "intersecting_mapunit_count": 4
+      },
+      "mapunit_area_distribution": {
+        "3270929": 0.006411750037465968,
+        "485933": 0.3108566137574406,
+        "486009": 0.15446984663753915,
+        "486192": 0.53467353960517
+      },
+      "component_support_weights": [
+        {
+          "mukey": "486192",
+          "cokey": "26405621",
+          "compname": "Cleavage",
+          "comppct_r": 50.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.53467353960517,
+          "component_support_weight": 0.267336769802585,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R025XY010ID",
+          "ecoclassname": "CLAYPAN 12-16",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "486192",
+          "cokey": "26405622",
+          "compname": "Snell",
+          "comppct_r": 30.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.53467353960517,
+          "component_support_weight": 0.16040206188155098,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R025XY011ID",
+          "ecoclassname": "LOAMY 13-16",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "485933",
+          "cokey": "26405318",
+          "compname": "Parkay",
+          "comppct_r": 45.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.3108566137574406,
+          "component_support_weight": 0.1398854761908483,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R025XY022ID",
+          "ecoclassname": "LOAMY 16-22",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "485933",
+          "cokey": "26405319",
+          "compname": "Dehana",
+          "comppct_r": 35.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.3108566137574406,
+          "component_support_weight": 0.10879981481510421,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R025XY001ID",
+          "ecoclassname": "ASPEN THICKET",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "486009",
+          "cokey": "26405409",
+          "compname": "Snell",
+          "comppct_r": 55.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.15446984663753915,
+          "component_support_weight": 0.08495841565064655,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R025XY011ID",
+          "ecoclassname": "LOAMY 13-16",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "486009",
+          "cokey": "26405410",
+          "compname": "Sharesnout",
+          "comppct_r": 20.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.15446984663753915,
+          "component_support_weight": 0.030893969327507834,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R025XY010ID",
+          "ecoclassname": "CLAYPAN 12-16",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "485933",
+          "cokey": "26405317",
+          "compname": "Blackwell",
+          "comppct_r": 2.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.3108566137574406,
+          "component_support_weight": 0.006217132275148813,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "D",
+          "ecoclassid": "R025XY039ID",
+          "ecoclassname": "DRY MEADOW",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "486009",
+          "cokey": "26405408",
+          "compname": "Welch",
+          "comppct_r": 3.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.15446984663753915,
+          "component_support_weight": 0.004634095399126174,
+          "drainagecl": "Poorly drained",
+          "hydgrp": "D",
+          "ecoclassid": "R025XY039ID",
+          "ecoclassname": "DRY MEADOW",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "3270929",
+          "cokey": "26405806",
+          "compname": "Parkay",
+          "comppct_r": 35.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.006411750037465968,
+          "component_support_weight": 0.0022441125131130884,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R025XY022ID",
+          "ecoclassname": "LOAMY 16-22",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "3270929",
+          "cokey": "26405807",
+          "compname": "Dehana",
+          "comppct_r": 25.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.006411750037465968,
+          "component_support_weight": 0.001602937509366492,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R025XY001ID",
+          "ecoclassname": "ASPEN THICKET",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "3270929",
+          "cokey": "26405808",
+          "compname": "Booneville",
+          "comppct_r": 15.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.006411750037465968,
+          "component_support_weight": 0.0009617625056198951,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R025XY045ID",
+          "ecoclassname": "DOUGLAS FIR SNOWBERRY 22+",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        }
+      ],
+      "known_component_share": 0.8079365478706173,
+      "unaccounted_component_share": 0.19847520216699838,
+      "component_percentages_renormalized": false,
+      "drainage_class_distribution": {
+        "Poorly drained": 0.010851227674274988,
+        "Well drained": 0.7970853201963424
+      },
+      "hydrologic_soil_group_distribution": {
+        "C": 0.49885458106624947,
+        "D": 0.3090819668043678
+      },
+      "ponding_frequency_distribution": {
+        "None": 0.8079365478706161
+      },
+      "flooding_frequency_distribution": {
+        "Frequent": 0.003098981535162595,
+        "None": 0.8048375663354536
+      },
+      "restrictive_layer_records": [
+        {
+          "cokey": "26405621",
+          "component_support_weight": 0.267336769802585,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 41.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405622",
+          "component_support_weight": 0.16040206188155098,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 99.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405318",
+          "component_support_weight": 0.1398854761908483,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 122.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405319",
+          "component_support_weight": 0.10879981481510421,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405409",
+          "component_support_weight": 0.08495841565064655,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 99.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405410",
+          "component_support_weight": 0.030893969327507834,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 56.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405317",
+          "component_support_weight": 0.006217132275148813,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405408",
+          "component_support_weight": 0.004634095399126174,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405806",
+          "component_support_weight": 0.0022441125131130884,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Lithic bedrock",
+          "resdept_r_cm": 122.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405807",
+          "component_support_weight": 0.001602937509366492,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26405808",
+          "component_support_weight": 0.0009617625056198951,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        }
+      ],
+      "restrictive_layer_distribution": {
+        "Lithic bedrock|122.0": 0.1421295887039614,
+        "Lithic bedrock|41.0": 0.267336769802585,
+        "Lithic bedrock|56.0": 0.030893969327507834,
+        "Lithic bedrock|99.0": 0.24536047753219753,
+        "UNKNOWN": 0.12221574250436558
+      },
+      "ecological_site_references": [
+        {
+          "ecological_site_id": "R025XY010ID",
+          "ecological_site_name": "CLAYPAN 12-16",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.2982307391300928,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY010ID",
+          "retrieval_timestamp": "2026-08-08T05:07:31Z",
+          "response_hash": "7405928600369086bdbf9a6d698587d7fd7c61043924dab646b193adc8a6c2b4",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R025XY011ID",
+          "ecological_site_name": "LOAMY 13-16",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.24536047753219753,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY011ID",
+          "retrieval_timestamp": "2026-08-08T05:07:31Z",
+          "response_hash": "8aed10b5737aaf7d4d5a5e42398a1aa1f856ae72dfafbe7ae3589cb66ade8fa7",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R025XY022ID",
+          "ecological_site_name": "LOAMY 16-22",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.1421295887039614,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY022ID",
+          "retrieval_timestamp": "2026-08-08T05:07:31Z",
+          "response_hash": "c86345317b9c9caf756006b1b415f4f10565f62b237c808adbecea2afb6a2053",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R025XY001ID",
+          "ecological_site_name": "ASPEN THICKET",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.11040275232447071,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY001ID",
+          "retrieval_timestamp": "2026-08-08T05:07:31Z",
+          "response_hash": "0b68fa579c6f9dec67ba131547d9709c46559b30284271683758ee501f675e78",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R025XY039ID",
+          "ecological_site_name": "DRY MEADOW",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.010851227674274988,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY039ID",
+          "retrieval_timestamp": "2026-08-08T05:07:31Z",
+          "response_hash": "d01535f809fbaf165b6643fc5617ef1f9790bf1abf3b8a5fd6ed0403ef42eb96",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R025XY045ID",
+          "ecological_site_name": "DOUGLAS FIR SNOWBERRY 22+",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.0009617625056198951,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY045ID",
+          "retrieval_timestamp": "2026-08-08T05:07:31Z",
+          "response_hash": "7c7344929e426e2745f29bf8d4fc4bdcc68507f84ca3bfab0c0d95276492f966",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        }
+      ],
+      "ecological_site_unknown_share": 0.0,
+      "available_water_storage": {
+        "status": "METHOD_INPUT_REQUIRED",
+        "derived_storage_mm": null,
+        "note": "Reusable AWC derivation exists; no approved depth interval is applied in this Land Profile."
+      },
+      "mireye_point_qa": {
+        "role": "POINT_DISPLAY_AND_QA_ONLY",
+        "may_represent_whole_parcel": false,
+        "fetched_at": null,
+        "fields": {},
+        "partial_failures": []
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "F04_SOIL_SITE_ATOMICITY_AND_SOURCE_AUDIT",
+          "CPER_LIVE_DATA_GATE"
+        ],
+        "notes": "F04 v0.1 is data-quality and context only; no directional suitability signal is approved."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "requested_area_m2": 1355538.0042752558,
+        "valid_area_m2": 1355538.0042754635,
+        "valid_coverage_fraction": 1.0,
+        "adapter_status": "SDA_POLYGON_AND_TABULAR_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": false,
+        "component_count": 11,
+        "horizon_record_count": 37,
+        "restriction_record_count": 11,
+        "monthly_wetness_record_count": 132,
+        "components_with_ecological_site_linkage": 11,
+        "derivation_contract_verified": true,
+        "numeric_average_of_controlled_categories": false
+      },
+      "provenance": {
+        "source_reference": "USDA_NRCS_SDA_SSURGO_AND_EDIT",
+        "fetched_at": "2026-08-08T05:07:31Z",
+        "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+        "response_or_artifact_hash": "fec25493a8f31ec71d2fd3243bb13a1497cf3a32e7c9cf1230eb7a136d651d64",
+        "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+        "primary_path": "OFFICIAL_SDA_PARCEL_POLYGONS_COMPONENTS_HORIZONS",
+        "mireye_role": "POINT_DISPLAY_AND_QA_ONLY"
+      },
+      "limitations": [
+        "No composite soil score is created.",
+        "Controlled categories are preserved as distributions, not ordinal averages.",
+        "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+        "Ecological-site names do not imply current vegetation or operation ranking.",
+        "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+        "Available-water storage is omitted from profile evidence until a depth interval is approved."
+      ],
+      "unknowns": [
+        "Within-map-unit component locations are unknown.",
+        "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+        "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+        "Ecological-site references do not establish current vegetation state.",
+        "No approved depth interval exists for parcel available-water storage in the Land Profile."
+      ],
+      "ranking_effect": "NONE"
+    },
+    "F05_CLIMATE_DROUGHT_EXPOSURE": {
+      "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+      "input_quality_state": "CLIMATE_CONTEXT_COMPLETE",
+      "derivation_spec": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+      "canonical_precipitation": {
+        "variable_id": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+        "value_mm": 462.55,
+        "value_inches": 18.211,
+        "unit": "millimeter",
+        "unit_normalized": "mm/year",
+        "normals_period": "1991-2020",
+        "spatial_resolution": {
+          "nominal": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+          "delta_lat_deg": 0.041667938232421875,
+          "delta_lon_deg": 0.04166412353515625
+        },
+        "aggregation": {
+          "method": "bbox_intersecting_cell_centers_mean",
+          "cell_count": 2,
+          "cell_values_mm": [
+            455.58,
+            469.52
+          ],
+          "cells": [
+            {
+              "lat": 43.10419845581055,
+              "lon": -116.77083587646484,
+              "annprcp_norm_mm": 455.5770263671875
+            },
+            {
+              "lat": 43.10419845581055,
+              "lon": -116.72916412353516,
+              "annprcp_norm_mm": 469.52056884765625
+            }
+          ],
+          "note": "Mean of NOAA NCEI gridded annual precipitation normals for grid cells intersecting the engineering rectangle."
+        },
+        "source": {
+          "organization": "NOAA National Centers for Environmental Information (NCEI)",
+          "product": "1991-2020 Gridded Monthly/Annual Precipitation Normals (derived from nClimGrid)",
+          "variable": "annprcp_norm",
+          "file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+          "source_url": "https://www.ncei.noaa.gov/data/oceans/archive/arc0196/0245564/1.1/data/0-data/prcp-1991_2020-monthly-normals-v1.0.nc",
+          "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "units_in_file": "millimeter",
+          "alternate_not_used": "ACIS retained as secondary QA only; never canonical Land Fact."
+        },
+        "role": "CANONICAL_LAND_FACT",
+        "suitability_signal": null
+      },
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_CELLS_INTERSECT_PARCEL_BBOX",
+        "spatial_support": "PARCEL_BBOX_INTERSECTING_GRID_CELLS",
+        "parcel_bbox": [
+          -116.76,
+          43.095,
+          -116.745,
+          43.105
+        ],
+        "intersecting_cell_count": 2,
+        "coverage_calculated_from_polygon_intersection": false,
+        "successful_query_implies_complete_coverage": false
+      },
+      "mireye_point_qa": {},
+      "secondary_comparisons": [],
+      "source_conflicts": [],
+      "validation": {
+        "complete": true,
+        "issues": [
+          "non_canonical_precip_access_path"
+        ],
+        "coverage_confirmed": true,
+        "unit_ok": true,
+        "period_ok": true,
+        "value_ok": true,
+        "provenance_ok": true,
+        "provenance_fields": {
+          "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "fetched_at": "2026-08-08T05:07:31Z",
+          "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+          "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2"
+        }
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED_FOR_DATA_CAPABILITY",
+        "basis": [
+          "F05_CLIMATE_DROUGHT_ATOMICITY_AND_SOURCE_AUDIT",
+          "F05_CLIMATE_DROUGHT_EVIDENCE_REGISTRY",
+          "CROSS_PARCEL_VALIDATION_NOAA_CANONICAL_PATH"
+        ],
+        "notes": "F05 v0.1 is data-quality and context only; annprcp_norm is retained as a Land Fact and is not converted into suitability."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_CELLS_INTERSECT_PARCEL_BBOX",
+        "adapter_status": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": true,
+        "canonical_precip_complete": true,
+        "directional_signal_approved": false,
+        "numeric_thresholds_approved": false
+      },
+      "provenance": {
+        "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+        "fetched_at": "2026-08-08T05:07:31Z",
+        "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+        "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+        "derivation_spec_version": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+        "primary_path": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF",
+        "canonical_variable": "annprcp_norm",
+        "acis_role": "SECONDARY_QA_OR_FALLBACK",
+        "mireye_role": "POINT_QA_AND_FAST_CONTEXT"
+      },
+      "limitations": [
+        "Mean annual precipitation is a Land Fact, not a suitability score.",
+        "Current USDM class is current-condition context only, not drought history.",
+        "Mireye point climate fields must not replace canonical NOAA parcel precipitation.",
+        "ACIS precipitation series is secondary QA/fallback and is not the canonical runtime source.",
+        "No precipitation, temperature, heat-day, or USDM suitability threshold is approved.",
+        "F05 must not alter F02 forage, F03 livestock-water, or F04 wetness signals.",
+        "Flood/FEMA hazard is out of scope for F05."
+      ],
+      "unknowns": [
+        "Drought-history summary method is not frozen.",
+        "Precipitation seasonality and interannual variability methods are not frozen.",
+        "No biological heat-stress threshold is approved for Cow-Calf or Sheep."
+      ],
+      "ranking_effect": "NONE",
+      "result_reference": "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/f05_derivation_result.json"
+    }
+  }
+}

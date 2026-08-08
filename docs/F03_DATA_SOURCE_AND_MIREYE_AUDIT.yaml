@@ -1,0 +1,132 @@
+audit_id: RANGEMATCH_F03_WATER_DATA_AUDIT
+version: 0.1.0
+language: English
+status: PRELIMINARY_LIVE_AUDIT_COMPLETE
+audit_date: 2026-08-07
+
+mireye:
+  catalog_version: 0.14.0
+  endpoint: /v1/fetch
+  test_coordinate: {lat: 40.825, lng: -104.7625}
+  http_status: 200
+  partial_failures: []
+  fixture: test-data/live-results/cper/cper_mireye_f03_point_2026-08-07.json
+  role: POINT_LEVEL_CONTEXT_AND_DATA_DISCOVERY_ONLY
+
+verified_point_fields:
+  - field_id: intersects_nhd_area
+    live_value: false
+    source: USGS_NHDPLUS_HR
+    permitted_use: Point intersection with an NHDArea hydrographic polygon.
+    prohibited_use: Proof that the parcel has no water or has no livestock source.
+
+  - field_id: nearest_flowline_name
+    live_value: Little Owl Creek
+    source: USGS_NHDPLUS_HR
+    permitted_use: Named nearby hydrography context.
+    prohibited_use: Proof of parcel intersection, flow, access, reliability, quality, or livestock use.
+
+  - field_id: nearest_waterbody_name
+    live_value: null
+    response_status: absent
+    source: USGS_NHDPLUS_HR
+    permitted_use: None for this response without feature identity and geometry.
+    prohibited_use: Interpreting a missing name as no nearby waterbody.
+
+  - field_id: surface_water_permanence_pct
+    live_value: 0.0
+    unit: percent
+    source: JRC_GSW
+    permitted_use: Surface-water occurrence context for the queried 30-meter cell.
+    prohibited_use: Parcel-wide water inventory or proof of no livestock water.
+
+  - field_id: nearest_groundwater_well_depth_to_water_m
+    live_value: 13.41
+    unit: meter_below_land_surface
+    source: USGS_NWIS_OGC
+    source_distance_m: 1497
+    reading_date: 1956-04-01
+    permitted_use: Sparse historical regional groundwater context.
+    prohibited_use: Parcel well depth, current water table, well yield, drilling feasibility, ownership, or livestock supply.
+
+  - field_id: nearest_usgs_gage_daily_discharge_cfs
+    live_value: null
+    response_status: absent
+    source: USGS_NWIS_OGC
+    permitted_use: None when no recent reporting gage is found.
+    prohibited_use: Proof that nearby streams are dry or unavailable.
+
+direct_f03_requirements_not_verified_from_mireye:
+  - parcel_candidate_water_source_inventory
+  - livestock_source_operational_status
+  - seasonal_and_drought_reliability
+  - deliverable_flow_and_storage_capacity
+  - water_quality
+  - ownership_and_legal_access
+  - parcel_wide_distance_surface
+  - traversable_livestock_distance
+
+external_source_candidates:
+  mapped_hydrography: USGS_NHDPLUS_HR
+  surface_water_history: JRC_GLOBAL_SURFACE_WATER
+  groundwater_context: USGS_NWIS_AND_STATE_WELL_RECORDS
+  infrastructure_and_status: OWNER_RECORDS_FIELD_INSPECTION_AND_PERMIT_RECORDS
+  water_quality: CERTIFIED_OR_REVIEWED_LAB_TEST
+  legal_access: TITLE_EASEMENT_PERMIT_AND_WATER_RIGHT_DILIGENCE
+
+gate_decision:
+  mireye_can_complete_f03_alone: false
+  mireye_can_support_remote_screening: true
+  point_sample_may_represent_parcel: false
+  mapped_feature_may_be_promoted_to_verified_livestock_source: false
+  current_factor_signal: NEEDS_VERIFICATION
+
+external_api_live_audit:
+  usgs_nhdplus_hr:
+    service_version: 11.3
+    parcel_query_geometry: ENGINEERING_TEST_GEOMETRY_CPER_001
+    network_flowline_feature_count: 7
+    nonnetwork_flowline_feature_count: 1
+    nhdarea_feature_count: 0
+    waterbody_feature_count: 1
+    named_flowline_observed: Little Owl Creek
+    unnamed_waterbody_observed: true
+    contract_status: RUNTIME_VERIFIED
+    interpretation: >-
+      Mireye's false point intersection with NHDArea is consistent with the
+      parcel query returning no NHDArea, while parcel-scale flowlines and an
+      unnamed waterbody are still present. A null nearest_waterbody_name is not
+      evidence that no waterbody exists.
+
+  usgs_nwis_ogc:
+    search_bbox: [-104.79, 40.80, -104.735, 40.85]
+    monitoring_location_count: 3
+    stream_site_count: 1
+    groundwater_site_count: 2
+    groundwater_parameter_code: "72019"
+    observations:
+      - monitoring_location_id: USGS-404848104461501
+        value: 44.00
+        unit: ft_below_land_surface
+        metric_conversion_m: 13.4112
+        observation_date: 1956-04-01
+      - monitoring_location_id: USGS-405029104450301
+        value: 36.40
+        unit: ft_below_land_surface
+        metric_conversion_m: 11.09472
+        observation_date: 1962-07-23
+    mireye_cross_check: >-
+      Mireye returned 13.41 m for the nearest record, consistent with 44 ft
+      after unit conversion. The record age and off-parcel location prevent use
+      as current parcel groundwater or well-supply evidence.
+    contract_status: RUNTIME_VERIFIED
+
+api_gate_summary:
+  candidate_hydrography_retrieval: VERIFIED
+  groundwater_observation_discovery: VERIFIED
+  current_livestock_source_verification: NOT_SUPPORTED_BY_THESE_APIS
+  parcel_source_reliability: NOT_SUPPORTED_BY_THESE_APIS
+  deliverable_capacity: NOT_SUPPORTED_BY_THESE_APIS
+  legal_access: NOT_SUPPORTED_BY_THESE_APIS
+  water_quality: NOT_SUPPORTED_BY_THESE_APIS
+

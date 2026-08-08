@@ -1,0 +1,154 @@
+spec_id: RANGEMATCH_F03_FIELD_EVIDENCE_INGESTION_SPEC
+version: 0.1.0
+language: English
+status: APPROVED_FOR_SYNTHETIC_WORKFLOW_GATE
+date: "2026-08-08"
+contract: docs/F03_VERIFIED_WATER_EVIDENCE_CONTRACT.yaml@0.1.1
+implementation:
+  module: src/rangematch/f03_field_evidence.py
+  fixtures: test-data/f03_field_evidence_fixtures/
+  demo: scripts/run_f03_field_evidence_demo.py
+  tests: tests/test_f03_field_evidence_ingestion.py
+
+purpose: >-
+  Define normalized ingestion, validation, conflict, freshness, and geometry
+  re-link behavior for FIELD_OBSERVATION, OPERATOR_OWNER_OPERATIONAL_RECORD,
+  REVIEWED_EQUIVALENT, and MIXED evidence. Demonstrate FIELD_VERIFIED state
+  transitions with synthetic fixtures only. Never manufacture FIELD_VERIFIED
+  evidence for live XPV parcels.
+
+non_goals:
+  - F06 / F07
+  - suitability thresholds
+  - Cow-Calf / Sheep ranking
+  - writing synthetic evidence into real parcel Land Facts or MatchResults
+  - changing five-parcel remote collection results
+
+evidence_classes:
+  - FIELD_OBSERVATION
+  - OPERATOR_OWNER_OPERATIONAL_RECORD
+  - REVIEWED_EQUIVALENT
+  - MIXED
+
+ingestion_schema:
+  required_package_fields:
+    - package_id
+    - evidence_class
+    - candidate_id
+    - prior_level
+    - parcel_context.parcel_id
+    - parcel_context.parcel_geometry_hash
+    - candidate_linkage.geometry_or_point_hash
+    - candidate_linkage.source_reference
+    - evidence_hashes.response_or_artifact_hash_or_record_hash
+    - observed_or_fetched_at
+    - reviewer_or_adapter_id
+    - dimensions
+  required_dimensions:
+    - feature_identity
+    - physical_presence
+    - seasonal_reliability
+    - livestock_accessibility
+    - capacity_and_quality.capacity
+    - capacity_and_quality.water_quality
+    - legal_access
+  normalized_outputs:
+    - candidate/source linkage
+    - physical presence
+    - seasonal reliability
+    - livestock accessibility
+    - capacity
+    - water quality
+    - legal access
+    - evidence provenance
+    - freshness
+    - limitations
+    - source conflicts
+  synthetic_markers_required_on_fixtures:
+    fixture_type: SYNTHETIC_ENGINEERING_TEST
+    evidence_use_limit: TEST_ONLY
+
+hash_rules:
+  response_or_artifact_hash_or_record_hash:
+    min_length: 32
+    invalid_rejects_package: true
+  geometry_or_point_hash:
+    min_length: 32
+  parcel_geometry_hash:
+    min_length: 32
+
+validation_behavior:
+  incomplete_package: reject_with_EVIDENCE_PACKAGE_INVALID
+  missing_legal_access: blocks_FIELD_VERIFIED; legal_access.status remains unresolved
+  unknown_capacity: requires_non_empty_unknown_rationale
+  unknown_water_quality: requires_diligence_required_true
+  MIXED: requires_qualified_field_basis
+  mapped_to_field_verified_direct_jump: prohibited
+  remote_only_ceiling: REMOTELY_SUPPORTED_CANDIDATE
+
+conflict_behavior:
+  material_conflict_examples:
+    - imagery_or_field_absent_vs_operator_active_use
+    - legal_access_denied_vs_physical_use_claimed
+    - perennial_claim_vs_ephemeral_evidence
+  effect:
+    verification_level: hold_or_demote_to_prior_defensible_level
+    factor_input_quality_state: CONFLICTING_SOURCES
+    ranking_effect: NONE
+
+freshness_behavior:
+  field_or_operator_preferred_max_age_days: 365
+  stale_does_not_auto_reject: true
+  stale_requires: explicit_limitation_and_or_staleness_review_note
+  stale_visible_as_limitation: true
+
+geometry_behavior:
+  parcel_geometry_hash_change: invalidate_verification_until_relink
+  linked_parcel_geometry_mismatch: GEOMETRY_MISMATCH_REQUIRES_RELINK
+  silently_reuse_stale_verification_after_geometry_change: prohibited
+
+factor_input_quality_mapping:
+  CONFLICTING_SOURCES: material_conflict
+  VERIFIED_WATER_SYSTEM_CONTEXT: >-
+    FIELD_VERIFIED with seasonal, accessibility, legal, measured/documented
+    capacity, and verified water quality
+  PHYSICAL_SOURCE_UNVERIFIED_SYSTEM: >-
+    FIELD_VERIFIED with one or more incomplete system dimensions
+    (e.g., capacity unknown with rationale, water quality unknown)
+  MAPPED_CANDIDATES_ONLY: no field-verified systems / remote-only ceiling
+  MISSING: no inventory
+
+live_synthetic_separation:
+  live_parcel_ids:
+    - XPV_CPER_001
+    - XPV_KONZA_001
+    - XPV_REYNOLDS_001
+    - XPV_ORDWAY_001
+    - XPV_KBS_MCSE_001
+  rules:
+    - reject_any_package_targeting_XPV_parcel_id
+    - never_write_land_profile_or_match_result
+    - live_remote_pilot_field_verified_count_must_remain_0
+
+synthetic_fixtures:
+  - valid_field_verified_livestock_water.json
+  - physical_source_unverified_system.json
+  - verified_water_system_context.json
+  - conflicting_sources.json
+  - missing_legal_access.json
+  - missing_capacity_rationale.json
+  - invalid_evidence_hash.json
+  - stale_evidence.json
+  - geometry_mismatch.json
+  - reviewed_equivalent_field_verified.json
+  - mixed_with_qualified_field_basis.json
+  - mapped_to_field_verified_jump_rejected.json
+
+gate_criteria:
+  - ingestion_schema_implemented
+  - validation_and_conflict_behavior_deterministic
+  - synthetic_state_transitions_demonstrated
+  - live_and_synthetic_evidence_separated
+  - runtime_rules_unchanged
+  - ranking_effect_none
+  - full_test_suite_green

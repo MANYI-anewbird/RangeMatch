@@ -1,0 +1,62 @@
+{
+  "variable_id": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "geometry_sha256": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+  "value_mm": 345.74,
+  "value_inches": 13.612,
+  "unit": "millimeter",
+  "aggregation": {
+    "method": "bbox_intersecting_cell_centers_mean",
+    "cell_count": 1,
+    "cell_values_mm": [
+      345.74
+    ],
+    "cells": [
+      {
+        "lat": 40.81253433227539,
+        "lon": -104.77083587646484,
+        "annprcp_norm_mm": 345.7378845214844
+      }
+    ],
+    "note": "Mean of NOAA NCEI gridded annual precipitation normals for grid cells intersecting the CPER engineering rectangle. Not area-weighted polygon clip (rectangle \u2248 bbox)."
+  },
+  "normals_period": "1991-2020",
+  "spatial_resolution": {
+    "nominal": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+    "delta_lat_deg": 0.041667938232421875,
+    "delta_lon_deg": 0.04166412353515625
+  },
+  "parcel_coverage": {
+    "parcel_bbox": [
+      -104.77,
+      40.82,
+      -104.755,
+      40.83
+    ],
+    "parcel_area_m2_approx": 1403433.39,
+    "intersecting_cell_count": 1,
+    "approx_cell_area_m2": 16242946.3,
+      "coverage_status": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+    "spatial_support": "PARCEL_BBOX_INTERSECTING_GRID_CELLS"
+  },
+  "source": {
+    "organization": "NOAA National Centers for Environmental Information (NCEI)",
+    "product": "1991-2020 Gridded Monthly/Annual Precipitation Normals (derived from nClimGrid)",
+    "variable": "annprcp_norm",
+    "title": "1991-2020 Normals",
+    "institution": "National Centers for Environmental Information (NCEI)",
+    "naming_authority": "gov.noaa.ncei",
+    "file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+    "source_url": "https://www.ncei.noaa.gov/data/oceans/archive/arc0196/0245564/1.1/data/0-data/prcp-1991_2020-monthly-normals-v1.0.nc",
+    "product_page": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals",
+    "nclimgrid_reference": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332",
+    "date_created_in_file": "2021-09-16 08:30:01",
+    "units_in_file": "millimeter",
+    "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+    "alternate_not_used": "PRISM retained as alternate/cross-check only; ACIS NRCC grid 1 not used as primary."
+  },
+  "fetched_at": "2026-08-08T02:23:15.739446+00:00",
+  "local_cache_path": "test-data/live-results/cper/cache/prcp-1991_2020-monthly-normals-v1.0.nc",
+  "file_sha256": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+  "file_bytes": 280673972
+}

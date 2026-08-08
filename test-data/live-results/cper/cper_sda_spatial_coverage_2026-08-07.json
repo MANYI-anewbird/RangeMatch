@@ -1,0 +1,29 @@
+{
+  "requested_area_m2": 1404078.7002779155,
+  "covered_area_m2": 1404078.7002779734,
+  "coverage_fraction": 1.0,
+  "mapunit_polygon_count": 9,
+  "intersecting_mapunit_count": 5,
+  "mapunit_intersection_areas": [
+    {
+      "mukey": "95111",
+      "intersection_area_m2": 133938.99869201495
+    },
+    {
+      "mukey": "95132",
+      "intersection_area_m2": 217845.05673339427
+    },
+    {
+      "mukey": "95134",
+      "intersection_area_m2": 370984.7609358968
+    },
+    {
+      "mukey": "95143",
+      "intersection_area_m2": 88656.46414931811
+    },
+    {
+      "mukey": "95151",
+      "intersection_area_m2": 592653.4197673491
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+test_suite_id: RANGEMATCH_F01_TOPOGRAPHY_DERIVATION_TESTS
+spec_version: 0.1.0
+status: TEST_DESIGN
+
+contract_tests:
+  - test_id: DERIVE_F01_001
+    scenario: Valid single-zone polygon with full 3DEP coverage
+    expected_quality_state: PARCEL_COMPLETE
+    required_assertions:
+      - slope_is_degrees
+      - aspect_uses_azimuth_convention
+      - arithmetic_mean_aspect_absent
+      - all_provenance_fields_present
+
+  - test_id: DERIVE_F01_002
+    scenario: Mireye point fields only and no parcel raster
+    expected_quality_state: MISSING
+    required_assertions:
+      - point_not_promoted_to_parcel
+
+  - test_id: DERIVE_F01_003
+    scenario: Parcel raster has a source-data gap
+    expected_quality_state: PARCEL_INCOMPLETE
+    required_assertions:
+      - coverage_fraction_reported
+      - missing_cells_not_imputed
+
+  - test_id: DERIVE_F01_004
+    scenario: Flat synthetic DEM
+    expected_quality_state: PARCEL_COMPLETE
+    required_assertions:
+      - slope_values_equal_zero
+      - aspect_cells_are_nodata
+      - undefined_flat_cell_count_reported
+
+  - test_id: DERIVE_F01_005
+    scenario: Synthetic plane descending east
+    expected_quality_state: PARCEL_COMPLETE
+    required_assertions:
+      - aspect_convention_returns_east
+      - slope_is_spatially_constant_except_mask_edges
+
+  - test_id: DERIVE_F01_006
+    scenario: Polygon crosses a UTM zone boundary
+    expected_quality_state: NEEDS_VERIFICATION
+    required_assertions:
+      - no_silent_crs_selection
+
+  - test_id: DERIVE_F01_007
+    scenario: Repeated run with identical geometry, source tiles, and software versions
+    expected_quality_state: PARCEL_COMPLETE
+    required_assertions:
+      - structured_outputs_identical
+      - reproducibility_manifest_identical_except_processing_timestamp
+
+  - test_id: DERIVE_F01_008
+    scenario: Multipart parcel
+    expected_quality_state: PARCEL_COMPLETE
+    required_assertions:
+      - all_components_aggregated
+      - component_count_preserved
+
+prohibited_behavior_tests:
+  - test_id: DERIVE_F01_NEG_001
+    prohibited_behavior: arithmetic_mean_of_aspect_degrees
+  - test_id: DERIVE_F01_NEG_002
+    prohibited_behavior: automatic_slope_suitability_bins
+  - test_id: DERIVE_F01_NEG_003
+    prohibited_behavior: point_value_as_parcel_distribution
+  - test_id: DERIVE_F01_NEG_004
+    prohibited_behavior: missing_cells_filled_with_zero
+  - test_id: DERIVE_F01_NEG_005
+    prohibited_behavior: unversioned_ruggedness_or_tpi_method
+

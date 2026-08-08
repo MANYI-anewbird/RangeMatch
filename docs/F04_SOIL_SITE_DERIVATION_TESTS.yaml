@@ -1,0 +1,81 @@
+test_suite_id: RANGEMATCH_F04_SOIL_SITE_DERIVATION_TESTS
+version: 0.1.0
+language: English
+
+tests:
+  - test_id: F04_DERIVE_001
+    description: Map-unit coverage is calculated spatially, not inferred from API success.
+    expected:
+      coverage_calculated_from_polygon_intersection: true
+
+  - test_id: F04_DERIVE_002
+    description: A dominant component does not replace minor components.
+    input:
+      component_percentages: [50, 35, 8, 7]
+    expected:
+      preserved_component_count: 4
+      dominant_component_only_output: false
+
+  - test_id: F04_DERIVE_003
+    description: Missing component share is not silently renormalized.
+    input:
+      known_component_percentages: [60, 20]
+    expected:
+      known_share: 0.8
+      unknown_share: 0.2
+      renormalized: false
+
+  - test_id: F04_DERIVE_004
+    description: Controlled categories remain a distribution.
+    input:
+      drainage_classes: [Well_drained, Poorly_drained]
+      support_weights: [0.7, 0.3]
+    expected:
+      output_distribution:
+        Well_drained: 0.7
+        Poorly_drained: 0.3
+      numeric_average: null
+
+  - test_id: F04_DERIVE_005
+    description: Missing monthly wetness value remains unknown.
+    input:
+      ponding_frequency: null
+    expected:
+      ponding_frequency: UNKNOWN
+      interpreted_as_none: false
+
+  - test_id: F04_DERIVE_006
+    description: A restrictive-layer null is not proof of unrestricted depth.
+    input:
+      reskind: null
+      resdept_r: null
+    expected:
+      restrictive_layer_status: UNKNOWN
+
+  - test_id: F04_DERIVE_007
+    description: Available water storage requires a declared interval.
+    input:
+      awc_r: 0.14
+      declared_depth_interval_cm: null
+    expected:
+      derived_storage_mm: null
+      status: METHOD_INPUT_REQUIRED
+
+  - test_id: F04_DERIVE_008
+    description: Ecological-site reference does not assert current vegetation state.
+    input:
+      ecological_site_id: R067BY002CO
+      public_description_accessible: true
+    expected:
+      current_state: UNKNOWN
+      operation_ranking_effect: NONE
+
+negative_tests:
+  - dominant_component_equals_parcel
+  - null_wetness_equals_none
+  - missing_restriction_equals_deep_unrestricted_soil
+  - arithmetic_mean_of_drainage_classes
+  - arithmetic_mean_of_raw_pH_values
+  - ecological_site_name_generates_suitability
+  - reference_community_equals_current_community
+

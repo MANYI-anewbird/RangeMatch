@@ -1,0 +1,181 @@
+spec_id: RANGEMATCH_F06_PARCEL_CONFIGURATION_DERIVATION
+version: 0.1.0
+language: English
+status: APPROVED_V0_1_FOR_IMPLEMENTATION
+factor_id: F06_PARCEL_CONFIGURATION
+atomicity_audit: F06_PARCEL_CONFIGURATION_ATOMICITY_AND_SOURCE_AUDIT.md
+implementation_status: IMPLEMENTED_V0_1
+scope: US_PARCELS_ENGINEERING_DEMO_FIRST
+
+purpose: >-
+  Convert parcel geometry into reproducible measurable configuration context.
+  F06 is not suitability, fencing cost, carrying capacity, or species ranking.
+
+canonical_source:
+  source_id: PARCEL_GEOMETRY
+  role: sole_v0_1_measurement_source
+  accepted_geometry_types: [POLYGON, MULTIPOLYGON]
+  feature_collection_policy:
+    exactly_one_feature: REQUIRED
+    zero_features: NEEDS_VERIFICATION
+    multiple_features: NEEDS_VERIFICATION
+    silent_first_feature_measurement: PROHIBITED
+    automatic_union: PROHIBITED_IN_V0_1
+  geometry_hash_required: true
+  geometry_reference_required: true
+
+crs_policy:
+  source_crs_default: EPSG:4326
+  source_crs_v0_1_accepted: [EPSG:4326]
+  non_epsg_4326_source_crs: CRS_UNSUPPORTED
+  working_crs: LOCAL_UTM_ZONE_FROM_PARCEL_CENTROID
+  working_unit: meter
+  planar_measurement_in_lon_lat_degrees: PROHIBITED
+  crs_selection_recorded: true
+  unsupported_geometry_cases:
+    - SOURCE_CRS_NOT_EPSG_4326
+    - PARCEL_CROSSES_UTM_ZONE_BOUNDARY
+    - PARCEL_OUTSIDE_VALID_LON_LAT_BOUNDS
+    - PARCEL_OUTSIDE_SUPPORTED_UTM_LATITUDE
+    - EMPTY_GEOMETRY
+    - INVALID_UNUSABLE_GEOMETRY
+    - FEATURE_COLLECTION_EMPTY
+    - FEATURE_COLLECTION_MULTIPLE_FEATURES
+  unsupported_case_behavior: NEEDS_VERIFICATION
+  optional_secondary_qa:
+    - GEODESIC_AREA_AND_PERIMETER_NOT_REQUIRED_FOR_V0_1_IMPLEMENTATION
+    - NON_4326_SOURCE_REPROJECT_THEN_UTM_SELECTION_DEFERRED
+
+algorithm_versioning:
+  algorithm_version: F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0
+  must_be_written_on_every_result: true
+
+frozen_derivations:
+  - variable_id: VAR_F06_PARCEL_AREA
+    name: parcel_area
+    method: PROJECTED_PLANAR_AREA_IN_WORKING_CRS
+    formula: A = area(project(geometry → working_crs))
+    output_unit: square_meter
+    interior_ring_area_policy: SUBTRACT_PER_STANDARD_POLYGON_SEMANTICS
+    required_outputs:
+      - area_m2
+      - working_crs
+      - source_crs
+      - geometry_hash
+      - algorithm_version
+    optional_display_only_conversions:
+      - area_ha = area_m2 / 10000
+      - area_acre = area_m2 / 4046.8564224
+    display_conversions_are_land_facts: false
+    prohibited_outputs:
+      - suitability_class_from_acreage
+      - carrying_capacity_from_area
+
+  - variable_id: VAR_F06_PARCEL_PERIMETER
+    name: parcel_perimeter
+    method: PROJECTED_EXTERIOR_RING_LENGTH_IN_WORKING_CRS
+    formula: P = length(exterior_rings(project(geometry → working_crs)))
+    output_unit: meter
+    holes_policy: EXCLUDED_FROM_V0_1_PERIMETER
+    hole_presence_recorded_as_limitation: true
+    required_outputs:
+      - perimeter_m
+      - working_crs
+      - geometry_hash
+      - algorithm_version
+    prohibited_outputs:
+      - fencing_cost
+      - labor_estimate
+
+  - variable_id: VAR_F06_POLYGON_PART_COUNT
+    name: polygon_part_count
+    method: COUNT_POLYGON_PARTS
+    formula: >
+      1 if Polygon; N if MultiPolygon with N parts; null if empty/unusable
+    output_unit: count
+    required_outputs:
+      - polygon_part_count
+      - geometry_hash
+    notes: >-
+      For v0.1, disconnected_part_count is deferred as redundant with this count
+      under the MultiPolygon part policy.
+
+  - variable_id: VAR_F06_COMPACTNESS
+    name: compactness_isoperimetric_quotient
+    method: ISOPERIMETRIC_QUOTIENT
+    formula: C = 4 * pi * A / (P * P)
+    output_unit: dimensionless
+    requires:
+      - VAR_F06_PARCEL_AREA
+      - VAR_F06_PARCEL_PERIMETER
+    null_when:
+      - A <= 0
+      - P <= 0
+    required_outputs:
+      - compactness
+      - area_m2
+      - perimeter_m
+      - algorithm_version
+    prohibited_outputs:
+      - operational_efficiency_score
+      - suitability_class
+
+  - variable_id: VAR_F06_GEOMETRY_VALIDITY
+    name: geometry_validity
+    method: OGC_VALIDITY_CHECK_WITH_OPTIONAL_REPAIR_FLAG
+    output_unit: categorical
+    enum:
+      - VALID
+      - INVALID
+      - REPAIRED_FOR_MEASUREMENT
+      - UNKNOWN
+    repair_requires:
+      - repair_method_recorded
+      - no_claim_of_legal_survey_authority
+    v0_1_automatic_repair: PROHIBITED
+    invalid_geometry_behavior: INVALID_UNUSABLE_NEEDS_VERIFICATION
+
+  - variable_id: VAR_F06_GEOMETRY_COVERAGE_STATUS
+    name: geometry_coverage_status
+    method: GEOMETRY_USABILITY_GATE
+    output_unit: categorical
+    enum:
+      - PARCEL_GEOMETRY_COMPLETE
+      - EMPTY_GEOMETRY
+      - INVALID_UNUSABLE
+      - CRS_UNSUPPORTED
+      - COVERAGE_UNQUANTIFIED
+    notes: >-
+      PARCEL_GEOMETRY_COMPLETE means F06 can measure the geometry. It does not
+      assert RAP, soils, climate, or water coverage completeness.
+
+deferred_variables:
+  - variable_id: VAR_F06_DISCONNECTED_PART_COUNT
+    reason: Redundant with polygon_part_count under v0.1 MultiPolygon policy.
+  - variable_id: VAR_F06_PERIMETER_TO_AREA_RATIO
+    reason: Redundant screening content with compactness; both are functions of A and P.
+  - variable_id: VAR_F06_BOUNDARY_COMPLEXITY
+    reason: No independent reviewed formula.
+  - variable_id: VAR_F06_NARROW_SECTION_CONTEXT
+    reason: Requires skeleton/minimum-width method review; deferred until after demo priorities.
+
+provenance_requirements:
+  required_on_every_result:
+    - geometry_id
+    - geometry_reference
+    - geometry_hash
+    - source_crs
+    - working_crs
+    - algorithm_version
+    - derived_at
+    - limitations
+  raw_measurements_preserved_before_display_conversion: true
+
+prohibited_derivations:
+  - planar_area_or_perimeter_in_lon_lat_degrees
+  - acreage_threshold_classes
+  - compactness_threshold_classes
+  - fencing_cost_from_perimeter
+  - carrying_capacity_from_area
+  - cow_calf_vs_sheep_ranking_from_configuration
+  - f07_access_inference_from_configuration

@@ -1,0 +1,1382 @@
+{
+  "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+  "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+  "input_quality_state": "PARCEL_COMPLETE",
+  "source_fixture_references": [
+    "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_spatial_coverage.json",
+    "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_mapunit_component_ecosite.json",
+    "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_horizons.json",
+    "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_restrictions.json",
+    "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/sda_monthly_wetness.json",
+    "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/ecological_site_access.json",
+    "test-data/cross-parcel-validation/XPV_REYNOLDS_001/live-results/mireye_f04_centroid.json"
+  ],
+  "parcel_coverage": {
+    "status": "COMPLETE",
+    "detail": "COMPLETE_WITH_NUMERIC_TOLERANCE",
+    "requested_area_m2": 1355538.0042752558,
+    "covered_area_m2": 1355538.0042754635,
+    "uncovered_area_m2": 0.0,
+    "coverage_fraction": 1.0,
+    "coverage_calculated_from_polygon_intersection": true,
+    "successful_query_implies_complete_coverage": false,
+    "intersecting_mapunit_count": 4
+  },
+  "mapunit_area_distribution": {
+    "3270929": 0.006411750037465968,
+    "485933": 0.3108566137574406,
+    "486009": 0.15446984663753915,
+    "486192": 0.53467353960517
+  },
+  "component_support_weights": [
+    {
+      "mukey": "486192",
+      "cokey": "26405621",
+      "compname": "Cleavage",
+      "comppct_r": 50.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.53467353960517,
+      "component_support_weight": 0.267336769802585,
+      "drainagecl": "Well drained",
+      "hydgrp": "D",
+      "ecoclassid": "R025XY010ID",
+      "ecoclassname": "CLAYPAN 12-16",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "486192",
+      "cokey": "26405622",
+      "compname": "Snell",
+      "comppct_r": 30.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.53467353960517,
+      "component_support_weight": 0.16040206188155098,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R025XY011ID",
+      "ecoclassname": "LOAMY 13-16",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "485933",
+      "cokey": "26405318",
+      "compname": "Parkay",
+      "comppct_r": 45.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.3108566137574406,
+      "component_support_weight": 0.1398854761908483,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R025XY022ID",
+      "ecoclassname": "LOAMY 16-22",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "485933",
+      "cokey": "26405319",
+      "compname": "Dehana",
+      "comppct_r": 35.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.3108566137574406,
+      "component_support_weight": 0.10879981481510421,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R025XY001ID",
+      "ecoclassname": "ASPEN THICKET",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "486009",
+      "cokey": "26405409",
+      "compname": "Snell",
+      "comppct_r": 55.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.15446984663753915,
+      "component_support_weight": 0.08495841565064655,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R025XY011ID",
+      "ecoclassname": "LOAMY 13-16",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "486009",
+      "cokey": "26405410",
+      "compname": "Sharesnout",
+      "comppct_r": 20.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.15446984663753915,
+      "component_support_weight": 0.030893969327507834,
+      "drainagecl": "Well drained",
+      "hydgrp": "D",
+      "ecoclassid": "R025XY010ID",
+      "ecoclassname": "CLAYPAN 12-16",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "485933",
+      "cokey": "26405317",
+      "compname": "Blackwell",
+      "comppct_r": 2.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.3108566137574406,
+      "component_support_weight": 0.006217132275148813,
+      "drainagecl": "Poorly drained",
+      "hydgrp": "D",
+      "ecoclassid": "R025XY039ID",
+      "ecoclassname": "DRY MEADOW",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "486009",
+      "cokey": "26405408",
+      "compname": "Welch",
+      "comppct_r": 3.0,
+      "majcompflag": "No",
+      "mapunit_parcel_area_fraction": 0.15446984663753915,
+      "component_support_weight": 0.004634095399126174,
+      "drainagecl": "Poorly drained",
+      "hydgrp": "D",
+      "ecoclassid": "R025XY039ID",
+      "ecoclassname": "DRY MEADOW",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "3270929",
+      "cokey": "26405806",
+      "compname": "Parkay",
+      "comppct_r": 35.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.006411750037465968,
+      "component_support_weight": 0.0022441125131130884,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R025XY022ID",
+      "ecoclassname": "LOAMY 16-22",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "3270929",
+      "cokey": "26405807",
+      "compname": "Dehana",
+      "comppct_r": 25.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.006411750037465968,
+      "component_support_weight": 0.001602937509366492,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R025XY001ID",
+      "ecoclassname": "ASPEN THICKET",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    },
+    {
+      "mukey": "3270929",
+      "cokey": "26405808",
+      "compname": "Booneville",
+      "comppct_r": 15.0,
+      "majcompflag": "Yes",
+      "mapunit_parcel_area_fraction": 0.006411750037465968,
+      "component_support_weight": 0.0009617625056198951,
+      "drainagecl": "Well drained",
+      "hydgrp": "C",
+      "ecoclassid": "R025XY045ID",
+      "ecoclassname": "DOUGLAS FIR SNOWBERRY 22+",
+      "ecoclasstypename": "NRCS Rangeland Site"
+    }
+  ],
+  "known_component_share": 0.8079365478706173,
+  "unaccounted_component_share": 0.19847520216699838,
+  "component_percentages_renormalized": false,
+  "drainage_class_distribution": {
+    "Poorly drained": 0.010851227674274988,
+    "Well drained": 0.7970853201963424
+  },
+  "hydrologic_soil_group_distribution": {
+    "C": 0.49885458106624947,
+    "D": 0.3090819668043678
+  },
+  "ponding_frequency_distribution": {
+    "None": 0.8079365478706161
+  },
+  "flooding_frequency_distribution": {
+    "Frequent": 0.003098981535162595,
+    "None": 0.8048375663354536
+  },
+  "monthly_wetness_records": [
+    {
+      "cokey": "26405317",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "Frequent",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "Frequent",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "Frequent",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405317",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405318",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405319",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "Frequent",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "Frequent",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "Frequent",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "Frequent",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405408",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405409",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405410",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405621",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405622",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405806",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405807",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 1,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 2,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 3,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 4,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 5,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 6,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 7,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 8,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 9,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 10,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 11,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    },
+    {
+      "cokey": "26405808",
+      "monthseq": 12,
+      "pondfreqcl": "None",
+      "flodfreqcl": "None",
+      "interpreted_null_as_none": false
+    }
+  ],
+  "restrictive_layer_records": [
+    {
+      "cokey": "26405621",
+      "component_support_weight": 0.267336769802585,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Lithic bedrock",
+      "resdept_r_cm": 41.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405622",
+      "component_support_weight": 0.16040206188155098,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Lithic bedrock",
+      "resdept_r_cm": 99.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405318",
+      "component_support_weight": 0.1398854761908483,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Lithic bedrock",
+      "resdept_r_cm": 122.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405319",
+      "component_support_weight": 0.10879981481510421,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405409",
+      "component_support_weight": 0.08495841565064655,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Lithic bedrock",
+      "resdept_r_cm": 99.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405410",
+      "component_support_weight": 0.030893969327507834,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Lithic bedrock",
+      "resdept_r_cm": 56.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405317",
+      "component_support_weight": 0.006217132275148813,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405408",
+      "component_support_weight": 0.004634095399126174,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405806",
+      "component_support_weight": 0.0022441125131130884,
+      "restrictive_layer_status": "KNOWN",
+      "reskind": "Lithic bedrock",
+      "resdept_r_cm": 122.0,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405807",
+      "component_support_weight": 0.001602937509366492,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    },
+    {
+      "cokey": "26405808",
+      "component_support_weight": 0.0009617625056198951,
+      "restrictive_layer_status": "UNKNOWN",
+      "reskind": null,
+      "resdept_r_cm": null,
+      "interpreted_as_unrestricted": false
+    }
+  ],
+  "restrictive_layer_distribution": {
+    "Lithic bedrock|122.0": 0.1421295887039614,
+    "Lithic bedrock|41.0": 0.267336769802585,
+    "Lithic bedrock|56.0": 0.030893969327507834,
+    "Lithic bedrock|99.0": 0.24536047753219753,
+    "UNKNOWN": 0.12221574250436558
+  },
+  "ecological_site_references": [
+    {
+      "ecological_site_id": "R025XY010ID",
+      "ecological_site_name": "CLAYPAN 12-16",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.2982307391300928,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY010ID",
+      "retrieval_timestamp": "2026-08-08T05:07:31Z",
+      "response_hash": "7405928600369086bdbf9a6d698587d7fd7c61043924dab646b193adc8a6c2b4",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R025XY011ID",
+      "ecological_site_name": "LOAMY 13-16",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.24536047753219753,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY011ID",
+      "retrieval_timestamp": "2026-08-08T05:07:31Z",
+      "response_hash": "8aed10b5737aaf7d4d5a5e42398a1aa1f856ae72dfafbe7ae3589cb66ade8fa7",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R025XY022ID",
+      "ecological_site_name": "LOAMY 16-22",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.1421295887039614,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY022ID",
+      "retrieval_timestamp": "2026-08-08T05:07:31Z",
+      "response_hash": "c86345317b9c9caf756006b1b415f4f10565f62b237c808adbecea2afb6a2053",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R025XY001ID",
+      "ecological_site_name": "ASPEN THICKET",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.11040275232447071,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY001ID",
+      "retrieval_timestamp": "2026-08-08T05:07:31Z",
+      "response_hash": "0b68fa579c6f9dec67ba131547d9709c46559b30284271683758ee501f675e78",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R025XY039ID",
+      "ecological_site_name": "DRY MEADOW",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.010851227674274988,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY039ID",
+      "retrieval_timestamp": "2026-08-08T05:07:31Z",
+      "response_hash": "d01535f809fbaf165b6643fc5617ef1f9790bf1abf3b8a5fd6ed0403ef42eb96",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    },
+    {
+      "ecological_site_id": "R025XY045ID",
+      "ecological_site_name": "DOUGLAS FIR SNOWBERRY 22+",
+      "ecological_site_type": "NRCS Rangeland Site",
+      "component_support_weight": 0.0009617625056198951,
+      "public_description_access_status": "ACCESSIBLE",
+      "access_error_type": null,
+      "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/025X/R025XY045ID",
+      "retrieval_timestamp": "2026-08-08T05:07:31Z",
+      "response_hash": "7c7344929e426e2745f29bf8d4fc4bdcc68507f84ca3bfab0c0d95276492f966",
+      "current_vegetation_state": "UNKNOWN",
+      "operation_ranking_effect": "NONE"
+    }
+  ],
+  "ecological_site_unknown_share": 0.0,
+  "available_water_storage": {
+    "status": "METHOD_INPUT_REQUIRED",
+    "derived_storage_mm": null,
+    "target_depth_cm": null,
+    "represented_depth_cm": null,
+    "depth_coverage_fraction": null,
+    "component_support_coverage_fraction": null,
+    "component_results": [],
+    "limitations": [
+      "Available-water storage requires an explicitly declared depth interval.",
+      "AWC is not forage production or operation suitability."
+    ]
+  },
+  "mireye_point_qa": {
+    "role": "POINT_DISPLAY_AND_QA_ONLY",
+    "may_represent_whole_parcel": false,
+    "fetched_at": null,
+    "fields": {},
+    "partial_failures": []
+  },
+  "applicability": {
+    "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+    "review_status": "VERIFIED",
+    "basis": [
+      "F04_SOIL_SITE_ATOMICITY_AND_SOURCE_AUDIT",
+      "CPER_LIVE_DATA_GATE"
+    ],
+    "notes": "F04 v0.1 is data-quality and context only; no directional suitability signal is approved."
+  },
+  "coverage": {
+    "status": "COMPLETE",
+    "requested_area_m2": 1355538.0042752558,
+    "valid_area_m2": 1355538.0042754635,
+    "valid_coverage_fraction": 1.0,
+    "adapter_status": "SDA_POLYGON_AND_TABULAR_VERIFIED"
+  },
+  "quality": {
+    "confidence_state": "SUPPORTED",
+    "modeled": false,
+    "component_count": 11,
+    "horizon_record_count": 37,
+    "restriction_record_count": 11,
+    "monthly_wetness_record_count": 132,
+    "components_with_ecological_site_linkage": 11,
+    "derivation_contract_verified": true,
+    "numeric_average_of_controlled_categories": false
+  },
+  "provenance": {
+    "source_reference": "USDA_NRCS_SDA_SSURGO_AND_EDIT",
+    "fetched_at": "2026-08-08T05:07:31Z",
+    "geometry_hash": "e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c",
+    "response_or_artifact_hash": "fec25493a8f31ec71d2fd3243bb13a1497cf3a32e7c9cf1230eb7a136d651d64",
+    "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+    "primary_path": "OFFICIAL_SDA_PARCEL_POLYGONS_COMPONENTS_HORIZONS",
+    "mireye_role": "POINT_DISPLAY_AND_QA_ONLY"
+  },
+  "limitations": [
+    "No composite soil score is created.",
+    "Controlled categories are preserved as distributions, not ordinal averages.",
+    "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+    "Ecological-site names do not imply current vegetation or operation ranking.",
+    "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+    "Available-water storage is omitted from profile evidence until a depth interval is approved."
+  ],
+  "unknowns": [
+    "Within-map-unit component locations are unknown.",
+    "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+    "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+    "Ecological-site references do not establish current vegetation state.",
+    "No approved depth interval exists for parcel available-water storage in the Land Profile."
+  ],
+  "ranking_effect": "NONE",
+  "directional_signal_allowed": false
+}

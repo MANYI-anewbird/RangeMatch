@@ -1,0 +1,177 @@
+validation_result_schema_version: 0.1.0
+parcel_id: XPV_KONZA_001
+geometry_id: ENGINEERING_TEST_GEOMETRY_KONZA_001
+geometry_hash: f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d
+assigned_slots:
+- SLOT_HUMID_STRONG_HERB
+run_utc: '2026-08-08T05:06:18Z'
+engine_version: 0.1.0
+land_profile_path: test-data/cross-parcel-validation/XPV_KONZA_001/land_profile.json
+match_result_path: test-data/cross-parcel-validation/XPV_KONZA_001/match_result.json
+factors:
+  F01_TOPOGRAPHY:
+    collection_status: COLLECTED
+    input_quality_state: PARCEL_COMPLETE
+    signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F01_EXPL_CONTEXT_REQUIRED
+    applicability_status: null
+    coverage_status: null
+    provenance_complete: true
+    place_name_used_as_suitability_input: false
+    data_path_status:
+      status: SUCCESS
+      error: null
+    notes: 'observation={''slope_median_degrees'': 6.917120720760842, ''slope_p90_degrees'':
+      13.011964845398815, ''elevation_median_m'': 408.6128692626953}; path=SUCCESS'
+  F02_HERBACEOUS_RESOURCE:
+    collection_status: COLLECTED
+    input_quality_state: null
+    signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F02_EXPL_COVERAGE
+    applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+    coverage_status: COVERAGE_UNQUANTIFIED
+    provenance_complete: true
+    place_name_used_as_suitability_input: false
+    data_path_status:
+      status: SUCCESS
+      error: null
+    notes: 'observation={''rap_cover_ok'': True, ''rap_production_ok'': True, ''applicability'':
+      ''IN_DOCUMENTED_PRODUCT_SCOPE''}; path=SUCCESS'
+  F03_LIVESTOCK_WATER:
+    collection_status: COLLECTED
+    input_quality_state: MAPPED_CANDIDATES_ONLY
+    signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F03_EXPL_CANDIDATES_NOT_VERIFIED
+    applicability_status: null
+    coverage_status: null
+    provenance_complete: true
+    place_name_used_as_suitability_input: false
+    data_path_status:
+      status: SUCCESS
+      error: null
+    notes: 'observation={''mapped_candidate_count'': 34, ''layer_errors'': {}}; path=SUCCESS'
+  F04_SOIL_WETNESS_ECOLOGICAL_SITE:
+    collection_status: PARTIAL
+    input_quality_state: PARCEL_COMPLETE
+    signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F04_EXPL_CONTEXT_ONLY
+    applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+    coverage_status: COMPLETE
+    provenance_complete: true
+    place_name_used_as_suitability_input: false
+    data_path_status:
+      status: DEGRADED
+      error: 'SSLError: HTTPSConnectionPool(host=''api.mireye.com'', port=443): Max
+        retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1, ''[SSL:
+        WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)'')))'
+    notes: 'observation={''coverage_fraction'': 1.0, ''intersecting_mapunit_count'':
+      4, ''input_quality_state'': ''PARCEL_COMPLETE'', ''mireye_error'': "SSLError:
+      HTTPSConnectionPool(host=''api.mireye.com'', port=443): Max retries exceeded
+      with url: /v1/fetch (Caused by SSLError(SSLError(1, ''[SSL: WRONG_VERSION_NUMBER]
+      wrong version number (_ssl.c:1020)'')))"}; path=DEGRADED; error=SSLError: HTTPSConnectionPool(host=''api.mireye.com'',
+      port=443): Max retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1,
+      ''[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)'')))'
+  F05_CLIMATE_DROUGHT_EXPOSURE:
+    collection_status: PARTIAL
+    input_quality_state: CLIMATE_CONTEXT_COMPLETE
+    signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F05_EXPL_CONTEXT_ONLY
+    applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+    coverage_status: COMPLETE
+    provenance_complete: true
+    place_name_used_as_suitability_input: false
+    data_path_status:
+      status: DEGRADED
+      error: 'SSLError: HTTPSConnectionPool(host=''api.mireye.com'', port=443): Max
+        retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1, ''[SSL:
+        WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)'')))'
+    notes: 'observation={''annprcp_norm_mm'': 879.57, ''coverage_status'': ''COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL'',
+      ''mireye_error'': "SSLError: HTTPSConnectionPool(host=''api.mireye.com'', port=443):
+      Max retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1, ''[SSL:
+      WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)'')))"}; path=DEGRADED;
+      error=SSLError: HTTPSConnectionPool(host=''api.mireye.com'', port=443): Max
+      retries exceeded with url: /v1/fetch (Caused by SSLError(SSLError(1, ''[SSL:
+      WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)'')))'
+operation_results:
+  COW_CALF_OPERATION:
+    decision_label: HOLD
+    decision_reason: Five shared Factors are implemented as data-quality/context evidence;
+      material verification remains incomplete and no directional climate suitability
+      threshold is approved.
+    ranking_position: null
+    factor_signals:
+      F01_TOPOGRAPHY: CONTEXT_DEPENDENT
+      F02_HERBACEOUS_RESOURCE: NEEDS_VERIFICATION
+      F03_LIVESTOCK_WATER: NEEDS_VERIFICATION
+      F04_SOIL_WETNESS_ECOLOGICAL_SITE: CONTEXT_DEPENDENT
+      F05_CLIMATE_DROUGHT_EXPOSURE: CONTEXT_DEPENDENT
+  SHEEP_GRAZING:
+    decision_label: HOLD
+    decision_reason: Five shared Factors are implemented as data-quality/context evidence;
+      material verification remains incomplete and no directional climate suitability
+      threshold is approved.
+    ranking_position: null
+    factor_signals:
+      F01_TOPOGRAPHY: CONTEXT_DEPENDENT
+      F02_HERBACEOUS_RESOURCE: NEEDS_VERIFICATION
+      F03_LIVESTOCK_WATER: NEEDS_VERIFICATION
+      F04_SOIL_WETNESS_ECOLOGICAL_SITE: CONTEXT_DEPENDENT
+      F05_CLIMATE_DROUGHT_EXPOSURE: CONTEXT_DEPENDENT
+diagnostics:
+  cow_sheep_signal_identity: IDENTICAL
+  cow_sheep_diagnosis: MISSING_SPECIES_DIFFERENTIAL_RULE
+  source_failure_misread_as_land_problem: false
+  unexpected_place_name_branch: false
+  determinism_replay_passed: true
+  cper_contrast_observation_only: true
+  potential_rule_issue: null
+  investigation_required: true
+  runtime_rule_changed: false
+  data_path_issue: Mireye HTTPS SSL WRONG_VERSION_NUMBER blocked F04/F05 point QA;
+    SDA and NOAA canonical paths succeeded. Not a Factor-rule defect.
+integrity_checks:
+  geometry_hash_matches_file: true
+  land_profile_geometry_hash_matches: true
+  factor_provenance_geometry_hash_aligned: true
+  stale_evidence_invalidated_on_geometry_change: NOT_RUN
+  match_result_input_sha256: 89ff1ec3a055d949806ff89359b00569bd26fd240fb4da23bd2ef06eaea54056
+  identical_replay_match_result: true
+unknowns:
+- F02 eligible, masked, no-data, and valid parcel areas are not quantified.
+- F03 mapped water candidates are not verified livestock-water systems; reliability,
+  capacity, quality, legal access, and traversable distance remain unknown.
+- F04 soil, wetness, and ecological-site facts are context only; they do not establish
+  current vegetation state, forage productivity, or operation ranking.
+- F05 climate and drought facts are context only; mean annual precipitation and current
+  USDM class do not establish suitability, carrying capacity, or forage/water failure.
+diligence_actions:
+- Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access
+  is available.
+- Verify botanical composition, palatability, and nutritive value with reviewed local
+  or field evidence.
+- Verify livestock-water source operation, seasonal reliability, capacity, quality,
+  legal access, and animal-access routes in field and records.
+- Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site
+  reference communities match current vegetation.
+- Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and
+  provenance; treat current USDM as current-condition context only.
+- Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT
+  decision.
+limitations:
+- Cross-parcel contrast versus CPER is observational only and is not a suitability
+  judgment.
+- Geometry was not altered after registration freeze.
+- ACIS precip was not used as F05 canonical Land Fact.
+decision_contribution:
+  primary_hold_drivers:
+  - F02_HERBACEOUS_RESOURCE:F02_EXPL_COVERAGE
+  - F03_LIVESTOCK_WATER:F03_EXPL_CANDIDATES_NOT_VERIFIED
+  - NO_APPROVED_RANKING_OR_THRESHOLDS
+  new_decision_gap_observed: []
+  candidate_next_action: DEEPEN_F02_F03_AFTER_AGGREGATE
+  defect_to_repair: null

@@ -1,0 +1,89 @@
+spec_id: RANGEMATCH_F02_HERBACEOUS_RULES
+version: 0.1.0
+language: English
+status: REVIEW_CANDIDATE
+factor_id: F02_HERBACEOUS_RESOURCE
+derivation_spec: F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0
+approved_numeric_suitability_thresholds: []
+approved_weights: []
+approved_hard_constraints: []
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  missing_values_are_unknown: true
+  operation_ranking_effect: NONE_IN_V0_1
+  relationship_gate: >-
+    COW_F02_001 and SHEEP_F02_001 remain pending final review. V0.1 may evaluate
+    data completeness and emit CONTEXT_DEPENDENT, UNKNOWN, or NEEDS_VERIFICATION;
+    it may not emit STRONG_RESOURCE_SIGNAL, MODERATE_RESOURCE_SIGNAL, or
+    LIMITING_SIGNAL.
+
+evaluation_order:
+  - rule_id: F02_QC_001
+    when: input_quality_state == CONFLICTING_SOURCES
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F02_EXPL_CONFLICT
+
+  - rule_id: F02_QC_002
+    when: input_quality_state == OUTSIDE_DOCUMENTED_PRODUCT_SCOPE
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F02_EXPL_SCOPE
+
+  - rule_id: F02_QC_003
+    when: input_quality_state in [COVERAGE_UNQUANTIFIED, PARTIAL_RANGELAND_COVERAGE]
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F02_EXPL_COVERAGE
+
+  - rule_id: F02_QC_004
+    when: input_quality_state == MISSING
+    output_signal: UNKNOWN
+    ranking_effect: NONE
+    explanation_code: F02_EXPL_MISSING
+
+  - rule_id: F02_REL_001
+    when: input_quality_state == COMPLETE_RANGELAND_COVERAGE
+    output_signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F02_EXPL_CONTEXT_ONLY
+
+operation_explanations:
+  COW_CALF_OPERATION:
+    requirement_id: COW_F02_001
+    requirement_status: PENDING_FINAL_REVIEW
+    allowed_claim: >-
+      Modeled herbaceous amount and timing provide resource context, but do not
+      establish available, palatable, nutritionally adequate, or sustainably
+      usable cattle forage.
+  SHEEP_GRAZING:
+    requirement_id: SHEEP_F02_001
+    requirement_status: PENDING_FINAL_REVIEW
+    allowed_claim: >-
+      Modeled herbaceous amount and timing provide resource context, but sheep
+      interpretation also requires composition, palatability, nutritive value,
+      season, breed, and management context.
+
+prohibited_claims:
+  - Higher RAP production automatically means higher suitability.
+  - RAP production is available forage or carrying capacity.
+  - AFG or PFG identifies parcel plant species or diet composition.
+  - Cow-Calf or Sheep receives a fixed advantage from RAP values alone.
+  - Missing, masked, or outside-scope pixels equal zero production.
+
+diligence_actions:
+  F02_DIL_001: Quantify eligible, masked, no-data, and valid AOI area using version-matched RAP rasters.
+  F02_DIL_002: Obtain field or reviewed local evidence for botanical composition, palatability, and nutritive value.
+  F02_DIL_003: Use a reviewed alternative source and field verification when the parcel is outside RAP rangeland scope.
+  F02_DIL_004: Reconcile annual and 16-day production versions, geometry, mask, and units.
+
+explanation_templates:
+  F02_EXPL_CONFLICT: Annual and interval production evidence conflicts beyond the approved tolerance.
+  F02_EXPL_SCOPE: RAP applicability has not been established for this parcel type, so F02 requires another source and field verification.
+  F02_EXPL_COVERAGE: RAP returned modeled values, but eligible, masked, or valid parcel coverage is incomplete or unquantified.
+  F02_EXPL_MISSING: Required herbaceous-resource evidence is unavailable, so F02 remains unknown.
+  F02_EXPL_CONTEXT_ONLY: Complete modeled cover and production context is available, but current reviewed evidence does not support a directional species signal from these values alone.
+

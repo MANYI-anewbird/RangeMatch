@@ -1,0 +1,137 @@
+{
+  "collection_id": "F03_FIVE_PARCEL_REMOTE_COLLECTION",
+  "as_of": "2026-08-08T06:19:11Z",
+  "contract_version": "0.1.1",
+  "selection_method": "STABLE_CANDIDATE_ID_ORDER_MAX_3",
+  "runtime_rules_changed": false,
+  "ranking_effect": "NONE",
+  "suitability_thresholds_added": false,
+  "cow_sheep_ranking_added": false,
+  "field_verified_count_total": 0,
+  "collection_gate": {
+    "passed": true,
+    "reasons": []
+  },
+  "parcels": [
+    {
+      "parcel_id": "XPV_CPER_001",
+      "available": 9,
+      "sampled": 3,
+      "MAPPED_CANDIDATE": 1,
+      "REMOTELY_SUPPORTED_CANDIDATE": 2,
+      "FIELD_VERIFIED_LIVESTOCK_WATER": 0,
+      "provenance_complete": 3,
+      "data_path_failures": [],
+      "conflicts": [],
+      "parcel_factor_state_before": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "mapped_candidate_count": 9,
+        "verified_livestock_water_system_count": 0
+      },
+      "parcel_factor_state_after": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "sampled_mapped_count": 1,
+        "sampled_remotely_supported_count": 2,
+        "sampled_field_verified_count": 0,
+        "note": "Parcel Land Fact input_quality_state remains MAPPED_CANDIDATES_ONLY because field_verified_count stays 0; remote support does not change runtime Factor rules."
+      },
+      "result_path": "test-data/cross-parcel-validation/XPV_CPER_001/f03_remote_pilot/remote_pilot_result.json"
+    },
+    {
+      "parcel_id": "XPV_KONZA_001",
+      "available": 34,
+      "sampled": 3,
+      "MAPPED_CANDIDATE": 3,
+      "REMOTELY_SUPPORTED_CANDIDATE": 0,
+      "FIELD_VERIFIED_LIVESTOCK_WATER": 0,
+      "provenance_complete": 3,
+      "data_path_failures": [],
+      "conflicts": [],
+      "parcel_factor_state_before": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "mapped_candidate_count": 34,
+        "verified_livestock_water_system_count": 0
+      },
+      "parcel_factor_state_after": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "sampled_mapped_count": 3,
+        "sampled_remotely_supported_count": 0,
+        "sampled_field_verified_count": 0,
+        "note": "Parcel Land Fact input_quality_state remains MAPPED_CANDIDATES_ONLY because field_verified_count stays 0; remote support does not change runtime Factor rules."
+      },
+      "result_path": "test-data/cross-parcel-validation/XPV_KONZA_001/f03_remote_pilot/remote_pilot_result.json"
+    },
+    {
+      "parcel_id": "XPV_REYNOLDS_001",
+      "available": 8,
+      "sampled": 3,
+      "MAPPED_CANDIDATE": 0,
+      "REMOTELY_SUPPORTED_CANDIDATE": 3,
+      "FIELD_VERIFIED_LIVESTOCK_WATER": 0,
+      "provenance_complete": 3,
+      "data_path_failures": [],
+      "conflicts": [],
+      "parcel_factor_state_before": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "mapped_candidate_count": 8,
+        "verified_livestock_water_system_count": 0
+      },
+      "parcel_factor_state_after": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "sampled_mapped_count": 0,
+        "sampled_remotely_supported_count": 3,
+        "sampled_field_verified_count": 0,
+        "note": "Parcel Land Fact input_quality_state remains MAPPED_CANDIDATES_ONLY because field_verified_count stays 0; remote support does not change runtime Factor rules."
+      },
+      "result_path": "test-data/cross-parcel-validation/XPV_REYNOLDS_001/f03_remote_pilot/remote_pilot_result.json"
+    },
+    {
+      "parcel_id": "XPV_ORDWAY_001",
+      "available": 24,
+      "sampled": 3,
+      "MAPPED_CANDIDATE": 3,
+      "REMOTELY_SUPPORTED_CANDIDATE": 0,
+      "FIELD_VERIFIED_LIVESTOCK_WATER": 0,
+      "provenance_complete": 3,
+      "data_path_failures": [],
+      "conflicts": [],
+      "parcel_factor_state_before": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "mapped_candidate_count": 24,
+        "verified_livestock_water_system_count": 0
+      },
+      "parcel_factor_state_after": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "sampled_mapped_count": 3,
+        "sampled_remotely_supported_count": 0,
+        "sampled_field_verified_count": 0,
+        "note": "Parcel Land Fact input_quality_state remains MAPPED_CANDIDATES_ONLY because field_verified_count stays 0; remote support does not change runtime Factor rules."
+      },
+      "result_path": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/remote_pilot_result.json"
+    },
+    {
+      "parcel_id": "XPV_KBS_MCSE_001",
+      "available": 5,
+      "sampled": 3,
+      "MAPPED_CANDIDATE": 3,
+      "REMOTELY_SUPPORTED_CANDIDATE": 0,
+      "FIELD_VERIFIED_LIVESTOCK_WATER": 0,
+      "provenance_complete": 3,
+      "data_path_failures": [],
+      "conflicts": [],
+      "parcel_factor_state_before": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "mapped_candidate_count": 5,
+        "verified_livestock_water_system_count": 0
+      },
+      "parcel_factor_state_after": {
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "sampled_mapped_count": 3,
+        "sampled_remotely_supported_count": 0,
+        "sampled_field_verified_count": 0,
+        "note": "Parcel Land Fact input_quality_state remains MAPPED_CANDIDATES_ONLY because field_verified_count stays 0; remote support does not change runtime Factor rules."
+      },
+      "result_path": "test-data/cross-parcel-validation/XPV_KBS_MCSE_001/f03_remote_pilot/remote_pilot_result.json"
+    }
+  ]
+}

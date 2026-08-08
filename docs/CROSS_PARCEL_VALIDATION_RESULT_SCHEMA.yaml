@@ -1,0 +1,269 @@
+schema_id: RANGEMATCH_CROSS_PARCEL_VALIDATION_RESULT
+version: 0.1.0
+language: English
+status: LOCKED_FOR_VALIDATION_PHASE
+related_plan: docs/CROSS_PARCEL_VALIDATION_PLAN.md
+format: YAML_OR_JSON_WITH_IDENTICAL_KEYS
+
+purpose: >-
+  One ValidationResult per engineering parcel after the F01–F05 run loop.
+  Records evidence-path behavior and diagnosis; does not authorize suitability
+  thresholds or operation ranking.
+
+required_top_level_fields:
+  - validation_result_schema_version
+  - parcel_id
+  - geometry_id
+  - geometry_hash
+  - assigned_slots
+  - run_utc
+  - engine_version
+  - land_profile_path
+  - match_result_path
+  - factors
+  - operation_results
+  - diagnostics
+  - integrity_checks
+  - decision_contribution
+
+field_definitions:
+  validation_result_schema_version:
+    type: string
+    const: "0.1.0"
+  parcel_id:
+    type: string
+    pattern: "^XPV_[A-Z0-9_]+$"
+  geometry_id:
+    type: string
+  geometry_hash:
+    type: string
+    description: SHA-256 of the geometry file bytes used for this run.
+  assigned_slots:
+    type: array
+    items:
+      enum:
+        - SLOT_HUMID_STRONG_HERB
+        - SLOT_ARID_UNCERTAIN_WATER
+        - SLOT_RUGGED_SHEEP_RELEVANT
+        - SLOT_WATER_CANDIDATE_RICH
+        - SLOT_RAP_SCOPE_BOUNDARY
+  run_utc:
+    type: string
+    format: datetime
+  engine_version:
+    type: string
+  land_profile_path:
+    type: string
+  match_result_path:
+    type: string
+
+  factors:
+    type: object
+    required_keys:
+      - F01_TOPOGRAPHY
+      - F02_HERBACEOUS_RESOURCE
+      - F03_LIVESTOCK_WATER
+      - F04_SOIL_WETNESS_ECOLOGICAL_SITE
+      - F05_CLIMATE_DROUGHT_EXPOSURE
+    each_factor_required_fields:
+      - collection_status
+      - input_quality_state
+      - signal
+      - ranking_effect
+      - explanation_code
+      - applicability_status
+      - coverage_status
+      - provenance_complete
+      - place_name_used_as_suitability_input
+      - notes
+    collection_status_enum:
+      - COLLECTED
+      - PARTIAL
+      - FAILED_SOURCE
+      - NOT_APPLICABLE
+      - SKIPPED_DEFECT
+    ranking_effect_const: NONE
+    place_name_used_as_suitability_input_const: false
+
+  operation_results:
+    type: object
+    required_keys: [COW_CALF_OPERATION, SHEEP_GRAZING]
+    each_operation_required_fields:
+      - decision_label
+      - decision_reason
+      - ranking_position
+      - factor_signals
+    ranking_position_const: null
+    decision_label_note: >-
+      HOLD is the expected common outcome in this phase; ADVANCE is not a
+      success criterion.
+
+  diagnostics:
+    required_fields:
+      - cow_sheep_signal_identity
+      - cow_sheep_diagnosis
+      - source_failure_misread_as_land_problem
+      - unexpected_place_name_branch
+      - determinism_replay_passed
+    cow_sheep_diagnosis_enum:
+      - SHARED_EVIDENCE_BOUNDARY
+      - MISSING_SPECIES_DIFFERENTIAL_RULE
+      - UNEXPECTED_RUNTIME_DIVERGENCE
+      - APPROVED_DIFFERENTIAL_APPLIED
+    source_failure_misread_as_land_problem_const: false
+    unexpected_place_name_branch_const: false
+
+  integrity_checks:
+    required_fields:
+      - geometry_hash_matches_file
+      - land_profile_geometry_hash_matches
+      - factor_provenance_geometry_hash_aligned
+      - stale_evidence_invalidated_on_geometry_change
+      - match_result_input_sha256
+      - identical_replay_match_result
+    stale_evidence_invalidated_on_geometry_change:
+      type: boolean_or_not_run
+      note: Required when the parcel was produced via replace-geometry or geometry swap.
+
+  decision_contribution:
+    required_fields:
+      - primary_hold_drivers
+      - new_decision_gap_observed
+      - candidate_next_action
+      - defect_to_repair
+    candidate_next_action_enum:
+      - DEEPEN_F02
+      - DEEPEN_F03
+      - DEEPEN_F02_AND_F03
+      - SELECT_F06_CANDIDATE
+      - REPAIR_EXISTING_FACTOR
+      - CONTINUE_VALIDATION
+      - NONE_YET
+    new_decision_gap_observed:
+      type: array
+      items: string
+      description: Buyer/decision questions revealed by this parcel that no frozen Factor owns.
+
+example_minimal_record:
+  validation_result_schema_version: "0.1.0"
+  parcel_id: XPV_CPER_001
+  geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_001
+  geometry_hash: 932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309
+  assigned_slots: [SLOT_ARID_UNCERTAIN_WATER]
+  run_utc: "2026-08-08T00:00:00Z"
+  engine_version: "0.1.0"
+  land_profile_path: test-data/land-profiles/land_profile_cper_001.json
+  match_result_path: test-data/land-profiles/match_result_cper_001.json
+  factors:
+    F01_TOPOGRAPHY:
+      collection_status: COLLECTED
+      input_quality_state: PARCEL_COMPLETE
+      signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+      explanation_code: F01_EXPL_CONTEXT_REQUIRED
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COMPLETE_OR_EQUIVALENT
+      provenance_complete: true
+      place_name_used_as_suitability_input: false
+      notes: Parcel topography context only.
+    F02_HERBACEOUS_RESOURCE:
+      collection_status: COLLECTED
+      input_quality_state: null
+      signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      explanation_code: F02_EXPL_COVERAGE
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COVERAGE_UNQUANTIFIED
+      provenance_complete: true
+      place_name_used_as_suitability_input: false
+      notes: RAP values present; eligible/masked/valid areas not quantified.
+    F03_LIVESTOCK_WATER:
+      collection_status: COLLECTED
+      input_quality_state: MAPPED_CANDIDATES_ONLY
+      signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      explanation_code: F03_EXPL_CANDIDATES_NOT_VERIFIED
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: CANDIDATES_ONLY
+      provenance_complete: true
+      place_name_used_as_suitability_input: false
+      notes: Nine mapped candidates; zero verified systems.
+    F04_SOIL_WETNESS_ECOLOGICAL_SITE:
+      collection_status: COLLECTED
+      input_quality_state: PARCEL_COMPLETE
+      signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+      explanation_code: F04_EXPL_CONTEXT_ONLY
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COMPLETE_WITH_NUMERIC_TOLERANCE
+      provenance_complete: true
+      place_name_used_as_suitability_input: false
+      notes: Soil-survey wetness is not FEMA flood hazard.
+    F05_CLIMATE_DROUGHT_EXPOSURE:
+      collection_status: COLLECTED
+      input_quality_state: CLIMATE_CONTEXT_COMPLETE
+      signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+      explanation_code: F05_EXPL_CONTEXT_ONLY
+      applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL
+      provenance_complete: true
+      place_name_used_as_suitability_input: false
+      notes: annprcp_norm=345.74 mm/year retained as Land Fact only.
+  operation_results:
+    COW_CALF_OPERATION:
+      decision_label: HOLD
+      decision_reason: Five shared Factors are context/data-quality only; material verification incomplete.
+      ranking_position: null
+      factor_signals:
+        F01_TOPOGRAPHY: CONTEXT_DEPENDENT
+        F02_HERBACEOUS_RESOURCE: NEEDS_VERIFICATION
+        F03_LIVESTOCK_WATER: NEEDS_VERIFICATION
+        F04_SOIL_WETNESS_ECOLOGICAL_SITE: CONTEXT_DEPENDENT
+        F05_CLIMATE_DROUGHT_EXPOSURE: CONTEXT_DEPENDENT
+    SHEEP_GRAZING:
+      decision_label: HOLD
+      decision_reason: Five shared Factors are context/data-quality only; material verification incomplete.
+      ranking_position: null
+      factor_signals:
+        F01_TOPOGRAPHY: CONTEXT_DEPENDENT
+        F02_HERBACEOUS_RESOURCE: NEEDS_VERIFICATION
+        F03_LIVESTOCK_WATER: NEEDS_VERIFICATION
+        F04_SOIL_WETNESS_ECOLOGICAL_SITE: CONTEXT_DEPENDENT
+        F05_CLIMATE_DROUGHT_EXPOSURE: CONTEXT_DEPENDENT
+  diagnostics:
+    cow_sheep_signal_identity: IDENTICAL
+    cow_sheep_diagnosis: MISSING_SPECIES_DIFFERENTIAL_RULE
+    source_failure_misread_as_land_problem: false
+    unexpected_place_name_branch: false
+    determinism_replay_passed: true
+  integrity_checks:
+    geometry_hash_matches_file: true
+    land_profile_geometry_hash_matches: true
+    factor_provenance_geometry_hash_aligned: true
+    stale_evidence_invalidated_on_geometry_change: NOT_RUN
+    match_result_input_sha256: REPLACE_WITH_ACTUAL
+    identical_replay_match_result: true
+  decision_contribution:
+    primary_hold_drivers:
+      - F02_COVERAGE_UNQUANTIFIED
+      - F03_CANDIDATES_NOT_VERIFIED
+      - NO_APPROVED_RANKING_OR_THRESHOLDS
+    new_decision_gap_observed: []
+    candidate_next_action: CONTINUE_VALIDATION
+    defect_to_repair: null
+
+portfolio_rollup_required_fields:
+  document: docs/CROSS_PARCEL_VALIDATION_RESULTS.md
+  must_include:
+    - parcel_count_and_slot_coverage
+    - shared_hold_drivers_across_parcels
+    - applicability_coverage_behavior_summary
+    - cow_sheep_diagnosis_summary
+    - defects_found_and_repairs
+    - post_validation_decision
+  post_validation_decision_enum:
+    - DEEPEN_F02_OR_F03
+    - SELECT_F06
+    - REPAIR_EXISTING_FACTORS
+    - MIXED_FOLLOWUP

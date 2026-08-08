@@ -1,0 +1,120 @@
+[
+  {
+    "ecological_site_id": "G154XB111FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "R154XX001FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XX001FL",
+    "http_status": 200,
+    "title": "Ecological site R154XX001FL",
+    "response_sha256": "5664541924089e747b76259b7278f0f431f345d6a408e3ace5893899059a7640",
+    "public_description_accessible": true
+  },
+  {
+    "ecological_site_id": "R154XY002FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XY002FL",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XY002FL"
+  },
+  {
+    "ecological_site_id": "G155XB111FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "F154XA004FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "G155XB131FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "R155XY008FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY008FL",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY008FL"
+  },
+  {
+    "ecological_site_id": "R155XY002FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY002FL",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY002FL"
+  },
+  {
+    "ecological_site_id": "G155XB121FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "R155XY001FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY001FL",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY001FL"
+  },
+  {
+    "ecological_site_id": "R154XY008FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XY008FL",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/154X/R154XY008FL"
+  },
+  {
+    "ecological_site_id": "G154XB231FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "F154XA009FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "G154XB521FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "F154XA015FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "G155XB145FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "R155XY010FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY010FL",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY010FL"
+  },
+  {
+    "ecological_site_id": "R155XY070FL",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/155X/R155XY070FL",
+    "http_status": 200,
+    "title": "Ecological site R155XY070FL",
+    "response_sha256": "44863908374b1bafa2a82d1c92c7e4ded7fbdc6e760024fff61c940a65a8abe9",
+    "public_description_accessible": true
+  },
+  {
+    "ecological_site_id": "G155XB141FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  },
+  {
+    "ecological_site_id": "F155XY120FL",
+    "public_description_accessible": false,
+    "note": "Non-standard ecological site id; EDIT catalog path not attempted."
+  }
+]

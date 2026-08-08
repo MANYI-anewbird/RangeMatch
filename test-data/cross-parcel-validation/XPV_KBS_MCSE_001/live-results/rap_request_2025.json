@@ -1,0 +1,35 @@
+{
+  "type": "Feature",
+  "id": "ENGINEERING_TEST_GEOMETRY_KBS_MCSE_001",
+  "properties": {
+    "mask": true,
+    "year": 2025
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -85.376,
+          42.414
+        ],
+        [
+          -85.361,
+          42.414
+        ],
+        [
+          -85.361,
+          42.404
+        ],
+        [
+          -85.376,
+          42.404
+        ],
+        [
+          -85.376,
+          42.414
+        ]
+      ]
+    ]
+  }
+}

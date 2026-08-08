@@ -1,0 +1,35 @@
+{
+  "type": "Feature",
+  "id": "ENGINEERING_TEST_GEOMETRY_KONZA_001",
+  "properties": {
+    "mask": true,
+    "year": 2025
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -96.57,
+          39.1
+        ],
+        [
+          -96.555,
+          39.1
+        ],
+        [
+          -96.555,
+          39.09
+        ],
+        [
+          -96.57,
+          39.09
+        ],
+        [
+          -96.57,
+          39.1
+        ]
+      ]
+    ]
+  }
+}

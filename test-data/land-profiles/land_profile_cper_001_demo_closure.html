@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RangeMatch Demo Closure — LAND_PROFILE_CPER_001</title>
+  <style>
+    :root {
+      --ink: #1d2a24;
+      --muted: #5c6b63;
+      --paper: #f3efe6;
+      --panel: #fffdf8;
+      --line: #c9c1b3;
+      --context: #5f5a52;
+      --verify: #8a5a17;
+      --unknown: #5a5a5a;
+      --hold: #6b3f2a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(47,93,80,0.08), transparent 40%),
+        linear-gradient(180deg, #e7e0d2 0%, var(--paper) 35%, #efe9dc 100%);
+    }
+    main {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 1.5rem auto 3rem;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    h1, h2, h3 {
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      letter-spacing: 0.01em;
+      margin: 0 0 0.6rem;
+    }
+    h1 { font-size: 1.8rem; }
+    h2 {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 2rem;
+    }
+    p, li, td, th { font-size: 0.98rem; line-height: 1.45; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 1rem 1.1rem;
+      margin-top: 0.75rem;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+    .meta div {
+      border-top: 1px solid var(--line);
+      padding-top: 0.45rem;
+    }
+    .meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      padding: 0.65rem 0.4rem;
+    }
+    th {
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    ul { margin: 0.2rem 0 0.2rem 1.1rem; padding: 0; }
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.45rem;
+      border: 1px solid currentColor;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+    .signal-context { color: var(--context); }
+    .signal-verify { color: var(--verify); }
+    .signal-unknown { color: var(--unknown); }
+    .signal-hold { color: var(--hold); }
+    .operations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.9rem;
+    }
+    .disclaimer {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .callout {
+      background: #fff7e8;
+      border: 1px solid #d2b48c;
+      padding: 0.85rem 1rem;
+      margin: 0.9rem 0 0;
+    }
+    .plain {
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .evidence-summary {
+      margin-top: 0.55rem;
+      padding: 0.45rem 0.55rem;
+      background: #f7f2e8;
+      border: 1px solid var(--line);
+      font-size: 0.84rem;
+    }
+    .evidence-summary ul {
+      margin: 0.35rem 0 0;
+      padding-left: 1.1rem;
+    }
+    code {
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>RangeMatch</h1>
+      <p>Five-Factor demo closure — preliminary screening, deterministic evaluation only.</p>
+      <div class="callout">
+        <strong>HOLD does not mean the land is unsuitable.</strong>
+        It means the current reviewed evidence is incomplete for an ADVANCE, REDIRECT, or REJECT decision.
+        <br /><br />
+        <strong>CONTEXT_DEPENDENT is not a positive score.</strong>
+        It means the Factor provides reviewed context and still depends on other conditions.
+        <br /><br />
+        This geometry is an <strong>engineering test polygon</strong>, not a real purchasable ranch parcel.
+      </div>
+      <p class="disclaimer">Preliminary screening only. The land did not fail; the match remains incomplete until additional reviewed Factors and field verification are available.</p>
+    </header>
+
+    <section>
+      <h2>Parcel Summary</h2>
+      <div class="panel meta">
+        <div><span>Profile</span>LAND_PROFILE_CPER_001</div>
+        <div><span>Geometry</span>ENGINEERING_TEST_GEOMETRY_CPER_001</div>
+        <div><span>Geometry role</span>ENGINEERING_TEST_GEOMETRY</div>
+        <div><span>Purchasable parcel</span>False</div>
+        <div><span>Supported use</span>ENGINEERING_VALIDATION_ONLY</div>
+        <div><span>Engine</span>0.1.0</div>
+        <div><span>Input hash</span><code>17605002066c90f8ae10d1bd67964687e3508627f18eca831667c0e9482cf3f2</code></div>
+        <div><span>Geometry file</span><code>test-data/engineering_test_geometry_cper_001.geojson</code></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Factor Evidence</h2>
+      <div class="panel" style="overflow-x:auto;">
+        <p class="plain">Signals describe evidence quality and reviewed context. They are not carrying capacity or profitability.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Signal</th>
+              <th>Ranking effect</th>
+              <th>Coverage</th>
+              <th>Limitations</th>
+              <th>Unknowns</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td>
+                <strong>Topography</strong><br />
+                <code>F01_TOPOGRAPHY</code>
+                
+              </td>
+              <td>
+                <span class="pill signal-context">CONTEXT_DEPENDENT</span>
+                <div class="plain">Context only — not a positive suitability score</div>
+              </td>
+              <td>NONE</td>
+              <td>PARCEL_COMPLETE</td>
+              <td><ul><li>No additional Factor-specific limitations recorded</li></ul></td>
+              <td><ul><li>No additional Factor-specific unknowns recorded</li></ul></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <strong>Herbaceous Resource</strong><br />
+                <code>F02_HERBACEOUS_RESOURCE</code>
+                
+              </td>
+              <td>
+                <span class="pill signal-verify">NEEDS_VERIFICATION</span>
+                <div class="plain">Needs verification — evidence is incomplete or unconfirmed</div>
+              </td>
+              <td>NONE</td>
+              <td>COVERAGE_UNQUANTIFIED</td>
+              <td><ul><li>RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.</li><li>Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity.</li><li>PFG combines perennial grasses and forbs.</li><li>Modeled cover is not standing biomass, available forage, palatability, or nutritive value.</li><li>Production is modeled new growth, not standing biomass.</li><li>Production is not available forage, carrying capacity, or stocking rate.</li><li>Parcel eligible, masked, no-data, and valid areas are not quantified.</li></ul></td>
+              <td><ul><li>F02 eligible, masked, no-data, and valid parcel areas are not quantified.</li><li>Botanical composition is not verified.</li><li>Operation-specific palatability is not verified.</li><li>Nutritive value is not verified.</li></ul></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <strong>Livestock Water</strong><br />
+                <code>F03_LIVESTOCK_WATER</code>
+                <div class='evidence-summary'><strong>Evidence summary</strong><ul><li>total mapped candidates: 9</li><li>deterministically sampled for remote review: 3</li><li>remotely supported: 2</li><li>sampled but still mapped: 1</li><li>field verified: 0</li><li>sample coverage limitation: Only 3 of 9 candidates were remotely reviewed under STABLE_CANDIDATE_ID_ORDER_MAX_3.</li><li>Factor state: MAPPED_CANDIDATES_ONLY</li><li>signal: NEEDS_VERIFICATION</li><li>ranking_effect: NONE</li><li>REMOTELY_SUPPORTED does not mean usable livestock water.</li><li>FIELD_VERIFIED remains zero for this live CPER profile.</li><li>Six unsampled candidates are UNREVIEWED, not absent or rejected.</li><li>The synthetic field-evidence demo is TEST_ONLY and is not part of CPER live evidence.</li><li>Water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.</li></ul></div>
+              </td>
+              <td>
+                <span class="pill signal-verify">NEEDS_VERIFICATION</span>
+                <div class="plain">Needs verification — evidence is incomplete or unconfirmed</div>
+              </td>
+              <td>NONE</td>
+              <td>MAPPED_CANDIDATES_ONLY</td>
+              <td><ul><li>Mapped NHD hydrography features are candidate context, not verified livestock-water sources.</li><li>REMOTELY_SUPPORTED_CANDIDATE is remote presence plus an approved remote attribute only; it is not usable livestock water.</li><li>Only 3 of 9 mapped candidates were deterministically sampled for remote review; 6 remain UNREVIEWED, not absent or rejected.</li><li>Euclidean distance is not traversable animal-access distance.</li><li>Reliability, capacity, quality, legal access, livestock accessibility, and seasonal operation remain unresolved.</li><li>field_verified_count is 0; verified_count == 0 does not mean the land has no water.</li><li>Synthetic field-evidence fixtures are TEST_ONLY and are excluded from this live CPER Land Profile.</li></ul></td>
+              <td><ul><li>No FIELD_VERIFIED_LIVESTOCK_WATER system is in evidence for CPER.</li><li>Unreviewed mapped candidates have not been remotely or field reviewed.</li><li>Seasonal reliability for livestock use remains unresolved.</li><li>Deliverable capacity remains unresolved.</li><li>Water quality remains unresolved.</li><li>Livestock accessibility remains unresolved.</li><li>Legal access remains unresolved.</li><li>F03 has mapped candidates and optional remote support, but no FIELD_VERIFIED livestock-water system; REMOTELY_SUPPORTED does not mean usable livestock water.</li><li>F03 unsampled mapped candidates are UNREVIEWED, not absent or rejected.</li><li>F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.</li><li>F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.</li></ul></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <strong>Soil, Wetness, and Ecological Site</strong><br />
+                <code>F04_SOIL_WETNESS_ECOLOGICAL_SITE</code>
+                
+              </td>
+              <td>
+                <span class="pill signal-context">CONTEXT_DEPENDENT</span>
+                <div class="plain">Context only — not a positive suitability score</div>
+              </td>
+              <td>NONE</td>
+              <td>COMPLETE (fraction=1.0)</td>
+              <td><ul><li>No composite soil score is created.</li><li>Controlled categories are preserved as distributions, not ordinal averages.</li><li>Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.</li><li>Ecological-site names do not imply current vegetation or operation ranking.</li><li>Mireye centroid soil fields must not replace parcel-wide F04 evidence.</li><li>Available-water storage is omitted from profile evidence until a depth interval is approved.</li></ul></td>
+              <td><ul><li>Within-map-unit component locations are unknown.</li><li>Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.</li><li>Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.</li><li>Ecological-site references do not establish current vegetation state.</li><li>No approved depth interval exists for parcel available-water storage in the Land Profile.</li><li>Some components lack ecological-site linkage; absent linkage remains UNKNOWN.</li><li>F04 soil, wetness, and ecological-site facts are context only; they do not establish current vegetation state, forage productivity, or operation ranking.</li></ul></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <strong>Climate and Drought Exposure</strong><br />
+                <code>F05_CLIMATE_DROUGHT_EXPOSURE</code>
+                
+              </td>
+              <td>
+                <span class="pill signal-context">CONTEXT_DEPENDENT</span>
+                <div class="plain">Context only — not a positive suitability score</div>
+              </td>
+              <td>NONE</td>
+              <td>COMPLETE (fraction=None)</td>
+              <td><ul><li>Mean annual precipitation is a Land Fact, not a suitability score.</li><li>Current USDM class is current-condition context only, not drought history.</li><li>Mireye point climate fields must not replace canonical NOAA parcel precipitation.</li><li>ACIS precipitation series is secondary QA/fallback and is not the canonical runtime source.</li><li>No precipitation, temperature, heat-day, or USDM suitability threshold is approved.</li><li>F05 must not alter F02 forage, F03 livestock-water, or F04 wetness signals.</li><li>Flood/FEMA hazard is out of scope for F05.</li></ul></td>
+              <td><ul><li>Drought-history summary method is not frozen.</li><li>Precipitation seasonality and interannual variability methods are not frozen.</li><li>No biological heat-stress threshold is approved for Cow-Calf or Sheep.</li><li>F05 climate and drought facts are context only; mean annual precipitation and current USDM class do not establish suitability, carrying capacity, or forage/water failure.</li></ul></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <strong>Parcel Configuration</strong><br />
+                <code>F06_PARCEL_CONFIGURATION</code>
+                
+              </td>
+              <td>
+                <span class="pill signal-context">CONTEXT_DEPENDENT</span>
+                <div class="plain">Context only — not a positive suitability score</div>
+              </td>
+              <td>NONE</td>
+              <td>PARCEL_GEOMETRY_COMPLETE</td>
+              <td><ul><li>Parcel area is geometric context, not grazable area or carrying capacity.</li><li>Parcel perimeter is not fencing cost.</li><li>Compactness is not operational efficiency or suitability.</li><li>Measurements use projected UTM meters; not a legal survey acreage.</li><li>v0.1 perimeter excludes interior rings/holes.</li><li>v0.1 does not automatically repair invalid geometry.</li><li>Geodesic QA is deferred and not required for v0.1.</li></ul></td>
+              <td><ul><li>F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.</li></ul></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <strong>Road and Physical Access</strong><br />
+                <code>F07_ROAD_AND_PHYSICAL_ACCESS</code>
+                
+              </td>
+              <td>
+                <span class="pill signal-context">CONTEXT_DEPENDENT</span>
+                <div class="plain">Context only — not a positive suitability score</div>
+              </td>
+              <td>NONE</td>
+              <td>ROAD_CONTEXT_COMPLETE</td>
+              <td><ul><li>Mapped road proximity/contact is physical context only.</li><li>Mapped roads do not establish legal access, easement, or deeded right-of-way.</li><li>Centerline contact does not prove a usable driveway, gate, or entrance.</li><li>Euclidean parcel-to-centerline distance is not network drive distance or travel time.</li><li>Search window is a retrieval parameter, not a too-far suitability threshold.</li><li>Absence of mapped roads in the window does not prove the parcel is landlocked.</li><li>OSM is deferred from F07 v0.1 and was not consulted.</li></ul></td>
+              <td><ul><li>F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.</li></ul></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <strong>Woody and Shrub Vegetation Structure</strong><br />
+                <code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE</code>
+                
+              </td>
+              <td>
+                <span class="pill signal-verify">NEEDS_VERIFICATION</span>
+                <div class="plain">Needs verification — evidence is incomplete or unconfirmed</div>
+              </td>
+              <td>NONE</td>
+              <td>COVERAGE_UNQUANTIFIED</td>
+              <td><ul><li>Shrub and tree cover are modeled RAP fractional cover context only.</li><li>Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.</li><li>Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.</li><li>combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.</li><li>Woody cover does not prove low herbaceous production.</li><li>F08 must not replace F02 herbaceous Land Facts.</li><li>Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.</li><li>Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof.</li><li>Parcel eligible, masked, no-data, and valid areas are not quantified.</li></ul></td>
+              <td><ul><li>Shared RAP eligible/masked/no-data/valid parcel areas are not quantified.</li><li>Botanical composition of woody cover is not verified.</li><li>Browse availability is not established.</li><li>Woody obstruction class is not established.</li><li>F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified.</li><li>F08 eligible, masked, no-data, and valid parcel areas are not quantified.</li></ul></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Operation Comparison</h2>
+      <div class="panel">
+        <p><strong>Peer evaluation:</strong> Cow-Calf and Sheep are shown side by side. Neither is primary.</p>
+        <p>Ranking permitted:
+          <strong>False</strong>
+          — Implemented Factors have no ranking effect; F02 coverage is unquantified, F03 water systems are unverified, F05 has no approved climate suitability threshold, F06 geometry metrics are context only, F07 mapped roads do not establish legal access, and F08 woody cover does not establish browse, obstruction, or species ranking; no reviewed differential rule is active.
+        </p>
+        <div class="operations">
+            <article class="operation">
+              <h3>Cow-Calf Operation</h3>
+              <p><span class="pill signal-hold">HOLD</span></p>
+              <p>Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.</p>
+              <ul><li>Topography: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Herbaceous Resource: <span class='pill signal-verify'>NEEDS_VERIFICATION</span> / ranking=NONE</li><li>Livestock Water: <span class='pill signal-verify'>NEEDS_VERIFICATION</span> / ranking=NONE</li><li>Soil, Wetness, and Ecological Site: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Climate and Drought Exposure: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Parcel Configuration: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Road and Physical Access: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Woody and Shrub Vegetation Structure: <span class='pill signal-verify'>NEEDS_VERIFICATION</span> / ranking=NONE</li></ul>
+            </article>
+            
+            <article class="operation">
+              <h3>Sheep Grazing</h3>
+              <p><span class="pill signal-hold">HOLD</span></p>
+              <p>Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.</p>
+              <ul><li>Topography: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Herbaceous Resource: <span class='pill signal-verify'>NEEDS_VERIFICATION</span> / ranking=NONE</li><li>Livestock Water: <span class='pill signal-verify'>NEEDS_VERIFICATION</span> / ranking=NONE</li><li>Soil, Wetness, and Ecological Site: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Climate and Drought Exposure: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Parcel Configuration: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Road and Physical Access: <span class='pill signal-context'>CONTEXT_DEPENDENT</span> / ranking=NONE</li><li>Woody and Shrub Vegetation Structure: <span class='pill signal-verify'>NEEDS_VERIFICATION</span> / ranking=NONE</li></ul>
+            </article>
+            </div>
+      </div>
+    </section>
+
+    <section id="unknowns">
+      <h2>Unknowns</h2>
+      <div class="panel">
+        <p class="plain">These items remain unresolved and should guide field or records diligence.</p>
+        <ul><li>Botanical composition is not verified.</li><li>Ecological-site references do not establish current vegetation state.</li><li>F02 eligible, masked, no-data, and valid parcel areas are not quantified.</li><li>F03 has mapped candidates and optional remote support, but no FIELD_VERIFIED livestock-water system; REMOTELY_SUPPORTED does not mean usable livestock water.</li><li>F03 unsampled mapped candidates are UNREVIEWED, not absent or rejected.</li><li>F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.</li><li>F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.</li><li>F04 soil, wetness, and ecological-site facts are context only; they do not establish current vegetation state, forage productivity, or operation ranking.</li><li>F05 climate and drought facts are context only; mean annual precipitation and current USDM class do not establish suitability, carrying capacity, or forage/water failure.</li><li>F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.</li><li>F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.</li><li>F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified.</li><li>No FIELD_VERIFIED livestock-water system is in evidence for CPER; verified_count == 0 does not mean the land has no water.</li><li>Nutritive value is not verified.</li><li>Operation-specific palatability is not verified.</li><li>Six of nine CPER mapped water candidates remain UNREVIEWED after deterministic remote sampling.</li><li>Within-map-unit component locations are unknown.</li></ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Diligence Actions</h2>
+      <div class="panel"><ul><li>Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.</li><li>Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.</li><li>Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.</li><li>Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.</li><li>Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.</li><li>Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.</li><li>Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.</li><li>Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.</li><li>Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.</li><li>Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision.</li></ul></div>
+    </section>
+
+    <section>
+      <h2>Source Trace</h2>
+      <div class="panel"><ul><li><code>F01_TOPOGRAPHY: derivation F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0</code></li><li><code>F01_TOPOGRAPHY: result test-data/live-results/cper/f01_derivation_result_2026-08-07.json</code></li><li><code>F02_HERBACEOUS_RESOURCE: derivation F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0</code></li><li><code>F02_HERBACEOUS_RESOURCE/VAR_F02_PERENNIAL_HERB_COVER: RAP_coverV3 @ 2026-08-07T21:03:00Z</code></li><li><code>F02_HERBACEOUS_RESOURCE/VAR_F02_ANNUAL_HERB_PRODUCTION: RAP_productionV3 @ 2026-08-07T21:03:00Z</code></li><li><code>F03_LIVESTOCK_WATER: derivation F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml@0.1.0</code></li><li><code>F03_LIVESTOCK_WATER: evidence_contract F03_VERIFIED_WATER_EVIDENCE_CONTRACT.yaml@0.1.1</code></li><li><code>F03_LIVESTOCK_WATER: result test-data/live-results/cper/cper_f03_candidate_distance_result_2026-08-07.json</code></li><li><code>F03_LIVESTOCK_WATER: remote_collection test-data/cross-parcel-validation/XPV_CPER_001/f03_remote_pilot/remote_pilot_result.json</code></li><li><code>F03_LIVESTOCK_WATER: five_parcel_remote_collection test-data/cross-parcel-validation/f03_five_parcel_remote_collection_summary.json</code></li><li><code>F03_LIVESTOCK_WATER: synthetic_field_evidence_demo test-data/f03_field_evidence_demo/field_evidence_demo_result.json (TEST_ONLY; not live CPER evidence)</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: derivation F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: result test-data/live-results/cper/f04_derivation_result_2026-08-07.json</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: fixture test-data/live-results/cper/cper_sda_spatial_coverage_2026-08-07.json</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: fixture test-data/live-results/cper/cper_sda_mapunit_component_ecosite_2026-08-07.json</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: fixture test-data/live-results/cper/cper_sda_horizons_2026-08-07.json</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: fixture test-data/live-results/cper/cper_sda_restrictions_2026-08-07.json</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: fixture test-data/live-results/cper/cper_sda_monthly_wetness_2026-08-07.json</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: fixture test-data/live-results/cper/cper_ecological_site_access_2026-08-07.json</code></li><li><code>F04_SOIL_WETNESS_ECOLOGICAL_SITE: USDA_NRCS_SDA_SSURGO_AND_EDIT hash=2807be243bc959b2eab4e2177986aa8cf88f0defd7b7694b001c95ab837dc4b8</code></li><li><code>F05_CLIMATE_DROUGHT_EXPOSURE: derivation F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0</code></li><li><code>F05_CLIMATE_DROUGHT_EXPOSURE: result test-data/live-results/cper/f05_derivation_result_2026-08-08.json</code></li><li><code>F05_CLIMATE_DROUGHT_EXPOSURE: fixture test-data/live-results/cper/cper_noaa_ncei_annprcp_normals_1991_2020_2026-08-07.json</code></li><li><code>F05_CLIMATE_DROUGHT_EXPOSURE: fixture test-data/live-results/cper/cper_mireye_f05_centroid_2026-08-07.json</code></li><li><code>F05_CLIMATE_DROUGHT_EXPOSURE: NOAA_NCEI_DIRECT_HTTPS_NETCDF hash=6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2</code></li><li><code>F06_PARCEL_CONFIGURATION: derivation F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0</code></li><li><code>F06_PARCEL_CONFIGURATION: result test-data/live-results/cper/f06_derivation_result_2026-08-08.json</code></li><li><code>F06_PARCEL_CONFIGURATION: test-data/engineering_test_geometry_cper_001.geojson hash=932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309</code></li><li><code>F07_ROAD_AND_PHYSICAL_ACCESS: derivation F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0</code></li><li><code>F07_ROAD_AND_PHYSICAL_ACCESS: result test-data/live-results/cper/f07_derivation_result_2026-08-08.json</code></li><li><code>F07_ROAD_AND_PHYSICAL_ACCESS: fixture test-data/live-results/cper/f07_tiger2025_all_roads_search_window.geojson</code></li><li><code>F07_ROAD_AND_PHYSICAL_ACCESS: None hash=f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE: derivation F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE: result test-data/live-results/cper/f08_derivation_result_2026-08-08.json</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE: fixture test-data/live-results/cper/rap_coverV3_2025.json</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE: fixture test-data/live-results/cper/rap_request_2025.json</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE/VAR_F08_SHRUB_COVER_FRACTION: RAP_coverV3 @ 2026-08-07T21:03:00Z</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE/VAR_F08_TREE_COVER_FRACTION: RAP_coverV3 @ 2026-08-07T21:03:00Z</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE/VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION: RAP_coverV3 @ 2026-08-07T21:03:00Z</code></li><li><code>F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE: RAP_coverV3 hash=58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160</code></li></ul></div>
+    </section>
+
+    <section>
+      <h2>Constrained Explanation</h2>
+      <div class="panel">
+        <p>Bound to MatchResult <code>17605002066c90f8ae10d1bd67964687e3508627f18eca831667c0e9482cf3f2</code>.
+        LLM override permitted: <strong>false</strong>.</p>
+        <ul><li>This is a preliminary screening result produced by the deterministic Matching Engine.</li><li>Cow-Calf and Sheep are evaluated as peer operations. No cross-profile ranking is permitted in this vertical slice.</li><li>Signals describe evidence quality and reviewed qualitative context. They are not carrying capacity, profitability, or success probability.</li><li>Missing or unverified inputs remain UNKNOWN or NEEDS_VERIFICATION and are listed as diligence actions.</li><li>CPER does not have verified livestock water in this live profile.</li><li>REMOTELY_SUPPORTED candidates are not usable livestock-water systems.</li><li>FIELD_VERIFIED remains zero; verified_count == 0 does not mean the land has no water.</li><li>Unsampled mapped water candidates are UNREVIEWED, not absent or rejected.</li><li>Synthetic field-evidence demos are TEST_ONLY and are not part of CPER live evidence.</li></ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

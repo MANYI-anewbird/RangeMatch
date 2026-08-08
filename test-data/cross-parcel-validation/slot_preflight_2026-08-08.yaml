@@ -1,0 +1,155 @@
+preflight_id: XPV_SLOT_PREFLIGHT_2026-08-08
+status: PASSED_FOR_REGISTRATION
+selection_date: "2026-08-08"
+rules_applied:
+  geometry_accessible: true
+  public_reproducible_boundary: true
+  environment_slot_supported_by_measured_data: true
+  f01_f05_data_paths_plausible: true
+  known_operation_outcome_required: false
+  selection_reason_does_not_predict_ranking: true
+
+method_notes:
+  - >-
+    ACIS GridData grid=21 annual precip mean 1991–2020 used only as low-cost
+    climate-regime contrast evidence for slot support; not a suitability score
+    and not the canonical NOAA normals Land Fact path.
+  - >-
+    Geometries are synthetic rectangles inside publicly documented research
+    extents; they are not official pasture boundaries, purchasable parcels, or
+    known-operation success cases.
+  - >-
+    Reference operation is intentionally null for all new parcels; nearby
+    ranching or research grazing does not convert a parcel into a success case.
+  - >-
+    Selection order followed humid → rugged → water-candidate-rich → RAP scope
+    boundary; parcels were not reverse-picked for expected Cow-Calf or Sheep
+    ranking.
+
+candidates:
+  - parcel_id: XPV_KONZA_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_KONZA_001
+    geometry_path: test-data/engineering_test_geometry_konza_001.geojson
+    geometry_hash: f379ea881cc068cbd48173064bc6b2fa473a16b07d96b4efa5cba534c3baee6d
+    assigned_slot: SLOT_HUMID_STRONG_HERB
+    approximate_area_ha: 143.94
+    selection_order: 1
+    preflight:
+      geometry_accessible: true
+      public_reproducible_boundary: true
+      environment_slot_supported_by_measured_data: true
+      f01_f05_data_paths_plausible: true
+      known_operation_outcome_required: false
+      selection_reason_does_not_predict_ranking: true
+      acis_grid21_mean_annual_precip_mm_1991_2020: 888.43
+      contrast_vs_cper_acis_mm: 537.6
+    selection_rationale: >-
+      Humid/subhumid tallgrass prairie research extent with substantially higher
+      long-term precip than CPER; stresses F02 herbaceous contrast and F05 precip
+      contrast. Engineering subpolygon only.
+    source_citations:
+      - https://en.wikipedia.org/wiki/Konza_Prairie
+      - https://www.neonscience.org/field-sites/konz
+      - https://doi.org/10.6073/pasta/2716ff680705925ddd5a37a4523f0020
+    known_limitations:
+      - Synthetic engineering subpolygon inside a larger public research extent.
+      - Preflight precip is ACIS secondary series, not canonical NOAA normals.
+      - No Cow-Calf or Sheep ranking outcome is predicted by selection.
+      - Full F01–F05 may yield UNKNOWN/NEEDS_VERIFICATION; that remains valid.
+    decision: REGISTER
+
+  - parcel_id: XPV_REYNOLDS_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_REYNOLDS_001
+    geometry_path: test-data/engineering_test_geometry_reynolds_001.geojson
+    geometry_hash: e0f96f072082ec0f7b57a9e07856415b2a39e7e241af51044fff53bb2826a93c
+    assigned_slot: SLOT_RUGGED_SHEEP_RELEVANT
+    approximate_area_ha: 135.42
+    selection_order: 2
+    preflight:
+      geometry_accessible: true
+      public_reproducible_boundary: true
+      environment_slot_supported_by_measured_data: true
+      f01_f05_data_paths_plausible: true
+      known_operation_outcome_required: false
+      selection_reason_does_not_predict_ranking: true
+      acis_grid21_mean_annual_precip_mm_1991_2020: 686.56
+      contrast_vs_cper_acis_mm: 335.73
+    selection_rationale: >-
+      Mountainous USDA-ARS experimental watershed with documented high local
+      relief; selected to stress F01 terrain context for sheep-relevant
+      ruggedness literature without assigning a Sheep known-operation outcome or
+      ranking expectation.
+    source_citations:
+      - https://ltar.ars.usda.gov/sites/gb/
+      - https://www.ars.usda.gov/pacific-west-area/boise-id/northwest-watershed-research-center/
+    known_limitations:
+      - Synthetic engineering subpolygon inside Reynolds Creek Experimental Watershed.
+      - Sheep-relevant means terrain-literature relevance only; not Sheep ADVANCE.
+      - Reference operation remains null despite regional grazing research context.
+      - Full F01–F05 may yield UNKNOWN/NEEDS_VERIFICATION; that remains valid.
+    decision: REGISTER
+
+  - parcel_id: XPV_ORDWAY_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_ORDWAY_001
+    geometry_path: test-data/engineering_test_geometry_ordway_001.geojson
+    geometry_hash: e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a
+    assigned_slot: SLOT_WATER_CANDIDATE_RICH
+    approximate_area_ha: 161.117
+    selection_order: 3
+    preflight:
+      geometry_accessible: true
+      public_reproducible_boundary: true
+      environment_slot_supported_by_measured_data: true
+      f01_f05_data_paths_plausible: true
+      known_operation_outcome_required: false
+      selection_reason_does_not_predict_ranking: true
+      acis_grid21_mean_annual_precip_mm_1991_2020: 1318.98
+      contrast_vs_cper_acis_mm: 968.15
+    selection_rationale: >-
+      Public research station colocated with NEON aquatic sites (lakes/wetland
+      mosaic); selected to stress dense mapped hydrography candidates while
+      keeping verified livestock-water systems at zero until field/legal
+      verification. Not a flood-suitability case and not a known ranch operation
+      success case.
+    source_citations:
+      - https://www.neonscience.org/field-sites/osbs
+      - https://ordway-swisher.ufl.edu/
+    known_limitations:
+      - Synthetic engineering subpolygon; candidate richness must be confirmed at F03 collection.
+      - Dense mapped water ≠ verified livestock water; candidate count is not adequacy.
+      - Not selected as a flood Factor case; flood remains non-default.
+      - Full F01–F05 may yield UNKNOWN/NEEDS_VERIFICATION; that remains valid.
+    decision: REGISTER
+
+  - parcel_id: XPV_KBS_MCSE_001
+    geometry_id: ENGINEERING_TEST_GEOMETRY_KBS_MCSE_001
+    geometry_path: test-data/engineering_test_geometry_kbs_mcse_001.geojson
+    geometry_hash: d2ae26983a61e4a7f712cec0952c178c278dd5954285d64cedc9938586de2eb9
+    assigned_slot: SLOT_RAP_SCOPE_BOUNDARY
+    approximate_area_ha: 136.938
+    selection_order: 4
+    preflight:
+      geometry_accessible: true
+      public_reproducible_boundary: true
+      environment_slot_supported_by_measured_data: true
+      f01_f05_data_paths_plausible: true
+      known_operation_outcome_required: false
+      selection_reason_does_not_predict_ranking: true
+      acis_grid21_mean_annual_precip_mm_1991_2020: 1024.60
+      contrast_vs_cper_acis_mm: 673.77
+    selection_rationale: >-
+      Published KBS LTER cropping-system experimental extent used to stress F02
+      RAP documented rangeland-domain applicability (expected
+      OUTSIDE_DOCUMENTED_PRODUCT_SCOPE or equivalent discipline), not to score
+      forage suitability. Not selected to predict Cow-Calf or Sheep ranking.
+    source_citations:
+      - https://lter.kbs.msu.edu/research/site-description-and-maps/general-description/
+      - https://lter.kbs.msu.edu/maps/GIS/plot_polygons_mainsite_fgdc.htm
+    known_limitations:
+      - Synthetic rectangle approximating MCSE extent; not official plot polygons.
+      - Outside-RAP-scope or UNKNOWN-heavy F02 outcomes are acceptable validation results.
+      - Not an improved-pasture success case and not a ranking prediction.
+      - Full F01–F05 may yield UNKNOWN/NEEDS_VERIFICATION; that remains valid.
+    decision: REGISTER
+
+rejected_or_deferred: []

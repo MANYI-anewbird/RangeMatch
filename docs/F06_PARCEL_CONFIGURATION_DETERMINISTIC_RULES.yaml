@@ -1,0 +1,138 @@
+spec_id: RANGEMATCH_F06_PARCEL_CONFIGURATION_RULES
+version: 0.1.0
+language: English
+status: APPROVED_V0_1_FOR_IMPLEMENTATION
+factor_id: F06_PARCEL_CONFIGURATION
+derivation_spec: F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0
+atomicity_audit: F06_PARCEL_CONFIGURATION_ATOMICITY_AND_SOURCE_AUDIT.md
+approved_numeric_thresholds: []
+approved_weights: []
+approved_hard_constraints: []
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  missing_values_are_unknown: true
+  operation_ranking_effect: NONE
+  directional_signal_allowed: false
+  suitability_factor: false
+  rationale: >-
+    Parcel configuration measurements provide geometric context only. Reviewed
+    evidence does not support acreage, compactness, or boundary thresholds, nor
+    Cow-Calf versus Sheep ranking from parcel shape or size.
+
+required_variables:
+  minimum_for_context_evaluation:
+    - VAR_F06_PARCEL_AREA
+    - VAR_F06_PARCEL_PERIMETER
+    - VAR_F06_GEOMETRY_VALIDITY
+    - VAR_F06_GEOMETRY_COVERAGE_STATUS
+  supporting_context:
+    - VAR_F06_POLYGON_PART_COUNT
+    - VAR_F06_COMPACTNESS
+  deferred_not_required:
+    - VAR_F06_DISCONNECTED_PART_COUNT
+    - VAR_F06_PERIMETER_TO_AREA_RATIO
+    - VAR_F06_BOUNDARY_COMPLEXITY
+    - VAR_F06_NARROW_SECTION_CONTEXT
+
+input_quality_states:
+  PARCEL_GEOMETRY_COMPLETE:
+    definition: >-
+      Non-empty measurable parcel geometry is available with validity usable for
+      measurement (VALID or reviewed REPAIRED_FOR_MEASUREMENT), working CRS
+      selected, and area/perimeter derived with units, CRS, geometry hash, and
+      algorithm version.
+  CRS_UNSUPPORTED:
+    definition: >-
+      Geometry exists but working CRS cannot be selected under the frozen policy
+      (for example UTM zone crossing) without silent arbitrary projection.
+  GEOMETRY_INVALID_OR_EMPTY:
+    definition: Geometry is empty, missing, or invalid and unusable for measurement.
+  PARCEL_INCOMPLETE:
+    definition: >-
+      A partial derivation exists, but required provenance, units, CRS, geometry
+      hash, or algorithm version is missing.
+  CONFLICTING_SOURCES:
+    definition: >-
+      Material disagreement exists between geometry sources or hashes for the
+      same parcel identity and no reviewed reconciliation resolves it.
+  MISSING:
+    definition: No parcel geometry is available.
+
+evaluation_order:
+  - rule_id: F06_QC_001
+    when: input_quality_state == CONFLICTING_SOURCES
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F06_EXPL_CONFLICT
+
+  - rule_id: F06_QC_002
+    when: input_quality_state == GEOMETRY_INVALID_OR_EMPTY
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F06_EXPL_GEOMETRY_UNUSABLE
+
+  - rule_id: F06_QC_003
+    when: input_quality_state == CRS_UNSUPPORTED
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F06_EXPL_CRS_UNSUPPORTED
+
+  - rule_id: F06_QC_004
+    when: input_quality_state == PARCEL_INCOMPLETE
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F06_EXPL_INCOMPLETE_PROVENANCE
+
+  - rule_id: F06_QC_005
+    when: input_quality_state == MISSING
+    output_signal: UNKNOWN
+    ranking_effect: NONE
+    explanation_code: F06_EXPL_MISSING
+
+  - rule_id: F06_QC_006
+    when: input_quality_state == PARCEL_GEOMETRY_COMPLETE
+    output_signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F06_EXPL_CONTEXT_ONLY
+
+allowed_signals:
+  - CONTEXT_DEPENDENT
+  - NEEDS_VERIFICATION
+  - UNKNOWN
+
+prohibited_outputs:
+  - ADVANCE_from_acreage_or_compactness
+  - REJECT_from_multipart_or_low_compactness
+  - fencing_cost
+  - carrying_capacity
+  - profitability
+  - cow_calf_vs_sheep_rank
+  - f07_access_claim
+
+operation_explanations:
+  COW_CALF_OPERATION:
+    requirement_id: COW_F06_001
+    requirement_status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    note: Parcel size/shape context may matter operationally, but no reviewed threshold is approved.
+  SHEEP_GRAZING:
+    requirement_id: SHEEP_F06_001
+    requirement_status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    note: Same geometric context for peer evaluation; no species ranking from F06.
+
+diligence_actions:
+  - diligence_id: F06_DIL_001
+    when: input_quality_state in [GEOMETRY_INVALID_OR_EMPTY, PARCEL_INCOMPLETE, CRS_UNSUPPORTED]
+    action: Repair or replace parcel geometry with a valid, CRS-supported boundary and regenerate F06 measurements.
+  - diligence_id: F06_DIL_002
+    when: polygon_part_count > 1
+    action: Confirm whether multi-part geometry reflects real disconnected ownership/operation units or a drafting artifact.
+  - diligence_id: F06_DIL_003
+    when: always_for_context
+    action: Do not interpret area or compactness as suitability, fencing cost, or carrying capacity.
+
+geometry_replacement_policy:
+  on_geometry_hash_change: INVALIDATE_F06_AND_REQUIRE_RECOMPUTE
+  silently_reuse_prior_measurements: PROHIBITED

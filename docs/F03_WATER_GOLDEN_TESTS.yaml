@@ -1,0 +1,81 @@
+test_suite_id: RANGEMATCH_F03_WATER_GOLDEN_TESTS
+rule_spec_version: 0.1.0
+status: REVIEW_CANDIDATE
+
+cases:
+  - test_id: F03_TEST_001
+    description: Parcel hydrography alone remains a candidate requiring verification.
+    input_quality_state: MAPPED_CANDIDATES_ONLY
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      diligence_action: F03_DIL_001
+
+  - test_id: F03_TEST_002
+    description: Null waterbody name does not mean no waterbody.
+    input:
+      nearest_waterbody_name: null
+      parcel_nhd_waterbody_count: 1
+    expected:
+      candidate_waterbody_present: true
+      livestock_source_verified: false
+
+  - test_id: F03_TEST_003
+    description: Historical nearby groundwater observation remains context only.
+    input:
+      distance_to_observation_m: 1497
+      observation_date: 1956-04-01
+      depth_to_water_m: 13.4112
+    expected:
+      current_parcel_groundwater_verified: false
+      well_yield_verified: false
+      factor_signal: NEEDS_VERIFICATION
+
+  - test_id: F03_TEST_004
+    description: Physical source without system evidence is incomplete.
+    input_quality_state: PHYSICAL_SOURCE_UNVERIFIED_SYSTEM
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+
+  - test_id: F03_TEST_005
+    description: Missing water evidence remains unknown.
+    input_quality_state: MISSING
+    expected:
+      cow_calf_signal: UNKNOWN
+      sheep_signal: UNKNOWN
+
+  - test_id: F03_TEST_006
+    description: Fully verified system remains context dependent without approved thresholds.
+    input_quality_state: VERIFIED_WATER_SYSTEM_CONTEXT
+    expected:
+      cow_calf_signal: CONTEXT_DEPENDENT
+      sheep_signal: CONTEXT_DEPENDENT
+      ranking_effect: NONE
+
+  - test_id: F03_TEST_007
+    description: Straight-line distance cannot substitute for traversable distance.
+    input:
+      euclidean_distance_m: 500
+      fencing_known: false
+      barriers_known: false
+      legal_access_known: false
+    expected:
+      traversable_distance_m: null
+      factor_signal: NEEDS_VERIFICATION
+
+prohibited_behavior_tests:
+  - test_id: F03_NEG_001
+    prohibited_output: livestock_source_verified_from_NHD_alone
+  - test_id: F03_NEG_002
+    prohibited_output: current_well_yield_from_historical_NWIS_depth
+  - test_id: F03_NEG_003
+    prohibited_output: no_waterbody_from_null_name
+  - test_id: F03_NEG_004
+    prohibited_output: universal_distance_to_water_threshold
+  - test_id: F03_NEG_005
+    prohibited_output: automatic_sheep_or_cattle_water_advantage
+  - test_id: F03_NEG_006
+    prohibited_output: physical_water_implies_legal_access
+

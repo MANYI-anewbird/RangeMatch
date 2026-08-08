@@ -1,0 +1,222 @@
+test_suite_id: RANGEMATCH_F08_WOODY_SHRUB_GOLDEN_TESTS
+rule_spec_version: 0.1.0
+derivation_spec_version: 0.1.0
+status: FROZEN_V0_1
+implementation_status: FROZEN_V0_1
+executable_suite: tests/test_f08_derivation.py
+unit_policy: fraction_normalized_0_1
+demo_factor_scope: CLOSED
+
+shared_expectations:
+  ranking_effect: NONE
+  browse_from_shrub_cover: false
+  obstruction_from_tree_cover: false
+  cow_sheep_signal_divergence_from_f08_alone: false
+  forced_sum_to_100: prohibited
+  average_rap_with_secondary: prohibited
+  mireye_point_as_parcel: prohibited
+  land_fact_unit: fraction
+  valid_range: [0.0, 1.0]
+  rap_percent_to_fraction: value / 100
+  combined_null_if_either_null: true
+  treat_null_as_zero: prohibited
+
+cases:
+  - test_id: F08_TEST_001
+    description: >-
+      Demo path — RAP woody values present but shared coverage unquantified
+      yields NEEDS_VERIFICATION (aligned with F02), not CONTEXT_DEPENDENT.
+    input:
+      rap_bands: [SHR, TRE]
+      applicability: IN_DOCUMENTED_PRODUCT_SCOPE
+      coverage_status: COVERAGE_UNQUANTIFIED
+      provenance_complete: true
+      input_quality_state: WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      ranking_effect: NONE
+      explanation_code: F08_EXPL_COVERAGE_UNQUANTIFIED
+      browse_inferred: false
+      obstruction_inferred: false
+      labeled_complete: false
+
+  - test_id: F08_TEST_002
+    description: Mireye point-only woody/tree fields cannot represent the parcel.
+    input:
+      mireye_only: true
+      fields: [lcms_class, tree_canopy_pct]
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      explanation_code: F08_EXPL_POINT_ONLY
+      parcel_distribution_claimed: false
+
+  - test_id: F08_TEST_003
+    description: Missing coverage/woody inputs produce UNKNOWN or NEEDS_VERIFICATION.
+    input_cases:
+      - input_quality_state: MISSING
+        expected_signal: UNKNOWN
+      - input_quality_state: COVERAGE_MISSING
+        expected_signal: NEEDS_VERIFICATION
+    expected:
+      ranking_effect: NONE
+      suitability_decision_from_f08_alone: false
+
+  - test_id: F08_TEST_004
+    description: Outside or unknown RAP applicability is preserved.
+    input:
+      applicability: [OUTSIDE_DOCUMENTED_PRODUCT_SCOPE, UNKNOWN]
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      explanation_code: F08_EXPL_APPLICABILITY
+      applicability_overwritten_to_in_scope: false
+
+  - test_id: F08_TEST_005
+    description: Conflicting RAP and secondary land-cover data are not averaged.
+    input:
+      rap_shr_fraction: 0.10
+      secondary_nlcd_or_lcms_woody_proxy_percent: 40.0
+      conflict: true
+    expected:
+      cow_calf_signal: NEEDS_VERIFICATION
+      sheep_signal: NEEDS_VERIFICATION
+      averaged_value: false
+      explanation_code: F08_EXPL_CONFLICT
+
+  - test_id: F08_TEST_006
+    description: Shrub cover fraction is not converted to browse availability.
+    input:
+      shrub_cover_fraction: 0.25
+    expected:
+      browse_availability: null
+      prohibited_field_present: false
+      ranking_effect: NONE
+
+  - test_id: F08_TEST_007
+    description: Tree cover fraction is not converted to obstruction.
+    input:
+      tree_cover_fraction: 0.15
+    expected:
+      obstruction_class: null
+      decision_label_from_tree_cover_alone: unchanged
+      ranking_effect: NONE
+
+  - test_id: F08_TEST_008
+    description: No Cow-Calf/Sheep ranking from F08 alone.
+    input:
+      shrub_cover_fraction: 0.30
+      tree_cover_fraction: 0.05
+    expected:
+      cow_calf_signal_equals_sheep_signal: true
+      ranking_position: null
+      ranking_effect: NONE
+
+  - test_id: F08_TEST_009
+    description: Same input and version produce the same result.
+    input:
+      identical_coverV3_artifact: true
+      algorithm_version: F08_WOODY_SHRUB_DERIVATION@0.1.0
+    expected:
+      deterministic_byte_identical_factor_evaluation: true
+
+  - test_id: F08_TEST_010
+    description: Geometry replacement invalidates F08 evidence.
+    input:
+      prior_geometry_hash: aaa
+      new_geometry_hash: bbb
+    expected:
+      reuse_prior_shr_tre: false
+      recompute_required: true
+
+  - test_id: F08_TEST_011
+    description: Shared F02/F08 RAP provenance and quality status remain consistent.
+    input:
+      f02_response_or_artifact_hash: abc123
+      f02_coverage_status: COVERAGE_UNQUANTIFIED
+      f02_applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      f08_reuses_same_coverV3: true
+      year: 2025
+      mask: true
+    expected:
+      f08_response_or_artifact_hash: abc123
+      f08_coverage_status: COVERAGE_UNQUANTIFIED
+      f08_applicability_status: IN_DOCUMENTED_PRODUCT_SCOPE
+      duplicate_coverV3_fetch: false
+      year_mismatch: false
+      f08_upgrades_coverage_to_complete: false
+
+  - test_id: F08_TEST_012
+    description: >-
+      Percent→fraction normalization, combined modeled woody derivation, and
+      no double-count / forced sum-to-100.
+    input:
+      raw_rap_percent:
+        AFG: 12.57
+        PFG: 32.99
+        SHR: 6.73
+        TRE: 0.11
+        LTR: 12.47
+        BGR: 26.41
+    expected:
+      shrub_cover_fraction: 0.0673
+      tree_cover_fraction: 0.0011
+      combined_modeled_woody_cover_fraction: 0.0684
+      unit: fraction
+      valid_range: [0.0, 1.0]
+      raw_rap_shr_percent_preserved: 6.73
+      raw_rap_tre_percent_preserved: 0.11
+      forced_sum_to_100: false
+      combined_counted_in_composition_identity: false
+      missing_mass_reassigned: false
+      observed_sum_qa_note_allowed: true
+
+  - test_id: F08_TEST_013
+    description: Combined modeled woody is null if either SHR or TRE is null.
+    input_cases:
+      - shrub_cover_fraction: 0.10
+        tree_cover_fraction: null
+        expected_combined: null
+      - shrub_cover_fraction: null
+        tree_cover_fraction: 0.05
+        expected_combined: null
+      - shrub_cover_fraction: null
+        tree_cover_fraction: null
+        expected_combined: null
+    expected:
+      treat_null_as_zero: false
+      clamp_or_truncate: false
+
+prohibited_behavior_tests:
+  - test_id: F08_NEG_001
+    description: Shrub cover must not create browse availability.
+    prohibited: browse_from_shrub_cover
+
+  - test_id: F08_NEG_002
+    description: Tree cover must not create obstruction classes.
+    prohibited: obstruction_from_tree_cover
+
+  - test_id: F08_NEG_003
+    description: Woody cover must not prove low herbaceous production.
+    prohibited: low_herbaceous_certainty_from_woody_cover
+
+  - test_id: F08_NEG_004
+    description: F08 must not rank Cow-Calf above Sheep or the reverse.
+    prohibited: cow_sheep_ranking_from_f08
+
+  - test_id: F08_NEG_005
+    description: F08 must not replace F02 herbaceous Land Facts.
+    prohibited: f02_replacement_by_f08
+
+  - test_id: F08_NEG_006
+    description: Mireye point must not be labeled parcel woody distribution.
+    prohibited: mireye_point_as_parcel_woody_distribution
+
+  - test_id: F08_NEG_007
+    description: Coverage unquantified must not become COMPLETE / CONTEXT_DEPENDENT in F08.
+    prohibited: coverage_unquantified_upgraded_to_complete
+
+  - test_id: F08_NEG_008
+    description: combined_modeled_woody must not treat null as zero.
+    prohibited: null_treated_as_zero_in_combined_woody

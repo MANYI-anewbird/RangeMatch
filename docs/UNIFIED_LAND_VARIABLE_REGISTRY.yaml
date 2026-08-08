@@ -1,0 +1,703 @@
+registry_id: RANGEMATCH_UNIFIED_LAND_VARIABLES
+version: 0.7.0-draft
+language: English
+status: ACTIVE_AUDIT
+current_factor_slice: F01_TO_F08_DEMO_SCOPE_CLOSED
+prior_frozen_slice: F01_F02_F03_F04_F05_F06_F07_AND_F08
+f02_coverage_upgrade: DEFERRED_FOR_DEMO
+demo_factor_scope_status: CLOSED
+f06_authorization: FROZEN_V0_1
+f07_authorization: FROZEN_V0_1
+f07_implementation: FROZEN_V0_1
+f08_authorization: FROZEN_V0_1
+f08_implementation: FROZEN_V0_1
+f09_authorization: NOT_AUTHORIZED
+next_phase: PRODUCT_PROTOTYPE_AND_AGENT_ORCHESTRATION
+land_fact_instance_schema: LAND_FACT_SCHEMA.yaml@0.1.0
+
+instance_governance:
+  required_trust_dimensions:
+    - observation
+    - source
+    - applicability
+    - coverage
+    - quality
+    - provenance
+    - limitations
+  value_presence_establishes_applicability: false
+  adapter_success_establishes_complete_coverage: false
+  aggregate_api_default_coverage_state: COVERAGE_UNQUANTIFIED
+  gate_order:
+    - APPLICABILITY_GATE
+    - COVERAGE_GATE
+    - PROVENANCE_AND_QUALITY_GATE
+    - VARIABLE_DERIVATION
+    - SCIENTIFIC_RELATIONSHIP_EVALUATION
+    - OPERATION_COMPARISON
+
+context_decomposition_policy:
+  place_names_are_suitability_inputs: false
+  coordinates_are_lookup_keys: true
+  raw_values_preserved_before_classification: true
+  missing_values_remain_unknown: true
+  numeric_encoding_requires_scientific_meaning: true
+  controlled_categories_allowed: true
+
+variables:
+  - variable_id: VAR_F08_SHRUB_COVER_FRACTION
+    name: shrub_cover_fraction
+    definition: >-
+      Parcel-mean RAP v3 coverV3 SHR normalized to fraction in [0,1]
+      (RAP percent / 100). Woody-layer context only. Not browse availability,
+      palatability, botanical composition, toxicity, or nutritive value.
+    type: SOURCE_DERIVED_LAND_FACT
+    unit: fraction
+    valid_range: [0.0, 1.0]
+    spatial_semantics: parcel_mean
+    canonical_source: USDA_ARS_RAP_V3_COVER
+    derivation_status: FROZEN_V0_1
+    derivation_spec: F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+    warning: Must not be converted to browse availability. Preserve raw RAP percent in provenance.
+
+  - variable_id: VAR_F08_TREE_COVER_FRACTION
+    name: tree_cover_fraction
+    definition: >-
+      Parcel-mean RAP v3 coverV3 TRE normalized to fraction in [0,1]
+      (RAP percent / 100). Woody-layer context only. Not automatic grazing
+      obstruction or cattle/sheep exclusion.
+    type: SOURCE_DERIVED_LAND_FACT
+    unit: fraction
+    valid_range: [0.0, 1.0]
+    spatial_semantics: parcel_mean
+    canonical_source: USDA_ARS_RAP_V3_COVER
+    derivation_status: FROZEN_V0_1
+    derivation_spec: F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+    warning: Must not be converted to obstruction class. Preserve raw RAP percent in provenance.
+
+  - variable_id: VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION
+    name: combined_modeled_woody_cover_fraction
+    definition: >-
+      Derived context only: shrub_cover_fraction + tree_cover_fraction.
+      Not an independent RAP canopy band. Null if either input is null.
+      Must not treat null as zero, clamp, repair residual mass, or participate
+      in a composition sum identity.
+    type: PARCEL_DERIVED_CONTEXT_VARIABLE
+    unit: fraction
+    valid_range: [0.0, 1.0]
+    spatial_semantics: parcel_mean
+    canonical_source: USDA_ARS_RAP_V3_COVER
+    derivation_status: FROZEN_V0_1
+    derivation_spec: F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F08_SOURCE_YEAR
+    name: source_year
+    definition: RAP cover year attached to F08 woody measurements; shared with F02 when reusing the same coverV3 artifact.
+    type: PROVENANCE_PROPERTY
+    unit: year
+    canonical_source: USDA_ARS_RAP_V3_COVER
+    derivation_status: FROZEN_V0_1
+    derivation_spec: F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F08_APPLICABILITY_STATUS
+    name: applicability_status
+    definition: Shared RAP applicability gate with F02; outside/unknown scope must be preserved.
+    type: APPLICABILITY_QA_PROPERTY
+    unit: categorical
+    enum: [IN_DOCUMENTED_PRODUCT_SCOPE, OUTSIDE_DOCUMENTED_PRODUCT_SCOPE, UNKNOWN]
+    canonical_source: USDA_ARS_RAP_V3_COVER
+    derivation_status: FROZEN_V0_1
+    derivation_spec: F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F08_COVERAGE_STATUS
+    name: coverage_status
+    definition: Shared RAP coverage record with F02; F02 coverage deepening remains DEFERRED_FOR_DEMO.
+    type: COVERAGE_QA_PROPERTY
+    unit: categorical
+    enum:
+      - COVERAGE_UNQUANTIFIED
+      - COMPLETE_RANGELAND_COVERAGE
+      - PARTIAL_RANGELAND_COVERAGE
+      - MISSING
+      - UNKNOWN
+    canonical_source: USDA_ARS_RAP_V3_COVER
+    derivation_status: FROZEN_V0_1
+    derivation_spec: F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F07_MAPPED_ROAD_FEATURE_COUNT_IN_SEARCH_WINDOW
+    name: mapped_road_feature_count_in_search_window
+    definition: >-
+      Count of mapped road centerline features intersecting the declared search
+      window around the parcel; not a completeness proof of private ranch roads.
+    type: SOURCE_DERIVED_CONTEXT_VARIABLE
+    unit: count
+    spatial_semantics: parcel_search_window
+    canonical_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+    derivation_status: FORMULA_APPROVED_AUTHORIZED_FOR_IMPLEMENTATION
+    derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F07_ROAD_PARCEL_CONTACT_STATUS
+    name: road_parcel_contact_status
+    definition: >-
+      Geometric contact detail between mapped roads and the parcel in the working
+      CRS: INTERSECTS vs TOUCHES preserved (optional combined summary may exist
+      but must not replace detail). Not legal access or usable entrance proof.
+    type: PARCEL_DERIVED_CONTEXT_VARIABLE
+    unit: categorical
+    enum:
+      - INTERSECTS
+      - TOUCHES
+      - NO_CONTACT_IN_WINDOW
+      - NO_MAPPED_ROAD_IN_SEARCH_WINDOW
+      - UNKNOWN
+    spatial_semantics: parcel_boundary_and_interior
+    canonical_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+    derivation_status: FORMULA_APPROVED_AUTHORIZED_FOR_IMPLEMENTATION
+    derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F07_NEAREST_MAPPED_ROAD_DISTANCE_M
+    name: nearest_mapped_road_distance_m
+    definition: >-
+      Minimum projected Euclidean distance from parcel geometry to a mapped road
+      centerline in the working CRS; ties broken by stable feature ID ascending
+      (LINEARID preferred). Not network drive distance or travel time.
+    type: PARCEL_DERIVED_LAND_FACT
+    unit: meter
+    spatial_semantics: parcel_to_nearest_mapped_road
+    canonical_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+    derivation_status: FORMULA_APPROVED_AUTHORIZED_FOR_IMPLEMENTATION
+    derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+    warning: Must not be computed as planar distance in longitude/latitude degrees.
+
+  - variable_id: VAR_F07_NEAREST_ROAD_CLASS_CONTEXT
+    name: nearest_road_class_context
+    definition: >-
+      MTFCC or equivalent class of the nearest mapped road; context only, not a
+      suitability class. Nearest feature selected by distance then stable ID.
+    type: SOURCE_DERIVED_CONTEXT_VARIABLE
+    unit: categorical_context
+    spatial_semantics: nearest_feature_attribute
+    canonical_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+    derivation_status: FORMULA_APPROVED_AUTHORIZED_FOR_IMPLEMENTATION
+    derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F07_NEAREST_ROAD_FEATURE_ID
+    name: nearest_road_feature_id
+    definition: >-
+      Persistent identifier of the nearest mapped road feature when available
+      (LINEARID preferred). Used for equal-distance tie-break ascending.
+    type: SOURCE_DERIVED_CONTEXT_VARIABLE
+    unit: identifier
+    canonical_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+    derivation_status: FORMULA_APPROVED_AUTHORIZED_FOR_IMPLEMENTATION
+    derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F07_SEARCH_WINDOW_M
+    name: search_window_m
+    definition: >-
+      Declared road-fetch radius in meters around the parcel. Adapter parameter
+      only; not a suitability or too-far threshold. Default 5000 m. All county
+      All-Roads files intersecting this window must be requested and loaded.
+    type: ADAPTER_PARAMETER
+    unit: meter
+    canonical_source: F07_DERIVATION_POLICY
+    derivation_status: FORMULA_APPROVED_AUTHORIZED_FOR_IMPLEMENTATION
+    derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F07_ROAD_SOURCE_COVERAGE_STATUS
+    name: road_source_coverage_status
+    definition: >-
+      Whether the mapped-road source/fetch is usable for F07 measurement,
+      including county All-Roads completeness (requested_county_fips vs
+      loaded_county_fips). Incomplete coverage is PARTIAL or UNKNOWN and must
+      not silently measure. Does not assert legal access or private-road
+      completeness.
+    type: COVERAGE_QA_PROPERTY
+    unit: categorical
+    enum:
+      - ROAD_CONTEXT_COMPLETE
+      - NO_MAPPED_ROAD_IN_SEARCH_WINDOW
+      - ROAD_SOURCE_INCOMPLETE
+      - PARTIAL
+      - CRS_UNSUPPORTED
+      - COVERAGE_UNQUANTIFIED
+      - MISSING
+      - UNKNOWN
+    canonical_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+    derivation_status: FORMULA_APPROVED_AUTHORIZED_FOR_IMPLEMENTATION
+    derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F06_PARCEL_AREA
+    name: parcel_area
+    definition: >-
+      Projected planar area of the parcel geometry in a declared working CRS
+      (meters); not grazable area, carrying capacity, or legal survey acreage.
+    type: PARCEL_DERIVED_LAND_FACT
+    unit: square_meter
+    spatial_semantics: parcel_total
+    canonical_source: PARCEL_GEOMETRY
+    derivation_status: FORMULA_PROPOSED_NOT_IMPLEMENTED
+    derivation_spec: F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+    warning: Must not be computed as planar area in longitude/latitude degrees.
+
+  - variable_id: VAR_F06_PARCEL_PERIMETER
+    name: parcel_perimeter
+    definition: >-
+      Projected exterior-ring perimeter of the parcel geometry in the working
+      CRS; not fencing cost or labor.
+    type: PARCEL_DERIVED_LAND_FACT
+    unit: meter
+    spatial_semantics: parcel_boundary
+    canonical_source: PARCEL_GEOMETRY
+    derivation_status: FORMULA_PROPOSED_NOT_IMPLEMENTED
+    derivation_spec: F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+    warning: v0.1 excludes interior rings/holes from perimeter.
+
+  - variable_id: VAR_F06_POLYGON_PART_COUNT
+    name: polygon_part_count
+    definition: Count of Polygon parts in a Polygon or MultiPolygon parcel geometry.
+    type: PARCEL_DERIVED_LAND_FACT
+    unit: count
+    spatial_semantics: parcel_topology
+    canonical_source: PARCEL_GEOMETRY
+    derivation_status: FORMULA_PROPOSED_NOT_IMPLEMENTED
+    derivation_spec: F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F06_COMPACTNESS
+    name: compactness_isoperimetric_quotient
+    definition: >-
+      Dimensionless isoperimetric quotient C = 4πA/P² derived from parcel area
+      and perimeter; not operational efficiency or suitability.
+    type: PARCEL_DERIVED_CONTEXT_VARIABLE
+    unit: dimensionless
+    spatial_semantics: parcel_shape_index
+    canonical_source: PARCEL_GEOMETRY
+    derivation_status: FORMULA_PROPOSED_NOT_IMPLEMENTED
+    derivation_spec: F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F06_GEOMETRY_VALIDITY
+    name: geometry_validity
+    definition: OGC-validity / repair status of the parcel geometry used for measurement.
+    type: GEOMETRY_QA_PROPERTY
+    unit: categorical
+    enum: [VALID, INVALID, REPAIRED_FOR_MEASUREMENT, UNKNOWN]
+    canonical_source: PARCEL_GEOMETRY
+    derivation_status: FORMULA_PROPOSED_NOT_IMPLEMENTED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F06_GEOMETRY_COVERAGE_STATUS
+    name: geometry_coverage_status
+    definition: >-
+      Whether parcel geometry is usable for F06 measurement. Does not assert
+      RAP, soils, climate, or water coverage completeness.
+    type: GEOMETRY_QA_PROPERTY
+    unit: categorical
+    enum:
+      - PARCEL_GEOMETRY_COMPLETE
+      - EMPTY_GEOMETRY
+      - INVALID_UNUSABLE
+      - CRS_UNSUPPORTED
+      - COVERAGE_UNQUANTIFIED
+    canonical_source: PARCEL_GEOMETRY
+    derivation_status: FORMULA_PROPOSED_NOT_IMPLEMENTED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F05_MEAN_ANNUAL_PRECIPITATION
+    name: mean_annual_precipitation
+    definition: Mean annual land-surface precipitation over an explicitly declared normals or series period; not atmospheric precipitable water and not available forage.
+    type: CONTINUOUS_CLIMATE_LAND_FACT
+    unit: millimeter_per_year
+    spatial_semantics: parcel_mean_or_reviewed_point_with_limitation
+    missing_behavior: UNKNOWN
+    notes:
+      - External NOAA/PRISM path required under Mireye v0.14.0 catalog audit.
+      - Must retain period, source version, coverage, and provenance.
+
+  - variable_id: VAR_F05_PRECIPITATION_SEASONALITY
+    name: precipitation_seasonality
+    definition: Within-year precipitation distribution or seasonality metric over an explicit method and period.
+    type: DERIVED_CLIMATE_CONTEXT
+    unit: method_defined
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F05_INTERANNUAL_PRECIP_VARIABILITY
+    name: interannual_precipitation_variability
+    definition: Multi-year precipitation variability over an explicitly declared window; not a drought class and not a forage-failure score.
+    type: DERIVED_CLIMATE_CONTEXT
+    unit: method_defined
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F05_DROUGHT_MONITOR_CATEGORY
+    name: drought_monitor_category
+    definition: Current U.S. Drought Monitor class at the analysis location; weekly current-condition context only.
+    type: CONTROLLED_CURRENT_CONDITION
+    unit: usdm_class
+    spatial_semantics: point_or_parcel_intersection_with_stated_rule
+    missing_behavior: UNKNOWN
+    notes:
+      - Null must preserve failure-versus-not-in-drought ambiguity until disambiguated.
+      - Must not be treated as multi-year drought frequency.
+
+  - variable_id: VAR_F05_DROUGHT_HISTORY_SUMMARY
+    name: drought_history_summary
+    definition: Multi-year drought frequency or severity summary over an explicitly declared window and method.
+    type: DERIVED_DROUGHT_CONTEXT
+    unit: method_defined
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F05_MEAN_ANNUAL_TEMPERATURE
+    name: mean_annual_temperature
+    definition: Mean annual temperature normal over an explicitly declared period; climate context, not operation ranking.
+    type: CONTINUOUS_CLIMATE_CONTEXT
+    unit: degree_celsius
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F05_HEAT_DAYS_ABOVE_32C
+    name: heat_days_above_32c
+    definition: Annual count of days above 32°C under the source product definition; no biological heat-stress threshold is approved for scoring.
+    type: CONTINUOUS_HEAT_CONTEXT
+    unit: days_per_year
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F05_REFERENCE_ET_OR_ARIDITY
+    name: reference_et_or_aridity
+    definition: Reference evapotranspiration and/or aridity index under an explicitly declared method; candidate only.
+    type: DERIVED_CLIMATE_CONTEXT
+    unit: method_defined
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_SOIL_MAPUNIT_COMPOSITION
+    name: soil_mapunit_component_composition
+    definition: Parcel-intersecting SSURGO map units with component identities and component percentages; not an exact within-map-unit soil map.
+    type: SOURCE_LAND_FACT_COLLECTION
+    unit: mapunit_component_records
+    spatial_semantics: parcel_intersection_and_component_distribution
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_DRAINAGE_CLASS
+    name: soil_drainage_class
+    definition: NRCS controlled drainage class preserved by component; not current soil moisture.
+    type: CONTROLLED_COMPONENT_PROPERTY
+    unit: nrcs_drainage_class
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_HYDROLOGIC_SOIL_GROUP
+    name: hydrologic_soil_group
+    definition: NRCS hydrologic soil group preserved as a controlled category; not a measured infiltration rate.
+    type: CONTROLLED_COMPONENT_PROPERTY
+    unit: nrcs_hydrologic_soil_group
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_AVAILABLE_WATER_STORAGE
+    name: available_water_storage
+    definition: Soil available water storage integrated over an explicitly declared depth interval using a frozen horizon and component method.
+    type: PARCEL_DERIVED_SOIL_PROPERTY
+    unit: millimeter_per_declared_profile_depth
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_RESTRICTIVE_LAYER_DEPTH
+    name: restrictive_layer_depth
+    definition: Depth to the first declared restrictive feature with feature type retained.
+    type: COMPONENT_SOIL_PROPERTY
+    unit: centimeter
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_SALINITY_EC
+    name: soil_electrical_conductivity
+    definition: Electrical conductivity summarized over an explicitly declared depth interval; not a direct animal suitability score.
+    type: PARCEL_DERIVED_SOIL_PROPERTY
+    unit: decisiemens_per_meter
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_SOIL_PH
+    name: soil_reaction
+    definition: Soil pH summarized over an explicitly declared depth interval with laboratory method retained when available.
+    type: PARCEL_DERIVED_SOIL_PROPERTY
+    unit: pH
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_PONDING_FREQUENCY
+    name: soil_survey_ponding_frequency
+    definition: Soil-survey ponding interpretation preserved by component; not a real-time wetness observation.
+    type: CONTROLLED_COMPONENT_PROPERTY
+    unit: nrcs_frequency_class
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_FLOODING_FREQUENCY
+    name: soil_survey_flooding_frequency
+    definition: Soil-survey flooding interpretation used as soil/site context only; not a substitute for authoritative flood-hazard analysis.
+    type: CONTROLLED_COMPONENT_PROPERTY
+    unit: nrcs_frequency_class
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F04_ECOLOGICAL_SITE_REFERENCE
+    name: ecological_site_reference
+    definition: Component-linked ecological-site identifier, correlation, and publication status; not current vegetation state or operation suitability.
+    type: INTERPRETIVE_REFERENCE_RECORD
+    unit: controlled_reference
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F03_MAPPED_SURFACE_WATER
+    name: mapped_surface_water_features
+    definition: Source-specific mapped hydrography retained as screening context; not a verified livestock water source.
+    type: SOURCE_LAND_FACT_COLLECTION
+    unit: geospatial_feature_collection
+    spatial_semantics: parcel_and_declared_search_area
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F03_SOURCE_INVENTORY
+    name: livestock_water_source_inventory
+    definition: Candidate and verified livestock watering points with source type, coordinates, verification state, and linked evidence.
+    type: PARCEL_LAND_FACT_COLLECTION
+    unit: controlled_source_records
+    spatial_semantics: parcel_and_legally_accessible_network
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F03_SOURCE_OPERATIONAL_STATUS
+    name: livestock_water_source_operational_status
+    definition: Verified present functionality of the source, conveyance, storage, and watering facility.
+    type: FIELD_OR_OPERATOR_VERIFIED_LAND_FACT
+    unit: controlled_status
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F03_SOURCE_RELIABILITY
+    name: livestock_water_source_reliability
+    definition: Evidence of source availability across relevant seasons, drought conditions, and operating periods.
+    type: OBSERVED_OR_DOCUMENT_LAND_FACT
+    unit: source_specific_time_record
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F03_DELIVERABLE_CAPACITY
+    name: livestock_water_deliverable_capacity
+    definition: Measured sustainable flow, pumping, conveyance, storage, and trough refill capability under the declared operating scenario.
+    type: MEASURED_LAND_FACT
+    unit: measurement_specific
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F03_WATER_QUALITY
+    name: livestock_water_quality
+    definition: Laboratory or authoritative current measures relevant to livestock health and intake.
+    type: FIELD_LAB_LAND_FACT
+    unit: analyte_specific
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F03_LEGAL_ACCESS
+    name: livestock_water_legal_access
+    definition: Verified ownership, easement, permit, allocation, and lawful right to use the source and delivery route.
+    type: LEGAL_DILIGENCE_RECORD
+    unit: controlled_status
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F03_EUCLIDEAN_DISTANCE_TO_CANDIDATE_WATER
+    name: euclidean_distance_to_candidate_water
+    definition: Straight-line parcel distance to mapped candidate water; not traversable or verified livestock access distance.
+    type: PARCEL_DERIVED_CONTEXT_VARIABLE
+    unit: meter
+    spatial_semantics: parcel_distribution
+    derivation_status: METHOD_NOT_YET_FROZEN
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F03_TRAVEL_DISTANCE_TO_VERIFIED_WATER
+    name: traversable_distance_to_verified_livestock_water
+    definition: Operation-aware travel distance considering terrain, barriers, fencing, gates, routes, and lawful access.
+    type: OPERATION_AWARE_DERIVED_METRIC
+    unit: meter
+    derivation_status: METHOD_REVIEW_REQUIRED
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F02_PERENNIAL_HERB_COVER
+    name: perennial_herbaceous_fractional_cover
+    definition: Modeled fractional cover of perennial grasses and forbs; not species composition or forage availability.
+    type: MODELED_LAND_FACT
+    unit: percent_cover
+    spatial_semantics: parcel_distribution_and_summary
+    temporal_semantics: annual
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F02_ANNUAL_HERB_COVER
+    name: annual_herbaceous_fractional_cover
+    definition: Modeled fractional cover of annual grasses and forbs; not species composition or forage availability.
+    type: MODELED_LAND_FACT
+    unit: percent_cover
+    spatial_semantics: parcel_distribution_and_summary
+    temporal_semantics: annual
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F02_ANNUAL_HERB_PRODUCTION
+    name: annual_aboveground_herbaceous_production
+    definition: Modeled annual new aboveground herbaceous production; not standing biomass or available forage.
+    type: MODELED_LAND_FACT
+    unit: pound_per_acre
+    spatial_semantics: parcel_distribution_and_summary
+    temporal_semantics: annual_accumulated_new_growth
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F02_16DAY_HERB_PRODUCTION
+    name: herbaceous_production_16day_series
+    definition: Modeled new aboveground herbaceous production by 16-day interval.
+    type: MODELED_TIME_SERIES_LAND_FACT
+    unit: pound_per_acre
+    spatial_semantics: parcel_summary_time_series
+    temporal_semantics: 23_intervals_per_year
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F02_INTERANNUAL_PRODUCTION_VARIABILITY
+    name: interannual_herbaceous_production_variability
+    definition: Versioned variability metric derived from valid annual modeled production values.
+    type: PARCEL_DERIVED_CONTEXT_VARIABLE
+    unit: relative_interquartile_range
+    derivation_status: FROZEN_REVIEW_CANDIDATE
+    derivation_spec: F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F02_BARE_GROUND
+    name: bare_ground_fractional_cover
+    definition: Modeled bare-ground cover retained as context and never treated as inverse forage availability.
+    type: MODELED_CONTEXT_VARIABLE
+    unit: percent_cover
+    spatial_semantics: parcel_distribution_and_summary
+    temporal_semantics: annual
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F02_BOTANICAL_COMPOSITION
+    name: botanical_composition
+    definition: Verified species or reviewed functional composition at the parcel and relevant season.
+    type: FIELD_OR_DOCUMENT_LAND_FACT
+    unit: controlled_composition_record
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F02_PALATABILITY
+    name: operation_specific_palatable_resource
+    definition: Reviewed operation-, species-, and season-specific interpretation of edible vegetation.
+    type: REVIEWED_LOCAL_INTERPRETATION
+    unit: controlled_record
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F02_NUTRITIVE_VALUE
+    name: forage_nutritive_value
+    definition: Verified laboratory or authoritative local measures such as crude protein, digestibility, energy, and fiber.
+    type: FIELD_LAB_OR_VERIFIED_LOCAL_FACT
+    unit: measurement_specific
+    missing_behavior: NEEDS_VERIFICATION
+
+  - variable_id: VAR_F01_SLOPE_POINT
+    name: slope_degrees_point
+    definition: Slope in degrees at a georeferenced sample point.
+    type: SOURCE_DERIVED_LAND_FACT
+    unit: degree
+    spatial_semantics: point
+    missing_behavior: UNKNOWN
+    warning: Must not represent an entire parcel.
+
+  - variable_id: VAR_F01_SLOPE_DISTRIBUTION
+    name: parcel_slope_distribution
+    definition: Distribution of slope values across the parcel geometry.
+    type: PARCEL_DERIVED_LAND_FACT
+    unit: degree_and_percent_area
+    spatial_semantics: parcel_distribution
+    required_statistics: [minimum, maximum, mean, median, quantiles, area_by_reviewed_class]
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F01_TERRAIN_RUGGEDNESS
+    name: terrain_ruggedness_index
+    definition: A versioned measure of local terrain heterogeneity computed from an elevation surface.
+    type: PARCEL_DERIVED_LAND_FACT
+    unit: method_dependent
+    spatial_semantics: parcel_distribution
+    derivation_status: METHOD_NOT_YET_FROZEN
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F01_TOPOGRAPHIC_POSITION
+    name: topographic_position_class
+    definition: Classified relative landscape position such as lowland, plain, open slope, upland, or ridge.
+    type: PARCEL_DERIVED_CONTEXT_VARIABLE
+    unit: categorical
+    spatial_semantics: parcel_distribution
+    derivation_status: METHOD_NOT_YET_FROZEN
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F01_ELEVATION
+    name: elevation
+    definition: Land-surface elevation referenced to a declared vertical datum.
+    type: SOURCE_DERIVED_CONTEXT_VARIABLE
+    unit: meter
+    spatial_semantics: point_and_parcel_distribution
+    missing_behavior: UNKNOWN
+
+  - variable_id: VAR_F01_ASPECT
+    name: aspect
+    definition: Downslope orientation, represented in degrees and optionally a cardinal class.
+    type: SOURCE_DERIVED_CONTEXT_VARIABLE
+    unit: degree
+    spatial_semantics: point_and_parcel_distribution
+    missing_behavior: UNKNOWN
+
+deferred_variables:
+  - variable_id: METRIC_AVAILABLE_FORAGE
+    reason: Derived operational metric requiring composition, palatability, utilization, accessibility, season, current use, residual and uncertainty; not an atomic F02 Land Fact.
+  - variable_id: METRIC_CARRYING_CAPACITY
+    reason: Out of MVP scope and prohibited from direct derivation from RAP cover or production.
+  - variable_id: VAR_ROCK_OUTCROP_COVER
+    reason: Separate surface-cover or movement-barrier factor; not equivalent to slope or ruggedness.
+  - variable_id: METRIC_ACCESSIBLE_GRAZING_AREA
+    reason: Operation-specific MatchMetric derived after topography, water, vegetation, infrastructure and uncertainty evaluation; never a permanent Land Fact.
+  - variable_id: VAR_F06_DISCONNECTED_PART_COUNT
+    reason: Redundant with VAR_F06_POLYGON_PART_COUNT under v0.1 MultiPolygon part policy.
+  - variable_id: VAR_F06_PERIMETER_TO_AREA_RATIO
+    reason: Redundant screening content with VAR_F06_COMPACTNESS; both are functions of area and perimeter.
+  - variable_id: VAR_F06_BOUNDARY_COMPLEXITY
+    reason: No independent reviewed formula; deferred from F06 v0.1.
+  - variable_id: VAR_F06_NARROW_SECTION_CONTEXT
+    reason: Requires skeleton/minimum-width method review; deferred until after demo priorities.
+  - variable_id: F02_RASTER_COVERAGE_DEPTH_UPGRADE
+    reason: DEFERRED_FOR_DEMO by product-owner priority; preserve existing F02 COVERAGE_UNQUANTIFIED limitations and runtime behavior.
+  - variable_id: VAR_F07_LEGAL_ACCESS_STATUS
+    reason: Requires title/easement/permit diligence; mapped roads are insufficient and must not imply legal access.
+  - variable_id: VAR_F07_NETWORK_DRIVE_DISTANCE_M
+    reason: Requires reviewed routing graph and impedance policy; deferred from F07 v0.1.
+  - variable_id: VAR_F07_TRAVEL_TIME_CONTEXT
+    reason: Logistics model; out of F07 v0.1 demo slice.
+  - variable_id: VAR_F07_SEASONAL_PASSABILITY
+    reason: Needs field/ops evidence; not inferable from centerlines alone.
+  - variable_id: VAR_F07_PRIVATE_RANCH_ROAD_INVENTORY
+    reason: National road layers are incomplete for internal ranch roads.
+  - variable_id: VAR_F07_GATE_OR_ENTRANCE_LOCATION
+    reason: Requires entrance-specific evidence; deferred.
+  - variable_id: VAR_F07_BRIDGE_OR_LOAD_LIMIT_CONTEXT
+    reason: Asset constraint inventory; deferred.
+  - variable_id: VAR_F08_WOODY_COVER_SPATIAL_DISTRIBUTION
+    reason: No frozen pixel/patch distribution method for F08 v0.1; aggregate mean alone is insufficient.
+  - variable_id: VAR_F08_WOODY_COVER_TEMPORAL_CHANGE
+    reason: No frozen multi-year change window or uncertainty policy for F08 v0.1.
+  - variable_id: VAR_F08_LITTER_COVER_FRACTION
+    reason: Litter (LTR) is not woody structure; deferred from F08 v0.1.
+  - variable_id: VAR_F08_BROWSE_AVAILABILITY
+    reason: REJECTED as Land Fact; fractional shrub cover does not establish browse availability.
+  - variable_id: VAR_F08_WOODY_OBSTRUCTION_CLASS
+    reason: REJECTED; no reviewed universal tree/shrub obstruction threshold.
+  - variable_id: VAR_F08_WOODY_CANOPY_COVER_FRACTION
+    reason: Renamed/superseded by VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION; not an independent canopy band.

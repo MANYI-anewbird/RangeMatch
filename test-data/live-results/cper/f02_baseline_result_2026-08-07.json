@@ -1,0 +1,108 @@
+{
+  "result_id": "CPER_F02_BASELINE_V0_1_2026_08_07",
+  "derivation_spec": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "quality_state": "COVERAGE_UNQUANTIFIED",
+  "baseline_id": "MOST_RECENT_10_COMPLETE_YEARS_V0_1",
+  "years": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "valid_aligned_year_count": 10,
+  "cover": {
+    "AFG": {
+      "valid_year_count": 10,
+      "minimum": 4.426332276491194,
+      "maximum": 26.491596870126212,
+      "mean": 11.497914177325347,
+      "median": 10.800747894705882,
+      "p25": 6.670784330114696,
+      "p75": 14.010180733305372
+    },
+    "PFG": {
+      "valid_year_count": 10,
+      "minimum": 22.452063121781247,
+      "maximum": 65.80173096686832,
+      "mean": 48.53557657419783,
+      "median": 55.438750330065446,
+      "p25": 35.79294410641127,
+      "p75": 58.691566095693354
+    },
+    "SHR": {
+      "valid_year_count": 10,
+      "minimum": 1.544346527713137,
+      "maximum": 7.3734971343684,
+      "mean": 5.019107313487002,
+      "median": 4.975869615186626,
+      "p25": 4.1849220476016065,
+      "p75": 6.444274055823314
+    },
+    "TRE": {
+      "valid_year_count": 10,
+      "minimum": 0.0,
+      "maximum": 0.27728713875659894,
+      "mean": 0.049538478489241304,
+      "median": 0.014198981404263974,
+      "p25": 0.003133483152897642,
+      "p75": 0.04118075040225225
+    },
+    "LTR": {
+      "valid_year_count": 10,
+      "minimum": 3.690701752053054,
+      "maximum": 21.507504592419313,
+      "mean": 13.554725110227599,
+      "median": 13.473594776704925,
+      "p25": 9.97314645780582,
+      "p75": 17.37274961959387
+    },
+    "BGR": {
+      "valid_year_count": 10,
+      "minimum": 7.725782705908518,
+      "maximum": 26.41437204009802,
+      "mean": 15.110981533440645,
+      "median": 11.199633936220975,
+      "p25": 10.01939121712886,
+      "p75": 22.029786611602017
+    }
+  },
+  "annual_production_lbs_per_acre": {
+    "AFG": {
+      "valid_year_count": 10,
+      "minimum": 43.22301455334278,
+      "maximum": 572.8426549448184,
+      "mean": 190.1430030101891,
+      "median": 145.87282028614212,
+      "p25": 90.56007524599673,
+      "p75": 246.22100270661417
+    },
+    "PFG": {
+      "valid_year_count": 10,
+      "minimum": 430.5217704952654,
+      "maximum": 1054.3763023891383,
+      "mean": 769.1709916586506,
+      "median": 804.7884180356948,
+      "p25": 666.2633280364001,
+      "p75": 883.7718755513716
+    },
+    "HER": {
+      "valid_year_count": 10,
+      "minimum": 576.8850191455485,
+      "maximum": 1240.634161944852,
+      "mean": 959.3139946688398,
+      "median": 996.9935092257698,
+      "p25": 834.5020382401939,
+      "p75": 1129.403755252743
+    }
+  },
+  "interannual_HER_relative_IQR": 0.29579100995507923,
+  "mask": true,
+  "warning": "Aggregate API responses do not quantify eligible, masked, no-data, or valid pixel area; no directional species signal is authorized."
+}

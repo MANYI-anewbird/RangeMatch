@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "name": "ENGINEERING_TEST_GEOMETRY_CPER_002",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ENGINEERING_TEST_GEOMETRY_CPER_002",
+      "properties": {
+        "site_name": "Central Plains Experimental Range",
+        "geometry_role": "ENGINEERING_TEST_GEOMETRY",
+        "official_pasture_boundary": false,
+        "purchasable_parcel": false,
+        "suitability_ground_truth": false,
+        "synthetic_subpolygon": true,
+        "replacement_of": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+        "approximate_geodesic_area_ha": 70.329,
+        "area_method": "WGS84 spherical rectangle approximation for test documentation",
+        "intended_tests": [
+          "GEOMETRY_REPLACEMENT_REUSABILITY"
+        ],
+        "source_extent_id": "CPER_PUBLIC_COVERAGE_EXTENT",
+        "created_on": "2026-08-07"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-104.770000, 40.830000],
+            [-104.762500, 40.830000],
+            [-104.762500, 40.820000],
+            [-104.770000, 40.820000],
+            [-104.770000, 40.830000]
+          ]
+        ]
+      }
+    }
+  ]
+}

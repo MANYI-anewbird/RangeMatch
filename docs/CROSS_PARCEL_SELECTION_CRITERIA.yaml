@@ -1,0 +1,112 @@
+criteria_id: RANGEMATCH_CROSS_PARCEL_SELECTION_CRITERIA
+version: 0.1.0
+language: English
+status: LOCKED_FOR_VALIDATION_PHASE
+related_plan: docs/CROSS_PARCEL_VALIDATION_PLAN.md
+target_parcel_count:
+  minimum: 3
+  maximum: 5
+  rationale: >-
+    Enough environmental contrast to stress F01–F05 without expanding into a
+    full reference-case similarity program.
+
+geometry_requirements:
+  role: ENGINEERING_TEST_GEOMETRY
+  official_pasture_boundary: false
+  purchasable_parcel: false
+  suitability_ground_truth: false
+  must_declare:
+    - geometry_id
+    - approximate_area_ha_or_m2
+    - created_on
+    - intended_validation_slots
+    - not_a_real_estate_listing
+  area_guidance:
+    preferred_ha_range: [40, 400]
+    note: >-
+      Keep geometries large enough for parcel aggregation stress and small
+      enough for practical live-gate collection.
+
+hard_constraints:
+  - Place names may label the site but must not be selection proxies for
+    suitability expectations.
+  - Do not select a parcel because a desired MatchResult label is expected.
+  - Do not fill every slot with CPER or near-duplicate CPER subpolygons.
+  - At least two distinct U.S. climate/forage regimes must be represented.
+  - At least one parcel must stress RAP applicability or coverage boundary.
+  - At least one parcel must stress livestock-water candidate richness or scarcity.
+  - Sheep-relevant rugged terrain may be included; it must not presuppose a
+    Sheep ranking advantage.
+
+environment_slots:
+  - slot_id: SLOT_HUMID_STRONG_HERB
+    intent: Humid or subhumid pasture/rangeland with relatively strong herbaceous resource signal potential
+    stresses: [F02_resource_contrast, F05_precip_contrast]
+    acceptance_cues:
+      - Documented higher long-term precip regime than CPER OR strong RAP herbaceous context
+      - Still an engineering geometry, not a carrying-capacity claim
+    rejection_cues:
+      - Selected only because a state name sounds “good cattle country”
+
+  - slot_id: SLOT_ARID_UNCERTAIN_WATER
+    intent: Arid or semi-arid grazing land with uncertain livestock-water verification
+    stresses: [F03_verification_gap, F05_drought_context]
+    acceptance_cues:
+      - Sparse or unverified water systems expected
+      - Climate normals or USDM context likely material as diligence context
+    rejection_cues:
+      - Treating drought class as forage failure in advance of evaluation
+
+  - slot_id: SLOT_RUGGED_SHEEP_RELEVANT
+    intent: Rugged topography relevant to sheep resource-selection literature without presupposing ranking
+    stresses: [F01_terrain_context, cow_sheep_peer_behavior]
+    acceptance_cues:
+      - Material slope/ruggedness contrast versus plains parcels
+      - Explicit note that Sheep advantage is NOT assumed
+    rejection_cues:
+      - Selecting steep land to force Sheep ADVANCE
+
+  - slot_id: SLOT_WATER_CANDIDATE_RICH
+    intent: Mapped hydrography / water candidates are relatively abundant but remain unverified livestock systems
+    stresses: [F03_candidates_not_verified]
+    acceptance_cues:
+      - Multiple NHD or equivalent candidates likely inside/near parcel
+      - Zero verified livestock-water systems at collection time
+    rejection_cues:
+      - Interpreting candidate count as water adequacy
+
+  - slot_id: SLOT_RAP_SCOPE_BOUNDARY
+    intent: RAP documented product-scope boundary or outside-scope case
+    stresses: [F02_applicability, coverage_semantics]
+    acceptance_cues:
+      - Parcel intersects RAP scope edge, sparse rangeland mask behavior, or outside documented product geography
+      - Expected outcome is applicability/coverage discipline, not forage scoring
+    rejection_cues:
+      - Using outside-scope as proof the land is unsuitable
+
+baseline_and_reuse:
+  cper_001:
+    geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_001
+    allowed_slots: [SLOT_ARID_UNCERTAIN_WATER]
+    note: May satisfy at most one slot; already has full F01–F05 fixtures.
+  cper_002:
+    geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_002
+    allowed_slots: []
+    note: Geometry-replacement stress only; does not count as a new environment slot.
+
+selection_record_required_fields:
+  - parcel_id
+  - geometry_id
+  - geometry_path
+  - assigned_slots
+  - selection_rationale
+  - contrasted_against
+  - prohibited_expectations
+  - selected_on
+  - selected_by
+
+prohibited_expectations_examples:
+  - Expect ADVANCE for Cow-Calf
+  - Expect Sheep ranking above Cow-Calf because terrain is steep
+  - Expect REJECT from low precipitation
+  - Expect verified livestock water from NHD density alone

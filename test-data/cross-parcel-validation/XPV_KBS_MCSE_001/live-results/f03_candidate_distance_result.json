@@ -1,0 +1,106 @@
+{
+  "result_id": "ENGINEERING_TEST_GEOMETRY_KBS_MCSE_001_F03_CANDIDATE_DISTANCE",
+  "derivation_spec": "F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml@0.1.0",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_KBS_MCSE_001",
+  "geometry_sha256": "d2ae26983a61e4a7f712cec0952c178c278dd5954285d64cedc9938586de2eb9",
+  "working_crs": "EPSG:32616",
+  "query_bbox_wgs84": [
+    -85.38600000000001,
+    42.394000000000005,
+    -85.351,
+    42.424
+  ],
+  "query_timestamp": "2026-08-08T05:08:26Z",
+  "response_hashes": {
+    "NetworkNHDFlowline": "bccb90313b97d162198c93c50341fd3567e2de75fd1aac624b0aa13b725d9874",
+    "NonNetworkNHDFlowline": "b3049ad7a1062091e169bd352424d59721a26b8b6229942aef26d11b0c6a96e1",
+    "NHDArea": "b3049ad7a1062091e169bd352424d59721a26b8b6229942aef26d11b0c6a96e1",
+    "NHDWaterbody": "eae5126740754b26aa2a4d8a76eac1bca004214d22f39276c43edbb541a13e08"
+  },
+  "layer_errors": {},
+  "mapped_candidate_count": 5,
+  "verified_livestock_water_system_count": 0,
+  "euclidean_distance_to_mapped_candidate_m": {
+    "valid_cell_count": 13714,
+    "minimum": 58.846847165765496,
+    "maximum": 1046.2032712292632,
+    "mean": 635.0328996812473,
+    "median": 652.1875310348704,
+    "p10": 355.3439949807315,
+    "p25": 493.4735597987159,
+    "p75": 781.9942976448406,
+    "p90": 891.4959616120954
+  },
+  "candidates": [
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:152515787",
+      "source": "USGS_NHDPLUS_HR",
+      "source_layer": "NetworkNHDFlowline",
+      "source_feature_id": "152515787",
+      "object_id": 1614491,
+      "geometry_type": "LineString",
+      "intersects_parcel": false,
+      "verification_status": "MAPPED_CANDIDATE",
+      "gnis_name": "Augusta Creek",
+      "ftype": 460,
+      "fcode": 46006,
+      "permitted_interpretation": "Mapped hydrography candidate context only; not verified livestock water."
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:152515972",
+      "source": "USGS_NHDPLUS_HR",
+      "source_layer": "NetworkNHDFlowline",
+      "source_feature_id": "152515972",
+      "object_id": 3323747,
+      "geometry_type": "LineString",
+      "intersects_parcel": false,
+      "verification_status": "MAPPED_CANDIDATE",
+      "gnis_name": "Augusta Creek",
+      "ftype": 460,
+      "fcode": 46006,
+      "permitted_interpretation": "Mapped hydrography candidate context only; not verified livestock water."
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:152518000",
+      "source": "USGS_NHDPLUS_HR",
+      "source_layer": "NHDWaterbody",
+      "source_feature_id": "152518000",
+      "object_id": 3235751,
+      "geometry_type": "Polygon",
+      "intersects_parcel": false,
+      "verification_status": "MAPPED_CANDIDATE",
+      "gnis_name": null,
+      "ftype": 390,
+      "fcode": 39004,
+      "permitted_interpretation": "Mapped hydrography candidate context only; not verified livestock water."
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:152518020",
+      "source": "USGS_NHDPLUS_HR",
+      "source_layer": "NHDWaterbody",
+      "source_feature_id": "152518020",
+      "object_id": 3841607,
+      "geometry_type": "Polygon",
+      "intersects_parcel": false,
+      "verification_status": "MAPPED_CANDIDATE",
+      "gnis_name": "Wintergreen Lake",
+      "ftype": 390,
+      "fcode": 39004,
+      "permitted_interpretation": "Mapped hydrography candidate context only; not verified livestock water."
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:152517976",
+      "source": "USGS_NHDPLUS_HR",
+      "source_layer": "NHDWaterbody",
+      "source_feature_id": "152517976",
+      "object_id": 6994466,
+      "geometry_type": "Polygon",
+      "intersects_parcel": false,
+      "verification_status": "MAPPED_CANDIDATE",
+      "gnis_name": "Duck Lake",
+      "ftype": 390,
+      "fcode": 39004,
+      "permitted_interpretation": "Mapped hydrography candidate context only; not verified livestock water."
+    }
+  ]
+}

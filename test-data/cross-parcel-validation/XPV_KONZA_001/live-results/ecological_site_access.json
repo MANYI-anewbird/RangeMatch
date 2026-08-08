@@ -1,0 +1,73 @@
+[
+  {
+    "ecological_site_id": "R076XY113KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY113KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY113KS"
+  },
+  {
+    "ecological_site_id": "R076XY115KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY115KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY115KS"
+  },
+  {
+    "ecological_site_id": "R076XY104KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY104KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY104KS"
+  },
+  {
+    "ecological_site_id": "R076XY109KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY109KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY109KS"
+  },
+  {
+    "ecological_site_id": "R076XY112KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY112KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY112KS"
+  },
+  {
+    "ecological_site_id": "R076XY128KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY128KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY128KS"
+  },
+  {
+    "ecological_site_id": "R076XY103KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY103KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY103KS"
+  },
+  {
+    "ecological_site_id": "R076XY107KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY107KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/076X/R076XY107KS"
+  },
+  {
+    "ecological_site_id": "R074XY132KS",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/074X/R074XY132KS",
+    "public_description_accessible": false,
+    "error_type": "HTTPError",
+    "error": "500 Server Error: Internal Server Error for url: https://edit.sc.egov.usda.gov/catalogs/esd/074X/R074XY132KS"
+  },
+  {
+    "ecological_site_id": "R106XY074NE",
+    "requested_url": "https://edit.sc.egov.usda.gov/catalogs/esd/106X/R106XY074NE",
+    "http_status": 200,
+    "title": "Ecological site R106XY074NE",
+    "response_sha256": "4b3194dfe1431c345ad339633e62b691dfa6f40187544c4771aabebcdfb81c0b",
+    "public_description_accessible": true
+  }
+]

@@ -1,0 +1,382 @@
+{
+  "pilot_id": "F03_REMOTE_ONLY_PILOT_XPV_ORDWAY_001",
+  "pilot_version": "five_parcel_collection_v1",
+  "contract_version": "0.1.1",
+  "adapter_authorization": "APPROVED_FOR_SMALL_SCALE_PILOT",
+  "parcel_id": "XPV_ORDWAY_001",
+  "parcel_geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+  "as_of": "2026-08-08T06:19:11Z",
+  "scope": "MAPPED_CANDIDATE \u2192 remote enrichment \u2192 REMOTELY_SUPPORTED|MAPPED",
+  "selection_method": "STABLE_CANDIDATE_ID_ORDER_MAX_3",
+  "selection": {
+    "method": "STABLE_CANDIDATE_ID_ORDER_MAX_3",
+    "max_n": 3,
+    "available_count": 24,
+    "sampled_count": 3,
+    "selection_keys": [
+      {
+        "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960459",
+        "source_layer": "NHDWaterbody",
+        "source_feature_id": "125960459"
+      },
+      {
+        "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960460",
+        "source_layer": "NHDWaterbody",
+        "source_feature_id": "125960460"
+      },
+      {
+        "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960496",
+        "source_layer": "NHDWaterbody",
+        "source_feature_id": "125960496"
+      }
+    ],
+    "selection_not_based_on_expected_promotion": true
+  },
+  "evidence_source_used": {
+    "provider": "USDA Farm Service Agency",
+    "product": "NAIP 2023 ? m orthoimagery",
+    "access_path": "Microsoft Planetary Computer STAC (naip collection)",
+    "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+    "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+    "local_crop_artifact": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960459.tif",
+    "imagery_acquisition_date": "2023-01-27"
+  },
+  "evidence_sources": [
+    {
+      "provider": "USDA Farm Service Agency",
+      "product": "NAIP 2023 ? m orthoimagery",
+      "access_path": "Microsoft Planetary Computer STAC (naip collection)",
+      "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+      "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+      "local_crop_artifact": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960459.tif",
+      "imagery_acquisition_date": "2023-01-27"
+    },
+    {
+      "provider": "USDA Farm Service Agency",
+      "product": "NAIP 2023 ? m orthoimagery",
+      "access_path": "Microsoft Planetary Computer STAC (naip collection)",
+      "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+      "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+      "local_crop_artifact": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960460.tif",
+      "imagery_acquisition_date": "2023-01-27"
+    },
+    {
+      "provider": "USDA Farm Service Agency",
+      "product": "NAIP 2023 ? m orthoimagery",
+      "access_path": "Microsoft Planetary Computer STAC (naip collection)",
+      "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+      "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+      "local_crop_artifact": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960496.tif",
+      "imagery_acquisition_date": "2023-01-27"
+    }
+  ],
+  "data_path_statuses": [
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960459",
+      "status": "OK",
+      "failure_code": null,
+      "failure_detail": null
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960460",
+      "status": "OK",
+      "failure_code": null,
+      "failure_detail": null
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960496",
+      "status": "OK",
+      "failure_code": null,
+      "failure_detail": null
+    }
+  ],
+  "data_path_failures": [],
+  "conflicts": [],
+  "provenance_gate_passed": false,
+  "field_verified_manufactured": false,
+  "field_verified_count": 0,
+  "candidate_count": 3,
+  "level_histogram": {
+    "MAPPED_CANDIDATE": 3
+  },
+  "counts": {
+    "available": 24,
+    "sampled": 3,
+    "MAPPED_CANDIDATE": 3,
+    "REMOTELY_SUPPORTED_CANDIDATE": 0,
+    "FIELD_VERIFIED_LIVESTOCK_WATER": 0,
+    "provenance_complete": 3
+  },
+  "parcel_factor_state_before": {
+    "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+    "mapped_candidate_count": 24,
+    "verified_livestock_water_system_count": 0
+  },
+  "parcel_factor_state_after": {
+    "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+    "sampled_mapped_count": 3,
+    "sampled_remotely_supported_count": 0,
+    "sampled_field_verified_count": 0,
+    "note": "Parcel Land Fact input_quality_state remains MAPPED_CANDIDATES_ONLY because field_verified_count stays 0; remote support does not change runtime Factor rules."
+  },
+  "parcel_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+  "runtime_rules_changed": false,
+  "suitability_thresholds_added": false,
+  "cow_sheep_ranking_added": false,
+  "ranking_effect": "NONE",
+  "candidates": [
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960459",
+      "source_layer": "NHDWaterbody",
+      "source_feature_id": "125960459",
+      "fcode": 39001,
+      "gnis_name": null,
+      "candidate_geometry_hash": "ab106d3499ba62aee5083e3531592d9057140119fb6c18c044a7063201ac3f06",
+      "baseline_level": "MAPPED_CANDIDATE",
+      "after_remote_level": "MAPPED_CANDIDATE",
+      "reason_codes": [
+        "REMOTE_EVIDENCE_CEILING",
+        "REMOTE_CRITERIA_NOT_MET"
+      ],
+      "seasonal_reliability": {
+        "status": "unknown"
+      },
+      "physical_presence": {
+        "status": "confirmed",
+        "source": "imagery",
+        "observation_date": "2023-01-27",
+        "review_note": "Five-parcel remote collection: USDA NAIP STAC item via Microsoft Planetary Computer; local GeoTIFF crop hashed and retained.",
+        "evidence_source_ids": [
+          "USDA_FSA_NAIP",
+          "MICROSOFT_PLANETARY_COMPUTER_STAC",
+          "USGS_NHDPLUS_HR"
+        ],
+        "provenance": {
+          "provider": "USDA Farm Service Agency (via Microsoft Planetary Computer STAC)",
+          "product_name": "NAIP 2023 ? m orthoimagery",
+          "source_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+          "item_id_or_artifact_reference": "stac:naip/fl_m_2908224_se_17_030_20230127_20230530; local_artifact=test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960459.tif; stac_fixture=test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_stac_item_fl_m_2908224_se_17_030_20230127_20230530.json",
+          "imagery_acquisition_date": "2023-01-27",
+          "review_date": "2026-08-08",
+          "reviewer_or_adapter_id": "rangematch.f03_five_parcel_remote_collection/v1",
+          "candidate_geometry_hash": "ab106d3499ba62aee5083e3531592d9057140119fb6c18c044a7063201ac3f06",
+          "parcel_geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+          "response_or_artifact_hash": "ca91d8d40ac6b59d8d99ea187c3f438f8d5782491fa4ce10a998546bc5af7ae9",
+          "supporting_artifact_hashes": {
+            "naip_crop_geotiff": "ca91d8d40ac6b59d8d99ea187c3f438f8d5782491fa4ce10a998546bc5af7ae9",
+            "stac_item_json": "b61d21278c1dd046583e9dee4fbcb634a19157c645ab19d3b2136fa59078394a"
+          },
+          "supported_claim": "Physical hydrographic feature context visible in NAIP imagery within the exported bbox covering source_feature_id=125960459.",
+          "unsupported_claims": [
+            "livestock_accessibility",
+            "seasonal_reliability_beyond_nhd_fcode",
+            "legal_access",
+            "deliverable_capacity",
+            "water_quality",
+            "operable_livestock_water_system",
+            "field_verification"
+          ],
+          "limitations": [
+            "Remote orthoimagery confirms landscape presence context only.",
+            "Feature visibility is not proof of usable livestock water.",
+            "Single NAIP date does not establish seasonal class by itself.",
+            "SAS-signed COG URLs expire; reproducible package is local GeoTIFF + STAC JSON."
+          ],
+          "freshness_status": "ACQUISITION_2023-01-27_OLDER_THAN_THREE_YEARS",
+          "bbox_wgs84_export": [
+            -82.00273560785423,
+            29.687567127889395,
+            -82.00148833172528,
+            29.688790608682343
+          ],
+          "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+          "producer_url": "https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/"
+        }
+      },
+      "evidence_use_limit": null,
+      "provenance_complete": true,
+      "data_path_status": "OK",
+      "failure_code": null,
+      "reviewed_presence_attempted": true,
+      "field_verified": false,
+      "evidence_source_used": {
+        "provider": "USDA Farm Service Agency",
+        "product": "NAIP 2023 ? m orthoimagery",
+        "access_path": "Microsoft Planetary Computer STAC (naip collection)",
+        "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+        "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+        "local_crop_artifact": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960459.tif",
+        "imagery_acquisition_date": "2023-01-27"
+      }
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960460",
+      "source_layer": "NHDWaterbody",
+      "source_feature_id": "125960460",
+      "fcode": 39001,
+      "gnis_name": null,
+      "candidate_geometry_hash": "3786d4129c43ef721dffcb5bf98c00b45dfa4e097612fae6d653dd0bb0a4a200",
+      "baseline_level": "MAPPED_CANDIDATE",
+      "after_remote_level": "MAPPED_CANDIDATE",
+      "reason_codes": [
+        "REMOTE_EVIDENCE_CEILING",
+        "REMOTE_CRITERIA_NOT_MET"
+      ],
+      "seasonal_reliability": {
+        "status": "unknown"
+      },
+      "physical_presence": {
+        "status": "confirmed",
+        "source": "imagery",
+        "observation_date": "2023-01-27",
+        "review_note": "Five-parcel remote collection: USDA NAIP STAC item via Microsoft Planetary Computer; local GeoTIFF crop hashed and retained.",
+        "evidence_source_ids": [
+          "USDA_FSA_NAIP",
+          "MICROSOFT_PLANETARY_COMPUTER_STAC",
+          "USGS_NHDPLUS_HR"
+        ],
+        "provenance": {
+          "provider": "USDA Farm Service Agency (via Microsoft Planetary Computer STAC)",
+          "product_name": "NAIP 2023 ? m orthoimagery",
+          "source_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+          "item_id_or_artifact_reference": "stac:naip/fl_m_2908224_se_17_030_20230127_20230530; local_artifact=test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960460.tif; stac_fixture=test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_stac_item_fl_m_2908224_se_17_030_20230127_20230530.json",
+          "imagery_acquisition_date": "2023-01-27",
+          "review_date": "2026-08-08",
+          "reviewer_or_adapter_id": "rangematch.f03_five_parcel_remote_collection/v1",
+          "candidate_geometry_hash": "3786d4129c43ef721dffcb5bf98c00b45dfa4e097612fae6d653dd0bb0a4a200",
+          "parcel_geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+          "response_or_artifact_hash": "884ce0b0804871f06414bb8736b16941f8eaa2247ecd1f2e67e9c1be2a0ee7d9",
+          "supporting_artifact_hashes": {
+            "naip_crop_geotiff": "884ce0b0804871f06414bb8736b16941f8eaa2247ecd1f2e67e9c1be2a0ee7d9",
+            "stac_item_json": "b61d21278c1dd046583e9dee4fbcb634a19157c645ab19d3b2136fa59078394a"
+          },
+          "supported_claim": "Physical hydrographic feature context visible in NAIP imagery within the exported bbox covering source_feature_id=125960460.",
+          "unsupported_claims": [
+            "livestock_accessibility",
+            "seasonal_reliability_beyond_nhd_fcode",
+            "legal_access",
+            "deliverable_capacity",
+            "water_quality",
+            "operable_livestock_water_system",
+            "field_verification"
+          ],
+          "limitations": [
+            "Remote orthoimagery confirms landscape presence context only.",
+            "Feature visibility is not proof of usable livestock water.",
+            "Single NAIP date does not establish seasonal class by itself.",
+            "SAS-signed COG URLs expire; reproducible package is local GeoTIFF + STAC JSON."
+          ],
+          "freshness_status": "ACQUISITION_2023-01-27_OLDER_THAN_THREE_YEARS",
+          "bbox_wgs84_export": [
+            -82.0075135662891,
+            29.687176895730886,
+            -82.0062424955849,
+            29.688362306063443
+          ],
+          "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+          "producer_url": "https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/"
+        }
+      },
+      "evidence_use_limit": null,
+      "provenance_complete": true,
+      "data_path_status": "OK",
+      "failure_code": null,
+      "reviewed_presence_attempted": true,
+      "field_verified": false,
+      "evidence_source_used": {
+        "provider": "USDA Farm Service Agency",
+        "product": "NAIP 2023 ? m orthoimagery",
+        "access_path": "Microsoft Planetary Computer STAC (naip collection)",
+        "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+        "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+        "local_crop_artifact": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960460.tif",
+        "imagery_acquisition_date": "2023-01-27"
+      }
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:125960496",
+      "source_layer": "NHDWaterbody",
+      "source_feature_id": "125960496",
+      "fcode": 39009,
+      "gnis_name": "Lake Barco",
+      "candidate_geometry_hash": "443f968edd5b812f69d01b29a2766a0d4d77d66ad2af8b652ad1649dc96aaa4d",
+      "baseline_level": "MAPPED_CANDIDATE",
+      "after_remote_level": "MAPPED_CANDIDATE",
+      "reason_codes": [
+        "REMOTE_EVIDENCE_CEILING",
+        "REMOTE_CRITERIA_NOT_MET"
+      ],
+      "seasonal_reliability": {
+        "status": "unknown"
+      },
+      "physical_presence": {
+        "status": "confirmed",
+        "source": "imagery",
+        "observation_date": "2023-01-27",
+        "review_note": "Five-parcel remote collection: USDA NAIP STAC item via Microsoft Planetary Computer; local GeoTIFF crop hashed and retained.",
+        "evidence_source_ids": [
+          "USDA_FSA_NAIP",
+          "MICROSOFT_PLANETARY_COMPUTER_STAC",
+          "USGS_NHDPLUS_HR"
+        ],
+        "provenance": {
+          "provider": "USDA Farm Service Agency (via Microsoft Planetary Computer STAC)",
+          "product_name": "NAIP 2023 ? m orthoimagery",
+          "source_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+          "item_id_or_artifact_reference": "stac:naip/fl_m_2908224_se_17_030_20230127_20230530; local_artifact=test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960496.tif; stac_fixture=test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_stac_item_fl_m_2908224_se_17_030_20230127_20230530.json",
+          "imagery_acquisition_date": "2023-01-27",
+          "review_date": "2026-08-08",
+          "reviewer_or_adapter_id": "rangematch.f03_five_parcel_remote_collection/v1",
+          "candidate_geometry_hash": "443f968edd5b812f69d01b29a2766a0d4d77d66ad2af8b652ad1649dc96aaa4d",
+          "parcel_geometry_hash": "e3b2adb8f0cec421ffb8dc33443940b95608972cd42e070fb0d25a3b1602393a",
+          "response_or_artifact_hash": "e5d2a315d1ef9c67f4d6848bab3049adca6e30535ef65e10989fe64703dac998",
+          "supporting_artifact_hashes": {
+            "naip_crop_geotiff": "e5d2a315d1ef9c67f4d6848bab3049adca6e30535ef65e10989fe64703dac998",
+            "stac_item_json": "b61d21278c1dd046583e9dee4fbcb634a19157c645ab19d3b2136fa59078394a"
+          },
+          "supported_claim": "Physical hydrographic feature context visible in NAIP imagery within the exported bbox covering source_feature_id=125960496.",
+          "unsupported_claims": [
+            "livestock_accessibility",
+            "seasonal_reliability_beyond_nhd_fcode",
+            "legal_access",
+            "deliverable_capacity",
+            "water_quality",
+            "operable_livestock_water_system",
+            "field_verification"
+          ],
+          "limitations": [
+            "Remote orthoimagery confirms landscape presence context only.",
+            "Feature visibility is not proof of usable livestock water.",
+            "Single NAIP date does not establish seasonal class by itself.",
+            "SAS-signed COG URLs expire; reproducible package is local GeoTIFF + STAC JSON."
+          ],
+          "freshness_status": "ACQUISITION_2023-01-27_OLDER_THAN_THREE_YEARS",
+          "bbox_wgs84_export": [
+            -82.01125791597154,
+            29.673947087072992,
+            -82.00621118300904,
+            29.678481220715838
+          ],
+          "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+          "producer_url": "https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/"
+        }
+      },
+      "evidence_use_limit": null,
+      "provenance_complete": true,
+      "data_path_status": "OK",
+      "failure_code": null,
+      "reviewed_presence_attempted": true,
+      "field_verified": false,
+      "evidence_source_used": {
+        "provider": "USDA Farm Service Agency",
+        "product": "NAIP 2023 ? m orthoimagery",
+        "access_path": "Microsoft Planetary Computer STAC (naip collection)",
+        "stac_item_id": "fl_m_2908224_se_17_030_20230127_20230530",
+        "stac_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/fl_m_2908224_se_17_030_20230127_20230530",
+        "local_crop_artifact": "test-data/cross-parcel-validation/XPV_ORDWAY_001/f03_remote_pilot/artifacts/naip_crop_125960496.tif",
+        "imagery_acquisition_date": "2023-01-27"
+      }
+    }
+  ],
+  "next_gate": "Five-parcel remote collection complete for review. Do not begin field/operator evidence ingestion until accepted."
+}

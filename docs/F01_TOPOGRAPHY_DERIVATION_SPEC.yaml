@@ -1,0 +1,189 @@
+spec_id: RANGEMATCH_F01_TOPOGRAPHY_DERIVATION
+version: 0.1.0
+language: English
+status: PARTIALLY_FROZEN
+scope: US_PARCELS
+
+authoritative_references:
+  - reference_id: DATA_USGS_3DEP_10M
+    title: 1/3rd arc-second Digital Elevation Models - USGS National Map 3DEP Downloadable Data Collection
+    url: https://data.usgs.gov/datacatalog/data/USGS%3A3a81321b-c153-416f-98b7-cc8e5f0e17c3
+    role: Bare-earth elevation source and source metadata.
+  - reference_id: METHOD_USGS_SEAMLESS_DEM_SPEC
+    title: The National Map seamless digital elevation model specifications
+    doi: https://doi.org/10.3133/tm11B9
+    role: DEM spatial reference, surface, metadata, and quality specification.
+  - reference_id: METHOD_GDAL_DEM
+    title: GDAL gdaldem documentation
+    url: https://gdal.org/en/stable/programs/gdaldem.html
+    role: Versioned slope, aspect, TRI, and TPI implementation reference.
+
+source_policy:
+  parcel_primary_source: USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM
+  nominal_ground_spacing: APPROXIMATELY_10_METERS
+  surface: BARE_EARTH
+  source_horizontal_reference: NAD83_GEOGRAPHIC
+  elevation_unit: meter
+  conterminous_us_vertical_reference: NAVD88
+  source_release_rule: MOST_RECENT_AVAILABLE_TILE_AT_FETCH_TIME
+  source_tile_ids_required: true
+  source_tile_dates_required: true
+  fetch_timestamp_required: true
+  source_metadata_snapshot_required: true
+  mireye_point_fields_role: POINT_QA_AND_DISPLAY_ONLY
+  rationale: >-
+    One consistent seamless source is preferred for the MVP parcel method.
+    Higher-resolution project DEMs may be added later only through a separate
+    source-priority, cross-resolution, and reproducibility review.
+
+parcel_input_contract:
+  geometry_required: true
+  accepted_geometry_types: [POLYGON, MULTIPOLYGON]
+  input_crs_required: true
+  geometry_validity_required: true
+  empty_geometry_behavior: ERROR
+  invalid_geometry_behavior: NEEDS_VERIFICATION
+  parcel_identifier_required: true
+
+working_grid:
+  horizontal_crs: LOCAL_UTM_ZONE_FROM_PARCEL_CENTROID
+  crs_selection_recorded: true
+  horizontal_unit: meter
+  target_cell_size_m: 10
+  elevation_resampling: bilinear
+  grid_alignment_recorded: true
+  vertical_unit: meter
+  processing_buffer_m: 30
+  buffer_rationale: >-
+    Terrain derivatives require neighboring cells. Derivatives are computed
+    on the buffered raster and clipped back to the parcel after processing.
+  unsupported_geometry_cases:
+    - PARCEL_CROSSES_UTM_ZONE_BOUNDARY
+    - PARCEL_OUTSIDE_SUPPORTED_UTM_LATITUDE
+    - PARCEL_EXTENT_REQUIRES_REGIONAL_PROJECTION_REVIEW
+  unsupported_case_behavior: NEEDS_VERIFICATION
+
+frozen_derivations:
+  - variable_id: VAR_F01_ELEVATION
+    method: REPROJECTED_USGS_3DEP_CELL_VALUES
+    output_unit: meter
+    parcel_outputs:
+      - valid_cell_count
+      - valid_area_m2
+      - coverage_fraction
+      - minimum
+      - maximum
+      - mean
+      - median
+      - p10
+      - p25
+      - p75
+      - p90
+
+  - variable_id: VAR_F01_SLOPE_DISTRIBUTION
+    method: GDAL_DEM_PROCESSING_SLOPE
+    algorithm: Horn
+    output_unit: degree
+    compute_edges: false
+    parcel_outputs:
+      - valid_cell_count
+      - valid_area_m2
+      - coverage_fraction
+      - minimum
+      - maximum
+      - mean
+      - median
+      - p10
+      - p25
+      - p75
+      - p90
+    prohibited_outputs:
+      - suitability_class
+      - usable_area_fraction
+      - species_penalty
+      - hard_exclusion_area
+
+  - variable_id: VAR_F01_ASPECT
+    method: GDAL_DEM_PROCESSING_ASPECT
+    algorithm: Horn
+    output_unit: degree_azimuth
+    convention: 0_NORTH_90_EAST_180_SOUTH_270_WEST
+    flat_cell_value: NODATA
+    compute_edges: false
+    parcel_outputs:
+      - valid_cell_count
+      - undefined_flat_cell_count
+      - coverage_fraction
+      - mean_eastness
+      - mean_northness
+    aggregation_note: >-
+      Aspect is circular. Arithmetic mean aspect is prohibited. Eastness is
+      sin(aspect radians); northness is cos(aspect radians).
+
+pending_derivations:
+  - variable_id: VAR_F01_TERRAIN_RUGGEDNESS
+    status: METHOD_REVIEW_REQUIRED
+    reason: >-
+      TRI algorithm and neighborhood scale materially affect interpretation.
+      GDAL Wilson/Riley options exist, but no RangeMatch scale is yet frozen.
+  - variable_id: VAR_F01_TOPOGRAPHIC_POSITION
+    status: METHOD_REVIEW_REQUIRED
+    reason: >-
+      TPI and position classes are neighborhood-scale dependent. A 3x3 result
+      cannot be promoted automatically into lowland, slope, upland, or ridge classes.
+
+parcel_mask_and_aggregation:
+  inclusion_rule: CELL_CENTER_INSIDE_PARCEL
+  area_weighting: EQUAL_PROJECTED_GRID_CELL_AREA
+  multipolygon_behavior: AGGREGATE_ALL_COMPONENTS_AND_RETAIN_COMPONENT_COUNT
+  nodata_excluded_from_statistics: true
+  percentile_method: LINEAR_INTERPOLATION_TYPE_7
+  raw_raster_values_preserved: true
+  class_bins: []
+  class_bin_policy: No slope class or area-by-class output until bins are separately reviewed and versioned.
+
+quality_contract:
+  outputs_always_required:
+    - coverage_fraction
+    - source_tile_ids
+    - source_tile_dates
+    - source_crs
+    - working_crs
+    - source_resolution
+    - target_resolution
+    - gdal_version
+    - algorithm_parameters
+    - processing_timestamp
+    - geometry_hash
+    - source_data_hash_or_etag
+  quality_states:
+    PARCEL_COMPLETE: Valid parcel-wide outputs with full required provenance and no unresolved source gaps.
+    PARCEL_INCOMPLETE: Outputs exist but coverage or required provenance is incomplete.
+    CONFLICTING_SOURCES: Mireye point QA materially disagrees with the parcel raster at the corresponding location and no approved tolerance policy resolves it.
+    MISSING: No valid parcel output.
+  no_automatic_imputation: true
+  no_automatic_cross_source_reconciliation: true
+  numeric_conflict_tolerance: NOT_YET_FROZEN
+
+reproducibility_manifest:
+  required_fields:
+    - derivation_spec_version
+    - source_product
+    - source_tile_ids
+    - source_tile_dates
+    - fetch_timestamp
+    - source_metadata
+    - source_hash_or_etag
+    - parcel_geometry_hash
+    - input_crs
+    - working_crs
+    - target_grid_origin
+    - target_cell_size
+    - resampling_method
+    - processing_buffer
+    - software_name
+    - software_version
+    - algorithm
+    - algorithm_options
+    - output_statistics
+

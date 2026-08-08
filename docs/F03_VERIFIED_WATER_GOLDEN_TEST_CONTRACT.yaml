@@ -1,0 +1,407 @@
+test_contract_id: RANGEMATCH_F03_VERIFIED_WATER_GOLDEN_TEST_CONTRACT
+version: 0.1.1
+language: English
+status: APPROVED_V0_1_1
+date: "2026-08-08"
+approved_on: "2026-08-08"
+evidence_contract: docs/F03_VERIFIED_WATER_EVIDENCE_CONTRACT.yaml@0.1.1
+related_existing_suite: docs/F03_WATER_GOLDEN_TESTS.yaml
+implementation_status: EXECUTABLE_TESTS_IMPLEMENTED
+executable_suite: tests/test_f03_verified_water.py
+schema_alignment_note: >-
+  v0.1.1 uses structured capacity and water_quality objects; remote promotion
+  allows unknown seasonal/accessibility; MIXED field-verified pathway covered;
+  single-date imagery cannot assign seasonal class.
+
+purpose: >-
+  Lock expected promotion, demotion, and prohibition behavior for the F03
+  verified-water evidence state machine before any adapter or engine change.
+
+shared_expectations:
+  ranking_effect: NONE
+  suitability_threshold_on_count_or_distance: false
+  verified_zero_means_no_water: false
+  cow_sheep_signal_divergence_from_water_alone: false
+
+schema_fixtures:
+  unknown_capacity: &unknown_capacity
+    status: unknown
+    value: null
+    unit: null
+    scenario_reference: null
+    unknown_rationale: "Capacity not measured or documented for this candidate."
+  unknown_water_quality: &unknown_water_quality
+    status: unknown
+    diligence_required: true
+    evidence_source_ids: []
+
+# ---------------------------------------------------------------------------
+# Positive / pathway cases
+# ---------------------------------------------------------------------------
+
+cases:
+  - test_id: F03_VW_001
+    title: NHD-only feature remains MAPPED_CANDIDATE
+    input:
+      sources: [USGS_NHDPLUS_HR]
+      dimensions:
+        feature_identity: {type: stream}
+        physical_presence: {status: uncertain, source: hydrography}
+        seasonal_reliability: {status: unknown}
+        livestock_accessibility: {status: unknown}
+        capacity_and_quality:
+          capacity: *unknown_capacity
+          water_quality: *unknown_water_quality
+        legal_access: {status: unresolved}
+    expected:
+      verification_level: MAPPED_CANDIDATE
+      promoted_to_remotely_supported: false
+      promoted_to_field_verified: false
+      factor_input_quality_state: MAPPED_CANDIDATES_ONLY
+      factor_signal: NEEDS_VERIFICATION
+
+  - test_id: F03_VW_002
+    title: Imagery-confirmed pond with permanence may become REMOTELY_SUPPORTED
+    input:
+      prior_level: MAPPED_CANDIDATE
+      dimensions:
+        feature_identity: {type: pond}
+        physical_presence:
+          status: confirmed
+          source: imagery
+          imagery_dates: ["2025-04-10", "2025-09-02"]
+        seasonal_reliability:
+          status: intermittent
+          evidence: SURFACE_WATER_PERMANENCE_PRODUCT
+        livestock_accessibility: {status: unknown}
+        capacity_and_quality:
+          capacity: *unknown_capacity
+          water_quality: *unknown_water_quality
+        legal_access: {status: unresolved}
+      evidence_class: REMOTE_ONLY
+    expected:
+      verification_level: REMOTELY_SUPPORTED_CANDIDATE
+      promoted_to_field_verified: false
+      factor_signal: NEEDS_VERIFICATION
+      legal_access_remains_unresolved: true
+      note: >-
+        Accessibility unknown is allowed because seasonal_reliability supplies
+        the at_least_one remote attribute beyond confirmed presence.
+
+  - test_id: F03_VW_003
+    title: Remote evidence cannot reach FIELD_VERIFIED even if all remote dims filled
+    input:
+      prior_level: REMOTELY_SUPPORTED_CANDIDATE
+      evidence_class: REMOTE_ONLY
+      dimensions:
+        feature_identity: {type: reservoir}
+        physical_presence: {status: confirmed, source: imagery}
+        seasonal_reliability: {status: perennial}
+        livestock_accessibility: {status: supported}
+        capacity_and_quality:
+          capacity: *unknown_capacity
+          water_quality: *unknown_water_quality
+        legal_access: {status: unresolved}
+    expected:
+      verification_level: REMOTELY_SUPPORTED_CANDIDATE
+      promoted_to_field_verified: false
+      reason_code: REMOTE_EVIDENCE_CEILING
+
+  - test_id: F03_VW_004
+    title: Field + legal + reliability can reach FIELD_VERIFIED
+    input:
+      prior_level: REMOTELY_SUPPORTED_CANDIDATE
+      evidence_class: FIELD_OBSERVATION
+      dimensions:
+        feature_identity: {type: tank}
+        physical_presence: {status: confirmed, source: field}
+        seasonal_reliability: {status: perennial, observation_period: "2024-2025"}
+        livestock_accessibility: {status: supported}
+        capacity_and_quality:
+          capacity:
+            status: documented
+            value: 5000
+            unit: gallon_storage
+            scenario_reference: declared_test_only
+            unknown_rationale: null
+          water_quality:
+            status: unknown
+            diligence_required: true
+            evidence_source_ids: []
+        legal_access: {status: verified, basis: deed_owned_source}
+    expected:
+      verification_level: FIELD_VERIFIED_LIVESTOCK_WATER
+      water_quality_unknown_allowed: true
+      factor_input_quality_state_in:
+        - PHYSICAL_SOURCE_UNVERIFIED_SYSTEM
+        - VERIFIED_WATER_SYSTEM_CONTEXT
+      ranking_effect: NONE
+      note: >-
+        Exact Factor state depends on whether remaining system completeness
+        criteria in F03_WATER_DETERMINISTIC_RULES are met; neither state may
+        invent a distance/count threshold.
+
+  - test_id: F03_VW_005
+    title: Direct jump MAPPED → FIELD_VERIFIED is rejected
+    input:
+      prior_level: MAPPED_CANDIDATE
+      attempted_level: FIELD_VERIFIED_LIVESTOCK_WATER
+      evidence_class: FIELD_OBSERVATION
+    expected:
+      transition_allowed: false
+      reason_code: SKIP_REMOTELY_SUPPORTED_PROHIBITED
+
+  - test_id: F03_VW_006
+    title: Near Euclidean distance alone does not promote
+    input:
+      prior_level: MAPPED_CANDIDATE
+      euclidean_distance_m: 25
+      dimensions_unchanged_from_mapped: true
+    expected:
+      verification_level: MAPPED_CANDIDATE
+      promoted: false
+      reason_code: DISTANCE_NOT_PRESENCE_OR_ACCESS
+
+  - test_id: F03_VW_007
+    title: Single wet-date image confirms presence date only; seasonal stays unknown
+    input:
+      physical_presence:
+        status: confirmed
+        source: imagery
+        observation_date: "2025-06-01"
+        imagery_dates: ["2025-06-01"]
+      attempted_seasonal_reliability: [perennial, intermittent, ephemeral]
+    expected:
+      physical_presence_semantics: confirmed_for_observation_date
+      seasonal_reliability: {status: unknown}
+      seasonal_class_from_single_date_forbidden: true
+      max_verification_level_without_other_attributes: MAPPED_CANDIDATE
+      note: >-
+        A lone wet date is not seasonal evidence. Remote promotion still needs
+        another at_least_one attribute (permanence product, accessibility, or
+        non-unknown capacity/quality).
+
+  - test_id: F03_VW_008
+    title: Well record location ≠ operable well / FIELD_VERIFIED
+    input:
+      sources: [STATE_OR_FEDERAL_WELL_RECORD]
+      dimensions:
+        feature_identity: {type: well}
+        physical_presence: {status: confirmed, source: records}
+        seasonal_reliability: {status: unknown}
+        livestock_accessibility: {status: unknown}
+        capacity_and_quality:
+          capacity:
+            status: unknown
+            value: null
+            unit: null
+            scenario_reference: null
+            unknown_rationale: "Well record locates a well; operable yield not established."
+          water_quality: *unknown_water_quality
+        legal_access: {status: unresolved}
+    expected:
+      verification_level: MAPPED_CANDIDATE
+      promoted_to_remotely_supported: false
+      promoted_to_field_verified: false
+      operable_well_verified: false
+      yield_verified: false
+      note: >-
+        Confirmed well location alone does not satisfy at_least_one livestock-
+        relevant remote attribute when seasonal, accessibility, capacity, and
+        quality remain unknown/non-verified. Even with an added remote attribute,
+        ceiling remains REMOTELY_SUPPORTED_CANDIDATE — never operable FIELD_VERIFIED
+        from location alone.
+
+  - test_id: F03_VW_009
+    title: Missing legal access blocks FIELD_VERIFIED
+    input:
+      prior_level: REMOTELY_SUPPORTED_CANDIDATE
+      evidence_class: FIELD_OBSERVATION
+      dimensions:
+        feature_identity: {type: pond}
+        physical_presence: {status: confirmed, source: field}
+        seasonal_reliability: {status: intermittent}
+        livestock_accessibility: {status: supported}
+        capacity_and_quality:
+          capacity:
+            status: unknown
+            value: null
+            unit: null
+            scenario_reference: null
+            unknown_rationale: "Storage volume not measured during field visit."
+          water_quality: *unknown_water_quality
+        legal_access: {status: unresolved}
+    expected:
+      verification_level: REMOTELY_SUPPORTED_CANDIDATE
+      field_verified: false
+      legal_access_status: unresolved
+
+  - test_id: F03_VW_010
+    title: Physical presence absent demotes/rejects
+    input:
+      prior_level: MAPPED_CANDIDATE
+      dimensions:
+        physical_presence: {status: absent, source: field}
+    expected:
+      verification_level: REJECTED_AS_SOURCE
+      counted_as_field_verified: false
+
+  - test_id: F03_VW_011
+    title: Material conflict yields CONFLICTING_SOURCES
+    input:
+      evidence:
+        - {claim: perennial, source: operator_record}
+        - {claim: dry_across_three_seasons, source: imagery_time_series}
+      conflict: material
+    expected:
+      factor_input_quality_state: CONFLICTING_SOURCES
+      factor_signal: NEEDS_VERIFICATION
+      explanation_code: F03_EXPL_CONFLICT
+      ranking_effect: NONE
+
+  - test_id: F03_VW_012
+    title: verified_count zero is not land-without-water
+    input:
+      mapped_candidate_count: 24
+      field_verified_count: 0
+      parcel_id: XPV_ORDWAY_001
+    expected:
+      interpretation_forbidden: land_has_no_water
+      factor_signal: NEEDS_VERIFICATION
+      diligence_continues: true
+
+  - test_id: F03_VW_013
+    title: Source/API failure is data failure not unsuitability
+    input:
+      permanence_product_status: TIMEOUT
+      mapped_candidates_present: true
+    expected:
+      land_unsuitable: false
+      verification_level_for_existing_nhd: MAPPED_CANDIDATE
+      data_path_status: FAILED_OR_DEGRADED
+
+  - test_id: F03_VW_014
+    title: Geometry change invalidates prior verification levels
+    input:
+      prior_verification_level: FIELD_VERIFIED_LIVESTOCK_WATER
+      geometry_hash_changed: true
+    expected:
+      stale_verification_reusable: false
+      required_action: re_verify_under_new_geometry_hash
+
+  - test_id: F03_VW_015
+    title: Cow and Sheep remain peer-identical under water evidence alone
+    input:
+      field_verified_count: 1
+      species_differential_rule_approved: false
+    expected:
+      cow_signal_equals_sheep_signal: true
+      ranking_effect: NONE
+
+  - test_id: F03_VW_016
+    title: MIXED evidence with qualified field basis can reach FIELD_VERIFIED
+    input:
+      prior_level: REMOTELY_SUPPORTED_CANDIDATE
+      evidence_class: MIXED
+      qualified_field_basis_required: true
+      dimensions:
+        feature_identity: {type: trough}
+        physical_presence:
+          status: confirmed
+          source: reviewed_equivalent
+          qualified_field_basis:
+            source: field
+            as_of: "2026-07-15T18:00:00Z"
+            record_or_observation_hash: "sha256:example_field_note"
+        seasonal_reliability: {status: intermittent, observation_period: "2025-2026"}
+        livestock_accessibility: {status: supported}
+        capacity_and_quality:
+          capacity:
+            status: unknown
+            value: null
+            unit: null
+            scenario_reference: null
+            unknown_rationale: "Trough volume not gauged; use confirmed by operator."
+          water_quality: *unknown_water_quality
+        legal_access: {status: verified, basis: lease_stock_water_clause}
+    expected:
+      verification_level: FIELD_VERIFIED_LIVESTOCK_WATER
+      mixed_pathway_accepted: true
+
+  - test_id: F03_VW_017
+    title: Capacity unknown without rationale blocks FIELD_VERIFIED
+    input:
+      prior_level: REMOTELY_SUPPORTED_CANDIDATE
+      evidence_class: FIELD_OBSERVATION
+      dimensions:
+        feature_identity: {type: pond}
+        physical_presence: {status: confirmed, source: field}
+        seasonal_reliability: {status: perennial}
+        livestock_accessibility: {status: supported}
+        capacity_and_quality:
+          capacity:
+            status: unknown
+            value: null
+            unit: null
+            scenario_reference: null
+            unknown_rationale: null
+          water_quality: *unknown_water_quality
+        legal_access: {status: verified, basis: owned}
+    expected:
+      verification_level: REMOTELY_SUPPORTED_CANDIDATE
+      field_verified: false
+      reason_code: CAPACITY_UNKNOWN_RATIONALE_REQUIRED
+
+# ---------------------------------------------------------------------------
+# Prohibited behavior cases (must fail closed)
+# ---------------------------------------------------------------------------
+
+prohibited_behavior_tests:
+  - test_id: F03_VW_NEG_001
+    prohibited: promote_NHD_alone_to_FIELD_VERIFIED_LIVESTOCK_WATER
+  - test_id: F03_VW_NEG_002
+    prohibited: promote_by_euclidean_distance_threshold
+  - test_id: F03_VW_NEG_003
+    prohibited: treat_verified_count_zero_as_no_water_on_land
+  - test_id: F03_VW_NEG_004
+    prohibited: infer_legal_access_from_physical_water
+  - test_id: F03_VW_NEG_005
+    prohibited: infer_operable_well_from_NWIS_or_well_location_only
+  - test_id: F03_VW_NEG_006
+    prohibited: skip_REMOTELY_SUPPORTED_CANDIDATE
+  - test_id: F03_VW_NEG_007
+    prohibited: assign_suitability_threshold_on_candidate_count
+  - test_id: F03_VW_NEG_008
+    prohibited: create_cow_sheep_ranking_from_water_evidence_without_review
+  - test_id: F03_VW_NEG_009
+    prohibited: use_place_name_or_ranch_reputation_as_verification_evidence
+  - test_id: F03_VW_NEG_010
+    prohibited: silently_fill_unknown_dimensions_with_optimistic_defaults
+  - test_id: F03_VW_NEG_011
+    prohibited: assign_seasonal_class_from_single_imagery_date
+  - test_id: F03_VW_NEG_012
+    prohibited: field_verified_with_capacity_unknown_and_empty_rationale
+  - test_id: F03_VW_NEG_013
+    prohibited: mixed_field_verified_without_qualified_field_basis
+
+# ---------------------------------------------------------------------------
+# Five-parcel plan smoke expectations (post-implementation)
+# ---------------------------------------------------------------------------
+
+frozen_parcel_smoke_plan:
+  applies_after: adapters_and_fixtures_exist
+  parcels:
+    - XPV_CPER_001
+    - XPV_KONZA_001
+    - XPV_REYNOLDS_001
+    - XPV_ORDWAY_001
+    - XPV_KBS_MCSE_001
+  expected_before_field_campaign:
+    - all_existing_nhd_features_default_MAPPED_CANDIDATE
+    - field_verified_count_may_remain_zero
+    - no_parcel_geometry_change
+    - ranking_effect_none
+  ordinal_stress_checks:
+    XPV_ORDWAY_001: candidate_rich_verified_zero_narrative_preserved
+    XPV_REYNOLDS_001: accessibility_unknown_or_constrained_without_sheep_ranking
+    XPV_KBS_MCSE_001: no_invented_stock_water_system

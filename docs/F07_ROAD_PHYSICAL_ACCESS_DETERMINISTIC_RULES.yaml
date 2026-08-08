@@ -1,0 +1,200 @@
+spec_id: RANGEMATCH_F07_ROAD_PHYSICAL_ACCESS_RULES
+version: 0.1.0
+language: English
+status: APPROVED_V0_1_FOR_IMPLEMENTATION
+factor_id: F07_ROAD_AND_PHYSICAL_ACCESS
+derivation_spec: F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0
+atomicity_audit: F07_ROAD_PHYSICAL_ACCESS_ATOMICITY_AND_SOURCE_AUDIT.md
+data_source_audit: F07_DATA_SOURCE_AUDIT.yaml@0.1.0
+approved_numeric_thresholds: []
+approved_weights: []
+approved_hard_constraints: []
+implementation_status: IMPLEMENTED_V0_1
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  missing_values_are_unknown: true
+  operation_ranking_effect: NONE
+  directional_signal_allowed: false
+  suitability_factor: false
+  legal_access_factor: false
+  profitability_factor: false
+  carrying_capacity_factor: false
+  osm_in_v0_1: false
+  rationale: >-
+    Mapped road proximity and geometric contact provide physical context only.
+    Reviewed evidence does not support distance or road-class thresholds, legal
+    access inference, landlocked certainty, profitability/carrying-capacity
+    conclusions, or Cow-Calf versus Sheep ranking.
+
+required_variables:
+  minimum_for_context_evaluation:
+    - VAR_F07_ROAD_SOURCE_COVERAGE_STATUS
+    - VAR_F07_SEARCH_WINDOW_M
+    - VAR_F07_ROAD_PARCEL_CONTACT_STATUS
+    - VAR_F07_NEAREST_MAPPED_ROAD_DISTANCE_M
+  supporting_context:
+    - VAR_F07_MAPPED_ROAD_FEATURE_COUNT_IN_SEARCH_WINDOW
+    - VAR_F07_NEAREST_ROAD_CLASS_CONTEXT
+    - VAR_F07_NEAREST_ROAD_FEATURE_ID
+  deferred_not_required:
+    - VAR_F07_LEGAL_ACCESS_STATUS
+    - VAR_F07_NETWORK_DRIVE_DISTANCE_M
+    - VAR_F07_TRAVEL_TIME_CONTEXT
+    - VAR_F07_SEASONAL_PASSABILITY
+    - VAR_F07_PRIVATE_RANCH_ROAD_INVENTORY
+    - VAR_F07_GATE_OR_ENTRANCE_LOCATION
+    - VAR_F07_BRIDGE_OR_LOAD_LIMIT_CONTEXT
+
+input_quality_states:
+  ROAD_CONTEXT_COMPLETE:
+    definition: >-
+      Parcel geometry is measurable, all requested county All-Roads files for the
+      search window were loaded with vintage and artifact hash, and
+      contact/distance were derived in the working CRS.
+  NO_MAPPED_ROAD_IN_SEARCH_WINDOW:
+    definition: >-
+      Usable complete road fetch finished and zero mapped road features fall
+      inside the declared search window. This is an observation about the mapped
+      layer and window, not proof the parcel is landlocked or legally inaccessible.
+  ROAD_SOURCE_INCOMPLETE:
+    definition: >-
+      Road fetch is partial, vintage/provenance missing, required measurement
+      fields cannot be completed, or county All-Roads set is incomplete.
+  PARTIAL:
+    definition: >-
+      loaded_county_fips is incomplete relative to requested_county_fips for the
+      search window. Silent measurement is prohibited.
+  CRS_UNSUPPORTED:
+    definition: Working CRS cannot be selected or source CRS policy fails.
+  GEOMETRY_INVALID_OR_EMPTY:
+    definition: Parcel geometry is empty, missing, or invalid/unusable.
+  MISSING:
+    definition: Parcel geometry and/or road inputs are absent.
+  UNKNOWN:
+    definition: Coverage or usability cannot be established for measurement.
+
+evaluation_order:
+  - rule_id: F07_QC_001
+    when: input_quality_state == GEOMETRY_INVALID_OR_EMPTY
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F07_EXPL_GEOMETRY_UNUSABLE
+
+  - rule_id: F07_QC_002
+    when: input_quality_state == CRS_UNSUPPORTED
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F07_EXPL_CRS_UNSUPPORTED
+
+  - rule_id: F07_QC_003
+    when: input_quality_state in [ROAD_SOURCE_INCOMPLETE, PARTIAL]
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F07_EXPL_SOURCE_INCOMPLETE
+    note: >-
+      Incomplete county All-Roads coverage (requested_county_fips vs
+      loaded_county_fips) must not silently produce distance/contact measures.
+
+  - rule_id: F07_QC_004
+    when: input_quality_state == UNKNOWN
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F07_EXPL_SOURCE_INCOMPLETE
+
+  - rule_id: F07_QC_005
+    when: input_quality_state == MISSING
+    output_signal: UNKNOWN
+    ranking_effect: NONE
+    explanation_code: F07_EXPL_MISSING
+
+  - rule_id: F07_QC_006
+    when: input_quality_state == NO_MAPPED_ROAD_IN_SEARCH_WINDOW
+    output_signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F07_EXPL_NO_MAPPED_ROAD_IN_WINDOW
+    note: >-
+      Context only. Diligence must consider legal access and unmapped ranch roads.
+      Must not emit REJECT or landlocked certainty.
+
+  - rule_id: F07_QC_007
+    when: input_quality_state == ROAD_CONTEXT_COMPLETE
+    output_signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F07_EXPL_CONTEXT_ONLY
+
+allowed_signals:
+  - CONTEXT_DEPENDENT
+  - NEEDS_VERIFICATION
+  - UNKNOWN
+
+prohibited_outputs:
+  - ADVANCE_from_road_contact_or_nearness
+  - REJECT_from_no_mapped_road
+  - legal_access_claim
+  - landlocked_certainty
+  - distance_band_suitability_class
+  - mtfcc_suitability_class
+  - travel_time_or_logistics_cost
+  - profitability_or_carrying_capacity_conclusion
+  - distance_threshold_decision
+  - cow_calf_vs_sheep_rank
+  - silent_tiger_osm_average
+  - osm_secondary_qa_in_v0_1
+  - silent_measure_under_incomplete_county_coverage
+  - treating_edges_as_equivalent_to_all_roads
+
+contact_detail_policy:
+  preserve_intersects_vs_touches: true
+  allowed_detail_values:
+    - INTERSECTS
+    - TOUCHES
+    - NO_CONTACT_IN_WINDOW
+    - NO_MAPPED_ROAD_IN_SEARCH_WINDOW
+    - UNKNOWN
+  optional_combined_summary_allowed: true
+  combined_summary_may_replace_detail: false
+
+nearest_feature_tie_break:
+  primary: distance_m_ascending
+  secondary: stable_feature_id_ascending
+  preferred_stable_id: LINEARID
+
+operation_explanations:
+  COW_CALF_OPERATION:
+    requirement_id: COW_F07_001
+    requirement_status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    note: >-
+      Road proximity may matter operationally for cattle enterprises, but no
+      reviewed distance/class threshold or ranking rule is approved.
+  SHEEP_GRAZING:
+    requirement_id: SHEEP_F07_001
+    requirement_status: CONTEXT_ONLY_NO_NUMERIC_RULE
+    note: Same road-context facts for peer evaluation; no species ranking from F07.
+
+diligence_actions:
+  - diligence_id: F07_DIL_001
+    when: input_quality_state in [ROAD_SOURCE_INCOMPLETE, PARTIAL, UNKNOWN, CRS_UNSUPPORTED, GEOMETRY_INVALID_OR_EMPTY]
+    action: >-
+      Repair geometry/CRS or re-fetch all requested county All-Roads extracts with
+      complete provenance before using F07 as screening context.
+  - diligence_id: F07_DIL_002
+    when: input_quality_state == NO_MAPPED_ROAD_IN_SEARCH_WINDOW
+    action: >-
+      Verify legal access and whether unmapped private/ranch roads or easements
+      exist; do not conclude the parcel is landlocked from the mapped layer alone.
+  - diligence_id: F07_DIL_003
+    when: road_parcel_contact_status in [INTERSECTS, TOUCHES]
+    action: >-
+      Confirm whether geometric contact corresponds to a usable entrance/gate and
+      whether legal access exists; mapped contact is not entrance proof. Preserve
+      INTERSECTS vs TOUCHES detail in evidence.
+  - diligence_id: F07_DIL_004
+    when: always_for_context
+    action: Treat Euclidean centerline distance as physical context only; do not infer drive time, truckability, legal rights, profitability, or carrying capacity.
+
+geometry_replacement_policy:
+  on_geometry_hash_change: INVALIDATE_F07_AND_REQUIRE_RECOMPUTE
+  silently_reuse_prior_road_measurements: PROHIBITED

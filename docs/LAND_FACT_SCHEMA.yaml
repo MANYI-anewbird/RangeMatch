@@ -1,0 +1,190 @@
+schema_id: RANGEMATCH_LAND_FACT
+version: 0.1.0
+language: English
+status: REVIEW_CANDIDATE
+
+required_fields:
+  - variable_id
+  - observation
+  - source
+  - applicability
+  - coverage
+  - quality
+  - provenance
+  - limitations
+
+observation:
+  required: [value_state, unit, spatial_semantics, temporal_semantics]
+  value_state_enum: [KNOWN, INFERRED, UNKNOWN, NEEDS_VERIFICATION]
+  fields:
+    value: scalar_array_object_or_null
+    unit: controlled_unit_or_null
+    spatial_semantics: controlled_string
+    temporal_semantics: controlled_string
+
+source:
+  required: [provider, product, version, data_kind]
+  data_kind_enum:
+    - OBSERVED
+    - SOURCE_DERIVED
+    - PARCEL_DERIVED
+    - MODELED
+    - USER_PROVIDED
+    - FIELD_ONLY
+  fields:
+    adapter_id: string_or_null
+    modeled: boolean
+
+applicability:
+  required: [domain_status, review_status]
+  domain_status_enum:
+    - IN_DOCUMENTED_PRODUCT_SCOPE
+    - OUTSIDE_DOCUMENTED_PRODUCT_SCOPE
+    - UNKNOWN
+  review_status_enum: [VERIFIED, NEEDS_VERIFICATION, NOT_REVIEWED]
+  fields:
+    basis: evidence_id_array
+    notes: string_or_null
+  rule: >-
+    A returned value does not establish product applicability. Applicability
+    must be evaluated independently from API success and numeric availability.
+
+coverage:
+  required: [status]
+  status_enum:
+    - COMPLETE
+    - PARTIAL
+    - COVERAGE_UNQUANTIFIED
+    - OUTSIDE_SUPPORTED_GEOGRAPHY
+    - NOT_APPLICABLE
+    - UNKNOWN
+  fields:
+    requested_area_m2: number_or_null
+    eligible_area_m2: number_or_null
+    masked_area_m2: number_or_null
+    no_data_area_m2: number_or_null
+    valid_area_m2: number_or_null
+    valid_coverage_fraction: number_or_null
+    adapter_status: string_or_null
+  invariants:
+    - Missing, masked, outside-scope, and no-data areas must not be imputed as zero.
+    - RASTER_VERIFIED is an adapter status, not a coverage status.
+    - A successful aggregate API response may remain COVERAGE_UNQUANTIFIED.
+
+quality:
+  required: [confidence_state]
+  confidence_state_enum:
+    - SUPPORTED
+    - LIMITED
+    - LIMITED_BY_UNQUANTIFIED_COVERAGE
+    - NEEDS_VERIFICATION
+    - UNKNOWN
+  fields:
+    modeled: boolean
+    resolution: string_or_null
+    freshness: string_or_null
+    api_contract_verified: boolean_or_null
+    temporal_contract_verified: boolean_or_null
+    derivation_contract_verified: boolean_or_null
+
+provenance:
+  required:
+    - source_reference
+    - fetched_at
+    - geometry_hash
+    - response_or_artifact_hash
+  fields:
+    endpoint: string_or_null
+    request_parameters: object_or_null
+    source_item_ids: array_or_null
+    derivation_spec_version: string_or_null
+
+limitations:
+  type: array_of_controlled_or_reviewed_statements
+  empty_array_allowed: false
+
+gate_order:
+  - APPLICABILITY_GATE
+  - COVERAGE_GATE
+  - PROVENANCE_AND_QUALITY_GATE
+  - VARIABLE_DERIVATION
+  - SCIENTIFIC_RELATIONSHIP_EVALUATION
+  - OPERATION_COMPARISON
+
+gate_behavior:
+  - when: applicability.domain_status == OUTSIDE_DOCUMENTED_PRODUCT_SCOPE
+    action: DO_NOT_USE_AS_PRIMARY_FACTOR_EVIDENCE
+    factor_state: NEEDS_VERIFICATION
+  - when: applicability.domain_status == UNKNOWN
+    action: REQUEST_DOMAIN_VERIFICATION
+    factor_state: NEEDS_VERIFICATION
+  - when: coverage.status == COVERAGE_UNQUANTIFIED
+    action: ALLOW_LIMITED_CONTEXT_ONLY
+    confidence_cap: LIMITED_BY_UNQUANTIFIED_COVERAGE
+  - when: coverage.status in [PARTIAL, UNKNOWN, OUTSIDE_SUPPORTED_GEOGRAPHY]
+    action: APPLY_FACTOR_SPECIFIC_QUALITY_RULE
+  - when: provenance.required_fields_complete == false
+    action: DO_NOT_PROMOTE_TO_VERIFIED_LAND_FACT
+
+adapter_policy:
+  RAP_AGGREGATE_API:
+    mvp_role: PRIMARY_FAST_PATH_FOR_REVIEWED_RANGELAND_CONTEXT
+    coverage_capability: COVERAGE_UNQUANTIFIED
+    blocks_mvp: false
+  RAP_RASTER_ADAPTER:
+    mvp_role: OPTIONAL_COVERAGE_AND_SPATIAL_QUALITY_PATH
+    coverage_capability: PIXEL_LEVEL_IF_RUNTIME_AND_PROVENANCE_GATES_PASS
+    blocks_mvp: false
+    implementation_phase: POST_MVP_OR_WHEN_CREDENTIALS_AVAILABLE
+
+example_f02_land_fact:
+  variable_id: VAR_F02_PERENNIAL_HERB_COVER
+  observation:
+    value_state: KNOWN
+    value: 32.98657702821575
+    unit: percent_cover
+    spatial_semantics: parcel_mean
+    temporal_semantics: annual_2025
+  source:
+    provider: USDA_ARS
+    product: RAP
+    version: v3
+    data_kind: MODELED
+    adapter_id: RAP_AGGREGATE_API
+    modeled: true
+  applicability:
+    domain_status: IN_DOCUMENTED_PRODUCT_SCOPE
+    review_status: VERIFIED
+    basis: [CPER_RANGELAND_TEST_CONTEXT]
+    notes: null
+  coverage:
+    status: COVERAGE_UNQUANTIFIED
+    requested_area_m2: 1406580
+    eligible_area_m2: null
+    masked_area_m2: null
+    no_data_area_m2: null
+    valid_area_m2: null
+    valid_coverage_fraction: null
+    adapter_status: AGGREGATE_API_VERIFIED
+  quality:
+    confidence_state: LIMITED_BY_UNQUANTIFIED_COVERAGE
+    modeled: true
+    resolution: 30_meters_nominal
+    freshness: annual_2025
+    api_contract_verified: true
+    temporal_contract_verified: true
+    derivation_contract_verified: true
+  provenance:
+    source_reference: RAP_coverV3
+    fetched_at: 2026-08-07T21:03:00Z
+    geometry_hash: 932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309
+    response_or_artifact_hash: 58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160
+    endpoint: coverV3
+    request_parameters: {mask: true, year: 2025}
+    source_item_ids: null
+    derivation_spec_version: F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0
+  limitations:
+    - AFG/PFG combines grasses and forbs.
+    - The value is modeled and is not standing biomass.
+    - The value is not available forage, palatability, or nutritive value.
+

@@ -1,0 +1,183 @@
+[
+  {
+    "fixture": "valid_FIELD_VERIFIED_LIVESTOCK_WATER",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+    "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+    "accepted": true,
+    "reason_codes": [
+      "FIELD_VERIFIED_CRITERIA_MET"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "PHYSICAL_SOURCE_UNVERIFIED_SYSTEM",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+    "factor_input_quality_state": "PHYSICAL_SOURCE_UNVERIFIED_SYSTEM",
+    "accepted": true,
+    "reason_codes": [
+      "FIELD_VERIFIED_CRITERIA_MET"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "VERIFIED_WATER_SYSTEM_CONTEXT",
+    "evidence_class": "OPERATOR_OWNER_OPERATIONAL_RECORD",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+    "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+    "accepted": true,
+    "reason_codes": [
+      "FIELD_VERIFIED_CRITERIA_MET"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "CONFLICTING_SOURCES",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "factor_input_quality_state": "CONFLICTING_SOURCES",
+    "accepted": true,
+    "reason_codes": [
+      "CONFLICTING_SOURCES"
+    ],
+    "limitations": [
+      "Material source conflict; promotion held/demoted."
+    ],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "missing_legal_access",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+    "accepted": true,
+    "reason_codes": [
+      "LEGAL_ACCESS_UNRESOLVED",
+      "INCOMPLETE_FIELD_VERIFIED_PROMOTION_REJECTED"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "missing_capacity_rationale",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+    "accepted": false,
+    "reason_codes": [
+      "EVIDENCE_PACKAGE_INVALID",
+      "capacity.unknown_rationale_missing"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "invalid_evidence_hash",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+    "accepted": false,
+    "reason_codes": [
+      "EVIDENCE_PACKAGE_INVALID",
+      "evidence_hashes.response_or_artifact_hash_or_record_hash_invalid"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "stale_evidence",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+    "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+    "accepted": true,
+    "reason_codes": [
+      "STALE_EVIDENCE_RECORDED_AS_LIMITATION",
+      "FIELD_VERIFIED_CRITERIA_MET"
+    ],
+    "limitations": [
+      "STALE_FIELD_OR_OPERATOR_EVIDENCE retained with review note",
+      "STALE_FIELD_OR_OPERATOR_EVIDENCE age_days=1300.5 preferred_max_age_days=365"
+    ],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "geometry_mismatch",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+    "accepted": false,
+    "reason_codes": [
+      "GEOMETRY_MISMATCH_REQUIRES_RELINK",
+      "PARCEL_GEOMETRY_HASH_CHANGED"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "REVIEWED_EQUIVALENT_FIELD_VERIFIED",
+    "evidence_class": "REVIEWED_EQUIVALENT",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+    "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+    "accepted": true,
+    "reason_codes": [
+      "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+      "FIELD_VERIFIED_CRITERIA_MET"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "MIXED_with_qualified_field_basis",
+    "evidence_class": "MIXED",
+    "prior_level": "REMOTELY_SUPPORTED_CANDIDATE",
+    "after_level": "FIELD_VERIFIED_LIVESTOCK_WATER",
+    "factor_input_quality_state": "VERIFIED_WATER_SYSTEM_CONTEXT",
+    "accepted": true,
+    "reason_codes": [
+      "REMOTE_PRESENCE_PROVENANCE_INCOMPLETE",
+      "FIELD_VERIFIED_CRITERIA_MET"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  },
+  {
+    "fixture": "mapped_to_field_verified_jump_rejected",
+    "evidence_class": "FIELD_OBSERVATION",
+    "prior_level": "MAPPED_CANDIDATE",
+    "after_level": "MAPPED_CANDIDATE",
+    "factor_input_quality_state": "MAPPED_CANDIDATES_ONLY",
+    "accepted": true,
+    "reason_codes": [
+      "SKIP_REMOTELY_SUPPORTED_PROHIBITED",
+      "INCOMPLETE_FIELD_VERIFIED_PROMOTION_REJECTED"
+    ],
+    "limitations": [],
+    "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+    "evidence_use_limit": "TEST_ONLY"
+  }
+]

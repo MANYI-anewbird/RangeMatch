@@ -1,0 +1,13 @@
+[project]
+name = "rangematch"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "shapely>=2.0",
+  "pyproj>=3.6",
+  "pyshp>=2.3",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+

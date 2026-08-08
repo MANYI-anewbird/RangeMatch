@@ -1,0 +1,154 @@
+audit_id: RANGEMATCH_F05_DATA_SOURCE_AUDIT
+version: 0.2.0
+language: English
+status: FROZEN_V0_1_VERTICAL_SLICE
+freeze_record: docs/F05_FREEZE_GATE_RESULTS.md
+full_test_suite_at_freeze: 63_passed
+factor_id: F05_CLIMATE_DROUGHT_EXPOSURE
+tier: 2
+flood_in_scope: false
+
+locked_precipitation_architecture:
+  F05 precipitation primary path:
+    source: NOAA/NCEI Direct Climate Normals NetCDF
+    variable: annprcp_norm
+    cper_value: 345.74
+    unit: mm/year
+    role: CANONICAL_LAND_FACT
+  ACIS:
+    grids_tested: [1, 21]
+    capability: CPER precipitation time series available
+    role: SECONDARY_QA_OR_FALLBACK
+    canonical_runtime_source: false
+  Mireye:
+    role: POINT_QA_AND_FAST_CONTEXT
+  measured_fact_note: 345.74 mm is a Land Fact only; no Cow-Calf/Sheep suitability signal.
+
+source_priority:
+  - source: NOAA_NCEI_GRIDDED_PRECIP_NORMALS_1991_2020
+    role: CANONICAL_LAND_FACT
+    live_status: LIVE_VERIFIED_ON_CPER
+    access_path: NOAA_NCEI_DIRECT_HTTPS_NETCDF
+    product_file: prcp-1991_2020-monthly-normals-v1.0.nc
+    variable: annprcp_norm
+  - source: ACIS_GRIDDATA
+    role: SECONDARY_QA_OR_FALLBACK
+    live_status: CAPABILITY_PROBED_ON_CPER
+    canonical_runtime_source: false
+    grids_tested: [1, 21]
+  - source: PRISM
+    role: ALTERNATE_OR_CROSS_CHECK_CLIMATE_SURFACE
+    live_status: NOT_SELECTED_FOR_PRIMARY_PATH
+  - source: USDM
+    role: CURRENT_DROUGHT_CATEGORY_CONTEXT
+    live_status: MIREYE_POINT_FIELD_LIVE_VERIFIED_ON_CPER
+  - source: MIREYE
+    role: POINT_QA_AND_FAST_CONTEXT
+    live_status: LIVE_VERIFIED_DROUGHT_TEMP_HEAT_ON_CPER
+
+mireye_v0_14_0_catalog_findings:
+  inspected_fixture: mireye/fixtures/field_catalog_v0.14.0.json
+  matched_fields:
+    - field_id: drought_category
+      source: USDM_CURRENT
+      spatial_semantics: POINT
+      temporal_semantics: CURRENT_WEEKLY_SNAPSHOT
+      f05_mapping: VAR_F05_DROUGHT_MONITOR_CATEGORY
+      may_represent_climatology: false
+      cper_live_value: D3
+      null_meaning_caution: >-
+        Catalog states null may mean not currently in a drought polygon or a
+        failed/stale read. Runtime must not collapse those cases.
+    - field_id: mean_annual_dry_bulb_temperature_degc
+      source: NOAA_NCEI_NORMALS_GRIDDED
+      spatial_semantics: POINT
+      temporal_semantics: NORMALS_1991_2020
+      f05_mapping: VAR_F05_MEAN_ANNUAL_TEMPERATURE
+      may_represent_whole_parcel: false
+      cper_live_value_degc: 9.12
+    - field_id: days_above_32c_annual_count
+      source: NOAA_NCEI_NCLIMGRID_DAILY
+      spatial_semantics: POINT
+      temporal_semantics: ANNUAL_COUNT_PRODUCT_DEFINED
+      f05_mapping: VAR_F05_HEAT_DAYS_ABOVE_32C
+      biological_threshold_approved: false
+      cper_live_value_days: 32
+  non_equivalent_fields:
+    - field_id: precipitable_water_annual_mean_cm
+      reason: Atmospheric column water vapor for irradiance attenuation, not land-surface rainfall.
+      f05_mapping: PROHIBITED_AS_PRECIPITATION
+  catalog_gaps:
+    - No verified land-surface mean annual precipitation field found in v0.14.0 catalog snapshot.
+    - No multi-year drought-frequency summary field found; history must come from external reconstruction or repeated USDM archives.
+    - No parcel-aggregate climate contract verified yet; current Mireye climate fields are point semantics.
+
+external_data_requirements:
+  - variable_id: VAR_F05_MEAN_ANNUAL_PRECIPITATION
+    primary_path: NOAA_NCEI_GRIDDED_PRECIP_NORMALS_1991_2020
+    alternate_candidate: PRISM
+    cper_live:
+      value_mm: 345.74
+      unit: millimeter
+      normals_period: 1991-2020
+      spatial_resolution: 1/24_degree_approx_4km
+      parcel_coverage: COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL
+      fixture: test-data/live-results/cper/cper_noaa_ncei_annprcp_normals_1991_2020_2026-08-07.json
+    required_outputs:
+      - value_mm_or_inches_with_unit
+      - normals_or_series_period
+      - spatial_support
+      - source_version
+      - fetched_at
+      - coverage_status
+  - variable_id: VAR_F05_DROUGHT_HISTORY_SUMMARY
+    primary_candidate: USDM_ARCHIVE_OR_REVIEWED_DROUGHT_FREQUENCY_PRODUCT
+    required_before_runtime_use:
+      - explicit_time_window
+      - aggregation_method
+      - missing_week_handling
+      - distinction_from_current_category
+
+cper_live_gate:
+  geometry_id: ENGINEERING_TEST_GEOMETRY_CPER_001
+  result_document: docs/F05_LIVE_DATA_GATE_RESULTS_CPER.md
+  summary_fixture: test-data/live-results/cper/cper_f05_live_gate_summary_2026-08-07.json
+  acceptance:
+    data_path_status: LIVE_VERIFIED
+    signal_status: NOT_YET_APPROVED
+    ranking_effect: NONE
+  completed_actions:
+    - fetch_mireye_point_drought_temperature_heat_fields_for_qa
+    - select_and_runtime_verify_external_precipitation_path_noaa_ncei
+    - record_coverage_period_units_and_provenance
+    - do_not_approve_numeric_thresholds_or_directional_signals
+  boundaries_confirmed:
+    - current_usdm_separated_from_drought_history
+    - land_surface_precip_separated_from_precipitable_water
+    - f05_does_not_mutate_f02_f03_signals
+    - f04_wetness_independent_of_future_flood_factor
+
+variable_list_freeze:
+  status: COMPLETE
+  registry: docs/UNIFIED_LAND_VARIABLE_REGISTRY.yaml
+  note: F05 variable candidates are already written; freeze is no longer the next gate.
+
+prohibited_shortcuts:
+  - precipitable_water_equals_rainfall
+  - current_usdm_equals_drought_climatology
+  - usdm_null_equals_historically_drought_free
+  - drought_category_equals_forage_failure
+  - precipitation_equals_available_forage
+  - climate_values_alter_f02_or_f03_ranking_without_reviewed_rule
+  - state_name_implies_climate
+  - fema_or_flood_logic_inside_f05
+
+relationship_and_rules_documents:
+  - docs/F05_CLIMATE_DROUGHT_EVIDENCE_REGISTRY.md
+  - docs/F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml
+  - docs/F05_CLIMATE_DROUGHT_GOLDEN_TESTS.yaml
+  - docs/SPECIES_REQUIREMENTS_REGISTRY.md
+
+next_documents:
+  - Keep Flood/Wetness out of F05
+  - Optional later: drought-history method freeze and seasonality/variability methods
+  - Do not add precipitation/USDM/heat suitability thresholds without a new reviewed version

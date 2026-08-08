@@ -1,0 +1,111 @@
+{
+    "type":"FeatureCollection",
+    "features":[
+        {
+            "type":"Feature",
+            "properties":{
+                "field_measurements_series_id":"d6fdfc82-55c9-4174-9ebe-aa1ad3724305",
+                "reading_type":"ReferencePrimary",
+                "field_visit_id":"c187b610-1b96-4049-8dc3-b1d16ca0a434",
+                "parameter_code":"72019",
+                "monitoring_location_id":"USGS-404848104461501",
+                "observing_procedure_code":"S",
+                "observing_procedure":"GW level, steel tape",
+                "value":"44.00",
+                "unit_of_measure":"ft",
+                "time":"1956-04-01T12:00:00+00:00",
+                "qualifier":[
+                    "Static"
+                ],
+                "vertical_datum":"Local Assumed Datum",
+                "approval_status":"Approved",
+                "measuring_agency":null,
+                "last_modified":"2026-07-11T06:35:42.787619+00:00",
+                "control_condition":null,
+                "measurement_rated":null,
+                "year":1956,
+                "month":4,
+                "day":1,
+                "time_of_day":null
+            },
+            "id":"4a29d5e2-124a-464d-80bf-a376a1ef0f3a",
+            "geometry":{
+                "type":"Point",
+                "coordinates":[
+                    -104.771357651623,
+                    40.8133144509944
+                ]
+            }
+        },
+        {
+            "type":"Feature",
+            "properties":{
+                "field_measurements_series_id":"e96102c6-6ddd-4bf9-a5a2-2a699c396ffa",
+                "reading_type":"ReferencePrimary",
+                "field_visit_id":"5ced9066-ae34-4f8a-b8ce-fd1dc125ed58",
+                "parameter_code":"72019",
+                "monitoring_location_id":"USGS-405029104450301",
+                "observing_procedure_code":"Z",
+                "observing_procedure":"None",
+                "value":"36.40",
+                "unit_of_measure":"ft",
+                "time":"1962-07-23T12:00:00+00:00",
+                "qualifier":[
+                    "Static"
+                ],
+                "vertical_datum":"Local Assumed Datum",
+                "approval_status":"Approved",
+                "measuring_agency":null,
+                "last_modified":"2026-07-11T06:36:19.352574+00:00",
+                "control_condition":null,
+                "measurement_rated":null,
+                "year":1962,
+                "month":7,
+                "day":23,
+                "time_of_day":null
+            },
+            "id":"9670848e-c14d-44a6-a278-d81a07be7945",
+            "geometry":{
+                "type":"Point",
+                "coordinates":[
+                    -104.751357175004,
+                    40.8413700614766
+                ]
+            }
+        }
+    ],
+    "numberReturned":2,
+    "links":[
+        {
+            "type":"application/geo+json",
+            "rel":"self",
+            "title":"This document as GeoJSON",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/field-measurements/items?f=json&bbox=-104.79,40.80,-104.735,40.85&parameter_code=72019&limit=100"
+        },
+        {
+            "rel":"alternate",
+            "type":"application/ld+json",
+            "title":"This document as RDF (JSON-LD)",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/field-measurements/items?f=jsonld&bbox=-104.79,40.80,-104.735,40.85&parameter_code=72019&limit=100"
+        },
+        {
+            "type":"text/html",
+            "rel":"alternate",
+            "title":"This document as HTML",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/field-measurements/items?f=html&bbox=-104.79,40.80,-104.735,40.85&parameter_code=72019&limit=100"
+        },
+        {
+            "type":"text/csv; charset=utf-8",
+            "rel":"alternate",
+            "title":"This document as CSV",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/field-measurements/items?f=csv&bbox=-104.79,40.80,-104.735,40.85&parameter_code=72019&limit=100"
+        },
+        {
+            "type":"application/json",
+            "title":"Field measurements",
+            "rel":"collection",
+            "href":"https://api.waterdata.usgs.gov/ogcapi/v0/collections/field-measurements"
+        }
+    ],
+    "timeStamp":"2026-08-07T21:38:46.443089Z"
+}

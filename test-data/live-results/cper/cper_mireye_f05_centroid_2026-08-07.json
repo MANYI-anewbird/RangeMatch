@@ -1,0 +1,61 @@
+{
+  "lat": 40.825,
+  "lng": -104.76249999999999,
+  "fetched_at": "2026-08-07T22:37:55.156487+00:00",
+  "fields": {
+    "drought_category": {
+      "value": "D3",
+      "unit": null,
+      "source": "USDM_CURRENT",
+      "source_url": "https://droughtmonitor.unl.edu/",
+      "confidence": "high",
+      "fetched_at": "2026-08-07T22:37:51.876458+00:00",
+      "dataset_vintage": "US Drought Monitor (NDMC/USDA/NOAA), current-week snapshot valid through 2026-08-03 (weekly release; local gpkg mirror)",
+      "ttl_seconds": 604800,
+      "notes": "max DM class (D0=Abnormally Dry .. D4=Exceptional) of the dissolved USDM polygons containing the point (point-in-polygon; local gpkg mirror); absence = not in any drought polygon",
+      "status": "ok"
+    },
+    "mean_annual_dry_bulb_temperature_degc": {
+      "value": 9.12,
+      "unit": "degC",
+      "source": "NOAA_NCEI_NORMALS_GRIDDED",
+      "source_url": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T22:37:54.972643+00:00",
+      "dataset_vintage": "NOAA NCEI 1991\u20132020 gridded climate normals (annual mean temp, CONUS)",
+      "ttl_seconds": 31536000,
+      "notes": "sampled from the bootstrapped CONUS COG at the point",
+      "status": "ok"
+    },
+    "days_above_32c_annual_count": {
+      "value": 32,
+      "unit": "days",
+      "source": "NOAA_NCEI_NCLIMGRID_DAILY",
+      "source_url": "https://www.ncei.noaa.gov/products/land-based-station/nclimgrid-daily",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T22:37:54.972971+00:00",
+      "dataset_vintage": "NOAA NCEI nClimGrid-Daily derived days \u2265 32\u00b0C per year (CONUS)",
+      "ttl_seconds": 2592000,
+      "notes": "sampled from the bootstrapped CONUS COG at the point",
+      "status": "ok"
+    },
+    "precipitable_water_annual_mean_cm": {
+      "value": 1.0675913242009132,
+      "unit": "cm",
+      "source": "NREL_NSRDB_GOES_TMY_V4",
+      "source_url": "https://nsrdb.nlr.gov/",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T22:37:55.126405+00:00",
+      "dataset_vintage": "NSRDB GOES TMY v4 (annual aggregate from hourly channels)",
+      "ttl_seconds": 31536000,
+      "notes": "derived from an hourly NSRDB GOES-TMY channel of the same broadened download used for surface_albedo_annual (-9999 sentinel rows excluded)",
+      "status": "ok"
+    }
+  },
+  "partial_failures": [],
+  "resolved_location": {
+    "lat": 40.825,
+    "lng": -104.76249999999999,
+    "source": "coordinate"
+  }
+}

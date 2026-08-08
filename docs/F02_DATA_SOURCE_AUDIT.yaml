@@ -1,0 +1,220 @@
+audit_id: RANGEMATCH_F02_HERBACEOUS_RESOURCE_DATA_AUDIT
+version: 0.1.0
+language: English
+status: PARTIAL_AUDIT_COMPLETE
+audit_date: 2026-08-07
+
+scope_decision:
+  rap_role: PRIMARY_CANDIDATE_FOR_RANGELAND_MODELED_COVER_AND_PRODUCTION
+  rap_is_universal_us_pasture_source: false
+  mireye_f02_fields_verified: false
+  directional_rule_allowed: false
+  reason: >-
+    RAP v3 public products are documented for rangeland monitoring and do not
+    establish universal improved-pasture coverage. Current Mireye F02 fields
+    could not be verified from a live catalog. Data availability is therefore
+    not sufficient to approve a universal F02 runtime path or directional rule.
+
+rap_v3:
+  provider: USDA Agricultural Research Service Rangeland Analysis Platform
+  documentation:
+    api: https://rangelands.app/support/71-api-documentation
+    cover_product: https://rangelands.app/support/article/48-vegetation-cover-dataset
+    production_product: https://rangelands.app/support/49-rangeland-production
+    gee_assets: https://rangelands.app/support/61-processing-rap-data-in-google-earth-engine
+    metadata: https://rangelands.app/support/59-rap-metadata
+  version_label: v3
+  spatial_resolution_m: 30
+  temporal_start_year: 1986
+  temporal_end_rule: PREVIOUS_COMPLETE_YEAR
+  aoi_crs: EPSG_4326
+  mask_option:
+    supported: true
+    excluded_classes_when_true: [cropland, development, water]
+    selected_mvp_behavior: true
+    warning: >-
+      Masked output may exclude land relevant to improved pasture or mixed land
+      use. Mask coverage and excluded-area fraction must be returned explicitly.
+  gee_assets:
+    vegetation_cover: projects/rap-data-365417/assets/vegetation-cover-v3
+    annual_npp_partitioned: projects/rap-data-365417/assets/npp-partitioned-v3
+    production_16day: projects/rap-data-365417/assets/npp-partitioned-16day-v3
+    provisional_16day: projects/rap-data-365417/assets/npp-partitioned-16day-v3-provisional
+  api_endpoints:
+    cover: https://us-central1-rap-data-365417.cloudfunctions.net/coverV3
+    annual_production: https://us-central1-rap-data-365417.cloudfunctions.net/productionV3
+    production_16day: https://us-central1-rap-data-365417.cloudfunctions.net/production16dayV3
+  access_validation:
+    documentation_verified: true
+    live_post_request_verified_in_current_environment: true
+    coverV3_polygon_verified: true
+    productionV3_polygon_verified: true
+    production16dayV3_polygon_verified: true
+    tested_geometry: ENGINEERING_TEST_GEOMETRY_CPER_001
+    tested_year: 2025
+    behavior_if_live_request_unverified: NEEDS_VERIFICATION
+
+variables:
+  - variable_id: VAR_F02_PERENNIAL_HERB_COVER
+    rap_endpoint: coverV3
+    rap_field: PFG
+    definition: Modeled fractional cover of perennial forbs and grasses.
+    unit: percent_cover
+    temporal_semantics: annual
+    directness: MODELED_RASTER_AGGREGATED_TO_AOI
+    availability: RUNTIME_VERIFIED_FOR_TESTED_RANGELAND_POLYGON
+    uncertainty:
+      endpoint_value_specific_uncertainty: NOT_EXPOSED_IN_DOCUMENTED_API_RESPONSE
+      external_accuracy_context_required: true
+    prohibited_interpretation: [grass_only_cover, species_composition, palatability, forage_availability]
+
+  - variable_id: VAR_F02_ANNUAL_HERB_COVER
+    rap_endpoint: coverV3
+    rap_field: AFG
+    definition: Modeled fractional cover of annual forbs and grasses.
+    unit: percent_cover
+    temporal_semantics: annual
+    directness: MODELED_RASTER_AGGREGATED_TO_AOI
+    availability: RUNTIME_VERIFIED_FOR_TESTED_RANGELAND_POLYGON
+    uncertainty:
+      endpoint_value_specific_uncertainty: NOT_EXPOSED_IN_DOCUMENTED_API_RESPONSE
+      external_accuracy_context_required: true
+    prohibited_interpretation: [grass_only_cover, species_composition, palatability, forage_availability]
+
+  - variable_id: VAR_F02_BARE_GROUND
+    rap_endpoint: coverV3
+    rap_field: BGR
+    definition: Modeled bare-ground fractional cover.
+    unit: percent_cover
+    temporal_semantics: annual
+    directness: MODELED_RASTER_AGGREGATED_TO_AOI
+    availability: RUNTIME_VERIFIED_FOR_TESTED_RANGELAND_POLYGON
+    role: CONTEXT_ONLY
+    prohibited_interpretation: [inverse_forage_availability, automatic_degradation_score]
+
+  - variable_id: VAR_F02_ANNUAL_HERB_PRODUCTION
+    rap_endpoint: productionV3
+    rap_fields: [AFG, PFG, HER]
+    definition: Modeled annual new aboveground herbaceous production.
+    unit: pound_per_acre
+    temporal_semantics: annual_accumulated_new_growth
+    directness: PROCESS_MODEL_OUTPUT_AGGREGATED_TO_AOI
+    availability: RUNTIME_VERIFIED_FOR_TESTED_RANGELAND_POLYGON
+    prohibited_interpretation: [standing_biomass, available_forage, carrying_capacity, current_residual]
+
+  - variable_id: VAR_F02_16DAY_HERB_PRODUCTION
+    rap_endpoint: production16dayV3
+    rap_fields: [date, year, doy, AFG, PFG, HER]
+    definition: Modeled new aboveground herbaceous production for each 16-day interval.
+    unit: pound_per_acre
+    temporal_semantics: 23_intervals_per_year
+    directness: PROCESS_MODEL_OUTPUT_AGGREGATED_TO_AOI
+    availability: RUNTIME_VERIFIED_FOR_TESTED_RANGELAND_POLYGON
+    zero_value_warning: >-
+      A documented zero is a model output for an interval and must remain
+      distinct from no-data, masked area, API failure, or unavailable coverage.
+    prohibited_interpretation: [standing_biomass, current_available_forage]
+
+  - variable_id: VAR_F02_INTERANNUAL_PRODUCTION_VARIABILITY
+    source_variables: [VAR_F02_ANNUAL_HERB_PRODUCTION]
+    availability: DERIVATION_METHOD_NOT_FROZEN
+    required_method_decisions:
+      - baseline_year_window
+      - minimum_valid_year_count
+      - missing_year_behavior
+      - trend_handling
+      - variability_statistic
+      - current_year_exclusion
+
+  - variable_id: VAR_F02_BOTANICAL_COMPOSITION
+    rap_field: null
+    availability: NOT_AVAILABLE_FROM_RAP_FUNCTIONAL_GROUPS
+    external_requirement: FIELD_SURVEY_OR_REVIEWED_LOCAL_VEGETATION_DATA
+
+  - variable_id: VAR_F02_PALATABILITY
+    rap_field: null
+    availability: NOT_AVAILABLE
+    external_requirement: OPERATION_SEASON_AND_SPECIES_SPECIFIC_REVIEW
+
+  - variable_id: VAR_F02_NUTRITIVE_VALUE
+    rap_field: null
+    availability: NOT_AVAILABLE
+    external_requirement: FIELD_SAMPLING_AND_LAB_OR_VERIFIED_LOCAL_DATA
+
+mireye_audit:
+  previously_recorded_catalog_version: v0.14.0
+  previously_recorded_catalog_endpoint: https://api.mireye.com/v1/meta/fields
+  current_endpoint_result: HTTP_200_ON_2026_08_07
+  current_catalog_verified: true
+  verified_catalog_version: v0.14.0
+  verified_catalog_field_count: 304
+  deterministic_fetch_endpoint: https://api.mireye.com/v1/fetch
+  live_point_test_result: HTTP_200_ON_2026_08_07
+  live_point_test_coordinate: {lat: 40.825, lng: -104.7625}
+  exact_numeric_f02_fields: []
+  exact_rap_fields: []
+  contextual_point_fields:
+    - field_id: lcms_class
+      source: USFS_LCMS
+      spatial_semantics: POINT_SAMPLE_FROM_APPROXIMATELY_120M_BLOCK_MODE_COG
+      live_value: Grass/Forb/Herb & Shrubs Mix
+      use_status: CONTEXT_AND_QA_ONLY
+    - field_id: cdl_class
+      source: USDA_NASS_CDL
+      spatial_semantics: POINT_SAMPLE_FROM_APPROXIMATELY_120M_BLOCK_MODE_COG
+      live_value: Grass/Pasture
+      use_status: CONTEXT_AND_QA_ONLY
+  field_status: >-
+    CATALOG_AND_POINT_FETCH_VERIFIED; NO MIREYE NUMERIC HERBACEOUS COVER,
+    PRODUCTION, OR RAP FIELD VERIFIED IN V0.14.0
+  prohibited_substitution:
+    - LCMS_CLASS_FOR_HERBACEOUS_COVER_OR_PRODUCTION
+    - CDL_CLASS_FOR_HERBACEOUS_COVER_OR_PRODUCTION
+    - POINT_CLASS_FOR_PARCEL_DISTRIBUTION
+    - LAND_COVER_CLASS_FOR_AVAILABLE_OR_PALATABLE_FORAGE
+
+coverage_gate:
+  required_outputs:
+    - requested_parcel_area_m2
+    - valid_rangeland_area_m2
+    - masked_area_m2
+    - no_data_area_m2
+    - valid_coverage_fraction
+    - mask_setting
+    - source_version
+    - requested_years
+    - returned_years
+  quality_states:
+    COMPLETE_RANGELAND_COVERAGE: Required RAP data and provenance are present for the eligible parcel area.
+    PARTIAL_RANGELAND_COVERAGE: Data exist for only part of the parcel or masked area is material and must be shown.
+    OUTSIDE_DOCUMENTED_PRODUCT_SCOPE: Parcel land use or geography is outside the reviewed RAP application scope.
+    API_UNVERIFIED: Endpoint is documented but runtime access or response schema has not been validated.
+    MISSING: No valid output.
+  no_masked_area_imputation: true
+  no_zero_for_missing: true
+
+improved_pasture_scope_decision:
+  universal_improved_pasture_support: NOT_APPROVED
+  default_quality_state: OUTSIDE_DOCUMENTED_PRODUCT_SCOPE
+  exception_rule: >-
+    Use RAP for F02 only when reviewed land-use evidence establishes that the
+    analyzed area is within the product's intended rangeland domain.
+  returned_numeric_value_does_not_establish_applicability: true
+  required_alternative_evidence:
+    - field_or_operator_records
+    - reviewed_local_forage_or_pasture_data
+    - suitable remote_sensing_product_validated_for_that_land_use
+
+pixel_coverage_runtime_status:
+  status: BLOCKED_PENDING_AUTHENTICATED_GEE_OR_EQUIVALENT_RASTER_ACCESS
+  public_aggregate_api_returns_pixel_area_counts: false
+  masked_vs_unmasked_contract_verified: true
+  masked_vs_unmasked_values_differ: true
+  difference_must_not_be_interpreted_as_masked_area_fraction: true
+  audit_document: F02_COVERAGE_AND_PASTURE_SCOPE_AUDIT.md
+
+next_actions:
+  - Configure authenticated Google Earth Engine or equivalent version-matched raster access.
+  - Calculate eligible, masked, no-data, and valid pixel areas for the CPER geometry.
+  - Compare raster-derived AOI means with public API means under a frozen tolerance.
+  - Select and audit an additional data path for improved pasture and cultivated forage systems.

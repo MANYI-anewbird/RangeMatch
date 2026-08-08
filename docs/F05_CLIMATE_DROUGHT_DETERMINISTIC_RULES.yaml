@@ -1,0 +1,133 @@
+spec_id: RANGEMATCH_F05_CLIMATE_DROUGHT_RULES
+version: 0.1.0
+language: English
+status: APPROVED_V0_1_DATA_QUALITY_CONTEXT_RULES
+factor_id: F05_CLIMATE_DROUGHT_EXPOSURE
+approved_numeric_thresholds: []
+approved_weights: []
+approved_hard_constraints: []
+approved_usdm_class_penalties: []
+approved_precip_cutoffs_mm: []
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  precipitable_water_is_rainfall: false
+  current_usdm_is_drought_history: false
+  operation_ranking_effect: NONE_IN_V0_1
+  directional_signal_allowed: false
+  may_mutate_f02_or_f03: false
+  canonical_precip_source: NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF
+  canonical_precip_variable: annprcp_norm
+  acis_role: SECONDARY_QA_OR_FALLBACK
+  mireye_role: POINT_QA_AND_FAST_CONTEXT
+  rationale: >-
+    Climate and drought fields can supply Land Facts and diligence context, but
+    reviewed sources do not authorize universal precipitation, USDM, or heat
+    thresholds for Cow-Calf or Sheep suitability ranking.
+
+input_quality_states:
+  CLIMATE_CONTEXT_COMPLETE:
+    definition: >-
+      Canonical NOAA/NCEI land-surface mean annual precipitation is present with
+      unit, normals or observation period, spatial support, coverage status, and
+      provenance. Optional current USDM and temperature/heat point QA may accompany
+      it. Drought-history summary is not required for this state in v0.1.
+  POINT_CLIMATE_ONLY:
+    definition: >-
+      Only point climate/drought samples are available; canonical parcel or
+      parcel-bbox precipitation normals are missing.
+  PROHIBITED_PRECIP_PROXY:
+    definition: >-
+      Atmospheric precipitable water or another non-equivalent proxy was offered
+      as land-surface precipitation.
+  CONFLICTING_SOURCES:
+    definition: >-
+      Material conflict among precipitation products, periods, units, or drought
+      semantics that cannot be reconciled without review.
+  MISSING:
+    definition: No usable F05 climate or drought evidence is available.
+
+evaluation_order:
+  - rule_id: F05_QC_001
+    when: input_quality_state == PROHIBITED_PRECIP_PROXY
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F05_EXPL_PRECIP_PROXY_PROHIBITED
+
+  - rule_id: F05_QC_002
+    when: input_quality_state == CONFLICTING_SOURCES
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F05_EXPL_CONFLICT
+
+  - rule_id: F05_QC_003
+    when: input_quality_state == POINT_CLIMATE_ONLY
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F05_EXPL_POINT_NOT_PARCEL_PRECIP
+
+  - rule_id: F05_QC_004
+    when: input_quality_state == MISSING
+    output_signal: UNKNOWN
+    ranking_effect: NONE
+    explanation_code: F05_EXPL_MISSING
+
+  - rule_id: F05_REL_001
+    when: input_quality_state == CLIMATE_CONTEXT_COMPLETE
+    output_signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F05_EXPL_CONTEXT_ONLY
+
+provenance_requirements_for_complete:
+  required:
+    - value_with_unit
+    - normals_or_observation_period
+    - spatial_support
+    - coverage_status
+    - source_identity
+    - fetched_at_or_dataset_vintage
+  canonical_precip_accepts:
+    - NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF
+  non_canonical_without_upgrade:
+    - ACIS_GRIDDATA
+    - PRISM
+    - MIREYE_POINT_SAMPLE
+  never_accept_as_precip:
+    - precipitable_water_annual_mean_cm
+    - atmospheric_column_water_vapor
+
+operation_explanations:
+  COW_CALF_OPERATION:
+    requirement_id: COW_F05_001
+    requirement_status: VERIFIED_FOR_V0_1
+  SHEEP_GRAZING:
+    requirement_id: SHEEP_F05_001
+    requirement_status: VERIFIED_FOR_V0_1
+
+prohibited_claims:
+  - Mean annual precipitation alone establishes forage suitability or carrying capacity.
+  - A current USDM class alone establishes multi-year drought exposure or forage failure.
+  - A null or non-drought USDM point proves historically drought-free land.
+  - Precipitable water equals land-surface rainfall.
+  - ACIS is the canonical mean-annual-precipitation Land Fact path.
+  - Mireye point climate equals parcel climate.
+  - F05 values silently alter F02 herbaceous or F03 livestock-water ranking.
+  - Cow-Calf or Sheep receives a fixed climate advantage over the other.
+  - FEMA or flood-hazard logic is part of F05.
+
+diligence_actions:
+  F05_DIL_001: Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance.
+  F05_DIL_002: Treat current USDM as current-condition context only; do not substitute for drought history.
+  F05_DIL_003: If drought-history summary is needed, declare window, aggregation method, and missing-week handling before use.
+  F05_DIL_004: Use ACIS precipitation series only for QA, fallback, or future variability methods—not as silent replacement of normals.
+  F05_DIL_005: Keep F05 context separate from F02 forage scores and F03 water verification.
+  F05_DIL_006: Field- and management-verify drought contingency needs; do not infer them from climate normals alone.
+
+explanation_templates:
+  F05_EXPL_PRECIP_PROXY_PROHIBITED: A non-equivalent precipitation proxy was supplied; land-surface precipitation remains unverified.
+  F05_EXPL_CONFLICT: Climate or drought evidence conflicts and cannot be reconciled without reviewed verification.
+  F05_EXPL_POINT_NOT_PARCEL_PRECIP: Point climate or drought samples are available, but canonical parcel precipitation normals are missing.
+  F05_EXPL_MISSING: Climate and drought evidence is unavailable, so F05 remains unknown.
+  F05_EXPL_CONTEXT_ONLY: Canonical precipitation context is present, but no approved universal threshold or cross-species ranking rule applies.

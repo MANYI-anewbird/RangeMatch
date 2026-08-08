@@ -1,0 +1,1664 @@
+{
+  "land_profile_id": "LAND_PROFILE_CPER_001",
+  "version": "0.2.1",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+  "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+  "supported_use": "ENGINEERING_VALIDATION_ONLY",
+  "factors": {
+    "F01_TOPOGRAPHY": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/live-results/cper/f01_derivation_result_2026-08-07.json",
+      "summary": {
+        "elevation_median_m": 1653.8697509765625,
+        "slope_median_degrees": 2.395727249934432,
+        "slope_p90_degrees": 5.255732540463456,
+        "mean_eastness": 0.09129856760794036,
+        "mean_northness": -0.28668371218180433
+      }
+    },
+    "F02_HERBACEOUS_RESOURCE": {
+      "derivation_spec": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+      "limitations": [
+        "RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.",
+        "Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity."
+      ],
+      "unknowns": [
+        "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+        "Botanical composition is not verified.",
+        "Operation-specific palatability is not verified.",
+        "Nutritive value is not verified."
+      ],
+      "land_facts": [
+        {
+          "variable_id": "VAR_F02_PERENNIAL_HERB_COVER",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 32.98657702821575,
+            "unit": "percent_cover",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "CPER_RANGELAND_TEST_CONTEXT"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1406580,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_coverV3",
+            "fetched_at": "2026-08-07T21:03:00Z",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "endpoint": "coverV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "PFG combines perennial grasses and forbs.",
+            "Modeled cover is not standing biomass, available forage, palatability, or nutritive value."
+          ]
+        },
+        {
+          "variable_id": "VAR_F02_ANNUAL_HERB_PRODUCTION",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 937.6780475452124,
+            "unit": "pound_per_acre",
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_accumulated_new_growth_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API",
+            "modeled": true
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "CPER_RANGELAND_TEST_CONTEXT"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1406580,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal",
+            "api_contract_verified": true,
+            "temporal_contract_verified": true,
+            "derivation_contract_verified": true
+          },
+          "provenance": {
+            "source_reference": "RAP_productionV3",
+            "fetched_at": "2026-08-07T21:03:00Z",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "response_or_artifact_hash": "f6c1e72a36ff9263df638723f3f952169eacd68f4e0ffa20d821421a7f4dfb96",
+            "endpoint": "productionV3",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0"
+          },
+          "limitations": [
+            "Production is modeled new growth, not standing biomass.",
+            "Production is not available forage, carrying capacity, or stocking rate."
+          ]
+        }
+      ]
+    },
+    "F03_LIVESTOCK_WATER": {
+      "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+      "derivation_spec": "F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml@0.1.0",
+      "evidence_contract": "F03_VERIFIED_WATER_EVIDENCE_CONTRACT.yaml@0.1.1",
+      "result_reference": "test-data/live-results/cper/cper_f03_candidate_distance_result_2026-08-07.json",
+      "remote_collection_reference": "test-data/cross-parcel-validation/XPV_CPER_001/f03_remote_pilot/remote_pilot_result.json",
+      "five_parcel_remote_collection_reference": "test-data/cross-parcel-validation/f03_five_parcel_remote_collection_summary.json",
+      "mapped_candidate_count": 9,
+      "verified_livestock_water_system_count": 0,
+      "field_verified_count": 0,
+      "euclidean_distance_to_mapped_candidate_m": {
+        "minimum": 0.0,
+        "median": 153.90288138901352,
+        "p90": 337.613479771555,
+        "maximum": 501.3165155857591
+      },
+      "euclidean_distance_to_verified_livestock_water_m": null,
+      "remote_evidence_summary": {
+        "total_mapped_candidates": 9,
+        "deterministically_sampled_for_remote_review": 3,
+        "remotely_supported": 2,
+        "sampled_but_still_mapped": 1,
+        "field_verified": 0,
+        "unreviewed_candidates": 6,
+        "unreviewed_status": "UNREVIEWED_NOT_ABSENT_OR_REJECTED",
+        "sample_coverage_limitation": "Only 3 of 9 candidates were remotely reviewed under STABLE_CANDIDATE_ID_ORDER_MAX_3.",
+        "selection_method": "STABLE_CANDIDATE_ID_ORDER_MAX_3",
+        "five_parcel_sample_disclosure": "15 reviewed out of 80 available across five frozen parcels",
+        "factor_state": "MAPPED_CANDIDATES_ONLY",
+        "signal": "NEEDS_VERIFICATION",
+        "ranking_effect": "NONE",
+        "remotely_supported_does_not_mean_usable_livestock_water": true,
+        "verified_count_zero_does_not_mean_no_water": true,
+        "synthetic_field_evidence_demo": {
+          "status": "TEST_ONLY",
+          "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+          "part_of_cper_live_profile": false,
+          "reference": "test-data/f03_field_evidence_demo/field_evidence_demo_result.json"
+        },
+        "unresolved_dimensions": [
+          "seasonal_reliability_for_livestock_use",
+          "deliverable_capacity",
+          "water_quality",
+          "livestock_accessibility",
+          "legal_access"
+        ]
+      },
+      "demo_statements": [
+        "REMOTELY_SUPPORTED does not mean usable livestock water.",
+        "FIELD_VERIFIED remains zero for this live CPER profile.",
+        "Six unsampled candidates are UNREVIEWED, not absent or rejected.",
+        "The synthetic field-evidence demo is TEST_ONLY and is not part of CPER live evidence.",
+        "Water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved."
+      ],
+      "limitations": [
+        "Mapped NHD hydrography features are candidate context, not verified livestock-water sources.",
+        "REMOTELY_SUPPORTED_CANDIDATE is remote presence plus an approved remote attribute only; it is not usable livestock water.",
+        "Only 3 of 9 mapped candidates were deterministically sampled for remote review; 6 remain UNREVIEWED, not absent or rejected.",
+        "Euclidean distance is not traversable animal-access distance.",
+        "Reliability, capacity, quality, legal access, livestock accessibility, and seasonal operation remain unresolved.",
+        "field_verified_count is 0; verified_count == 0 does not mean the land has no water.",
+        "Synthetic field-evidence fixtures are TEST_ONLY and are excluded from this live CPER Land Profile."
+      ],
+      "unknowns": [
+        "No FIELD_VERIFIED_LIVESTOCK_WATER system is in evidence for CPER.",
+        "Unreviewed mapped candidates have not been remotely or field reviewed.",
+        "Seasonal reliability for livestock use remains unresolved.",
+        "Deliverable capacity remains unresolved.",
+        "Water quality remains unresolved.",
+        "Livestock accessibility remains unresolved.",
+        "Legal access remains unresolved."
+      ],
+      "ranking_effect": "NONE"
+    },
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+      "input_quality_state": "PARCEL_COMPLETE",
+      "derivation_spec": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+      "result_reference": "test-data/live-results/cper/f04_derivation_result_2026-08-07.json",
+      "source_fixture_references": [
+        "test-data/live-results/cper/cper_sda_spatial_coverage_2026-08-07.json",
+        "test-data/live-results/cper/cper_sda_mapunit_component_ecosite_2026-08-07.json",
+        "test-data/live-results/cper/cper_sda_horizons_2026-08-07.json",
+        "test-data/live-results/cper/cper_sda_restrictions_2026-08-07.json",
+        "test-data/live-results/cper/cper_sda_monthly_wetness_2026-08-07.json",
+        "test-data/live-results/cper/cper_ecological_site_access_2026-08-07.json"
+      ],
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_WITH_NUMERIC_TOLERANCE",
+        "requested_area_m2": 1404078.7002779155,
+        "covered_area_m2": 1404078.7002779734,
+        "uncovered_area_m2": 0.0,
+        "coverage_fraction": 1.0,
+        "coverage_calculated_from_polygon_intersection": true,
+        "successful_query_implies_complete_coverage": false,
+        "intersecting_mapunit_count": 5
+      },
+      "mapunit_area_distribution": {
+        "95111": 0.09539280003713739,
+        "95132": 0.1551515998998313,
+        "95134": 0.2642193495724037,
+        "95143": 0.06314209034847544,
+        "95151": 0.42209416014219336
+      },
+      "component_support_weights": [
+        {
+          "mukey": "95134",
+          "cokey": "26599152",
+          "compname": "Nunn",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.2642193495724037,
+          "component_support_weight": 0.2245864471365431,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R067BY042CO",
+          "ecoclassname": "Clayey Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95151",
+          "cokey": "26599213",
+          "compname": "Renohill",
+          "comppct_r": 50.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.42209416014219336,
+          "component_support_weight": 0.21104708007109668,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R067BY002CO",
+          "ecoclassname": "Loamy Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95151",
+          "cokey": "26599214",
+          "compname": "Shingle",
+          "comppct_r": 35.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.42209416014219336,
+          "component_support_weight": 0.14773295604976766,
+          "drainagecl": "Well drained",
+          "hydgrp": "D",
+          "ecoclassid": "R067BY045CO",
+          "ecoclassname": "Shaly Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95132",
+          "cokey": "26599030",
+          "compname": "Ascalon",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.1551515998998313,
+          "component_support_weight": 0.1318788599148566,
+          "drainagecl": "Well drained",
+          "hydgrp": "B",
+          "ecoclassid": "R067BY024CO",
+          "ecoclassname": "Sandy Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95111",
+          "cokey": "26599076",
+          "compname": "Cascajo",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.09539280003713739,
+          "component_support_weight": 0.08108388003156677,
+          "drainagecl": "Excessively drained",
+          "hydgrp": "A",
+          "ecoclassid": "R067BY063CO",
+          "ecoclassname": "Gravel Breaks",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95143",
+          "cokey": "26599032",
+          "compname": "Ascalon",
+          "comppct_r": 85.0,
+          "majcompflag": "Yes",
+          "mapunit_parcel_area_fraction": 0.06314209034847544,
+          "component_support_weight": 0.05367077679620412,
+          "drainagecl": "Well drained",
+          "hydgrp": "B",
+          "ecoclassid": "R067BY024CO",
+          "ecoclassname": "Sandy Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95151",
+          "cokey": "26599212",
+          "compname": "Midway",
+          "comppct_r": 8.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.42209416014219336,
+          "component_support_weight": 0.03376753281137547,
+          "drainagecl": null,
+          "hydgrp": null,
+          "ecoclassid": null,
+          "ecoclassname": null,
+          "ecoclasstypename": null
+        },
+        {
+          "mukey": "95151",
+          "cokey": "26599211",
+          "compname": "Tassel",
+          "comppct_r": 7.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.42209416014219336,
+          "component_support_weight": 0.029546591209953538,
+          "drainagecl": null,
+          "hydgrp": null,
+          "ecoclassid": null,
+          "ecoclassname": null,
+          "ecoclasstypename": null
+        },
+        {
+          "mukey": "95134",
+          "cokey": "26599150",
+          "compname": "Manzanst",
+          "comppct_r": 10.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.2642193495724037,
+          "component_support_weight": 0.026421934957240368,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R067BY042CO",
+          "ecoclassname": "Clayey Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95111",
+          "cokey": "26599075",
+          "compname": "Stoneham",
+          "comppct_r": 14.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.09539280003713739,
+          "component_support_weight": 0.013354992005199236,
+          "drainagecl": null,
+          "hydgrp": null,
+          "ecoclassid": null,
+          "ecoclassname": null,
+          "ecoclasstypename": null
+        },
+        {
+          "mukey": "95134",
+          "cokey": "26599151",
+          "compname": "Avar",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.2642193495724037,
+          "component_support_weight": 0.013210967478620184,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R067BY033CO",
+          "ecoclassname": "Salt Flat",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95132",
+          "cokey": "26599031",
+          "compname": "Olnest",
+          "comppct_r": 8.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.1551515998998313,
+          "component_support_weight": 0.012412127991986504,
+          "drainagecl": "Well drained",
+          "hydgrp": "B",
+          "ecoclassid": "R067BY024CO",
+          "ecoclassname": "Sandy Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95132",
+          "cokey": "26599029",
+          "compname": "Otero",
+          "comppct_r": 7.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.1551515998998313,
+          "component_support_weight": 0.01086061199298819,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R067BY024CO",
+          "ecoclassname": "Sandy Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95143",
+          "cokey": "26599033",
+          "compname": "Stoneham",
+          "comppct_r": 10.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06314209034847544,
+          "component_support_weight": 0.0063142090348475444,
+          "drainagecl": "Well drained",
+          "hydgrp": "C",
+          "ecoclassid": "R067BY002CO",
+          "ecoclassname": "Loamy Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95143",
+          "cokey": "26599034",
+          "compname": "Manter",
+          "comppct_r": 5.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.06314209034847544,
+          "component_support_weight": 0.0031571045174237722,
+          "drainagecl": "Well drained",
+          "hydgrp": "A",
+          "ecoclassid": "R067BY024CO",
+          "ecoclassname": "Sandy Plains",
+          "ecoclasstypename": "NRCS Rangeland Site"
+        },
+        {
+          "mukey": "95111",
+          "cokey": "26599074",
+          "compname": "Otero",
+          "comppct_r": 1.0,
+          "majcompflag": "No",
+          "mapunit_parcel_area_fraction": 0.09539280003713739,
+          "component_support_weight": 0.0009539280003713739,
+          "drainagecl": null,
+          "hydgrp": null,
+          "ecoclassid": null,
+          "ecoclassname": null,
+          "ecoclasstypename": null
+        }
+      ],
+      "known_component_share": 1.0,
+      "unaccounted_component_share": 0.0,
+      "component_percentages_renormalized": false,
+      "drainage_class_distribution": {
+        "Excessively drained": 0.08108388003156677,
+        "UNKNOWN": 0.07762304402689962,
+        "Well drained": 0.8412930759415748
+      },
+      "hydrologic_soil_group_distribution": {
+        "A": 0.09510159654197874,
+        "B": 0.19796176470304724,
+        "C": 0.27053355860725115,
+        "D": 0.35878003612086434,
+        "UNKNOWN": 0.07762304402689962
+      },
+      "ponding_frequency_distribution": {
+        "None": 0.9223769559731433,
+        "UNKNOWN": 0.07762304402689965
+      },
+      "flooding_frequency_distribution": {
+        "None": 0.9223769559731433,
+        "UNKNOWN": 0.07762304402689965
+      },
+      "restrictive_layer_records": [
+        {
+          "cokey": "26599152",
+          "component_support_weight": 0.2245864471365431,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599213",
+          "component_support_weight": 0.21104708007109668,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Paralithic bedrock",
+          "resdept_r_cm": 74.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599214",
+          "component_support_weight": 0.14773295604976766,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Paralithic bedrock",
+          "resdept_r_cm": 28.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599030",
+          "component_support_weight": 0.1318788599148566,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599076",
+          "component_support_weight": 0.08108388003156677,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599032",
+          "component_support_weight": 0.05367077679620412,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599212",
+          "component_support_weight": 0.03376753281137547,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599211",
+          "component_support_weight": 0.029546591209953538,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599150",
+          "component_support_weight": 0.026421934957240368,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599075",
+          "component_support_weight": 0.013354992005199236,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599151",
+          "component_support_weight": 0.013210967478620184,
+          "restrictive_layer_status": "KNOWN",
+          "reskind": "Natric",
+          "resdept_r_cm": 8.0,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599031",
+          "component_support_weight": 0.012412127991986504,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599029",
+          "component_support_weight": 0.01086061199298819,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599033",
+          "component_support_weight": 0.0063142090348475444,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599034",
+          "component_support_weight": 0.0031571045174237722,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        },
+        {
+          "cokey": "26599074",
+          "component_support_weight": 0.0009539280003713739,
+          "restrictive_layer_status": "UNKNOWN",
+          "reskind": null,
+          "resdept_r_cm": null,
+          "interpreted_as_unrestricted": false
+        }
+      ],
+      "restrictive_layer_distribution": {
+        "Natric|8.0": 0.013210967478620184,
+        "Paralithic bedrock|28.0": 0.14773295604976766,
+        "Paralithic bedrock|74.0": 0.21104708007109668,
+        "UNKNOWN": 0.6280089964005565
+      },
+      "ecological_site_references": [
+        {
+          "ecological_site_id": "R067BY042CO",
+          "ecological_site_name": "Clayey Plains",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.25100838209378346,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "TimeoutError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY042CO",
+          "retrieval_timestamp": "2026-08-07T22:30:00Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R067BY002CO",
+          "ecological_site_name": "Loamy Plains",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.21736128910594424,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY002CO",
+          "retrieval_timestamp": "2026-08-07T22:30:00Z",
+          "response_hash": "b841012aa705fb9924be575bf2c84cbc365cddbe7d141ac8fe147291f57c78b0",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R067BY024CO",
+          "ecological_site_name": "Sandy Plains",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.2119794812134592,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY024CO",
+          "retrieval_timestamp": "2026-08-07T22:30:00Z",
+          "response_hash": "055940266eef154d2eaa2d4c019d3073bf074d3bdbb52edf2745d01129eceb47",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R067BY045CO",
+          "ecological_site_name": "Shaly Plains",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.14773295604976766,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "TimeoutError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY045CO",
+          "retrieval_timestamp": "2026-08-07T22:30:00Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R067BY063CO",
+          "ecological_site_name": "Gravel Breaks",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.08108388003156677,
+          "public_description_access_status": "UNKNOWN",
+          "access_error_type": "TimeoutError",
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY063CO",
+          "retrieval_timestamp": "2026-08-07T22:30:00Z",
+          "response_hash": null,
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        },
+        {
+          "ecological_site_id": "R067BY033CO",
+          "ecological_site_name": "Salt Flat",
+          "ecological_site_type": "NRCS Rangeland Site",
+          "component_support_weight": 0.013210967478620184,
+          "public_description_access_status": "ACCESSIBLE",
+          "access_error_type": null,
+          "source_url": "https://edit.sc.egov.usda.gov/catalogs/esd/067B/R067BY033CO",
+          "retrieval_timestamp": "2026-08-07T22:30:00Z",
+          "response_hash": "1b1f762297e56f2a2be0da7527e5266ccbbb68e151c95a219317ad1737d52762",
+          "current_vegetation_state": "UNKNOWN",
+          "operation_ranking_effect": "NONE"
+        }
+      ],
+      "ecological_site_unknown_share": 0.07762304402689962,
+      "available_water_storage": {
+        "status": "METHOD_INPUT_REQUIRED",
+        "derived_storage_mm": null,
+        "note": "Reusable AWC derivation exists; no approved depth interval is applied in this Land Profile."
+      },
+      "mireye_point_qa": {
+        "role": "POINT_DISPLAY_AND_QA_ONLY",
+        "may_represent_whole_parcel": false,
+        "fetched_at": "2026-08-07T21:57:00.329871+00:00",
+        "fields": {
+          "soil_map_unit_name": {
+            "value": "Renohill-Shingle complex, 3 to 9 percent slopes",
+            "unit": null,
+            "source": "NRCS_gNATSGO",
+            "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+            "confidence": "high",
+            "fetched_at": "2026-08-07T21:53:47.376701+00:00",
+            "dataset_vintage": null,
+            "ttl_seconds": 31536000,
+            "notes": null,
+            "status": "ok"
+          },
+          "soil_drainage_class": {
+            "value": "Well drained",
+            "unit": null,
+            "source": "NRCS_gNATSGO",
+            "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+            "confidence": "high",
+            "fetched_at": "2026-08-07T21:53:47.376724+00:00",
+            "dataset_vintage": null,
+            "ttl_seconds": 31536000,
+            "notes": null,
+            "status": "ok"
+          },
+          "soil_ponding_frequency_class": {
+            "value": "None",
+            "unit": null,
+            "source": "NRCS_gNATSGO",
+            "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+            "confidence": "medium",
+            "fetched_at": "2026-08-07T21:53:47.376828+00:00",
+            "dataset_vintage": null,
+            "ttl_seconds": 31536000,
+            "notes": "dominant-component worst-case ponding frequency across its monthly SSURGO records (comonth.pondfreqcl); 'None' is a real value meaning the component does not pond, not missing data",
+            "status": "ok"
+          },
+          "soil_hydrologic_group": {
+            "value": "D",
+            "unit": null,
+            "source": "NRCS_gNATSGO",
+            "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+            "confidence": "high",
+            "fetched_at": "2026-08-07T21:53:47.376713+00:00",
+            "dataset_vintage": null,
+            "ttl_seconds": 31536000,
+            "notes": null,
+            "status": "ok"
+          },
+          "soil_restrictive_layer_depth_cm": {
+            "value": 74.0,
+            "unit": "cm",
+            "source": "NRCS_gNATSGO",
+            "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+            "confidence": "medium",
+            "fetched_at": "2026-08-07T21:53:47.376802+00:00",
+            "dataset_vintage": null,
+            "ttl_seconds": 31536000,
+            "notes": null,
+            "status": "ok"
+          },
+          "soil_restrictive_layer_kind": {
+            "value": "Paralithic bedrock",
+            "unit": null,
+            "source": "NRCS_gNATSGO",
+            "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+            "confidence": "medium",
+            "fetched_at": "2026-08-07T21:53:47.376813+00:00",
+            "dataset_vintage": null,
+            "ttl_seconds": 31536000,
+            "notes": null,
+            "status": "ok"
+          },
+          "soil_available_water_capacity": {
+            "value": 0.14,
+            "unit": "cm/cm",
+            "source": "NRCS_gNATSGO",
+            "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+            "confidence": "medium",
+            "fetched_at": "2026-08-07T21:53:47.376736+00:00",
+            "dataset_vintage": null,
+            "ttl_seconds": 31536000,
+            "notes": null,
+            "status": "ok"
+          }
+        },
+        "partial_failures": []
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "F04_SOIL_SITE_ATOMICITY_AND_SOURCE_AUDIT",
+          "CPER_LIVE_DATA_GATE"
+        ],
+        "notes": "F04 v0.1 is data-quality and context only; no directional suitability signal is approved."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "requested_area_m2": 1404078.7002779155,
+        "valid_area_m2": 1404078.7002779734,
+        "valid_coverage_fraction": 1.0,
+        "adapter_status": "SDA_POLYGON_AND_TABULAR_VERIFIED"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": false,
+        "component_count": 16,
+        "horizon_record_count": 56,
+        "restriction_record_count": 16,
+        "monthly_wetness_record_count": 192,
+        "components_with_ecological_site_linkage": 12,
+        "derivation_contract_verified": true,
+        "numeric_average_of_controlled_categories": false
+      },
+      "provenance": {
+        "source_reference": "USDA_NRCS_SDA_SSURGO_AND_EDIT",
+        "fetched_at": "2026-08-07T22:30:00Z",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "2807be243bc959b2eab4e2177986aa8cf88f0defd7b7694b001c95ab837dc4b8",
+        "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+        "primary_path": "OFFICIAL_SDA_PARCEL_POLYGONS_COMPONENTS_HORIZONS",
+        "mireye_role": "POINT_DISPLAY_AND_QA_ONLY"
+      },
+      "limitations": [
+        "No composite soil score is created.",
+        "Controlled categories are preserved as distributions, not ordinal averages.",
+        "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+        "Ecological-site names do not imply current vegetation or operation ranking.",
+        "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+        "Available-water storage is omitted from profile evidence until a depth interval is approved."
+      ],
+      "unknowns": [
+        "Within-map-unit component locations are unknown.",
+        "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+        "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+        "Ecological-site references do not establish current vegetation state.",
+        "No approved depth interval exists for parcel available-water storage in the Land Profile.",
+        "Some components lack ecological-site linkage; absent linkage remains UNKNOWN."
+      ],
+      "ranking_effect": "NONE"
+    },
+    "F05_CLIMATE_DROUGHT_EXPOSURE": {
+      "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+      "input_quality_state": "CLIMATE_CONTEXT_COMPLETE",
+      "derivation_spec": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+      "canonical_precipitation": {
+        "variable_id": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+        "value_mm": 345.74,
+        "value_inches": 13.612,
+        "unit": "millimeter",
+        "unit_normalized": "mm/year",
+        "normals_period": "1991-2020",
+        "spatial_resolution": {
+          "nominal": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+          "delta_lat_deg": 0.041667938232421875,
+          "delta_lon_deg": 0.04166412353515625
+        },
+        "aggregation": {
+          "method": "bbox_intersecting_cell_centers_mean",
+          "cell_count": 1,
+          "cell_values_mm": [
+            345.74
+          ],
+          "cells": [
+            {
+              "lat": 40.81253433227539,
+              "lon": -104.77083587646484,
+              "annprcp_norm_mm": 345.7378845214844
+            }
+          ],
+          "note": "Mean of NOAA NCEI gridded annual precipitation normals for grid cells intersecting the CPER engineering rectangle. Not area-weighted polygon clip (rectangle \u2248 bbox)."
+        },
+        "source": {
+          "organization": "NOAA National Centers for Environmental Information (NCEI)",
+          "product": "1991-2020 Gridded Monthly/Annual Precipitation Normals (derived from nClimGrid)",
+          "variable": "annprcp_norm",
+          "title": "1991-2020 Normals",
+          "institution": "National Centers for Environmental Information (NCEI)",
+          "naming_authority": "gov.noaa.ncei",
+          "file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+          "source_url": "https://www.ncei.noaa.gov/data/oceans/archive/arc0196/0245564/1.1/data/0-data/prcp-1991_2020-monthly-normals-v1.0.nc",
+          "product_page": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals",
+          "nclimgrid_reference": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332",
+          "date_created_in_file": "2021-09-16 08:30:01",
+          "units_in_file": "millimeter",
+          "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "alternate_not_used": "PRISM retained as alternate/cross-check only; ACIS NRCC grid 1 not used as primary."
+        },
+        "role": "CANONICAL_LAND_FACT",
+        "suitability_signal": null
+      },
+      "parcel_coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+        "spatial_support": "PARCEL_BBOX_INTERSECTING_GRID_CELLS",
+        "parcel_bbox": [
+          -104.77,
+          40.82,
+          -104.755,
+          40.83
+        ],
+        "intersecting_cell_count": 1,
+        "coverage_calculated_from_polygon_intersection": false,
+        "successful_query_implies_complete_coverage": false
+      },
+      "mireye_point_qa": {
+        "drought_category": {
+          "value": "D3",
+          "unit": null,
+          "status": "ok",
+          "source": "USDM_CURRENT",
+          "dataset_vintage": "US Drought Monitor (NDMC/USDA/NOAA), current-week snapshot valid through 2026-08-03 (weekly release; local gpkg mirror)",
+          "fetched_at": "2026-08-07T22:37:51.876458+00:00",
+          "spatial_semantics": "POINT_CENTROID"
+        },
+        "mean_annual_dry_bulb_temperature_degc": {
+          "value": 9.12,
+          "unit": "degC",
+          "status": "ok",
+          "source": "NOAA_NCEI_NORMALS_GRIDDED",
+          "dataset_vintage": "NOAA NCEI 1991\u20132020 gridded climate normals (annual mean temp, CONUS)",
+          "fetched_at": "2026-08-07T22:37:54.972643+00:00",
+          "spatial_semantics": "POINT_CENTROID"
+        },
+        "days_above_32c_annual_count": {
+          "value": 32,
+          "unit": "days",
+          "status": "ok",
+          "source": "NOAA_NCEI_NCLIMGRID_DAILY",
+          "dataset_vintage": "NOAA NCEI nClimGrid-Daily derived days \u2265 32\u00b0C per year (CONUS)",
+          "fetched_at": "2026-08-07T22:37:54.972971+00:00",
+          "spatial_semantics": "POINT_CENTROID"
+        }
+      },
+      "secondary_comparisons": [],
+      "source_conflicts": [],
+      "validation": {
+        "complete": true,
+        "issues": [
+          "non_canonical_precip_access_path"
+        ],
+        "coverage_confirmed": true,
+        "unit_ok": true,
+        "period_ok": true,
+        "value_ok": true,
+        "provenance_ok": true,
+        "provenance_fields": {
+          "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "fetched_at": "2026-08-08T02:23:15.739446+00:00",
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2"
+        }
+      },
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED_FOR_DATA_CAPABILITY",
+        "basis": [
+          "F05_CLIMATE_DROUGHT_ATOMICITY_AND_SOURCE_AUDIT",
+          "F05_CLIMATE_DROUGHT_EVIDENCE_REGISTRY",
+          "CPER_LIVE_DATA_GATE"
+        ],
+        "notes": "F05 v0.1 is data-quality and context only; annprcp_norm is retained as a Land Fact and is not converted into suitability."
+      },
+      "coverage": {
+        "status": "COMPLETE",
+        "detail": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+        "adapter_status": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF"
+      },
+      "quality": {
+        "confidence_state": "SUPPORTED",
+        "modeled": true,
+        "canonical_precip_complete": true,
+        "directional_signal_approved": false,
+        "numeric_thresholds_approved": false
+      },
+      "provenance": {
+        "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+        "fetched_at": "2026-08-08T02:23:15.739446+00:00",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+        "derivation_spec_version": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+        "primary_path": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF",
+        "canonical_variable": "annprcp_norm",
+        "acis_role": "SECONDARY_QA_OR_FALLBACK",
+        "mireye_role": "POINT_QA_AND_FAST_CONTEXT"
+      },
+      "limitations": [
+        "Mean annual precipitation is a Land Fact, not a suitability score.",
+        "Current USDM class is current-condition context only, not drought history.",
+        "Mireye point climate fields must not replace canonical NOAA parcel precipitation.",
+        "ACIS precipitation series is secondary QA/fallback and is not the canonical runtime source.",
+        "No precipitation, temperature, heat-day, or USDM suitability threshold is approved.",
+        "F05 must not alter F02 forage, F03 livestock-water, or F04 wetness signals.",
+        "Flood/FEMA hazard is out of scope for F05."
+      ],
+      "unknowns": [
+        "Drought-history summary method is not frozen.",
+        "Precipitation seasonality and interannual variability methods are not frozen.",
+        "No biological heat-stress threshold is approved for Cow-Calf or Sheep."
+      ],
+      "ranking_effect": "NONE",
+      "result_reference": "test-data/live-results/cper/f05_derivation_result_2026-08-08.json",
+      "source_fixture_references": [
+        "test-data/live-results/cper/cper_noaa_ncei_annprcp_normals_1991_2020_2026-08-07.json",
+        "test-data/live-results/cper/cper_mireye_f05_centroid_2026-08-07.json"
+      ]
+    },
+    "F06_PARCEL_CONFIGURATION": {
+      "factor_id": "F06_PARCEL_CONFIGURATION",
+      "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+      "derivation_spec": "F06_PARCEL_CONFIGURATION_DERIVATION_SPEC.yaml@0.1.0",
+      "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+      "source_crs": "EPSG:4326",
+      "working_crs": "EPSG:32613",
+      "crs_selection": {
+        "ok": true,
+        "reason": null,
+        "working_crs": "EPSG:32613",
+        "utm_zone": 13,
+        "centroid_wgs84": [
+          -104.76249999999999,
+          40.82500000000001
+        ],
+        "bounds_wgs84": [
+          -104.77,
+          40.82,
+          -104.755,
+          40.83
+        ]
+      },
+      "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+      "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+      "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+      "geometry_type": "Polygon",
+      "geometry_validity": "VALID",
+      "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+      "polygon_part_count": 1,
+      "area_m2": 1404078.7002779155,
+      "perimeter_m": 4749.852971191508,
+      "compactness": 0.7820616361495341,
+      "has_holes": false,
+      "automatic_repair_applied": false,
+      "display_only": {
+        "area_ha": 140.40787002779155,
+        "area_acre_international": 346.955402842096
+      },
+      "display_conversions": {
+        "area_ha_formula": "area_m2 / 10000",
+        "area_acre_formula": "area_m2 / 4046.8564224",
+        "acre_convention": "international_acre",
+        "are_land_facts": false
+      },
+      "measured_geometry_geojson_hash": "f8a30e95954bc6c7a7a827420828eb499962a3be75c5edf75f227344a37059ac",
+      "derived_at": "2026-08-08T06:00:00Z",
+      "ranking_effect": "NONE",
+      "provenance": {
+        "source_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+        "fetched_at": "2026-08-08T06:00:00Z",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+        "working_crs": "EPSG:32613",
+        "source_crs": "EPSG:4326"
+      },
+      "limitations": [
+        "Parcel area is geometric context, not grazable area or carrying capacity.",
+        "Parcel perimeter is not fencing cost.",
+        "Compactness is not operational efficiency or suitability.",
+        "Measurements use projected UTM meters; not a legal survey acreage.",
+        "v0.1 perimeter excludes interior rings/holes.",
+        "v0.1 does not automatically repair invalid geometry.",
+        "Geodesic QA is deferred and not required for v0.1."
+      ],
+      "unknowns": [],
+      "prohibited_interpretations_applied": true,
+      "result_reference": "test-data/live-results/cper/f06_derivation_result_2026-08-08.json"
+    },
+    "F07_ROAD_AND_PHYSICAL_ACCESS": {
+      "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+      "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+      "derivation_spec": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION_SPEC.yaml@0.1.0",
+      "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+      "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+      "road_product": "TIGER/Line 2025 All Roads",
+      "road_product_vintage": "2025",
+      "search_window_m": 5000.0,
+      "source_crs": "EPSG:4326",
+      "working_crs": "EPSG:32613",
+      "crs_selection": {
+        "ok": true,
+        "reason": null,
+        "working_crs": "EPSG:32613",
+        "utm_zone": 13,
+        "centroid_wgs84": [
+          -104.76249999999999,
+          40.82500000000001
+        ],
+        "bounds_wgs84": [
+          -104.77,
+          40.82,
+          -104.755,
+          40.83
+        ]
+      },
+      "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+      "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+      "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+      "geometry_validity": "VALID",
+      "county_coverage": {
+        "requested_county_fips": [
+          "08123"
+        ],
+        "loaded_county_fips": [
+          "08123"
+        ],
+        "missing_county_fips": [],
+        "status": "COMPLETE"
+      },
+      "mapped_road_feature_count_in_search_window": 45,
+      "road_parcel_contact_status": "INTERSECTS",
+      "road_parcel_contact_detail": {
+        "intersects_feature_count": 4,
+        "touches_feature_count": 0,
+        "no_contact_feature_count": 41
+      },
+      "nearest_mapped_road_distance_m": 0.0,
+      "nearest_road_feature_id": "110417652669",
+      "nearest_road_class_context": "S1400",
+      "nearest_road_fullname": null,
+      "nearest_feature_tie_break": {
+        "primary": "distance_m_ascending",
+        "secondary": "stable_feature_id_ascending",
+        "preferred_stable_id": "LINEARID"
+      },
+      "road_source_coverage_status": "ROAD_CONTEXT_COMPLETE",
+      "road_artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+      "osm_consulted": false,
+      "edges_fallback_used": false,
+      "ranking_effect": "NONE",
+      "derived_at": "2026-08-08T06:57:21Z",
+      "provenance": {
+        "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+        "road_product_vintage": "2025",
+        "fetched_at": "2026-08-08T06:57:21Z",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+        "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+        "working_crs": "EPSG:32613",
+        "source_crs": "EPSG:4326",
+        "search_window_m": 5000.0,
+        "requested_county_fips": [
+          "08123"
+        ],
+        "loaded_county_fips": [
+          "08123"
+        ]
+      },
+      "adapter": {
+        "adapter_id": "F07_TIGER_LINE_2025_ALL_ROADS_ADAPTER@0.1.0",
+        "osm_consulted": false,
+        "edges_fallback_used": false,
+        "requested_county_fips": [
+          "08123"
+        ],
+        "loaded_county_fips": [
+          "08123"
+        ],
+        "missing_county_fips": [],
+        "county_downloads": [
+          {
+            "county_fips": "08123",
+            "ok": true,
+            "feature_count_in_window": 45,
+            "download": {
+              "url": "https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_08123_roads.zip",
+              "path": "test-data/live-results/cper/tiger2025_cache/tl_2025_08123_roads.zip",
+              "sha256": "4d2f5e066e5f56779293b3eb64ef051dfd43cacc3c75ed7f98600d4d2097dc8c",
+              "bytes": 1899906,
+              "cache_hit": false,
+              "fetched_at": "2026-08-08T06:57:20Z"
+            },
+            "url": "https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_08123_roads.zip"
+          }
+        ],
+        "county_resolution": {
+          "fetch_region_bounds_wgs84": [
+            -104.82929963053661,
+            40.77495742634188,
+            -104.69570055268339,
+            40.875042142889086
+          ],
+          "county_download": {
+            "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+            "path": "test-data/live-results/cper/tiger2025_cache/tl_2025_us_county.zip",
+            "sha256": "9c6e9d9076abce2670d1de255de3710c35ecca00a7005d88e012dec52d95f763",
+            "bytes": 83989800,
+            "cache_hit": false,
+            "fetched_at": "2026-08-08T06:57:13Z"
+          },
+          "counties": [
+            {
+              "county_fips": "08123",
+              "name": "Weld",
+              "statefp": "08",
+              "countyfp": "123"
+            }
+          ]
+        },
+        "feature_count_in_window": 45,
+        "collection_ok": true
+      },
+      "live_gate": {
+        "live_gate_id": "F07_TIGER2025_ALL_ROADS_CPER",
+        "status": "LIVE_VERIFIED",
+        "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+        "osm_consulted": false,
+        "edges_fallback_used": false,
+        "requested_county_fips": [
+          "08123"
+        ],
+        "loaded_county_fips": [
+          "08123"
+        ],
+        "county_coverage_status": "COMPLETE",
+        "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+        "signal": "CONTEXT_DEPENDENT",
+        "ranking_effect": "NONE",
+        "adapter_id": "F07_TIGER_LINE_2025_ALL_ROADS_ADAPTER@0.1.0",
+        "derived_at": "2026-08-08T06:57:21Z",
+        "explanation_code": "F07_EXPL_CONTEXT_ONLY"
+      },
+      "limitations": [
+        "Mapped road proximity/contact is physical context only.",
+        "Mapped roads do not establish legal access, easement, or deeded right-of-way.",
+        "Centerline contact does not prove a usable driveway, gate, or entrance.",
+        "Euclidean parcel-to-centerline distance is not network drive distance or travel time.",
+        "Search window is a retrieval parameter, not a too-far suitability threshold.",
+        "Absence of mapped roads in the window does not prove the parcel is landlocked.",
+        "OSM is deferred from F07 v0.1 and was not consulted."
+      ],
+      "unknowns": [],
+      "prohibited_interpretations_applied": true,
+      "result_reference": "test-data/live-results/cper/f07_derivation_result_2026-08-08.json",
+      "source_fixture_references": [
+        "test-data/live-results/cper/f07_tiger2025_all_roads_search_window.geojson"
+      ]
+    },
+    "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": {
+      "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+      "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED",
+      "derivation_spec": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+      "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+      "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+      "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+      "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+      "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+      "source_year": 2025,
+      "mask": true,
+      "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+      "coverage_status": "COVERAGE_UNQUANTIFIED",
+      "applicability": {
+        "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "review_status": "VERIFIED",
+        "basis": [
+          "CPER_RANGELAND_TEST_CONTEXT"
+        ]
+      },
+      "coverage": {
+        "status": "COVERAGE_UNQUANTIFIED",
+        "requested_area_m2": 1406580,
+        "eligible_area_m2": null,
+        "masked_area_m2": null,
+        "no_data_area_m2": null,
+        "valid_area_m2": null,
+        "valid_coverage_fraction": null,
+        "adapter_status": "AGGREGATE_API_VERIFIED"
+      },
+      "shrub_cover_fraction": 0.06727234043361567,
+      "tree_cover_fraction": 0.0010557150211526738,
+      "combined_modeled_woody_cover_fraction": 0.06832805545476835,
+      "unit": "fraction",
+      "valid_range": [
+        0.0,
+        1.0
+      ],
+      "raw_rap_shr_percent": 6.727234043361567,
+      "raw_rap_tre_percent": 0.10557150211526739,
+      "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+      "reused_existing_artifact": true,
+      "duplicate_coverV3_fetch": false,
+      "shared_with_f02": {
+        "same_artifact": true,
+        "same_geometry_hash": true,
+        "same_source_year": true,
+        "same_mask": true,
+        "same_applicability_status": true,
+        "same_coverage_status": true,
+        "f02_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "f08_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "f02_source_year": 2025,
+        "f02_mask": true,
+        "f02_applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+        "f02_coverage_status": "COVERAGE_UNQUANTIFIED"
+      },
+      "ranking_effect": "NONE",
+      "derived_at": "2026-08-08T12:51:59Z",
+      "land_facts": [
+        {
+          "variable_id": "VAR_F08_SHRUB_COVER_FRACTION",
+          "name": "shrub_cover_fraction",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 0.06727234043361567,
+            "unit": "fraction",
+            "valid_range": [
+              0.0,
+              1.0
+            ],
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API_REUSE",
+            "modeled": true,
+            "derived_not_independent_band": false
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "CPER_RANGELAND_TEST_CONTEXT"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1406580,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal"
+          },
+          "provenance": {
+            "source_reference": "RAP_coverV3",
+            "source_product_and_version": "RAP_v3",
+            "endpoint": "coverV3",
+            "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+            "fetched_at": "2026-08-07T21:03:00Z",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+            "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "raw_rap_shr_percent": 6.727234043361567,
+            "raw_rap_tre_percent": 0.10557150211526739,
+            "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+            "reused_existing_artifact": true,
+            "duplicate_coverV3_fetch": false
+          },
+          "limitations": [
+            "Shrub and tree cover are modeled RAP fractional cover context only.",
+            "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+            "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+            "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+            "Woody cover does not prove low herbaceous production.",
+            "F08 must not replace F02 herbaceous Land Facts.",
+            "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+            "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+          ]
+        },
+        {
+          "variable_id": "VAR_F08_TREE_COVER_FRACTION",
+          "name": "tree_cover_fraction",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 0.0010557150211526738,
+            "unit": "fraction",
+            "valid_range": [
+              0.0,
+              1.0
+            ],
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API_REUSE",
+            "modeled": true,
+            "derived_not_independent_band": false
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "CPER_RANGELAND_TEST_CONTEXT"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1406580,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal"
+          },
+          "provenance": {
+            "source_reference": "RAP_coverV3",
+            "source_product_and_version": "RAP_v3",
+            "endpoint": "coverV3",
+            "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+            "fetched_at": "2026-08-07T21:03:00Z",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+            "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "raw_rap_shr_percent": 6.727234043361567,
+            "raw_rap_tre_percent": 0.10557150211526739,
+            "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+            "reused_existing_artifact": true,
+            "duplicate_coverV3_fetch": false
+          },
+          "limitations": [
+            "Shrub and tree cover are modeled RAP fractional cover context only.",
+            "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+            "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+            "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+            "Woody cover does not prove low herbaceous production.",
+            "F08 must not replace F02 herbaceous Land Facts.",
+            "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+            "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+          ]
+        },
+        {
+          "variable_id": "VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION",
+          "name": "combined_modeled_woody_cover_fraction",
+          "observation": {
+            "value_state": "KNOWN",
+            "value": 0.06832805545476835,
+            "unit": "fraction",
+            "valid_range": [
+              0.0,
+              1.0
+            ],
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025"
+          },
+          "source": {
+            "provider": "USDA_ARS",
+            "product": "RAP",
+            "version": "v3",
+            "data_kind": "MODELED",
+            "adapter_id": "RAP_AGGREGATE_API_REUSE",
+            "modeled": true,
+            "derived_not_independent_band": true
+          },
+          "applicability": {
+            "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "review_status": "VERIFIED",
+            "basis": [
+              "CPER_RANGELAND_TEST_CONTEXT"
+            ]
+          },
+          "coverage": {
+            "status": "COVERAGE_UNQUANTIFIED",
+            "requested_area_m2": 1406580,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          },
+          "quality": {
+            "confidence_state": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "modeled": true,
+            "resolution": "30_meters_nominal"
+          },
+          "provenance": {
+            "source_reference": "RAP_coverV3",
+            "source_product_and_version": "RAP_v3",
+            "endpoint": "coverV3",
+            "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+            "fetched_at": "2026-08-07T21:03:00Z",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+            "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "raw_rap_shr_percent": 6.727234043361567,
+            "raw_rap_tre_percent": 0.10557150211526739,
+            "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+            "reused_existing_artifact": true,
+            "duplicate_coverV3_fetch": false
+          },
+          "limitations": [
+            "Shrub and tree cover are modeled RAP fractional cover context only.",
+            "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+            "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+            "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+            "Woody cover does not prove low herbaceous production.",
+            "F08 must not replace F02 herbaceous Land Facts.",
+            "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+            "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+          ]
+        }
+      ],
+      "provenance": {
+        "source_reference": "RAP_coverV3",
+        "source_product_and_version": "RAP_v3",
+        "endpoint": "coverV3",
+        "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+        "fetched_at": "2026-08-07T21:03:00Z",
+        "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+        "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "request_parameters": {
+          "mask": true,
+          "year": 2025
+        },
+        "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+        "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+        "raw_rap_shr_percent": 6.727234043361567,
+        "raw_rap_tre_percent": 0.10557150211526739,
+        "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+        "reused_existing_artifact": true,
+        "duplicate_coverV3_fetch": false
+      },
+      "limitations": [
+        "Shrub and tree cover are modeled RAP fractional cover context only.",
+        "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+        "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+        "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+        "Woody cover does not prove low herbaceous production.",
+        "F08 must not replace F02 herbaceous Land Facts.",
+        "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+        "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+      ],
+      "unknowns": [
+        "Shared RAP eligible/masked/no-data/valid parcel areas are not quantified.",
+        "Botanical composition of woody cover is not verified.",
+        "Browse availability is not established.",
+        "Woody obstruction class is not established."
+      ],
+      "prohibited_interpretations_applied": true,
+      "mireye_used_as_parcel_land_fact": false,
+      "browse_inferred": false,
+      "obstruction_inferred": false,
+      "forced_sum_to_100": false,
+      "null_treated_as_zero": false,
+      "combined_included_in_composition_sum": false,
+      "result_reference": "test-data/live-results/cper/f08_derivation_result_2026-08-08.json",
+      "source_fixture_references": [
+        "test-data/live-results/cper/rap_coverV3_2025.json",
+        "test-data/live-results/cper/rap_request_2025.json"
+      ],
+      "live_gate": {
+        "live_gate_id": "F08_RAP_COVERV3_DATA_REUSE_CPER",
+        "status": "DATA_REUSE_VERIFIED",
+        "network_rap_request_issued": false,
+        "reused_existing_artifact": true,
+        "duplicate_coverV3_fetch": false,
+        "artifact_path": "test-data/live-results/cper/rap_coverV3_2025.json",
+        "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "shared_with_f02": {
+          "same_artifact": true,
+          "same_geometry_hash": true,
+          "same_source_year": true,
+          "same_mask": true,
+          "same_applicability_status": true,
+          "same_coverage_status": true,
+          "f02_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+          "f08_response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+          "f02_source_year": 2025,
+          "f02_mask": true,
+          "f02_applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+          "f02_coverage_status": "COVERAGE_UNQUANTIFIED"
+        },
+        "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED",
+        "signal": "NEEDS_VERIFICATION",
+        "explanation_code": "F08_EXPL_COVERAGE_UNQUANTIFIED",
+        "ranking_effect": "NONE",
+        "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+        "derived_at": "2026-08-08T12:51:59Z",
+        "shrub_cover_fraction": 0.06727234043361567,
+        "tree_cover_fraction": 0.0010557150211526738,
+        "combined_modeled_woody_cover_fraction": 0.06832805545476835,
+        "raw_rap_shr_percent": 6.727234043361567,
+        "raw_rap_tre_percent": 0.10557150211526739
+      }
+    }
+  },
+  "unknowns": [
+    "Botanical composition is not verified.",
+    "Operation-specific palatability is not verified.",
+    "Nutritive value is not verified.",
+    "No FIELD_VERIFIED livestock-water system is in evidence for CPER; verified_count == 0 does not mean the land has no water.",
+    "Six of nine CPER mapped water candidates remain UNREVIEWED after deterministic remote sampling.",
+    "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.",
+    "Within-map-unit component locations are unknown.",
+    "Ecological-site references do not establish current vegetation state."
+  ]
+}

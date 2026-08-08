@@ -1,0 +1,678 @@
+contract_id: RANGEMATCH_F03_VERIFIED_WATER_EVIDENCE_CONTRACT
+version: 0.1.1
+language: English
+status: APPROVED_V0_1_1
+factor_id: F03_LIVESTOCK_WATER
+date: "2026-08-08"
+approved_on: "2026-08-08"
+adapter_authorization: APPROVED_FOR_SMALL_SCALE_PILOT
+schema_alignment_note: >-
+  v0.1.1 aligns water_quality/capacity schemas, remote promotion requiredness,
+  and MIXED/reviewed_equivalent field-verified pathways. Three-tier state machine
+  unchanged. Final review passed; small-scale remote-only pilot authorized.
+related:
+  upgrade_plan: docs/F02_F03_EVIDENCE_DEPTH_UPGRADE_PLAN.md
+  candidate_derivation: docs/F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml
+  deterministic_rules: docs/F03_WATER_DETERMINISTIC_RULES.yaml
+  evidence_registry: docs/F03_LIVESTOCK_WATER_EVIDENCE_REGISTRY.md
+  golden_test_contract: docs/F03_VERIFIED_WATER_GOLDEN_TEST_CONTRACT.yaml
+  frozen_parcels: test-data/cross-parcel-validation/parcel_registry.yaml
+
+governing_question: >-
+  What evidence must a mapped water candidate satisfy before it may be promoted
+  from “present on a map” to “a possibly usable livestock-water source”?
+
+phase_1_scope:
+  includes:
+    - evidence_state_machine
+    - per_dimension_evidence_requirements
+    - accepted_and_prohibited_data_sources
+    - provenance_and_freshness_requirements
+    - missing_and_conflict_behavior
+    - five_frozen_parcel_verification_plan
+    - golden_test_contract
+  excludes_until_contract_approved:
+    - new_data_adapters
+    - bulk_remote_calls
+    - automatic promotion in the matching engine
+    - suitability_thresholds_on_count_or_distance
+    - cow_sheep_ranking_rules
+
+# ---------------------------------------------------------------------------
+# 1. Three-tier evidence state machine
+# ---------------------------------------------------------------------------
+
+verification_levels:
+  - level: MAPPED_CANDIDATE
+    rank: 1
+    definition: >-
+      A hydrographic or infrastructure feature geometry/record intersects the
+      declared query extent and has been normalized into the candidate inventory.
+      Presence on a map only.
+    may_be_assigned_from:
+      - USGS_NHDPLUS_HR
+      - other_reviewed_hydrography_or_point_inventories
+    may_not_claim:
+      - livestock_usability
+      - seasonal_reliability
+      - legal_access
+      - operational_status
+      - deliverable_capacity
+      - water_quality_adequacy
+    factor_implication: >-
+      Parcel remains at or below MAPPED_CANDIDATES_ONLY unless higher-level
+      candidates exist.
+
+  - level: REMOTELY_SUPPORTED_CANDIDATE
+    rank: 2
+    definition: >-
+      Independent remote or documentary evidence supports physical presence and
+      at least one livestock-relevant attribute beyond bare hydrography identity,
+      without field or equivalent operational verification.
+    ceiling: >-
+      Remote evidence MUST NOT promote beyond this level. Open data alone cannot
+      reach FIELD_VERIFIED_LIVESTOCK_WATER.
+    minimum_promotion_requirements:
+      from: MAPPED_CANDIDATE
+      all_of:
+        - feature_identity.type_is_declared
+        - physical_presence.status == confirmed
+        - physical_presence.source in
+            [imagery, hydrography_plus_independent_record, records, reviewed_equivalent]
+        - at_least_one_of:
+            - seasonal_reliability.status in [perennial, intermittent, ephemeral]
+            - livestock_accessibility.status in [supported, constrained]
+            - capacity_and_quality.capacity.status in [measured, documented]
+            - capacity_and_quality.water_quality.status == verified
+      none_of:
+        - physical_presence.status == absent
+        - unresolved_material_conflict
+      note: >-
+        seasonal_reliability and livestock_accessibility must be evaluated
+        (unknown allowed). They are NOT each independently mandatory for remote
+        promotion; only the at_least_one_of clause above is mandatory beyond
+        confirmed presence.
+    still_unknown_allowed:
+      - legal_access
+      - capacity.status == unknown (with unknown_rationale when asserted)
+      - water_quality.status == unknown
+      - seasonal_reliability.status == unknown
+      - livestock_accessibility.status == unknown
+      - drought_period_reliability
+    factor_implication: >-
+      Still NEEDS_VERIFICATION at Factor level. Does not authorize
+      VERIFIED_WATER_SYSTEM_CONTEXT.
+
+  - level: FIELD_VERIFIED_LIVESTOCK_WATER
+    rank: 3
+    definition: >-
+      A livestock-usable watering source or delivery system is verified by field
+      observation, reliable operator/owner operational records, or reviewed
+      equivalent evidence covering identity, presence, and livestock use pathway.
+    minimum_promotion_requirements:
+      from: REMOTELY_SUPPORTED_CANDIDATE
+      # Direct jump from MAPPED_CANDIDATE is prohibited.
+      all_of:
+        - feature_identity.type_is_declared
+        - physical_presence.status == confirmed
+        - physical_presence_source_satisfies_field_verified_basis
+        - seasonal_reliability.status != unknown
+        - livestock_accessibility.status in [supported, constrained]
+        - legal_access.status in [verified, not_applicable]
+        - capacity_and_quality.capacity satisfies_field_verified_capacity_schema
+        - capacity_and_quality.water_quality satisfies_field_verified_water_quality_schema
+        - verification_evidence_class in
+            [FIELD_OBSERVATION, OPERATOR_OWNER_OPERATIONAL_RECORD, REVIEWED_EQUIVALENT, MIXED]
+      physical_presence_source_satisfies_field_verified_basis:
+        any_of:
+          - physical_presence.source in [field, operator_record_equivalent, reviewed_equivalent]
+          - all_of:
+              - verification_evidence_class == MIXED
+              - qualified_field_basis_required == true
+              - qualified_field_basis.source in
+                  [field, operator_record_equivalent, reviewed_equivalent]
+              - qualified_field_basis.as_of is present
+              - qualified_field_basis.record_or_observation_hash is present
+      capacity_and_quality.capacity satisfies_field_verified_capacity_schema: >-
+        capacity.status in [measured, documented], with value/unit/scenario_reference
+        present; OR capacity.status == unknown with non-empty unknown_rationale.
+      capacity_and_quality.water_quality satisfies_field_verified_water_quality_schema: >-
+        water_quality.status in [verified, unknown]; if status == unknown then
+        diligence_required must be true; evidence_source_ids required when
+        status == verified.
+    factor_implication: >-
+      A count of FIELD_VERIFIED_LIVESTOCK_WATER systems may raise parcel
+      input_quality_state toward PHYSICAL_SOURCE_UNVERIFIED_SYSTEM or
+      VERIFIED_WATER_SYSTEM_CONTEXT only when the existing F03 deterministic
+      rules’ completeness criteria are met. No suitability threshold is implied.
+
+prohibited_transitions:
+  - from: MAPPED_CANDIDATE
+    to: FIELD_VERIFIED_LIVESTOCK_WATER
+    reason: Open/remote data must not skip REMOTELY_SUPPORTED_CANDIDATE.
+  - from: any
+    to: FIELD_VERIFIED_LIVESTOCK_WATER
+    when: evidence_class == REMOTE_ONLY
+    reason: Remote evidence ceiling is REMOTELY_SUPPORTED_CANDIDATE.
+  - from: any
+    to: REMOTELY_SUPPORTED_CANDIDATE
+    when: only_evidence_is_euclidean_proximity
+    reason: Distance is not physical presence or usability evidence.
+
+demotion_and_rejection:
+  REJECTED_AS_SOURCE:
+    when:
+      - physical_presence.status == absent with reviewed evidence
+      - feature is infrastructure-irrelevant and not livestock-usable by reviewed basis
+    effect: Exclude from verified counts; may remain in inventory with rejection reason.
+  CONFLICTING_SOURCES:
+    when: material conflict among identity, presence, reliability, access, or capacity
+    effect: Hold or demote; Factor signal NEEDS_VERIFICATION via F03_EXPL_CONFLICT.
+  UNKNOWN_DIMENSIONS:
+    effect: Missing dimensions stay unknown; never filled with defaults that imply usability.
+
+# ---------------------------------------------------------------------------
+# 2. Independent evidence dimensions
+# ---------------------------------------------------------------------------
+
+evidence_dimensions:
+  feature_identity:
+    required: true
+    fields:
+      type:
+        enum: [pond, reservoir, stream, spring, well, tank, trough, pipeline_outlet, canal, other]
+        unknown_allowed: false_for_promotion_above_mapped
+      subtype_or_notes:
+        required: false
+      geometry_or_point_reference:
+        required: true
+      source_feature_id:
+        required: true_when_from_external_inventory
+    evidence_requirement: >-
+      Declare a livestock-relevant feature class. NHD ftype/fcode may propose a
+      type for MAPPED_CANDIDATE but do not alone prove livestock usability.
+    accepted_sources:
+      - USGS_NHDPlus_HR_attributes
+      - reviewed_point_inventories
+      - field_notes
+      - operator_records
+    prohibited_inferences:
+      - gnis_name_null_means_no_feature
+      - waterbody_name_implies_livestock_access
+
+  physical_presence:
+    required_for_evaluation: true
+    fields:
+      status:
+        enum: [confirmed, uncertain, absent]
+      source:
+        enum:
+          - imagery
+          - hydrography
+          - records
+          - field
+          - hydrography_plus_independent_record
+          - operator_record_equivalent
+          - reviewed_equivalent
+      observation_date:
+        required_when: source == imagery and single_date_observation
+        semantics: >-
+          A single imagery date may support presence confirmed_for_observation_date
+          only; it does not establish seasonal_reliability class.
+      qualified_field_basis:
+        required_when: verification_evidence_class == MIXED
+        fields:
+          source: [field, operator_record_equivalent, reviewed_equivalent]
+          as_of: datetime
+          record_or_observation_hash: string
+        note: >-
+          MIXED records (field/operational plus remote) must declare the
+          qualified field/equivalent basis used for FIELD_VERIFIED promotion.
+    evidence_requirement: >-
+      Confirmation that a physical water feature or watering infrastructure
+      exists at the referenced location under a declared observation window.
+    accepted_sources_by_status:
+      confirmed:
+        remotely_supported_ok:
+          - multi_date_imagery_with_declared_dates
+          - hydrography_plus_independent_record
+          - administrative_or_well_record_with_location
+          - reviewed_equivalent_remote_or_documentary_package
+        field_verified_ok:
+          - field_observation
+          - operator_owner_operational_record
+          - reviewed_equivalent
+          - mixed_with_qualified_field_basis
+      uncertain:
+        - single_date_cloudy_imagery
+        - stale_record_without_corroboration
+      absent:
+        - field_visit_negative
+        - reviewed_high_confidence_absence_record
+    prohibited_inferences:
+      - nhd_geometry_alone_confirms_current_presence
+      - historical_map_alone_confirms_current_presence
+      - single_date_wet_image_proves_seasonal_class
+
+  seasonal_reliability:
+    required_for_evaluation: true
+    unknown_allowed_for_remote_promotion: true
+    required_non_unknown_for_field_verified: true
+    fields:
+      status:
+        enum: [perennial, intermittent, ephemeral, unknown]
+      observation_period:
+        required: true_when_status_not_unknown
+      drought_period_note:
+        required: false
+    evidence_requirement: >-
+      Classify expected presence through seasons relevant to livestock use.
+      Surface-water permanence products may support remote classification but
+      do not prove accessible drinking water. A single wet observation date
+      leaves status = unknown unless independent multi-date or permanence
+      evidence supports a class.
+    accepted_sources:
+      remotely_supported:
+        - reviewed_permanence_or_flow_regime_products
+        - multi_season_imagery_time_series
+        - published_gage_or_hydrography_permanence_attributes
+      field_verified:
+        - operator_seasonal_logs
+        - field_visits_across_seasons
+        - reviewed_equivalent_operational_records
+    prohibited_inferences:
+      - water_visible_once_means_perennial
+      - water_visible_once_means_intermittent_or_ephemeral
+      - stream_line_on_nhd_means_year_round_livestock_water
+
+  livestock_accessibility:
+    required_for_evaluation: true
+    unknown_allowed_for_remote_promotion: true
+    required_non_unknown_for_field_verified: true
+    fields:
+      status:
+        enum: [supported, constrained, unknown]
+      notes:
+        required: false
+    evidence_requirement: >-
+      Whether livestock can physically reach and drink from or be watered by the
+      source under ordinary management, ignoring unapproved traversable-distance
+      thresholds. Fencing/barrier complete routing remains METHOD_REVIEW_REQUIRED.
+      For REMOTELY_SUPPORTED promotion, unknown is allowed if another at_least_one
+      attribute is satisfied. For FIELD_VERIFIED, status must be supported or
+      constrained.
+    accepted_sources:
+      remotely_supported:
+        - imagery_showing_trough_tank_or_clear_bank_access_with_review_note
+        - records_describing_stock_water_infrastructure
+      field_verified:
+        - field_observation_of_access_path_and_watering_point
+        - operator_statement_of_current_watering_use
+    prohibited_inferences:
+      - euclidean_distance_near_means_accessible
+      - parcel_intersection_means_livestock_can_drink
+      - steep_or_fenced_context_ignored_when_claiming_supported
+
+  capacity_and_quality:
+    required_for_evaluation: true
+    required_for_field_verified: true
+    fields:
+      capacity:
+        status:
+          enum: [measured, documented, unknown]
+        value:
+          type: number_or_null
+          required_when_status_in: [measured, documented]
+        unit:
+          type: string_or_null
+          required_when_status_in: [measured, documented]
+        scenario_reference:
+          type: string_or_null
+          required_when_status_in: [measured, documented]
+        unknown_rationale:
+          type: string_or_null
+          required_when_status: unknown
+          required_for_field_verified_when_unknown: true
+      water_quality:
+        status:
+          enum: [verified, unknown]
+        diligence_required:
+          type: boolean
+          required: true
+          rule: >-
+            Must be true when status == unknown. May be false when status ==
+            verified and lab/reviewed evidence is attached.
+        evidence_source_ids:
+          type: array
+          required_when_status: verified
+          default: []
+    evidence_requirement: >-
+      Capacity is deliverable supply for a declared period/scenario, not map
+      area. Unknown capacity is allowed at FIELD_VERIFIED only with an explicit
+      unknown_rationale. Water quality uses status verified|unknown; unknown
+      always sets diligence_required true.
+    accepted_sources:
+      capacity:
+        - metered_or_measured_flow_storage_delivery
+        - operator_rated_capacity_with_date
+        - engineered_design_record_with_review_limits
+      water_quality:
+        - certified_or_reviewed_laboratory_result
+    prohibited_inferences:
+      - pond_area_equals_drinkable_volume
+      - well_depth_equals_yield
+      - gage_discharge_equals_parcel_livestock_supply
+      - absence_of_lab_result_means_safe
+      - capacity_unknown_without_rationale_at_field_verified
+
+  legal_access:
+    required: true_for_field_verified
+    fields:
+      status:
+        enum: [verified, unresolved, not_applicable]
+      basis:
+        required: true_when_status_in [verified, not_applicable]
+    evidence_requirement: >-
+      Lawful right to use the water for livestock on the subject parcel/operation.
+      Missing legal access MUST remain unresolved/UNKNOWN — never inferred from
+      physical presence.
+    accepted_sources:
+      - deed_easement_lease
+      - permit_or_water_right_record
+      - reviewed_counsel_or_title_opinion_summary
+      - not_applicable_only_when_reviewed_basis_says_public_or_owned_source_with_no_separate_right_required
+    prohibited_inferences:
+      - physical_water_implies_legal_access
+      - adjacency_to_named_waterbody_implies_right
+      - historical_use_without_record_implies_current_right
+
+  verification_level:
+    required_for_evaluation: true
+    fields:
+      status:
+        enum:
+          - MAPPED_CANDIDATE
+          - REMOTELY_SUPPORTED_CANDIDATE
+          - FIELD_VERIFIED_LIVESTOCK_WATER
+          - REJECTED_AS_SOURCE
+      evidence_class:
+        enum:
+          - REMOTE_ONLY
+          - FIELD_OBSERVATION
+          - OPERATOR_OWNER_OPERATIONAL_RECORD
+          - REVIEWED_EQUIVALENT
+          - MIXED
+      qualified_field_basis_required:
+        type: boolean
+        required_when: evidence_class == MIXED and target_or_status == FIELD_VERIFIED_LIVESTOCK_WATER
+        default: false
+        note: >-
+          MIXED evidence may include remote layers, but FIELD_VERIFIED promotion
+          still requires an explicit qualified field/operator/reviewed-equivalent
+          basis under physical_presence.qualified_field_basis.
+      as_of:
+        type: date_or_datetime
+        required: true
+    evidence_requirement: >-
+      verification_level.status is computed only from the dimension rules in this
+      contract. It is never set because a desired MatchResult is wanted.
+      REVIEWED_EQUIVALENT and MIXED are first-class pathways to FIELD_VERIFIED
+      when the qualified field/equivalent presence basis is satisfied.
+
+# ---------------------------------------------------------------------------
+# 3. Governance non-equivalences (frozen)
+# ---------------------------------------------------------------------------
+
+governance_rules:
+  - id: F03_GOV_001
+    rule: NHD feature ≠ livestock water
+  - id: F03_GOV_002
+    rule: Near distance ≠ accessible
+  - id: F03_GOV_003
+    rule: Surface water present ≠ year-round reliable
+  - id: F03_GOV_004
+    rule: Well location ≠ operable well
+  - id: F03_GOV_005
+    rule: Missing legal access must remain UNKNOWN / unresolved
+  - id: F03_GOV_006
+    rule: Remote evidence ceiling is REMOTELY_SUPPORTED_CANDIDATE
+  - id: F03_GOV_007
+    rule: >-
+      Only field records, reliable operational records, or reviewed equivalent
+      evidence may mark FIELD_VERIFIED_LIVESTOCK_WATER
+  - id: F03_GOV_008
+    rule: verified_count == 0 does not mean the land has no water
+  - id: F03_GOV_009
+    rule: No suitability threshold on water count or distance in this phase
+  - id: F03_GOV_010
+    rule: No Cow-Calf vs Sheep ranking from water evidence in this phase
+
+# ---------------------------------------------------------------------------
+# 4. Accepted vs prohibited data sources
+# ---------------------------------------------------------------------------
+
+data_sources:
+  accepted_for_MAPPED_CANDIDATE:
+    - source_id: USGS_NHDPLUS_HR
+      role: candidate_geometry_and_attributes
+      max_verification_level: MAPPED_CANDIDATE
+      notes: Default entry point for current frozen-parcel inventories.
+    - source_id: REVIEWED_POINT_INVENTORY
+      role: candidate_points
+      max_verification_level: MAPPED_CANDIDATE
+
+  accepted_for_REMOTELY_SUPPORTED_CANDIDATE:
+    - source_id: MULTI_DATE_OPTICAL_IMAGERY
+      role: physical_presence_and_access_context
+      max_verification_level: REMOTELY_SUPPORTED_CANDIDATE
+    - source_id: SURFACE_WATER_PERMANENCE_PRODUCT
+      role: seasonal_reliability_support
+      max_verification_level: REMOTELY_SUPPORTED_CANDIDATE
+    - source_id: STATE_OR_FEDERAL_WELL_RECORD
+      role: well_identity_and_record_presence
+      max_verification_level: REMOTELY_SUPPORTED_CANDIDATE
+      notes: Does not prove current operability or yield.
+    - source_id: NWIS_OR_GAGE_CONTEXT
+      role: regional_hydrologic_context_only
+      max_verification_level: MAPPED_CANDIDATE
+      notes: Nearby gage/depth is not parcel livestock supply.
+    - source_id: ADMINISTRATIVE_STOCK_WATER_RECORD
+      role: infrastructure_or_permit_context
+      max_verification_level: REMOTELY_SUPPORTED_CANDIDATE
+      notes: Legal status still requires legal_access dimension.
+
+  accepted_for_FIELD_VERIFIED_LIVESTOCK_WATER:
+    - source_id: FIELD_OBSERVATION_LOG
+      role: presence_access_operational_status
+      max_verification_level: FIELD_VERIFIED_LIVESTOCK_WATER
+      required_fields: [observer, date, location, observations, photos_or_notes_hash]
+    - source_id: OPERATOR_OWNER_OPERATIONAL_RECORD
+      role: operational_use_reliability_capacity
+      max_verification_level: FIELD_VERIFIED_LIVESTOCK_WATER
+      required_fields: [record_holder, as_of_date, source_id_link, claims, limitation_notes]
+    - source_id: REVIEWED_EQUIVALENT_EVIDENCE
+      role: exceptional_verified_path
+      max_verification_level: FIELD_VERIFIED_LIVESTOCK_WATER
+      notes: >-
+        Requires human review note explaining equivalence to field/operational
+        verification. Not a dumping ground for convenient open data.
+
+  prohibited_as_sole_basis_for_promotion:
+    - NHD_feature_alone_to_REMOTELY_SUPPORTED_or_FIELD_VERIFIED
+    - Euclidean_or_travel_distance_alone
+    - Single_date_imagery_claiming_perennial
+    - Historical_NWIS_depth_as_operable_well
+    - Gage_discharge_as_parcel_capacity
+    - Place_name_or_ranch_reputation
+    - Desired_MatchResult_or_species_ranking_outcome
+
+# ---------------------------------------------------------------------------
+# 5. Provenance and freshness
+# ---------------------------------------------------------------------------
+
+provenance_requirements:
+  required_on_every_candidate_record:
+    - candidate_id
+    - geometry_or_point_hash
+    - source_reference
+    - fetched_or_observed_at
+    - verification_level.status
+    - verification_level.evidence_class
+    - verification_level.as_of
+    - response_or_artifact_hash_or_record_hash
+    - geometry_hash_of_parcel_context
+  required_on_each_filled_dimension:
+    - dimension_status
+    - evidence_source_ids
+    - evidence_as_of
+    - reviewer_or_adapter_id
+  freshness:
+    mapped_hydrography:
+      policy: RECORD_SOURCE_VINTAGE
+      stale_does_not_auto_reject: true
+      note: Stale hydrography remains usable as MAPPED_CANDIDATE with vintage disclosed.
+    remote_imagery_for_presence:
+      preferred_max_age_days: 365
+      if_older: physical_presence.status may be uncertain unless corroborated
+    field_or_operator_records:
+      preferred_max_age_days: 365
+      if_older: may support FIELD_VERIFIED only with explicit staleness limitation and review note
+    legal_access:
+      policy: CURRENT_AS_OF_RECORD_DATE
+      expired_permit: legal_access.status = unresolved
+    water_quality_lab:
+      preferred_max_age_days: 365
+      if_older: water_quality remains unknown unless reviewed exception recorded
+  prohibited_provenance_behavior:
+    - silently_reuse_stale_verification_after_geometry_change
+    - copy_verification_level_across_parcels_by_place_name
+    - drop_unknown_dimensions_to_imply_completeness
+
+# ---------------------------------------------------------------------------
+# 6. Missing and conflict behavior
+# ---------------------------------------------------------------------------
+
+missing_and_conflict_behavior:
+  missing_dimension:
+    default: keep_status_unknown_or_unresolved
+    promotion: blocked_if_dimension_required_for_target_level
+    factor_signal: do_not_invent_NEGATIVE_or_POSITIVE_suitability
+  verified_count_zero:
+    interpretation: >-
+      No FIELD_VERIFIED_LIVESTOCK_WATER systems are in evidence. This is not proof
+      that the parcel lacks water.
+    factor_mapping: MAPPED_CANDIDATES_ONLY or MISSING per existing inventory rules
+  conflict:
+    material_conflict_examples:
+      - imagery_absent_vs_operator_claims_active_trough
+      - legal_access_denied_vs_physical_use_claimed
+      - perennial_claim_vs_multi_season_dry_imagery
+    behavior:
+      verification_level: hold_or_demote_to_lower_defensible_level
+      factor_input_quality_state: CONFLICTING_SOURCES
+      ranking_effect: NONE
+  timeout_or_source_failure:
+    behavior: record data-path failure; do not interpret as land without water
+  mapping_to_existing_factor_input_quality_states:
+    all_candidates_MAPPED_or_empty_remote_support: MAPPED_CANDIDATES_ONLY
+    any_REMOTELY_SUPPORTED_without_field_verified: MAPPED_CANDIDATES_ONLY
+      # Remote support deepens diligence context but does not change v0.1 Factor
+      # signal family until engine mapping is explicitly version-bumped.
+    any_FIELD_VERIFIED_with_incomplete_system_dimensions: PHYSICAL_SOURCE_UNVERIFIED_SYSTEM
+    field_verified_meeting_VERIFIED_WATER_SYSTEM_CONTEXT_criteria: VERIFIED_WATER_SYSTEM_CONTEXT
+    no_inventory: MISSING
+    material_conflict: CONFLICTING_SOURCES
+  engine_rule_change_policy: >-
+    This contract does not by itself change F03_WATER_DETERMINISTIC_RULES.yaml.
+    Any new Factor-level mapping for REMOTELY_SUPPORTED_CANDIDATE requires a
+    reviewed rules version bump after this contract is approved.
+
+# ---------------------------------------------------------------------------
+# 7. Five frozen-parcel verification plan (contract stage only)
+# ---------------------------------------------------------------------------
+
+five_parcel_verification_plan:
+  purpose: >-
+    Apply the same evidence contract to the frozen cross-parcel set after approval.
+    No geometry changes. No adapters until this contract is approved.
+  parcels:
+    - parcel_id: XPV_CPER_001
+      slot: SLOT_ARID_UNCERTAIN_WATER
+      baseline_mapped_candidates: 9
+      baseline_field_verified: 0
+      plan:
+        - Freeze current NHD inventory as MAPPED_CANDIDATE set.
+        - Attempt remote support only for a small declared subset (e.g., waterbodies/ponds).
+        - Do not expect FIELD_VERIFIED without operator/field pathway.
+        - Success metric: dimensions populated with unknowns explicit; verified may remain 0.
+    - parcel_id: XPV_KONZA_001
+      slot: SLOT_HUMID_STRONG_HERB
+      baseline_mapped_candidates: 34
+      baseline_field_verified: 0
+      plan:
+        - Dense candidates stress inventory bookkeeping, not adequacy.
+        - Sample remote-support checks on intersecting waterbodies/streams only.
+        - Prohibit treating candidate richness as water sufficiency.
+    - parcel_id: XPV_REYNOLDS_001
+      slot: SLOT_RUGGED_SHEEP_RELEVANT
+      baseline_mapped_candidates: 8
+      baseline_field_verified: 0
+      plan:
+        - Emphasize livestock_accessibility constrained/unknown under rugged terrain.
+        - No Sheep ranking from access constraints.
+    - parcel_id: XPV_ORDWAY_001
+      slot: SLOT_WATER_CANDIDATE_RICH
+      baseline_mapped_candidates: 24
+      baseline_field_verified: 0
+      plan:
+        - Primary stress for candidate-rich + verified-zero narrative.
+        - Lakes/wetlands may be REMOTELY_SUPPORTED for presence/permanence only.
+        - Legal access and livestock accessibility likely unresolved/unknown.
+    - parcel_id: XPV_KBS_MCSE_001
+      slot: SLOT_RAP_SCOPE_BOUNDARY
+      baseline_mapped_candidates: 5
+      baseline_field_verified: 0
+      plan:
+        - Agricultural research context; do not invent stock-water systems.
+        - Mapped candidates remain candidates unless independent evidence appears.
+  before_after_comparison:
+    required_after_implementation:
+      - verification_level histogram per parcel
+      - dimension completeness rates
+      - field_verified count (may remain zero)
+      - Factor signals and explanation codes
+      - diligence_actions unchanged-or-extended without suitability thresholds
+  stop_conditions_for_parcel_work:
+    - contract_not_approved
+    - attempt_to_change_frozen_geometry
+    - attempt_to_add_distance_or_count_threshold
+
+# ---------------------------------------------------------------------------
+# 8. Review gate before adapters
+# ---------------------------------------------------------------------------
+
+review_gate:
+  current_review_snapshot:
+    three_tier_state_machine: PASS
+    remote_evidence_ceiling: PASS
+    source_governance: PASS
+    missing_conflict_behavior: PASS
+    five_parcel_plan: PASS
+    schema_alignment_v0_1_1: PASS
+    adapter_authorization: APPROVED_FOR_SMALL_SCALE_PILOT
+  approval_required_before:
+    - writing_new_f03_verification_adapters
+    - bulk_imagery_or_permanence_calls
+    - engine_mapping_changes_for_remotely_supported
+  approval_checklist:
+    - three_tier_state_machine_accepted
+    - dimension_requirements_accepted
+    - source_allow_and_deny_lists_accepted
+    - provenance_freshness_accepted
+    - missing_conflict_behavior_accepted
+    - five_parcel_plan_accepted
+    - golden_test_contract_accepted
+    - schema_alignment_water_quality_capacity_requiredness_mixed_basis_accepted
+  post_approval_next_step: >-
+    Implement fixtures and adapters against this contract; then rerun the five
+    frozen parcels for before/after evidence-depth comparison.

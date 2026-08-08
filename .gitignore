@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+
+# Local API artifacts that may accidentally contain credentials.
+mireye/private/
+mireye/*secret*
+mireye/*token*
+
+# Local live-gate tooling and large NOAA NetCDF cache.
+.venv-livegate/
+test-data/live-results/cper/cache/
+test-data/live-results/cper/tiger2025_cache/
+
+
+.DS_Store
+**/.DS_Store

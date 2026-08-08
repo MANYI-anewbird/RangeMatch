@@ -1,0 +1,125 @@
+audit_id: RANGEMATCH_F07_ROAD_DATA_SOURCE_AUDIT
+version: 0.1.0
+language: English
+status: APPROVED_V0_1_FOR_IMPLEMENTATION
+audit_date: 2026-08-08
+factor_id: F07_ROAD_AND_PHYSICAL_ACCESS
+implementation_status: IMPLEMENTED_V0_1
+live_gate_status: LIVE_VERIFIED_CPER
+adapter_id: F07_TIGER_LINE_2025_ALL_ROADS_ADAPTER@0.1.0
+live_gate_results: F07_LIVE_DATA_GATE_RESULTS_CPER.md
+
+purpose: >-
+  Identify candidate road/physical-access data sources for F07 and lock
+  permitted vs prohibited uses before any runtime adapter or CPER live fetch.
+  Human audit corrections applied; implementation may begin.
+
+canonical_source:
+  source_id: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+  organization: US Census Bureau
+  product: TIGER/Line 2025 All Roads
+  product_path_pattern: >-
+    https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_{STATEFP}{COUNTYFP}_roads.zip
+  vintage: 2025
+  geometry_type: road_centerline
+  role: CANONICAL_MAPPED_ROAD_INVENTORY
+  equivalence_note: >-
+    Filtered TIGER Edges is NOT an equivalent of All Roads. Edges is a
+    separately versioned FALLBACK with a different source_id and
+    algorithm_version when used.
+  required_provenance:
+    - tiger_vintage_or_year
+    - fetch_timestamp
+    - response_or_artifact_hash
+    - layer_or_product_name
+    - requested_county_fips
+    - loaded_county_fips
+  retained_attributes:
+    - MTFCC
+    - LINEARID_or_persistent_id_when_present
+    - FULLNAME_when_present
+  county_coverage_policy:
+    search_window_m_default: 5000
+    require_all_intersecting_county_all_roads_files: true
+    record_requested_county_fips: true
+    record_loaded_county_fips: true
+    incomplete_coverage_behavior: >-
+      If loaded_county_fips is incomplete relative to requested_county_fips,
+      coverage is PARTIAL or UNKNOWN and signal is NEEDS_VERIFICATION.
+      Silent measurement under incomplete county coverage is prohibited.
+  permitted_use:
+    - Mapped road inventory intersecting a declared search window
+    - Parcel-to-centerline Euclidean distance in working CRS
+    - Geometric contact detail (INTERSECTS vs TOUCHES) as physical-proximity context
+    - Road class/MTFCC as non-suitability context
+  prohibited_use:
+    - Proof of legal access, easement, or deeded right-of-way
+    - Proof of usable driveway, gate, or equipment entrance
+    - Proof parcel is or is not landlocked
+    - Suitability, truckability, seasonal passability, or travel-time claims
+    - Profitability or carrying-capacity conclusions
+    - Distance-threshold decision conclusions
+    - Cow-Calf versus Sheep ranking
+    - Silent measure when county All-Roads coverage is incomplete
+
+fallback_source:
+  source_id: US_CENSUS_TIGER_LINE_EDGES_ROAD_FILTERED
+  product: TIGER/Line Edges filtered to road MTFCC codes
+  role: FALLBACK_SEPARATELY_VERSIONED
+  equivalence_to_all_roads: false
+  requirement: >-
+    When activated, must use a different source_id and algorithm_version than
+    the All Roads canonical path. Must not be presented as interchangeable with
+    US_CENSUS_TIGER_LINE_2025_ALL_ROADS.
+  v0_1_default: NOT_USED
+
+deferred_sources:
+  - source_id: OPENSTREETMAP_HIGHWAYS
+    role: DEFER
+    v0_1_decision: DEFER_FROM_F07_V0_1_ENTIRELY
+    note: >-
+      OSM is not secondary QA in F07 v0.1. No OSM fetch, conflict detection,
+      densification, or averaging is authorized in this slice.
+  - source_id: USFS_OR_BLM_JURISDICTION_ROADS
+    role: DEFER
+    note: Useful later for public-land densification; not national sole canonical source.
+  - source_id: PROPRIETARY_NAVIGATION_BASEMAPS
+    role: OUT_OF_SCOPE_FOR_DEMO
+    note: Licensing and reproducibility barriers for engineering fixtures.
+
+not_road_sources:
+  - source_id: PARCEL_TITLE_EASEMENT_RECORDS
+    role: LEGAL_ACCESS_DILIGENCE_ONLY
+    note: Required for legal-access claims; never inferred from mapped roads.
+  - source_id: AERIAL_IMAGERY_DRIVEWAY_INTERPRETATION
+    role: DEFER
+    note: May later support entrance hypotheses; cannot establish legal or operational access in v0.1.
+
+non_equivalences:
+  - mapped_road_ne_legal_access
+  - centerline_contact_ne_usable_entrance
+  - euclidean_distance_ne_network_drive_distance
+  - tiger_absence_ne_landlocked
+  - tiger_all_roads_ne_tiger_edges_road_filtered
+  - osm_track_ne_public_right_of_way
+  - mtfcc_ne_suitability_class
+  - search_window_ne_too_far_threshold
+  - incomplete_county_coverage_ne_silent_complete_measure
+
+live_gate_requirements_when_implemented:
+  - Fetch TIGER 2025 All Roads for all counties intersecting the CPER 5000 m window
+  - Record requested_county_fips and loaded_county_fips; incomplete → NEEDS_VERIFICATION
+  - Demonstrate deterministic INTERSECTS vs TOUCHES detail and nearest-distance derivation in local UTM
+  - Demonstrate equal-distance tie-break by stable feature ID (LINEARID preferred)
+  - Confirm empty-window and multi-road fixtures without inventing thresholds
+  - Confirm geometry-hash change invalidates F07 evidence
+  - Do not introduce OSM secondary QA or legal-access inference in v0.1
+
+gate_decision:
+  audit_complete_for_source_candidates: true
+  canonical_source_human_approved: true
+  canonical_source_id: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+  osm_in_v0_1: false
+  edges_fallback_is_equivalent_to_all_roads: false
+  runtime_implementation_authorized: true
+  f08_authorized: false

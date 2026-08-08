@@ -1,0 +1,97 @@
+{
+  "lat": 40.82500000000001,
+  "lng": -104.76249999999999,
+  "fetched_at": "2026-08-07T21:57:00.329871+00:00",
+  "fields": {
+    "soil_map_unit_name": {
+      "value": "Renohill-Shingle complex, 3 to 9 percent slopes",
+      "unit": null,
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "confidence": "high",
+      "fetched_at": "2026-08-07T21:53:47.376701+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "soil_drainage_class": {
+      "value": "Well drained",
+      "unit": null,
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "confidence": "high",
+      "fetched_at": "2026-08-07T21:53:47.376724+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "soil_ponding_frequency_class": {
+      "value": "None",
+      "unit": null,
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T21:53:47.376828+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": "dominant-component worst-case ponding frequency across its monthly SSURGO records (comonth.pondfreqcl); 'None' is a real value meaning the component does not pond, not missing data",
+      "status": "ok"
+    },
+    "soil_hydrologic_group": {
+      "value": "D",
+      "unit": null,
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "confidence": "high",
+      "fetched_at": "2026-08-07T21:53:47.376713+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "soil_restrictive_layer_depth_cm": {
+      "value": 74.0,
+      "unit": "cm",
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T21:53:47.376802+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "soil_restrictive_layer_kind": {
+      "value": "Paralithic bedrock",
+      "unit": null,
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T21:53:47.376813+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "soil_available_water_capacity": {
+      "value": 0.14,
+      "unit": "cm/cm",
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T21:53:47.376736+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    }
+  },
+  "partial_failures": [],
+  "resolved_location": {
+    "lat": 40.82500000000001,
+    "lng": -104.76249999999999,
+    "source": "coordinate"
+  }
+}

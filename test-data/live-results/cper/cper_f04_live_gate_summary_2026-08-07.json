@@ -1,0 +1,71 @@
+{
+  "executed_at": "2026-08-07T22:00:43.619438+00:00",
+  "geometry_sha256": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+  "centroid": {
+    "lat": 40.82500000000001,
+    "lng": -104.76249999999999
+  },
+  "mireye_requested_fields": [
+    "soil_map_unit_name",
+    "soil_drainage_class",
+    "soil_ponding_frequency_class",
+    "soil_hydrologic_group",
+    "soil_restrictive_layer_depth_cm",
+    "soil_restrictive_layer_kind",
+    "soil_available_water_capacity"
+  ],
+  "mireye_returned_fields": [
+    "soil_available_water_capacity",
+    "soil_drainage_class",
+    "soil_hydrologic_group",
+    "soil_map_unit_name",
+    "soil_ponding_frequency_class",
+    "soil_restrictive_layer_depth_cm",
+    "soil_restrictive_layer_kind"
+  ],
+  "mireye_partial_failures": [],
+  "sda_table_count": 18,
+  "sda_horizon_table_count": 58,
+  "sda_restriction_table_count": 18,
+  "sda_monthly_wetness_table_count": 194,
+  "public_ecological_site_descriptions_accessible": 3,
+  "sda_spatial_coverage": {
+    "requested_area_m2": 1404078.7002779155,
+    "covered_area_m2": 1404078.7002779734,
+    "coverage_fraction": 1.0,
+    "mapunit_polygon_count": 9,
+    "intersecting_mapunit_count": 5,
+    "mapunit_intersection_areas": [
+      {
+        "mukey": "95111",
+        "intersection_area_m2": 133938.99869201495
+      },
+      {
+        "mukey": "95132",
+        "intersection_area_m2": 217845.05673339427
+      },
+      {
+        "mukey": "95134",
+        "intersection_area_m2": 370984.7609358968
+      },
+      {
+        "mukey": "95143",
+        "intersection_area_m2": 88656.46414931811
+      },
+      {
+        "mukey": "95151",
+        "intersection_area_m2": 592653.4197673491
+      }
+    ]
+  },
+  "artifact_sha256": {
+    "mireye_point": "ac2f23fea4a059e495f030685ac7b9c39b533e1a13d0afd8dd830bb131c693e6",
+    "sda_tabular": "9195fd740edc54365907a8edaa9a433ee081e6ae130b49d669727244c459efff",
+    "sda_wfs_gml": "98491d025da09b7ef149e5d1c03007c218a13ded525077a303e97b9a6ec9d2b0",
+    "sda_spatial_summary": "eaa827beaaf3cca754fe566ac20771b64973b9507ef5d968633aa00d36a912cb",
+    "sda_horizons": "36bc104508fa1f9c074dd15fef5cb214634ba65319cfff426ae9517c7b6c4c8e",
+    "sda_restrictions": "112f3543fb902fe4c91fa212ca05452c77d4ade1fbc4b0a5e21b7028b58f2c95",
+    "sda_monthly_wetness": "ee58fa1b43146e51949e28c47473c437a5fc385d394e6408a0dfe9f2235abf6c",
+    "ecological_site_access": "606aa34c4dbb861057405d9a5a8bbc40e6a2b81c91afabb2effa86dc3dfb072c"
+  }
+}

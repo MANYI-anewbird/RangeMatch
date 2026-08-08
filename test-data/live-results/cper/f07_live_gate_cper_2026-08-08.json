@@ -1,0 +1,117 @@
+{
+  "live_gate": {
+    "live_gate_id": "F07_TIGER2025_ALL_ROADS_CPER",
+    "status": "LIVE_VERIFIED",
+    "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+    "osm_consulted": false,
+    "edges_fallback_used": false,
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ],
+    "county_coverage_status": "COMPLETE",
+    "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+    "signal": "CONTEXT_DEPENDENT",
+    "ranking_effect": "NONE",
+    "adapter_id": "F07_TIGER_LINE_2025_ALL_ROADS_ADAPTER@0.1.0",
+    "derived_at": "2026-08-08T06:57:21Z",
+    "explanation_code": "F07_EXPL_CONTEXT_ONLY"
+  },
+  "measurements": {
+    "mapped_road_feature_count_in_search_window": 45,
+    "road_parcel_contact_status": "INTERSECTS",
+    "road_parcel_contact_detail": {
+      "intersects_feature_count": 4,
+      "touches_feature_count": 0,
+      "no_contact_feature_count": 41
+    },
+    "nearest_mapped_road_distance_m": 0.0,
+    "nearest_road_feature_id": "110417652669",
+    "nearest_road_class_context": "S1400",
+    "search_window_m": 5000.0,
+    "working_crs": "EPSG:32613"
+  },
+  "county_coverage": {
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ],
+    "missing_county_fips": [],
+    "status": "COMPLETE"
+  },
+  "provenance": {
+    "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+    "road_product_vintage": "2025",
+    "fetched_at": "2026-08-08T06:57:21Z",
+    "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "response_or_artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+    "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+    "working_crs": "EPSG:32613",
+    "source_crs": "EPSG:4326",
+    "search_window_m": 5000.0,
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ]
+  },
+  "adapter": {
+    "adapter_id": "F07_TIGER_LINE_2025_ALL_ROADS_ADAPTER@0.1.0",
+    "osm_consulted": false,
+    "edges_fallback_used": false,
+    "requested_county_fips": [
+      "08123"
+    ],
+    "loaded_county_fips": [
+      "08123"
+    ],
+    "missing_county_fips": [],
+    "county_downloads": [
+      {
+        "county_fips": "08123",
+        "ok": true,
+        "feature_count_in_window": 45,
+        "download": {
+          "url": "https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_08123_roads.zip",
+          "path": "test-data/live-results/cper/tiger2025_cache/tl_2025_08123_roads.zip",
+          "sha256": "4d2f5e066e5f56779293b3eb64ef051dfd43cacc3c75ed7f98600d4d2097dc8c",
+          "bytes": 1899906,
+          "cache_hit": false,
+          "fetched_at": "2026-08-08T06:57:20Z"
+        },
+        "url": "https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_08123_roads.zip"
+      }
+    ],
+    "county_resolution": {
+      "fetch_region_bounds_wgs84": [
+        -104.82929963053661,
+        40.77495742634188,
+        -104.69570055268339,
+        40.875042142889086
+      ],
+      "county_download": {
+        "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+        "path": "test-data/live-results/cper/tiger2025_cache/tl_2025_us_county.zip",
+        "sha256": "9c6e9d9076abce2670d1de255de3710c35ecca00a7005d88e012dec52d95f763",
+        "bytes": 83989800,
+        "cache_hit": false,
+        "fetched_at": "2026-08-08T06:57:13Z"
+      },
+      "counties": [
+        {
+          "county_fips": "08123",
+          "name": "Weld",
+          "statefp": "08",
+          "countyfp": "123"
+        }
+      ]
+    },
+    "feature_count_in_window": 45,
+    "collection_ok": true
+  }
+}

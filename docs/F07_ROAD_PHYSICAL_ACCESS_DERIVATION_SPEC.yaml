@@ -1,0 +1,215 @@
+spec_id: RANGEMATCH_F07_ROAD_PHYSICAL_ACCESS_DERIVATION
+version: 0.1.0
+language: English
+status: APPROVED_V0_1_FOR_IMPLEMENTATION
+factor_id: F07_ROAD_AND_PHYSICAL_ACCESS
+atomicity_audit: F07_ROAD_PHYSICAL_ACCESS_ATOMICITY_AND_SOURCE_AUDIT.md
+data_source_audit: F07_DATA_SOURCE_AUDIT.yaml@0.1.0
+implementation_status: IMPLEMENTED_V0_1
+scope: US_PARCELS_ENGINEERING_DEMO_FIRST
+
+purpose: >-
+  Convert parcel geometry and a mapped road centerline extract into reproducible
+  physical-proximity / contact context. F07 is not legal access, suitability,
+  travel time, truckability, profitability, carrying capacity, species ranking,
+  or a distance-threshold decision Factor.
+
+canonical_inputs:
+  parcel_geometry:
+    source_crs_v0_1_accepted: [EPSG:4326]
+    accepted_geometry_types: [POLYGON, MULTIPOLYGON]
+    feature_collection_policy:
+      exactly_one_feature: REQUIRED
+      silent_first_feature_measurement: PROHIBITED
+      automatic_union: PROHIBITED_IN_V0_1
+    geometry_hash_required: true
+    multipolygon_nearest_policy: MIN_OVER_WHOLE_GEOMETRY
+  road_network:
+    canonical_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+    product: TIGER/Line 2025 All Roads
+    product_path_pattern: >-
+      https://www2.census.gov/geo/tiger/TIGER2025/ROADS/tl_2025_{STATEFP}{COUNTYFP}_roads.zip
+    geometry_type: CENTERLINE
+    vintage_required: true
+    vintage: 2025
+    fallback_source:
+      source_id: US_CENSUS_TIGER_LINE_EDGES_ROAD_FILTERED
+      role: FALLBACK_SEPARATELY_VERSIONED
+      equivalence_to_all_roads: false
+      note: >-
+        Not an equivalent of All Roads. When used, must carry a different
+        source_id and algorithm_version than the All Roads path.
+    osm_in_v0_1: DEFER_ENTIRELY
+
+crs_policy:
+  working_crs: LOCAL_UTM_ZONE_FROM_PARCEL_CENTROID
+  working_unit: meter
+  planar_measurement_in_lon_lat_degrees: PROHIBITED
+  project_roads_into_same_working_crs: REQUIRED
+  unsupported_case_behavior: NEEDS_VERIFICATION
+
+algorithm_versioning:
+  algorithm_version: F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0
+  applies_to_source: US_CENSUS_TIGER_LINE_2025_ALL_ROADS
+  must_be_written_on_every_result: true
+  edges_fallback_requires_different_algorithm_version: true
+
+adapter_parameters:
+  - parameter_id: search_window_m
+    variable_id: VAR_F07_SEARCH_WINDOW_M
+    default_m: 5000
+    role: RETRIEVAL_WINDOW_ONLY
+    suitability_threshold: false
+    notes: >-
+      Records the fetch radius. Empty results mean unobserved beyond the window,
+      not landlocked certainty or REJECT.
+
+county_coverage_policy:
+  require_all_county_all_roads_files_intersecting_search_window: true
+  provenance_fields:
+    - requested_county_fips
+    - loaded_county_fips
+  incomplete_behavior:
+    coverage_status: [PARTIAL, UNKNOWN]
+    signal: NEEDS_VERIFICATION
+    silent_measure: PROHIBITED
+
+nearest_feature_tie_break:
+  primary: distance_m_ascending
+  secondary: stable_feature_id_ascending
+  preferred_stable_id: LINEARID
+
+frozen_derivations:
+  - variable_id: VAR_F07_MAPPED_ROAD_FEATURE_COUNT_IN_SEARCH_WINDOW
+    name: mapped_road_feature_count_in_search_window
+    method: COUNT_ROAD_FEATURES_INTERSECTING_FETCH_REGION
+    formula: >-
+      N = |{ road : road intersects buffer(project(parcel), search_window_m) }|
+    output_unit: count
+    required_outputs:
+      - mapped_road_feature_count_in_search_window
+      - search_window_m
+
+  - variable_id: VAR_F07_ROAD_PARCEL_CONTACT_STATUS
+    name: road_parcel_contact_status
+    method: PROJECTED_POLYGON_LINE_TOPOLOGY_DETAIL
+    formula: >-
+      INTERSECTS if any road INTERSECTS parcel; else TOUCHES if any road TOUCHES
+      parcel; else NO_CONTACT_IN_WINDOW if N > 0; else
+      NO_MAPPED_ROAD_IN_SEARCH_WINDOW if N == 0 and county coverage complete;
+      else UNKNOWN.
+    output_unit: categorical
+    enum:
+      - INTERSECTS
+      - TOUCHES
+      - NO_CONTACT_IN_WINDOW
+      - NO_MAPPED_ROAD_IN_SEARCH_WINDOW
+      - UNKNOWN
+    optional_combined_summary:
+      name: INTERSECTS_OR_TOUCHES
+      allowed: true
+      may_replace_detail: false
+    notes: >-
+      Contact detail must preserve INTERSECTS vs TOUCHES. Contact is geometric
+      only and does not mean driveway, gate, or legal access.
+
+  - variable_id: VAR_F07_NEAREST_MAPPED_ROAD_DISTANCE_M
+    name: nearest_mapped_road_distance_m
+    method: MIN_PROJECTED_POLYGON_TO_LINE_DISTANCE
+    formula: >-
+      d = min_i distance(project(parcel), project(road_i));
+      on ties, select feature by stable_feature_id ascending (LINEARID preferred)
+    output_unit: meter
+    null_when: no roads in search window or unusable/incomplete coverage
+    prohibited:
+      - distance_band_classes
+      - planar_lon_lat_degree_distance
+      - silent_measure_under_incomplete_county_coverage
+
+  - variable_id: VAR_F07_NEAREST_ROAD_CLASS_CONTEXT
+    name: nearest_road_class_context
+    method: ATTRIBUTE_OF_NEAREST_ROAD
+    source_attribute: MTFCC_or_equivalent
+    output_unit: categorical_context
+    suitability_mapping: PROHIBITED
+    nearest_selection: distance_m_then_stable_feature_id
+
+  - variable_id: VAR_F07_NEAREST_ROAD_FEATURE_ID
+    name: nearest_road_feature_id
+    method: PERSISTENT_ID_OF_NEAREST_ROAD
+    preferred_id: LINEARID
+    output_unit: identifier
+    null_allowed: true
+    nearest_selection: distance_m_then_stable_feature_id
+
+  - variable_id: VAR_F07_ROAD_SOURCE_COVERAGE_STATUS
+    name: road_source_coverage_status
+    method: SOURCE_AND_FETCH_USABILITY_GATE
+    output_unit: categorical
+    enum:
+      - ROAD_CONTEXT_COMPLETE
+      - NO_MAPPED_ROAD_IN_SEARCH_WINDOW
+      - ROAD_SOURCE_INCOMPLETE
+      - PARTIAL
+      - CRS_UNSUPPORTED
+      - COVERAGE_UNQUANTIFIED
+      - MISSING
+      - UNKNOWN
+    notes: >-
+      ROAD_CONTEXT_COMPLETE requires all requested county All-Roads files loaded
+      and contact/distance reportable. It does not assert legal access or
+      complete private-road inventory. Incomplete county set → PARTIAL or UNKNOWN
+      → NEEDS_VERIFICATION. OSM conflict states are out of v0.1.
+
+deferred_variables:
+  - variable_id: VAR_F07_LEGAL_ACCESS_STATUS
+    reason: Requires title/easement/permit diligence; mapped roads are insufficient.
+  - variable_id: VAR_F07_NETWORK_DRIVE_DISTANCE_M
+    reason: Requires reviewed routing graph and impedance policy.
+  - variable_id: VAR_F07_TRAVEL_TIME_CONTEXT
+    reason: Logistics model; out of v0.1.
+  - variable_id: VAR_F07_SEASONAL_PASSABILITY
+    reason: Needs field/ops evidence; not inferable from centerlines alone.
+  - variable_id: VAR_F07_PRIVATE_RANCH_ROAD_INVENTORY
+    reason: National road layers are incomplete for internal ranch roads.
+  - variable_id: VAR_F07_GATE_OR_ENTRANCE_LOCATION
+    reason: Requires entrance-specific evidence; deferred.
+  - variable_id: VAR_F07_BRIDGE_OR_LOAD_LIMIT_CONTEXT
+    reason: Asset constraint inventory; deferred.
+
+provenance_requirements:
+  required_on_every_result:
+    - geometry_id
+    - geometry_reference
+    - geometry_hash
+    - source_crs
+    - working_crs
+    - road_source_id
+    - road_product_vintage
+    - requested_county_fips
+    - loaded_county_fips
+    - search_window_m
+    - algorithm_version
+    - derived_at
+    - response_or_artifact_hash
+    - road_parcel_contact_status_detail
+    - limitations
+  mandatory_limitation: >-
+    Mapped road proximity/contact is physical context only and does not establish
+    legal access, easement, or operational entrance usability.
+
+prohibited_derivations:
+  - planar_distance_in_lon_lat_degrees
+  - distance_or_mtfcc_suitability_classes
+  - legal_access_from_mapped_roads
+  - landlocked_certainty_from_empty_window
+  - network_or_travel_time_from_euclidean_only
+  - silent_tiger_osm_average
+  - osm_secondary_qa_in_v0_1
+  - treating_edges_as_equivalent_to_all_roads
+  - silent_measure_under_incomplete_county_coverage
+  - collapsing_intersects_vs_touches_without_preserving_detail
+  - cow_calf_vs_sheep_ranking_from_roads
+  - reject_from_no_mapped_road
+  - profitability_or_carrying_capacity_from_roads
+  - distance_threshold_decision_from_roads

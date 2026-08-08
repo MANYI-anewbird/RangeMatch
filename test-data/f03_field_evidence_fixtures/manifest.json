@@ -1,0 +1,20 @@
+{
+  "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+  "evidence_use_limit": "TEST_ONLY",
+  "live_parcels_touched": false,
+  "fixtures": [
+    "conflicting_sources.json",
+    "geometry_mismatch.json",
+    "invalid_evidence_hash.json",
+    "manifest.json",
+    "mapped_to_field_verified_jump_rejected.json",
+    "missing_capacity_rationale.json",
+    "missing_legal_access.json",
+    "mixed_with_qualified_field_basis.json",
+    "physical_source_unverified_system.json",
+    "reviewed_equivalent_field_verified.json",
+    "stale_evidence.json",
+    "valid_field_verified_livestock_water.json",
+    "verified_water_system_context.json"
+  ]
+}

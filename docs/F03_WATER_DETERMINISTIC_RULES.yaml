@@ -1,0 +1,97 @@
+spec_id: RANGEMATCH_F03_WATER_RULES
+version: 0.1.0
+language: English
+status: APPROVED_V0_1_DATA_QUALITY_RULES
+factor_id: F03_LIVESTOCK_WATER
+approved_numeric_thresholds: []
+approved_weights: []
+approved_hard_constraints: []
+
+governance:
+  deterministic: true
+  llm_may_modify: false
+  llm_may_override: false
+  mapped_feature_is_verified_source: false
+  operation_ranking_effect: NONE_IN_V0_1
+  directional_signal_allowed: false
+  rationale: >-
+    Remote APIs can discover candidate hydrography and sparse observations but
+    do not establish operational status, seasonal reliability, deliverable
+    capacity, water quality, legal access, or traversable livestock distance.
+
+input_quality_states:
+  VERIFIED_WATER_SYSTEM_CONTEXT:
+    definition: >-
+      Source identity, lawful access, operational status, relevant-period
+      reliability, deliverable capacity, and current quality evidence are
+      verified under a declared operation scenario.
+  MAPPED_CANDIDATES_ONLY:
+    definition: Only hydrography, remote occurrence, or nearby monitoring records are available.
+  PHYSICAL_SOURCE_UNVERIFIED_SYSTEM:
+    definition: A physical source is verified but one or more system, reliability, capacity, quality, or legal facts are missing.
+  CONFLICTING_SOURCES:
+    definition: Material source identity, status, reliability, capacity, quality, or access evidence conflicts.
+  MISSING:
+    definition: No valid candidate or verified water evidence is available.
+
+evaluation_order:
+  - rule_id: F03_QC_001
+    when: input_quality_state == CONFLICTING_SOURCES
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F03_EXPL_CONFLICT
+
+  - rule_id: F03_QC_002
+    when: input_quality_state == MAPPED_CANDIDATES_ONLY
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F03_EXPL_CANDIDATE_ONLY
+
+  - rule_id: F03_QC_003
+    when: input_quality_state == PHYSICAL_SOURCE_UNVERIFIED_SYSTEM
+    output_signal: NEEDS_VERIFICATION
+    ranking_effect: NONE
+    explanation_code: F03_EXPL_SYSTEM_INCOMPLETE
+
+  - rule_id: F03_QC_004
+    when: input_quality_state == MISSING
+    output_signal: UNKNOWN
+    ranking_effect: NONE
+    explanation_code: F03_EXPL_MISSING
+
+  - rule_id: F03_REL_001
+    when: input_quality_state == VERIFIED_WATER_SYSTEM_CONTEXT
+    output_signal: CONTEXT_DEPENDENT
+    ranking_effect: NONE
+    explanation_code: F03_EXPL_CONTEXT_ONLY
+
+operation_explanations:
+  COW_CALF_OPERATION:
+    requirement_id: COW_F03_001
+    requirement_status: VERIFIED_FOR_V0_1
+  SHEEP_GRAZING:
+    requirement_id: SHEEP_F03_001
+    requirement_status: VERIFIED_FOR_V0_1
+
+prohibited_claims:
+  - A mapped stream, pond, spring, canal, or reservoir is verified livestock water.
+  - A null feature name means no water feature exists.
+  - Historical nearby groundwater depth establishes current parcel well depth or yield.
+  - Nearby gage flow establishes accessible or legally usable livestock water.
+  - Straight-line distance is traversable livestock distance.
+  - Cow-Calf or Sheep receives a fixed advantage from remote water mapping.
+
+diligence_actions:
+  F03_DIL_001: Field-verify candidate source identity, operational status, conveyance, storage, and watering facilities.
+  F03_DIL_002: Obtain relevant-season and drought-period reliability records.
+  F03_DIL_003: Measure sustainable flow, refill, storage, and delivery capacity under the declared herd scenario.
+  F03_DIL_004: Obtain current livestock-relevant laboratory water-quality results.
+  F03_DIL_005: Verify ownership, easements, permits, allocation, and lawful access.
+  F03_DIL_006: Derive traversable distance only after terrain, fencing, barriers, gates, routes, and legal access are available.
+
+explanation_templates:
+  F03_EXPL_CONFLICT: Water-source evidence conflicts and cannot be reconciled without reviewed verification.
+  F03_EXPL_CANDIDATE_ONLY: Remote data identifies candidate water context but does not verify a usable livestock water system.
+  F03_EXPL_SYSTEM_INCOMPLETE: A physical source may exist, but operational status, reliability, capacity, quality, access, or distribution remains incomplete.
+  F03_EXPL_MISSING: Livestock-water evidence is unavailable, so F03 remains unknown.
+  F03_EXPL_CONTEXT_ONLY: The water system context is verified, but no approved universal threshold or cross-species ranking rule applies.

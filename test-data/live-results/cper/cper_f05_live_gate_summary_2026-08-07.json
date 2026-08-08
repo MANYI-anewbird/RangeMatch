@@ -1,0 +1,84 @@
+{
+  "gate_id": "F05_CLIMATE_DROUGHT_LIVE_DATA_GATE_CPER",
+  "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+  "geometry_sha256": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+  "date": "2026-08-07",
+  "data_path_status": "LIVE_VERIFIED",
+  "signal_status": "NOT_YET_APPROVED",
+  "ranking_effect": "NONE",
+  "scope": {
+    "includes": [
+      "NOAA_NCEI_parcel_mean_annual_precipitation_normals",
+      "Mireye_point_QA_drought_category",
+      "Mireye_point_QA_mean_annual_temperature",
+      "Mireye_point_QA_days_above_32C"
+    ],
+    "excludes": [
+      "suitability_rules",
+      "numeric_thresholds",
+      "species_ranking",
+      "drought_history_summary",
+      "PRISM_primary_path",
+      "Flood_Factor",
+      "F02_F03_signal_mutation"
+    ]
+  },
+  "noaa_precipitation": {
+    "value_mm": 345.74,
+    "value_inches": 13.612,
+    "normals_period": "1991-2020",
+    "spatial_resolution": "1/24 degree (~4 km) nClimGrid-compatible CONUS grid",
+    "parcel_coverage": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+    "source_file": "prcp-1991_2020-monthly-normals-v1.0.nc",
+    "access_path": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+    "fixture": "test-data/live-results/cper/cper_noaa_ncei_annprcp_normals_1991_2020_2026-08-07.json"
+  },
+  "mireye_point_qa": {
+    "centroid": {
+      "lat": 40.825,
+      "lng": -104.76249999999999
+    },
+    "fields": {
+      "drought_category": {
+        "value": "D3",
+        "unit": null,
+        "status": "ok",
+        "source": "USDM_CURRENT",
+        "dataset_vintage": "US Drought Monitor (NDMC/USDA/NOAA), current-week snapshot valid through 2026-08-03 (weekly release; local gpkg mirror)",
+        "fetched_at": "2026-08-07T22:37:51.876458+00:00",
+        "spatial_semantics": "POINT_CENTROID",
+        "notes": "max DM class (D0=Abnormally Dry .. D4=Exceptional) of the dissolved USDM polygons containing the point (point-in-polygon; local gpkg mirror); absence = not in any drought polygon"
+      },
+      "mean_annual_dry_bulb_temperature_degc": {
+        "value": 9.12,
+        "unit": "degC",
+        "status": "ok",
+        "source": "NOAA_NCEI_NORMALS_GRIDDED",
+        "dataset_vintage": "NOAA NCEI 1991\u20132020 gridded climate normals (annual mean temp, CONUS)",
+        "fetched_at": "2026-08-07T22:37:54.972643+00:00",
+        "spatial_semantics": "POINT_CENTROID",
+        "notes": "sampled from the bootstrapped CONUS COG at the point"
+      },
+      "days_above_32c_annual_count": {
+        "value": 32,
+        "unit": "days",
+        "status": "ok",
+        "source": "NOAA_NCEI_NCLIMGRID_DAILY",
+        "dataset_vintage": "NOAA NCEI nClimGrid-Daily derived days \u2265 32\u00b0C per year (CONUS)",
+        "fetched_at": "2026-08-07T22:37:54.972971+00:00",
+        "spatial_semantics": "POINT_CENTROID",
+        "notes": "sampled from the bootstrapped CONUS COG at the point"
+      }
+    },
+    "fixture": "test-data/live-results/cper/cper_mireye_f05_centroid_2026-08-07.json",
+    "point_vs_parcel": "POINT_QA_ONLY_NOT_PARCEL_AGGREGATE",
+    "note": "Reused live Mireye centroid fixture from this session; no suitability mapping applied."
+  },
+  "boundaries_confirmed": {
+    "current_usdm_separated_from_drought_history": true,
+    "land_surface_precip_separated_from_precipitable_water": true,
+    "f05_does_not_mutate_f02_f03_signals": true,
+    "f04_wetness_independent_of_future_flood_factor": true,
+    "no_numeric_thresholds_or_species_ranking": true
+  }
+}
