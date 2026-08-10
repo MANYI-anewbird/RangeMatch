@@ -1,0 +1,11 @@
+{
+  "disposition": "no_match",
+  "reason": "no_geocode_hit",
+  "parcel_grade": null,
+  "confidence": null,
+  "normalized_address": null,
+  "precision_note": null,
+  "fetched_at": "2026-08-07T20:00:00+00:00",
+  "fields": {},
+  "partial_failures": []
+}

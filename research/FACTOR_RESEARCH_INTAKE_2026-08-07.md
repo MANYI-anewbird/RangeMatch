@@ -1,5 +1,7 @@
 # Factor Research Intake — 2026-08-07
 
+> **Historical research intake.** Active runtime scope is Cow-Calf + Sheep across frozen F01–F08. Candidate species/factor language below is provenance only and cannot override current registries.
+
 > Material: `factor-research-chatgpt-deep-research-2026-08-07.pdf`  
 > Author metadata: ChatGPT Deep Research  
 > Status: `BACKUP / EVIDENCE CANDIDATE`  
@@ -130,4 +132,3 @@ Use the report as the starting hypothesis list for the comprehensive US Factor S
 `ACCEPTED AS BACKUP` — valuable for research direction and source discovery.
 
 `NOT ACCEPTED AS SCIENTIFIC RULES` — thresholds, weights, hard constraints and citations require primary-source recovery and review.
-

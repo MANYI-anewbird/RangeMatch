@@ -1,0 +1,208 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "authority": {
+    "canonical_for_parcel_facts": false,
+    "permitted_uses": [
+      "POINT_QA",
+      "FAST_CONTEXT",
+      "CANDIDATE_DISCOVERY",
+      "DILIGENCE_TRIGGER",
+      "JURISDICTION_CONTEXT"
+    ]
+  },
+  "context_id": "mireye_b979f160fc3fbec66233b227",
+  "context_type": "POINT_LAND_CONTEXT",
+  "factor_usage_refs": [
+    {
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "aspect_cardinal",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "elevation",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "factor_id": "F02_HERBACEOUS_RESOURCE",
+      "field_id": "land_use_class",
+      "use": "FAST_CONTEXT"
+    },
+    {
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "factor_id": "F02_HERBACEOUS_RESOURCE",
+      "field_id": "lcms_class",
+      "use": "FAST_CONTEXT"
+    },
+    {
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+      "field_id": "lcms_class",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "slope_degrees",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+      "field_id": "soil_drainage_class",
+      "use": "POINT_QA"
+    }
+  ],
+  "fields": {
+    "aspect_cardinal": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T20:55:50.019114+00:00",
+      "field_id": "aspect_cardinal",
+      "notes": null,
+      "raw_field_hash": "800ac279978ace824fe7164c8a9011d2d1bb9bc4a324528f58622681460c1b07",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "NW"
+    },
+    "bedrock_depth_cm": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:07.995974+00:00",
+      "field_id": "bedrock_depth_cm",
+      "notes": "restrictive layer classified as bedrock",
+      "raw_field_hash": "9590c92f677cc6192be8bf6cbabb0b3b6a137f7198fbf837e0bfba7322a98c89",
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "ttl_seconds": 31536000,
+      "unit": "centimeters",
+      "value": 74.0
+    },
+    "coast_distance_m": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:07.999911+00:00",
+      "field_id": "coast_distance_m",
+      "notes": null,
+      "raw_field_hash": "cc4482f4daa05b462959f52ba7552dd7b090720b03e6a2f48556ed5a2fa65778",
+      "source": "NOAA_CUSP",
+      "source_url": "https://shoreline.noaa.gov/data/datasheets/cusp.html",
+      "ttl_seconds": 31536000,
+      "unit": "meters",
+      "value": 1160472.695082172
+    },
+    "elevation": {
+      "confidence": "medium",
+      "dataset_vintage": "3DEP 1/3 arc-second seamless DEM",
+      "fetched_at": "2026-08-07T20:55:50.019395+00:00",
+      "field_id": "elevation",
+      "notes": null,
+      "raw_field_hash": "c59833d31b0a700cbc627b1ee4b9a011cac43da792200c49ac0680cbe7003dc0",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": "meters",
+      "value": 1646.923095703125
+    },
+    "land_use_class": {
+      "confidence": "medium",
+      "dataset_vintage": "USFS LCMS Land_Use CONUS v2025-11 (2025 annual), ~120 m block-mode CONUS COG",
+      "fetched_at": "2026-08-07T20:55:49.418180+00:00",
+      "field_id": "land_use_class",
+      "notes": "LCMS Land_Use class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+      "raw_field_hash": "162d782804fe15595b48798773e0e800dc443e9e19914704db9de9f138395f08",
+      "source": "USFS_LCMS",
+      "source_url": "https://data.fs.usda.gov/geodata/rastergateway/LCMS/",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "Rangeland or Pasture"
+    },
+    "lcms_class": {
+      "confidence": "medium",
+      "dataset_vintage": "USFS LCMS Land_Cover CONUS v2025-11 (2025 annual), ~120 m block-mode CONUS COG",
+      "fetched_at": "2026-08-07T20:55:49.417527+00:00",
+      "field_id": "lcms_class",
+      "notes": "LCMS Land_Cover class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+      "raw_field_hash": "250b753d4bc1fa9213c203456dad0ece3d259d6adc59e39652f0aca21e754fa6",
+      "source": "USFS_LCMS",
+      "source_url": "https://data.fs.usda.gov/geodata/rastergateway/LCMS/",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "Grass/Forb/Herb & Shrubs Mix"
+    },
+    "slope_degrees": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T20:55:50.018932+00:00",
+      "field_id": "slope_degrees",
+      "notes": null,
+      "raw_field_hash": "0d4d4b315a520f6aa60c92012473978f0b39c045763942ac6b45b6d74e5e3f6b",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": "degrees",
+      "value": 0.9686843752861023
+    },
+    "soil_drainage_class": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T21:53:47.376724+00:00",
+      "field_id": "soil_drainage_class",
+      "notes": null,
+      "raw_field_hash": "72b4ba3f4bc5cc7cdcc771d072d7507a8bb7519f0ebb61018f9ad0727ba9090a",
+      "source": "NRCS_gNATSGO",
+      "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "Well drained"
+    }
+  },
+  "limitations": [
+    "canonical_for_parcel_facts=false",
+    "point_or_diligence_context_only",
+    "do_not_average_with_parcel_land_facts",
+    "do_not_promote_to_factor_land_facts",
+    "legal_title_not_verified",
+    "zoning_legality_not_confirmed"
+  ],
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "parcel_geometry_hash": null,
+    "point_role": "PARCEL_CENTROID_QA",
+    "spatial_semantics": "POINT"
+  },
+  "partial_failures": [],
+  "provenance": {
+    "adapter_version": "0.1.0",
+    "api_base_url": "https://api.mireye.com",
+    "api_or_catalog_version": "0.14.0",
+    "raw_artifact_reference": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/raw_point_land_cper.json",
+    "raw_response_hash": "03062ad29d4c0f3eb87abfcb0a7d2a908c354e83fc16a660d858b8fcff9961ec",
+    "request_hash": "ed6bc00e362f687e4314c177df7bd91400834aaeeba0c9113ea44277a0eba9a4"
+  },
+  "request": {
+    "endpoint": "/v1/fetch",
+    "explicitly_requested_fields": [
+      "lcms_class",
+      "land_use_class"
+    ],
+    "preset": "terrain",
+    "request_hash": "ed6bc00e362f687e4314c177df7bd91400834aaeeba0c9113ea44277a0eba9a4",
+    "requested_location": {
+      "kind": "coord",
+      "lat": 40.825,
+      "lng": -104.7625
+    }
+  },
+  "response_status": {
+    "fetched_at": "2026-08-08T19:02:08.014255+00:00",
+    "status": "COMPLETE"
+  }
+}

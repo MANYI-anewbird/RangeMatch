@@ -1,0 +1,70 @@
+{
+  "scenario_id": "coord_one_valid_candidate",
+  "raw_address": null,
+  "input_kind": "COORDINATE",
+  "latitude": 40.495,
+  "longitude": -104.895,
+  "normalized_address": "40.495,-104.895",
+  "geocode_outcome": "OK",
+  "parcel_lookup_outcome": "OK",
+  "geocode": {
+    "point": {
+      "type": "Point",
+      "coordinates": [-104.895, 40.495]
+    },
+    "confidence": 1.0,
+    "provider": "FIXTURE_COORD",
+    "request_id": "geocode_fixture_coord_001",
+    "retrieved_at": "2026-08-08T12:00:00+00:00",
+    "accuracy_type": "rooftop",
+    "limitations": [
+      "Coordinates are a parcel lookup point only — not a parcel boundary."
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_coord_001",
+      "label": "Demo Ranch Parcel (coord query)",
+      "parcel_geometry": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "id": "DEMO_PARCEL_COORD_001",
+            "properties": {},
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-104.9, 40.5],
+                  [-104.89, 40.5],
+                  [-104.89, 40.49],
+                  [-104.9, 40.49],
+                  [-104.9, 40.5]
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "source_crs": "EPSG:4326",
+      "confidence": 0.9,
+      "provenance": {
+        "source": "FIXTURE_PARCEL_FABRIC",
+        "provider": "FIXTURE",
+        "request_id": "req_cand_coord_001",
+        "reference_id": "fixture:cand_coord_001",
+        "retrieved_at": "2026-08-08T12:00:00+00:00"
+      },
+      "limitations": [
+        "Fixture geometry for offline parcel-resolution tests only.",
+        "Query point is not F01–F08 geometry."
+      ],
+      "attributes": {
+        "apn": null,
+        "owner": null,
+        "zoning": null
+      }
+    }
+  ]
+}

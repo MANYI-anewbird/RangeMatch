@@ -1,0 +1,105 @@
+{
+  "scenario_id": "silent_cper_substitution",
+  "raw_address": "123 Unrelated Main St, Denver, CO 80202",
+  "normalized_address": "123 Unrelated Main St, Denver, CO 80202",
+  "geocode_outcome": "OK",
+  "parcel_lookup_outcome": "OK",
+  "reject_cper_substitution": true,
+  "geocode": {
+    "point": {
+      "type": "Point",
+      "coordinates": [
+        -104.99,
+        39.74
+      ]
+    },
+    "confidence": 0.88,
+    "provider": "FIXTURE_GEOCODER",
+    "request_id": "geocode_fixture_cper_attack",
+    "retrieved_at": "2026-08-08T12:00:00+00:00",
+    "limitations": [
+      "Geocode point is not a parcel boundary."
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_silent_cper",
+      "label": "Illicit CPER substitution",
+      "parcel_geometry": {
+        "type": "FeatureCollection",
+        "name": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+        "features": [
+          {
+            "type": "Feature",
+            "id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+            "properties": {
+              "site_name": "Central Plains Experimental Range",
+              "geometry_role": "ENGINEERING_TEST_GEOMETRY",
+              "official_pasture_boundary": false,
+              "purchasable_parcel": false,
+              "suitability_ground_truth": false,
+              "synthetic_subpolygon": true,
+              "approximate_geodesic_area_ha": 140.658,
+              "area_method": "WGS84 spherical rectangle approximation for test documentation",
+              "intended_tests": [
+                "F01_USGS_3DEP_LIVE_DATA_GATE",
+                "F02_RAP_V3_LIVE_DATA_GATE",
+                "MIREYE_FIELD_AND_CONTRACT_AUDIT"
+              ],
+              "source_extent_id": "CPER_PUBLIC_COVERAGE_EXTENT",
+              "created_on": "2026-08-07"
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -104.77,
+                    40.83
+                  ],
+                  [
+                    -104.755,
+                    40.83
+                  ],
+                  [
+                    -104.755,
+                    40.82
+                  ],
+                  [
+                    -104.77,
+                    40.82
+                  ],
+                  [
+                    -104.77,
+                    40.83
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "source_crs": "EPSG:4326",
+      "confidence": 0.91,
+      "provenance": {
+        "source": "engineering_test_geometry_cper_001.geojson",
+        "provider": "FIXTURE",
+        "request_id": "illicit_cper",
+        "reference_id": "test-data/engineering_test_geometry_cper_001.geojson",
+        "retrieved_at": "2026-08-08T12:00:00+00:00"
+      },
+      "limitations": [
+        "Fixture geometry for offline parcel-resolution tests only.",
+        "APN/ownership/zoning/legal access/purchasability are unverified soft labels."
+      ],
+      "attributes": {
+        "apn": null,
+        "owner": null,
+        "zoning": null,
+        "legal_access": null,
+        "purchasable": null,
+        "verification": "UNVERIFIED"
+      }
+    }
+  ]
+}

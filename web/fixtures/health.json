@@ -1,0 +1,10 @@
+{
+  "status": "ok",
+  "api_version": "RANGEMATCH_ONE_PARCEL_API@0.1.0",
+  "schema_version": "RANGEMATCH_UNIFIED_OUTPUT@0.1.0",
+  "planner_version": "RANGEMATCH_PLANNER@0.1.0",
+  "executor_version": "RANGEMATCH_PLANNER_EXECUTOR@0.1.0",
+  "live_mireye_availability": "BLOCKED_EXTERNAL",
+  "storage": "in_memory_ephemeral",
+  "live_network_authorized": false
+}

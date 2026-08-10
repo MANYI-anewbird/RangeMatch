@@ -14,6 +14,12 @@ from .f08_derivation import (
     run_cper_f08_data_reuse_gate,
 )
 from .geometry_replace import replace_geometry, write_replaced_profile
+from .planner import build_investigation_plan
+from .unified_output import (
+    hash_match_result,
+    project_unified_output,
+    validate_unified_output,
+)
 
 __all__ = [
     "evaluate_land_profile",
@@ -34,5 +40,9 @@ __all__ = [
     "write_demo_closure",
     "replace_geometry",
     "write_replaced_profile",
+    "project_unified_output",
+    "validate_unified_output",
+    "hash_match_result",
+    "build_investigation_plan",
 ]
 

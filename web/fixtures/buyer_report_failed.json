@@ -1,0 +1,22 @@
+{
+  "investigation_id": "inv_fail",
+  "displayable": false,
+  "validation_status": "FAILED",
+  "buyer_report": null,
+  "validation_violations": [
+    {
+      "code": "LLM_CREDENTIALS_MISSING",
+      "message": "not configured",
+      "path": "report_provenance"
+    }
+  ],
+  "report_provenance": {
+    "provider": "OPENAI",
+    "model_id": null,
+    "prompt_version": "x",
+    "generated_at": "2026-08-08T12:00:00Z",
+    "provider_status": "NOT_CONFIGURED",
+    "match_result_hash": "da0be081e6a45f9c7c1d14149fa5eeecb098053afa04cb749df15add5a7443e5",
+    "displayable": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/diligence_search_result.schema.json",
+  "title": "RangeMatchDiligenceSearchResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "search_id", "status", "topics", "summary", "sources", "searched_at", "provider", "effect_on_engine", "limitations"],
+  "properties": {
+    "schema_version": {"const": "RANGEMATCH_DILIGENCE_SEARCH@0.1.0"},
+    "search_id": {"type": "string"},
+    "status": {"enum": ["COMPLETE", "PARTIAL", "FAILED", "NOT_CONFIGURED"]},
+    "topics": {"type": "array", "items": {"enum": ["REGULATION_AND_PERMITS", "LOCAL_AG_GUIDANCE", "CURRENT_DROUGHT", "PUBLIC_LAND_CONSTRAINTS"]}},
+    "summary": {"type": "string"},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "title", "url", "domain", "retrieved_at", "source_class", "jurisdiction_scope", "use_limit"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "title": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "domain": {"type": "string"},
+          "retrieved_at": {"type": "string"},
+          "published_at": {"type": ["string", "null"]},
+          "source_class": {"enum": ["GOVERNMENT", "UNIVERSITY_EXTENSION"]},
+          "jurisdiction_scope": {"type": "string"},
+          "use_limit": {"const": "DILIGENCE_CONTEXT_ONLY"}
+        }
+      }
+    },
+    "searched_at": {"type": "string"},
+    "provider": {"type": "object"},
+    "effect_on_engine": {"const": "NONE"},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  }
+}

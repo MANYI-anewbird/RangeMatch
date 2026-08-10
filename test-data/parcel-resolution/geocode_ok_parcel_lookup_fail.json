@@ -1,0 +1,24 @@
+{
+  "scenario_id": "geocode_ok_parcel_lookup_fail",
+  "raw_address": "300 Lookup Fail Rd, Weld County, CO 80701",
+  "normalized_address": "300 Lookup Fail Rd, Weld County, CO 80701",
+  "geocode_outcome": "OK",
+  "parcel_lookup_outcome": "FAILED",
+  "geocode": {
+    "point": {
+      "type": "Point",
+      "coordinates": [
+        -104.895,
+        40.495
+      ]
+    },
+    "confidence": 0.88,
+    "provider": "FIXTURE_GEOCODER",
+    "request_id": "geocode_fixture_004",
+    "retrieved_at": "2026-08-08T12:00:00+00:00",
+    "limitations": [
+      "Geocode point is not a parcel boundary."
+    ]
+  },
+  "candidates": []
+}

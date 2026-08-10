@@ -1,0 +1,51 @@
+{
+  "plaintext_http_probe_ipv4": {
+    "ok": true,
+    "first_bytes_hex": "485454502f312e312033303220466f756e640d0a4c6f636174696f6e3a2068747470733a2f2f7777",
+    "first_bytes_ascii": "HTTP/1.1 302 Found..Location: https://www.safebrowse.io/warn.html?[REDACTED]",
+    "looks_like_http": true,
+    "looks_like_tls_record": false
+  },
+  "tls_default": {
+    "ok": false,
+    "error_class": "SSLError",
+    "msg": "[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)"
+  },
+  "tls_tls12_only": {
+    "ok": false,
+    "error_class": "SSLError",
+    "msg": "[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)"
+  },
+  "tls_tls13_only": {
+    "ok": false,
+    "error_class": "SSLError",
+    "msg": "[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)"
+  },
+  "plaintext_http_probe_ipv6": {
+    "first_bytes_ascii": "HTTP/1.1 302 Found..Location: https://www.safebrowse.io/warn.html?[REDACTED]",
+    "looks_like_http": true
+  },
+  "tls_ipv6_direct": {
+    "ok": false,
+    "error_class": "SSLError",
+    "msg": "[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)"
+  },
+  "openssl_s_client": {
+    "returncode": 1,
+    "status_lines": [
+      "805E29F401000000:error:0A00010B:SSL routines:tls_validate_record_header:wrong version number:ssl/record/methods/tlsany_meth.c:78:",
+      "805E29F401000000:error:0A000197:SSL routines:SSL_shutdown:shutdown while in init:ssl/ssl_lib.c:2804:"
+    ]
+  },
+  "system_python_tls": {
+    "ok": false,
+    "error": "SSLError",
+    "msg": "[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)",
+    "openssl": "OpenSSL 3.0.15 3 Sep 2024"
+  },
+  "venv_python": {
+    "executable": "/Users/hongmanyi/RangeMatch/.venv-livegate/bin/python",
+    "openssl": "OpenSSL 3.0.15 3 Sep 2024",
+    "version": "3.13.0"
+  }
+}

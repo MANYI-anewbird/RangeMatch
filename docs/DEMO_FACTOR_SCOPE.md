@@ -3,7 +3,7 @@
 > Status: `CLOSED`  
 > Date: 2026-08-08  
 > Product scope: time-constrained evidence-constrained screening demo  
-> Next phase: Product Prototype + Agent Orchestration
+> Current product phase: Competition Packaging + Deployment Readiness (see `CURRENT_SYSTEM_BASELINE.md`)
 
 ## Canonical scope
 

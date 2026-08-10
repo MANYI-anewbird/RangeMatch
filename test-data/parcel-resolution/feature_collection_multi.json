@@ -1,0 +1,119 @@
+{
+  "scenario_id": "feature_collection_multi",
+  "raw_address": "700 Multi Feature Rd, Weld County, CO 80701",
+  "normalized_address": "700 Multi Feature Rd, Weld County, CO 80701",
+  "geocode_outcome": "OK",
+  "parcel_lookup_outcome": "OK",
+  "geocode": {
+    "point": {
+      "type": "Point",
+      "coordinates": [
+        -104.895,
+        40.495
+      ]
+    },
+    "confidence": 0.88,
+    "provider": "FIXTURE_GEOCODER",
+    "request_id": "geocode_fixture_007",
+    "retrieved_at": "2026-08-08T12:00:00+00:00",
+    "limitations": [
+      "Geocode point is not a parcel boundary."
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_multi_fc",
+      "label": "Two features illegally packaged",
+      "parcel_geometry": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "id": "P1",
+            "properties": {},
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -104.9,
+                    40.5
+                  ],
+                  [
+                    -104.89,
+                    40.5
+                  ],
+                  [
+                    -104.89,
+                    40.49
+                  ],
+                  [
+                    -104.9,
+                    40.49
+                  ],
+                  [
+                    -104.9,
+                    40.5
+                  ]
+                ]
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "id": "P2",
+            "properties": {},
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -104.889,
+                    40.5
+                  ],
+                  [
+                    -104.879,
+                    40.5
+                  ],
+                  [
+                    -104.879,
+                    40.49
+                  ],
+                  [
+                    -104.889,
+                    40.49
+                  ],
+                  [
+                    -104.889,
+                    40.5
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "source_crs": "EPSG:4326",
+      "confidence": 0.91,
+      "provenance": {
+        "source": "FIXTURE_PARCEL_FABRIC",
+        "provider": "FIXTURE",
+        "request_id": "req_cand_multi_fc",
+        "reference_id": "fixture:cand_multi_fc",
+        "retrieved_at": "2026-08-08T12:00:00+00:00"
+      },
+      "limitations": [
+        "Fixture geometry for offline parcel-resolution tests only.",
+        "APN/ownership/zoning/legal access/purchasability are unverified soft labels."
+      ],
+      "attributes": {
+        "apn": null,
+        "owner": null,
+        "zoning": null,
+        "legal_access": null,
+        "purchasable": null,
+        "verification": "UNVERIFIED"
+      }
+    }
+  ]
+}

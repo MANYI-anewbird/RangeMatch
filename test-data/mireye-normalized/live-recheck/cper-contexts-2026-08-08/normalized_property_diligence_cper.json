@@ -1,0 +1,92 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "authority": {
+    "canonical_for_parcel_facts": false,
+    "permitted_uses": [
+      "POINT_QA",
+      "FAST_CONTEXT",
+      "CANDIDATE_DISCOVERY",
+      "DILIGENCE_TRIGGER",
+      "JURISDICTION_CONTEXT"
+    ]
+  },
+  "context_id": "mireye_12617580a6287c103b2176cb",
+  "context_type": "PROPERTY_DILIGENCE_CONTEXT",
+  "factor_usage_refs": [],
+  "fields": {},
+  "limitations": [
+    "canonical_for_parcel_facts=false",
+    "point_or_diligence_context_only",
+    "do_not_average_with_parcel_land_facts",
+    "do_not_promote_to_factor_land_facts",
+    "legal_title_not_verified",
+    "zoning_legality_not_confirmed"
+  ],
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "parcel_geometry_hash": null,
+    "point_role": "PARCEL_CENTROID_QA",
+    "spatial_semantics": "POINT"
+  },
+  "parcel_candidate": {
+    "apn": "030122000004",
+    "area_m2": 1948472.3770128714,
+    "assessed_value_usd": 400273.0,
+    "geometry": "{\"type\":\"Polygon\",\"coordinates\":[[[-104.7579885,40.812224],[-104.753207,40.8122025],[-104.7531875,40.8230915],[-104.753181,40.8267215],[-104.7579655,40.826735],[-104.76275,40.8267485],[-104.7675345,40.826762],[-104.772319,40.8267755],[-104.7723225,40.823154],[-104.7723265,40.8195325],[-104.769589,40.8195225],[-104.769535,40.819522],[-104.7694675,40.819522],[-104.769235,40.819521],[-104.768976,40.81952],[-104.768914,40.81952],[-104.7648715,40.8195055],[-104.76276,40.8194975],[-104.7627605,40.81912],[-104.762762,40.8180945],[-104.762764,40.816908],[-104.762764,40.816851],[-104.762764,40.816742],[-104.762764,40.8167045],[-104.762764,40.8166195],[-104.762765,40.8158715],[-104.7627705,40.8122455],[-104.7626465,40.812245],[-104.761797,40.8122415],[-104.7579885,40.812224]]]}",
+    "geometry_wkt": "POLYGON((-104.7579885 40.812224, -104.753207 40.8122025, -104.7531875 40.8230915, -104.753181 40.8267215, -104.7579655 40.826735, -104.76275 40.8267485, -104.7675345 40.826762, -104.772319 40.8267755, -104.7723225 40.823154, -104.7723265 40.8195325, -104.769589 40.8195225, -104.769535 40.819522, -104.7694675 40.819522, -104.769235 40.819521, -104.768976 40.81952, -104.768914 40.81952, -104.7648715 40.8195055, -104.76276 40.8194975, -104.7627605 40.81912, -104.762762 40.8180945, -104.762764 40.816908, -104.762764 40.816851, -104.762764 40.816742, -104.762764 40.8167045, -104.762764 40.8166195, -104.762765 40.8158715, -104.7627705 40.8122455, -104.7626465 40.812245, -104.761797 40.8122415, -104.7579885 40.812224))",
+    "land_use": "Exempt",
+    "last_sale_price_usd": 0.0,
+    "legal_title_verified": false,
+    "match_distance_m": 0.0,
+    "match_radius_m": 0.0,
+    "match_type": "exact_intersect",
+    "owner": "UNITED STATES OF AMERICA",
+    "parcel_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+    "source": "regrid_paid",
+    "zoning": "A",
+    "zoning_legality_confirmed": false
+  },
+  "partial_failures": [],
+  "provenance": {
+    "adapter_version": "0.1.0",
+    "api_base_url": "https://api.mireye.com",
+    "api_or_catalog_version": "0.14.0",
+    "raw_artifact_reference": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/raw_property_diligence_cper.json",
+    "raw_response_hash": "24923aed278b75fe17fbefb45175fb8508757ac37a7505f16c26d91ffdbaa8c5",
+    "request_hash": "f71a6ae51e21e1df699f866a6ca753b0b5cf97b0d8807090c9c1f6ad7015ee2a"
+  },
+  "request": {
+    "endpoint": "/v1/lookup",
+    "explicitly_requested_fields": [],
+    "preset": null,
+    "request_hash": "f71a6ae51e21e1df699f866a6ca753b0b5cf97b0d8807090c9c1f6ad7015ee2a",
+    "requested_location": {
+      "kind": "coord",
+      "lat": 40.825,
+      "lng": -104.7625
+    }
+  },
+  "resolution": {
+    "confidence": 0.8,
+    "disposition": "RESOLVED",
+    "legal_title_verified": false,
+    "normalized_address": null,
+    "parcel_grade": null,
+    "parcel_unavailable": false,
+    "parcel_unavailable_reason": null,
+    "precision_note": null,
+    "reason": null,
+    "resolved_location": {
+      "lat": 40.825,
+      "lng": -104.7625,
+      "source": "coordinate"
+    },
+    "zoning_legality_confirmed": false
+  },
+  "response_status": {
+    "fetched_at": null,
+    "status": "COMPLETE"
+  }
+}

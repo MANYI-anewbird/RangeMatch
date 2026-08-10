@@ -1,0 +1,22 @@
+{
+  "disposition": "clarify",
+  "parcel_grade": null,
+  "confidence": "low",
+  "normalized_address": null,
+  "precision_note": "multiple plausible matches",
+  "fetched_at": "2026-08-07T20:00:00+00:00",
+  "candidates": [
+    {
+      "label": "Candidate A",
+      "lat": 40.82,
+      "lng": -104.76
+    },
+    {
+      "label": "Candidate B",
+      "lat": 40.83,
+      "lng": -104.77
+    }
+  ],
+  "fields": {},
+  "partial_failures": []
+}

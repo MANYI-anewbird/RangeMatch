@@ -1,0 +1,424 @@
+{
+  "execution_id": "exec_34764d0ee0d445d3",
+  "execution_status": "PARTIAL",
+  "plan_sha256": "17fbc8e1ffc817e5bc83ee1c16c9073cddfb23c20b10f7c23bdc234c1b93df3b",
+  "deterministic_execution_hash": "10b7e2715a0e00a50e9a9902a929d23298ed6e733070b1cc6dcaf2498bb28746",
+  "step_order_executed": [
+    "S01_VALIDATE_ONE_PARCEL",
+    "S02_RESOLVE_GEOMETRY",
+    "S03_MIREYE_PROPERTY",
+    "S04_MIREYE_POINT_LAND",
+    "S05_MIREYE_POINT_HAZARD",
+    "S06_F06_PARCEL_CONFIGURATION",
+    "S07_PEER_F01_TOPOGRAPHY",
+    "S07_PEER_F02_HERBACEOUS_RESOURCE",
+    "S07_PEER_F03_LIVESTOCK_WATER",
+    "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+    "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+    "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+    "S08_F08_WOODY_REUSE",
+    "S09_ASSEMBLE_LAND_PROFILE",
+    "S10_EVALUATE_ENGINE",
+    "S11_PROJECT_UNIFIED_OUTPUT",
+    "S13_EXPLAIN_AND_PRODUCT"
+  ],
+  "canonical_factor_report_order": [
+    "F01_TOPOGRAPHY",
+    "F02_HERBACEOUS_RESOURCE",
+    "F03_LIVESTOCK_WATER",
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+    "F05_CLIMATE_DROUGHT_EXPOSURE",
+    "F06_PARCEL_CONFIGURATION",
+    "F07_ROAD_AND_PHYSICAL_ACCESS",
+    "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+  ],
+  "steps": [
+    {
+      "step_id": "S01_VALIDATE_ONE_PARCEL",
+      "tool_id": "geometry.validate_one_parcel",
+      "action": "COMPUTE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [],
+      "runner_id": "fixture.geometry_validate",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "geometry_validation"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": null
+    },
+    {
+      "step_id": "S02_RESOLVE_GEOMETRY",
+      "tool_id": "geometry.resolve",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S01_VALIDATE_ONE_PARCEL"
+      ],
+      "runner_id": "fixture.geometry_resolve",
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "output_refs": [
+        "geometry_binding"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": null
+    },
+    {
+      "step_id": "S03_MIREYE_PROPERTY",
+      "tool_id": "mireye.property_diligence",
+      "action": "REUSE",
+      "status": "BLOCKED_EXTERNAL",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "runner_id": "fixture.mireye_property",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "mireye:PROPERTY_DILIGENCE_CONTEXT"
+      ],
+      "failure": {
+        "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+        "retryable": false
+      },
+      "parallel_group": "mireye_context",
+      "factor_id": null
+    },
+    {
+      "step_id": "S04_MIREYE_POINT_LAND",
+      "tool_id": "mireye.point_land",
+      "action": "REUSE",
+      "status": "BLOCKED_EXTERNAL",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "runner_id": "fixture.mireye_point_land",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "mireye:POINT_LAND_CONTEXT"
+      ],
+      "failure": {
+        "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+        "retryable": false
+      },
+      "parallel_group": "mireye_context",
+      "factor_id": null
+    },
+    {
+      "step_id": "S05_MIREYE_POINT_HAZARD",
+      "tool_id": "mireye.point_hazard",
+      "action": "REUSE",
+      "status": "BLOCKED_EXTERNAL",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "runner_id": "fixture.mireye_point_hazard",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "mireye:POINT_HAZARD_CONTEXT"
+      ],
+      "failure": {
+        "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+        "retryable": false
+      },
+      "parallel_group": "mireye_context",
+      "factor_id": null
+    },
+    {
+      "step_id": "S06_F06_PARCEL_CONFIGURATION",
+      "tool_id": "factor.f06_parcel_configuration",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "runner_id": "fixture.factor_f06",
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "output_refs": [
+        "factor:F06_PARCEL_CONFIGURATION"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": "F06_PARCEL_CONFIGURATION"
+    },
+    {
+      "step_id": "S07_PEER_F01_TOPOGRAPHY",
+      "tool_id": "adapter.usgs_3dep",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "runner_id": "fixture.factor_f01",
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "output_refs": [
+        "factor:F01_TOPOGRAPHY"
+      ],
+      "failure": null,
+      "parallel_group": "peer_factors_after_f06",
+      "factor_id": "F01_TOPOGRAPHY"
+    },
+    {
+      "step_id": "S07_PEER_F02_HERBACEOUS_RESOURCE",
+      "tool_id": "adapter.rap_cover_production",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "runner_id": "fixture.factor_f02_rap",
+      "reused_artifact_refs": [
+        "land_profile",
+        "rap_coverV3:58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160"
+      ],
+      "output_refs": [
+        "factor:F02_HERBACEOUS_RESOURCE"
+      ],
+      "failure": null,
+      "parallel_group": "peer_factors_after_f06",
+      "factor_id": "F02_HERBACEOUS_RESOURCE"
+    },
+    {
+      "step_id": "S07_PEER_F03_LIVESTOCK_WATER",
+      "tool_id": "adapter.nhd_water_candidates",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "runner_id": "fixture.factor_f03",
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "output_refs": [
+        "factor:F03_LIVESTOCK_WATER"
+      ],
+      "failure": null,
+      "parallel_group": "peer_factors_after_f06",
+      "factor_id": "F03_LIVESTOCK_WATER"
+    },
+    {
+      "step_id": "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+      "tool_id": "adapter.usda_sda",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "runner_id": "fixture.factor_f04",
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "output_refs": [
+        "factor:F04_SOIL_WETNESS_ECOLOGICAL_SITE"
+      ],
+      "failure": null,
+      "parallel_group": "peer_factors_after_f06",
+      "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE"
+    },
+    {
+      "step_id": "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+      "tool_id": "adapter.noaa_ncei_precip",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "runner_id": "fixture.factor_f05",
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "output_refs": [
+        "factor:F05_CLIMATE_DROUGHT_EXPOSURE"
+      ],
+      "failure": null,
+      "parallel_group": "peer_factors_after_f06",
+      "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE"
+    },
+    {
+      "step_id": "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+      "tool_id": "adapter.tiger_roads",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "runner_id": "fixture.factor_f07",
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "output_refs": [
+        "factor:F07_ROAD_AND_PHYSICAL_ACCESS"
+      ],
+      "failure": null,
+      "parallel_group": "peer_factors_after_f06",
+      "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS"
+    },
+    {
+      "step_id": "S08_F08_WOODY_REUSE",
+      "tool_id": "factor.f08_woody_reuse_rap",
+      "action": "REUSE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S07_PEER_F02_HERBACEOUS_RESOURCE"
+      ],
+      "runner_id": "fixture.factor_f08_reuse",
+      "reused_artifact_refs": [
+        "rap_coverV3:58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "factor:F02_HERBACEOUS_RESOURCE"
+      ],
+      "output_refs": [
+        "factor:F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+    },
+    {
+      "step_id": "S09_ASSEMBLE_LAND_PROFILE",
+      "tool_id": "profile.assemble",
+      "action": "COMPUTE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S07_PEER_F01_TOPOGRAPHY",
+        "S07_PEER_F02_HERBACEOUS_RESOURCE",
+        "S07_PEER_F03_LIVESTOCK_WATER",
+        "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+        "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+        "S08_F08_WOODY_REUSE"
+      ],
+      "runner_id": "fixture.assemble_land_profile",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "land_profile"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": null
+    },
+    {
+      "step_id": "S10_EVALUATE_ENGINE",
+      "tool_id": "engine.evaluate",
+      "action": "EVALUATE",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S09_ASSEMBLE_LAND_PROFILE"
+      ],
+      "runner_id": "fixture.engine_evaluate",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "match_result"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": null
+    },
+    {
+      "step_id": "S11_PROJECT_UNIFIED_OUTPUT",
+      "tool_id": "output.project_unified",
+      "action": "PROJECT",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S10_EVALUATE_ENGINE"
+      ],
+      "runner_id": "fixture.project_unified",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "unified_output"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": null
+    },
+    {
+      "step_id": "S13_EXPLAIN_AND_PRODUCT",
+      "tool_id": "explanation.bind_and_product",
+      "action": "EXPLAIN",
+      "status": "SUCCEEDED",
+      "dependency_step_ids": [
+        "S11_PROJECT_UNIFIED_OUTPUT"
+      ],
+      "runner_id": "fixture.explanation_bind",
+      "reused_artifact_refs": [],
+      "output_refs": [
+        "explanation",
+        "unified_output"
+      ],
+      "failure": null,
+      "parallel_group": null,
+      "factor_id": null
+    }
+  ],
+  "failures": [
+    {
+      "step_id": "S03_MIREYE_PROPERTY",
+      "tool_id": "mireye.property_diligence",
+      "status": "BLOCKED_EXTERNAL",
+      "failure": {
+        "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+        "retryable": false
+      }
+    },
+    {
+      "step_id": "S04_MIREYE_POINT_LAND",
+      "tool_id": "mireye.point_land",
+      "status": "BLOCKED_EXTERNAL",
+      "failure": {
+        "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+        "retryable": false
+      }
+    },
+    {
+      "step_id": "S05_MIREYE_POINT_HAZARD",
+      "tool_id": "mireye.point_hazard",
+      "status": "BLOCKED_EXTERNAL",
+      "failure": {
+        "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+        "retryable": false
+      }
+    }
+  ],
+  "artifact_refs": [
+    "explanation",
+    "f02_coverV3_artifact_hash",
+    "f02_factor",
+    "factor:F01_TOPOGRAPHY",
+    "factor:F02_HERBACEOUS_RESOURCE",
+    "factor:F03_LIVESTOCK_WATER",
+    "factor:F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+    "factor:F05_CLIMATE_DROUGHT_EXPOSURE",
+    "factor:F06_PARCEL_CONFIGURATION",
+    "factor:F07_ROAD_AND_PHYSICAL_ACCESS",
+    "factor:F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+    "geometry",
+    "geometry_binding",
+    "land_profile",
+    "match_result",
+    "mireye:POINT_HAZARD_CONTEXT",
+    "mireye:POINT_LAND_CONTEXT",
+    "mireye:PROPERTY_DILIGENCE_CONTEXT",
+    "unified_output"
+  ],
+  "constraints": {
+    "live_network": false,
+    "live_mireye_attempted": false,
+    "f09_authorized": false,
+    "batch_authorized": false,
+    "icp_authorized": false
+  }
+}

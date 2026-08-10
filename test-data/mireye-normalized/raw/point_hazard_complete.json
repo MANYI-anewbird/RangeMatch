@@ -1,0 +1,61 @@
+{
+  "lat": 40.825,
+  "lng": -104.7625,
+  "fetched_at": "2026-08-07T21:00:00+00:00",
+  "fields": {
+    "flood_zone": {
+      "value": "X",
+      "unit": null,
+      "source": "FEMA_NFHL",
+      "source_url": "https://www.fema.gov/national-flood-hazard-layer",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "dataset_vintage": "NFHL fixture",
+      "ttl_seconds": 2592000,
+      "notes": null,
+      "status": "ok"
+    },
+    "within_floodplain_polygon": {
+      "value": false,
+      "unit": null,
+      "source": "FEMA_NFHL",
+      "source_url": "https://www.fema.gov/national-flood-hazard-layer",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "dataset_vintage": "NFHL fixture",
+      "ttl_seconds": 2592000,
+      "notes": null,
+      "status": "ok"
+    },
+    "tree_canopy_pct": {
+      "value": 2.5,
+      "unit": "percent",
+      "source": "USFS_TCC",
+      "source_url": "https://data.fs.usda.gov/geodata/rastergateway/treecanopycover/",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "dataset_vintage": "fixture",
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "ndvi_current": {
+      "value": 0.31,
+      "unit": null,
+      "source": "SATELLITE_NDVI",
+      "source_url": "https://example.invalid/ndvi",
+      "confidence": "low",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "dataset_vintage": "fixture",
+      "ttl_seconds": 86400,
+      "notes": null,
+      "status": "ok"
+    }
+  },
+  "partial_failures": [],
+  "resolved_location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "source": "coordinate"
+  }
+}

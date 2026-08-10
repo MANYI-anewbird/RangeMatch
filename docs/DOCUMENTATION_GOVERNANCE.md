@@ -3,7 +3,11 @@
 > Status: `CANONICAL`
 > Audience: RangeMatch builders, scientific reviewers, and Mireye reviewers
 > Submission language: English
-> Last updated: 2026-08-07
+> Last updated: 2026-08-08
+
+## 0. Current-state authority
+
+`CURRENT_SYSTEM_BASELINE.md` is the canonical index for current product scope, runtime status, report shape, and next milestone. Scientific freeze records remain authoritative for their individual Factor contracts. Dated live-gate, incident, portfolio-review, and milestone documents are immutable audit records; they must be labeled historical and must not override the current baseline.
 
 ## 1. Language Policy
 
@@ -36,7 +40,7 @@ All geographic and descriptive context must follow `CONTEXT_DECOMPOSITION_STANDA
 3. `UNIFIED_LAND_VARIABLE_REGISTRY.yaml` - shared Land Facts and Context Variables.
 4. `DATA_SOURCE_AND_MIREYE_AUDIT.yaml` - field availability, version, derivation, and external-data requirements.
 5. `FACTOR_FREEZE_GATE.yaml` - unified stop condition for Factor research and implementation depth.
-6. `DEMO_ACCEPTANCE.md` - four-Factor demo acceptance and reusability validation gate.
+6. `DEMO_ACCEPTANCE.md` - historical four-Factor demo acceptance and reusability validation gate.
 7. Factor-family audits such as `F05_CLIMATE_DROUGHT_ATOMICITY_AND_SOURCE_AUDIT.md` and matching data-source YAML files.
 8. Cross-parcel validation plan, selection criteria, and result schema (`CROSS_PARCEL_VALIDATION_PLAN.md`, `CROSS_PARCEL_SELECTION_CRITERIA.yaml`, `CROSS_PARCEL_VALIDATION_RESULT_SCHEMA.yaml`).
 
@@ -81,3 +85,19 @@ A relationship may become `ACCEPTED_RELATIONSHIP` only when:
 ## 6. Mireye Submission Package
 
 The review package should include the four canonical scientific deliverables, the deterministic rule specification, the Profile version manifest, and representative MatchResult traces. Every referenced Mireye field must include the exact field ID, inspected API/catalog version, access date, spatial semantics, and whether the value is direct, source-derived, parcel-derived, or unavailable.
+
+## 7. Current product documentation set
+
+Current product behavior is defined by:
+
+- `CURRENT_SYSTEM_BASELINE.md`;
+- `PRODUCT_PROTOTYPE_SCOPE.md`;
+- `AGENT_ORCHESTRATION_SPEC.md`;
+- `ONE_PARCEL_API_SPEC.md`;
+- `F01_F08_UNIFIED_OUTPUT_CONTRACT.md`;
+- `LLM_AUTHORITY_AND_REPORT_SPEC.md`;
+- `DILIGENCE_SEARCH_AGENT_SPEC.md`;
+- `BUYER_DASHBOARD_AND_SCORING_SPEC.md`;
+- `PACKAGING_AND_DELIVERY_STRATEGY.md`.
+
+When test counts or incident states differ across dated files, the newest verified baseline is current and the older value remains historical evidence only.

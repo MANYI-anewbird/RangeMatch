@@ -1,5 +1,7 @@
 # F01–F05 Five-Parcel Aggregate Review
 
+> **Historical validation result.** This artifact records the F01–F05 stage and is not a statement that the current product has only five Factors.
+
 > Status: `COMPLETE — CONCLUSION LOCKED`  
 > Date: 2026-08-08  
 > Runner: `scripts/run_cross_parcel_validation.py`  

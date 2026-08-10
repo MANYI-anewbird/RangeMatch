@@ -1,0 +1,27 @@
+{
+  "investigation_id": "inv_demo",
+  "diligence_search": {
+    "status": "COMPLETE",
+    "provider": "FIXTURE",
+    "effect_on_engine": "NONE",
+    "search_topics": ["REGULATION_AND_PERMITS", "CURRENT_DROUGHT"],
+    "summary": "Current public guidance indicates that water access, drought planning, and county-level land-use requirements should be verified before purchase.",
+    "sources": [
+      {
+        "source_id": "PUB_001",
+        "title": "Drought conditions and outlook",
+        "url": "https://www.drought.gov/",
+        "domain": "drought.gov",
+        "publisher": "National Integrated Drought Information System"
+      },
+      {
+        "source_id": "PUB_002",
+        "title": "Local land-use and permit guidance",
+        "url": "https://www.weld.gov/Government/Departments/Planning-and-Zoning",
+        "domain": "weld.gov",
+        "publisher": "Weld County"
+      }
+    ],
+    "limitations": ["Public guidance does not establish parcel-specific legal compliance."]
+  }
+}

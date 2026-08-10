@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/parcel_resolution.schema.json",
+  "title": "RangeMatch Parcel Resolution Record",
+  "description": "ADDRESS or COORDINATE → geocode/lookup → parcel candidate → user confirmation. Exactly one confirmed Polygon/MultiPolygon Feature in EPSG:4326 may enter Planner.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "resolution_id",
+    "adapter_id",
+    "adapter_version",
+    "provider_mode",
+    "status",
+    "input",
+    "candidates",
+    "provenance",
+    "limitations",
+    "errors"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "RANGEMATCH_PARCEL_RESOLUTION@0.1.0"
+    },
+    "resolution_id": { "type": "string", "minLength": 1 },
+    "adapter_id": {
+      "enum": [
+        "PARCEL_RESOLVER_FIXTURE",
+        "PARCEL_RESOLVER_LIVE"
+      ]
+    },
+    "adapter_version": { "type": "string", "minLength": 1 },
+    "provider_mode": {
+      "enum": ["FIXTURE", "OFFLINE", "LIVE"]
+    },
+    "status": {
+      "enum": [
+        "ADDRESS_ACCEPTED",
+        "GEOCODED",
+        "PARCEL_CANDIDATES_FOUND",
+        "NEEDS_USER_SELECTION",
+        "NEEDS_BOUNDARY_CONFIRMATION",
+        "PARCEL_CONFIRMED",
+        "NO_MATCH",
+        "AMBIGUOUS",
+        "BLOCKED_EXTERNAL",
+        "INVALID_GEOMETRY",
+        "PARCEL_DATA_UNAVAILABLE",
+        "GEOCODE_QUALITY_INSUFFICIENT"
+      ]
+    },
+    "scenario_id": { "type": ["string", "null"] },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input_kind", "raw_address", "normalized_address"],
+      "properties": {
+        "input_kind": {
+          "enum": ["ADDRESS", "COORDINATE"],
+          "description": "Competition Demo land entry. Drop a pin and Enter coordinates share COORDINATE."
+        },
+        "raw_address": {
+          "type": ["string", "null"],
+          "description": "Raw street address for ADDRESS; null for COORDINATE"
+        },
+        "normalized_address": {
+          "type": ["string", "null"],
+          "description": "Normalized street address or lat,lng query string"
+        },
+        "latitude": {
+          "type": ["number", "null"],
+          "description": "Query-point latitude for COORDINATE; never parcel geometry"
+        },
+        "longitude": {
+          "type": ["number", "null"],
+          "description": "Query-point longitude for COORDINATE; never parcel geometry"
+        }
+      }
+    },
+    "geocode": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "point",
+        "confidence",
+        "provider",
+        "request_id",
+        "retrieved_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": ["OK", "FAILED", "AMBIGUOUS", "BLOCKED_EXTERNAL", "NO_MATCH"]
+        },
+        "point": {
+          "type": ["object", "null"],
+          "description": "GeoJSON Point; never usable as parcel boundary"
+        },
+        "confidence": { "type": ["number", "null"] },
+        "provider": { "type": "string" },
+        "request_id": { "type": "string" },
+        "retrieved_at": { "type": ["string", "null"] },
+        "accuracy": { "type": ["number", "null"] },
+        "accuracy_type": {
+          "type": ["string", "null"],
+          "description": "Mireye/geocoder accuracy_type; parcel-quality requires rooftop or nearest_rooftop_match"
+        },
+        "match_type": { "type": ["string", "null"] },
+        "normalized_address": { "type": ["string", "null"] },
+        "limitations": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/parcel_candidate" }
+    },
+    "selection": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "selected_candidate_id": { "type": ["string", "null"] },
+        "confirmed_at": { "type": ["string", "null"] },
+        "confirmation_method": {
+          "enum": [
+            "USER_BOUNDARY_CONFIRMATION",
+            "PENDING",
+            null
+          ]
+        }
+      }
+    },
+    "confirmed_parcel": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "parcel_geometry",
+        "geometry_id",
+        "geometry_reference",
+        "geometry_hash",
+        "source_crs"
+      ],
+      "properties": {
+        "parcel_geometry": { "type": "object" },
+        "geometry_id": { "type": "string" },
+        "geometry_reference": { "type": "string" },
+        "geometry_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_crs": { "const": "EPSG:4326" }
+      }
+    },
+    "evidence_invalidation_required": { "type": "boolean" },
+    "previous_geometry_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "request_id",
+        "retrieved_at",
+        "source_crs",
+        "normalized_crs"
+      ],
+      "properties": {
+        "source": { "type": ["string", "null"] },
+        "provider": { "type": "string" },
+        "request_id": { "type": "string" },
+        "reference_id": { "type": ["string", "null"] },
+        "retrieved_at": { "type": ["string", "null"] },
+        "source_crs": { "type": ["string", "null"] },
+        "normalized_crs": { "type": ["string", "null"] },
+        "confidence": { "type": ["number", "null"] },
+        "status": { "type": ["string", "null"] }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" },
+          "path": { "type": ["string", "null"] }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "parcel_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "label",
+        "parcel_geometry",
+        "source_crs",
+        "normalized_crs",
+        "geometry_hash",
+        "confidence",
+        "provenance",
+        "limitations",
+        "attributes"
+      ],
+      "properties": {
+        "candidate_id": { "type": "string" },
+        "label": { "type": "string" },
+        "parcel_geometry": { "type": "object" },
+        "source_crs": { "type": "string" },
+        "normalized_crs": { "type": ["string", "null"] },
+        "geometry_hash": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "confidence": { "type": ["number", "null"] },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "limitations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "attributes": {
+          "type": "object",
+          "description": "Soft labels only; never verified title/APN/zoning/access by this adapter alone",
+          "additionalProperties": true
+        },
+        "validation_status": {
+          "enum": ["PENDING", "VALID", "INVALID", null]
+        },
+        "validation_errors": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

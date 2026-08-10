@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/mireye_normalized_context.schema.json",
+  "title": "RangeMatch Normalized Mireye Context",
+  "description": "Normalized envelope for PROPERTY_DILIGENCE_CONTEXT, POINT_LAND_CONTEXT, and POINT_HAZARD_CONTEXT. Non-canonical for parcel Land Facts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "context_id",
+    "context_type",
+    "adapter_id",
+    "adapter_version",
+    "request",
+    "response_status",
+    "location",
+    "authority",
+    "fields",
+    "partial_failures",
+    "provenance",
+    "factor_usage_refs",
+    "limitations"
+  ],
+  "properties": {
+    "context_id": { "type": "string", "minLength": 1 },
+    "context_type": {
+      "enum": [
+        "PROPERTY_DILIGENCE_CONTEXT",
+        "POINT_LAND_CONTEXT",
+        "POINT_HAZARD_CONTEXT"
+      ]
+    },
+    "adapter_id": { "const": "MIREYE_UNIFIED_CONTEXT_ADAPTER" },
+    "adapter_version": { "type": "string" },
+    "request": {
+      "type": "object",
+      "required": [
+        "endpoint",
+        "preset",
+        "explicitly_requested_fields",
+        "requested_location",
+        "request_hash"
+      ],
+      "properties": {
+        "endpoint": { "type": "string" },
+        "preset": { "type": ["string", "null"] },
+        "explicitly_requested_fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "requested_location": { "type": "object" },
+        "request_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "response_status": {
+      "type": "object",
+      "required": ["status", "fetched_at"],
+      "properties": {
+        "status": { "enum": ["COMPLETE", "PARTIAL", "FAILED"] },
+        "fetched_at": { "type": ["string", "null"] }
+      }
+    },
+    "location": {
+      "type": "object",
+      "required": ["lat", "lng", "spatial_semantics", "point_role"],
+      "properties": {
+        "lat": { "type": ["number", "null"] },
+        "lng": { "type": ["number", "null"] },
+        "spatial_semantics": { "const": "POINT" },
+        "point_role": {
+          "enum": [
+            "PARCEL_CENTROID_QA",
+            "USER_SUPPLIED_POINT",
+            "ADDRESS_RESOLVED_POINT"
+          ]
+        },
+        "parcel_geometry_hash": { "type": ["string", "null"] }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": ["canonical_for_parcel_facts", "permitted_uses"],
+      "properties": {
+        "canonical_for_parcel_facts": { "const": false },
+        "permitted_uses": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "POINT_QA",
+              "FAST_CONTEXT",
+              "CANDIDATE_DISCOVERY",
+              "DILIGENCE_TRIGGER",
+              "JURISDICTION_CONTEXT"
+            ]
+          }
+        }
+      }
+    },
+    "fields": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/normalized_field" }
+    },
+    "resolution": { "type": ["object", "null"] },
+    "parcel_candidate": { "type": ["object", "null"] },
+    "partial_failures": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/partial_failure" }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "raw_response_hash",
+        "request_hash",
+        "raw_artifact_reference",
+        "api_base_url",
+        "api_or_catalog_version",
+        "adapter_version"
+      ],
+      "properties": {
+        "raw_response_hash": { "type": "string" },
+        "request_hash": { "type": "string" },
+        "raw_artifact_reference": { "type": ["string", "null"] },
+        "api_base_url": { "type": ["string", "null"] },
+        "api_or_catalog_version": { "type": ["string", "null"] },
+        "adapter_version": { "type": "string" }
+      }
+    },
+    "factor_usage_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["factor_id", "field_id", "use", "context_id"],
+        "properties": {
+          "factor_id": { "type": "string" },
+          "field_id": { "type": "string" },
+          "use": { "type": "string" },
+          "context_id": { "type": "string" }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "normalized_field": {
+      "type": "object",
+      "required": [
+        "field_id",
+        "value",
+        "unit",
+        "source",
+        "source_url",
+        "confidence",
+        "dataset_vintage",
+        "fetched_at",
+        "ttl_seconds",
+        "notes",
+        "raw_field_hash"
+      ],
+      "properties": {
+        "field_id": { "type": "string" },
+        "value": {},
+        "unit": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] },
+        "source_url": { "type": ["string", "null"] },
+        "confidence": { "type": ["string", "number", "null"] },
+        "dataset_vintage": { "type": ["string", "number", "null"] },
+        "fetched_at": { "type": ["string", "null"] },
+        "ttl_seconds": { "type": ["integer", "number", "null"] },
+        "notes": { "type": ["string", "null"] },
+        "raw_field_hash": { "type": "string" }
+      }
+    },
+    "partial_failure": {
+      "type": "object",
+      "required": [
+        "field_id",
+        "source",
+        "error_code",
+        "message",
+        "retryable",
+        "normalized_effect",
+        "raw_failure_hash"
+      ],
+      "properties": {
+        "field_id": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] },
+        "error_code": { "type": ["string", "null"] },
+        "message": { "type": ["string", "null"] },
+        "retryable": { "type": "boolean" },
+        "normalized_effect": { "const": "UNKNOWN" },
+        "raw_failure_hash": { "type": "string" }
+      }
+    }
+  }
+}

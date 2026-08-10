@@ -1,12 +1,158 @@
 # RangeMatch Agent 完整建设步骤清单
 
-> 文档状态：Canonical（项目基准文档）  
-> 最后更新：2026-08-08  
-> 产品数据范围：United States（Mireye 当前覆盖）  
-> Initial validation scope：Selected U.S. regions and reference cases  
+> 文档状态：Canonical（项目基准文档）
+> 最后更新：2026-08-08
+> 产品数据范围：United States（Mireye 当前覆盖）
+> Initial validation scope：Selected U.S. regions and reference cases
 > Operation Profiles：Cow-Calf Operation、Sheep Grazing
 
 > 当前执行主线：只建设比赛所需的最小闭环，不以完成全部 Phase 为 Demo 前置条件。完整 Phase 清单是长期建设地图，而不是必须串行完成的发布计划。
+
+## 0. 当前产品与工作流（项目负责人首页）
+
+### 0.1 最终产品定义
+
+> **RangeMatch 是一个受约束的农业土地尽调与匹配 Agent：Mireye 快速读取物理世界，专业开放数据补全 parcel facts，固定农业知识和确定性引擎完成牛羊匹配，LLM 负责理解用户、规划调查、调用工具、检查动态法规，并向买家解释下一步行动。**
+
+当前比赛原型每次只评估一个美国 parcel，不提供 batch search、portfolio ranking、regional site discovery 或 Mireye ICP Finder。
+
+### 0.2 用户模式
+
+#### Goal-directed
+
+用户指定当前支持的目标经营方式，例如 Cow-Calf。Planner 优先调查和展示用户选定的 Profile，但 Sheep 仍可作为 peer Profile 运行。用户意图只改变调查与展示顺序，不改变科学规则、数据标准或 Engine 判定。
+
+#### Discovery
+
+用户不指定经营方式。系统对 Cow-Calf 和 Sheep 进行平级评估，并必须说明结论仅限于当前支持的 Profiles；不得声称发现土地的客观最佳用途。
+
+### 0.3 当前完整 Agent 工作流
+
+```text
+1. 用户通过地址或地图坐标定位土地，并显式确认 exactly one parcel polygon
+2. LLM Intent Parser 将自然语言转成结构化意图
+3. 解析并绑定 exactly one parcel，生成 geometry_hash
+4. Deterministic Planner 生成受控调查 DAG
+5. Mireye Property / Land / Hazards 提供 point/diligence context
+6. Planner Executor 运行批准的 F01–F08 数据路径
+7. 组装 Normalized Land Profile
+8. Deterministic Engine 运行 Cow-Calf / Sheep Profiles
+9. 生成 Unified Output + 完整参数/证据表
+10. Public Diligence Agent 检索当前官方政策与尽调信息并保留引用
+11. LLM Buyer Report Generator 生成人类可读报告
+12. Deterministic Report Validator 核查数字、标签、引用和 unknowns
+13. Dashboard + Readable Report + Evidence Appendix 展示结果
+```
+
+当前 Factor 执行是依赖 DAG，不是按编号串行：
+
+```text
+Resolve / validate geometry
+├── Mireye Property / Land / Hazards contexts
+└── F06 geometry gate
+    ├── F01 Topography
+    ├── F02 Herbaceous Resource ──→ F08 reuse same RAP coverV3
+    ├── F03 Livestock Water
+    ├── F04 Soil / Wetness / Ecological Site
+    ├── F05 Climate / Drought
+    └── F07 Road / Physical Access
+```
+
+报告和知识顺序始终保持 `F01 → F08`，不受执行完成顺序影响。
+
+### 0.4 Mireye 与 F01–F08 的分工
+
+```text
+Mireye
+→ parcel/jurisdiction 线索、point-level land context、hazard triggers、
+  provenance 与 partial failures
+
+F01–F08
+→ parcel-wide、版本化、可复现的农业土地调查合同
+
+Matching Engine
+→ Factor signals、Operation labels、unknowns、constraints 与 diligence
+```
+
+Mireye point context 可被 F01/F02/F03/F04/F05/F08 引用作为 QA、快速背景或候选发现，但不得未经批准提升为 parcel-canonical Land Fact。F06 来自 geometry；F07 v0.1 来自 TIGER/Line。
+
+Mireye live parcel lookup 与 Property/Land/Hazard context 已在干净网络完成验证。历史 SafeBrowse/TLS 拦截仍保留为 incident record；未来任何外部失败仍必须可见、fail closed，且不得静默替换为 fixture。
+
+### 0.5 LLM 权限边界
+
+```yaml
+llm_can:
+  - parse_user_intent
+  - explain_unified_output
+  - generate_buyer_readable_report
+  - investigate_current_official_regulations
+  - propose_reviewed_diligence_actions
+
+llm_cannot:
+  - invent_or_modify_land_facts
+  - create_factor_signals
+  - create_cow_sheep_ranking
+  - change_engine_decision_labels
+  - invent_thresholds_or_scores
+  - promote_unknown_to_known
+  - give_final_legal_conclusions
+  - override_the_matching_engine
+```
+
+当前 Planner、Executor、Matching Engine 和 Unified Output 均为确定性实现。LLM 已用于受约束的 Intent Parsing 与 Buyer Report；Public Diligence Agent 可检索当前官方来源。两者都不进入 Match 裁决。
+
+### 0.6 最终交付的两类报告
+
+#### Buyer-Readable Report
+
+由 LLM 根据 Unified Output 生成，并经 Validator 审核。当前买家报告按“结论 → parcel-specific facts → Cow/Sheep evidence comparison → top diligence actions → current official guidance → methodology”组织；不把系统字段或重复免责声明当作主要内容。
+
+#### Evidence & Parameter Appendix
+
+由程序确定性生成，保存 F01–F08 的全部参数、单位、source、coverage、applicability、provenance、limitations、unknowns、规则和版本。LLM 报告中的数字和事实引用必须能反向定位到该附录。
+
+### 0.7 当前完成状态
+
+```yaml
+completed:
+  factor_scope: F01_TO_F08_CLOSED
+  matching_engine: true
+  unified_output_contract: true
+  executable_schema_and_projection: true
+  planner_dependency_dag: true
+  planner_executor: true
+  mireye_live_parcel_and_context_paths: true
+  one_parcel_api: true
+  constrained_llm_intent_and_buyer_report: true
+  deterministic_report_validator: true
+  public_diligence_search_agent: true
+  buyer_facing_dashboard_report_appendix: true
+  backend_test_suite: 423_PASSED
+  frontend_test_suite: 22_PASSED
+
+deferred:
+  - batch_search
+  - portfolio_ranking
+  - mireye_icp_finder
+  - f09_plus
+  - batch_and_portfolio_workflows
+```
+
+### 0.8 当前下一步
+
+```text
+Competition packaging and deployment readiness
+→ end-to-end real-parcel rehearsal
+→ demo reliability and failure-state QA
+→ Docker / Agent Skill / submission package
+```
+
+### 0.9 文档阅读规则
+
+- 本节是当前产品、进度和下一步的权威首页。
+- `MVP_SPEC.md`、`PRODUCT_PROTOTYPE_SCOPE.md`、`AGENT_ORCHESTRATION_SPEC.md` 和 `F01_F08_UNIFIED_OUTPUT_CONTRACT.md` 是对应英文正式合同。
+- 下方 Phase 清单是长期建设地图，未勾选项不代表比赛原型当前缺陷。
+- 下方科学审核记录保留历史审计价值；若与本节状态冲突，以本节及对应英文 freeze/contract 文档为准，并应修正过期 checklist。
 
 ### 文档语言与提交规范
 
@@ -121,15 +267,28 @@
 - [x] **F07 first-stage audit APPROVED_V0_1_FOR_IMPLEMENTATION**：人工 corrections 已锁定（TIGER 2025 All Roads canonical；Edges fallback 分版；OSM DEFER；county coverage；INTERSECTS/TOUCHES；tie-break）。
 - [x] **F07 implementation v0.1**：`src/rangematch/f07_derivation.py` + `src/rangematch/f07_tiger_adapter.py` + engine/demo wiring；跨县 TIGER 2025 All Roads adapter；CPER live gate `LIVE_VERIFIED`；county coverage PARTIAL/UNKNOWN 不静默测量；INTERSECTS/TOUCHES；distance→LINEARID tie-break；OSM/Edges 未启用；`ranking_effect: NONE`；可执行 suite `tests/test_f07_derivation.py`。
 - [x] **F07 freeze / demo gate PASSED**：`docs/F07_FREEZE_GATE_RESULTS.md`；`f07_freeze_status: FROZEN_V0_1`。
+- [x] **F07 confirmed-parcel runtime integration**：one-parcel LIVE workflow 调用已冻结 TIGER/Line 2025 All Roads adapter；大体积 road collection 仅留在 cache，Land Profile 只接收 deterministic F07 派生结果；单 Factor 失败独立降级。CPER live investigation gate：county coverage complete、54 mapped features、`INTERSECTS`、nearest `0.0 m`、`ranking_effect: NONE`；Cow/Sheep 仍 peer `HOLD`。
+- [x] **F03/F04 confirmed-parcel runtime integration**：F03 通过 USGS NHDPlus HR 建立 mapped-candidate inventory 与 deterministic max-3 review queue；未完成 provenance-complete imagery review 时 `remotely_supported=0`，`field_verified=0`，不把 NHD 映射对象当可用牲畜水源。F04 通过 USDA-NRCS SDA tabular + WFS parcel intersection 生成 soil/wetness/site context，EDIT live access 未审计时保持 UNKNOWN。完整 CPER live gate 无 Factor-local failure：F03 `MAPPED_CANDIDATES_ONLY / NEEDS_VERIFICATION`；F04 coverage complete、`PARCEL_COMPLETE / CONTEXT_DEPENDENT`；investigation `COMPLETED`；Cow/Sheep 仍 `HOLD`，ranking prohibited。
+- [x] **One-parcel product acceptance**：真实 React UI → LIVE Mireye coordinate lookup → explicit parcel confirmation → DISCOVERY → F01–F08 → Engine → Unified Output → validated buyer narrative → Evidence/trace 全流程通过；详见 `docs/ONE_PARCEL_PRODUCT_ACCEPTANCE_2026-08-08.md`。验收中修复 UI 未传 `allow_network` / 固定 `BLOCKED_EXTERNAL` 的 live wiring，并将 F03 trace tool 诚实重命名为 `adapter.nhd_water_candidates`。Backend `409 passed`；frontend `20 passed`。下一步锁定为 async investigation job/progress，不改 Factor science。
 - [x] **F08 `FROZEN_V0_1`**：data-reuse `PASSED`；全量 `161 passed`；**Demo Factor scope CLOSED**；F09 未授权。
 - [x] **阶段切换**：Product Prototype + Agent Orchestration；见 `docs/AGENT_ORCHESTRATION_SPEC.md`。
+- [x] **统一输出合同**：`docs/F01_F08_UNIFIED_OUTPUT_CONTRACT.md`（`RANGEMATCH_UNIFIED_OUTPUT@0.1.0`）；可执行 JSON Schema / typed projection 待授权。
 - [x] **产品交互边界**：Competition prototype 每次只评估一个 parcel；不做 batch search、portfolio ranking、regional site discovery 或 ICP Finder。
 - [x] **用户模式锁定**：Goal-directed 仅按用户意图优先调查选定 Profile；Discovery 对 Cow-Calf / Sheep 平级评估。
 - [x] **Mireye prototype workflows**：Property Diligence / lookup、Land Read、Hazards Read；均受 point/diligence semantics、provenance 与 partial-failure gate 约束。
 - [x] F08 implementation and freeze：`FROZEN_V0_1`；data-reuse gate passed；full suite `161 passed`。
-- [ ] Product Prototype + Agent Orchestration（F01–F08 scope closed；按 AGENT_ORCHESTRATION_SPEC）。
+- [ ] Product Prototype + Agent Orchestration（F01–F08 scope closed；按 AGENT_ORCHESTRATION_SPEC + UNIFIED_OUTPUT_CONTRACT）。
+- [x] Executable unified output schema + typed projection（`unified_output.py` + JSON Schema + CPER golden）；不改 Factor 科学规则。
+- [x] Packaging strategy locked: Agent runtime first, Skill/submission last; no premature monorepo split (`docs/PACKAGING_AND_DELIVERY_STRATEGY.md`)。
+- [x] Planner routing stub (dependency DAG)：`planner.py` + `tool_registry.py` + `PLANNER_ROUTING_SPEC.md` + Mireye adapter contracts；plan-only，无 live network。
+- [x] Unified Mireye Context Adapter（offline）：`mireye_adapter.py` + schema + field registry + fixtures/tests；不改 F01–F08 科学。
+- [x] Planner executor（fixture-backed）：`planner_executor.py` + `tool_runners.py` + `PLANNER_EXECUTOR_SPEC.md`；无 live network；Mireye 可为 fixture success 或可见 `BLOCKED_EXTERNAL`。
+- [x] One-parcel API prototype：`api.py` + `ONE_PARCEL_API_SPEC.md`；fixture / existing Land Profile / parcel resolution。
+- [x] Parcel Resolution contract + FIXTURE resolver + API：`parcel_resolution.py` + store + `/v1/parcel-resolutions*`；LIVE `NOT_CONFIGURED`；无 map library。
 - [ ] F02 raster coverage upgrade：`DEFERRED_FOR_DEMO`；demo 后重启；现有 `COVERAGE_UNQUANTIFIED` 行为保持不变。
-- [ ] 修复 Mireye SSL 后仅重跑 point QA，不重跑 NOAA/SDA/RAP/NHD canonical 路径。
+- [ ] 修复 Mireye SSL / SafeBrowse 后仅重跑 point QA / Mireye live gate，不重跑 NOAA/SDA/RAP/NHD canonical 路径。
+- [x] Buyer-facing UI on one-parcel API（仍不优先 Docker/Skill）。
+- [x] Map UI confirmation on parcel-resolution API（MapLibre GL JS 2D；无 Mapbox token / Cesium / 3D）。
 
 ## 1. 系统原则
 
@@ -219,7 +378,9 @@ MVP 完成时，用户能够提供一块美国土地和可选的目标经营方�
 - 为每项结论提供规则和数据来源追踪。
 - 在相同输入和版本下产生相同的结构化判断。
 
-## 3. 分阶段建设清单
+## 3. 长期分阶段建设地图与历史审计清单
+
+> 本节保留完整长期路线和历史完成轨迹，不是当前比赛原型必须依次执行的待办列表。当前工作以第 0 节为准。
 
 ### Phase 0 — 锁定 MVP 与决策边界
 
@@ -589,7 +750,9 @@ Decision + evidence + unknowns + next diligence
 - Reviewer or provenance
 - Change notes
 
-## 6. 第一轮待办事项
+## 6. 历史第一轮待办事项与里程碑记录
+
+> 本节记录项目早期建设顺序。它不再表示当前下一步；当前下一步见第 0.8 节。
 
 - [ ] 创建项目目录与基础技术架构。
 - [ ] 将本文档登记为项目的 canonical build plan。
@@ -608,7 +771,35 @@ Decision + evidence + unknowns + next diligence
 - [ ] 为原型建立 golden tests。
 - [ ] 再接入 LLM 生成受约束的调查解释。
 
-### 当前阶段状态：Demo Factor scope CLOSED（F01–F08）；F08 FROZEN_V0_1；下一阶段 Product Prototype + Agent Orchestration；F09 NOT_AUTHORIZED
+### 当前阶段状态：端到端比赛原型已完成；进入 Packaging / Deployment Readiness；F09 NOT_AUTHORIZED
+
+```yaml
+backend_tests: 423_PASSED
+ui_tests: 22_PASSED
+llm_intent_and_buyer_report: IMPLEMENTED
+report_validator: HARDENED_WITH_ADVERSARIAL_TESTS
+deterministic_ui_fallback: IMPLEMENTED
+parcel_resolution_contract: IMPLEMENTED
+parcel_resolution_api: IMPLEMENTED_FIXTURE_AND_LIVE
+parcel_map_ui: IMPLEMENTED_MAPLIBRE_2D
+mireye_live_parcel_resolver_contract: DOCUMENTED
+mireye_lookup_parcel_adapter: IMPLEMENTED_FIXTURE_AND_LIVE
+parcel_resolver_live_http: LIVE_VERIFIED_ON_CLEAN_NETWORK
+public_diligence_search: IMPLEMENTED_WITH_OFFICIAL_SOURCE_CITATIONS
+buyer_report_v2: IMPLEMENTED_DASHBOARD_READABLE_REPORT_APPENDIX
+next_slice: COMPETITION_PACKAGING_AND_DEPLOYMENT_READINESS
+engine_behavior: HOLD_ONLY_NO_APPROVED_RANKING
+```
+
+Governance note:
+
+```text
+Regrid licensing answers do NOT block competition Demo.
+They only block long-term commercial cache / redistribution / owner PII display.
+Catalog compatibility gate: IMPLEMENTED (offline fixture + gated LIVE fetch).
+Lookup HTTP transport: IMPLEMENTED (allow_network gated; injectable for tests).
+Historical SafeBrowse interception remains documented; current clean-network live path is verified. Any recurrence must remain a visible `BLOCKED_EXTERNAL` state.
+```
 
 Demo priority (product owner):
 
@@ -624,9 +815,9 @@ F03 complete
 - F02 coverage upgrade: **DEFERRED_FOR_DEMO** — preserve existing limitations/runtime; do not deepen before demo
 - F06 Parcel Configuration: **FROZEN_V0_1** — `docs/F06_FREEZE_GATE_RESULTS.md`
 - F07: **FROZEN_V0_1** — `docs/F07_FREEZE_GATE_RESULTS.md`; live gate `LIVE_VERIFIED`
-- F08: **AUTHORIZED_FOR_FIRST_STAGE_AUDIT** — audit package drafted; implementation not authorized
+- F08: **FROZEN_V0_1** — data-reuse gate passed；Demo Factor scope CLOSED
 
-F08 first-stage audit artifacts:
+F08 retained audit and freeze artifacts:
 
 - [`F08_WOODY_SHRUB_ATOMICITY_AND_SOURCE_AUDIT.md`](./F08_WOODY_SHRUB_ATOMICITY_AND_SOURCE_AUDIT.md)
 - [`F08_DATA_SOURCE_AND_MIREYE_AUDIT.yaml`](./F08_DATA_SOURCE_AND_MIREYE_AUDIT.yaml)
@@ -641,9 +832,9 @@ F08 checklist:
 - [x] Shared F02/F08 RAP acquisition/coverage design drafted
 - [x] Atomic vs derived variables decided; browse/obstruction rejected; spatial/temporal change deferred
 - [x] Data-quality deterministic rules drafted (`CONTEXT_DEPENDENT` / `NEEDS_VERIFICATION` / `UNKNOWN`; `ranking_effect: NONE`)
-- [x] Golden-test contract drafted (not yet executable)
-- [ ] Human review of first-stage audit package
-- [ ] Implementation code — blocked until audit approval
+- [x] Golden-test contract drafted and executable
+- [x] Human review of first-stage audit package — PASSED
+- [x] Implementation code and freeze — `FROZEN_V0_1`
 - [ ] F09+ — blocked until after Demo
 
 F07 artifacts:
@@ -698,6 +889,26 @@ F06 checklist:
 - [x] F07 implementation — IMPLEMENTED_V0_1
 - [x] F07 freeze / demo gate — PASSED (`FROZEN_V0_1`)
 - [x] F08 freeze gate — PASSED; AGENT_ORCHESTRATION_SPEC drafted; no F09
+- [x] F01–F08 unified output contract drafted (`F01_F08_UNIFIED_OUTPUT_CONTRACT.md`)
+- [x] Executable unified output schema + typed projection (no Factor science changes)
+- [x] Planner DAG stub against unified output stages (assemble→evaluate→project→explain)
+- [x] Unified Mireye Context Adapter offline slice (still no Factor science changes)
+- [x] Planner executor fixture-backed slice；随后接入 controlled live paths（未改 Factor science）
+- [x] One-parcel API orchestration on top of fixture executor
+- [x] Constrained LLM Intent Parser
+- [x] Constrained LLM Buyer Report Generator
+- [x] Deterministic Report Validator, including adversarial grounding tests
+- [x] Buyer-facing Dashboard + Readable Report + Evidence Appendix
+- [x] Address/coordinate parcel resolution and explicit 2D boundary confirmation
+- [x] Async one-parcel investigation job + truthful Planner trace progress UI
+- [x] Async acceptance for single-process demo (`ASYNC_INVESTIGATION_JOB_ACCEPTANCE_2026-08-08.md`)
+- [x] SafeStructure-inspired cohesive intake → map confirmation → mode selection → Agent progress UX (`design-qa.md` passed)
+- [x] Buyer report visual hierarchy aligned to the same product system: decision-first hero, report navigation, buyer narrative, peer operation cards, and collapsed technical evidence (`design-qa.md` passed)
+- [ ] Durable shared investigation store / job queue for multi-worker deployment
+- [x] Controlled live OpenAI Buyer Report acceptance gate on public CPER fixture (`OPENAI_LIVE_GATE_RESULTS_2026-08-08.md`); product-owner authorization recorded and backend-configured live narrative enabled
+- [x] Diligence Search Agent v0.1: bounded public-source topics, .gov/.edu source gate, Responses API web search, citations, fixture/API tests, and live Weld County gate; side branch only with `effect_on_engine: NONE`
+- [x] Diligence Search UI integration: automatic post-analysis run, visible Public Diligence Agent progress, buyer-readable current-guidance section, clickable source cards, and fail-open report behavior
+- [ ] Deployment packaging and production environment validation
 - [x] F08 implementation and freeze — `FROZEN_V0_1`; data-reuse gate passed; no F09+ work is permitted before the Demo
 
 F03 closure (retained):

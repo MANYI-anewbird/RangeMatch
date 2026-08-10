@@ -6,6 +6,8 @@
 > Initial validation scope: Selected U.S. environments and reference cases
 > Intended use: Competition MVP and first executable vertical slice
 
+> Current implementation and report status: see `CURRENT_SYSTEM_BASELINE.md`. This specification defines product/scientific scope; later implementation milestones do not reopen its frozen rules.
+
 ## 1. Product Definition
 
 RangeMatch is a constrained agricultural-land decision agent. Fixed, reviewed, and versioned agricultural knowledge defines the rules; physical-world data supplies land facts; deterministic and explainable logic evaluates the match; and the LLM interprets intent, plans and executes the investigation, and explains results without changing the science.

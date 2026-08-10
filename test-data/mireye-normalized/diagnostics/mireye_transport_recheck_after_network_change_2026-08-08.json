@@ -1,0 +1,55 @@
+{
+  "base_url_validation": {
+    "duplicate_scheme": false,
+    "endswith_slash": false,
+    "exact_official_origin": true,
+    "expected": "https://api.mireye.com",
+    "fragment_present": false,
+    "has_userinfo": false,
+    "hostname": "api.mireye.com",
+    "ok": true,
+    "path": "",
+    "port": null,
+    "query_present": false,
+    "scheme": "https"
+  },
+  "classification": "TRANSPORT_OK",
+  "dns": {
+    "ok": true,
+    "records": [
+      {
+        "addr": "66.241.124.184",
+        "family": "IPv4"
+      }
+    ]
+  },
+  "https_health_no_auth": {
+    "bypass_env_proxy": true,
+    "http_status": 200,
+    "ok": true
+  },
+  "key_present": true,
+  "plaintext_http_probe": {
+    "error_class": "ConnectionResetError",
+    "host": "api.mireye.com",
+    "looks_like_http": false,
+    "message": "[Errno 54] Connection reset by peer",
+    "ok": false,
+    "port": 443,
+    "safebrowse_redirect": false,
+    "status_line": null
+  },
+  "proxy_environment": {
+    "NO_PROXY": null,
+    "proxies": {}
+  },
+  "ssl": {
+    "certifi_used": true,
+    "openssl_version": "OpenSSL 3.0.15 3 Sep 2024"
+  },
+  "target_host": "api.mireye.com",
+  "tls_direct": {
+    "ok": true,
+    "version": "TLSv1.3"
+  }
+}

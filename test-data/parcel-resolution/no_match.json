@@ -1,0 +1,24 @@
+{
+  "scenario_id": "no_match",
+  "raw_address": "999 Missing Parcel Ln, Nowhere, CO 80000",
+  "normalized_address": "999 Missing Parcel Ln, Nowhere, CO 80000",
+  "geocode_outcome": "OK",
+  "parcel_lookup_outcome": "NO_MATCH",
+  "geocode": {
+    "point": {
+      "type": "Point",
+      "coordinates": [
+        -104.895,
+        40.495
+      ]
+    },
+    "confidence": 0.88,
+    "provider": "FIXTURE_GEOCODER",
+    "request_id": "geocode_fixture_003",
+    "retrieved_at": "2026-08-08T12:00:00+00:00",
+    "limitations": [
+      "Geocode point is not a parcel boundary."
+    ]
+  },
+  "candidates": []
+}

@@ -1,0 +1,21 @@
+{
+  "intent_status": "NEEDS_CLARIFICATION",
+  "rejection_code": null,
+  "mode": null,
+  "intended_operation": null,
+  "planned_actions": [],
+  "parcel_input_reference": {"kind": "none", "value": null},
+  "clarification_questions": [
+    "That operation is not supported yet. Choose Cow-Calf or Sheep, or run Discovery for both."
+  ],
+  "supported_operations_note": "Supported operations are COW_CALF_OPERATION and SHEEP_GRAZING only.",
+  "parser_provenance": {
+    "provider": "FIXTURE",
+    "model_id": "fixture",
+    "prompt_version": "RANGEMATCH_INTENT_PARSER@0.1.0",
+    "generated_at": "2026-08-08T12:00:00Z",
+    "provider_status": "FIXTURE",
+    "ui_overrides_applied": false
+  },
+  "prohibited_inferences_applied": true
+}

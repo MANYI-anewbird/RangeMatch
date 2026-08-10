@@ -9,9 +9,27 @@ mireye/*token*
 
 # Local live-gate tooling and large NOAA NetCDF cache.
 .venv-livegate/
+.venv/
 test-data/live-results/cper/cache/
 test-data/live-results/cper/tiger2025_cache/
+
+# Buyer UI
+web/node_modules/
+web/dist/
+web/tsconfig.tsbuildinfo
 
 
 .DS_Store
 **/.DS_Store
+
+# Python build/test artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Frontend build/test artifacts
+web/coverage/
+web/vite.config.ts.timestamp-*.mjs

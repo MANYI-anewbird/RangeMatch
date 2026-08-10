@@ -1,0 +1,13 @@
+{
+  "scenario_id": "apn_not_supported",
+  "raw_address": "APN: R9999999",
+  "normalized_address": "APN: R9999999",
+  "lookup_response": {
+    "disposition": "no_match",
+    "reason": "apn_not_supported_in_v1",
+    "fetched_at": "2026-08-08T16:00:00+00:00",
+    "request_id": "mireye_lookup_apn_001",
+    "fields": {},
+    "partial_failures": []
+  }
+}

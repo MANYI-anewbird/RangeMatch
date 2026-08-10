@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/rangematch_intent.schema.json",
+  "title": "RangeMatchIntent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "intent_status",
+    "mode",
+    "intended_operation",
+    "planned_actions",
+    "parcel_input_reference",
+    "clarification_questions",
+    "parser_provenance",
+    "prohibited_inferences_applied"
+  ],
+  "properties": {
+    "intent_status": {
+      "type": "string",
+      "enum": ["PARSED", "NEEDS_CLARIFICATION", "REJECTED"]
+    },
+    "rejection_code": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "REJECTED_OUT_OF_SCOPE_BATCH",
+        "REJECTED_UNSUPPORTED_OPERATION",
+        "REJECTED_INVALID_REQUEST",
+        "REJECTED_PROHIBITED_INFERENCE"
+      ]
+    },
+    "mode": {
+      "type": ["string", "null"],
+      "enum": ["GOAL_DIRECTED", "DISCOVERY", null]
+    },
+    "intended_operation": {
+      "type": ["string", "null"],
+      "enum": ["COW_CALF_OPERATION", "SHEEP_GRAZING", null]
+    },
+    "planned_actions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "parcel_input_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": {
+        "kind": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "address",
+            "parcel_geometry",
+            "existing_land_profile_reference",
+            "none"
+          ]
+        },
+        "value": {
+          "type": ["string", "object", "null"]
+        }
+      }
+    },
+    "clarification_questions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "supported_operations_note": {
+      "type": "string"
+    },
+    "parser_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model_id",
+        "prompt_version",
+        "generated_at",
+        "provider_status"
+      ],
+      "properties": {
+        "provider": { "type": "string" },
+        "model_id": { "type": ["string", "null"] },
+        "prompt_version": { "type": "string" },
+        "generated_at": { "type": "string" },
+        "provider_status": {
+          "type": "string",
+          "enum": [
+            "OK",
+            "FIXTURE",
+            "NOT_CONFIGURED",
+            "FAILED_EXTERNAL"
+          ]
+        },
+        "ui_overrides_applied": { "type": "boolean" }
+      }
+    },
+    "prohibited_inferences_applied": {
+      "type": "boolean",
+      "const": true
+    }
+  }
+}

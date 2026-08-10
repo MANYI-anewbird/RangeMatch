@@ -1,0 +1,54 @@
+{
+  "scenario_id": "clarify_with_parcels",
+  "raw_address": "302 Split Mireye Rd, Weld County, CO 80701",
+  "normalized_address": "302 Split Mireye Rd, Weld County, CO 80701",
+  "lookup_response": {
+    "disposition": "clarify",
+    "parcel_grade": null,
+    "confidence": 0.55,
+    "normalized_address": "302 Split Mireye Rd, Weld County, CO 80701",
+    "accuracy_type": "rooftop",
+    "fetched_at": "2026-08-08T16:00:00+00:00",
+    "request_id": "mireye_lookup_clarify_001",
+    "lat": 40.495,
+    "lng": -104.885,
+    "candidates": [
+      {
+        "label": "West tract",
+        "parcel_id": "MIREYE-CLARIFY-A",
+        "owner_name": "REDACT_ME_A",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-104.9, 40.5],
+              [-104.89, 40.5],
+              [-104.89, 40.49],
+              [-104.9, 40.49],
+              [-104.9, 40.5]
+            ]
+          ]
+        }
+      },
+      {
+        "label": "East tract",
+        "parcel_id": "MIREYE-CLARIFY-B",
+        "owner_name": "REDACT_ME_B",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-104.88, 40.5],
+              [-104.87, 40.5],
+              [-104.87, 40.49],
+              [-104.88, 40.49],
+              [-104.88, 40.5]
+            ]
+          ]
+        }
+      }
+    ],
+    "fields": {},
+    "partial_failures": []
+  }
+}

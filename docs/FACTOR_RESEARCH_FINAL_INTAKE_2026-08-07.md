@@ -1,5 +1,7 @@
 # Final Factor Research Intake — 2026-08-07
 
+> **Historical research intake.** The candidate numbering and Goat references below predate the frozen demo ontology. Active runtime scope is Cow-Calf + Sheep across F01–F08 as defined by `DEMO_FACTOR_SCOPE.md`; this file is evidence-backup provenance only and cannot override active registries or rules.
+
 > Material: `Executive_Summary_US_Grazing_Factors_Final.pdf`  
 > Author metadata: ChatGPT Deep Research  
 > Language: English  

@@ -1,0 +1,87 @@
+registry_id: RANGEMATCH_MIREYE_FIELD_USAGE
+version: 0.1.0
+status: ACTIVE_PROTOTYPE
+adapter_id: MIREYE_UNIFIED_CONTEXT_ADAPTER
+rule: >-
+  Factors reference context_id + field_id. Do not copy Mireye values into
+  multiple Factor Land Facts. Never average with canonical parcel facts.
+  canonical_for_parcel_facts is always false.
+
+context_presets:
+  PROPERTY_DILIGENCE_CONTEXT:
+    endpoint: /v1/lookup
+    preset: null
+  POINT_LAND_CONTEXT:
+    endpoint: /v1/fetch
+    preset: terrain
+    additional_reviewed_fields: [lcms_class, land_use_class]
+  POINT_HAZARD_CONTEXT:
+    endpoint: /v1/fetch
+    preset: flood_risk
+    additional_reviewed_fields: [tree_canopy_pct, ndvi_current]
+
+factor_usage:
+  F01_TOPOGRAPHY:
+    use: POINT_QA
+    fields:
+      - slope_degrees
+      - elevation
+      - aspect_degrees
+      - aspect_cardinal
+  F02_HERBACEOUS_RESOURCE:
+    use: FAST_CONTEXT
+    fields:
+      - lcms_class
+      - land_use_class
+  F03_LIVESTOCK_WATER:
+    use: CANDIDATE_DISCOVERY
+    fields:
+      - intersects_nhd_area
+      - nearest_flowline_name
+      - nearest_waterbody_name
+      - nearest_groundwater_well_depth_to_water_m
+      - nearest_usgs_gage_name
+      - nearest_usgs_gage_distance_m
+      - nearest_usgs_gage_daily_discharge_cfs
+      - surface_water_permanence_pct
+    prohibited_promotions:
+      - FIELD_VERIFIED
+      - usable_livestock_water_certainty
+  F04_SOIL_WETNESS_ECOLOGICAL_SITE:
+    use: POINT_QA
+    fields:
+      - soil_drainage_class
+      - soil_hydrologic_group
+      - soil_map_unit_name
+      - soil_available_water_capacity
+      - soil_ponding_frequency_class
+      - soil_restrictive_layer_depth_cm
+      - soil_restrictive_layer_kind
+  F05_CLIMATE_DROUGHT_EXPOSURE:
+    use: POINT_QA_OR_FAST_CONTEXT
+    fields:
+      - drought_category
+      - mean_annual_dry_bulb_temperature_degc
+      - days_above_32c_annual_count
+    notes:
+      - precipitable_water_annual_mean_cm is not annual rainfall; do not map to F05 precip Land Fact
+  F06_PARCEL_CONFIGURATION:
+    use: NONE
+    fields: []
+  F07_ROAD_AND_PHYSICAL_ACCESS:
+    use: NONE
+    fields: []
+    notes:
+      - No Mireye v0.1 Factor Land Fact for F07
+  F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE:
+    use: POINT_QA
+    fields:
+      - lcms_class
+      - tree_canopy_pct
+
+global_prohibitions:
+  - promote_point_to_parcel_canonical_land_fact
+  - average_mireye_with_rap_sda_noaa_tiger_dem
+  - invent_null_values
+  - store_credentials_in_artifacts_or_hashes
+  - change_factor_signals_in_this_slice

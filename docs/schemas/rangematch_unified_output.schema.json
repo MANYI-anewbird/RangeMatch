@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/rangematch_unified_output.schema.json",
+  "title": "RangeMatch Unified Output Envelope",
+  "description": "Executable schema for RANGEMATCH_UNIFIED_OUTPUT@0.1.0. Projection from Land Profile + MatchResult; does not alter Factor science.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "run_id",
+    "mode",
+    "intended_operation",
+    "planned_actions",
+    "created_at",
+    "engine_version",
+    "engine_input_hash",
+    "match_result_hash",
+    "explanation_binding_hash",
+    "parcel",
+    "mireye_context",
+    "factors",
+    "operations",
+    "cross_profile_comparison",
+    "buyer_report",
+    "dynamic_diligence_findings",
+    "unknowns",
+    "diligence_actions",
+    "constraints"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "RANGEMATCH_UNIFIED_OUTPUT@0.1.0"
+    },
+    "run_id": { "type": "string", "minLength": 1 },
+    "mode": { "enum": ["GOAL_DIRECTED", "DISCOVERY"] },
+    "intended_operation": {
+      "type": ["string", "null"],
+      "enum": ["COW_CALF_OPERATION", "SHEEP_GRAZING", null]
+    },
+    "planned_actions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional v0.1 run input. Routes dynamic diligence only; must not mutate F01–F08 or MatchResult."
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "engine_version": { "type": "string" },
+    "engine_input_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "match_result_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "explanation_binding_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "parcel": { "$ref": "#/$defs/parcel_identity" },
+    "mireye_context": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/mireye_context_item" }
+    },
+    "factors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "F01_TOPOGRAPHY",
+        "F02_HERBACEOUS_RESOURCE",
+        "F03_LIVESTOCK_WATER",
+        "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "F05_CLIMATE_DROUGHT_EXPOSURE",
+        "F06_PARCEL_CONFIGURATION",
+        "F07_ROAD_AND_PHYSICAL_ACCESS",
+        "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+      ],
+      "properties": {
+        "F01_TOPOGRAPHY": { "$ref": "#/$defs/factor_result" },
+        "F02_HERBACEOUS_RESOURCE": { "$ref": "#/$defs/factor_result" },
+        "F03_LIVESTOCK_WATER": { "$ref": "#/$defs/factor_result" },
+        "F04_SOIL_WETNESS_ECOLOGICAL_SITE": { "$ref": "#/$defs/factor_result" },
+        "F05_CLIMATE_DROUGHT_EXPOSURE": { "$ref": "#/$defs/factor_result" },
+        "F06_PARCEL_CONFIGURATION": { "$ref": "#/$defs/factor_result" },
+        "F07_ROAD_AND_PHYSICAL_ACCESS": { "$ref": "#/$defs/factor_result" },
+        "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": { "$ref": "#/$defs/factor_result" }
+      }
+    },
+    "operations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["COW_CALF_OPERATION", "SHEEP_GRAZING"],
+      "properties": {
+        "COW_CALF_OPERATION": { "$ref": "#/$defs/operation_evaluation" },
+        "SHEEP_GRAZING": { "$ref": "#/$defs/operation_evaluation" }
+      }
+    },
+    "cross_profile_comparison": {
+      "type": "object",
+      "required": ["ranking_permitted", "reason"],
+      "properties": {
+        "ranking_permitted": { "type": "boolean" },
+        "reason": { "type": "string" },
+        "numeric_score": { "type": ["number", "null"] }
+      }
+    },
+    "buyer_report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Property",
+        "Land & Resources",
+        "Resilience & Hazards",
+        "Operation Comparison",
+        "Diligence Plan"
+      ],
+      "properties": {
+        "Property": { "$ref": "#/$defs/buyer_section" },
+        "Land & Resources": { "$ref": "#/$defs/buyer_section" },
+        "Resilience & Hazards": { "$ref": "#/$defs/buyer_section" },
+        "Operation Comparison": { "$ref": "#/$defs/buyer_section" },
+        "Diligence Plan": { "$ref": "#/$defs/buyer_section" }
+      }
+    },
+    "dynamic_diligence_findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dynamic_finding" }
+    },
+    "unknowns": { "type": "array", "items": { "type": "string" } },
+    "diligence_actions": { "type": "array", "items": { "type": "string" } },
+    "constraints": {
+      "type": "object",
+      "required": [
+        "parcels_per_run",
+        "f09_authorized",
+        "batch_workflow_authorized",
+        "planned_actions_mutate_factors"
+      ],
+      "properties": {
+        "parcels_per_run": { "const": 1 },
+        "f09_authorized": { "const": false },
+        "batch_workflow_authorized": { "const": false },
+        "planned_actions_mutate_factors": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "parcel_identity": {
+      "type": "object",
+      "required": [
+        "geometry_id",
+        "geometry_hash",
+        "geometry_reference",
+        "source_crs",
+        "jurisdiction",
+        "geometry_validity"
+      ],
+      "properties": {
+        "geometry_id": { "type": ["string", "null"] },
+        "geometry_hash": { "type": ["string", "null"] },
+        "geometry_reference": { "type": ["string", "null"] },
+        "source_crs": { "type": ["string", "null"] },
+        "address": { "type": ["string", "null"] },
+        "apn": { "type": ["string", "null"] },
+        "parcel_id": { "type": ["string", "null"] },
+        "jurisdiction": { "$ref": "#/$defs/jurisdiction" },
+        "geometry_validity": { "type": "object" }
+      }
+    },
+    "jurisdiction": {
+      "type": "object",
+      "required": ["resolution_status"],
+      "properties": {
+        "resolution_status": {
+          "enum": ["RESOLVED", "PARTIAL", "UNKNOWN", "NOT_REQUESTED"]
+        },
+        "county": { "type": ["string", "null"] },
+        "state": { "type": ["string", "null"] },
+        "county_fips": { "type": ["string", "null"] },
+        "zoning": { "type": ["string", "null"] },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["normalized_status", "source_status", "details"],
+      "properties": {
+        "normalized_status": {
+          "enum": [
+            "COMPLETE",
+            "PARTIAL",
+            "UNQUANTIFIED",
+            "OUTSIDE_SCOPE",
+            "UNKNOWN",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "source_status": { "type": ["string", "null"] },
+        "details": { "type": "object" }
+      }
+    },
+    "land_fact": {
+      "type": "object",
+      "required": [
+        "variable_id",
+        "value",
+        "unit",
+        "spatial_semantics",
+        "temporal_semantics",
+        "geometry_hash",
+        "source_id",
+        "source_version",
+        "artifact_hash",
+        "derivation_algorithm_version",
+        "applicability_status",
+        "coverage",
+        "confidence_or_quality_status",
+        "limitations"
+      ],
+      "properties": {
+        "variable_id": { "type": "string" },
+        "value": {},
+        "unit": { "type": ["string", "null"] },
+        "raw_value": {},
+        "spatial_semantics": { "type": ["string", "null"] },
+        "temporal_semantics": { "type": ["string", "null"] },
+        "geometry_hash": { "type": ["string", "null"] },
+        "source_id": { "type": ["string", "null"] },
+        "source_version": { "type": ["string", "null"] },
+        "artifact_hash": { "type": ["string", "null"] },
+        "derivation_algorithm_version": { "type": ["string", "null"] },
+        "applicability_status": { "type": ["string", "null"] },
+        "coverage": { "$ref": "#/$defs/coverage" },
+        "confidence_or_quality_status": { "type": ["string", "null"] },
+        "limitations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "factor_result": {
+      "type": "object",
+      "required": [
+        "factor_id",
+        "factor_version",
+        "input_quality_state",
+        "signal",
+        "ranking_effect",
+        "land_facts",
+        "applicability",
+        "coverage",
+        "provenance",
+        "limitations",
+        "unknowns",
+        "diligence_actions",
+        "explanation_code"
+      ],
+      "properties": {
+        "factor_id": { "type": "string" },
+        "factor_version": { "type": ["string", "null"] },
+        "input_quality_state": { "type": ["string", "null"] },
+        "signal": {
+          "enum": ["CONTEXT_DEPENDENT", "NEEDS_VERIFICATION", "UNKNOWN"]
+        },
+        "ranking_effect": { "type": "string" },
+        "land_facts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/land_fact" }
+        },
+        "applicability": { "type": "object" },
+        "coverage": { "$ref": "#/$defs/coverage" },
+        "provenance": { "type": "object" },
+        "limitations": { "type": "array", "items": { "type": "string" } },
+        "unknowns": { "type": "array", "items": { "type": "string" } },
+        "diligence_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "explanation_code": { "type": ["string", "null"] },
+        "evaluation_extras": { "type": "object" }
+      }
+    },
+    "operation_evaluation": {
+      "type": "object",
+      "required": [
+        "operation_id",
+        "operation_profile_version",
+        "decision_label",
+        "factor_evaluations",
+        "hard_constraints",
+        "supporting_signals",
+        "limiting_signals",
+        "unknowns",
+        "confidence_limitation",
+        "ranking_permission"
+      ],
+      "properties": {
+        "operation_id": {
+          "enum": ["COW_CALF_OPERATION", "SHEEP_GRAZING"]
+        },
+        "operation_profile_version": { "type": ["string", "null"] },
+        "decision_label": {
+          "enum": ["ADVANCE", "REVIEW", "HOLD", "REDIRECT", "REJECT"]
+        },
+        "decision_reason": { "type": ["string", "null"] },
+        "factor_evaluations": { "type": "object" },
+        "hard_constraints": { "type": "array" },
+        "supporting_signals": { "type": "array", "items": { "type": "string" } },
+        "limiting_signals": { "type": "array", "items": { "type": "string" } },
+        "unknowns": { "type": "array", "items": { "type": "string" } },
+        "confidence_limitation": { "type": "string" },
+        "ranking_permission": { "type": "boolean" },
+        "ranking_position": { "type": ["integer", "null"] },
+        "presentation_priority": {
+          "type": ["integer", "null"],
+          "description": "UI order only; no scientific priority"
+        }
+      }
+    },
+    "buyer_section": {
+      "type": "object",
+      "required": ["section_id", "factor_ids", "highlights", "unknowns", "limitations"],
+      "properties": {
+        "section_id": { "type": "string" },
+        "factor_ids": { "type": "array", "items": { "type": "string" } },
+        "highlights": { "type": "array" },
+        "unknowns": { "type": "array", "items": { "type": "string" } },
+        "limitations": { "type": "array", "items": { "type": "string" } },
+        "diligence_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "mireye_context_types": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "mireye_context_item": {
+      "type": "object",
+      "required": [
+        "context_type",
+        "endpoint_or_preset",
+        "requested_point",
+        "disposition",
+        "fields",
+        "fetched_at",
+        "partial_failures"
+      ],
+      "properties": {
+        "context_type": {
+          "enum": [
+            "PROPERTY_DILIGENCE_CONTEXT",
+            "POINT_LAND_CONTEXT",
+            "POINT_HAZARD_CONTEXT"
+          ]
+        },
+        "endpoint_or_preset": { "type": ["string", "null"] },
+        "requested_point": { "type": ["object", "null"] },
+        "disposition": { "type": "string" },
+        "parcel_grade": { "type": ["string", "number", "null"] },
+        "fields": { "type": "object" },
+        "confidence": { "type": ["string", "number", "null"] },
+        "source_urls": { "type": "array", "items": { "type": "string" } },
+        "fetched_at": { "type": ["string", "null"] },
+        "dataset_vintage": { "type": ["string", "number", "null"] },
+        "partial_failures": { "type": "array" }
+      }
+    },
+    "dynamic_finding": {
+      "type": "object",
+      "required": [
+        "finding_id",
+        "finding_type",
+        "trigger",
+        "jurisdiction",
+        "official_sources",
+        "accessed_at",
+        "currency_status",
+        "applicability_status",
+        "limitations",
+        "professional_verification_required",
+        "disposition"
+      ],
+      "properties": {
+        "finding_id": { "type": "string" },
+        "finding_type": {
+          "enum": ["RISK_TRIGGER", "REGULATORY", "LAND_RIGHTS", "PERMIT"]
+        },
+        "trigger": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "official_sources": { "type": "array" },
+        "publication_or_effective_date": { "type": ["string", "null"] },
+        "accessed_at": { "type": "string" },
+        "currency_status": { "type": "string" },
+        "applicability_status": { "type": "string" },
+        "limitations": { "type": "array", "items": { "type": "string" } },
+        "professional_verification_required": { "type": "boolean" },
+        "disposition": {
+          "enum": [
+            "POTENTIAL_TRIGGER",
+            "NO_TRIGGER_FOUND_IN_REVIEWED_SOURCES",
+            "UNKNOWN",
+            "PROFESSIONAL_CONFIRMATION_REQUIRED"
+          ]
+        },
+        "related_planned_actions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

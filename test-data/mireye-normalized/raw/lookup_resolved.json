@@ -1,0 +1,23 @@
+{
+  "disposition": "resolved",
+  "parcel_grade": "A",
+  "confidence": "high",
+  "normalized_address": "CPER HQ Rd, Nunn, CO",
+  "precision_note": "parcel-quality geocode",
+  "fetched_at": "2026-08-07T20:00:00+00:00",
+  "lat": 40.825,
+  "lng": -104.7625,
+  "resolved_location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "source": "geocode"
+  },
+  "parcel": {
+    "parcel_id": "CPER-FIXTURE-001",
+    "jurisdiction": "Weld County, CO",
+    "zoning": "A",
+    "land_use": "Agriculture"
+  },
+  "fields": {},
+  "partial_failures": []
+}

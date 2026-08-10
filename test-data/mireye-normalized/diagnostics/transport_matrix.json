@@ -1,0 +1,58 @@
+{
+  "host": "api.mireye.com",
+  "proxies_in_process": {
+    "NO_PROXY": null
+  },
+  "dns": {
+    "ok": true,
+    "records": [
+      {
+        "family": "IPv6",
+        "addr": "2a09:8280:1::122:e682:0"
+      },
+      {
+        "family": "IPv4",
+        "addr": "66.241.124.184"
+      }
+    ]
+  },
+  "tls_direct_ipv4": {
+    "ok": false,
+    "error_class": "SSL_WRONG_VERSION_NUMBER"
+  },
+  "tls_direct_ipv6": {
+    "ok": false,
+    "error_class": "ValueError:too many values to unpack (expected 2)"
+  },
+  "curl_default": {
+    "ok": false,
+    "http_status": null,
+    "error_class": "curl_exit_35:curl: (35) Send failure: Broken pipe\n",
+    "returncode": 35
+  },
+  "curl_noproxy": {
+    "ok": false,
+    "http_status": null,
+    "error_class": "TLS_PROTOCOL_VERSION",
+    "returncode": 35
+  },
+  "python_urllib_default": {
+    "ok": false,
+    "error_class": "SSL_WRONG_VERSION_NUMBER"
+  },
+  "python_urllib_noproxy": {
+    "ok": false,
+    "error_class": "SSL_WRONG_VERSION_NUMBER"
+  },
+  "curl_ipv4_noproxy": {
+    "ok": false,
+    "http_status": null,
+    "error_class": "TLS_PROTOCOL_VERSION",
+    "returncode": 35
+  },
+  "interpreter": {
+    "executable": "/Users/hongmanyi/RangeMatch/.venv-livegate/bin/python",
+    "version": "3.13.0",
+    "openssl": "OpenSSL 3.0.15 3 Sep 2024"
+  }
+}

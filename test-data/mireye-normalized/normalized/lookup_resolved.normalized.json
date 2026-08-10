@@ -1,0 +1,81 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "authority": {
+    "canonical_for_parcel_facts": false,
+    "permitted_uses": [
+      "POINT_QA",
+      "FAST_CONTEXT",
+      "CANDIDATE_DISCOVERY",
+      "DILIGENCE_TRIGGER",
+      "JURISDICTION_CONTEXT"
+    ]
+  },
+  "context_id": "mireye_a5ccbdc7906103693ee67318",
+  "context_type": "PROPERTY_DILIGENCE_CONTEXT",
+  "factor_usage_refs": [],
+  "fields": {},
+  "limitations": [
+    "canonical_for_parcel_facts=false",
+    "point_or_diligence_context_only",
+    "do_not_average_with_parcel_land_facts",
+    "do_not_promote_to_factor_land_facts",
+    "legal_title_not_verified",
+    "zoning_legality_not_confirmed"
+  ],
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "parcel_geometry_hash": "fixture_geom_hash_cper_001",
+    "point_role": "PARCEL_CENTROID_QA",
+    "spatial_semantics": "POINT"
+  },
+  "parcel_candidate": {
+    "jurisdiction": "Weld County, CO",
+    "land_use": "Agriculture",
+    "legal_title_verified": false,
+    "parcel_id": "CPER-FIXTURE-001",
+    "zoning": "A",
+    "zoning_legality_confirmed": false
+  },
+  "partial_failures": [],
+  "provenance": {
+    "adapter_version": "0.1.0",
+    "api_base_url": "https://api.mireye.com",
+    "api_or_catalog_version": "0.14.0",
+    "raw_artifact_reference": "test-data/mireye-normalized/raw/lookup_resolved.json",
+    "raw_response_hash": "a129f52f3142072f32292eb17d154a82e0a3b2a84db7ade9aa16d4125b1baa9f",
+    "request_hash": "7753b5eb7f1877741ff1910bfaf2affdcbaca1697249e22e345969f10ae3b416"
+  },
+  "request": {
+    "endpoint": "/v1/lookup",
+    "explicitly_requested_fields": [],
+    "preset": null,
+    "request_hash": "7753b5eb7f1877741ff1910bfaf2affdcbaca1697249e22e345969f10ae3b416",
+    "requested_location": {
+      "lat": 40.825,
+      "lng": -104.7625
+    }
+  },
+  "resolution": {
+    "confidence": "high",
+    "disposition": "RESOLVED",
+    "legal_title_verified": false,
+    "normalized_address": "CPER HQ Rd, Nunn, CO",
+    "parcel_grade": "A",
+    "parcel_unavailable": null,
+    "parcel_unavailable_reason": null,
+    "precision_note": "parcel-quality geocode",
+    "reason": null,
+    "resolved_location": {
+      "lat": 40.825,
+      "lng": -104.7625,
+      "source": "geocode"
+    },
+    "zoning_legality_confirmed": false
+  },
+  "response_status": {
+    "fetched_at": "2026-08-07T20:00:00+00:00",
+    "status": "COMPLETE"
+  }
+}

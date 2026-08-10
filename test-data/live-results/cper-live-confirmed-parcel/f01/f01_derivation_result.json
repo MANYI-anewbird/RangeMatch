@@ -1,0 +1,58 @@
+{
+  "result_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95_F01_DERIVATION",
+  "derivation_spec": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+  "quality_state": "PARCEL_COMPLETE",
+  "quality_reason": "Export locked to queried 1/3 arc-second catalog item with source identifier, dates, datum, request contract, and raster hash.",
+  "processing_timestamp": "2026-08-08T19:26:26Z",
+  "geometry_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+  "geometry_sha256": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+  "source": {
+    "product": "USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM",
+    "service": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage",
+    "surface": "bare_earth",
+    "mosaic_method": "esriMosaicLockRaster",
+    "source_object_id": 4878,
+    "source_tile_name": "n41w105",
+    "source_title": "USGS 1/3 Arc Second n41w105 20260708",
+    "source_url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w105/USGS_13_n41w105.tif",
+    "source_publication_date": "20260708",
+    "vertical_datum": "North American Vertical Datum of 1988 (NAVD 88)",
+    "source_raster_sha256": "37390225c1354290adda92ae61957e8c77761385838904a6ee4251a5daded33a",
+    "source_crs": "EPSG:32613",
+    "working_crs": "EPSG:32613"
+  },
+  "coverage": {
+    "parcel_cell_count": 19683,
+    "valid_elevation_cell_count": 19683,
+    "valid_slope_cell_count": 19683,
+    "cell_area_m2": 99.55293092127714,
+    "coverage_fraction": 1.0
+  },
+  "summary": {
+    "elevation_median_m": 1649.6339111328125,
+    "slope_median_degrees": 1.891524753346898,
+    "slope_p90_degrees": 5.171279222147744,
+    "mean_eastness": -0.02168011466366132,
+    "mean_northness": -0.3322180495547544
+  },
+  "elevation_m": {
+    "minimum": 1634.078125,
+    "maximum": 1673.985595703125,
+    "mean": 1649.7070640513962,
+    "median": 1649.6339111328125,
+    "p10": 1639.638818359375,
+    "p25": 1644.0001220703125,
+    "p75": 1655.2546997070312,
+    "p90": 1658.4512451171875
+  },
+  "slope_degrees": {
+    "minimum": 0.004767179787477459,
+    "maximum": 16.100456047054053,
+    "mean": 2.4918685604978954,
+    "median": 1.891524753346898,
+    "p10": 0.4117732659953114,
+    "p25": 0.8169293667420268,
+    "p75": 3.67498538346813,
+    "p90": 5.171279222147744
+  }
+}

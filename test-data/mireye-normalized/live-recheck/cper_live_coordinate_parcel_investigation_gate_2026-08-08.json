@@ -1,0 +1,3140 @@
+{
+  "confirm": {
+    "adapter_id": "PARCEL_RESOLVER_LIVE",
+    "adapter_version": "0.1.0",
+    "candidates": [
+      {
+        "attributes": {
+          "apn": "030122000004",
+          "jurisdiction": null,
+          "owner": null,
+          "parcel_unavailable": false,
+          "zoning": "A"
+        },
+        "candidate_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+        "confidence": null,
+        "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+        "label": "030122000004",
+        "limitations": [
+          "Parcel geometry sourced via Mireye /v1/lookup (Regrid).",
+          "Owner names are redacted pending licensing confirmation.",
+          "APN/zoning/legal access/purchasability are unverified soft labels.",
+          "Geometry requires explicit user boundary confirmation."
+        ],
+        "normalized_crs": "EPSG:4326",
+        "parcel_geometry": {
+          "features": [
+            {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      -104.7579885,
+                      40.812224
+                    ],
+                    [
+                      -104.753207,
+                      40.8122025
+                    ],
+                    [
+                      -104.7531875,
+                      40.8230915
+                    ],
+                    [
+                      -104.753181,
+                      40.8267215
+                    ],
+                    [
+                      -104.7579655,
+                      40.826735
+                    ],
+                    [
+                      -104.76275,
+                      40.8267485
+                    ],
+                    [
+                      -104.7675345,
+                      40.826762
+                    ],
+                    [
+                      -104.772319,
+                      40.8267755
+                    ],
+                    [
+                      -104.7723225,
+                      40.823154
+                    ],
+                    [
+                      -104.7723265,
+                      40.8195325
+                    ],
+                    [
+                      -104.769589,
+                      40.8195225
+                    ],
+                    [
+                      -104.769535,
+                      40.819522
+                    ],
+                    [
+                      -104.7694675,
+                      40.819522
+                    ],
+                    [
+                      -104.769235,
+                      40.819521
+                    ],
+                    [
+                      -104.768976,
+                      40.81952
+                    ],
+                    [
+                      -104.768914,
+                      40.81952
+                    ],
+                    [
+                      -104.7648715,
+                      40.8195055
+                    ],
+                    [
+                      -104.76276,
+                      40.8194975
+                    ],
+                    [
+                      -104.7627605,
+                      40.81912
+                    ],
+                    [
+                      -104.762762,
+                      40.8180945
+                    ],
+                    [
+                      -104.762764,
+                      40.816908
+                    ],
+                    [
+                      -104.762764,
+                      40.816851
+                    ],
+                    [
+                      -104.762764,
+                      40.816742
+                    ],
+                    [
+                      -104.762764,
+                      40.8167045
+                    ],
+                    [
+                      -104.762764,
+                      40.8166195
+                    ],
+                    [
+                      -104.762765,
+                      40.8158715
+                    ],
+                    [
+                      -104.7627705,
+                      40.8122455
+                    ],
+                    [
+                      -104.7626465,
+                      40.812245
+                    ],
+                    [
+                      -104.761797,
+                      40.8122415
+                    ],
+                    [
+                      -104.7579885,
+                      40.812224
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "properties": {},
+              "type": "Feature"
+            }
+          ],
+          "type": "FeatureCollection"
+        },
+        "provenance": {
+          "provider": "Mireye",
+          "reference_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+          "request_id": "mireye:lookup",
+          "retrieved_at": null,
+          "source": "REGRID via Mireye"
+        },
+        "source_crs": "EPSG:4326",
+        "validation_errors": [],
+        "validation_status": "VALID"
+      }
+    ],
+    "confirmation_status": {
+      "confirmation_method": "USER_BOUNDARY_CONFIRMATION",
+      "confirmed": true,
+      "confirmed_at": "2026-08-08T19:39:26+00:00",
+      "selected_candidate_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+      "status": "PARCEL_CONFIRMED"
+    },
+    "confirmed_parcel": {
+      "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+      "geometry_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+      "geometry_reference": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+      "parcel_geometry": {
+        "features": [
+          {
+            "geometry": {
+              "coordinates": [
+                [
+                  [
+                    -104.7579885,
+                    40.812224
+                  ],
+                  [
+                    -104.753207,
+                    40.8122025
+                  ],
+                  [
+                    -104.7531875,
+                    40.8230915
+                  ],
+                  [
+                    -104.753181,
+                    40.8267215
+                  ],
+                  [
+                    -104.7579655,
+                    40.826735
+                  ],
+                  [
+                    -104.76275,
+                    40.8267485
+                  ],
+                  [
+                    -104.7675345,
+                    40.826762
+                  ],
+                  [
+                    -104.772319,
+                    40.8267755
+                  ],
+                  [
+                    -104.7723225,
+                    40.823154
+                  ],
+                  [
+                    -104.7723265,
+                    40.8195325
+                  ],
+                  [
+                    -104.769589,
+                    40.8195225
+                  ],
+                  [
+                    -104.769535,
+                    40.819522
+                  ],
+                  [
+                    -104.7694675,
+                    40.819522
+                  ],
+                  [
+                    -104.769235,
+                    40.819521
+                  ],
+                  [
+                    -104.768976,
+                    40.81952
+                  ],
+                  [
+                    -104.768914,
+                    40.81952
+                  ],
+                  [
+                    -104.7648715,
+                    40.8195055
+                  ],
+                  [
+                    -104.76276,
+                    40.8194975
+                  ],
+                  [
+                    -104.7627605,
+                    40.81912
+                  ],
+                  [
+                    -104.762762,
+                    40.8180945
+                  ],
+                  [
+                    -104.762764,
+                    40.816908
+                  ],
+                  [
+                    -104.762764,
+                    40.816851
+                  ],
+                  [
+                    -104.762764,
+                    40.816742
+                  ],
+                  [
+                    -104.762764,
+                    40.8167045
+                  ],
+                  [
+                    -104.762764,
+                    40.8166195
+                  ],
+                  [
+                    -104.762765,
+                    40.8158715
+                  ],
+                  [
+                    -104.7627705,
+                    40.8122455
+                  ],
+                  [
+                    -104.7626465,
+                    40.812245
+                  ],
+                  [
+                    -104.761797,
+                    40.8122415
+                  ],
+                  [
+                    -104.7579885,
+                    40.812224
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "properties": {},
+            "type": "Feature"
+          }
+        ],
+        "type": "FeatureCollection"
+      },
+      "source_crs": "EPSG:4326"
+    },
+    "errors": [],
+    "evidence_invalidation_required": false,
+    "geocode": {
+      "accuracy": null,
+      "accuracy_type": "rooftop",
+      "confidence": 0.8,
+      "limitations": [
+        "Property addresses sent for live resolution may be logged and retained by the geospatial provider for reliability and audit purposes.",
+        "Geocode point is not a parcel boundary.",
+        "Mireye lookup disposition=resolved.",
+        "Mireye resolved + parcel geometry present; user must confirm boundary.",
+        "provenance.source=REGRID via Mireye."
+      ],
+      "match_type": null,
+      "normalized_address": "40.825,-104.7625",
+      "point": {
+        "coordinates": [
+          -104.7625,
+          40.825
+        ],
+        "type": "Point"
+      },
+      "provider": "Mireye",
+      "request_id": "mireye:lookup",
+      "retrieved_at": null,
+      "status": "OK"
+    },
+    "input": {
+      "input_kind": "COORDINATE",
+      "latitude": 40.825,
+      "longitude": -104.7625,
+      "normalized_address": "40.825,-104.7625",
+      "raw_address": null
+    },
+    "input_kind": "COORDINATE",
+    "latitude": 40.825,
+    "limitations": [
+      "Ownership, APN, zoning, legal access, and purchasability are not verified by parcel resolution alone.",
+      "Address text and geocode points are not parcel boundaries.",
+      "Coordinates (when used) are a parcel lookup point only \u2014 never F01\u2013F08 geometry.",
+      "Property addresses sent for live resolution may be logged and retained by the geospatial provider for reliability and audit purposes.",
+      "Geocode point is not a parcel boundary.",
+      "Mireye lookup disposition=resolved.",
+      "Mireye resolved + parcel geometry present; user must confirm boundary.",
+      "provenance.source=REGRID via Mireye.",
+      "Parcel geometry sourced via Mireye /v1/lookup (Regrid).",
+      "Owner names are redacted pending licensing confirmation.",
+      "APN/zoning/legal access/purchasability are unverified soft labels.",
+      "Geometry requires explicit user boundary confirmation."
+    ],
+    "longitude": -104.7625,
+    "normalized_address": "40.825,-104.7625",
+    "planner_binding": {
+      "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+      "geometry_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+      "geometry_reference": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+      "parcel_geometry": {
+        "features": [
+          {
+            "geometry": {
+              "coordinates": [
+                [
+                  [
+                    -104.7579885,
+                    40.812224
+                  ],
+                  [
+                    -104.753207,
+                    40.8122025
+                  ],
+                  [
+                    -104.7531875,
+                    40.8230915
+                  ],
+                  [
+                    -104.753181,
+                    40.8267215
+                  ],
+                  [
+                    -104.7579655,
+                    40.826735
+                  ],
+                  [
+                    -104.76275,
+                    40.8267485
+                  ],
+                  [
+                    -104.7675345,
+                    40.826762
+                  ],
+                  [
+                    -104.772319,
+                    40.8267755
+                  ],
+                  [
+                    -104.7723225,
+                    40.823154
+                  ],
+                  [
+                    -104.7723265,
+                    40.8195325
+                  ],
+                  [
+                    -104.769589,
+                    40.8195225
+                  ],
+                  [
+                    -104.769535,
+                    40.819522
+                  ],
+                  [
+                    -104.7694675,
+                    40.819522
+                  ],
+                  [
+                    -104.769235,
+                    40.819521
+                  ],
+                  [
+                    -104.768976,
+                    40.81952
+                  ],
+                  [
+                    -104.768914,
+                    40.81952
+                  ],
+                  [
+                    -104.7648715,
+                    40.8195055
+                  ],
+                  [
+                    -104.76276,
+                    40.8194975
+                  ],
+                  [
+                    -104.7627605,
+                    40.81912
+                  ],
+                  [
+                    -104.762762,
+                    40.8180945
+                  ],
+                  [
+                    -104.762764,
+                    40.816908
+                  ],
+                  [
+                    -104.762764,
+                    40.816851
+                  ],
+                  [
+                    -104.762764,
+                    40.816742
+                  ],
+                  [
+                    -104.762764,
+                    40.8167045
+                  ],
+                  [
+                    -104.762764,
+                    40.8166195
+                  ],
+                  [
+                    -104.762765,
+                    40.8158715
+                  ],
+                  [
+                    -104.7627705,
+                    40.8122455
+                  ],
+                  [
+                    -104.7626465,
+                    40.812245
+                  ],
+                  [
+                    -104.761797,
+                    40.8122415
+                  ],
+                  [
+                    -104.7579885,
+                    40.812224
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "properties": {},
+            "type": "Feature"
+          }
+        ],
+        "type": "FeatureCollection"
+      },
+      "source_crs": "EPSG:4326"
+    },
+    "previous_geometry_hash": null,
+    "provenance": {
+      "confidence": null,
+      "mireye_lookup": {
+        "accuracy_type": "rooftop",
+        "attempts": 1,
+        "catalog_context": {
+          "affects_parcel_resolution": false,
+          "compatible": true,
+          "errors": [],
+          "etag": "W/\"fixture-field-catalog-v0.14.0\"",
+          "field_count": 304,
+          "gate_id": "MIREYE_FIELD_CATALOG_COMPATIBILITY_GATE",
+          "gate_version": "0.1.0",
+          "http_status": 200,
+          "limitations": [
+            "Catalog compatibility is independent of parcel resolution status.",
+            "Catalog failure must not be rewritten as NO_MATCH / PARCEL_DATA_UNAVAILABLE.",
+            "Pinned baseline catalog version: 0.14.0."
+          ],
+          "missing_fields": [],
+          "observed_catalog_version": "0.14.0",
+          "observed_major": 0,
+          "pinned_catalog_version": "0.14.0",
+          "pinned_major": 0,
+          "previous_etag": null,
+          "status": "COMPATIBLE",
+          "type_mismatches": [],
+          "unit_mismatches": []
+        },
+        "disposition": "resolved",
+        "endpoint": "/v1/lookup",
+        "error_class": null,
+        "http_status": 200,
+        "input_fingerprint": "60cde9b2ab0e558a4c7965524bc258e170bfe2b068f13082f1eff75fd6ba3b82",
+        "kind": "coord",
+        "ok": true,
+        "request_hash": "c7ccfb443cc38f7085009b5e80d004ae99d540dbf6eda6633db46eeed8fedd7e",
+        "response_hash": "24923aed278b75fe17fbefb45175fb8508757ac37a7505f16c26d91ffdbaa8c5",
+        "retries": 0,
+        "retrieved_at": "2026-08-08T19:39:25+00:00"
+      },
+      "normalized_crs": "EPSG:4326",
+      "provider": "LIVE",
+      "reference_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+      "request_id": "mireye:lookup",
+      "retrieved_at": null,
+      "source": "REGRID via Mireye",
+      "source_crs": "EPSG:4326",
+      "status": "PARCEL_CONFIRMED"
+    },
+    "provider_mode": "LIVE",
+    "resolution_id": "pres_b592214eb0ea8a0b",
+    "scenario_id": null,
+    "schema_version": "RANGEMATCH_PARCEL_RESOLUTION@0.1.0",
+    "selection": {
+      "confirmation_method": "USER_BOUNDARY_CONFIRMATION",
+      "confirmed_at": "2026-08-08T19:39:26+00:00",
+      "selected_candidate_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95"
+    },
+    "status": "PARCEL_CONFIRMED"
+  },
+  "confirm_http_status": 200,
+  "coordinate": {
+    "latitude": 40.825,
+    "longitude": -104.7625
+  },
+  "create": {
+    "adapter_id": "PARCEL_RESOLVER_LIVE",
+    "adapter_version": "0.1.0",
+    "candidates": [
+      {
+        "attributes": {
+          "apn": "030122000004",
+          "jurisdiction": null,
+          "owner": null,
+          "parcel_unavailable": false,
+          "zoning": "A"
+        },
+        "candidate_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+        "confidence": null,
+        "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+        "label": "030122000004",
+        "limitations": [
+          "Parcel geometry sourced via Mireye /v1/lookup (Regrid).",
+          "Owner names are redacted pending licensing confirmation.",
+          "APN/zoning/legal access/purchasability are unverified soft labels.",
+          "Geometry requires explicit user boundary confirmation."
+        ],
+        "normalized_crs": "EPSG:4326",
+        "parcel_geometry": {
+          "features": [
+            {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      -104.7579885,
+                      40.812224
+                    ],
+                    [
+                      -104.753207,
+                      40.8122025
+                    ],
+                    [
+                      -104.7531875,
+                      40.8230915
+                    ],
+                    [
+                      -104.753181,
+                      40.8267215
+                    ],
+                    [
+                      -104.7579655,
+                      40.826735
+                    ],
+                    [
+                      -104.76275,
+                      40.8267485
+                    ],
+                    [
+                      -104.7675345,
+                      40.826762
+                    ],
+                    [
+                      -104.772319,
+                      40.8267755
+                    ],
+                    [
+                      -104.7723225,
+                      40.823154
+                    ],
+                    [
+                      -104.7723265,
+                      40.8195325
+                    ],
+                    [
+                      -104.769589,
+                      40.8195225
+                    ],
+                    [
+                      -104.769535,
+                      40.819522
+                    ],
+                    [
+                      -104.7694675,
+                      40.819522
+                    ],
+                    [
+                      -104.769235,
+                      40.819521
+                    ],
+                    [
+                      -104.768976,
+                      40.81952
+                    ],
+                    [
+                      -104.768914,
+                      40.81952
+                    ],
+                    [
+                      -104.7648715,
+                      40.8195055
+                    ],
+                    [
+                      -104.76276,
+                      40.8194975
+                    ],
+                    [
+                      -104.7627605,
+                      40.81912
+                    ],
+                    [
+                      -104.762762,
+                      40.8180945
+                    ],
+                    [
+                      -104.762764,
+                      40.816908
+                    ],
+                    [
+                      -104.762764,
+                      40.816851
+                    ],
+                    [
+                      -104.762764,
+                      40.816742
+                    ],
+                    [
+                      -104.762764,
+                      40.8167045
+                    ],
+                    [
+                      -104.762764,
+                      40.8166195
+                    ],
+                    [
+                      -104.762765,
+                      40.8158715
+                    ],
+                    [
+                      -104.7627705,
+                      40.8122455
+                    ],
+                    [
+                      -104.7626465,
+                      40.812245
+                    ],
+                    [
+                      -104.761797,
+                      40.8122415
+                    ],
+                    [
+                      -104.7579885,
+                      40.812224
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "properties": {},
+              "type": "Feature"
+            }
+          ],
+          "type": "FeatureCollection"
+        },
+        "provenance": {
+          "provider": "Mireye",
+          "reference_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+          "request_id": "mireye:lookup",
+          "retrieved_at": null,
+          "source": "REGRID via Mireye"
+        },
+        "source_crs": "EPSG:4326",
+        "validation_errors": [],
+        "validation_status": "VALID"
+      }
+    ],
+    "confirmation_status": {
+      "confirmation_method": "PENDING",
+      "confirmed": false,
+      "confirmed_at": null,
+      "selected_candidate_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+      "status": "NEEDS_BOUNDARY_CONFIRMATION"
+    },
+    "confirmed_parcel": null,
+    "errors": [],
+    "evidence_invalidation_required": false,
+    "geocode": {
+      "accuracy": null,
+      "accuracy_type": "rooftop",
+      "confidence": 0.8,
+      "limitations": [
+        "Property addresses sent for live resolution may be logged and retained by the geospatial provider for reliability and audit purposes.",
+        "Geocode point is not a parcel boundary.",
+        "Mireye lookup disposition=resolved.",
+        "Mireye resolved + parcel geometry present; user must confirm boundary.",
+        "provenance.source=REGRID via Mireye."
+      ],
+      "match_type": null,
+      "normalized_address": "40.825,-104.7625",
+      "point": {
+        "coordinates": [
+          -104.7625,
+          40.825
+        ],
+        "type": "Point"
+      },
+      "provider": "Mireye",
+      "request_id": "mireye:lookup",
+      "retrieved_at": null,
+      "status": "OK"
+    },
+    "input": {
+      "input_kind": "COORDINATE",
+      "latitude": 40.825,
+      "longitude": -104.7625,
+      "normalized_address": "40.825,-104.7625",
+      "raw_address": null
+    },
+    "input_kind": "COORDINATE",
+    "latitude": 40.825,
+    "limitations": [
+      "Ownership, APN, zoning, legal access, and purchasability are not verified by parcel resolution alone.",
+      "Address text and geocode points are not parcel boundaries.",
+      "Coordinates (when used) are a parcel lookup point only \u2014 never F01\u2013F08 geometry.",
+      "Property addresses sent for live resolution may be logged and retained by the geospatial provider for reliability and audit purposes.",
+      "Geocode point is not a parcel boundary.",
+      "Mireye lookup disposition=resolved.",
+      "Mireye resolved + parcel geometry present; user must confirm boundary.",
+      "provenance.source=REGRID via Mireye."
+    ],
+    "longitude": -104.7625,
+    "normalized_address": "40.825,-104.7625",
+    "previous_geometry_hash": null,
+    "provenance": {
+      "confidence": 0.8,
+      "mireye_lookup": {
+        "accuracy_type": "rooftop",
+        "attempts": 1,
+        "catalog_context": {
+          "affects_parcel_resolution": false,
+          "compatible": true,
+          "errors": [],
+          "etag": "W/\"fixture-field-catalog-v0.14.0\"",
+          "field_count": 304,
+          "gate_id": "MIREYE_FIELD_CATALOG_COMPATIBILITY_GATE",
+          "gate_version": "0.1.0",
+          "http_status": 200,
+          "limitations": [
+            "Catalog compatibility is independent of parcel resolution status.",
+            "Catalog failure must not be rewritten as NO_MATCH / PARCEL_DATA_UNAVAILABLE.",
+            "Pinned baseline catalog version: 0.14.0."
+          ],
+          "missing_fields": [],
+          "observed_catalog_version": "0.14.0",
+          "observed_major": 0,
+          "pinned_catalog_version": "0.14.0",
+          "pinned_major": 0,
+          "previous_etag": null,
+          "status": "COMPATIBLE",
+          "type_mismatches": [],
+          "unit_mismatches": []
+        },
+        "disposition": "resolved",
+        "endpoint": "/v1/lookup",
+        "error_class": null,
+        "http_status": 200,
+        "input_fingerprint": "60cde9b2ab0e558a4c7965524bc258e170bfe2b068f13082f1eff75fd6ba3b82",
+        "kind": "coord",
+        "ok": true,
+        "request_hash": "c7ccfb443cc38f7085009b5e80d004ae99d540dbf6eda6633db46eeed8fedd7e",
+        "response_hash": "24923aed278b75fe17fbefb45175fb8508757ac37a7505f16c26d91ffdbaa8c5",
+        "retries": 0,
+        "retrieved_at": "2026-08-08T19:39:25+00:00"
+      },
+      "normalized_crs": "EPSG:4326",
+      "provider": "LIVE",
+      "reference_id": null,
+      "request_id": "mireye:lookup",
+      "retrieved_at": null,
+      "source": "REGRID via Mireye",
+      "source_crs": "EPSG:4326",
+      "status": "NEEDS_BOUNDARY_CONFIRMATION"
+    },
+    "provider_mode": "LIVE",
+    "resolution_id": "pres_b592214eb0ea8a0b",
+    "scenario_id": null,
+    "schema_version": "RANGEMATCH_PARCEL_RESOLUTION@0.1.0",
+    "selection": {
+      "confirmation_method": "PENDING",
+      "confirmed_at": null,
+      "selected_candidate_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95"
+    },
+    "status": "NEEDS_BOUNDARY_CONFIRMATION"
+  },
+  "create_http_status": 200,
+  "gate_id": "CPER_LIVE_COORDINATE_PARCEL_TO_INVESTIGATION_2026_08_08",
+  "investigation": {
+    "created_at": "2026-08-08T19:39:36.272931+00:00",
+    "deterministic_execution_hash": "11d53a2ed227ccf464e6f9829190a0c655f67dbe856eea075c35b110d77deb54",
+    "execution_ref": "exec_bf77250cf3ca49dc",
+    "execution_source": "PARCEL_RESOLUTION",
+    "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+    "geometry_reference": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+    "intended_operation": null,
+    "investigation_id": "inv_23ff787980c14504",
+    "land_profile_reference": null,
+    "limitations": [
+      "execution_source:PARCEL_RESOLUTION",
+      "geometry_bound_from_confirmed_parcel_resolution",
+      "geometry_hash:3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+      "live_mireye_contexts_noncanonical_for_parcel_facts",
+      "remaining_f03_f04_f05_f07_live_collection_not_performed_for_resolution_geometry",
+      "no_automatic_cper_fixture_substitution"
+    ],
+    "live_factor_summary": {
+      "computed_factors": [
+        "F01_TOPOGRAPHY",
+        "F02_HERBACEOUS_RESOURCE",
+        "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+      ],
+      "failed_factors": {},
+      "ranking_effect": "NONE",
+      "rap_acquisition": {
+        "cover_request_count": 1,
+        "cover_response_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+        "duplicate_coverV3_fetch": false,
+        "f08_reuses_f02_cover_artifact": true,
+        "production_request_count": 1
+      },
+      "rules_changed": false
+    },
+    "mireye_live_summary": {
+      "canonical_for_parcel_facts": false,
+      "context_status": {
+        "POINT_HAZARD_CONTEXT": "COMPLETE",
+        "POINT_LAND_CONTEXT": "COMPLETE",
+        "PROPERTY_DILIGENCE_CONTEXT": "COMPLETE"
+      },
+      "failed_contexts": [],
+      "requested_point": {
+        "lat": 40.82069890587167,
+        "lng": -104.76116125377715
+      }
+    },
+    "mode": "DISCOVERY",
+    "parcel_resolution_id": "pres_b592214eb0ea8a0b",
+    "plan_ref": "api_DISCOVERY_DISCOVERY_PARCEL_RESOLUTION_pres_b592214eb0ea8a0b_mireye_LIVE",
+    "plan_sha256": "79bea1301aaacce35f19c76dea83ed7b210977cc8d5a327afe7bfa6bd139ad32",
+    "presentation": {
+      "discovery_limited_to_supported_profiles": true,
+      "intended_operation": null,
+      "mode": "DISCOVERY",
+      "operation_presentation_order": [
+        "COW_CALF_OPERATION",
+        "SHEEP_GRAZING"
+      ],
+      "rule_or_threshold_change": false,
+      "scientific_priority_change": false
+    },
+    "replay_label": null,
+    "source_crs": "EPSG:4326",
+    "status": "PARTIAL",
+    "unified_output": {
+      "buyer_report": {
+        "Diligence Plan": {
+          "diligence_actions": [
+            "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+            "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+            "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+            "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+            "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+            "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+            "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+            "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+            "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+            "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+          ],
+          "factor_ids": [],
+          "highlights": [
+            {
+              "canonical_factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+              "f07_projection": "legal_access_diligence"
+            }
+          ],
+          "limitations": [
+            "Dynamic regulatory/land-rights findings are non-canonical and not F09.",
+            "F07 remains one canonical Factor result; legal-access items are surfaced here."
+          ],
+          "mireye_context_types": [],
+          "section_id": "Diligence Plan",
+          "unknowns": [
+            "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty."
+          ]
+        },
+        "Land & Resources": {
+          "diligence_actions": [],
+          "factor_ids": [
+            "F01_TOPOGRAPHY",
+            "F02_HERBACEOUS_RESOURCE",
+            "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+            "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+            "F03_LIVESTOCK_WATER"
+          ],
+          "highlights": [
+            {
+              "factor_id": "F01_TOPOGRAPHY",
+              "input_quality_state": "PARCEL_COMPLETE",
+              "signal": "CONTEXT_DEPENDENT"
+            },
+            {
+              "factor_id": "F02_HERBACEOUS_RESOURCE",
+              "input_quality_state": "RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY",
+              "signal": "NEEDS_VERIFICATION"
+            },
+            {
+              "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+              "input_quality_state": "RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY",
+              "signal": "NEEDS_VERIFICATION"
+            },
+            {
+              "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+              "input_quality_state": "MISSING",
+              "signal": "UNKNOWN"
+            },
+            {
+              "factor_id": "F03_LIVESTOCK_WATER",
+              "input_quality_state": "MISSING",
+              "signal": "UNKNOWN"
+            }
+          ],
+          "limitations": [
+            "Terrain statistics are parcel context, not carrying capacity or profitability.",
+            "No universal slope suitability threshold is approved.",
+            "USGS 3DEP does not establish rock cover or accessible grazing area.",
+            "RAP aggregate coverage remains COVERAGE_UNQUANTIFIED.",
+            "Modeled cover/production are not forage availability, palatability, nutritive value, carrying capacity, or stocking rate.",
+            "F02_HERBACEOUS_RESOURCE coverage_status remains unquantified (source preserved).",
+            "Shrub and tree cover are modeled RAP fractional cover context only.",
+            "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+            "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+            "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+            "Woody cover does not prove low herbaceous production.",
+            "F08 must not replace F02 herbaceous Land Facts.",
+            "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+            "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof.",
+            "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE coverage_status remains unquantified (source preserved)."
+          ],
+          "mireye_context_types": [
+            "POINT_LAND_CONTEXT"
+          ],
+          "section_id": "Land & Resources",
+          "unknowns": [
+            "RAP valid pixel-area fraction is not quantified.",
+            "Botanical composition, palatability, and nutritive value are not verified.",
+            "Shared RAP eligible/masked/no-data/valid parcel areas are not quantified.",
+            "Botanical composition of woody cover is not verified.",
+            "Browse availability is not established.",
+            "Woody obstruction class is not established."
+          ]
+        },
+        "Operation Comparison": {
+          "diligence_actions": [
+            "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+            "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+            "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+            "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+            "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+            "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+            "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+            "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+            "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+            "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+          ],
+          "factor_ids": [
+            "F01_TOPOGRAPHY",
+            "F02_HERBACEOUS_RESOURCE",
+            "F03_LIVESTOCK_WATER",
+            "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+            "F05_CLIMATE_DROUGHT_EXPOSURE",
+            "F06_PARCEL_CONFIGURATION",
+            "F07_ROAD_AND_PHYSICAL_ACCESS",
+            "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+          ],
+          "highlights": [
+            {
+              "decision_label": "HOLD",
+              "limiting_signals": [
+                "F02_HERBACEOUS_RESOURCE",
+                "F03_LIVESTOCK_WATER",
+                "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+                "F05_CLIMATE_DROUGHT_EXPOSURE",
+                "F07_ROAD_AND_PHYSICAL_ACCESS",
+                "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+              ],
+              "operation_id": "COW_CALF_OPERATION",
+              "presentation_priority": 0,
+              "ranking_permission": false
+            },
+            {
+              "decision_label": "HOLD",
+              "limiting_signals": [
+                "F02_HERBACEOUS_RESOURCE",
+                "F03_LIVESTOCK_WATER",
+                "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+                "F05_CLIMATE_DROUGHT_EXPOSURE",
+                "F07_ROAD_AND_PHYSICAL_ACCESS",
+                "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+              ],
+              "operation_id": "SHEEP_GRAZING",
+              "presentation_priority": 1,
+              "ranking_permission": false
+            },
+            {
+              "qualification": "Comparison applies only to currently supported Profiles (Cow-Calf and Sheep Grazing)."
+            }
+          ],
+          "limitations": [
+            "No numeric suitability score is authorized.",
+            "ranking_effect NONE cannot create cross-profile ranking.",
+            "HOLD does not mean unsuitable."
+          ],
+          "mireye_context_types": [],
+          "section_id": "Operation Comparison",
+          "unknowns": [
+            "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+            "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+            "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+            "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified."
+          ]
+        },
+        "Property": {
+          "diligence_actions": [],
+          "factor_ids": [
+            "F06_PARCEL_CONFIGURATION",
+            "F07_ROAD_AND_PHYSICAL_ACCESS"
+          ],
+          "highlights": [
+            {
+              "canonical_factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+              "f07_projection": "physical_road_context",
+              "road_parcel_contact_status": null,
+              "signal": "UNKNOWN"
+            },
+            {
+              "factor_id": "F06_PARCEL_CONFIGURATION",
+              "signal": "CONTEXT_DEPENDENT"
+            }
+          ],
+          "limitations": [
+            "Parcel area is geometric context, not grazable area or carrying capacity.",
+            "Parcel perimeter is not fencing cost.",
+            "Compactness is not operational efficiency or suitability.",
+            "Measurements use projected UTM meters; not a legal survey acreage.",
+            "v0.1 perimeter excludes interior rings/holes.",
+            "v0.1 does not automatically repair invalid geometry.",
+            "Geodesic QA is deferred and not required for v0.1."
+          ],
+          "mireye_context_types": [
+            "PROPERTY_DILIGENCE_CONTEXT"
+          ],
+          "section_id": "Property",
+          "unknowns": []
+        },
+        "Resilience & Hazards": {
+          "diligence_actions": [],
+          "factor_ids": [
+            "F05_CLIMATE_DROUGHT_EXPOSURE"
+          ],
+          "highlights": [
+            {
+              "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+              "input_quality_state": "MISSING",
+              "signal": "UNKNOWN"
+            }
+          ],
+          "limitations": [],
+          "mireye_context_types": [
+            "POINT_HAZARD_CONTEXT"
+          ],
+          "section_id": "Resilience & Hazards",
+          "unknowns": []
+        }
+      },
+      "constraints": {
+        "batch_workflow_authorized": false,
+        "f09_authorized": false,
+        "parcels_per_run": 1,
+        "planned_actions_mutate_factors": false
+      },
+      "contract_version": "RANGEMATCH_UNIFIED_OUTPUT@0.1.0",
+      "created_at": "2026-08-08T19:39:36Z",
+      "cross_profile_comparison": {
+        "numeric_score": null,
+        "ranking_permitted": false,
+        "reason": "Implemented Factors have no ranking effect; F02 coverage is unquantified, F03 water systems are unverified, F05 has no approved climate suitability threshold, F06 geometry metrics are context only, F07 mapped roads do not establish legal access, and F08 woody cover does not establish browse, obstruction, or species ranking; no reviewed differential rule is active."
+      },
+      "diligence_actions": [
+        "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+        "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+        "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+        "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+        "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+        "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+        "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+        "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+        "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+        "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+      ],
+      "dynamic_diligence_findings": [],
+      "engine_input_hash": "1ee123127f8f65bd032603647ace72aeb344d8cd590644cf2a8d752d970b4c30",
+      "engine_version": "0.1.0",
+      "explanation": {
+        "bound_to_input_sha256": "1ee123127f8f65bd032603647ace72aeb344d8cd590644cf2a8d752d970b4c30",
+        "bound_to_match_result_hash": "807e80a7e7d6e4e038de69fa6b43314b894956c2e7fcf5c7befec68cb8d48e0f",
+        "cross_profile_comparison": {
+          "ranking_permitted": false,
+          "reason": "Implemented Factors have no ranking effect; F02 coverage is unquantified, F03 water systems are unverified, F05 has no approved climate suitability threshold, F06 geometry metrics are context only, F07 mapped roads do not establish legal access, and F08 woody cover does not establish browse, obstruction, or species ranking; no reviewed differential rule is active."
+        },
+        "diligence_actions": [
+          "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+          "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+          "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+          "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+          "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+          "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+          "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+          "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+          "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+          "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+        ],
+        "disclaimer": "Preliminary screening only. The land did not fail; the match remains incomplete until additional reviewed Factors and field verification are available.",
+        "engine_version": "0.1.0",
+        "explanation_schema_version": "0.1.0",
+        "llm_override_permitted": false,
+        "may_alter_decision_labels": false,
+        "may_invent_scores_or_thresholds": false,
+        "narrative_constraints": [
+          "This is a preliminary screening result produced by the deterministic Matching Engine.",
+          "Cow-Calf and Sheep are evaluated as peer operations. No cross-profile ranking is permitted in this vertical slice.",
+          "Signals describe evidence quality and reviewed qualitative context. They are not carrying capacity, profitability, or success probability.",
+          "Missing or unverified inputs remain UNKNOWN or NEEDS_VERIFICATION and are listed as diligence actions."
+        ],
+        "operation_summaries": [
+          {
+            "decision_label": "HOLD",
+            "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+            "factors": [
+              {
+                "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+                "factor_id": "F01_TOPOGRAPHY",
+                "label": "Topography",
+                "ranking_effect": "NONE",
+                "signal": "CONTEXT_DEPENDENT"
+              },
+              {
+                "explanation_code": "F02_EXPL_SCOPE",
+                "factor_id": "F02_HERBACEOUS_RESOURCE",
+                "label": "Herbaceous Resource",
+                "ranking_effect": "NONE",
+                "signal": "NEEDS_VERIFICATION"
+              },
+              {
+                "explanation_code": "F03_EXPL_MISSING",
+                "factor_id": "F03_LIVESTOCK_WATER",
+                "label": "Livestock Water",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F04_EXPL_MISSING",
+                "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+                "label": "Soil, Wetness, and Ecological Site",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F05_EXPL_MISSING",
+                "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+                "label": "Climate and Drought Exposure",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+                "factor_id": "F06_PARCEL_CONFIGURATION",
+                "label": "Parcel Configuration",
+                "ranking_effect": "NONE",
+                "signal": "CONTEXT_DEPENDENT"
+              },
+              {
+                "explanation_code": "F07_EXPL_MISSING",
+                "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+                "label": "Road and Physical Access",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F08_EXPL_APPLICABILITY",
+                "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+                "label": "Woody and Shrub Vegetation Structure",
+                "ranking_effect": "NONE",
+                "signal": "NEEDS_VERIFICATION"
+              }
+            ],
+            "label": "Cow-Calf Operation",
+            "operation_id": "COW_CALF_OPERATION",
+            "ranking_position": null
+          },
+          {
+            "decision_label": "HOLD",
+            "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+            "factors": [
+              {
+                "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+                "factor_id": "F01_TOPOGRAPHY",
+                "label": "Topography",
+                "ranking_effect": "NONE",
+                "signal": "CONTEXT_DEPENDENT"
+              },
+              {
+                "explanation_code": "F02_EXPL_SCOPE",
+                "factor_id": "F02_HERBACEOUS_RESOURCE",
+                "label": "Herbaceous Resource",
+                "ranking_effect": "NONE",
+                "signal": "NEEDS_VERIFICATION"
+              },
+              {
+                "explanation_code": "F03_EXPL_MISSING",
+                "factor_id": "F03_LIVESTOCK_WATER",
+                "label": "Livestock Water",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F04_EXPL_MISSING",
+                "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+                "label": "Soil, Wetness, and Ecological Site",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F05_EXPL_MISSING",
+                "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+                "label": "Climate and Drought Exposure",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+                "factor_id": "F06_PARCEL_CONFIGURATION",
+                "label": "Parcel Configuration",
+                "ranking_effect": "NONE",
+                "signal": "CONTEXT_DEPENDENT"
+              },
+              {
+                "explanation_code": "F07_EXPL_MISSING",
+                "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+                "label": "Road and Physical Access",
+                "ranking_effect": "NONE",
+                "signal": "UNKNOWN"
+              },
+              {
+                "explanation_code": "F08_EXPL_APPLICABILITY",
+                "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+                "label": "Woody and Shrub Vegetation Structure",
+                "ranking_effect": "NONE",
+                "signal": "NEEDS_VERIFICATION"
+              }
+            ],
+            "label": "Sheep Grazing",
+            "operation_id": "SHEEP_GRAZING",
+            "ranking_position": null
+          }
+        ],
+        "parcel": {
+          "geometry_id": "geom_3ae9eb7a1e03",
+          "land_profile_id": "assembled_fixture",
+          "land_profile_version": null,
+          "supported_use": null
+        },
+        "unknowns": [
+          "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+          "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+          "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+          "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified."
+        ]
+      },
+      "explanation_binding_hash": "807e80a7e7d6e4e038de69fa6b43314b894956c2e7fcf5c7befec68cb8d48e0f",
+      "factors": {
+        "F01_TOPOGRAPHY": {
+          "applicability": {
+            "domain_status": null
+          },
+          "coverage": {
+            "details": {
+              "cell_area_m2": 99.55293092127714,
+              "coverage_fraction": 1.0,
+              "parcel_cell_count": 19683,
+              "valid_elevation_cell_count": 19683,
+              "valid_slope_cell_count": 19683
+            },
+            "normalized_status": "COMPLETE",
+            "source_status": "COMPLETE"
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {},
+          "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+          "factor_id": "F01_TOPOGRAPHY",
+          "factor_version": "USGS_3DEP_F01_ADAPTER@0.1.0",
+          "input_quality_state": "PARCEL_COMPLETE",
+          "land_facts": [
+            {
+              "applicability_status": null,
+              "artifact_hash": "37390225c1354290adda92ae61957e8c77761385838904a6ee4251a5daded33a",
+              "confidence_or_quality_status": null,
+              "coverage": {
+                "details": {
+                  "cell_area_m2": 99.55293092127714,
+                  "coverage_fraction": 1.0,
+                  "parcel_cell_count": 19683,
+                  "valid_elevation_cell_count": 19683,
+                  "valid_slope_cell_count": 19683
+                },
+                "normalized_status": "COMPLETE",
+                "source_status": "COMPLETE"
+              },
+              "derivation_algorithm_version": "USGS_3DEP_F01_ADAPTER@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Terrain statistics are parcel context, not carrying capacity or profitability."
+              ],
+              "raw_value": null,
+              "source_id": "USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM",
+              "source_version": "USGS_3DEP_F01_ADAPTER@0.1.0",
+              "spatial_semantics": "parcel_aggregate",
+              "temporal_semantics": null,
+              "unit": "m",
+              "value": 1649.6339111328125,
+              "variable_id": "VAR_F01_ELEVATION_MEDIAN_M"
+            },
+            {
+              "applicability_status": null,
+              "artifact_hash": "37390225c1354290adda92ae61957e8c77761385838904a6ee4251a5daded33a",
+              "confidence_or_quality_status": null,
+              "coverage": {
+                "details": {
+                  "cell_area_m2": 99.55293092127714,
+                  "coverage_fraction": 1.0,
+                  "parcel_cell_count": 19683,
+                  "valid_elevation_cell_count": 19683,
+                  "valid_slope_cell_count": 19683
+                },
+                "normalized_status": "COMPLETE",
+                "source_status": "COMPLETE"
+              },
+              "derivation_algorithm_version": "USGS_3DEP_F01_ADAPTER@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Terrain statistics are parcel context, not carrying capacity or profitability."
+              ],
+              "raw_value": null,
+              "source_id": "USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM",
+              "source_version": "USGS_3DEP_F01_ADAPTER@0.1.0",
+              "spatial_semantics": "parcel_aggregate",
+              "temporal_semantics": null,
+              "unit": "degree",
+              "value": 1.891524753346898,
+              "variable_id": "VAR_F01_SLOPE_MEDIAN_DEGREES"
+            }
+          ],
+          "limitations": [
+            "Terrain statistics are parcel context, not carrying capacity or profitability.",
+            "No universal slope suitability threshold is approved.",
+            "USGS 3DEP does not establish rock cover or accessible grazing area."
+          ],
+          "provenance": {
+            "algorithm_version": "USGS_3DEP_F01_ADAPTER@0.1.0",
+            "canonical_source_id": "USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM",
+            "derivation_spec_version": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "response_or_artifact_hash": "37390225c1354290adda92ae61957e8c77761385838904a6ee4251a5daded33a",
+            "source_crs": "EPSG:4326",
+            "source_product_and_version": "USGS_3DEP_1_3_ARC_SECOND_SEAMLESS_DEM",
+            "working_crs": "EPSG:32613"
+          },
+          "ranking_effect": "NONE",
+          "signal": "CONTEXT_DEPENDENT",
+          "unknowns": []
+        },
+        "F02_HERBACEOUS_RESOURCE": {
+          "applicability": {
+            "domain_status": null
+          },
+          "coverage": {
+            "details": {
+              "adapter_status": "AGGREGATE_API_VERIFIED",
+              "eligible_area_m2": null,
+              "masked_area_m2": null,
+              "no_data_area_m2": null,
+              "requested_area_m2": null,
+              "valid_area_m2": null,
+              "valid_coverage_fraction": null
+            },
+            "normalized_status": "UNQUANTIFIED",
+            "source_status": "COVERAGE_UNQUANTIFIED"
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {
+            "land_fact_gates": [
+              {
+                "confidence_cap": "NEEDS_VERIFICATION",
+                "gate_state": "NEEDS_VERIFICATION",
+                "reason_code": "APPLICABILITY_UNKNOWN",
+                "use_as_context": false,
+                "use_as_primary_factor_evidence": false
+              },
+              {
+                "confidence_cap": "NEEDS_VERIFICATION",
+                "gate_state": "NEEDS_VERIFICATION",
+                "reason_code": "APPLICABILITY_UNKNOWN",
+                "use_as_context": false,
+                "use_as_primary_factor_evidence": false
+              }
+            ]
+          },
+          "explanation_code": "F02_EXPL_SCOPE",
+          "factor_id": "F02_HERBACEOUS_RESOURCE",
+          "factor_version": "USDA_ARS_RAP_V3_AGGREGATE_ADAPTER@0.1.0",
+          "input_quality_state": "RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY",
+          "land_facts": [
+            {
+              "applicability_status": "UNKNOWN",
+              "artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+              "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+              "coverage": {
+                "details": {
+                  "adapter_status": "AGGREGATE_API_VERIFIED",
+                  "eligible_area_m2": null,
+                  "masked_area_m2": null,
+                  "no_data_area_m2": null,
+                  "requested_area_m2": null,
+                  "valid_area_m2": null,
+                  "valid_coverage_fraction": null
+                },
+                "normalized_status": "UNQUANTIFIED",
+                "source_status": "COVERAGE_UNQUANTIFIED"
+              },
+              "derivation_algorithm_version": "USDA_ARS_RAP_V3_AGGREGATE_ADAPTER@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "PFG combines perennial grasses and forbs."
+              ],
+              "raw_value": null,
+              "source_id": "USDA_ARS_RAP_V3",
+              "source_version": "v3",
+              "spatial_semantics": "parcel_mean",
+              "temporal_semantics": "annual_2025",
+              "unit": "percent_cover",
+              "value": 24.57089015915846,
+              "variable_id": "VAR_F02_PERENNIAL_HERB_COVER"
+            },
+            {
+              "applicability_status": "UNKNOWN",
+              "artifact_hash": "c4d7d42446e4d6ac3f850e7e34789d6f16978b1172677135456e5b556fa88922",
+              "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+              "coverage": {
+                "details": {
+                  "adapter_status": "AGGREGATE_API_VERIFIED",
+                  "eligible_area_m2": null,
+                  "masked_area_m2": null,
+                  "no_data_area_m2": null,
+                  "requested_area_m2": null,
+                  "valid_area_m2": null,
+                  "valid_coverage_fraction": null
+                },
+                "normalized_status": "UNQUANTIFIED",
+                "source_status": "COVERAGE_UNQUANTIFIED"
+              },
+              "derivation_algorithm_version": "USDA_ARS_RAP_V3_AGGREGATE_ADAPTER@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Modeled new growth is not standing biomass or available forage."
+              ],
+              "raw_value": null,
+              "source_id": "USDA_ARS_RAP_V3",
+              "source_version": "v3",
+              "spatial_semantics": "parcel_mean",
+              "temporal_semantics": "annual_2025",
+              "unit": "pound_per_acre",
+              "value": 873.6456873215,
+              "variable_id": "VAR_F02_ANNUAL_HERB_PRODUCTION"
+            }
+          ],
+          "limitations": [
+            "RAP aggregate coverage remains COVERAGE_UNQUANTIFIED.",
+            "Modeled cover/production are not forage availability, palatability, nutritive value, carrying capacity, or stocking rate."
+          ],
+          "provenance": {
+            "algorithm_version": "USDA_ARS_RAP_V3_AGGREGATE_ADAPTER@0.1.0",
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "response_or_artifact_hash": null
+          },
+          "ranking_effect": "NONE",
+          "signal": "NEEDS_VERIFICATION",
+          "unknowns": [
+            "RAP valid pixel-area fraction is not quantified.",
+            "Botanical composition, palatability, and nutritive value are not verified."
+          ]
+        },
+        "F03_LIVESTOCK_WATER": {
+          "applicability": {
+            "domain_status": null
+          },
+          "coverage": {
+            "details": {},
+            "normalized_status": "UNKNOWN",
+            "source_status": null
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {
+            "field_verified_count": null,
+            "mapped_candidate_count": null,
+            "verified_livestock_water_system_count": null
+          },
+          "explanation_code": "F03_EXPL_MISSING",
+          "factor_id": "F03_LIVESTOCK_WATER",
+          "factor_version": null,
+          "input_quality_state": "MISSING",
+          "land_facts": [],
+          "limitations": [],
+          "provenance": {
+            "algorithm_version": null,
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "response_or_artifact_hash": null
+          },
+          "ranking_effect": "NONE",
+          "signal": "UNKNOWN",
+          "unknowns": []
+        },
+        "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+          "applicability": {
+            "domain_status": null
+          },
+          "coverage": {
+            "details": {},
+            "normalized_status": "UNKNOWN",
+            "source_status": null
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {
+            "component_count": null,
+            "ecological_site_count": 0
+          },
+          "explanation_code": "F04_EXPL_MISSING",
+          "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "factor_version": null,
+          "input_quality_state": "MISSING",
+          "land_facts": [],
+          "limitations": [],
+          "provenance": {
+            "algorithm_version": null,
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "response_or_artifact_hash": null
+          },
+          "ranking_effect": "NONE",
+          "signal": "UNKNOWN",
+          "unknowns": []
+        },
+        "F05_CLIMATE_DROUGHT_EXPOSURE": {
+          "applicability": {
+            "domain_status": null
+          },
+          "coverage": {
+            "details": {},
+            "normalized_status": "UNKNOWN",
+            "source_status": null
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {
+            "canonical_precip_mm": null,
+            "canonical_precip_unit": null,
+            "mutates_f02": false,
+            "mutates_f03": false,
+            "mutates_f04": false,
+            "normals_period": null
+          },
+          "explanation_code": "F05_EXPL_MISSING",
+          "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+          "factor_version": null,
+          "input_quality_state": "MISSING",
+          "land_facts": [],
+          "limitations": [],
+          "provenance": {
+            "algorithm_version": null,
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "response_or_artifact_hash": null
+          },
+          "ranking_effect": "NONE",
+          "signal": "UNKNOWN",
+          "unknowns": []
+        },
+        "F06_PARCEL_CONFIGURATION": {
+          "applicability": {
+            "domain_status": null
+          },
+          "coverage": {
+            "details": {},
+            "normalized_status": "UNKNOWN",
+            "source_status": null
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {
+            "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+            "area_m2": 1948514.793268538,
+            "compactness": 0.5889533621371998,
+            "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+            "geometry_validity": "VALID",
+            "perimeter_m": 6447.870894138111,
+            "polygon_part_count": 1,
+            "working_crs": "EPSG:32613"
+          },
+          "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+          "factor_id": "F06_PARCEL_CONFIGURATION",
+          "factor_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+          "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+          "land_facts": [
+            {
+              "applicability_status": null,
+              "artifact_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "confidence_or_quality_status": null,
+              "coverage": {
+                "details": {},
+                "normalized_status": "UNKNOWN",
+                "source_status": null
+              },
+              "derivation_algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Parcel area is geometric context, not grazable area or carrying capacity."
+              ],
+              "raw_value": null,
+              "source_id": null,
+              "source_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+              "spatial_semantics": "parcel_aggregate",
+              "temporal_semantics": null,
+              "unit": "m2",
+              "value": 1948514.793268538,
+              "variable_id": "VAR_F06_AREA_M2"
+            },
+            {
+              "applicability_status": null,
+              "artifact_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "confidence_or_quality_status": null,
+              "coverage": {
+                "details": {},
+                "normalized_status": "UNKNOWN",
+                "source_status": null
+              },
+              "derivation_algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Parcel area is geometric context, not grazable area or carrying capacity."
+              ],
+              "raw_value": null,
+              "source_id": null,
+              "source_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+              "spatial_semantics": "parcel_aggregate",
+              "temporal_semantics": null,
+              "unit": "m",
+              "value": 6447.870894138111,
+              "variable_id": "VAR_F06_PERIMETER_M"
+            }
+          ],
+          "limitations": [
+            "Parcel area is geometric context, not grazable area or carrying capacity.",
+            "Parcel perimeter is not fencing cost.",
+            "Compactness is not operational efficiency or suitability.",
+            "Measurements use projected UTM meters; not a legal survey acreage.",
+            "v0.1 perimeter excludes interior rings/holes.",
+            "v0.1 does not automatically repair invalid geometry.",
+            "Geodesic QA is deferred and not required for v0.1."
+          ],
+          "provenance": {
+            "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+            "fetched_at": "2026-08-08T19:39:36Z",
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "response_or_artifact_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "source_crs": "EPSG:4326",
+            "source_reference": "fixture_geometry",
+            "working_crs": "EPSG:32613"
+          },
+          "ranking_effect": "NONE",
+          "signal": "CONTEXT_DEPENDENT",
+          "unknowns": []
+        },
+        "F07_ROAD_AND_PHYSICAL_ACCESS": {
+          "applicability": {
+            "domain_status": null
+          },
+          "coverage": {
+            "details": {},
+            "normalized_status": "UNKNOWN",
+            "source_status": null
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {},
+          "explanation_code": "F07_EXPL_MISSING",
+          "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+          "factor_version": null,
+          "input_quality_state": "MISSING",
+          "land_facts": [],
+          "limitations": [],
+          "provenance": {
+            "algorithm_version": null,
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "response_or_artifact_hash": null
+          },
+          "ranking_effect": "NONE",
+          "signal": "UNKNOWN",
+          "unknowns": []
+        },
+        "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": {
+          "applicability": {
+            "basis": [
+              "RAP_RANGELAND_DOMAIN_NOT_YET_VERIFIED_FOR_LIVE_PARCEL"
+            ],
+            "domain_status": "UNKNOWN",
+            "review_status": "NEEDS_VERIFICATION"
+          },
+          "coverage": {
+            "details": {
+              "adapter_status": "AGGREGATE_API_VERIFIED",
+              "eligible_area_m2": null,
+              "masked_area_m2": null,
+              "no_data_area_m2": null,
+              "requested_area_m2": null,
+              "valid_area_m2": null,
+              "valid_coverage_fraction": null
+            },
+            "normalized_status": "UNQUANTIFIED",
+            "source_status": "COVERAGE_UNQUANTIFIED"
+          },
+          "diligence_actions": [],
+          "evaluation_extras": {
+            "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "applicability_status": "UNKNOWN",
+            "browse_inferred": false,
+            "combined_modeled_woody_cover_fraction": 0.06615818264239436,
+            "coverage_status": "COVERAGE_UNQUANTIFIED",
+            "duplicate_coverV3_fetch": false,
+            "labeled_complete": false,
+            "mask": true,
+            "obstruction_inferred": false,
+            "response_or_artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+            "reused_existing_artifact": true,
+            "shrub_cover_fraction": 0.06495904947232874,
+            "source_year": 2025,
+            "tree_cover_fraction": 0.0011991331700656237
+          },
+          "explanation_code": "F08_EXPL_APPLICABILITY",
+          "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+          "factor_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+          "input_quality_state": "RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY",
+          "land_facts": [
+            {
+              "applicability_status": "UNKNOWN",
+              "artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+              "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+              "coverage": {
+                "details": {
+                  "adapter_status": "AGGREGATE_API_VERIFIED",
+                  "eligible_area_m2": null,
+                  "masked_area_m2": null,
+                  "no_data_area_m2": null,
+                  "requested_area_m2": null,
+                  "valid_area_m2": null,
+                  "valid_coverage_fraction": null
+                },
+                "normalized_status": "UNQUANTIFIED",
+                "source_status": "COVERAGE_UNQUANTIFIED"
+              },
+              "derivation_algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Shrub and tree cover are modeled RAP fractional cover context only.",
+                "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+                "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+                "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+                "Woody cover does not prove low herbaceous production.",
+                "F08 must not replace F02 herbaceous Land Facts.",
+                "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+                "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+              ],
+              "raw_value": 6.495904947232874,
+              "source_id": "USDA_ARS_RAP_V3_COVER",
+              "source_version": "v3",
+              "spatial_semantics": "parcel_mean",
+              "temporal_semantics": "annual_2025",
+              "unit": "fraction",
+              "value": 0.06495904947232874,
+              "variable_id": "VAR_F08_SHRUB_COVER_FRACTION"
+            },
+            {
+              "applicability_status": "UNKNOWN",
+              "artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+              "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+              "coverage": {
+                "details": {
+                  "adapter_status": "AGGREGATE_API_VERIFIED",
+                  "eligible_area_m2": null,
+                  "masked_area_m2": null,
+                  "no_data_area_m2": null,
+                  "requested_area_m2": null,
+                  "valid_area_m2": null,
+                  "valid_coverage_fraction": null
+                },
+                "normalized_status": "UNQUANTIFIED",
+                "source_status": "COVERAGE_UNQUANTIFIED"
+              },
+              "derivation_algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Shrub and tree cover are modeled RAP fractional cover context only.",
+                "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+                "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+                "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+                "Woody cover does not prove low herbaceous production.",
+                "F08 must not replace F02 herbaceous Land Facts.",
+                "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+                "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+              ],
+              "raw_value": 0.11991331700656238,
+              "source_id": "USDA_ARS_RAP_V3_COVER",
+              "source_version": "v3",
+              "spatial_semantics": "parcel_mean",
+              "temporal_semantics": "annual_2025",
+              "unit": "fraction",
+              "value": 0.0011991331700656237,
+              "variable_id": "VAR_F08_TREE_COVER_FRACTION"
+            },
+            {
+              "applicability_status": "UNKNOWN",
+              "artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+              "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+              "coverage": {
+                "details": {
+                  "adapter_status": "AGGREGATE_API_VERIFIED",
+                  "eligible_area_m2": null,
+                  "masked_area_m2": null,
+                  "no_data_area_m2": null,
+                  "requested_area_m2": null,
+                  "valid_area_m2": null,
+                  "valid_coverage_fraction": null
+                },
+                "normalized_status": "UNQUANTIFIED",
+                "source_status": "COVERAGE_UNQUANTIFIED"
+              },
+              "derivation_algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+              "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+              "limitations": [
+                "Shrub and tree cover are modeled RAP fractional cover context only.",
+                "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+                "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+                "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+                "Woody cover does not prove low herbaceous production.",
+                "F08 must not replace F02 herbaceous Land Facts.",
+                "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+                "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+              ],
+              "raw_value": null,
+              "source_id": "USDA_ARS_RAP_V3_COVER",
+              "source_version": "v3",
+              "spatial_semantics": "parcel_mean",
+              "temporal_semantics": "annual_2025",
+              "unit": "fraction",
+              "value": 0.06615818264239436,
+              "variable_id": "VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION"
+            }
+          ],
+          "limitations": [
+            "Shrub and tree cover are modeled RAP fractional cover context only.",
+            "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+            "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+            "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+            "Woody cover does not prove low herbaceous production.",
+            "F08 must not replace F02 herbaceous Land Facts.",
+            "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+            "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+          ],
+          "provenance": {
+            "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "artifact_path": "memory://rap/coverV3",
+            "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+            "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+            "duplicate_coverV3_fetch": false,
+            "endpoint": "coverV3",
+            "fetched_at": "2026-08-08T19:39:36+00:00",
+            "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+            "raw_rap_shr_percent": 6.495904947232874,
+            "raw_rap_tre_percent": 0.11991331700656238,
+            "request_parameters": {
+              "mask": true,
+              "year": 2025
+            },
+            "response_or_artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+            "reused_existing_artifact": true,
+            "source_product_and_version": "RAP_v3",
+            "source_reference": "RAP_coverV3"
+          },
+          "ranking_effect": "NONE",
+          "signal": "NEEDS_VERIFICATION",
+          "unknowns": [
+            "Shared RAP eligible/masked/no-data/valid parcel areas are not quantified.",
+            "Botanical composition of woody cover is not verified.",
+            "Browse availability is not established.",
+            "Woody obstruction class is not established."
+          ]
+        }
+      },
+      "intended_operation": null,
+      "match_result_hash": "807e80a7e7d6e4e038de69fa6b43314b894956c2e7fcf5c7befec68cb8d48e0f",
+      "mireye_context": [
+        {
+          "authority": {
+            "canonical_for_parcel_facts": false,
+            "permitted_uses": [
+              "POINT_QA",
+              "FAST_CONTEXT",
+              "CANDIDATE_DISCOVERY",
+              "DILIGENCE_TRIGGER",
+              "JURISDICTION_CONTEXT"
+            ]
+          },
+          "confidence": 0.8,
+          "context_id": "mireye_e6ae5a3ff54c56ad186f8e30",
+          "context_type": "PROPERTY_DILIGENCE_CONTEXT",
+          "dataset_vintage": null,
+          "disposition": "RESOLVED",
+          "endpoint_or_preset": "/v1/lookup",
+          "fetched_at": null,
+          "fields": {},
+          "limitations": [
+            "canonical_for_parcel_facts=false",
+            "point_or_diligence_context_only",
+            "do_not_average_with_parcel_land_facts",
+            "do_not_promote_to_factor_land_facts",
+            "legal_title_not_verified",
+            "zoning_legality_not_confirmed"
+          ],
+          "parcel_grade": null,
+          "partial_failures": [],
+          "requested_point": {
+            "lat": 40.82069890587167,
+            "lng": -104.76116125377715
+          },
+          "source_urls": []
+        },
+        {
+          "authority": {
+            "canonical_for_parcel_facts": false,
+            "permitted_uses": [
+              "POINT_QA",
+              "FAST_CONTEXT",
+              "CANDIDATE_DISCOVERY",
+              "DILIGENCE_TRIGGER",
+              "JURISDICTION_CONTEXT"
+            ]
+          },
+          "confidence": null,
+          "context_id": "mireye_1badfa21b333ebfb3f5a1f02",
+          "context_type": "POINT_LAND_CONTEXT",
+          "dataset_vintage": null,
+          "disposition": "COMPLETE",
+          "endpoint_or_preset": "terrain",
+          "fetched_at": "2026-08-08T19:39:27.305783+00:00",
+          "fields": {
+            "aspect_cardinal": {
+              "confidence": "medium",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:05.508554+00:00",
+              "field_id": "aspect_cardinal",
+              "notes": null,
+              "raw_field_hash": "4459fce4935e774c1d2a5f7be8f21c31eb30a54c08ef86130835c3c8cdd8853c",
+              "source": "USGS_3DEP_COG",
+              "source_url": "https://www.usgs.gov/3d-elevation-program",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": "NW"
+            },
+            "bedrock_depth_cm": {
+              "confidence": "low",
+              "dataset_vintage": "Pelletier et al. 2016",
+              "fetched_at": "2026-08-08T19:18:15.108770+00:00",
+              "field_id": "bedrock_depth_cm",
+              "notes": null,
+              "raw_field_hash": "1b033547f3dddf52925b53fe249e3f7bc71fd7d6fa9b29d89b241a264dcaa7b1",
+              "source": "PELLETIER_DTB",
+              "source_url": "https://www.nrcs.usda.gov/resources/data-and-reports/u-s-general-soil-map-statsgo2",
+              "ttl_seconds": 31536000,
+              "unit": "centimeters",
+              "value": 100.0
+            },
+            "coast_distance_m": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:05.011279+00:00",
+              "field_id": "coast_distance_m",
+              "notes": null,
+              "raw_field_hash": "132fcaaabf50e4b35d9ca8f6441bdfc92f43b99f33f0d6d99f7a02285b3391d2",
+              "source": "NOAA_CUSP",
+              "source_url": "https://shoreline.noaa.gov/data/datasheets/cusp.html",
+              "ttl_seconds": 31536000,
+              "unit": "meters",
+              "value": 1160847.4285902004
+            },
+            "elevation": {
+              "confidence": "medium",
+              "dataset_vintage": "3DEP 1/3 arc-second seamless DEM",
+              "fetched_at": "2026-08-08T19:18:05.508879+00:00",
+              "field_id": "elevation",
+              "notes": null,
+              "raw_field_hash": "458d35d0888b18ad439c32d21fb0397263545f6b929ae919df5dd07e7ba1d132",
+              "source": "USGS_3DEP_COG",
+              "source_url": "https://www.usgs.gov/3d-elevation-program",
+              "ttl_seconds": 31536000,
+              "unit": "meters",
+              "value": 1643.5396728515625
+            },
+            "land_use_class": {
+              "confidence": "medium",
+              "dataset_vintage": "USFS LCMS Land_Use CONUS v2025-11 (2025 annual), ~120 m block-mode CONUS COG",
+              "fetched_at": "2026-08-08T19:18:04.983357+00:00",
+              "field_id": "land_use_class",
+              "notes": "LCMS Land_Use class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+              "raw_field_hash": "9cefb5dd555133028d5feaf93bd1abdeae7720523718eceacf8bfbe69c156740",
+              "source": "USFS_LCMS",
+              "source_url": "https://data.fs.usda.gov/geodata/rastergateway/LCMS/",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": "Rangeland or Pasture"
+            },
+            "lcms_class": {
+              "confidence": "medium",
+              "dataset_vintage": "USFS LCMS Land_Cover CONUS v2025-11 (2025 annual), ~120 m block-mode CONUS COG",
+              "fetched_at": "2026-08-08T19:18:04.982225+00:00",
+              "field_id": "lcms_class",
+              "notes": "LCMS Land_Cover class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+              "raw_field_hash": "7438bd74407795d016c739e2875ebe3c5e59205a8c5e9bf9ad969ade0184802d",
+              "source": "USFS_LCMS",
+              "source_url": "https://data.fs.usda.gov/geodata/rastergateway/LCMS/",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": "Grass/Forb/Herb"
+            },
+            "slope_degrees": {
+              "confidence": "medium",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:05.508469+00:00",
+              "field_id": "slope_degrees",
+              "notes": null,
+              "raw_field_hash": "863a10c9de24394426f5d5180ef1c507321a9d25d41bb5aeec28222a5fa5b87d",
+              "source": "USGS_3DEP_COG",
+              "source_url": "https://www.usgs.gov/3d-elevation-program",
+              "ttl_seconds": 31536000,
+              "unit": "degrees",
+              "value": 0.4867822825908661
+            },
+            "soil_drainage_class": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:22:49.353981+00:00",
+              "field_id": "soil_drainage_class",
+              "notes": null,
+              "raw_field_hash": "14c667090afa74bd7a7958a7aa286b84983aba6938a691406e5ac0a364276037",
+              "source": "NRCS_gNATSGO",
+              "source_url": "https://storage.googleapis.com/mireye-earth-data/soils/gnatsgo_mukey_conus_fy2025.tif",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": "Well drained"
+            }
+          },
+          "limitations": [
+            "canonical_for_parcel_facts=false",
+            "point_or_diligence_context_only",
+            "do_not_average_with_parcel_land_facts",
+            "do_not_promote_to_factor_land_facts",
+            "legal_title_not_verified",
+            "zoning_legality_not_confirmed"
+          ],
+          "parcel_grade": null,
+          "partial_failures": [],
+          "requested_point": {
+            "lat": 40.82069890587167,
+            "lng": -104.76116125377715
+          },
+          "source_urls": []
+        },
+        {
+          "authority": {
+            "canonical_for_parcel_facts": false,
+            "permitted_uses": [
+              "POINT_QA",
+              "FAST_CONTEXT",
+              "CANDIDATE_DISCOVERY",
+              "DILIGENCE_TRIGGER",
+              "JURISDICTION_CONTEXT"
+            ]
+          },
+          "confidence": null,
+          "context_id": "mireye_8feed97f907660d2fd330424",
+          "context_type": "POINT_HAZARD_CONTEXT",
+          "dataset_vintage": null,
+          "disposition": "COMPLETE",
+          "endpoint_or_preset": "flood_risk",
+          "fetched_at": "2026-08-08T19:39:32.473934+00:00",
+          "fields": {
+            "coast_distance_m": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:05.011279+00:00",
+              "field_id": "coast_distance_m",
+              "notes": null,
+              "raw_field_hash": "132fcaaabf50e4b35d9ca8f6441bdfc92f43b99f33f0d6d99f7a02285b3391d2",
+              "source": "NOAA_CUSP",
+              "source_url": "https://shoreline.noaa.gov/data/datasheets/cusp.html",
+              "ttl_seconds": 31536000,
+              "unit": "meters",
+              "value": 1160847.4285902004
+            },
+            "elevation": {
+              "confidence": "medium",
+              "dataset_vintage": "3DEP 1/3 arc-second seamless DEM",
+              "fetched_at": "2026-08-08T19:18:05.508879+00:00",
+              "field_id": "elevation",
+              "notes": null,
+              "raw_field_hash": "458d35d0888b18ad439c32d21fb0397263545f6b929ae919df5dd07e7ba1d132",
+              "source": "USGS_3DEP_COG",
+              "source_url": "https://www.usgs.gov/3d-elevation-program",
+              "ttl_seconds": 31536000,
+              "unit": "meters",
+              "value": 1643.5396728515625
+            },
+            "intersects_nhd_area": {
+              "confidence": "medium",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:19.657362+00:00",
+              "field_id": "intersects_nhd_area",
+              "notes": "No NHDPlus HR NHDArea polygon intersects this coordinate. This does not rule out FEMA NFHL flood-hazard coverage.",
+              "raw_field_hash": "6fb6d35b5a2f5d02828020f18908963fc5a4e4a8259c4f82aeb2532c18a21998",
+              "source": "USGS_NHDPLUS_HR",
+              "source_url": "https://hydro.nationalmap.gov/arcgis/rest/services/NHDPlus_HR/MapServer/8/query?f=json&outFields=%2A&returnGeometry=true&geometry=-104.76116125377715%2C40.82069890587167&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&resultRecordCount=1",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": false
+            },
+            "intersects_wetland": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:16.798134+00:00",
+              "field_id": "intersects_wetland",
+              "notes": null,
+              "raw_field_hash": "78ed1fdbab6fc54fdcf4bacad00d45bb31c385c16543a6ede90fb7e7e0a8bc8b",
+              "source": "USFWS_NWI",
+              "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": false
+            },
+            "ndvi_current": {
+              "confidence": "high",
+              "dataset_vintage": "S2 SR 60d window @ 2026-08-08",
+              "fetched_at": "2026-08-08T19:39:32.472416+00:00",
+              "field_id": "ndvi_current",
+              "notes": null,
+              "raw_field_hash": "5ec91e7af3b1bccceeab7bd4ec755b77dc1538ad41108ddd79b4afb5b3003edb",
+              "source": "COPERNICUS_S2_SR_HARMONIZED",
+              "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+              "ttl_seconds": 604800,
+              "unit": null,
+              "value": 0.21082854270935059
+            },
+            "nearest_waterbody_name": {
+              "confidence": "medium",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:19.657534+00:00",
+              "field_id": "nearest_waterbody_name",
+              "notes": "Nearest NHDPlus waterbody has no GNIS/name attribute.",
+              "raw_field_hash": "5a10a0cb88ae824bfea28ae2476fad3c972f8c86c7f3e09f87ed9325f112b184",
+              "source": "USGS_NHDPLUS_HR",
+              "source_url": "https://hydro.nationalmap.gov/arcgis/rest/services/NHDPlus_HR/MapServer/9/query?f=json&outFields=%2A&returnGeometry=true&geometry=-104.76116125377715%2C40.82069890587167&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=5000&units=esriSRUnit_Meter&outSR=4326&orderByFields=OBJECTID&resultRecordCount=200&resultOffset=0",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": null
+            },
+            "nearest_wetland_distance_m": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:16.798314+00:00",
+              "field_id": "nearest_wetland_distance_m",
+              "notes": null,
+              "raw_field_hash": "c66be0b6b70078ca458ac7f999d3991e4f6e2afc66a4226afcb036e861af9347",
+              "source": "USFWS_NWI",
+              "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+              "ttl_seconds": 31536000,
+              "unit": "m",
+              "value": 165.1655651864846
+            },
+            "surface_water_permanence_pct": {
+              "confidence": "medium",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:15.601243+00:00",
+              "field_id": "surface_water_permanence_pct",
+              "notes": null,
+              "raw_field_hash": "fc4badd65a7367b7d14b061bc5254d634ab9877fc7325e78ca6a0b4dcac6fcd3",
+              "source": "JRC_GSW",
+              "source_url": "https://global-surface-water.appspot.com/",
+              "ttl_seconds": 2592000,
+              "unit": "percent",
+              "value": 0.0
+            },
+            "tree_canopy_pct": {
+              "confidence": "high",
+              "dataset_vintage": "USFS/MRLC NLCD Tree Canopy Cover 2025 (v2025-6), CONUS COG (~120 m block-mean canopy %)",
+              "fetched_at": "2026-08-08T19:18:15.531285+00:00",
+              "field_id": "tree_canopy_pct",
+              "notes": "tree canopy cover (%) sampled from the bootstrapped USFS/NLCD CONUS COG",
+              "raw_field_hash": "2469de3908f723750a4fa3ff747a661daed7964f022dbb9ddf2fb5001b89e5e0",
+              "source": "USFS_NLCD_TCC",
+              "source_url": "https://data.fs.usda.gov/geodata/rastergateway/treecanopycover/",
+              "ttl_seconds": 31536000,
+              "unit": "percent",
+              "value": 0.0
+            },
+            "wetland_acres": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:16.798307+00:00",
+              "field_id": "wetland_acres",
+              "notes": null,
+              "raw_field_hash": "a50a0c1cfefd3114b03df06b5ca3566320ad55766dc09bb0bf216ca247157af4",
+              "source": "USFWS_NWI",
+              "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+              "ttl_seconds": 31536000,
+              "unit": "acre",
+              "value": 1.4374441941777256
+            },
+            "wetland_subtype": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:16.798298+00:00",
+              "field_id": "wetland_subtype",
+              "notes": null,
+              "raw_field_hash": "9167bc16e3a3eb75e4e2f01d65f4050aa66921696c9a71eb9ecf0a98a1c1f9ef",
+              "source": "USFWS_NWI",
+              "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": "R4SBC"
+            },
+            "wetland_type": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:16.798184+00:00",
+              "field_id": "wetland_type",
+              "notes": null,
+              "raw_field_hash": "edb01933234da7ecc5572e7e1bdba142a8fc28d358fa945e0729a2d816d43d60",
+              "source": "USFWS_NWI",
+              "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": "Riverine Intermittent Streambed Seasonally Flooded"
+            },
+            "wetlands_within_100m_count": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:16.798321+00:00",
+              "field_id": "wetlands_within_100m_count",
+              "notes": null,
+              "raw_field_hash": "7b3fb4384a75a9f563c4a5d45d940b884fea2fcb647892f442767b4ced80ddbd",
+              "source": "USFWS_NWI",
+              "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": 0
+            },
+            "wetlands_within_500m_count": {
+              "confidence": "high",
+              "dataset_vintage": null,
+              "fetched_at": "2026-08-08T19:18:16.798329+00:00",
+              "field_id": "wetlands_within_500m_count",
+              "notes": null,
+              "raw_field_hash": "9052c93ce8e3206871435193ebf146d6155085167010f9c59a1d9935bd96afe3",
+              "source": "USFWS_NWI",
+              "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+              "ttl_seconds": 31536000,
+              "unit": null,
+              "value": 3
+            },
+            "within_floodplain_polygon": {
+              "confidence": "high",
+              "dataset_vintage": "08123C_FBFM1",
+              "fetched_at": "2026-08-08T19:18:15.601753+00:00",
+              "field_id": "within_floodplain_polygon",
+              "notes": "FEMA NFHL Flood Hazard Zones intersect, but not an SFHA: Zone D; SFHA_TF=F; FLD_AR_ID=08123C_250; SOURCE_CIT=08123C_FBFM1.",
+              "raw_field_hash": "650cdc61945b9204061642203924d74be2219451dccaf2f0947b3230615bc463",
+              "source": "FEMA_NFHL",
+              "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+              "ttl_seconds": 2592000,
+              "unit": null,
+              "value": false
+            }
+          },
+          "limitations": [
+            "canonical_for_parcel_facts=false",
+            "point_or_diligence_context_only",
+            "do_not_average_with_parcel_land_facts",
+            "do_not_promote_to_factor_land_facts",
+            "legal_title_not_verified",
+            "zoning_legality_not_confirmed"
+          ],
+          "parcel_grade": null,
+          "partial_failures": [],
+          "requested_point": {
+            "lat": 40.82069890587167,
+            "lng": -104.76116125377715
+          },
+          "source_urls": []
+        }
+      ],
+      "mode": "DISCOVERY",
+      "operations": {
+        "COW_CALF_OPERATION": {
+          "confidence_limitation": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+          "decision_label": "HOLD",
+          "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+          "factor_evaluations": {
+            "F01_TOPOGRAPHY": {
+              "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+              "factor_id": "F01_TOPOGRAPHY",
+              "input_quality_state": "PARCEL_COMPLETE",
+              "ranking_effect": "NONE",
+              "signal": "CONTEXT_DEPENDENT"
+            },
+            "F02_HERBACEOUS_RESOURCE": {
+              "explanation_code": "F02_EXPL_SCOPE",
+              "factor_id": "F02_HERBACEOUS_RESOURCE",
+              "land_fact_gates": [
+                {
+                  "confidence_cap": "NEEDS_VERIFICATION",
+                  "gate_state": "NEEDS_VERIFICATION",
+                  "reason_code": "APPLICABILITY_UNKNOWN",
+                  "use_as_context": false,
+                  "use_as_primary_factor_evidence": false
+                },
+                {
+                  "confidence_cap": "NEEDS_VERIFICATION",
+                  "gate_state": "NEEDS_VERIFICATION",
+                  "reason_code": "APPLICABILITY_UNKNOWN",
+                  "use_as_context": false,
+                  "use_as_primary_factor_evidence": false
+                }
+              ],
+              "ranking_effect": "NONE",
+              "signal": "NEEDS_VERIFICATION"
+            },
+            "F03_LIVESTOCK_WATER": {
+              "explanation_code": "F03_EXPL_MISSING",
+              "factor_id": "F03_LIVESTOCK_WATER",
+              "field_verified_count": null,
+              "input_quality_state": "MISSING",
+              "mapped_candidate_count": null,
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN",
+              "verified_livestock_water_system_count": null
+            },
+            "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+              "component_count": null,
+              "ecological_site_count": 0,
+              "explanation_code": "F04_EXPL_MISSING",
+              "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+              "input_quality_state": "MISSING",
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN"
+            },
+            "F05_CLIMATE_DROUGHT_EXPOSURE": {
+              "canonical_precip_mm": null,
+              "canonical_precip_unit": null,
+              "explanation_code": "F05_EXPL_MISSING",
+              "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+              "input_quality_state": "MISSING",
+              "mutates_f02": false,
+              "mutates_f03": false,
+              "mutates_f04": false,
+              "normals_period": null,
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN"
+            },
+            "F06_PARCEL_CONFIGURATION": {
+              "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+              "area_m2": 1948514.793268538,
+              "compactness": 0.5889533621371998,
+              "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+              "factor_id": "F06_PARCEL_CONFIGURATION",
+              "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+              "geometry_validity": "VALID",
+              "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+              "perimeter_m": 6447.870894138111,
+              "polygon_part_count": 1,
+              "ranking_effect": "NONE",
+              "signal": "CONTEXT_DEPENDENT",
+              "working_crs": "EPSG:32613"
+            },
+            "F07_ROAD_AND_PHYSICAL_ACCESS": {
+              "explanation_code": "F07_EXPL_MISSING",
+              "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+              "input_quality_state": "MISSING",
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN"
+            },
+            "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": {
+              "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+              "applicability_status": "UNKNOWN",
+              "browse_inferred": false,
+              "combined_modeled_woody_cover_fraction": 0.06615818264239436,
+              "coverage_status": "COVERAGE_UNQUANTIFIED",
+              "duplicate_coverV3_fetch": false,
+              "explanation_code": "F08_EXPL_APPLICABILITY",
+              "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+              "input_quality_state": "RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY",
+              "labeled_complete": false,
+              "mask": true,
+              "obstruction_inferred": false,
+              "ranking_effect": "NONE",
+              "response_or_artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+              "reused_existing_artifact": true,
+              "shrub_cover_fraction": 0.06495904947232874,
+              "signal": "NEEDS_VERIFICATION",
+              "source_year": 2025,
+              "tree_cover_fraction": 0.0011991331700656237
+            }
+          },
+          "hard_constraints": [],
+          "limiting_signals": [
+            "F02_HERBACEOUS_RESOURCE",
+            "F03_LIVESTOCK_WATER",
+            "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+            "F05_CLIMATE_DROUGHT_EXPOSURE",
+            "F07_ROAD_AND_PHYSICAL_ACCESS",
+            "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+          ],
+          "operation_id": "COW_CALF_OPERATION",
+          "operation_profile_version": null,
+          "presentation_priority": 0,
+          "ranking_permission": false,
+          "ranking_position": null,
+          "supporting_signals": [
+            "F01_TOPOGRAPHY",
+            "F06_PARCEL_CONFIGURATION"
+          ],
+          "unknowns": [
+            "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+            "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+            "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+            "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified."
+          ]
+        },
+        "SHEEP_GRAZING": {
+          "confidence_limitation": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+          "decision_label": "HOLD",
+          "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+          "factor_evaluations": {
+            "F01_TOPOGRAPHY": {
+              "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+              "factor_id": "F01_TOPOGRAPHY",
+              "input_quality_state": "PARCEL_COMPLETE",
+              "ranking_effect": "NONE",
+              "signal": "CONTEXT_DEPENDENT"
+            },
+            "F02_HERBACEOUS_RESOURCE": {
+              "explanation_code": "F02_EXPL_SCOPE",
+              "factor_id": "F02_HERBACEOUS_RESOURCE",
+              "land_fact_gates": [
+                {
+                  "confidence_cap": "NEEDS_VERIFICATION",
+                  "gate_state": "NEEDS_VERIFICATION",
+                  "reason_code": "APPLICABILITY_UNKNOWN",
+                  "use_as_context": false,
+                  "use_as_primary_factor_evidence": false
+                },
+                {
+                  "confidence_cap": "NEEDS_VERIFICATION",
+                  "gate_state": "NEEDS_VERIFICATION",
+                  "reason_code": "APPLICABILITY_UNKNOWN",
+                  "use_as_context": false,
+                  "use_as_primary_factor_evidence": false
+                }
+              ],
+              "ranking_effect": "NONE",
+              "signal": "NEEDS_VERIFICATION"
+            },
+            "F03_LIVESTOCK_WATER": {
+              "explanation_code": "F03_EXPL_MISSING",
+              "factor_id": "F03_LIVESTOCK_WATER",
+              "field_verified_count": null,
+              "input_quality_state": "MISSING",
+              "mapped_candidate_count": null,
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN",
+              "verified_livestock_water_system_count": null
+            },
+            "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+              "component_count": null,
+              "ecological_site_count": 0,
+              "explanation_code": "F04_EXPL_MISSING",
+              "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+              "input_quality_state": "MISSING",
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN"
+            },
+            "F05_CLIMATE_DROUGHT_EXPOSURE": {
+              "canonical_precip_mm": null,
+              "canonical_precip_unit": null,
+              "explanation_code": "F05_EXPL_MISSING",
+              "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+              "input_quality_state": "MISSING",
+              "mutates_f02": false,
+              "mutates_f03": false,
+              "mutates_f04": false,
+              "normals_period": null,
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN"
+            },
+            "F06_PARCEL_CONFIGURATION": {
+              "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+              "area_m2": 1948514.793268538,
+              "compactness": 0.5889533621371998,
+              "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+              "factor_id": "F06_PARCEL_CONFIGURATION",
+              "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+              "geometry_validity": "VALID",
+              "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+              "perimeter_m": 6447.870894138111,
+              "polygon_part_count": 1,
+              "ranking_effect": "NONE",
+              "signal": "CONTEXT_DEPENDENT",
+              "working_crs": "EPSG:32613"
+            },
+            "F07_ROAD_AND_PHYSICAL_ACCESS": {
+              "explanation_code": "F07_EXPL_MISSING",
+              "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+              "input_quality_state": "MISSING",
+              "ranking_effect": "NONE",
+              "signal": "UNKNOWN"
+            },
+            "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": {
+              "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+              "applicability_status": "UNKNOWN",
+              "browse_inferred": false,
+              "combined_modeled_woody_cover_fraction": 0.06615818264239436,
+              "coverage_status": "COVERAGE_UNQUANTIFIED",
+              "duplicate_coverV3_fetch": false,
+              "explanation_code": "F08_EXPL_APPLICABILITY",
+              "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+              "input_quality_state": "RAP_OUTSIDE_OR_UNKNOWN_APPLICABILITY",
+              "labeled_complete": false,
+              "mask": true,
+              "obstruction_inferred": false,
+              "ranking_effect": "NONE",
+              "response_or_artifact_hash": "31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+              "reused_existing_artifact": true,
+              "shrub_cover_fraction": 0.06495904947232874,
+              "signal": "NEEDS_VERIFICATION",
+              "source_year": 2025,
+              "tree_cover_fraction": 0.0011991331700656237
+            }
+          },
+          "hard_constraints": [],
+          "limiting_signals": [
+            "F02_HERBACEOUS_RESOURCE",
+            "F03_LIVESTOCK_WATER",
+            "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+            "F05_CLIMATE_DROUGHT_EXPOSURE",
+            "F07_ROAD_AND_PHYSICAL_ACCESS",
+            "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+          ],
+          "operation_id": "SHEEP_GRAZING",
+          "operation_profile_version": null,
+          "presentation_priority": 1,
+          "ranking_permission": false,
+          "ranking_position": null,
+          "supporting_signals": [
+            "F01_TOPOGRAPHY",
+            "F06_PARCEL_CONFIGURATION"
+          ],
+          "unknowns": [
+            "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+            "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+            "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+            "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified."
+          ]
+        }
+      },
+      "parcel": {
+        "address": null,
+        "apn": null,
+        "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+        "geometry_id": "geom_3ae9eb7a1e03",
+        "geometry_reference": "fixture_geometry",
+        "geometry_validity": "VALID",
+        "jurisdiction": {
+          "county": null,
+          "county_fips": null,
+          "notes": null,
+          "resolution_status": "NOT_REQUESTED",
+          "state": null,
+          "zoning": null
+        },
+        "parcel_id": null,
+        "source_crs": "EPSG:4326"
+      },
+      "planned_actions": [],
+      "run_id": "api_DISCOVERY_DISCOVERY_PARCEL_RESOLUTION_pres_b592214eb0ea8a0b_mireye_LIVE",
+      "unknowns": [
+        "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+        "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+        "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+        "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified."
+      ]
+    },
+    "unified_output_ref": "memory://inv_23ff787980c14504/unified_output"
+  },
+  "investigation_http_status": 200,
+  "trace": {
+    "artifact_refs": [
+      "explanation",
+      "f02_coverV3_artifact_hash",
+      "f02_factor",
+      "factor:F01_TOPOGRAPHY",
+      "factor:F02_HERBACEOUS_RESOURCE",
+      "factor:F06_PARCEL_CONFIGURATION",
+      "factor:F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+      "geometry",
+      "geometry_binding",
+      "land_profile",
+      "match_result",
+      "mireye:POINT_HAZARD_CONTEXT",
+      "mireye:POINT_LAND_CONTEXT",
+      "mireye:PROPERTY_DILIGENCE_CONTEXT",
+      "unified_output"
+    ],
+    "canonical_factor_report_order": [
+      "F01_TOPOGRAPHY",
+      "F02_HERBACEOUS_RESOURCE",
+      "F03_LIVESTOCK_WATER",
+      "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+      "F05_CLIMATE_DROUGHT_EXPOSURE",
+      "F06_PARCEL_CONFIGURATION",
+      "F07_ROAD_AND_PHYSICAL_ACCESS",
+      "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+    ],
+    "constraints": {
+      "batch_authorized": false,
+      "f09_authorized": false,
+      "icp_authorized": false,
+      "live_mireye_attempted": false,
+      "live_network": false
+    },
+    "deterministic_execution_hash": "11d53a2ed227ccf464e6f9829190a0c655f67dbe856eea075c35b110d77deb54",
+    "execution_id": "exec_bf77250cf3ca49dc",
+    "execution_status": "PARTIAL",
+    "failures": [
+      {
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F03_LIVESTOCK_WATER",
+          "retryable": false
+        },
+        "status": "FAILED",
+        "step_id": "S07_PEER_F03_LIVESTOCK_WATER",
+        "tool_id": "adapter.nhd_naip_water"
+      },
+      {
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "retryable": false
+        },
+        "status": "FAILED",
+        "step_id": "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "tool_id": "adapter.usda_sda"
+      },
+      {
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F05_CLIMATE_DROUGHT_EXPOSURE",
+          "retryable": false
+        },
+        "status": "FAILED",
+        "step_id": "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+        "tool_id": "adapter.noaa_ncei_precip"
+      },
+      {
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F07_ROAD_AND_PHYSICAL_ACCESS",
+          "retryable": false
+        },
+        "status": "FAILED",
+        "step_id": "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+        "tool_id": "adapter.tiger_roads"
+      }
+    ],
+    "plan_sha256": "79bea1301aaacce35f19c76dea83ed7b210977cc8d5a327afe7bfa6bd139ad32",
+    "step_order_executed": [
+      "S01_VALIDATE_ONE_PARCEL",
+      "S02_RESOLVE_GEOMETRY",
+      "S03_MIREYE_PROPERTY",
+      "S04_MIREYE_POINT_LAND",
+      "S05_MIREYE_POINT_HAZARD",
+      "S06_F06_PARCEL_CONFIGURATION",
+      "S07_PEER_F01_TOPOGRAPHY",
+      "S07_PEER_F02_HERBACEOUS_RESOURCE",
+      "S07_PEER_F03_LIVESTOCK_WATER",
+      "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+      "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+      "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+      "S08_F08_WOODY_REUSE",
+      "S09_ASSEMBLE_LAND_PROFILE",
+      "S10_EVALUATE_ENGINE",
+      "S11_PROJECT_UNIFIED_OUTPUT",
+      "S13_EXPLAIN_AND_PRODUCT"
+    ],
+    "steps": [
+      {
+        "action": "COMPUTE",
+        "dependency_step_ids": [],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "geometry_validation"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.geometry_validate",
+        "status": "SUCCEEDED",
+        "step_id": "S01_VALIDATE_ONE_PARCEL",
+        "tool_id": "geometry.validate_one_parcel"
+      },
+      {
+        "action": "COMPUTE",
+        "dependency_step_ids": [
+          "S01_VALIDATE_ONE_PARCEL"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "geometry_binding",
+          "geometry"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.geometry_resolve",
+        "status": "SUCCEEDED",
+        "step_id": "S02_RESOLVE_GEOMETRY",
+        "tool_id": "geometry.resolve"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S02_RESOLVE_GEOMETRY"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "mireye:PROPERTY_DILIGENCE_CONTEXT"
+        ],
+        "parallel_group": "mireye_context",
+        "reused_artifact_refs": [
+          "mireye_fixture:PROPERTY_DILIGENCE_CONTEXT"
+        ],
+        "runner_id": "fixture.mireye_property",
+        "status": "SUCCEEDED",
+        "step_id": "S03_MIREYE_PROPERTY",
+        "tool_id": "mireye.property_diligence"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S02_RESOLVE_GEOMETRY"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "mireye:POINT_LAND_CONTEXT"
+        ],
+        "parallel_group": "mireye_context",
+        "reused_artifact_refs": [
+          "mireye_fixture:POINT_LAND_CONTEXT"
+        ],
+        "runner_id": "fixture.mireye_point_land",
+        "status": "SUCCEEDED",
+        "step_id": "S04_MIREYE_POINT_LAND",
+        "tool_id": "mireye.point_land"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S02_RESOLVE_GEOMETRY"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "mireye:POINT_HAZARD_CONTEXT"
+        ],
+        "parallel_group": "mireye_context",
+        "reused_artifact_refs": [
+          "mireye_fixture:POINT_HAZARD_CONTEXT"
+        ],
+        "runner_id": "fixture.mireye_point_hazard",
+        "status": "SUCCEEDED",
+        "step_id": "S05_MIREYE_POINT_HAZARD",
+        "tool_id": "mireye.point_hazard"
+      },
+      {
+        "action": "COMPUTE",
+        "dependency_step_ids": [
+          "S02_RESOLVE_GEOMETRY"
+        ],
+        "factor_id": "F06_PARCEL_CONFIGURATION",
+        "failure": null,
+        "output_refs": [
+          "factor:F06_PARCEL_CONFIGURATION"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [],
+        "runner_id": "deterministic.factor_f06_geometry_or_reuse",
+        "status": "SUCCEEDED",
+        "step_id": "S06_F06_PARCEL_CONFIGURATION",
+        "tool_id": "factor.f06_parcel_configuration"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S06_F06_PARCEL_CONFIGURATION"
+        ],
+        "factor_id": "F01_TOPOGRAPHY",
+        "failure": null,
+        "output_refs": [
+          "factor:F01_TOPOGRAPHY"
+        ],
+        "parallel_group": "peer_factors_after_f06",
+        "reused_artifact_refs": [
+          "computed_factor:F01_TOPOGRAPHY"
+        ],
+        "runner_id": "fixture.factor_f01",
+        "status": "SUCCEEDED",
+        "step_id": "S07_PEER_F01_TOPOGRAPHY",
+        "tool_id": "adapter.usgs_3dep"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S06_F06_PARCEL_CONFIGURATION"
+        ],
+        "factor_id": "F02_HERBACEOUS_RESOURCE",
+        "failure": null,
+        "output_refs": [
+          "factor:F02_HERBACEOUS_RESOURCE"
+        ],
+        "parallel_group": "peer_factors_after_f06",
+        "reused_artifact_refs": [
+          "computed_factor:F02_HERBACEOUS_RESOURCE",
+          "rap_coverV3:31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2"
+        ],
+        "runner_id": "fixture.factor_f02_rap",
+        "status": "SUCCEEDED",
+        "step_id": "S07_PEER_F02_HERBACEOUS_RESOURCE",
+        "tool_id": "adapter.rap_cover_production"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S06_F06_PARCEL_CONFIGURATION"
+        ],
+        "factor_id": "F03_LIVESTOCK_WATER",
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F03_LIVESTOCK_WATER",
+          "retryable": false
+        },
+        "output_refs": [],
+        "parallel_group": "peer_factors_after_f06",
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.factor_f03",
+        "status": "FAILED",
+        "step_id": "S07_PEER_F03_LIVESTOCK_WATER",
+        "tool_id": "adapter.nhd_naip_water"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S06_F06_PARCEL_CONFIGURATION"
+        ],
+        "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "retryable": false
+        },
+        "output_refs": [],
+        "parallel_group": "peer_factors_after_f06",
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.factor_f04",
+        "status": "FAILED",
+        "step_id": "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "tool_id": "adapter.usda_sda"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S06_F06_PARCEL_CONFIGURATION"
+        ],
+        "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F05_CLIMATE_DROUGHT_EXPOSURE",
+          "retryable": false
+        },
+        "output_refs": [],
+        "parallel_group": "peer_factors_after_f06",
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.factor_f05",
+        "status": "FAILED",
+        "step_id": "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+        "tool_id": "adapter.noaa_ncei_precip"
+      },
+      {
+        "action": "FETCH",
+        "dependency_step_ids": [
+          "S06_F06_PARCEL_CONFIGURATION"
+        ],
+        "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+        "failure": {
+          "details": {},
+          "error_code": "RunnerError",
+          "message": "factor_fixture_missing:F07_ROAD_AND_PHYSICAL_ACCESS",
+          "retryable": false
+        },
+        "output_refs": [],
+        "parallel_group": "peer_factors_after_f06",
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.factor_f07",
+        "status": "FAILED",
+        "step_id": "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+        "tool_id": "adapter.tiger_roads"
+      },
+      {
+        "action": "REUSE",
+        "dependency_step_ids": [
+          "S07_PEER_F02_HERBACEOUS_RESOURCE"
+        ],
+        "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+        "failure": null,
+        "output_refs": [
+          "factor:F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [
+          "rap_coverV3:31189e94767499745db98db2b25ea5aff627a5e9b58018c05cc12cf2a16dcfc2",
+          "factor:F02_HERBACEOUS_RESOURCE"
+        ],
+        "runner_id": "fixture.factor_f08_reuse",
+        "status": "SUCCEEDED",
+        "step_id": "S08_F08_WOODY_REUSE",
+        "tool_id": "factor.f08_woody_reuse_rap"
+      },
+      {
+        "action": "COMPUTE",
+        "dependency_step_ids": [
+          "S06_F06_PARCEL_CONFIGURATION",
+          "S07_PEER_F01_TOPOGRAPHY",
+          "S07_PEER_F02_HERBACEOUS_RESOURCE",
+          "S07_PEER_F03_LIVESTOCK_WATER",
+          "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+          "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+          "S08_F08_WOODY_REUSE"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "land_profile"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.assemble_land_profile",
+        "status": "PARTIAL",
+        "step_id": "S09_ASSEMBLE_LAND_PROFILE",
+        "tool_id": "profile.assemble"
+      },
+      {
+        "action": "EVALUATE",
+        "dependency_step_ids": [
+          "S09_ASSEMBLE_LAND_PROFILE"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "match_result"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.engine_evaluate",
+        "status": "SUCCEEDED",
+        "step_id": "S10_EVALUATE_ENGINE",
+        "tool_id": "engine.evaluate"
+      },
+      {
+        "action": "PROJECT",
+        "dependency_step_ids": [
+          "S10_EVALUATE_ENGINE"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "unified_output"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.project_unified",
+        "status": "SUCCEEDED",
+        "step_id": "S11_PROJECT_UNIFIED_OUTPUT",
+        "tool_id": "output.project_unified"
+      },
+      {
+        "action": "EXPLAIN",
+        "dependency_step_ids": [
+          "S11_PROJECT_UNIFIED_OUTPUT"
+        ],
+        "factor_id": null,
+        "failure": null,
+        "output_refs": [
+          "explanation",
+          "unified_output"
+        ],
+        "parallel_group": null,
+        "reused_artifact_refs": [],
+        "runner_id": "fixture.explanation_bind",
+        "status": "SUCCEEDED",
+        "step_id": "S13_EXPLAIN_AND_PRODUCT",
+        "tool_id": "explanation.bind_and_product"
+      }
+    ]
+  },
+  "trace_http_status": 200
+}

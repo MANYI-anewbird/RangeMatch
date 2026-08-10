@@ -1,0 +1,4 @@
+{
+  "_fixture_action": "BUILD_FROM_UNIFIED_OUTPUT",
+  "note": "Fixture provider instructs generator to build a grounded buyer report from Unified Output. Not a live LLM response substitute when OPENAI was requested."
+}

@@ -1,10 +1,11 @@
-# RangeMatch Agent Orchestration Spec (v0.2 draft)
+# RangeMatch Agent Orchestration Spec (v0.2)
 
-> Status: `DRAFT_FOR_PROTOTYPE`  
-> Date: 2026-08-08  
-> Phase: Product Prototype + Agent Orchestration  
-> Frozen Factors: `F01–F08` (`demo_factor_scope: CLOSED`)  
+> Status: `CURRENT_CANONICAL`
+> Date: 2026-08-08
+> Phase: Product Prototype + Agent Orchestration
+> Frozen Factors: `F01–F08` (`demo_factor_scope: CLOSED`)
 > F09+: `NOT_AUTHORIZED`
+> Current baseline: `docs/CURRENT_SYSTEM_BASELINE.md`
 
 ## Purpose
 
@@ -35,8 +36,8 @@ The user asks what the parcel may support without selecting an operation. Cow-Ca
 
 Accepted entry points (one per run):
 
-1. **Address / place string** → geocode / resolve → candidate parcel geometry  
-2. **Parcel geometry** (GeoJSON Feature / FeatureCollection with exactly one Feature)  
+1. **Address / place string** → geocode / resolve → candidate parcel geometry
+2. **Parcel geometry** (GeoJSON Feature / FeatureCollection with exactly one Feature)
 3. **Existing Land Profile** (re-evaluate only; skip fetch when provenance-complete)
 
 The run also records:
@@ -56,57 +57,35 @@ geometry_id, geometry_reference, geometry_hash, source_crs=EPSG:4326
 
 Geometry hash change **invalidates** F01–F08 evidence and forces recompute.
 
-## Canonical tool order
+## Canonical report order vs execution DAG
+
+Canonical **report** order remains `F01…F08`. Execution is a **dependency DAG** (not that list as a serial chain). See `docs/PLANNER_ROUTING_SPEC.md` and `src/rangematch/planner.py`.
 
 ```text
-1. Resolve geometry
-   address/place → parcel candidate(s) → bind geometry + hash
-   OR accept supplied parcel geometry
-
-2. Mireye context (point / diligence) — non-authoritative for parcel Land Facts
-   a. Property Diligence / lookup  # resolve parcel, jurisdiction, zoning/property context
-   b. Land Read                    # terrain, soil, land-cover / land-use point context
-   c. Hazards Read                 # flood, wetland, wildfire-related point triggers
-   Store as POINT_QA / diligence context only.
-   Do not promote Mireye point fields to F01–F08 Land Facts.
-   Check disposition, parcel_grade, confidence, provenance, and partial_failures.
-
-3. Parcel Factor collection (F01–F08 frozen paths only)
-   Prefer reuse of provenance-complete artifacts (geometry_hash + year/mask/source key).
-   Suggested dependency-aware order:
-     F06 Parcel Configuration          # geometry metrics; no remote required
-     F01 Topography                    # approved DEM path
-     F02 Herbaceous (RAP cover/production)
-     F08 Woody/Shrub                   # MUST reuse F02 coverV3 artifact; no duplicate RAP
-     F04 Soil / wetness / ecological site  # SDA primary; Mireye soil = QA only
-     F05 Climate / drought             # NOAA precip canonical; Mireye drought = QA
-     F03 Livestock water               # mapped candidates + evidence workflow
-     F07 Road / physical access        # TIGER 2025 All Roads
-
-4. Assemble Land Profile
-   Attach Land Facts, applicability, coverage, provenance, limitations, unknowns.
-
-5. Deterministic engine
-   evaluate_land_profile → MatchResult
-   (Cow-Calf / Sheep peer; ranking_effect remains NONE unless later reviewed)
-
-6. Explanation + diligence packaging
-   Constrained explanation bound to MatchResult.
-   Surface unknowns and diligence actions (including regulatory/land-rights
-   follow-ups as dynamic investigation — not as new frozen Factors).
-
-7. Product surface
-   Buyer-oriented UI / demo closure narrative from MatchResult only.
+resolve one geometry
+→ Mireye PROPERTY/LAND/HAZARD context (non-canonical; after location)
+→ F06 COMPUTE (geometry validity/hash/area/CRS)
+→ peers in parallel: F01, F02, F03, F04, F05, F07
+→ F08 REUSE F02-compatible RAP coverV3 (no duplicate RAP FETCH)
+→ assemble Land Profile in report order F01–F08
+→ EVALUATE engine → PROJECT unified output
+→ GENERATE constrained Buyer Report → VALIDATE against Unified Output
+→ RUN bounded Public Diligence official-source search (side branch; no Engine effect)
+→ DISPLAY decision dashboard + validated narrative or deterministic fallback + appendix
 ```
+
+Mireye contracts: `docs/MIREYE_PROTOTYPE_ADAPTER_CONTRACTS.md`.
+Unified offline adapter: `src/rangematch/mireye_adapter.py` + `docs/schemas/mireye_normalized_context.schema.json` + `docs/MIREYE_FIELD_USAGE_REGISTRY.yaml`.
+Mireye lookup and context adapters are implemented and have passed live checks on a clean network. Historical TLS/SafeBrowse failures remain in dated incident records and still fail closed if they recur.
 
 ## Hard routing rules
 
-1. **No F09+ Factor** without new authorization.  
-2. **F08 reuses F02** `coverV3` artifact (same hash/year/mask/applicability/coverage).  
-3. **No duplicate remote call** when a complete artifact already exists for the request key.  
-4. **Mireye ≠ parcel truth** for RAP/SDA/NOAA/TIGER Land Facts.  
-5. Missing / unquantified / conflicting evidence → `UNKNOWN` or `NEEDS_VERIFICATION`; never invent.  
-6. Engine decisions and Factor signals are authoritative; Agent may only restate them.  
+1. **No F09+ Factor** without new authorization.
+2. **F08 reuses F02** `coverV3` artifact (same hash/year/mask/applicability/coverage).
+3. **No duplicate remote call** when a complete artifact already exists for the request key.
+4. **Mireye ≠ parcel truth** for RAP/SDA/NOAA/TIGER Land Facts.
+5. Missing / unquantified / conflicting evidence → `UNKNOWN` or `NEEDS_VERIFICATION`; never invent.
+6. Engine decisions and Factor signals are authoritative; Agent may only restate them.
 7. Regulatory & land-rights work is a **dynamic diligence workflow**, not a new Factor in this phase.
 8. One parcel per run; no batch list, ICP screening, portfolio ranking, or region-search workflow in the prototype.
 9. Goal-directed priority changes investigation order only; it does not change Profile rules or evidence standards.
@@ -130,17 +109,42 @@ open_diligence: [...]
 prohibited_claims_applied: true
 ```
 
-## Out of scope for this draft
+## Unified output envelope
 
-- Full tool schema / OpenAPI  
-- Buyer UI wireframes  
-- Regulatory workflow detail (separate doc after planner stub)  
-- Competition demo script (after orchestration + UI skeleton)  
-- Unifying F01–F08 output contract schema (next short doc recommended)
+Product runs assemble into `docs/F01_F08_UNIFIED_OUTPUT_CONTRACT.md` (`RANGEMATCH_UNIFIED_OUTPUT@0.1.0`):
+
+```text
+run identity + parcel identity
+→ Mireye typed context (non-canonical)
+→ F01–F08 Factor results + Land Facts
+→ Cow-Calf / Sheep operation evaluations
+→ MatchResult (engine-authoritative)
+→ buyer decision report mapping (parcel facts, evidence matrix, actions)
+→ dynamic diligence findings with citations (non-F09)
+```
+
+Executable schema + projection are implemented (`docs/schemas/rangematch_unified_output.schema.json`, `src/rangematch/unified_output.py`). Factor science remains frozen.
+
+## Out of scope for this version
+
+- Full tool schema / OpenAPI
+- Batch/portfolio parcel discovery
+- Final regulatory or legal determination
+- Numeric fit/ranking without approved differential rules
 - Batch parcel search, portfolio ranking, ICP Finder, or regional site discovery
 
-## Immediate next docs
+## Packaging note
 
-1. `F01_F08_UNIFIED_OUTPUT_CONTRACT.md` — frozen Factor → Land Profile / MatchResult shape  
-2. Mireye Property Diligence / Land / Hazards adapter notes  
-3. Planner tool-routing stub (code) bound to this order
+Runtime packaging (API/UI) and optional Agent Skill submission packaging are now the next delivery phase. The Skill must reference canonical contracts rather than duplicate scientific rules. See `docs/PACKAGING_AND_DELIVERY_STRATEGY.md`.
+
+## Completed product slices and next work
+
+1. ~~Live/offline Mireye adapters implementing PROPERTY/LAND/HAZARD context contracts~~ — **done**; live verified on a clean network
+2. ~~Planner executor that runs the DAG without changing science~~ — **done** (`docs/PLANNER_EXECUTOR_SPEC.md`)
+3. ~~One-parcel API orchestration skeleton~~ — **done** (`docs/ONE_PARCEL_API_SPEC.md`, `src/rangematch/api.py`)
+4. ~~Buyer UI consuming validated narrative with deterministic fallback~~ — **done** (`web/`)
+5. ~~Constrained LLM Intent + Buyer Report + deterministic validation~~ — **done**; adversarial grounding tests included
+6. ~~Address/coordinate parcel resolution, map selection, and explicit boundary confirmation~~ — **done**
+7. ~~Public Diligence Agent with official-source citations~~ — **done**
+8. ~~Buyer decision report v2 with parcel values and evidence matrix~~ — **done**
+9. **Next:** competition packaging, deployment, and final end-to-end demo acceptance

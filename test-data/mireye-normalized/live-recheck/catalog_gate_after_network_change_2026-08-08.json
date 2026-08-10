@@ -1,0 +1,24 @@
+{
+  "affects_parcel_resolution": false,
+  "compatible": true,
+  "errors": [],
+  "etag": "\"205aa856ec719270d338205fe9b41eaca294b7afb95e94fe8296a196562f3ab4\"",
+  "field_count": 304,
+  "gate_id": "MIREYE_FIELD_CATALOG_COMPATIBILITY_GATE",
+  "gate_version": "0.1.0",
+  "http_status": 200,
+  "limitations": [
+    "Catalog compatibility is independent of parcel resolution status.",
+    "Catalog failure must not be rewritten as NO_MATCH / PARCEL_DATA_UNAVAILABLE.",
+    "Pinned baseline catalog version: 0.14.0."
+  ],
+  "missing_fields": [],
+  "observed_catalog_version": "0.14.0",
+  "observed_major": 0,
+  "pinned_catalog_version": "0.14.0",
+  "pinned_major": 0,
+  "previous_etag": null,
+  "status": "COMPATIBLE",
+  "type_mismatches": [],
+  "unit_mismatches": []
+}

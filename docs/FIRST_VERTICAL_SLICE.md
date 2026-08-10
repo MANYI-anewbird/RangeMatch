@@ -1,5 +1,7 @@
 # RangeMatch First Executable Vertical Slice
 
+> **Foundational engineering record.** The current product now includes live parcel resolution, Planner execution, validated LLM reporting, Public Diligence search, and the buyer report v2. This file remains authoritative for the F01–F08 vertical-slice behavior, not for current UI or deployment status.
+
 This prototype evaluates one CPER engineering Land Profile with the closed F01–F08 Factor set and no LLM decision authority.
 
 ```text

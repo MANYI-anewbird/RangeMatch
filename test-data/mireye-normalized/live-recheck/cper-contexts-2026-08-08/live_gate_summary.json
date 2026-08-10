@@ -1,0 +1,64 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "contexts": {
+    "POINT_HAZARD_CONTEXT": {
+      "adapter_status": "COMPLETE",
+      "context_id": "mireye_388fe5ad08daf7ae8c429edd",
+      "endpoint_status": {
+        "api_base_url": "https://api.mireye.com",
+        "bypass_env_proxy": true,
+        "endpoint": "/v1/fetch",
+        "error": null,
+        "error_class": null,
+        "http_status": 200,
+        "ok": true
+      },
+      "normalized_artifact": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/normalized_point_hazard_cper.json",
+      "partial_failure_count": 0,
+      "raw_artifact": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/raw_point_hazard_cper.json"
+    },
+    "POINT_LAND_CONTEXT": {
+      "adapter_status": "COMPLETE",
+      "context_id": "mireye_b979f160fc3fbec66233b227",
+      "endpoint_status": {
+        "api_base_url": "https://api.mireye.com",
+        "bypass_env_proxy": true,
+        "endpoint": "/v1/fetch",
+        "error": null,
+        "error_class": null,
+        "http_status": 200,
+        "ok": true
+      },
+      "normalized_artifact": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/normalized_point_land_cper.json",
+      "partial_failure_count": 0,
+      "raw_artifact": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/raw_point_land_cper.json"
+    },
+    "PROPERTY_DILIGENCE_CONTEXT": {
+      "adapter_status": "COMPLETE",
+      "context_id": "mireye_12617580a6287c103b2176cb",
+      "disposition": "RESOLVED",
+      "endpoint_status": {
+        "api_base_url": "https://api.mireye.com",
+        "bypass_env_proxy": true,
+        "endpoint": "/v1/lookup",
+        "error": null,
+        "error_class": null,
+        "http_status": 200,
+        "ok": true
+      },
+      "normalized_artifact": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/normalized_property_diligence_cper.json",
+      "partial_failure_count": 0,
+      "raw_artifact": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/raw_property_diligence_cper.json"
+    }
+  },
+  "credential_safety": "PASS",
+  "factor_writes": false,
+  "gate_id": "MIREYE_ADAPTER_CPER_LIVE_GATE",
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625
+  },
+  "match_result_changed": false,
+  "transport_blocked": false
+}

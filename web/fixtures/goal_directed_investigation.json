@@ -1,0 +1,1943 @@
+{
+  "investigation_id": "inv_a0ad110862fd4d79",
+  "status": "PARTIAL",
+  "mode": "GOAL_DIRECTED",
+  "intended_operation": "COW_CALF_OPERATION",
+  "execution_source": "DEMO_FIXTURE",
+  "replay_label": "REPLAY_DEMO_FIXTURE_NOT_LIVE",
+  "plan_ref": "api_GOAL_DIRECTED_COW_CALF_OPERATION_DEMO_FIXTURE_land_profile_cper_001.json_mireye_BLOCKED_EXTERNAL",
+  "plan_sha256": "7fd1759d8eae66e5612ed756376c509924503b342efcff87feee8d7f6af6574c",
+  "execution_ref": "exec_2b8eceabf9474cd8",
+  "deterministic_execution_hash": "d68be9f6d184b15e364757d07cb7840dda15496ccb2bda4fa3abfbeded8e96dc",
+  "unified_output_ref": "memory://inv_a0ad110862fd4d79/unified_output",
+  "unified_output": {
+    "contract_version": "RANGEMATCH_UNIFIED_OUTPUT@0.1.0",
+    "run_id": "api_GOAL_DIRECTED_COW_CALF_OPERATION_DEMO_FIXTURE_land_profile_cper_001.json_mireye_BLOCKED_EXTERNAL",
+    "mode": "GOAL_DIRECTED",
+    "intended_operation": "COW_CALF_OPERATION",
+    "planned_actions": [],
+    "created_at": "2026-08-08T14:10:23Z",
+    "engine_version": "0.1.0",
+    "engine_input_hash": "17605002066c90f8ae10d1bd67964687e3508627f18eca831667c0e9482cf3f2",
+    "match_result_hash": "da0be081e6a45f9c7c1d14149fa5eeecb098053afa04cb749df15add5a7443e5",
+    "explanation_binding_hash": "da0be081e6a45f9c7c1d14149fa5eeecb098053afa04cb749df15add5a7443e5",
+    "parcel": {
+      "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+      "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+      "geometry_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+      "source_crs": "EPSG:4326",
+      "address": null,
+      "apn": null,
+      "parcel_id": null,
+      "jurisdiction": {
+        "resolution_status": "RESOLVED",
+        "county": "Weld",
+        "state": "CO",
+        "county_fips": "08123",
+        "zoning": null,
+        "notes": null
+      },
+      "geometry_validity": "VALID"
+    },
+    "mireye_context": [
+      {
+        "context_type": "PROPERTY_DILIGENCE_CONTEXT",
+        "endpoint_or_preset": "/v1/lookup",
+        "requested_point": {
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309"
+        },
+        "disposition": "BLOCKED_EXTERNAL",
+        "parcel_grade": null,
+        "fields": {},
+        "confidence": null,
+        "fetched_at": null,
+        "partial_failures": [
+          {
+            "field_id": null,
+            "source": "MIREYE_TRANSPORT",
+            "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+            "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+            "retryable": false,
+            "normalized_effect": "UNKNOWN"
+          }
+        ],
+        "source_urls": [],
+        "dataset_vintage": null,
+        "limitations": [
+          "BLOCKED_EXTERNAL: Mireye live HTTP not attempted in fixture-backed executor",
+          "canonical_for_parcel_facts=false",
+          "diligence_note: confirm Mireye connectivity after SafeBrowse whitelist; do not treat absence as empty success"
+        ],
+        "authority": {
+          "canonical_for_parcel_facts": false,
+          "permitted_uses": [
+            "POINT_QA",
+            "FAST_CONTEXT",
+            "CANDIDATE_DISCOVERY",
+            "DILIGENCE_TRIGGER",
+            "JURISDICTION_CONTEXT"
+          ]
+        },
+        "context_id": "blocked_property_diligence_context"
+      },
+      {
+        "context_type": "POINT_LAND_CONTEXT",
+        "endpoint_or_preset": "terrain",
+        "requested_point": {
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309"
+        },
+        "disposition": "BLOCKED_EXTERNAL",
+        "parcel_grade": null,
+        "fields": {},
+        "confidence": null,
+        "fetched_at": null,
+        "partial_failures": [
+          {
+            "field_id": null,
+            "source": "MIREYE_TRANSPORT",
+            "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+            "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+            "retryable": false,
+            "normalized_effect": "UNKNOWN"
+          }
+        ],
+        "source_urls": [],
+        "dataset_vintage": null,
+        "limitations": [
+          "BLOCKED_EXTERNAL: Mireye live HTTP not attempted in fixture-backed executor",
+          "canonical_for_parcel_facts=false",
+          "diligence_note: confirm Mireye connectivity after SafeBrowse whitelist; do not treat absence as empty success"
+        ],
+        "authority": {
+          "canonical_for_parcel_facts": false,
+          "permitted_uses": [
+            "POINT_QA",
+            "FAST_CONTEXT",
+            "CANDIDATE_DISCOVERY",
+            "DILIGENCE_TRIGGER",
+            "JURISDICTION_CONTEXT"
+          ]
+        },
+        "context_id": "blocked_point_land_context"
+      },
+      {
+        "context_type": "POINT_HAZARD_CONTEXT",
+        "endpoint_or_preset": "flood_risk",
+        "requested_point": {
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309"
+        },
+        "disposition": "BLOCKED_EXTERNAL",
+        "parcel_grade": null,
+        "fields": {},
+        "confidence": null,
+        "fetched_at": null,
+        "partial_failures": [
+          {
+            "field_id": null,
+            "source": "MIREYE_TRANSPORT",
+            "error_code": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+            "message": "Mireye live transport blocked by documented SafeBrowse middlebox; fixture executor did not call live API",
+            "retryable": false,
+            "normalized_effect": "UNKNOWN"
+          }
+        ],
+        "source_urls": [],
+        "dataset_vintage": null,
+        "limitations": [
+          "BLOCKED_EXTERNAL: Mireye live HTTP not attempted in fixture-backed executor",
+          "canonical_for_parcel_facts=false",
+          "diligence_note: confirm Mireye connectivity after SafeBrowse whitelist; do not treat absence as empty success"
+        ],
+        "authority": {
+          "canonical_for_parcel_facts": false,
+          "permitted_uses": [
+            "POINT_QA",
+            "FAST_CONTEXT",
+            "CANDIDATE_DISCOVERY",
+            "DILIGENCE_TRIGGER",
+            "JURISDICTION_CONTEXT"
+          ]
+        },
+        "context_id": "blocked_point_hazard_context"
+      }
+    ],
+    "factors": {
+      "F01_TOPOGRAPHY": {
+        "factor_id": "F01_TOPOGRAPHY",
+        "factor_version": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+        "input_quality_state": "PARCEL_COMPLETE",
+        "signal": "CONTEXT_DEPENDENT",
+        "ranking_effect": "NONE",
+        "land_facts": [
+          {
+            "variable_id": "VAR_F01_ELEVATION_MEDIAN_M",
+            "value": 1653.8697509765625,
+            "unit": "m",
+            "raw_value": null,
+            "spatial_semantics": "parcel_aggregate",
+            "temporal_semantics": null,
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": null,
+            "source_version": null,
+            "artifact_hash": null,
+            "derivation_algorithm_version": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+            "applicability_status": null,
+            "coverage": {
+              "normalized_status": "UNKNOWN",
+              "source_status": null,
+              "details": {}
+            },
+            "confidence_or_quality_status": null,
+            "limitations": []
+          },
+          {
+            "variable_id": "VAR_F01_SLOPE_MEDIAN_DEGREES",
+            "value": 2.395727249934432,
+            "unit": "degree",
+            "raw_value": null,
+            "spatial_semantics": "parcel_aggregate",
+            "temporal_semantics": null,
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": null,
+            "source_version": null,
+            "artifact_hash": null,
+            "derivation_algorithm_version": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+            "applicability_status": null,
+            "coverage": {
+              "normalized_status": "UNKNOWN",
+              "source_status": null,
+              "details": {}
+            },
+            "confidence_or_quality_status": null,
+            "limitations": []
+          }
+        ],
+        "applicability": {
+          "domain_status": null
+        },
+        "coverage": {
+          "normalized_status": "UNKNOWN",
+          "source_status": null,
+          "details": {}
+        },
+        "provenance": {
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": null,
+          "algorithm_version": null
+        },
+        "limitations": [],
+        "unknowns": [],
+        "diligence_actions": [],
+        "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+        "evaluation_extras": {}
+      },
+      "F02_HERBACEOUS_RESOURCE": {
+        "factor_id": "F02_HERBACEOUS_RESOURCE",
+        "factor_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+        "input_quality_state": "MISSING",
+        "signal": "NEEDS_VERIFICATION",
+        "ranking_effect": "NONE",
+        "land_facts": [
+          {
+            "variable_id": "VAR_F02_PERENNIAL_HERB_COVER",
+            "value": 32.98657702821575,
+            "unit": "percent_cover",
+            "raw_value": null,
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": "RAP_coverV3",
+            "source_version": "v3",
+            "artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "derivation_algorithm_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+            "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "coverage": {
+              "normalized_status": "UNQUANTIFIED",
+              "source_status": "COVERAGE_UNQUANTIFIED",
+              "details": {
+                "requested_area_m2": 1406580,
+                "eligible_area_m2": null,
+                "masked_area_m2": null,
+                "no_data_area_m2": null,
+                "valid_area_m2": null,
+                "valid_coverage_fraction": null,
+                "adapter_status": "AGGREGATE_API_VERIFIED"
+              }
+            },
+            "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "limitations": [
+              "PFG combines perennial grasses and forbs.",
+              "Modeled cover is not standing biomass, available forage, palatability, or nutritive value."
+            ]
+          },
+          {
+            "variable_id": "VAR_F02_ANNUAL_HERB_PRODUCTION",
+            "value": 937.6780475452124,
+            "unit": "pound_per_acre",
+            "raw_value": null,
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_accumulated_new_growth_2025",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": "RAP_productionV3",
+            "source_version": "v3",
+            "artifact_hash": "f6c1e72a36ff9263df638723f3f952169eacd68f4e0ffa20d821421a7f4dfb96",
+            "derivation_algorithm_version": "F02_HERBACEOUS_DERIVATION_SPEC.yaml@0.1.0",
+            "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "coverage": {
+              "normalized_status": "UNQUANTIFIED",
+              "source_status": "COVERAGE_UNQUANTIFIED",
+              "details": {
+                "requested_area_m2": 1406580,
+                "eligible_area_m2": null,
+                "masked_area_m2": null,
+                "no_data_area_m2": null,
+                "valid_area_m2": null,
+                "valid_coverage_fraction": null,
+                "adapter_status": "AGGREGATE_API_VERIFIED"
+              }
+            },
+            "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "limitations": [
+              "Production is modeled new growth, not standing biomass.",
+              "Production is not available forage, carrying capacity, or stocking rate."
+            ]
+          }
+        ],
+        "applicability": {
+          "domain_status": null
+        },
+        "coverage": {
+          "normalized_status": "UNQUANTIFIED",
+          "source_status": "COVERAGE_UNQUANTIFIED",
+          "details": {
+            "requested_area_m2": 1406580,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          }
+        },
+        "provenance": {
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": null,
+          "algorithm_version": null
+        },
+        "limitations": [
+          "RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.",
+          "Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity."
+        ],
+        "unknowns": [
+          "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+          "Botanical composition is not verified.",
+          "Operation-specific palatability is not verified.",
+          "Nutritive value is not verified."
+        ],
+        "diligence_actions": [],
+        "explanation_code": "F02_EXPL_COVERAGE",
+        "evaluation_extras": {
+          "land_fact_gates": [
+            {
+              "gate_state": "LIMITED_CONTEXT",
+              "use_as_context": true,
+              "use_as_primary_factor_evidence": false,
+              "confidence_cap": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+              "reason_code": "COVERAGE_UNQUANTIFIED"
+            },
+            {
+              "gate_state": "LIMITED_CONTEXT",
+              "use_as_context": true,
+              "use_as_primary_factor_evidence": false,
+              "confidence_cap": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+              "reason_code": "COVERAGE_UNQUANTIFIED"
+            }
+          ]
+        }
+      },
+      "F03_LIVESTOCK_WATER": {
+        "factor_id": "F03_LIVESTOCK_WATER",
+        "factor_version": "F03_CANDIDATE_WATER_DERIVATION_SPEC.yaml@0.1.0",
+        "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+        "signal": "NEEDS_VERIFICATION",
+        "ranking_effect": "NONE",
+        "land_facts": [],
+        "applicability": {
+          "domain_status": null
+        },
+        "coverage": {
+          "normalized_status": "UNKNOWN",
+          "source_status": null,
+          "details": {}
+        },
+        "provenance": {
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": null,
+          "algorithm_version": null
+        },
+        "limitations": [
+          "Mapped NHD hydrography features are candidate context, not verified livestock-water sources.",
+          "REMOTELY_SUPPORTED_CANDIDATE is remote presence plus an approved remote attribute only; it is not usable livestock water.",
+          "Only 3 of 9 mapped candidates were deterministically sampled for remote review; 6 remain UNREVIEWED, not absent or rejected.",
+          "Euclidean distance is not traversable animal-access distance.",
+          "Reliability, capacity, quality, legal access, livestock accessibility, and seasonal operation remain unresolved.",
+          "field_verified_count is 0; verified_count == 0 does not mean the land has no water.",
+          "Synthetic field-evidence fixtures are TEST_ONLY and are excluded from this live CPER Land Profile."
+        ],
+        "unknowns": [
+          "No FIELD_VERIFIED_LIVESTOCK_WATER system is in evidence for CPER.",
+          "Unreviewed mapped candidates have not been remotely or field reviewed.",
+          "Seasonal reliability for livestock use remains unresolved.",
+          "Deliverable capacity remains unresolved.",
+          "Water quality remains unresolved.",
+          "Livestock accessibility remains unresolved.",
+          "Legal access remains unresolved."
+        ],
+        "diligence_actions": [],
+        "explanation_code": "F03_EXPL_CANDIDATES_NOT_VERIFIED",
+        "evaluation_extras": {
+          "mapped_candidate_count": 9,
+          "verified_livestock_water_system_count": 0,
+          "field_verified_count": 0,
+          "remote_evidence_summary": {
+            "total_mapped_candidates": 9,
+            "deterministically_sampled_for_remote_review": 3,
+            "remotely_supported": 2,
+            "sampled_but_still_mapped": 1,
+            "field_verified": 0,
+            "unreviewed_candidates": 6,
+            "unreviewed_status": "UNREVIEWED_NOT_ABSENT_OR_REJECTED",
+            "sample_coverage_limitation": "Only 3 of 9 candidates were remotely reviewed under STABLE_CANDIDATE_ID_ORDER_MAX_3.",
+            "selection_method": "STABLE_CANDIDATE_ID_ORDER_MAX_3",
+            "five_parcel_sample_disclosure": "15 reviewed out of 80 available across five frozen parcels",
+            "factor_state": "MAPPED_CANDIDATES_ONLY",
+            "signal": "NEEDS_VERIFICATION",
+            "ranking_effect": "NONE",
+            "remotely_supported_does_not_mean_usable_livestock_water": true,
+            "verified_count_zero_does_not_mean_no_water": true,
+            "synthetic_field_evidence_demo": {
+              "status": "TEST_ONLY",
+              "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+              "part_of_cper_live_profile": false,
+              "reference": "test-data/f03_field_evidence_demo/field_evidence_demo_result.json"
+            },
+            "unresolved_dimensions": [
+              "seasonal_reliability_for_livestock_use",
+              "deliverable_capacity",
+              "water_quality",
+              "livestock_accessibility",
+              "legal_access"
+            ]
+          },
+          "demo_statements": [
+            "REMOTELY_SUPPORTED does not mean usable livestock water.",
+            "FIELD_VERIFIED remains zero for this live CPER profile.",
+            "Six unsampled candidates are UNREVIEWED, not absent or rejected.",
+            "The synthetic field-evidence demo is TEST_ONLY and is not part of CPER live evidence.",
+            "Water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved."
+          ]
+        }
+      },
+      "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+        "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "factor_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+        "input_quality_state": "PARCEL_COMPLETE",
+        "signal": "CONTEXT_DEPENDENT",
+        "ranking_effect": "NONE",
+        "land_facts": [],
+        "applicability": {
+          "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+          "review_status": "VERIFIED",
+          "basis": [
+            "F04_SOIL_SITE_ATOMICITY_AND_SOURCE_AUDIT",
+            "CPER_LIVE_DATA_GATE"
+          ],
+          "notes": "F04 v0.1 is data-quality and context only; no directional suitability signal is approved."
+        },
+        "coverage": {
+          "normalized_status": "COMPLETE",
+          "source_status": "COMPLETE",
+          "details": {
+            "requested_area_m2": 1404078.7002779155,
+            "valid_area_m2": 1404078.7002779734,
+            "valid_coverage_fraction": 1.0,
+            "adapter_status": "SDA_POLYGON_AND_TABULAR_VERIFIED"
+          }
+        },
+        "provenance": {
+          "source_reference": "USDA_NRCS_SDA_SSURGO_AND_EDIT",
+          "fetched_at": "2026-08-07T22:30:00Z",
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": "2807be243bc959b2eab4e2177986aa8cf88f0defd7b7694b001c95ab837dc4b8",
+          "derivation_spec_version": "F04_SOIL_SITE_DERIVATION_SPEC.yaml@0.1.0",
+          "primary_path": "OFFICIAL_SDA_PARCEL_POLYGONS_COMPONENTS_HORIZONS",
+          "mireye_role": "POINT_DISPLAY_AND_QA_ONLY"
+        },
+        "limitations": [
+          "No composite soil score is created.",
+          "Controlled categories are preserved as distributions, not ordinal averages.",
+          "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+          "Ecological-site names do not imply current vegetation or operation ranking.",
+          "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+          "Available-water storage is omitted from profile evidence until a depth interval is approved."
+        ],
+        "unknowns": [
+          "Within-map-unit component locations are unknown.",
+          "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+          "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+          "Ecological-site references do not establish current vegetation state.",
+          "No approved depth interval exists for parcel available-water storage in the Land Profile.",
+          "Some components lack ecological-site linkage; absent linkage remains UNKNOWN."
+        ],
+        "diligence_actions": [],
+        "explanation_code": "F04_EXPL_CONTEXT_ONLY",
+        "evaluation_extras": {
+          "component_count": 16,
+          "ecological_site_count": 6
+        }
+      },
+      "F05_CLIMATE_DROUGHT_EXPOSURE": {
+        "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+        "factor_version": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+        "input_quality_state": "CLIMATE_CONTEXT_COMPLETE",
+        "signal": "CONTEXT_DEPENDENT",
+        "ranking_effect": "NONE",
+        "land_facts": [],
+        "applicability": {
+          "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+          "review_status": "VERIFIED_FOR_DATA_CAPABILITY",
+          "basis": [
+            "F05_CLIMATE_DROUGHT_ATOMICITY_AND_SOURCE_AUDIT",
+            "F05_CLIMATE_DROUGHT_EVIDENCE_REGISTRY",
+            "CPER_LIVE_DATA_GATE"
+          ],
+          "notes": "F05 v0.1 is data-quality and context only; annprcp_norm is retained as a Land Fact and is not converted into suitability."
+        },
+        "coverage": {
+          "normalized_status": "COMPLETE",
+          "source_status": "COMPLETE",
+          "details": {
+            "detail": "COMPLETE_SINGLE_CELL_COVERS_SMALL_PARCEL",
+            "adapter_status": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF"
+          }
+        },
+        "provenance": {
+          "source_reference": "NOAA_NCEI_DIRECT_HTTPS_NETCDF",
+          "fetched_at": "2026-08-08T02:23:15.739446+00:00",
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": "6d1dcb9620f11d50f6da41910c642753198c8dffbf526607630bae0a0f75e1d2",
+          "derivation_spec_version": "F05_CLIMATE_DROUGHT_DETERMINISTIC_RULES.yaml@0.1.0",
+          "primary_path": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF",
+          "canonical_variable": "annprcp_norm",
+          "acis_role": "SECONDARY_QA_OR_FALLBACK",
+          "mireye_role": "POINT_QA_AND_FAST_CONTEXT"
+        },
+        "limitations": [
+          "Mean annual precipitation is a Land Fact, not a suitability score.",
+          "Current USDM class is current-condition context only, not drought history.",
+          "Mireye point climate fields must not replace canonical NOAA parcel precipitation.",
+          "ACIS precipitation series is secondary QA/fallback and is not the canonical runtime source.",
+          "No precipitation, temperature, heat-day, or USDM suitability threshold is approved.",
+          "F05 must not alter F02 forage, F03 livestock-water, or F04 wetness signals.",
+          "Flood/FEMA hazard is out of scope for F05."
+        ],
+        "unknowns": [
+          "Drought-history summary method is not frozen.",
+          "Precipitation seasonality and interannual variability methods are not frozen.",
+          "No biological heat-stress threshold is approved for Cow-Calf or Sheep."
+        ],
+        "diligence_actions": [],
+        "explanation_code": "F05_EXPL_CONTEXT_ONLY",
+        "evaluation_extras": {
+          "canonical_precip_mm": 345.74,
+          "canonical_precip_unit": "mm/year",
+          "normals_period": "1991-2020",
+          "mutates_f02": false,
+          "mutates_f03": false,
+          "mutates_f04": false
+        }
+      },
+      "F06_PARCEL_CONFIGURATION": {
+        "factor_id": "F06_PARCEL_CONFIGURATION",
+        "factor_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+        "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+        "signal": "CONTEXT_DEPENDENT",
+        "ranking_effect": "NONE",
+        "land_facts": [
+          {
+            "variable_id": "VAR_F06_AREA_M2",
+            "value": 1404078.7002779155,
+            "unit": "m2",
+            "raw_value": null,
+            "spatial_semantics": "parcel_aggregate",
+            "temporal_semantics": null,
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": null,
+            "source_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+            "artifact_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "derivation_algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+            "applicability_status": null,
+            "coverage": {
+              "normalized_status": "UNKNOWN",
+              "source_status": null,
+              "details": {}
+            },
+            "confidence_or_quality_status": null,
+            "limitations": [
+              "Parcel area is geometric context, not grazable area or carrying capacity."
+            ]
+          },
+          {
+            "variable_id": "VAR_F06_PERIMETER_M",
+            "value": 4749.852971191508,
+            "unit": "m",
+            "raw_value": null,
+            "spatial_semantics": "parcel_aggregate",
+            "temporal_semantics": null,
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": null,
+            "source_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+            "artifact_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "derivation_algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+            "applicability_status": null,
+            "coverage": {
+              "normalized_status": "UNKNOWN",
+              "source_status": null,
+              "details": {}
+            },
+            "confidence_or_quality_status": null,
+            "limitations": [
+              "Parcel area is geometric context, not grazable area or carrying capacity."
+            ]
+          }
+        ],
+        "applicability": {
+          "domain_status": null
+        },
+        "coverage": {
+          "normalized_status": "UNKNOWN",
+          "source_status": null,
+          "details": {}
+        },
+        "provenance": {
+          "source_reference": "test-data/engineering_test_geometry_cper_001.geojson",
+          "fetched_at": "2026-08-08T06:00:00Z",
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0",
+          "working_crs": "EPSG:32613",
+          "source_crs": "EPSG:4326"
+        },
+        "limitations": [
+          "Parcel area is geometric context, not grazable area or carrying capacity.",
+          "Parcel perimeter is not fencing cost.",
+          "Compactness is not operational efficiency or suitability.",
+          "Measurements use projected UTM meters; not a legal survey acreage.",
+          "v0.1 perimeter excludes interior rings/holes.",
+          "v0.1 does not automatically repair invalid geometry.",
+          "Geodesic QA is deferred and not required for v0.1."
+        ],
+        "unknowns": [],
+        "diligence_actions": [],
+        "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+        "evaluation_extras": {
+          "area_m2": 1404078.7002779155,
+          "perimeter_m": 4749.852971191508,
+          "compactness": 0.7820616361495341,
+          "polygon_part_count": 1,
+          "geometry_validity": "VALID",
+          "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+          "working_crs": "EPSG:32613",
+          "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0"
+        }
+      },
+      "F07_ROAD_AND_PHYSICAL_ACCESS": {
+        "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+        "factor_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+        "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+        "signal": "CONTEXT_DEPENDENT",
+        "ranking_effect": "NONE",
+        "land_facts": [
+          {
+            "variable_id": "VAR_F07_NEAREST_MAPPED_ROAD_DISTANCE_M",
+            "value": 0.0,
+            "unit": "m",
+            "raw_value": null,
+            "spatial_semantics": "parcel_aggregate",
+            "temporal_semantics": null,
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+            "source_version": "2025",
+            "artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+            "derivation_algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+            "applicability_status": null,
+            "coverage": {
+              "normalized_status": "UNKNOWN",
+              "source_status": "ROAD_CONTEXT_COMPLETE",
+              "details": {
+                "county_coverage": {
+                  "requested_county_fips": [
+                    "08123"
+                  ],
+                  "loaded_county_fips": [
+                    "08123"
+                  ],
+                  "missing_county_fips": [],
+                  "status": "COMPLETE"
+                }
+              }
+            },
+            "confidence_or_quality_status": null,
+            "limitations": [
+              "Mapped road proximity/contact is physical context only."
+            ]
+          },
+          {
+            "variable_id": "VAR_F07_MAPPED_ROAD_FEATURE_COUNT_IN_SEARCH_WINDOW",
+            "value": 45,
+            "unit": "count",
+            "raw_value": null,
+            "spatial_semantics": "parcel_aggregate",
+            "temporal_semantics": null,
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+            "source_version": "2025",
+            "artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+            "derivation_algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+            "applicability_status": null,
+            "coverage": {
+              "normalized_status": "UNKNOWN",
+              "source_status": "ROAD_CONTEXT_COMPLETE",
+              "details": {
+                "county_coverage": {
+                  "requested_county_fips": [
+                    "08123"
+                  ],
+                  "loaded_county_fips": [
+                    "08123"
+                  ],
+                  "missing_county_fips": [],
+                  "status": "COMPLETE"
+                }
+              }
+            },
+            "confidence_or_quality_status": null,
+            "limitations": [
+              "Mapped road proximity/contact is physical context only."
+            ]
+          }
+        ],
+        "applicability": {
+          "domain_status": null
+        },
+        "coverage": {
+          "normalized_status": "UNKNOWN",
+          "source_status": "ROAD_CONTEXT_COMPLETE",
+          "details": {
+            "county_coverage": {
+              "requested_county_fips": [
+                "08123"
+              ],
+              "loaded_county_fips": [
+                "08123"
+              ],
+              "missing_county_fips": [],
+              "status": "COMPLETE"
+            }
+          }
+        },
+        "provenance": {
+          "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+          "road_product_vintage": "2025",
+          "fetched_at": "2026-08-08T06:57:21Z",
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": "f360b582ba6adf64ca8ac1b120f70788334c71eae48ca6b69d8681bdaaa6170f",
+          "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+          "working_crs": "EPSG:32613",
+          "source_crs": "EPSG:4326",
+          "search_window_m": 5000.0,
+          "requested_county_fips": [
+            "08123"
+          ],
+          "loaded_county_fips": [
+            "08123"
+          ]
+        },
+        "limitations": [
+          "Mapped road proximity/contact is physical context only.",
+          "Mapped roads do not establish legal access, easement, or deeded right-of-way.",
+          "Centerline contact does not prove a usable driveway, gate, or entrance.",
+          "Euclidean parcel-to-centerline distance is not network drive distance or travel time.",
+          "Search window is a retrieval parameter, not a too-far suitability threshold.",
+          "Absence of mapped roads in the window does not prove the parcel is landlocked.",
+          "OSM is deferred from F07 v0.1 and was not consulted."
+        ],
+        "unknowns": [],
+        "diligence_actions": [],
+        "explanation_code": "F07_EXPL_CONTEXT_ONLY",
+        "evaluation_extras": {
+          "mapped_road_feature_count_in_search_window": 45,
+          "road_parcel_contact_status": "INTERSECTS",
+          "nearest_mapped_road_distance_m": 0.0,
+          "nearest_road_feature_id": "110417652669",
+          "nearest_road_class_context": "S1400",
+          "search_window_m": 5000.0,
+          "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+          "road_source_coverage_status": "ROAD_CONTEXT_COMPLETE",
+          "county_coverage": {
+            "requested_county_fips": [
+              "08123"
+            ],
+            "loaded_county_fips": [
+              "08123"
+            ],
+            "missing_county_fips": [],
+            "status": "COMPLETE"
+          },
+          "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+          "legal_access_inferred": false
+        }
+      },
+      "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": {
+        "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+        "factor_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+        "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED",
+        "signal": "NEEDS_VERIFICATION",
+        "ranking_effect": "NONE",
+        "land_facts": [
+          {
+            "variable_id": "VAR_F08_SHRUB_COVER_FRACTION",
+            "value": 0.06727234043361567,
+            "unit": "fraction",
+            "raw_value": 6.727234043361567,
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": "USDA_ARS_RAP_V3_COVER",
+            "source_version": "v3",
+            "artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "derivation_algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "coverage": {
+              "normalized_status": "UNQUANTIFIED",
+              "source_status": "COVERAGE_UNQUANTIFIED",
+              "details": {
+                "requested_area_m2": 1406580,
+                "eligible_area_m2": null,
+                "masked_area_m2": null,
+                "no_data_area_m2": null,
+                "valid_area_m2": null,
+                "valid_coverage_fraction": null,
+                "adapter_status": "AGGREGATE_API_VERIFIED"
+              }
+            },
+            "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "limitations": [
+              "Shrub and tree cover are modeled RAP fractional cover context only.",
+              "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+              "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+              "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+              "Woody cover does not prove low herbaceous production.",
+              "F08 must not replace F02 herbaceous Land Facts.",
+              "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+              "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+            ]
+          },
+          {
+            "variable_id": "VAR_F08_TREE_COVER_FRACTION",
+            "value": 0.0010557150211526738,
+            "unit": "fraction",
+            "raw_value": 0.10557150211526739,
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": "USDA_ARS_RAP_V3_COVER",
+            "source_version": "v3",
+            "artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "derivation_algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "coverage": {
+              "normalized_status": "UNQUANTIFIED",
+              "source_status": "COVERAGE_UNQUANTIFIED",
+              "details": {
+                "requested_area_m2": 1406580,
+                "eligible_area_m2": null,
+                "masked_area_m2": null,
+                "no_data_area_m2": null,
+                "valid_area_m2": null,
+                "valid_coverage_fraction": null,
+                "adapter_status": "AGGREGATE_API_VERIFIED"
+              }
+            },
+            "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "limitations": [
+              "Shrub and tree cover are modeled RAP fractional cover context only.",
+              "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+              "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+              "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+              "Woody cover does not prove low herbaceous production.",
+              "F08 must not replace F02 herbaceous Land Facts.",
+              "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+              "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+            ]
+          },
+          {
+            "variable_id": "VAR_F08_COMBINED_MODELED_WOODY_COVER_FRACTION",
+            "value": 0.06832805545476835,
+            "unit": "fraction",
+            "raw_value": null,
+            "spatial_semantics": "parcel_mean",
+            "temporal_semantics": "annual_2025",
+            "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+            "source_id": "USDA_ARS_RAP_V3_COVER",
+            "source_version": "v3",
+            "artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "derivation_algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "coverage": {
+              "normalized_status": "UNQUANTIFIED",
+              "source_status": "COVERAGE_UNQUANTIFIED",
+              "details": {
+                "requested_area_m2": 1406580,
+                "eligible_area_m2": null,
+                "masked_area_m2": null,
+                "no_data_area_m2": null,
+                "valid_area_m2": null,
+                "valid_coverage_fraction": null,
+                "adapter_status": "AGGREGATE_API_VERIFIED"
+              }
+            },
+            "confidence_or_quality_status": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+            "limitations": [
+              "Shrub and tree cover are modeled RAP fractional cover context only.",
+              "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+              "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+              "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+              "Woody cover does not prove low herbaceous production.",
+              "F08 must not replace F02 herbaceous Land Facts.",
+              "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+              "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+            ]
+          }
+        ],
+        "applicability": {
+          "domain_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+          "review_status": "VERIFIED",
+          "basis": [
+            "CPER_RANGELAND_TEST_CONTEXT"
+          ]
+        },
+        "coverage": {
+          "normalized_status": "UNQUANTIFIED",
+          "source_status": "COVERAGE_UNQUANTIFIED",
+          "details": {
+            "requested_area_m2": 1406580,
+            "eligible_area_m2": null,
+            "masked_area_m2": null,
+            "no_data_area_m2": null,
+            "valid_area_m2": null,
+            "valid_coverage_fraction": null,
+            "adapter_status": "AGGREGATE_API_VERIFIED"
+          }
+        },
+        "provenance": {
+          "source_reference": "RAP_coverV3",
+          "source_product_and_version": "RAP_v3",
+          "endpoint": "coverV3",
+          "canonical_source_id": "USDA_ARS_RAP_V3_COVER",
+          "fetched_at": "2026-08-07T21:03:00Z",
+          "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+          "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+          "request_parameters": {
+            "mask": true,
+            "year": 2025
+          },
+          "derivation_spec_version": "F08_WOODY_SHRUB_DERIVATION_SPEC.yaml@0.1.0",
+          "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+          "raw_rap_shr_percent": 6.727234043361567,
+          "raw_rap_tre_percent": 0.10557150211526739,
+          "artifact_path": "/Users/hongmanyi/RangeMatch/test-data/live-results/cper/rap_coverV3_2025.json",
+          "reused_existing_artifact": true,
+          "duplicate_coverV3_fetch": false
+        },
+        "limitations": [
+          "Shrub and tree cover are modeled RAP fractional cover context only.",
+          "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+          "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+          "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+          "Woody cover does not prove low herbaceous production.",
+          "F08 must not replace F02 herbaceous Land Facts.",
+          "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+          "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof."
+        ],
+        "unknowns": [
+          "Shared RAP eligible/masked/no-data/valid parcel areas are not quantified.",
+          "Botanical composition of woody cover is not verified.",
+          "Browse availability is not established.",
+          "Woody obstruction class is not established."
+        ],
+        "diligence_actions": [],
+        "explanation_code": "F08_EXPL_COVERAGE_UNQUANTIFIED",
+        "evaluation_extras": {
+          "shrub_cover_fraction": 0.06727234043361567,
+          "tree_cover_fraction": 0.0010557150211526738,
+          "combined_modeled_woody_cover_fraction": 0.06832805545476835,
+          "source_year": 2025,
+          "mask": true,
+          "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+          "coverage_status": "COVERAGE_UNQUANTIFIED",
+          "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+          "reused_existing_artifact": true,
+          "duplicate_coverV3_fetch": false,
+          "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+          "browse_inferred": false,
+          "obstruction_inferred": false,
+          "labeled_complete": false
+        }
+      }
+    },
+    "operations": {
+      "COW_CALF_OPERATION": {
+        "operation_id": "COW_CALF_OPERATION",
+        "operation_profile_version": "0.2.1",
+        "decision_label": "HOLD",
+        "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+        "factor_evaluations": {
+          "F01_TOPOGRAPHY": {
+            "factor_id": "F01_TOPOGRAPHY",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+            "input_quality_state": "PARCEL_COMPLETE"
+          },
+          "F02_HERBACEOUS_RESOURCE": {
+            "factor_id": "F02_HERBACEOUS_RESOURCE",
+            "signal": "NEEDS_VERIFICATION",
+            "ranking_effect": "NONE",
+            "explanation_code": "F02_EXPL_COVERAGE",
+            "land_fact_gates": [
+              {
+                "gate_state": "LIMITED_CONTEXT",
+                "use_as_context": true,
+                "use_as_primary_factor_evidence": false,
+                "confidence_cap": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+                "reason_code": "COVERAGE_UNQUANTIFIED"
+              },
+              {
+                "gate_state": "LIMITED_CONTEXT",
+                "use_as_context": true,
+                "use_as_primary_factor_evidence": false,
+                "confidence_cap": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+                "reason_code": "COVERAGE_UNQUANTIFIED"
+              }
+            ]
+          },
+          "F03_LIVESTOCK_WATER": {
+            "factor_id": "F03_LIVESTOCK_WATER",
+            "signal": "NEEDS_VERIFICATION",
+            "ranking_effect": "NONE",
+            "explanation_code": "F03_EXPL_CANDIDATES_NOT_VERIFIED",
+            "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+            "mapped_candidate_count": 9,
+            "verified_livestock_water_system_count": 0,
+            "field_verified_count": 0,
+            "remote_evidence_summary": {
+              "total_mapped_candidates": 9,
+              "deterministically_sampled_for_remote_review": 3,
+              "remotely_supported": 2,
+              "sampled_but_still_mapped": 1,
+              "field_verified": 0,
+              "unreviewed_candidates": 6,
+              "unreviewed_status": "UNREVIEWED_NOT_ABSENT_OR_REJECTED",
+              "sample_coverage_limitation": "Only 3 of 9 candidates were remotely reviewed under STABLE_CANDIDATE_ID_ORDER_MAX_3.",
+              "selection_method": "STABLE_CANDIDATE_ID_ORDER_MAX_3",
+              "five_parcel_sample_disclosure": "15 reviewed out of 80 available across five frozen parcels",
+              "factor_state": "MAPPED_CANDIDATES_ONLY",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "remotely_supported_does_not_mean_usable_livestock_water": true,
+              "verified_count_zero_does_not_mean_no_water": true,
+              "synthetic_field_evidence_demo": {
+                "status": "TEST_ONLY",
+                "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+                "part_of_cper_live_profile": false,
+                "reference": "test-data/f03_field_evidence_demo/field_evidence_demo_result.json"
+              },
+              "unresolved_dimensions": [
+                "seasonal_reliability_for_livestock_use",
+                "deliverable_capacity",
+                "water_quality",
+                "livestock_accessibility",
+                "legal_access"
+              ]
+            },
+            "demo_statements": [
+              "REMOTELY_SUPPORTED does not mean usable livestock water.",
+              "FIELD_VERIFIED remains zero for this live CPER profile.",
+              "Six unsampled candidates are UNREVIEWED, not absent or rejected.",
+              "The synthetic field-evidence demo is TEST_ONLY and is not part of CPER live evidence.",
+              "Water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved."
+            ]
+          },
+          "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+            "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F04_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "PARCEL_COMPLETE",
+            "component_count": 16,
+            "ecological_site_count": 6
+          },
+          "F05_CLIMATE_DROUGHT_EXPOSURE": {
+            "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F05_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "CLIMATE_CONTEXT_COMPLETE",
+            "canonical_precip_mm": 345.74,
+            "canonical_precip_unit": "mm/year",
+            "normals_period": "1991-2020",
+            "mutates_f02": false,
+            "mutates_f03": false,
+            "mutates_f04": false
+          },
+          "F06_PARCEL_CONFIGURATION": {
+            "factor_id": "F06_PARCEL_CONFIGURATION",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+            "area_m2": 1404078.7002779155,
+            "perimeter_m": 4749.852971191508,
+            "compactness": 0.7820616361495341,
+            "polygon_part_count": 1,
+            "geometry_validity": "VALID",
+            "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+            "working_crs": "EPSG:32613",
+            "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0"
+          },
+          "F07_ROAD_AND_PHYSICAL_ACCESS": {
+            "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F07_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+            "mapped_road_feature_count_in_search_window": 45,
+            "road_parcel_contact_status": "INTERSECTS",
+            "nearest_mapped_road_distance_m": 0.0,
+            "nearest_road_feature_id": "110417652669",
+            "nearest_road_class_context": "S1400",
+            "search_window_m": 5000.0,
+            "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+            "road_source_coverage_status": "ROAD_CONTEXT_COMPLETE",
+            "county_coverage": {
+              "requested_county_fips": [
+                "08123"
+              ],
+              "loaded_county_fips": [
+                "08123"
+              ],
+              "missing_county_fips": [],
+              "status": "COMPLETE"
+            },
+            "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+            "legal_access_inferred": false
+          },
+          "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": {
+            "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+            "signal": "NEEDS_VERIFICATION",
+            "ranking_effect": "NONE",
+            "explanation_code": "F08_EXPL_COVERAGE_UNQUANTIFIED",
+            "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED",
+            "shrub_cover_fraction": 0.06727234043361567,
+            "tree_cover_fraction": 0.0010557150211526738,
+            "combined_modeled_woody_cover_fraction": 0.06832805545476835,
+            "source_year": 2025,
+            "mask": true,
+            "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "coverage_status": "COVERAGE_UNQUANTIFIED",
+            "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "reused_existing_artifact": true,
+            "duplicate_coverV3_fetch": false,
+            "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "browse_inferred": false,
+            "obstruction_inferred": false,
+            "labeled_complete": false
+          }
+        },
+        "hard_constraints": [],
+        "supporting_signals": [
+          "F01_TOPOGRAPHY",
+          "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "F05_CLIMATE_DROUGHT_EXPOSURE",
+          "F06_PARCEL_CONFIGURATION",
+          "F07_ROAD_AND_PHYSICAL_ACCESS"
+        ],
+        "limiting_signals": [
+          "F02_HERBACEOUS_RESOURCE",
+          "F03_LIVESTOCK_WATER",
+          "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+        ],
+        "unknowns": [
+          "Botanical composition is not verified.",
+          "Ecological-site references do not establish current vegetation state.",
+          "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+          "F03 has mapped candidates and optional remote support, but no FIELD_VERIFIED livestock-water system; REMOTELY_SUPPORTED does not mean usable livestock water.",
+          "F03 unsampled mapped candidates are UNREVIEWED, not absent or rejected.",
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.",
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.",
+          "F04 soil, wetness, and ecological-site facts are context only; they do not establish current vegetation state, forage productivity, or operation ranking.",
+          "F05 climate and drought facts are context only; mean annual precipitation and current USDM class do not establish suitability, carrying capacity, or forage/water failure.",
+          "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+          "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+          "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified.",
+          "No FIELD_VERIFIED livestock-water system is in evidence for CPER; verified_count == 0 does not mean the land has no water.",
+          "Nutritive value is not verified.",
+          "Operation-specific palatability is not verified.",
+          "Six of nine CPER mapped water candidates remain UNREVIEWED after deterministic remote sampling.",
+          "Within-map-unit component locations are unknown."
+        ],
+        "confidence_limitation": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+        "ranking_permission": false,
+        "ranking_position": null,
+        "presentation_priority": 0
+      },
+      "SHEEP_GRAZING": {
+        "operation_id": "SHEEP_GRAZING",
+        "operation_profile_version": "0.2.1",
+        "decision_label": "HOLD",
+        "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+        "factor_evaluations": {
+          "F01_TOPOGRAPHY": {
+            "factor_id": "F01_TOPOGRAPHY",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F01_EXPL_CONTEXT_REQUIRED",
+            "input_quality_state": "PARCEL_COMPLETE"
+          },
+          "F02_HERBACEOUS_RESOURCE": {
+            "factor_id": "F02_HERBACEOUS_RESOURCE",
+            "signal": "NEEDS_VERIFICATION",
+            "ranking_effect": "NONE",
+            "explanation_code": "F02_EXPL_COVERAGE",
+            "land_fact_gates": [
+              {
+                "gate_state": "LIMITED_CONTEXT",
+                "use_as_context": true,
+                "use_as_primary_factor_evidence": false,
+                "confidence_cap": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+                "reason_code": "COVERAGE_UNQUANTIFIED"
+              },
+              {
+                "gate_state": "LIMITED_CONTEXT",
+                "use_as_context": true,
+                "use_as_primary_factor_evidence": false,
+                "confidence_cap": "LIMITED_BY_UNQUANTIFIED_COVERAGE",
+                "reason_code": "COVERAGE_UNQUANTIFIED"
+              }
+            ]
+          },
+          "F03_LIVESTOCK_WATER": {
+            "factor_id": "F03_LIVESTOCK_WATER",
+            "signal": "NEEDS_VERIFICATION",
+            "ranking_effect": "NONE",
+            "explanation_code": "F03_EXPL_CANDIDATES_NOT_VERIFIED",
+            "input_quality_state": "MAPPED_CANDIDATES_ONLY",
+            "mapped_candidate_count": 9,
+            "verified_livestock_water_system_count": 0,
+            "field_verified_count": 0,
+            "remote_evidence_summary": {
+              "total_mapped_candidates": 9,
+              "deterministically_sampled_for_remote_review": 3,
+              "remotely_supported": 2,
+              "sampled_but_still_mapped": 1,
+              "field_verified": 0,
+              "unreviewed_candidates": 6,
+              "unreviewed_status": "UNREVIEWED_NOT_ABSENT_OR_REJECTED",
+              "sample_coverage_limitation": "Only 3 of 9 candidates were remotely reviewed under STABLE_CANDIDATE_ID_ORDER_MAX_3.",
+              "selection_method": "STABLE_CANDIDATE_ID_ORDER_MAX_3",
+              "five_parcel_sample_disclosure": "15 reviewed out of 80 available across five frozen parcels",
+              "factor_state": "MAPPED_CANDIDATES_ONLY",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "remotely_supported_does_not_mean_usable_livestock_water": true,
+              "verified_count_zero_does_not_mean_no_water": true,
+              "synthetic_field_evidence_demo": {
+                "status": "TEST_ONLY",
+                "fixture_type": "SYNTHETIC_ENGINEERING_TEST",
+                "part_of_cper_live_profile": false,
+                "reference": "test-data/f03_field_evidence_demo/field_evidence_demo_result.json"
+              },
+              "unresolved_dimensions": [
+                "seasonal_reliability_for_livestock_use",
+                "deliverable_capacity",
+                "water_quality",
+                "livestock_accessibility",
+                "legal_access"
+              ]
+            },
+            "demo_statements": [
+              "REMOTELY_SUPPORTED does not mean usable livestock water.",
+              "FIELD_VERIFIED remains zero for this live CPER profile.",
+              "Six unsampled candidates are UNREVIEWED, not absent or rejected.",
+              "The synthetic field-evidence demo is TEST_ONLY and is not part of CPER live evidence.",
+              "Water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved."
+            ]
+          },
+          "F04_SOIL_WETNESS_ECOLOGICAL_SITE": {
+            "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F04_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "PARCEL_COMPLETE",
+            "component_count": 16,
+            "ecological_site_count": 6
+          },
+          "F05_CLIMATE_DROUGHT_EXPOSURE": {
+            "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F05_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "CLIMATE_CONTEXT_COMPLETE",
+            "canonical_precip_mm": 345.74,
+            "canonical_precip_unit": "mm/year",
+            "normals_period": "1991-2020",
+            "mutates_f02": false,
+            "mutates_f03": false,
+            "mutates_f04": false
+          },
+          "F06_PARCEL_CONFIGURATION": {
+            "factor_id": "F06_PARCEL_CONFIGURATION",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F06_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "PARCEL_GEOMETRY_COMPLETE",
+            "area_m2": 1404078.7002779155,
+            "perimeter_m": 4749.852971191508,
+            "compactness": 0.7820616361495341,
+            "polygon_part_count": 1,
+            "geometry_validity": "VALID",
+            "geometry_coverage_status": "PARCEL_GEOMETRY_COMPLETE",
+            "working_crs": "EPSG:32613",
+            "algorithm_version": "F06_PARCEL_CONFIGURATION_DERIVATION@0.1.0"
+          },
+          "F07_ROAD_AND_PHYSICAL_ACCESS": {
+            "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+            "signal": "CONTEXT_DEPENDENT",
+            "ranking_effect": "NONE",
+            "explanation_code": "F07_EXPL_CONTEXT_ONLY",
+            "input_quality_state": "ROAD_CONTEXT_COMPLETE",
+            "mapped_road_feature_count_in_search_window": 45,
+            "road_parcel_contact_status": "INTERSECTS",
+            "nearest_mapped_road_distance_m": 0.0,
+            "nearest_road_feature_id": "110417652669",
+            "nearest_road_class_context": "S1400",
+            "search_window_m": 5000.0,
+            "road_source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+            "road_source_coverage_status": "ROAD_CONTEXT_COMPLETE",
+            "county_coverage": {
+              "requested_county_fips": [
+                "08123"
+              ],
+              "loaded_county_fips": [
+                "08123"
+              ],
+              "missing_county_fips": [],
+              "status": "COMPLETE"
+            },
+            "algorithm_version": "F07_ROAD_PHYSICAL_ACCESS_DERIVATION@0.1.0",
+            "legal_access_inferred": false
+          },
+          "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": {
+            "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+            "signal": "NEEDS_VERIFICATION",
+            "ranking_effect": "NONE",
+            "explanation_code": "F08_EXPL_COVERAGE_UNQUANTIFIED",
+            "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED",
+            "shrub_cover_fraction": 0.06727234043361567,
+            "tree_cover_fraction": 0.0010557150211526738,
+            "combined_modeled_woody_cover_fraction": 0.06832805545476835,
+            "source_year": 2025,
+            "mask": true,
+            "applicability_status": "IN_DOCUMENTED_PRODUCT_SCOPE",
+            "coverage_status": "COVERAGE_UNQUANTIFIED",
+            "response_or_artifact_hash": "58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+            "reused_existing_artifact": true,
+            "duplicate_coverV3_fetch": false,
+            "algorithm_version": "F08_WOODY_SHRUB_DERIVATION@0.1.0",
+            "browse_inferred": false,
+            "obstruction_inferred": false,
+            "labeled_complete": false
+          }
+        },
+        "hard_constraints": [],
+        "supporting_signals": [
+          "F01_TOPOGRAPHY",
+          "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "F05_CLIMATE_DROUGHT_EXPOSURE",
+          "F06_PARCEL_CONFIGURATION",
+          "F07_ROAD_AND_PHYSICAL_ACCESS"
+        ],
+        "limiting_signals": [
+          "F02_HERBACEOUS_RESOURCE",
+          "F03_LIVESTOCK_WATER",
+          "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+        ],
+        "unknowns": [
+          "Botanical composition is not verified.",
+          "Ecological-site references do not establish current vegetation state.",
+          "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+          "F03 has mapped candidates and optional remote support, but no FIELD_VERIFIED livestock-water system; REMOTELY_SUPPORTED does not mean usable livestock water.",
+          "F03 unsampled mapped candidates are UNREVIEWED, not absent or rejected.",
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.",
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.",
+          "F04 soil, wetness, and ecological-site facts are context only; they do not establish current vegetation state, forage productivity, or operation ranking.",
+          "F05 climate and drought facts are context only; mean annual precipitation and current USDM class do not establish suitability, carrying capacity, or forage/water failure.",
+          "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+          "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+          "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified.",
+          "No FIELD_VERIFIED livestock-water system is in evidence for CPER; verified_count == 0 does not mean the land has no water.",
+          "Nutritive value is not verified.",
+          "Operation-specific palatability is not verified.",
+          "Six of nine CPER mapped water candidates remain UNREVIEWED after deterministic remote sampling.",
+          "Within-map-unit component locations are unknown."
+        ],
+        "confidence_limitation": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+        "ranking_permission": false,
+        "ranking_position": null,
+        "presentation_priority": 1
+      }
+    },
+    "cross_profile_comparison": {
+      "ranking_permitted": false,
+      "reason": "Implemented Factors have no ranking effect; F02 coverage is unquantified, F03 water systems are unverified, F05 has no approved climate suitability threshold, F06 geometry metrics are context only, F07 mapped roads do not establish legal access, and F08 woody cover does not establish browse, obstruction, or species ranking; no reviewed differential rule is active.",
+      "numeric_score": null
+    },
+    "buyer_report": {
+      "Property": {
+        "section_id": "Property",
+        "factor_ids": [
+          "F06_PARCEL_CONFIGURATION",
+          "F07_ROAD_AND_PHYSICAL_ACCESS"
+        ],
+        "highlights": [
+          {
+            "f07_projection": "physical_road_context",
+            "canonical_factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+            "road_parcel_contact_status": "INTERSECTS",
+            "signal": "CONTEXT_DEPENDENT"
+          },
+          {
+            "factor_id": "F06_PARCEL_CONFIGURATION",
+            "signal": "CONTEXT_DEPENDENT"
+          }
+        ],
+        "unknowns": [],
+        "limitations": [
+          "Parcel area is geometric context, not grazable area or carrying capacity.",
+          "Parcel perimeter is not fencing cost.",
+          "Compactness is not operational efficiency or suitability.",
+          "Measurements use projected UTM meters; not a legal survey acreage.",
+          "v0.1 perimeter excludes interior rings/holes.",
+          "v0.1 does not automatically repair invalid geometry.",
+          "Geodesic QA is deferred and not required for v0.1.",
+          "Mapped road proximity/contact is physical context only.",
+          "Euclidean parcel-to-centerline distance is not network drive distance or travel time.",
+          "Search window is a retrieval parameter, not a too-far suitability threshold.",
+          "OSM is deferred from F07 v0.1 and was not consulted."
+        ],
+        "diligence_actions": [],
+        "mireye_context_types": [
+          "PROPERTY_DILIGENCE_CONTEXT"
+        ]
+      },
+      "Land & Resources": {
+        "section_id": "Land & Resources",
+        "factor_ids": [
+          "F01_TOPOGRAPHY",
+          "F02_HERBACEOUS_RESOURCE",
+          "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+          "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "F03_LIVESTOCK_WATER"
+        ],
+        "highlights": [
+          {
+            "factor_id": "F01_TOPOGRAPHY",
+            "signal": "CONTEXT_DEPENDENT",
+            "input_quality_state": "PARCEL_COMPLETE"
+          },
+          {
+            "factor_id": "F02_HERBACEOUS_RESOURCE",
+            "signal": "NEEDS_VERIFICATION",
+            "input_quality_state": "MISSING"
+          },
+          {
+            "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+            "signal": "NEEDS_VERIFICATION",
+            "input_quality_state": "WOODY_CONTEXT_AVAILABLE_COVERAGE_UNQUANTIFIED"
+          },
+          {
+            "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+            "signal": "CONTEXT_DEPENDENT",
+            "input_quality_state": "PARCEL_COMPLETE"
+          },
+          {
+            "factor_id": "F03_LIVESTOCK_WATER",
+            "signal": "NEEDS_VERIFICATION",
+            "input_quality_state": "MAPPED_CANDIDATES_ONLY"
+          }
+        ],
+        "unknowns": [
+          "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+          "Botanical composition is not verified.",
+          "Operation-specific palatability is not verified.",
+          "Nutritive value is not verified.",
+          "Shared RAP eligible/masked/no-data/valid parcel areas are not quantified.",
+          "Botanical composition of woody cover is not verified.",
+          "Browse availability is not established.",
+          "Woody obstruction class is not established.",
+          "Within-map-unit component locations are unknown.",
+          "Null restrictive-layer records remain UNKNOWN and do not prove unrestricted depth.",
+          "Null monthly ponding/flooding classes remain UNKNOWN and are not interpreted as None.",
+          "Ecological-site references do not establish current vegetation state.",
+          "No approved depth interval exists for parcel available-water storage in the Land Profile.",
+          "Some components lack ecological-site linkage; absent linkage remains UNKNOWN.",
+          "No FIELD_VERIFIED_LIVESTOCK_WATER system is in evidence for CPER.",
+          "Unreviewed mapped candidates have not been remotely or field reviewed.",
+          "Seasonal reliability for livestock use remains unresolved.",
+          "Deliverable capacity remains unresolved.",
+          "Water quality remains unresolved.",
+          "Livestock accessibility remains unresolved.",
+          "Legal access remains unresolved."
+        ],
+        "limitations": [
+          "RAP aggregate responses remain COVERAGE_UNQUANTIFIED because eligible, masked, no-data, and valid pixel areas are not returned.",
+          "Modeled herbaceous cover and production are not available forage, palatability, nutritive value, or carrying capacity.",
+          "F02_HERBACEOUS_RESOURCE coverage_status remains unquantified (source preserved).",
+          "Shrub and tree cover are modeled RAP fractional cover context only.",
+          "Shrub cover is not browse availability, palatability, botanical composition, toxicity, or nutritive value.",
+          "Tree cover is not automatic grazing obstruction or cattle/sheep exclusion.",
+          "combined_modeled_woody_cover_fraction is derived SHR+TRE context, not an independent RAP canopy band.",
+          "Woody cover does not prove low herbaceous production.",
+          "F08 must not replace F02 herbaceous Land Facts.",
+          "Mireye lcms_class / tree_canopy fields are point QA only and are not parcel Land Facts.",
+          "Shared RAP coverage may be COVERAGE_UNQUANTIFIED; that is not complete pixel-area proof.",
+          "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE coverage_status remains unquantified (source preserved).",
+          "No composite soil score is created.",
+          "Controlled categories are preserved as distributions, not ordinal averages.",
+          "Flooding frequency is soil/site context only and is not a FEMA flood-hazard determination.",
+          "Ecological-site names do not imply current vegetation or operation ranking.",
+          "Mireye centroid soil fields must not replace parcel-wide F04 evidence.",
+          "Available-water storage is omitted from profile evidence until a depth interval is approved.",
+          "Mapped NHD hydrography features are candidate context, not verified livestock-water sources.",
+          "REMOTELY_SUPPORTED_CANDIDATE is remote presence plus an approved remote attribute only; it is not usable livestock water.",
+          "Only 3 of 9 mapped candidates were deterministically sampled for remote review; 6 remain UNREVIEWED, not absent or rejected.",
+          "Euclidean distance is not traversable animal-access distance.",
+          "Reliability, capacity, quality, legal access, livestock accessibility, and seasonal operation remain unresolved.",
+          "field_verified_count is 0; verified_count == 0 does not mean the land has no water.",
+          "Synthetic field-evidence fixtures are TEST_ONLY and are excluded from this live CPER Land Profile."
+        ],
+        "diligence_actions": [],
+        "mireye_context_types": [
+          "POINT_LAND_CONTEXT"
+        ]
+      },
+      "Resilience & Hazards": {
+        "section_id": "Resilience & Hazards",
+        "factor_ids": [
+          "F05_CLIMATE_DROUGHT_EXPOSURE"
+        ],
+        "highlights": [
+          {
+            "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+            "signal": "CONTEXT_DEPENDENT",
+            "input_quality_state": "CLIMATE_CONTEXT_COMPLETE"
+          }
+        ],
+        "unknowns": [
+          "Drought-history summary method is not frozen.",
+          "Precipitation seasonality and interannual variability methods are not frozen.",
+          "No biological heat-stress threshold is approved for Cow-Calf or Sheep."
+        ],
+        "limitations": [
+          "Mean annual precipitation is a Land Fact, not a suitability score.",
+          "Current USDM class is current-condition context only, not drought history.",
+          "Mireye point climate fields must not replace canonical NOAA parcel precipitation.",
+          "ACIS precipitation series is secondary QA/fallback and is not the canonical runtime source.",
+          "No precipitation, temperature, heat-day, or USDM suitability threshold is approved.",
+          "F05 must not alter F02 forage, F03 livestock-water, or F04 wetness signals.",
+          "Flood/FEMA hazard is out of scope for F05."
+        ],
+        "diligence_actions": [],
+        "mireye_context_types": [
+          "POINT_HAZARD_CONTEXT"
+        ]
+      },
+      "Operation Comparison": {
+        "section_id": "Operation Comparison",
+        "factor_ids": [
+          "F01_TOPOGRAPHY",
+          "F02_HERBACEOUS_RESOURCE",
+          "F03_LIVESTOCK_WATER",
+          "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+          "F05_CLIMATE_DROUGHT_EXPOSURE",
+          "F06_PARCEL_CONFIGURATION",
+          "F07_ROAD_AND_PHYSICAL_ACCESS",
+          "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+        ],
+        "highlights": [
+          {
+            "operation_id": "COW_CALF_OPERATION",
+            "decision_label": "HOLD",
+            "ranking_permission": false,
+            "limiting_signals": [
+              "F02_HERBACEOUS_RESOURCE",
+              "F03_LIVESTOCK_WATER",
+              "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+            ],
+            "presentation_priority": 0
+          },
+          {
+            "operation_id": "SHEEP_GRAZING",
+            "decision_label": "HOLD",
+            "ranking_permission": false,
+            "limiting_signals": [
+              "F02_HERBACEOUS_RESOURCE",
+              "F03_LIVESTOCK_WATER",
+              "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+            ],
+            "presentation_priority": 1
+          },
+          {
+            "qualification": "Intended operation COW_CALF_OPERATION is presented first; no scientific priority or modified rules."
+          }
+        ],
+        "unknowns": [
+          "Botanical composition is not verified.",
+          "Ecological-site references do not establish current vegetation state.",
+          "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+          "F03 has mapped candidates and optional remote support, but no FIELD_VERIFIED livestock-water system; REMOTELY_SUPPORTED does not mean usable livestock water.",
+          "F03 unsampled mapped candidates are UNREVIEWED, not absent or rejected.",
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.",
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.",
+          "F04 soil, wetness, and ecological-site facts are context only; they do not establish current vegetation state, forage productivity, or operation ranking.",
+          "F05 climate and drought facts are context only; mean annual precipitation and current USDM class do not establish suitability, carrying capacity, or forage/water failure.",
+          "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+          "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+          "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified.",
+          "No FIELD_VERIFIED livestock-water system is in evidence for CPER; verified_count == 0 does not mean the land has no water.",
+          "Nutritive value is not verified.",
+          "Operation-specific palatability is not verified.",
+          "Six of nine CPER mapped water candidates remain UNREVIEWED after deterministic remote sampling.",
+          "Within-map-unit component locations are unknown."
+        ],
+        "limitations": [
+          "No numeric suitability score is authorized.",
+          "ranking_effect NONE cannot create cross-profile ranking.",
+          "HOLD does not mean unsuitable."
+        ],
+        "diligence_actions": [
+          "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+          "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+          "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+          "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+          "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+          "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+          "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+          "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+          "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+          "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+        ],
+        "mireye_context_types": []
+      },
+      "Diligence Plan": {
+        "section_id": "Diligence Plan",
+        "factor_ids": [],
+        "highlights": [
+          {
+            "f07_projection": "legal_access_diligence",
+            "canonical_factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS"
+          }
+        ],
+        "unknowns": [
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.",
+          "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.",
+          "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty."
+        ],
+        "limitations": [
+          "Mapped roads do not establish legal access, easement, or deeded right-of-way.",
+          "Centerline contact does not prove a usable driveway, gate, or entrance.",
+          "Absence of mapped roads in the window does not prove the parcel is landlocked.",
+          "Dynamic regulatory/land-rights findings are non-canonical and not F09.",
+          "F07 remains one canonical Factor result; legal-access items are surfaced here."
+        ],
+        "diligence_actions": [
+          "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+          "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+          "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+          "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+          "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+          "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+          "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+          "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+          "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+          "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+        ],
+        "mireye_context_types": []
+      }
+    },
+    "dynamic_diligence_findings": [],
+    "unknowns": [
+      "Botanical composition is not verified.",
+      "Ecological-site references do not establish current vegetation state.",
+      "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+      "F03 has mapped candidates and optional remote support, but no FIELD_VERIFIED livestock-water system; REMOTELY_SUPPORTED does not mean usable livestock water.",
+      "F03 unsampled mapped candidates are UNREVIEWED, not absent or rejected.",
+      "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.",
+      "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.",
+      "F04 soil, wetness, and ecological-site facts are context only; they do not establish current vegetation state, forage productivity, or operation ranking.",
+      "F05 climate and drought facts are context only; mean annual precipitation and current USDM class do not establish suitability, carrying capacity, or forage/water failure.",
+      "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+      "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+      "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified.",
+      "No FIELD_VERIFIED livestock-water system is in evidence for CPER; verified_count == 0 does not mean the land has no water.",
+      "Nutritive value is not verified.",
+      "Operation-specific palatability is not verified.",
+      "Six of nine CPER mapped water candidates remain UNREVIEWED after deterministic remote sampling.",
+      "Within-map-unit component locations are unknown."
+    ],
+    "diligence_actions": [
+      "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+      "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+      "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+      "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+      "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+      "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+      "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+      "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+      "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+      "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+    ],
+    "constraints": {
+      "parcels_per_run": 1,
+      "f09_authorized": false,
+      "batch_workflow_authorized": false,
+      "planned_actions_mutate_factors": false
+    },
+    "limitations": [
+      "Mireye context BLOCKED_EXTERNAL (documented SafeBrowse middlebox); canonical F01\u2013F08 fixture paths were not blocked by this failure."
+    ],
+    "explanation": {
+      "explanation_schema_version": "0.1.0",
+      "bound_to_input_sha256": "17605002066c90f8ae10d1bd67964687e3508627f18eca831667c0e9482cf3f2",
+      "bound_to_match_result_hash": "da0be081e6a45f9c7c1d14149fa5eeecb098053afa04cb749df15add5a7443e5",
+      "engine_version": "0.1.0",
+      "llm_override_permitted": false,
+      "may_alter_decision_labels": false,
+      "may_invent_scores_or_thresholds": false,
+      "parcel": {
+        "land_profile_id": "LAND_PROFILE_CPER_001",
+        "land_profile_version": "0.2.1",
+        "geometry_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+        "supported_use": "ENGINEERING_VALIDATION_ONLY"
+      },
+      "narrative_constraints": [
+        "This is a preliminary screening result produced by the deterministic Matching Engine.",
+        "Cow-Calf and Sheep are evaluated as peer operations. No cross-profile ranking is permitted in this vertical slice.",
+        "Signals describe evidence quality and reviewed qualitative context. They are not carrying capacity, profitability, or success probability.",
+        "Missing or unverified inputs remain UNKNOWN or NEEDS_VERIFICATION and are listed as diligence actions.",
+        "CPER does not have verified livestock water in this live profile.",
+        "REMOTELY_SUPPORTED candidates are not usable livestock-water systems.",
+        "FIELD_VERIFIED remains zero; verified_count == 0 does not mean the land has no water.",
+        "Unsampled mapped water candidates are UNREVIEWED, not absent or rejected.",
+        "Synthetic field-evidence demos are TEST_ONLY and are not part of CPER live evidence."
+      ],
+      "operation_summaries": [
+        {
+          "operation_id": "COW_CALF_OPERATION",
+          "label": "Cow-Calf Operation",
+          "decision_label": "HOLD",
+          "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+          "ranking_position": null,
+          "factors": [
+            {
+              "factor_id": "F01_TOPOGRAPHY",
+              "label": "Topography",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F01_EXPL_CONTEXT_REQUIRED"
+            },
+            {
+              "factor_id": "F02_HERBACEOUS_RESOURCE",
+              "label": "Herbaceous Resource",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "explanation_code": "F02_EXPL_COVERAGE"
+            },
+            {
+              "factor_id": "F03_LIVESTOCK_WATER",
+              "label": "Livestock Water",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "explanation_code": "F03_EXPL_CANDIDATES_NOT_VERIFIED"
+            },
+            {
+              "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+              "label": "Soil, Wetness, and Ecological Site",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F04_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+              "label": "Climate and Drought Exposure",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F05_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F06_PARCEL_CONFIGURATION",
+              "label": "Parcel Configuration",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F06_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+              "label": "Road and Physical Access",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F07_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+              "label": "Woody and Shrub Vegetation Structure",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "explanation_code": "F08_EXPL_COVERAGE_UNQUANTIFIED"
+            }
+          ]
+        },
+        {
+          "operation_id": "SHEEP_GRAZING",
+          "label": "Sheep Grazing",
+          "decision_label": "HOLD",
+          "decision_reason": "Shared Factor evidence is implemented as data-quality/context only; material verification remains incomplete and no directional suitability threshold is approved.",
+          "ranking_position": null,
+          "factors": [
+            {
+              "factor_id": "F01_TOPOGRAPHY",
+              "label": "Topography",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F01_EXPL_CONTEXT_REQUIRED"
+            },
+            {
+              "factor_id": "F02_HERBACEOUS_RESOURCE",
+              "label": "Herbaceous Resource",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "explanation_code": "F02_EXPL_COVERAGE"
+            },
+            {
+              "factor_id": "F03_LIVESTOCK_WATER",
+              "label": "Livestock Water",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "explanation_code": "F03_EXPL_CANDIDATES_NOT_VERIFIED"
+            },
+            {
+              "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+              "label": "Soil, Wetness, and Ecological Site",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F04_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+              "label": "Climate and Drought Exposure",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F05_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F06_PARCEL_CONFIGURATION",
+              "label": "Parcel Configuration",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F06_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+              "label": "Road and Physical Access",
+              "signal": "CONTEXT_DEPENDENT",
+              "ranking_effect": "NONE",
+              "explanation_code": "F07_EXPL_CONTEXT_ONLY"
+            },
+            {
+              "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+              "label": "Woody and Shrub Vegetation Structure",
+              "signal": "NEEDS_VERIFICATION",
+              "ranking_effect": "NONE",
+              "explanation_code": "F08_EXPL_COVERAGE_UNQUANTIFIED"
+            }
+          ]
+        }
+      ],
+      "cross_profile_comparison": {
+        "ranking_permitted": false,
+        "reason": "Implemented Factors have no ranking effect; F02 coverage is unquantified, F03 water systems are unverified, F05 has no approved climate suitability threshold, F06 geometry metrics are context only, F07 mapped roads do not establish legal access, and F08 woody cover does not establish browse, obstruction, or species ranking; no reviewed differential rule is active."
+      },
+      "unknowns": [
+        "Botanical composition is not verified.",
+        "Ecological-site references do not establish current vegetation state.",
+        "F02 eligible, masked, no-data, and valid parcel areas are not quantified.",
+        "F03 has mapped candidates and optional remote support, but no FIELD_VERIFIED livestock-water system; REMOTELY_SUPPORTED does not mean usable livestock water.",
+        "F03 unsampled mapped candidates are UNREVIEWED, not absent or rejected.",
+        "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved.",
+        "F03 water reliability, capacity, quality, livestock accessibility, and legal access remain unresolved; verified_count == 0 does not mean the land has no water.",
+        "F04 soil, wetness, and ecological-site facts are context only; they do not establish current vegetation state, forage productivity, or operation ranking.",
+        "F05 climate and drought facts are context only; mean annual precipitation and current USDM class do not establish suitability, carrying capacity, or forage/water failure.",
+        "F06 parcel area, perimeter, and compactness are geometric context only; they do not establish suitability, fencing cost, carrying capacity, or access.",
+        "F07 mapped road proximity/contact is physical context only; it does not establish legal access, usable entrance, travel time, or landlocked certainty.",
+        "F08 shrub/tree fractional cover is woody-structure context only; it does not establish browse availability, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; shared RAP coverage may remain unquantified.",
+        "No FIELD_VERIFIED livestock-water system is in evidence for CPER; verified_count == 0 does not mean the land has no water.",
+        "Nutritive value is not verified.",
+        "Operation-specific palatability is not verified.",
+        "Six of nine CPER mapped water candidates remain UNREVIEWED after deterministic remote sampling.",
+        "Within-map-unit component locations are unknown."
+      ],
+      "diligence_actions": [
+        "Quantify RAP eligible, masked, no-data, and valid parcel areas when raster access is available.",
+        "Verify botanical composition, palatability, and nutritive value with reviewed local or field evidence.",
+        "Verify livestock-water source operation, seasonal reliability, capacity, quality, legal access, and animal-access routes in field and records; do not treat REMOTELY_SUPPORTED or verified_count == 0 as proof of usable or absent water.",
+        "Review remaining UNREVIEWED mapped water candidates if remote or field evidence becomes available; unreviewed is not absent or rejected.",
+        "Field-verify soil restrictive layers, wetness interpretation, and whether ecological-site reference communities match current vegetation.",
+        "Retain canonical NOAA/NCEI precipitation normals with period, unit, coverage, and provenance; treat current USDM as current-condition context only.",
+        "Treat F06 area/perimeter/compactness as geometric context only; do not infer fencing cost, carrying capacity, or suitability.",
+        "Treat F07 mapped road contact/distance as physical context only; verify legal access and usable entrance separately; do not infer landlocked certainty from an empty search window.",
+        "Treat F08 shrub/tree fractions and combined modeled woody cover as vegetation-structure context only; do not infer browse, obstruction, herbaceous failure, or Cow-Calf versus Sheep ranking; keep F02/F08 RAP artifact/year/mask/coverage aligned.",
+        "Evaluate the remaining approved shared Factors before an ADVANCE, REDIRECT, or REJECT decision."
+      ],
+      "disclaimer": "Preliminary screening only. The land did not fail; the match remains incomplete until additional reviewed Factors and field verification are available."
+    }
+  },
+  "limitations": [
+    "REPLAY_DEMO_FIXTURE_NOT_LIVE",
+    "Mireye context BLOCKED_EXTERNAL (documented SafeBrowse middlebox); canonical F01\u2013F08 fixture paths were not blocked by this failure.",
+    "Mireye context BLOCKED_EXTERNAL (documented SafeBrowse middlebox); canonical fixture Factor paths were not blocked."
+  ],
+  "created_at": "2026-08-08T14:10:23.574716+00:00",
+  "land_profile_reference": "test-data/land-profiles/land_profile_cper_001.json",
+  "presentation": {
+    "mode": "GOAL_DIRECTED",
+    "intended_operation": "COW_CALF_OPERATION",
+    "operation_presentation_order": [
+      "COW_CALF_OPERATION",
+      "SHEEP_GRAZING"
+    ],
+    "scientific_priority_change": false,
+    "rule_or_threshold_change": false,
+    "discovery_limited_to_supported_profiles": false
+  }
+}

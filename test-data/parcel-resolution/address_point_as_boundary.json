@@ -1,0 +1,67 @@
+{
+  "scenario_id": "address_point_as_boundary",
+  "raw_address": "900 Point As Parcel Rd, Weld County, CO 80701",
+  "normalized_address": "900 Point As Parcel Rd, Weld County, CO 80701",
+  "geocode_outcome": "OK",
+  "parcel_lookup_outcome": "OK",
+  "geocode": {
+    "point": {
+      "type": "Point",
+      "coordinates": [
+        -104.895,
+        40.495
+      ]
+    },
+    "confidence": 0.88,
+    "provider": "FIXTURE_GEOCODER",
+    "request_id": "geocode_fixture_009",
+    "retrieved_at": "2026-08-08T12:00:00+00:00",
+    "limitations": [
+      "Geocode point is not a parcel boundary."
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand_point_boundary",
+      "label": "Illegal point-as-parcel",
+      "parcel_geometry": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "id": "POINT_NOT_PARCEL",
+            "properties": {},
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -104.895,
+                40.495
+              ]
+            }
+          }
+        ]
+      },
+      "source_crs": "EPSG:4326",
+      "confidence": 0.91,
+      "provenance": {
+        "source": "FIXTURE_PARCEL_FABRIC",
+        "provider": "FIXTURE",
+        "request_id": "req_cand_point_boundary",
+        "reference_id": "fixture:cand_point_boundary",
+        "retrieved_at": "2026-08-08T12:00:00+00:00"
+      },
+      "limitations": [
+        "Fixture geometry for offline parcel-resolution tests only.",
+        "APN/ownership/zoning/legal access/purchasability are unverified soft labels."
+      ],
+      "attributes": {
+        "apn": null,
+        "owner": null,
+        "zoning": null,
+        "legal_access": null,
+        "purchasable": null,
+        "verification": "UNVERIFIED"
+      }
+    }
+  ]
+}

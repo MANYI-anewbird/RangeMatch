@@ -1,5 +1,7 @@
 # Five-Factor Portfolio Review
 
+> **Historical milestone record.** This review captured the system immediately after F05. The active competition scope is now frozen at F01–F08; current product status is defined in `CURRENT_SYSTEM_BASELINE.md`.
+
 > Status: `REVIEW COMPLETE — F06 NOT SELECTED`  
 > Date: 2026-08-08  
 > Scope: F01–F05 after F05 freeze  

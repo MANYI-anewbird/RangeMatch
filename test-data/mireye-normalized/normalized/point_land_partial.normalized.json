@@ -1,0 +1,204 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "authority": {
+    "canonical_for_parcel_facts": false,
+    "permitted_uses": [
+      "POINT_QA",
+      "FAST_CONTEXT",
+      "CANDIDATE_DISCOVERY",
+      "DILIGENCE_TRIGGER",
+      "JURISDICTION_CONTEXT"
+    ]
+  },
+  "context_id": "mireye_e27b6702a35d6d211f6377a5",
+  "context_type": "POINT_LAND_CONTEXT",
+  "factor_usage_refs": [
+    {
+      "context_id": "mireye_e27b6702a35d6d211f6377a5",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "aspect_cardinal",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_e27b6702a35d6d211f6377a5",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "aspect_degrees",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_e27b6702a35d6d211f6377a5",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "elevation",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_e27b6702a35d6d211f6377a5",
+      "factor_id": "F02_HERBACEOUS_RESOURCE",
+      "field_id": "land_use_class",
+      "use": "FAST_CONTEXT"
+    },
+    {
+      "context_id": "mireye_e27b6702a35d6d211f6377a5",
+      "factor_id": "F02_HERBACEOUS_RESOURCE",
+      "field_id": "lcms_class",
+      "use": "FAST_CONTEXT"
+    },
+    {
+      "context_id": "mireye_e27b6702a35d6d211f6377a5",
+      "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+      "field_id": "lcms_class",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_e27b6702a35d6d211f6377a5",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "slope_degrees",
+      "use": "POINT_QA"
+    }
+  ],
+  "fields": {
+    "aspect_cardinal": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T20:55:50.019114+00:00",
+      "field_id": "aspect_cardinal",
+      "notes": null,
+      "raw_field_hash": "800ac279978ace824fe7164c8a9011d2d1bb9bc4a324528f58622681460c1b07",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "NW"
+    },
+    "aspect_degrees": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T20:55:50.019092+00:00",
+      "field_id": "aspect_degrees",
+      "notes": null,
+      "raw_field_hash": "722df1d9e6bb717695aec767e2452570bba77994bfb4851adced5572b6a50b92",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": "degrees",
+      "value": 301.71868896484375
+    },
+    "cdl_class": {
+      "confidence": "medium",
+      "dataset_vintage": "USDA CDL 2025 (~120 m block-mode CONUS COG)",
+      "fetched_at": "2026-08-07T20:55:49.413362+00:00",
+      "field_id": "cdl_class",
+      "notes": "CDL class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+      "raw_field_hash": "039db88c8cd7abca0374864a2700f21d71a37b53a0db01744e96f6456494579b",
+      "source": "USDA_NASS_CDL",
+      "source_url": "https://nassgeodata.gmu.edu/CropScape/",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "Grass/Pasture"
+    },
+    "elevation": {
+      "confidence": null,
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T20:55:50.036941+00:00",
+      "field_id": "elevation",
+      "notes": "upstream timeout",
+      "raw_field_hash": "abb14eb6ca26117542bdcf97a57a6979708f11f44ccee59d49089a4192d6f5d7",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": "meters",
+      "value": null
+    },
+    "land_use_class": {
+      "confidence": "medium",
+      "dataset_vintage": "fixture-v0",
+      "fetched_at": "2026-08-07T20:55:50.036941+00:00",
+      "field_id": "land_use_class",
+      "notes": "offline fixture supplemental field",
+      "raw_field_hash": "31ad08d29d1b8576522cd1ef27b177271d4be651b13cfe449b483122573135c4",
+      "source": "REVIEWED_SYNTHETIC_FIXTURE",
+      "source_url": "https://example.invalid/land_use_class",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "Rangeland"
+    },
+    "lcms_class": {
+      "confidence": "medium",
+      "dataset_vintage": "USFS LCMS Land_Cover CONUS v2025-11 (2025 annual), ~120 m block-mode CONUS COG",
+      "fetched_at": "2026-08-07T20:55:49.417527+00:00",
+      "field_id": "lcms_class",
+      "notes": "LCMS Land_Cover class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+      "raw_field_hash": "250b753d4bc1fa9213c203456dad0ece3d259d6adc59e39652f0aca21e754fa6",
+      "source": "USFS_LCMS",
+      "source_url": "https://data.fs.usda.gov/geodata/rastergateway/LCMS/",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "Grass/Forb/Herb & Shrubs Mix"
+    },
+    "slope_degrees": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T20:55:50.018932+00:00",
+      "field_id": "slope_degrees",
+      "notes": null,
+      "raw_field_hash": "0d4d4b315a520f6aa60c92012473978f0b39c045763942ac6b45b6d74e5e3f6b",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": "degrees",
+      "value": 0.9686843752861023
+    }
+  },
+  "limitations": [
+    "canonical_for_parcel_facts=false",
+    "point_or_diligence_context_only",
+    "do_not_average_with_parcel_land_facts",
+    "do_not_promote_to_factor_land_facts",
+    "legal_title_not_verified",
+    "zoning_legality_not_confirmed"
+  ],
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "parcel_geometry_hash": "fixture_geom_hash_cper_001",
+    "point_role": "PARCEL_CENTROID_QA",
+    "spatial_semantics": "POINT"
+  },
+  "partial_failures": [
+    {
+      "error_code": "UPSTREAM_TIMEOUT",
+      "field_id": "elevation",
+      "message": "upstream timeout",
+      "normalized_effect": "UNKNOWN",
+      "raw_failure_hash": "565c6f865dc6c103d981cd3f2e4f56965d6bd98beca58dae8a9f3f9e2a52ac76",
+      "retryable": true,
+      "source": "USGS_3DEP_COG"
+    }
+  ],
+  "provenance": {
+    "adapter_version": "0.1.0",
+    "api_base_url": "https://api.mireye.com",
+    "api_or_catalog_version": "0.14.0",
+    "raw_artifact_reference": "test-data/mireye-normalized/raw/point_land_partial.json",
+    "raw_response_hash": "5c2ad543b724ed9065d726d1431edffe5b16cc5ce6a032ce7dde3a180a56aded",
+    "request_hash": "6deb514c7d47c33bbbdabd24cdbdcaf887ce268cf72b22121831f903d18aaf96"
+  },
+  "request": {
+    "endpoint": "/v1/fetch",
+    "explicitly_requested_fields": [
+      "lcms_class",
+      "land_use_class"
+    ],
+    "preset": "terrain",
+    "request_hash": "6deb514c7d47c33bbbdabd24cdbdcaf887ce268cf72b22121831f903d18aaf96",
+    "requested_location": {
+      "lat": 40.825,
+      "lng": -104.7625
+    }
+  },
+  "response_status": {
+    "fetched_at": "2026-08-07T20:55:50.036941+00:00",
+    "status": "PARTIAL"
+  }
+}

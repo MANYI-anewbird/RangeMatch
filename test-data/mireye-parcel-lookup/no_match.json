@@ -1,0 +1,16 @@
+{
+  "scenario_id": "no_match",
+  "raw_address": "304 Unknown Mireye Rd, Nowhere, CO 80000",
+  "normalized_address": "304 Unknown Mireye Rd, Nowhere, CO 80000",
+  "lookup_response": {
+    "disposition": "no_match",
+    "reason": "no_geocode_hit",
+    "parcel_grade": null,
+    "confidence": null,
+    "normalized_address": null,
+    "fetched_at": "2026-08-08T16:00:00+00:00",
+    "request_id": "mireye_lookup_no_match_001",
+    "fields": {},
+    "partial_failures": []
+  }
+}

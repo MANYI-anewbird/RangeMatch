@@ -1,0 +1,45 @@
+{
+  "classification_checks": {},
+  "system_dns_a": [
+    "66.241.124.184"
+  ],
+  "system_dns_aaaa": [
+    "2a09:8280:1::122:e682:0"
+  ],
+  "doh_cloudflare_a": {
+    "ok": false,
+    "error_class": "URLError",
+    "msg": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1020)>"
+  },
+  "doh_cloudflare_aaaa": {
+    "ok": false,
+    "error_class": "URLError",
+    "msg": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1020)>"
+  },
+  "plaintext_http_headers": [
+    "HTTP/1.1 302 Found",
+    "Location: https://www.safebrowse.io/warn.html?[REDACTED_TARGET_URL]",
+    "Connection: close",
+    "Content-Length: 0"
+  ],
+  "control_tls_cloudflare_dns": {
+    "ok": false,
+    "error_class": "SSLCertVerificationError",
+    "msg": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1020)"
+  },
+  "control_tls_api_github": {
+    "ok": false,
+    "error_class": "SSLCertVerificationError",
+    "msg": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1020)"
+  },
+  "ptr": {
+    "66.241.124.184": "ip-66-241-124-184.shared.customer.flyio.net"
+  },
+  "dns_matches_doh": true,
+  "intercept_evidence": {
+    "port_443_speaks_plaintext_http": true,
+    "redirect_to_safebrowse": true,
+    "tls_handshake_fails_wrong_version": true,
+    "likely_class": "NETWORK_MIDDLEBOX_OR_SAFEBROWSE_INTERCEPT"
+  }
+}

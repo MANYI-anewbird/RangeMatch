@@ -1,0 +1,119 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "authority": {
+    "canonical_for_parcel_facts": false,
+    "permitted_uses": [
+      "POINT_QA",
+      "FAST_CONTEXT",
+      "CANDIDATE_DISCOVERY",
+      "DILIGENCE_TRIGGER",
+      "JURISDICTION_CONTEXT"
+    ]
+  },
+  "context_id": "mireye_b6638c4bede636ee548a3649",
+  "context_type": "POINT_HAZARD_CONTEXT",
+  "factor_usage_refs": [
+    {
+      "context_id": "mireye_b6638c4bede636ee548a3649",
+      "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+      "field_id": "tree_canopy_pct",
+      "use": "POINT_QA"
+    }
+  ],
+  "fields": {
+    "flood_zone": {
+      "confidence": "medium",
+      "dataset_vintage": "NFHL fixture",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "field_id": "flood_zone",
+      "notes": null,
+      "raw_field_hash": "4d37dd541644a83379fd506df7830acc2eb16023935f4c64dbd25f7f96721fda",
+      "source": "FEMA_NFHL",
+      "source_url": "https://www.fema.gov/national-flood-hazard-layer",
+      "ttl_seconds": 2592000,
+      "unit": null,
+      "value": "X"
+    },
+    "ndvi_current": {
+      "confidence": "low",
+      "dataset_vintage": "fixture",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "field_id": "ndvi_current",
+      "notes": "no observation",
+      "raw_field_hash": "66959695010033f43fbd7bce9d5a97b829d83b0faa6257a553fbb3f35cc78f5b",
+      "source": "SATELLITE_NDVI",
+      "source_url": "https://example.invalid/ndvi",
+      "ttl_seconds": 86400,
+      "unit": null,
+      "value": null
+    },
+    "tree_canopy_pct": {
+      "confidence": "medium",
+      "dataset_vintage": "fixture",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "field_id": "tree_canopy_pct",
+      "notes": null,
+      "raw_field_hash": "614912548c2e32ca6f6253d29f8f4d12c1838877e3d1958bde7a42846c713e8b",
+      "source": "USFS_TCC",
+      "source_url": "https://data.fs.usda.gov/geodata/rastergateway/treecanopycover/",
+      "ttl_seconds": 31536000,
+      "unit": "percent",
+      "value": 2.5
+    },
+    "within_floodplain_polygon": {
+      "confidence": "medium",
+      "dataset_vintage": "NFHL fixture",
+      "fetched_at": "2026-08-07T21:00:00+00:00",
+      "field_id": "within_floodplain_polygon",
+      "notes": null,
+      "raw_field_hash": "ed468a0e8aa9879151737069844958bb4b43dd1075acd879522d214e6cb78747",
+      "source": "FEMA_NFHL",
+      "source_url": "https://www.fema.gov/national-flood-hazard-layer",
+      "ttl_seconds": 2592000,
+      "unit": null,
+      "value": false
+    }
+  },
+  "limitations": [
+    "canonical_for_parcel_facts=false",
+    "point_or_diligence_context_only",
+    "do_not_average_with_parcel_land_facts",
+    "do_not_promote_to_factor_land_facts",
+    "legal_title_not_verified",
+    "zoning_legality_not_confirmed"
+  ],
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "parcel_geometry_hash": "fixture_geom_hash_cper_001",
+    "point_role": "PARCEL_CENTROID_QA",
+    "spatial_semantics": "POINT"
+  },
+  "partial_failures": [],
+  "provenance": {
+    "adapter_version": "0.1.0",
+    "api_base_url": "https://api.mireye.com",
+    "api_or_catalog_version": "0.14.0",
+    "raw_artifact_reference": "test-data/mireye-normalized/raw/point_hazard_null_field.json",
+    "raw_response_hash": "b6dcafdb4b84818d2b377b44fa14816acb336154471fbed90723245b54472cb1",
+    "request_hash": "abce270593f8a6469c34b75f97f89584f6f911a91cc38f5aef99368f4829560f"
+  },
+  "request": {
+    "endpoint": "/v1/fetch",
+    "explicitly_requested_fields": [
+      "tree_canopy_pct",
+      "ndvi_current"
+    ],
+    "preset": "flood_risk",
+    "request_hash": "abce270593f8a6469c34b75f97f89584f6f911a91cc38f5aef99368f4829560f",
+    "requested_location": {
+      "lat": 40.825,
+      "lng": -104.7625
+    }
+  },
+  "response_status": {
+    "fetched_at": "2026-08-07T21:00:00+00:00",
+    "status": "COMPLETE"
+  }
+}

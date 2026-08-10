@@ -1,0 +1,18 @@
+{
+  "scenario_id": "blocked_external",
+  "raw_address": "400 Blocked Provider Ave, Denver, CO 80202",
+  "normalized_address": "400 Blocked Provider Ave, Denver, CO 80202",
+  "geocode_outcome": "BLOCKED_EXTERNAL",
+  "parcel_lookup_outcome": "BLOCKED_EXTERNAL",
+  "geocode": {
+    "point": null,
+    "confidence": null,
+    "provider": "FIXTURE_GEOCODER",
+    "request_id": "geocode_fixture_blocked",
+    "retrieved_at": null,
+    "limitations": [
+      "External provider blocked."
+    ]
+  },
+  "candidates": []
+}

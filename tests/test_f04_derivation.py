@@ -168,6 +168,46 @@ class F04DerivationGoldenTests(unittest.TestCase):
         self.assertAlmostEqual(synthetic["unaccounted_component_share"], 0.2)
         self.assertFalse(synthetic["component_percentages_renormalized"])
 
+    def test_duplicate_ecological_join_rows_do_not_double_count_component_share(self):
+        columns = [
+            "mukey", "musym", "muname", "cokey", "compname", "comppct_r",
+            "majcompflag", "drainagecl", "hydgrp", "ecoclassid",
+            "ecoclassname", "ecoclasstypename",
+        ]
+        synthetic = derive_f04_parcel_facts(
+            spatial_coverage={
+                "requested_area_m2": 100.0,
+                "covered_area_m2": 100.0,
+                "coverage_fraction": 1.0,
+                "intersecting_mapunit_count": 1,
+                "mapunit_intersection_areas": [{"mukey": "1", "intersection_area_m2": 100.0}],
+            },
+            components_table=_table(
+                columns,
+                [
+                    ["1", "A", "Unit", "c1", "A", 60, "Yes", "Well drained", "B", "R001", "Site 1", "ESD"],
+                    ["1", "A", "Unit", "c1", "A", 60, "Yes", "Well drained", "B", "R002", "Site 2", "ESD"],
+                    ["1", "A", "Unit", "c2", "B", 40, "Yes", "Well drained", "B", None, None, None],
+                ],
+            ),
+            horizons_table=_table(
+                ["mukey", "cokey", "compname", "comppct_r", "chkey", "hzname", "hzdept_r", "hzdepb_r", "awc_r", "ec_r", "ph1to1h2o_r"],
+                [],
+            ),
+            restrictions_table=_table(
+                ["mukey", "cokey", "compname", "comppct_r", "corestrictkey", "reskind", "resdept_r"],
+                [],
+            ),
+            monthly_wetness_table=_table(
+                ["mukey", "cokey", "compname", "comppct_r", "comonthkey", "monthseq", "flodfreqcl", "pondfreqcl"],
+                [],
+            ),
+            ecological_site_access=[],
+        )
+        self.assertEqual(len(synthetic["component_support_weights"]), 2)
+        self.assertAlmostEqual(synthetic["known_component_share"], 1.0)
+        self.assertEqual(synthetic["duplicate_component_rows_deduplicated"], 1)
+
     def test_f04_derive_004_controlled_categories_remain_distributions(self):
         distribution = self.derived["drainage_class_distribution"]
         self.assertIn("Well drained", distribution)

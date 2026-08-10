@@ -54,10 +54,11 @@ Record the authentication method, not the credential value.
 authentication_type: bearer_token | x_api_key | oauth2 | signed_request | other | TBD
 header_name: Authorization | X-API-Key | TBD
 token_prefix: Bearer | none | TBD
-credential_environment_variable: MIREYE_API_KEY
+credential_environment_variable: MIREYE_API_TOKEN
+credential_environment_variable_legacy_alias: MIREYE_API_KEY
 additional_required_headers: []
-token_expiration_behavior: TBD
-rate_limit_documentation: TBD
+token_expiration_behavior: dashboard_token_default_about_90_days
+rate_limit_documentation: honor_retryable_and_Retry-After
 ```
 
 Store the real credential only in:
@@ -70,7 +71,8 @@ Example local `.env` contents:
 
 ```dotenv
 MIREYE_API_BASE_URL=https://replace-with-real-base-url
-MIREYE_API_KEY=replace-with-real-secret
+MIREYE_API_TOKEN=replace-with-real-secret
+# MIREYE_API_KEY=replace-with-real-secret  # legacy alias still accepted
 ```
 
 ## 4. Required Endpoints

@@ -1,0 +1,48 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "contexts": {
+    "POINT_HAZARD_CONTEXT": {
+      "adapter_status": "FAILED",
+      "endpoint_status": {
+        "endpoint": "/v1/fetch",
+        "error": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443:URLError",
+        "error_class": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "ok": false
+      },
+      "gate_status": "BLOCKED_EXTERNAL",
+      "note": "live_transport_or_tls_failure"
+    },
+    "POINT_LAND_CONTEXT": {
+      "adapter_status": "FAILED",
+      "endpoint_status": {
+        "endpoint": "/v1/fetch",
+        "error": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443:URLError",
+        "error_class": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "ok": false
+      },
+      "gate_status": "BLOCKED_EXTERNAL",
+      "note": "live_transport_or_tls_failure"
+    },
+    "PROPERTY_DILIGENCE_CONTEXT": {
+      "adapter_status": "FAILED",
+      "endpoint_status": {
+        "endpoint": "/v1/lookup",
+        "error": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443:URLError",
+        "error_class": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+        "ok": false
+      },
+      "gate_status": "BLOCKED_EXTERNAL",
+      "note": "live_transport_or_tls_failure"
+    }
+  },
+  "credential_safety": "PASS",
+  "factor_writes": false,
+  "gate_id": "MIREYE_ADAPTER_CPER_LIVE_GATE",
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625
+  },
+  "match_result_changed": false,
+  "transport_blocked": true
+}

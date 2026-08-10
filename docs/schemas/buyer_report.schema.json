@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/buyer_report.schema.json",
+  "title": "RangeMatchBuyerReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "match_result_hash",
+    "mode",
+    "intended_operation",
+    "executive_summary",
+    "property",
+    "land_and_resources",
+    "resilience_and_hazards",
+    "operation_comparison",
+    "key_unknowns",
+    "diligence_plan",
+    "methodology_and_limitations",
+    "evidence_references",
+    "claim_ledger",
+    "report_provenance",
+    "validation_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "RANGEMATCH_BUYER_REPORT@0.1.0"
+    },
+    "match_result_hash": { "type": "string", "minLength": 16 },
+    "mode": {
+      "type": "string",
+      "enum": ["GOAL_DIRECTED", "DISCOVERY"]
+    },
+    "intended_operation": {
+      "type": ["string", "null"],
+      "enum": ["COW_CALF_OPERATION", "SHEEP_GRAZING", null]
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": ["PASSED", "FAILED", "PENDING"]
+    },
+    "validation_violations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" },
+          "path": { "type": "string" }
+        }
+      }
+    },
+    "executive_summary": { "$ref": "#/$defs/narrative_section" },
+    "property": { "$ref": "#/$defs/narrative_section" },
+    "land_and_resources": { "$ref": "#/$defs/narrative_section" },
+    "resilience_and_hazards": { "$ref": "#/$defs/narrative_section" },
+    "operation_comparison": { "$ref": "#/$defs/narrative_section" },
+    "key_unknowns": { "$ref": "#/$defs/narrative_section" },
+    "diligence_plan": { "$ref": "#/$defs/narrative_section" },
+    "methodology_and_limitations": { "$ref": "#/$defs/narrative_section" },
+    "evidence_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ref_id", "kind", "label"],
+        "properties": {
+          "ref_id": { "type": "string" },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "LAND_FACT",
+              "FACTOR",
+              "OPERATION",
+              "UNKNOWN",
+              "LIMITATION",
+              "MIREYE_CONTEXT",
+              "SOURCE",
+              "DILIGENCE"
+            ]
+          },
+          "label": { "type": "string" },
+          "factor_id": { "type": ["string", "null"] },
+          "variable_id": { "type": ["string", "null"] },
+          "value": {},
+          "unit": { "type": ["string", "null"] },
+          "spatial_semantics": { "type": ["string", "null"] },
+          "source_id": { "type": ["string", "null"] },
+          "point_context": { "type": "boolean" }
+        }
+      }
+    },
+    "claim_ledger": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "text",
+          "claim_type",
+          "evidence_refs",
+          "numeric_refs",
+          "certainty"
+        ],
+        "properties": {
+          "claim_id": { "type": "string" },
+          "text": { "type": "string", "minLength": 1 },
+          "claim_type": {
+            "type": "string",
+            "enum": [
+              "FACT",
+              "ENGINE_DECISION",
+              "LIMITATION",
+              "UNKNOWN",
+              "DILIGENCE_ACTION",
+              "CONTEXT"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "numeric_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "certainty": {
+            "type": "string",
+            "enum": ["KNOWN", "INFERRED", "UNKNOWN", "NEEDS_VERIFICATION"]
+          },
+          "operation_scope": {
+            "type": ["string", "null"],
+            "enum": ["COW_CALF_OPERATION", "SHEEP_GRAZING", "BOTH", null]
+          }
+        }
+      }
+    },
+    "report_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model_id",
+        "prompt_version",
+        "generated_at",
+        "provider_status",
+        "match_result_hash"
+      ],
+      "properties": {
+        "provider": { "type": "string" },
+        "model_id": { "type": ["string", "null"] },
+        "prompt_version": { "type": "string" },
+        "generated_at": { "type": "string" },
+        "provider_status": {
+          "type": "string",
+          "enum": ["OK", "FIXTURE", "NOT_CONFIGURED", "FAILED_EXTERNAL"]
+        },
+        "match_result_hash": { "type": "string" },
+        "displayable": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "narrative_section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading",
+        "summary",
+        "findings",
+        "evidence_refs",
+        "limitation_refs"
+      ],
+      "properties": {
+        "heading": { "type": "string" },
+        "summary": { "type": "string" },
+        "findings": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "limitation_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

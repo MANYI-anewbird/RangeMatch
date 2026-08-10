@@ -1,0 +1,97 @@
+{
+  "lat": 40.825,
+  "lng": -104.7625,
+  "fetched_at": "2026-08-07T20:55:50.036941+00:00",
+  "fields": {
+    "lcms_class": {
+      "value": "Grass/Forb/Herb & Shrubs Mix",
+      "unit": null,
+      "source": "USFS_LCMS",
+      "source_url": "https://data.fs.usda.gov/geodata/rastergateway/LCMS/",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T20:55:49.417527+00:00",
+      "dataset_vintage": "USFS LCMS Land_Cover CONUS v2025-11 (2025 annual), ~120 m block-mode CONUS COG",
+      "ttl_seconds": 31536000,
+      "notes": "LCMS Land_Cover class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+      "status": "ok"
+    },
+    "cdl_class": {
+      "value": "Grass/Pasture",
+      "unit": null,
+      "source": "USDA_NASS_CDL",
+      "source_url": "https://nassgeodata.gmu.edu/CropScape/",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T20:55:49.413362+00:00",
+      "dataset_vintage": "USDA CDL 2025 (~120 m block-mode CONUS COG)",
+      "ttl_seconds": 31536000,
+      "notes": "CDL class sampled from the bootstrapped ~120 m block-mode CONUS COG",
+      "status": "ok"
+    },
+    "elevation": {
+      "value": 1646.923095703125,
+      "unit": "meters",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T20:55:50.019395+00:00",
+      "dataset_vintage": "3DEP 1/3 arc-second seamless DEM",
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "slope_degrees": {
+      "value": 0.9686843752861023,
+      "unit": "degrees",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T20:55:50.018932+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "aspect_degrees": {
+      "value": 301.71868896484375,
+      "unit": "degrees",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T20:55:50.019092+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "aspect_cardinal": {
+      "value": "NW",
+      "unit": null,
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T20:55:50.019114+00:00",
+      "dataset_vintage": null,
+      "ttl_seconds": 31536000,
+      "notes": null,
+      "status": "ok"
+    },
+    "land_use_class": {
+      "value": "Rangeland",
+      "unit": null,
+      "source": "REVIEWED_SYNTHETIC_FIXTURE",
+      "source_url": "https://example.invalid/land_use_class",
+      "confidence": "medium",
+      "fetched_at": "2026-08-07T20:55:50.036941+00:00",
+      "dataset_vintage": "fixture-v0",
+      "ttl_seconds": 31536000,
+      "notes": "offline fixture supplemental field",
+      "status": "ok"
+    }
+  },
+  "partial_failures": [],
+  "resolved_location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "source": "coordinate"
+  }
+}

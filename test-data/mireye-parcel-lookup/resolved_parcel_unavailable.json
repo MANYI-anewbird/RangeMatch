@@ -1,0 +1,25 @@
+{
+  "scenario_id": "resolved_parcel_unavailable",
+  "raw_address": "301 Mireye Ranch Rd, Weld County, CO 80701",
+  "normalized_address": "301 Mireye Ranch Rd, Weld County, CO 80701",
+  "lookup_response": {
+    "disposition": "resolved",
+    "parcel_grade": null,
+    "confidence": 0.8,
+    "normalized_address": "301 Mireye Ranch Rd, Weld County, CO 80701",
+    "accuracy_type": "nearest_rooftop_match",
+    "accuracy": 0.9,
+    "fetched_at": "2026-08-08T16:00:00+00:00",
+    "request_id": "mireye_lookup_unavailable_001",
+    "lat": 40.5,
+    "lng": -104.9,
+    "parcel_unavailable": true,
+    "parcel_unavailable_reason": "regrid_quota_exhausted",
+    "parcel": {
+      "parcel_id": null,
+      "jurisdiction": "Weld County, CO"
+    },
+    "fields": {},
+    "partial_failures": []
+  }
+}

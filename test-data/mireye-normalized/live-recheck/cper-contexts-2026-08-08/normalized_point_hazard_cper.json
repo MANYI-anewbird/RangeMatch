@@ -1,0 +1,287 @@
+{
+  "adapter_id": "MIREYE_UNIFIED_CONTEXT_ADAPTER",
+  "adapter_version": "0.1.0",
+  "authority": {
+    "canonical_for_parcel_facts": false,
+    "permitted_uses": [
+      "POINT_QA",
+      "FAST_CONTEXT",
+      "CANDIDATE_DISCOVERY",
+      "DILIGENCE_TRIGGER",
+      "JURISDICTION_CONTEXT"
+    ]
+  },
+  "context_id": "mireye_388fe5ad08daf7ae8c429edd",
+  "context_type": "POINT_HAZARD_CONTEXT",
+  "factor_usage_refs": [
+    {
+      "context_id": "mireye_388fe5ad08daf7ae8c429edd",
+      "factor_id": "F01_TOPOGRAPHY",
+      "field_id": "elevation",
+      "use": "POINT_QA"
+    },
+    {
+      "context_id": "mireye_388fe5ad08daf7ae8c429edd",
+      "factor_id": "F03_LIVESTOCK_WATER",
+      "field_id": "intersects_nhd_area",
+      "use": "CANDIDATE_DISCOVERY"
+    },
+    {
+      "context_id": "mireye_388fe5ad08daf7ae8c429edd",
+      "factor_id": "F03_LIVESTOCK_WATER",
+      "field_id": "nearest_waterbody_name",
+      "use": "CANDIDATE_DISCOVERY"
+    },
+    {
+      "context_id": "mireye_388fe5ad08daf7ae8c429edd",
+      "factor_id": "F03_LIVESTOCK_WATER",
+      "field_id": "surface_water_permanence_pct",
+      "use": "CANDIDATE_DISCOVERY"
+    },
+    {
+      "context_id": "mireye_388fe5ad08daf7ae8c429edd",
+      "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+      "field_id": "tree_canopy_pct",
+      "use": "POINT_QA"
+    }
+  ],
+  "fields": {
+    "coast_distance_m": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:07.999911+00:00",
+      "field_id": "coast_distance_m",
+      "notes": null,
+      "raw_field_hash": "cc4482f4daa05b462959f52ba7552dd7b090720b03e6a2f48556ed5a2fa65778",
+      "source": "NOAA_CUSP",
+      "source_url": "https://shoreline.noaa.gov/data/datasheets/cusp.html",
+      "ttl_seconds": 31536000,
+      "unit": "meters",
+      "value": 1160472.695082172
+    },
+    "elevation": {
+      "confidence": "medium",
+      "dataset_vintage": "3DEP 1/3 arc-second seamless DEM",
+      "fetched_at": "2026-08-07T20:55:50.019395+00:00",
+      "field_id": "elevation",
+      "notes": null,
+      "raw_field_hash": "c59833d31b0a700cbc627b1ee4b9a011cac43da792200c49ac0680cbe7003dc0",
+      "source": "USGS_3DEP_COG",
+      "source_url": "https://www.usgs.gov/3d-elevation-program",
+      "ttl_seconds": 31536000,
+      "unit": "meters",
+      "value": 1646.923095703125
+    },
+    "intersects_nhd_area": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T21:33:44.605364+00:00",
+      "field_id": "intersects_nhd_area",
+      "notes": "No NHDPlus HR NHDArea polygon intersects this coordinate. This does not rule out FEMA NFHL flood-hazard coverage.",
+      "raw_field_hash": "3852f5a73d5293fe21fc7da4963177ce8815478551bec34987e04a1cff80e476",
+      "source": "USGS_NHDPLUS_HR",
+      "source_url": "https://hydro.nationalmap.gov/arcgis/rest/services/NHDPlus_HR/MapServer/8/query?f=json&outFields=%2A&returnGeometry=true&geometry=-104.7625%2C40.825&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&resultRecordCount=1",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": false
+    },
+    "intersects_wetland": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:10.743337+00:00",
+      "field_id": "intersects_wetland",
+      "notes": null,
+      "raw_field_hash": "df5fc1374f23f7be2d349a35d1c92c097f570454f93a25f825ff4b7c8deb4b24",
+      "source": "USFWS_NWI",
+      "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": false
+    },
+    "ndvi_current": {
+      "confidence": "high",
+      "dataset_vintage": "S2 SR 60d window @ 2026-08-08",
+      "fetched_at": "2026-08-08T19:02:10.744188+00:00",
+      "field_id": "ndvi_current",
+      "notes": null,
+      "raw_field_hash": "e89f77ed1c4f2409179924a5709471e5dfd3338fba36f279e3ab76fde1968450",
+      "source": "COPERNICUS_S2_SR_HARMONIZED",
+      "source_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+      "ttl_seconds": 604800,
+      "unit": null,
+      "value": 0.21074095368385315
+    },
+    "nearest_waterbody_name": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T21:33:44.605488+00:00",
+      "field_id": "nearest_waterbody_name",
+      "notes": "Nearest NHDPlus waterbody has no GNIS/name attribute.",
+      "raw_field_hash": "2ebccc8a7dfb8d7d3692a00bb2b764309be20c0ea9068ccbb03cb566b367e41f",
+      "source": "USGS_NHDPLUS_HR",
+      "source_url": "https://hydro.nationalmap.gov/arcgis/rest/services/NHDPlus_HR/MapServer/9/query?f=json&outFields=%2A&returnGeometry=true&geometry=-104.7625%2C40.825&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=5000&units=esriSRUnit_Meter&outSR=4326&orderByFields=OBJECTID&resultRecordCount=200&resultOffset=0",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": null
+    },
+    "nearest_wetland_distance_m": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:10.743417+00:00",
+      "field_id": "nearest_wetland_distance_m",
+      "notes": null,
+      "raw_field_hash": "750d43d15ce3ba003c67a407137d71110e65f76ad0d93a0f1cd41c3b5a5caab1",
+      "source": "USFWS_NWI",
+      "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+      "ttl_seconds": 31536000,
+      "unit": "m",
+      "value": 154.897933152616
+    },
+    "surface_water_permanence_pct": {
+      "confidence": "medium",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-07T21:33:40.768125+00:00",
+      "field_id": "surface_water_permanence_pct",
+      "notes": null,
+      "raw_field_hash": "fa226fd759f01b11bc53d9450aa35188e857f5ec7d2fd8398edd515cfcf8cc38",
+      "source": "JRC_GSW",
+      "source_url": "https://global-surface-water.appspot.com/",
+      "ttl_seconds": 2592000,
+      "unit": "percent",
+      "value": 0.0
+    },
+    "tree_canopy_pct": {
+      "confidence": "high",
+      "dataset_vintage": "USFS/MRLC NLCD Tree Canopy Cover 2025 (v2025-6), CONUS COG (~120 m block-mean canopy %)",
+      "fetched_at": "2026-08-08T19:02:08.631352+00:00",
+      "field_id": "tree_canopy_pct",
+      "notes": "tree canopy cover (%) sampled from the bootstrapped USFS/NLCD CONUS COG",
+      "raw_field_hash": "36ed08684ef0a12399ae7a2ff573256253acbadcdba3e45913bc731f9932d2d9",
+      "source": "USFS_NLCD_TCC",
+      "source_url": "https://data.fs.usda.gov/geodata/rastergateway/treecanopycover/",
+      "ttl_seconds": 31536000,
+      "unit": "percent",
+      "value": 0.0
+    },
+    "wetland_acres": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:10.743409+00:00",
+      "field_id": "wetland_acres",
+      "notes": null,
+      "raw_field_hash": "3b761cd2a9792fb0cb5bf6779925973f55cf5e157c8ecb289171fd8c213f0d5b",
+      "source": "USFWS_NWI",
+      "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+      "ttl_seconds": 31536000,
+      "unit": "acre",
+      "value": 1.3217337886776335
+    },
+    "wetland_subtype": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:10.743400+00:00",
+      "field_id": "wetland_subtype",
+      "notes": null,
+      "raw_field_hash": "b741496408693a0222b83a8982cae5ebebd676170ee58883a4ab82b76a752adf",
+      "source": "USFWS_NWI",
+      "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "PEM1A"
+    },
+    "wetland_type": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:10.743389+00:00",
+      "field_id": "wetland_type",
+      "notes": null,
+      "raw_field_hash": "2ef29362050e5316935bf82f6a6a3186c5401ab9a6f3eceacb255fba3adaccd5",
+      "source": "USFWS_NWI",
+      "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": "Palustrine Emergent Persistent Temporarily Flooded"
+    },
+    "wetlands_within_100m_count": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:10.743425+00:00",
+      "field_id": "wetlands_within_100m_count",
+      "notes": null,
+      "raw_field_hash": "742d400a1ffc42f4c431b746912646bade0ac57a28b7940b32e2758987464c71",
+      "source": "USFWS_NWI",
+      "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": 0
+    },
+    "wetlands_within_500m_count": {
+      "confidence": "high",
+      "dataset_vintage": null,
+      "fetched_at": "2026-08-08T19:02:10.743433+00:00",
+      "field_id": "wetlands_within_500m_count",
+      "notes": null,
+      "raw_field_hash": "07f104fa01d5772a249a3ab7ffc65aada83e5147572e137e39a04d45c7f16965",
+      "source": "USFWS_NWI",
+      "source_url": "https://www.fws.gov/program/national-wetlands-inventory",
+      "ttl_seconds": 31536000,
+      "unit": null,
+      "value": 4
+    },
+    "within_floodplain_polygon": {
+      "confidence": "high",
+      "dataset_vintage": "08123C_FBFM1",
+      "fetched_at": "2026-08-08T19:02:08.705480+00:00",
+      "field_id": "within_floodplain_polygon",
+      "notes": "FEMA NFHL Flood Hazard Zones intersect, but not an SFHA: Zone D; SFHA_TF=F; FLD_AR_ID=08123C_250; SOURCE_CIT=08123C_FBFM1.",
+      "raw_field_hash": "8059cb2d8d49cb389fde39efb91026aa253e7a1e539b0136b452272032258a66",
+      "source": "FEMA_NFHL",
+      "source_url": "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28",
+      "ttl_seconds": 2592000,
+      "unit": null,
+      "value": false
+    }
+  },
+  "limitations": [
+    "canonical_for_parcel_facts=false",
+    "point_or_diligence_context_only",
+    "do_not_average_with_parcel_land_facts",
+    "do_not_promote_to_factor_land_facts",
+    "legal_title_not_verified",
+    "zoning_legality_not_confirmed"
+  ],
+  "location": {
+    "lat": 40.825,
+    "lng": -104.7625,
+    "parcel_geometry_hash": null,
+    "point_role": "PARCEL_CENTROID_QA",
+    "spatial_semantics": "POINT"
+  },
+  "partial_failures": [],
+  "provenance": {
+    "adapter_version": "0.1.0",
+    "api_base_url": "https://api.mireye.com",
+    "api_or_catalog_version": "0.14.0",
+    "raw_artifact_reference": "test-data/mireye-normalized/live-recheck/cper-contexts-2026-08-08/raw_point_hazard_cper.json",
+    "raw_response_hash": "70e05922c3cc94fd61b5a0f84c7efa682d374e10c27019eed0992f64640e5f2c",
+    "request_hash": "4efe93004a021d84dc24722c8efeb1d93b84025bf45c813ab345576dfb3ae420"
+  },
+  "request": {
+    "endpoint": "/v1/fetch",
+    "explicitly_requested_fields": [
+      "tree_canopy_pct",
+      "ndvi_current"
+    ],
+    "preset": "flood_risk",
+    "request_hash": "4efe93004a021d84dc24722c8efeb1d93b84025bf45c813ab345576dfb3ae420",
+    "requested_location": {
+      "kind": "coord",
+      "lat": 40.825,
+      "lng": -104.7625
+    }
+  },
+  "response_status": {
+    "fetched_at": "2026-08-08T19:02:10.757203+00:00",
+    "status": "COMPLETE"
+  }
+}

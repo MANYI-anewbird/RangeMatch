@@ -271,13 +271,39 @@ def derive_f04_parcel_facts(
         str(item["mukey"]): float(item["intersection_area_m2"])
         for item in spatial_coverage["mapunit_intersection_areas"]
     }
+    raw_mapunit_area_sum = sum(mu_areas.values())
+    spatial_overlap_normalization_factor = 1.0
+    if covered_area > 0 and raw_mapunit_area_sum > covered_area * (1.0 + 1e-9):
+        # Overlapping WFS survey polygons can otherwise allocate more than the
+        # parcel's covered area. Preserve the raw diagnostic and proportionally
+        # reconcile only the spatial support weights to the union-covered area.
+        spatial_overlap_normalization_factor = covered_area / raw_mapunit_area_sum
+        mu_areas = {
+            mukey: area * spatial_overlap_normalization_factor
+            for mukey, area in mu_areas.items()
+        }
     mapunit_area_distribution = {
         mukey: (area / requested_area if requested_area else 0.0)
         for mukey, area in sorted(mu_areas.items())
     }
 
-    components_by_mu: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    # SDA's LEFT JOIN to ecological-class records may return more than one row
+    # for the same soil component. Component percentage is a property of the
+    # component, not of each joined ecological record, so count each cokey once.
+    components_by_key: dict[tuple[str, str], dict[str, Any]] = {}
+    duplicate_component_rows = 0
     for component in components:
+        key = (str(component["mukey"]), str(component["cokey"]))
+        if key in components_by_key:
+            duplicate_component_rows += 1
+            existing = components_by_key[key]
+            for field in ("ecoclassid", "ecoclassname", "ecoclasstypename"):
+                if not existing.get(field) and component.get(field):
+                    existing[field] = component[field]
+            continue
+        components_by_key[key] = dict(component)
+    components_by_mu: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for component in components_by_key.values():
         components_by_mu[str(component["mukey"])].append(component)
 
     component_support_weights: list[dict[str, Any]] = []
@@ -314,7 +340,8 @@ def derive_f04_parcel_facts(
         unaccounted_component_share += mu_fraction * max(0.0, 1.0 - (pct_sum / 100.0))
 
     component_support_weights.sort(key=lambda item: (-item["component_support_weight"], item["cokey"]))
-    known_component_share = _clamp_unit_fraction(known_component_share)
+    known_component_share_before_guard = known_component_share
+    known_component_share = min(1.0, max(0.0, known_component_share))
     unaccounted_component_share = _clamp_unit_fraction(unaccounted_component_share)
 
     drainage_class_distribution = _weighted_category_distribution(
@@ -486,6 +513,14 @@ def derive_f04_parcel_facts(
         unknowns.append(
             "Some components lack ecological-site linkage; absent linkage remains UNKNOWN."
         )
+    if duplicate_component_rows:
+        unknowns.append(
+            f"{duplicate_component_rows} duplicate SDA component join rows were deduplicated by mukey+cokey."
+        )
+    if spatial_overlap_normalization_factor < 1.0:
+        unknowns.append(
+            "Overlapping SDA WFS map-unit intersections were proportionally reconciled to union-covered parcel area."
+        )
 
     return {
         "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
@@ -506,8 +541,12 @@ def derive_f04_parcel_facts(
             ),
         },
         "mapunit_area_distribution": mapunit_area_distribution,
+        "raw_mapunit_intersection_area_sum_m2": raw_mapunit_area_sum,
+        "spatial_overlap_normalization_factor": spatial_overlap_normalization_factor,
         "component_support_weights": component_support_weights,
         "known_component_share": known_component_share,
+        "known_component_share_before_guard": known_component_share_before_guard,
+        "duplicate_component_rows_deduplicated": duplicate_component_rows,
         "unaccounted_component_share": unaccounted_component_share,
         "component_percentages_renormalized": False,
         "drainage_class_distribution": drainage_class_distribution,

@@ -1,0 +1,18 @@
+{
+  "scenario_id": "clarify_points_only",
+  "raw_address": "303 Ambiguous Mireye Rd, Weld County, CO 80701",
+  "normalized_address": "303 Ambiguous Mireye Rd, Weld County, CO 80701",
+  "lookup_response": {
+    "disposition": "clarify",
+    "confidence": 0.4,
+    "normalized_address": null,
+    "fetched_at": "2026-08-08T16:00:00+00:00",
+    "request_id": "mireye_lookup_clarify_points_001",
+    "candidates": [
+      { "label": "Candidate A", "lat": 40.82, "lng": -104.76 },
+      { "label": "Candidate B", "lat": 40.83, "lng": -104.77 }
+    ],
+    "fields": {},
+    "partial_failures": []
+  }
+}

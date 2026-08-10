@@ -1,0 +1,33 @@
+{
+  "gate_id": "F01_USGS_3DEP_CONFIRMED_CPER_PARCEL_LIVE_GATE",
+  "geometry_hash": "3ae9eb7a1e03213bcacd6b0d0c8bca18e6cef3603a60d08c8c893bf543fdc42c",
+  "geometry_id": "8b82c68b-6127-47e1-8b05-7abe8376cc95",
+  "numeric_suitability_thresholds_added": false,
+  "ranking_effect": "NONE",
+  "result": {
+    "factor": {
+      "derivation_spec": "F01_TOPOGRAPHY_DERIVATION_SPEC.yaml@0.1.0",
+      "input_quality_state": "PARCEL_COMPLETE",
+      "result_reference": "test-data/live-results/cper-live-confirmed-parcel/f01/f01_derivation_result.json",
+      "summary": {
+        "elevation_median_m": 1649.6339111328125,
+        "mean_eastness": -0.02168011466366132,
+        "mean_northness": -0.3322180495547544,
+        "slope_median_degrees": 1.891524753346898,
+        "slope_p90_degrees": 5.171279222147744
+      }
+    },
+    "observation": {
+      "elevation_median_m": 1649.6339111328125,
+      "slope_median_degrees": 1.891524753346898,
+      "slope_p90_degrees": 5.171279222147744
+    },
+    "path": {
+      "error": null,
+      "status": "SUCCESS"
+    }
+  },
+  "rules_changed": false,
+  "source_crs": "EPSG:4326",
+  "status": "LIVE_VERIFIED"
+}

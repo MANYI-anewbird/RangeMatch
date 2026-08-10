@@ -1,0 +1,661 @@
+{
+  "artifacts": {
+    "_meta": {
+      "executor_version": "RANGEMATCH_PLANNER_EXECUTOR@0.1.0",
+      "network_authorized": false,
+      "rap_fetch_count": 1,
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0"
+    },
+    "explanation": "<in_memory>",
+    "f02_coverV3_artifact_hash": "<in_memory>",
+    "f02_factor": "<in_memory>",
+    "factor:F01_TOPOGRAPHY": "<in_memory>",
+    "factor:F02_HERBACEOUS_RESOURCE": "<in_memory>",
+    "factor:F03_LIVESTOCK_WATER": "<in_memory>",
+    "factor:F04_SOIL_WETNESS_ECOLOGICAL_SITE": "<in_memory>",
+    "factor:F05_CLIMATE_DROUGHT_EXPOSURE": "<in_memory>",
+    "factor:F06_PARCEL_CONFIGURATION": "<in_memory>",
+    "factor:F07_ROAD_AND_PHYSICAL_ACCESS": "<in_memory>",
+    "factor:F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE": "<in_memory>",
+    "geometry": "<in_memory>",
+    "geometry_binding": "<in_memory>",
+    "land_profile": "<in_memory>",
+    "match_result": "<in_memory>",
+    "mireye:POINT_HAZARD_CONTEXT": {
+      "context_type": "POINT_HAZARD_CONTEXT",
+      "disposition": "COMPLETE",
+      "limitations": [
+        "canonical_for_parcel_facts=false",
+        "point_or_diligence_context_only",
+        "do_not_average_with_parcel_land_facts",
+        "do_not_promote_to_factor_land_facts",
+        "legal_title_not_verified",
+        "zoning_legality_not_confirmed"
+      ],
+      "partial_failure_count": 0
+    },
+    "mireye:POINT_LAND_CONTEXT": {
+      "context_type": "POINT_LAND_CONTEXT",
+      "disposition": "COMPLETE",
+      "limitations": [
+        "canonical_for_parcel_facts=false",
+        "point_or_diligence_context_only",
+        "do_not_average_with_parcel_land_facts",
+        "do_not_promote_to_factor_land_facts",
+        "legal_title_not_verified",
+        "zoning_legality_not_confirmed"
+      ],
+      "partial_failure_count": 0
+    },
+    "mireye:PROPERTY_DILIGENCE_CONTEXT": {
+      "context_type": "PROPERTY_DILIGENCE_CONTEXT",
+      "disposition": "RESOLVED",
+      "limitations": [
+        "canonical_for_parcel_facts=false",
+        "point_or_diligence_context_only",
+        "do_not_average_with_parcel_land_facts",
+        "do_not_promote_to_factor_land_facts",
+        "legal_title_not_verified",
+        "zoning_legality_not_confirmed"
+      ],
+      "partial_failure_count": 0
+    },
+    "unified_output": "<in_memory>"
+  },
+  "canonical_factor_report_order": [
+    "F01_TOPOGRAPHY",
+    "F02_HERBACEOUS_RESOURCE",
+    "F03_LIVESTOCK_WATER",
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+    "F05_CLIMATE_DROUGHT_EXPOSURE",
+    "F06_PARCEL_CONFIGURATION",
+    "F07_ROAD_AND_PHYSICAL_ACCESS",
+    "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+  ],
+  "completed_at": "2026-08-08T14:47:23.365999+00:00",
+  "constraints": {
+    "batch_authorized": false,
+    "f09_authorized": false,
+    "icp_authorized": false,
+    "live_mireye_attempted": false,
+    "live_network": false
+  },
+  "deterministic_execution_hash": "db21f1f5a74b2246ce183ba4f8226cb2c58d7d3149f63dc308ef4a74de436703",
+  "execution_id": "exec_cper_goal",
+  "execution_status": "SUCCEEDED",
+  "executor_version": "RANGEMATCH_PLANNER_EXECUTOR@0.1.0",
+  "factor_steps_by_report_order": [
+    "F01_TOPOGRAPHY",
+    "F02_HERBACEOUS_RESOURCE",
+    "F03_LIVESTOCK_WATER",
+    "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+    "F05_CLIMATE_DROUGHT_EXPOSURE",
+    "F06_PARCEL_CONFIGURATION",
+    "F07_ROAD_AND_PHYSICAL_ACCESS",
+    "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+  ],
+  "failures": [],
+  "intended_operation": "COW_CALF_OPERATION",
+  "land_profile_ref": "land_profile",
+  "match_result_ref": "match_result",
+  "mode": "GOAL_DIRECTED",
+  "plan_id": "cper_goal_directed_exec",
+  "plan_sha256": "6b41679cbe68851f6f75b8b509d3a29e8ba1e969cd00806ab65f60058227507d",
+  "planner_version": "RANGEMATCH_PLANNER@0.1.0",
+  "presentation": {
+    "discovery_limited_to_supported_profiles": false,
+    "intended_operation": "COW_CALF_OPERATION",
+    "mode": "GOAL_DIRECTED",
+    "operation_presentation_order": [
+      "COW_CALF_OPERATION",
+      "SHEEP_GRAZING"
+    ],
+    "rule_or_threshold_change": false,
+    "scientific_priority_change": false
+  },
+  "runner_bundle_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+  "started_at": "2026-08-08T14:47:23.360436+00:00",
+  "step_order_executed": [
+    "S01_VALIDATE_ONE_PARCEL",
+    "S02_RESOLVE_GEOMETRY",
+    "S03_MIREYE_PROPERTY",
+    "S04_MIREYE_POINT_LAND",
+    "S05_MIREYE_POINT_HAZARD",
+    "S06_F06_PARCEL_CONFIGURATION",
+    "S07_PEER_F01_TOPOGRAPHY",
+    "S07_PEER_F02_HERBACEOUS_RESOURCE",
+    "S07_PEER_F03_LIVESTOCK_WATER",
+    "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+    "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+    "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+    "S08_F08_WOODY_REUSE",
+    "S09_ASSEMBLE_LAND_PROFILE",
+    "S10_EVALUATE_ENGINE",
+    "S11_PROJECT_UNIFIED_OUTPUT",
+    "S13_EXPLAIN_AND_PRODUCT"
+  ],
+  "steps": [
+    {
+      "action": "COMPUTE",
+      "completed_at": "2026-08-08T14:47:23.360466+00:00",
+      "dependency_step_ids": [],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "land_profile"
+      ],
+      "nonvolatile_step_hash": "346f35606c935d319cad1369ffe3b1e2e7cd2aeb2484854ed3beb9ccd65a18b2",
+      "output_refs": [
+        "geometry_validation"
+      ],
+      "parallel_group": null,
+      "report_order_index": null,
+      "reused_artifact_refs": [],
+      "runner_id": "fixture.geometry_validate",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360461+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S01_VALIDATE_ONE_PARCEL",
+      "tool_id": "geometry.validate_one_parcel"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360503+00:00",
+      "dependency_step_ids": [
+        "S01_VALIDATE_ONE_PARCEL"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "land_profile",
+        "S01_VALIDATE_ONE_PARCEL"
+      ],
+      "nonvolatile_step_hash": "9666053077e2c8f83a6d2d07d90628bb4c131ba0ae1f8ee94c84f032b387017a",
+      "output_refs": [
+        "geometry_binding"
+      ],
+      "parallel_group": null,
+      "report_order_index": null,
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "runner_id": "fixture.geometry_resolve",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360481+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S02_RESOLVE_GEOMETRY",
+      "tool_id": "geometry.resolve"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360554+00:00",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "S02_RESOLVE_GEOMETRY",
+        "land_profile"
+      ],
+      "nonvolatile_step_hash": "796f3580350f1b48964d601b1a2e5f699328af10f0d1fc36212be79ba7712adb",
+      "output_refs": [
+        "mireye:PROPERTY_DILIGENCE_CONTEXT"
+      ],
+      "parallel_group": "mireye_context",
+      "report_order_index": null,
+      "reused_artifact_refs": [
+        "mireye_fixture:PROPERTY_DILIGENCE_CONTEXT"
+      ],
+      "runner_id": "fixture.mireye_property",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360516+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S03_MIREYE_PROPERTY",
+      "tool_id": "mireye.property_diligence"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360631+00:00",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "c8aaa17183caf368d31dcf53cceb1565258b76e9062200d3f50b329c786bf866",
+      "output_refs": [
+        "mireye:POINT_LAND_CONTEXT"
+      ],
+      "parallel_group": "mireye_context",
+      "report_order_index": null,
+      "reused_artifact_refs": [
+        "mireye_fixture:POINT_LAND_CONTEXT"
+      ],
+      "runner_id": "fixture.mireye_point_land",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360565+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S04_MIREYE_POINT_LAND",
+      "tool_id": "mireye.point_land"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360682+00:00",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "c946b7f1c5ec700ddf1bf3641fe729aa2467ad34a9f9f17749f5591c6a06f946",
+      "output_refs": [
+        "mireye:POINT_HAZARD_CONTEXT"
+      ],
+      "parallel_group": "mireye_context",
+      "report_order_index": null,
+      "reused_artifact_refs": [
+        "mireye_fixture:POINT_HAZARD_CONTEXT"
+      ],
+      "runner_id": "fixture.mireye_point_hazard",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360641+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S05_MIREYE_POINT_HAZARD",
+      "tool_id": "mireye.point_hazard"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360721+00:00",
+      "dependency_step_ids": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "factor_id": "F06_PARCEL_CONFIGURATION",
+      "failure": null,
+      "input_refs": [
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "7776657a7a4e2992868e00798f04465874c2dca0f97beabd1a73c7816d6a8ec4",
+      "notes": {
+        "fixture_backed": true,
+        "rap_fetch": false
+      },
+      "output_refs": [
+        "factor:F06_PARCEL_CONFIGURATION"
+      ],
+      "parallel_group": null,
+      "report_order_index": 5,
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "runner_id": "fixture.factor_f06",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360692+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S06_F06_PARCEL_CONFIGURATION",
+      "tool_id": "factor.f06_parcel_configuration"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360743+00:00",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "factor_id": "F01_TOPOGRAPHY",
+      "failure": null,
+      "input_refs": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "2083143e83479f100f8635017245e11fbe929ff1aee1819149c35e6b1c03077e",
+      "notes": {
+        "fixture_backed": true,
+        "rap_fetch": false
+      },
+      "output_refs": [
+        "factor:F01_TOPOGRAPHY"
+      ],
+      "parallel_group": "peer_factors_after_f06",
+      "report_order_index": 0,
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "runner_id": "fixture.factor_f01",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360735+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S07_PEER_F01_TOPOGRAPHY",
+      "tool_id": "adapter.usgs_3dep"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360808+00:00",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "factor_id": "F02_HERBACEOUS_RESOURCE",
+      "failure": null,
+      "input_refs": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "36531f2dee3226c6159b3cea102a1ec71744535eca789f13b19619f20efa4948",
+      "notes": {
+        "fixture_backed": true,
+        "rap_fetch": true
+      },
+      "output_refs": [
+        "factor:F02_HERBACEOUS_RESOURCE"
+      ],
+      "parallel_group": "peer_factors_after_f06",
+      "report_order_index": 1,
+      "reused_artifact_refs": [
+        "land_profile",
+        "rap_coverV3:58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160"
+      ],
+      "runner_id": "fixture.factor_f02_rap",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360754+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S07_PEER_F02_HERBACEOUS_RESOURCE",
+      "tool_id": "adapter.rap_cover_production"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.360856+00:00",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "factor_id": "F03_LIVESTOCK_WATER",
+      "failure": null,
+      "input_refs": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "77133e46ccdb568c1e8df5594da76bf714f4e00097951473dca04881e5b9695f",
+      "notes": {
+        "fixture_backed": true,
+        "rap_fetch": false
+      },
+      "output_refs": [
+        "factor:F03_LIVESTOCK_WATER"
+      ],
+      "parallel_group": "peer_factors_after_f06",
+      "report_order_index": 2,
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "runner_id": "fixture.factor_f03",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360825+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S07_PEER_F03_LIVESTOCK_WATER",
+      "tool_id": "adapter.nhd_naip_water"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.361087+00:00",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "factor_id": "F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+      "failure": null,
+      "input_refs": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "71f2c06190500476165bd3fe34497d4c582201cc0dd0dc60ba616c06cea6d345",
+      "notes": {
+        "fixture_backed": true,
+        "rap_fetch": false
+      },
+      "output_refs": [
+        "factor:F04_SOIL_WETNESS_ECOLOGICAL_SITE"
+      ],
+      "parallel_group": "peer_factors_after_f06",
+      "report_order_index": 3,
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "runner_id": "fixture.factor_f04",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.360870+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+      "tool_id": "adapter.usda_sda"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.361153+00:00",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "factor_id": "F05_CLIMATE_DROUGHT_EXPOSURE",
+      "failure": null,
+      "input_refs": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "3e9d95c5498d1d5f42feebe41acdba51b558565a81b62a01c6b17999ceb25cd3",
+      "notes": {
+        "fixture_backed": true,
+        "rap_fetch": false
+      },
+      "output_refs": [
+        "factor:F05_CLIMATE_DROUGHT_EXPOSURE"
+      ],
+      "parallel_group": "peer_factors_after_f06",
+      "report_order_index": 4,
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "runner_id": "fixture.factor_f05",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.361099+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+      "tool_id": "adapter.noaa_ncei_precip"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.361219+00:00",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION"
+      ],
+      "factor_id": "F07_ROAD_AND_PHYSICAL_ACCESS",
+      "failure": null,
+      "input_refs": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "8a9f2d62c5fff84fad330fdc550d73362742b4635781664dbb34c7068a073f35",
+      "notes": {
+        "fixture_backed": true,
+        "rap_fetch": false
+      },
+      "output_refs": [
+        "factor:F07_ROAD_AND_PHYSICAL_ACCESS"
+      ],
+      "parallel_group": "peer_factors_after_f06",
+      "report_order_index": 6,
+      "reused_artifact_refs": [
+        "land_profile"
+      ],
+      "runner_id": "fixture.factor_f07",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.361164+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+      "tool_id": "adapter.tiger_roads"
+    },
+    {
+      "action": "REUSE",
+      "completed_at": "2026-08-08T14:47:23.361344+00:00",
+      "dependency_step_ids": [
+        "S07_PEER_F02_HERBACEOUS_RESOURCE"
+      ],
+      "factor_id": "F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE",
+      "failure": null,
+      "input_refs": [
+        "S07_PEER_F02_HERBACEOUS_RESOURCE",
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S02_RESOLVE_GEOMETRY"
+      ],
+      "nonvolatile_step_hash": "d4bf7a9f27df3d007c8e88585e70035a6750e8e6e1ab96c366135c50de685d40",
+      "notes": {
+        "duplicate_rap_fetch": false,
+        "reused_f02_artifact": true
+      },
+      "output_refs": [
+        "factor:F08_WOODY_AND_SHRUB_VEGETATION_STRUCTURE"
+      ],
+      "parallel_group": null,
+      "report_order_index": 7,
+      "reused_artifact_refs": [
+        "rap_coverV3:58bf1fc7aa91ce3d863bf419f59dad98ec18da36db23f570a1c9dc244d951160",
+        "factor:F02_HERBACEOUS_RESOURCE"
+      ],
+      "runner_id": "fixture.factor_f08_reuse",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.361230+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S08_F08_WOODY_REUSE",
+      "tool_id": "factor.f08_woody_reuse_rap"
+    },
+    {
+      "action": "COMPUTE",
+      "completed_at": "2026-08-08T14:47:23.362356+00:00",
+      "dependency_step_ids": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S07_PEER_F01_TOPOGRAPHY",
+        "S07_PEER_F02_HERBACEOUS_RESOURCE",
+        "S07_PEER_F03_LIVESTOCK_WATER",
+        "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+        "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+        "S08_F08_WOODY_REUSE"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "S06_F06_PARCEL_CONFIGURATION",
+        "S07_PEER_F01_TOPOGRAPHY",
+        "S07_PEER_F02_HERBACEOUS_RESOURCE",
+        "S07_PEER_F03_LIVESTOCK_WATER",
+        "S07_PEER_F04_SOIL_WETNESS_ECOLOGICAL_SITE",
+        "S07_PEER_F05_CLIMATE_DROUGHT_EXPOSURE",
+        "S07_PEER_F07_ROAD_AND_PHYSICAL_ACCESS",
+        "S08_F08_WOODY_REUSE",
+        "S03_MIREYE_PROPERTY",
+        "S04_MIREYE_POINT_LAND",
+        "S05_MIREYE_POINT_HAZARD"
+      ],
+      "nonvolatile_step_hash": "8f68017c9495279f994fb3a92bf03dea6a32f9655183780938d1605393b6c65a",
+      "notes": {
+        "invented_land_facts": false,
+        "missing_factors": []
+      },
+      "output_refs": [
+        "land_profile"
+      ],
+      "parallel_group": null,
+      "report_order_index": null,
+      "reused_artifact_refs": [],
+      "runner_id": "fixture.assemble_land_profile",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.361357+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S09_ASSEMBLE_LAND_PROFILE",
+      "tool_id": "profile.assemble"
+    },
+    {
+      "action": "EVALUATE",
+      "completed_at": "2026-08-08T14:47:23.363343+00:00",
+      "dependency_step_ids": [
+        "S09_ASSEMBLE_LAND_PROFILE"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "S09_ASSEMBLE_LAND_PROFILE"
+      ],
+      "nonvolatile_step_hash": "88766138b2549c784b201bb20b9cfa2aac175b41bcc5ed586f2e51e2a200c29c",
+      "notes": {
+        "engine_authoritative": true
+      },
+      "output_refs": [
+        "match_result"
+      ],
+      "parallel_group": null,
+      "report_order_index": null,
+      "reused_artifact_refs": [],
+      "runner_id": "fixture.engine_evaluate",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.362371+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S10_EVALUATE_ENGINE",
+      "tool_id": "engine.evaluate"
+    },
+    {
+      "action": "PROJECT",
+      "completed_at": "2026-08-08T14:47:23.364212+00:00",
+      "dependency_step_ids": [
+        "S10_EVALUATE_ENGINE"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "S09_ASSEMBLE_LAND_PROFILE",
+        "S10_EVALUATE_ENGINE"
+      ],
+      "nonvolatile_step_hash": "b1e30abb96de58c94f3066d3a36e4ad1db1ec6bd850ef4b906133188f94bb8e3",
+      "output_refs": [
+        "unified_output"
+      ],
+      "parallel_group": null,
+      "report_order_index": null,
+      "reused_artifact_refs": [],
+      "runner_id": "fixture.project_unified",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.363357+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S11_PROJECT_UNIFIED_OUTPUT",
+      "tool_id": "output.project_unified"
+    },
+    {
+      "action": "EXPLAIN",
+      "completed_at": "2026-08-08T14:47:23.365986+00:00",
+      "dependency_step_ids": [
+        "S11_PROJECT_UNIFIED_OUTPUT"
+      ],
+      "factor_id": null,
+      "failure": null,
+      "input_refs": [
+        "S11_PROJECT_UNIFIED_OUTPUT",
+        "S10_EVALUATE_ENGINE"
+      ],
+      "nonvolatile_step_hash": "8720baac39b9abc88bdca09d228477fa06841b5bd2b3ef3b4e6ee20d29723edf",
+      "notes": {
+        "bound_to_match_result_hash": "da0be081e6a45f9c7c1d14149fa5eeecb098053afa04cb749df15add5a7443e5"
+      },
+      "output_refs": [
+        "explanation",
+        "unified_output"
+      ],
+      "parallel_group": null,
+      "report_order_index": null,
+      "reused_artifact_refs": [],
+      "runner_id": "fixture.explanation_bind",
+      "runner_version": "RANGEMATCH_TOOL_RUNNERS@0.1.0",
+      "started_at": "2026-08-08T14:47:23.364772+00:00",
+      "status": "SUCCEEDED",
+      "step_id": "S13_EXPLAIN_AND_PRODUCT",
+      "tool_id": "explanation.bind_and_product"
+    }
+  ],
+  "unified_output_ref": "unified_output"
+}

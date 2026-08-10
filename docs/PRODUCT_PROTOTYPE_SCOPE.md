@@ -1,8 +1,9 @@
 # RangeMatch Competition Product Prototype Scope
 
-> Status: `CANONICAL_V0_1`  
-> Date: 2026-08-08  
+> Status: `CANONICAL_V0_1`
+> Date: 2026-08-08
 > Product surface: one U.S. parcel per run
+> Current baseline: `docs/CURRENT_SYSTEM_BASELINE.md`
 
 ## Buyer and problem
 
@@ -10,7 +11,7 @@ The initial buyer is a serious ranch buyer or ranch operator screening a parcel 
 
 ## Product promise
 
-RangeMatch accepts an address, APN, parcel geometry, or existing Land Profile and produces an evidence-constrained comparison for the currently supported Cow-Calf and Sheep grazing Profiles. It explains what is known, what is not known, why the current decision label was produced, and what should be verified next.
+The runnable prototype accepts an address or coordinate/map pin, resolves candidate parcels through Mireye, requires explicit polygon confirmation, and then runs the same one-parcel workflow. Existing Land Profiles remain an engineering replay path. APN-first lookup and user-drawn boundaries are not supported.
 
 RangeMatch does not promise carrying capacity, profitability, legal compliance, or purchase approval.
 
@@ -60,7 +61,7 @@ Mireye context does not replace parcel-wide canonical RAP, SDA, NOAA, TIGER, DEM
 
 ## Dynamic diligence
 
-Regulatory and land-rights investigation is a later dynamic workflow above the frozen Factors. It may investigate current federal, state, and county rules, permit triggers, water rights, zoning, and official-source currency. It must not provide final legal advice or write LLM conclusions into canonical Land Facts.
+The Public Diligence Agent performs a bounded, official-source search for current federal, state, and county guidance, permit triggers, drought context, and public-land constraints. It must not provide final legal advice, infer compliance, or write search conclusions into canonical Land Facts or MatchResult.
 
 ## Explicitly deferred
 
@@ -73,6 +74,44 @@ Regulatory and land-rights investigation is a later dynamic workflow above the f
 - Final legal compliance determination
 - Carrying-capacity and profitability claims
 
+## Buyer-facing report surface
+
+The UI presents a decision dashboard, readable decision report, and evidence appendix. The readable report contains:
+
+1. Executive Summary
+2. Key Unknowns
+3. What We Found on This Parcel
+4. Cow-Calf vs. Sheep evidence matrix
+5. Diligence Plan
+6. Current Rules and Local Guidance
+7. Methodology and Limitations
+
+Presentation may simplify, but must not discard material unknowns, coverage limitations, source failures, or provenance access. Technical F01–F08 evidence and Agent trace remain available through progressive disclosure. Only a validator-passed LLM narrative is displayable; otherwise the UI uses a labeled deterministic Engine fallback. Contract version: `RANGEMATCH_UNIFIED_OUTPUT@0.1.0`.
+
+## Planner stance
+
+Investigation planning is a dependency DAG (`docs/PLANNER_ROUTING_SPEC.md`). Factor IDs define report order; execution peers after F06 may run in parallel; F08 reuses F02 RAP artifacts. The Planner Executor and confirmed-parcel live adapter paths are implemented. Historical SafeBrowse/TLS failures remain documented as incidents; Mireye lookup and Property/Land/Hazard calls have subsequently passed on a clean network. Any recurrence still fails visibly and never substitutes fixture data.
+
+## Packaging stance
+
+Packaging has two layers: (1) runnable engineering package (API + UI + engine), and (2) optional Agent Skill/submission instructions that reference rather than duplicate scientific rules. The one-parcel workflow is now ready for competition packaging and deployment preparation.
+
+## Current implementation status
+
+```yaml
+backend_tests: 423_PASSED
+ui_tests: 22_PASSED
+llm_report_validator: HARDENED
+buyer_report_ui: IMPLEMENTED
+engine_behavior: HOLD_ONLY_NO_APPROVED_RANKING
+live_mireye: LIVE_VERIFIED_ON_CLEAN_NETWORK
+public_diligence_search: IMPLEMENTED
+buyer_decision_report_v2: IMPLEMENTED
+next_slice: COMPETITION_PACKAGING_AND_DEPLOYMENT_READINESS
+```
+
+The current Engine is scientifically conservative: it does not yet establish a Cow-Calf-versus-Sheep ranking, suitability score, carrying capacity, or purchase recommendation.
+
 ## Prototype success condition
 
-The demonstration succeeds when the Agent can take one parcel, recognize Goal-directed or Discovery intent, call approved tools, preserve provenance and failures, reuse existing artifacts, produce the same deterministic MatchResult from the same inputs, and present actionable unknowns and diligence steps without changing the science.
+The demonstration succeeds when the Agent can take one parcel, recognize Goal-directed or Discovery intent, call approved tools, preserve provenance and failures, reuse existing artifacts, produce the same deterministic MatchResult from the same inputs, project the unified output envelope, and present actionable unknowns and diligence steps without changing the science.

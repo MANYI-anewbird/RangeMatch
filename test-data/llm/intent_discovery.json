@@ -1,0 +1,18 @@
+{
+  "intent_status": "PARSED",
+  "rejection_code": null,
+  "mode": "DISCOVERY",
+  "intended_operation": null,
+  "planned_actions": [],
+  "parcel_input_reference": {"kind": "none", "value": null},
+  "clarification_questions": [],
+  "parser_provenance": {
+    "provider": "FIXTURE",
+    "model_id": "fixture",
+    "prompt_version": "RANGEMATCH_INTENT_PARSER@0.1.0",
+    "generated_at": "2026-08-08T12:00:00Z",
+    "provider_status": "FIXTURE",
+    "ui_overrides_applied": false
+  },
+  "prohibited_inferences_applied": true
+}

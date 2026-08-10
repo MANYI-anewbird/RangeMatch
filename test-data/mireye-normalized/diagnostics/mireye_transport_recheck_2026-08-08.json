@@ -1,0 +1,60 @@
+{
+  "base_url_validation": {
+    "duplicate_scheme": false,
+    "endswith_slash": false,
+    "exact_official_origin": true,
+    "expected": "https://api.mireye.com",
+    "fragment_present": false,
+    "has_userinfo": false,
+    "hostname": "api.mireye.com",
+    "ok": true,
+    "path": "",
+    "port": null,
+    "query_present": false,
+    "scheme": "https"
+  },
+  "classification": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+  "dns": {
+    "ok": true,
+    "records": [
+      {
+        "addr": "2a09:8280:1::122:e682:0",
+        "family": "IPv6"
+      },
+      {
+        "addr": "66.241.124.184",
+        "family": "IPv4"
+      }
+    ]
+  },
+  "https_health_no_auth": {
+    "bypass_env_proxy": true,
+    "error_class": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+    "message": "<urlopen error [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)>",
+    "ok": false
+  },
+  "key_present": true,
+  "plaintext_http_probe": {
+    "first_bytes_ascii": "HTTP/1.1 302 Found | location_host=safebrowse.io | query=[REDACTED]",
+    "host": "api.mireye.com",
+    "looks_like_http": true,
+    "ok": true,
+    "port": 443,
+    "safebrowse_redirect": true,
+    "status_line": "HTTP/1.1 302 Found"
+  },
+  "proxy_environment": {
+    "NO_PROXY": null,
+    "proxies": {}
+  },
+  "ssl": {
+    "certifi_used": true,
+    "openssl_version": "OpenSSL 3.0.15 3 Sep 2024"
+  },
+  "target_host": "api.mireye.com",
+  "tls_direct": {
+    "error_class": "BLOCKED_EXTERNAL_NETWORK_MIDDLEBOX_PLAINTEXT_HTTP_ON_443",
+    "message": "[SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:1020)",
+    "ok": false
+  }
+}

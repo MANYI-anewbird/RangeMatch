@@ -84,9 +84,12 @@ def explain_match_result(
             ]
         )
 
+    from rangematch.unified_output import hash_match_result
+
     return {
         "explanation_schema_version": "0.1.0",
         "bound_to_input_sha256": match_result.get("input_sha256"),
+        "bound_to_match_result_hash": hash_match_result(match_result),
         "engine_version": match_result.get("engine_version"),
         "llm_override_permitted": False,
         "may_alter_decision_labels": False,

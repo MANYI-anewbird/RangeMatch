@@ -1,5 +1,7 @@
 # Cross-Parcel Validation Results (Portfolio Rollup)
 
+> **Historical validation result.** Current runtime scope is F01–F08; this rollup remains an immutable record of the earlier cross-parcel gate.
+
 > Status: `PASSED`  
 > Date: 2026-08-08  
 > Canonical conclusion: `docs/CROSS_PARCEL_VALIDATION_CONCLUSION.yaml`  
