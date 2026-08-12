@@ -52,7 +52,7 @@ class AdvisorLlmTrialTests(unittest.TestCase):
         report = generate_advisor_buyer_explanation(
             self.packet, mireye_live=MIREYE, unified_output=self.uo, provider_name="FIXTURE"
         )
-        self.assertEqual(report["source"], "LLM")
+        self.assertEqual(report["source"], "STRUCTURED_FIXTURE")
         self.assertEqual(report["validation_status"], "PASSED")
         self.assertEqual(report["validation_violations"], [])
         self.assertIn("Request access documents", report["sections"]["recommendation"])

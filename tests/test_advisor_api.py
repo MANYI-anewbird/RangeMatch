@@ -61,7 +61,7 @@ class AdvisorApiTests(unittest.TestCase):
         self.assertEqual(explained.status_code, 200, explained.text)
         body = explained.json()
         self.assertEqual(body["status"], "SUCCEEDED")
-        self.assertEqual(body["buyer_explanation"]["source"], "LLM")
+        self.assertEqual(body["buyer_explanation"]["source"], "STRUCTURED_FIXTURE")
         self.assertEqual(body["buyer_explanation"]["validation_status"], "PASSED")
         self.assertTrue(body["packet_hash"])
 

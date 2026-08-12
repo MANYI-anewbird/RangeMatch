@@ -203,12 +203,17 @@ async function readRun(response: Response): Promise<AgentRun & { detail?: string
   return (await response.json()) as AgentRun & { detail?: string };
 }
 
+type ExplanationProvider = "OPENAI" | "FIXTURE";
+
 export function AdvisorDemoPage() {
   const [address, setAddress] = useState(CPER_DEMO_ADDRESS);
   const [run, setRun] = useState<AgentRun | null>(null);
   const [busy, setBusy] = useState(false);
   const [clientError, setClientError] = useState<string | null>(null);
   const [explainBusy, setExplainBusy] = useState(false);
+  /** Explicit choice: LIVE LLM (OPENAI) or structured fixture. Default LIVE. */
+  const [explanationProvider, setExplanationProvider] =
+    useState<ExplanationProvider>("OPENAI");
 
   async function runAgent() {
     const place = address.trim();
@@ -260,7 +265,7 @@ export function AdvisorDemoPage() {
       const response = await fetch(`/v1/advisor/runs/${run.run_id}/buyer-explanation`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ provider: "FIXTURE" }),
+        body: JSON.stringify({ provider: explanationProvider }),
       });
       const body = await readRun(response);
       if (!response.ok) {
@@ -305,7 +310,11 @@ export function AdvisorDemoPage() {
         </div>
         <div className="advisor-badges">
           <span className="advisor-badge">Deterministic agent</span>
-          <span className="advisor-badge">No live LLM</span>
+          <span className="advisor-badge">
+            {explanationProvider === "OPENAI"
+              ? "Buyer explanation: LIVE LLM"
+              : "Buyer explanation: structured fixture"}
+          </span>
           <span className="advisor-badge advisor-badge-warn">
             CPER engineering test geometry — not a listing
           </span>
@@ -373,14 +382,42 @@ export function AdvisorDemoPage() {
             {busy ? "Running investigation…" : succeeded ? "Run again" : "Run investigation"}
           </button>
           {succeeded && (
-            <button
-              type="button"
-              className="advisor-chip"
-              disabled={explainBusy}
-              onClick={() => void explainBuyer()}
-            >
-              {explainBusy ? "Generating explanation…" : "Generate buyer explanation"}
-            </button>
+            <div className="advisor-explain-controls">
+              <label className="advisor-address-label" htmlFor="advisor-explanation-provider">
+                Buyer explanation provider
+              </label>
+              <select
+                id="advisor-explanation-provider"
+                className="advisor-address"
+                value={explanationProvider}
+                disabled={explainBusy}
+                onChange={(event) =>
+                  setExplanationProvider(event.target.value as ExplanationProvider)
+                }
+              >
+                <option value="OPENAI">LIVE LLM (OpenAI)</option>
+                <option value="FIXTURE">Structured fixture</option>
+              </select>
+              <button
+                type="button"
+                className="advisor-chip"
+                disabled={explainBusy}
+                onClick={() => void explainBuyer()}
+              >
+                {explainBusy
+                  ? "Generating explanation…"
+                  : explanationProvider === "OPENAI"
+                    ? "Generate buyer explanation (LIVE LLM)"
+                    : "Generate buyer explanation (fixture)"}
+              </button>
+              <p className="advisor-quiet">
+                LIVE LLM calls{" "}
+                <code>POST …/buyer-explanation</code> with{" "}
+                <code>{`{"provider":"OPENAI"}`}</code>. If the key is missing or
+                validation fails, the API returns a deterministic fallback — it
+                does not silently swap the fixture.
+              </p>
+            </div>
           )}
           {run && (run.status === "SUCCEEDED" || run.status === "FAILED") && (
             <p className="advisor-run-meta">

@@ -115,7 +115,9 @@ describe("Advisor demo route", () => {
     expect(screen.getByRole("heading", { name: "What you can do now" })).toBeInTheDocument();
     expect(screen.getByText("Visit depends on access paper")).toBeInTheDocument();
     expect(screen.getByText(/advisor_test_run_001/)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Generate buyer explanation/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Generate buyer explanation \(LIVE LLM\)/i })).toBeInTheDocument();
+    expect(screen.getByLabelText(/Buyer explanation provider/i)).toHaveValue("OPENAI");
+    expect(screen.getByText(/Buyer explanation: LIVE LLM/i)).toBeInTheDocument();
     expect(screen.getByText(/Do not send the client yet/i)).toBeInTheDocument();
     expect(screen.getByText(new RegExp(brief.packet_hash.slice(0, 12)))).toBeInTheDocument();
     expect(globalThis.fetch).toHaveBeenCalledWith(
@@ -123,6 +125,31 @@ describe("Advisor demo route", () => {
       expect.objectContaining({
         method: "POST",
         body: expect.stringContaining("Central Plains Experimental Range Demo"),
+      }),
+    );
+  });
+
+  it("posts OPENAI by default for buyer explanation and can switch to fixture", async () => {
+    const user = userEvent.setup();
+    renderDemo();
+    fireEvent.click(screen.getByRole("button", { name: /Run investigation/i }));
+    expect(await screen.findByRole("button", { name: /Generate buyer explanation \(LIVE LLM\)/i })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /Generate buyer explanation \(LIVE LLM\)/i }));
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      "/v1/advisor/runs/advisor_test_run_001/buyer-explanation",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ provider: "OPENAI" }),
+      }),
+    );
+    await user.selectOptions(screen.getByLabelText(/Buyer explanation provider/i), "FIXTURE");
+    expect(screen.getByRole("button", { name: /Generate buyer explanation \(fixture\)/i })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /Generate buyer explanation \(fixture\)/i }));
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      "/v1/advisor/runs/advisor_test_run_001/buyer-explanation",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ provider: "FIXTURE" }),
       }),
     );
   });

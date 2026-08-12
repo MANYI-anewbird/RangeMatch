@@ -22,7 +22,7 @@
     "validation_status": { "type": "string", "enum": ["PASSED", "FAILED"] },
     "source": {
       "type": "string",
-      "enum": ["LLM", "DETERMINISTIC_FALLBACK"]
+      "enum": ["STRUCTURED_FIXTURE", "LIVE_LLM", "DETERMINISTIC_FALLBACK"]
     },
     "sections": {
       "type": "object",
