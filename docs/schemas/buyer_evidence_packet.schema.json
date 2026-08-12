@@ -1,0 +1,420 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/buyer_evidence_packet.schema.json",
+  "title": "RangeMatchBuyerEvidencePacket",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "parcel",
+    "decision_context",
+    "listing_claims",
+    "observations",
+    "candidate_objects",
+    "claim_evidence_gaps",
+    "bottlenecks",
+    "actions",
+    "action_policy",
+    "copy_ready_message_specs",
+    "prohibited_inferences",
+    "technical_references"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "RANGEMATCH_BUYER_EVIDENCE_PACKET@0.1.0"
+    },
+    "parcel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parcel_id", "geometry_hash", "confirmation_status"],
+      "properties": {
+        "parcel_id": { "type": "string", "minLength": 1 },
+        "geometry_hash": { "type": "string", "minLength": 16 },
+        "confirmation_status": {
+          "type": "string",
+          "enum": ["CONFIRMED", "UNCONFIRMED"]
+        },
+        "display_label": { "type": ["string", "null"] },
+        "is_engineering_test_geometry": { "type": "boolean" }
+      }
+    },
+    "decision_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_stage", "goal"],
+      "properties": {
+        "current_stage": {
+          "type": "string",
+          "enum": [
+            "PARCEL_CONFIRMATION",
+            "PRE_VISIT",
+            "DOCUMENT_REVIEW",
+            "TITLE_REVIEW_ACTIVE",
+            "FIELD_FOLLOW_UP",
+            "FIELD_VISIT_ALREADY_BOOKED",
+            "PAUSE"
+          ]
+        },
+        "decision_deadline": {
+          "type": ["string", "null"],
+          "enum": ["TODAY", "THIS_WEEK", "THIS_MONTH", null]
+        },
+        "candidate_actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "REQUEST_DOCUMENTS",
+              "SCHEDULE_FIELD_VISIT",
+              "ENGAGE_PROFESSIONAL",
+              "PAUSE_ADDITIONAL_SPEND",
+              "CONFIRM_PARCEL"
+            ]
+          }
+        },
+        "user_question": { "type": ["string", "null"] },
+        "goal": {
+          "type": "string",
+          "const": "CHOOSE_NEXT_DILIGENCE_SPEND_NOT_PURCHASE"
+        }
+      }
+    },
+    "listing_claims": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/listing_claim" }
+    },
+    "observations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/observation" }
+    },
+    "candidate_objects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/candidate_object" }
+    },
+    "claim_evidence_gaps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim_gap" }
+    },
+    "bottlenecks": {
+      "type": "array",
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/bottleneck" }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/action" }
+    },
+    "action_policy": { "$ref": "#/$defs/action_policy" },
+    "copy_ready_message_specs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/message_spec" }
+    },
+    "prohibited_inferences": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "technical_references": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "listing_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "category",
+        "text",
+        "verification_status"
+      ],
+      "properties": {
+        "claim_id": { "type": "string", "pattern": "^CLAIM_" },
+        "category": {
+          "type": "string",
+          "enum": [
+            "LIVESTOCK_WATER",
+            "LEGAL_ACCESS",
+            "FORAGE_OR_PRODUCTION",
+            "TERRAIN",
+            "CLIMATE",
+            "OTHER"
+          ]
+        },
+        "text": { "type": "string", "minLength": 1 },
+        "source_reference": { "type": ["string", "null"] },
+        "claim_strength": {
+          "type": ["string", "null"],
+          "enum": ["STRONG", "MODERATE", "WEAK", null]
+        },
+        "verification_status": { "type": "string", "const": "SELLER_CLAIMED" }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_id",
+        "label",
+        "evidence_state",
+        "spatial_meaning",
+        "source_id",
+        "allowed_support",
+        "prohibited_support"
+      ],
+      "properties": {
+        "observation_id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string" },
+        "value": { "type": ["number", "string", "null"] },
+        "display_value": { "type": ["number", "string", "null"] },
+        "unit": { "type": ["string", "null"] },
+        "time_period": { "type": ["string", "null"] },
+        "evidence_state": {
+          "type": "string",
+          "enum": [
+            "MEASURED",
+            "PARCEL_DERIVED",
+            "MODELED",
+            "MAPPED_CANDIDATE",
+            "REMOTELY_SUPPORTED",
+            "COVERAGE_UNQUANTIFIED",
+            "NOT_VERIFIED",
+            "MISSING",
+            "SOURCE_UNAVAILABLE"
+          ]
+        },
+        "spatial_meaning": { "type": "string" },
+        "source_id": { "type": "string" },
+        "land_fact_ref": { "type": ["string", "null"] },
+        "allowed_support": { "type": "array", "items": { "type": "string" } },
+        "prohibited_support": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "candidate_object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "candidate_type",
+        "evidence_state",
+        "review_status",
+        "geometry",
+        "legal_access_status",
+        "livestock_use_status"
+      ],
+      "properties": {
+        "candidate_id": { "type": "string", "minLength": 1 },
+        "candidate_type": {
+          "type": "string",
+          "enum": [
+            "WATERBODY",
+            "FLOWLINE",
+            "ROAD_SEGMENT",
+            "SELLER_CLAIMED_WELL",
+            "OTHER"
+          ]
+        },
+        "source_feature_type": { "type": ["string", "null"] },
+        "source_feature_id": { "type": ["string", "null"] },
+        "display_name": { "type": ["string", "null"] },
+        "geometry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "field_navigation_precision"],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": ["POINT", "BBOX", "LINE", "POLYGON"]
+            },
+            "centroid": { "type": ["array", "null"] },
+            "bbox": { "type": ["array", "null"] },
+            "field_navigation_precision": {
+              "type": "string",
+              "enum": ["EXACT", "APPROXIMATE", "AREA_ONLY", "NOT_NAVIGABLE"]
+            }
+          }
+        },
+        "parcel_relationship": { "type": "object" },
+        "evidence_state": {
+          "type": "string",
+          "enum": ["MAPPED_CANDIDATE", "REMOTELY_SUPPORTED", "FIELD_VERIFIED"]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": ["UNREVIEWED", "SAMPLED"]
+        },
+        "legal_access_status": { "type": "string", "const": "NOT_VERIFIED" },
+        "livestock_use_status": { "type": "string", "const": "NOT_VERIFIED" },
+        "allowed_action_language": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "prohibited_inferences": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "claim_gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "supported_portion",
+        "unsupported_portion",
+        "risk_of_misreading",
+        "recommended_action_id"
+      ],
+      "properties": {
+        "claim_id": { "type": "string" },
+        "claim": { "type": "string" },
+        "supported_portion": { "type": "string" },
+        "unsupported_portion": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "risk_of_misreading": {
+          "type": "string",
+          "enum": ["HIGH", "MEDIUM", "LOW"]
+        },
+        "recommended_action_id": { "type": ["string", "null"] },
+        "recommended_message_id": { "type": ["string", "null"] }
+      }
+    },
+    "bottleneck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bottleneck_id",
+        "bottleneck_rank",
+        "title",
+        "decision_impact",
+        "information_gain",
+        "cost_class"
+      ],
+      "properties": {
+        "bottleneck_id": { "type": "string" },
+        "bottleneck_rank": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "title": { "type": "string" },
+        "supporting_observation_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "affected_candidate_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "blocked_inferences": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "decision_impact": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] },
+        "information_gain": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] },
+        "cost_class": {
+          "type": "string",
+          "enum": [
+            "DESKTOP",
+            "DOCUMENT_REQUEST",
+            "FIELD_HALF_DAY",
+            "PROFESSIONAL_REVIEW",
+            "UNKNOWN"
+          ]
+        },
+        "next_action_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_id",
+        "execution_order",
+        "action_type",
+        "specificity",
+        "suggested_executor",
+        "cost_class",
+        "can_establish",
+        "cannot_establish"
+      ],
+      "properties": {
+        "action_id": { "type": "string" },
+        "execution_order": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "action_type": {
+          "type": "string",
+          "enum": [
+            "DOCUMENT_REQUEST",
+            "FIELD_REVIEW",
+            "PROFESSIONAL_REVIEW",
+            "PAUSE",
+            "CONFIRM_PARCEL"
+          ]
+        },
+        "specificity": {
+          "type": "string",
+          "enum": ["CATEGORY_LEVEL", "OBJECT_LEVEL"]
+        },
+        "target_category": { "type": ["string", "null"] },
+        "candidate_id": { "type": ["string", "null"] },
+        "suggested_executor": { "type": "string" },
+        "cost_class": { "type": "string" },
+        "why_now": { "type": "string" },
+        "can_establish": { "type": "array", "items": { "type": "string" } },
+        "cannot_establish": { "type": "array", "items": { "type": "string" } },
+        "success_transition": { "type": ["string", "null"] },
+        "failure_transition": { "type": ["string", "null"] }
+      }
+    },
+    "action_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_first_actions", "action_dependencies"],
+      "properties": {
+        "allowed_first_actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "action_dependencies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "allowed_permutations": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "message_spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_id",
+        "audience",
+        "bound_action_id",
+        "template_id"
+      ],
+      "properties": {
+        "message_id": { "type": "string" },
+        "audience": {
+          "type": "string",
+          "enum": ["LISTING_BROKER", "TITLE_OR_COUNSEL", "FIELD_VISITOR", "PARTNER"]
+        },
+        "bound_action_id": { "type": "string" },
+        "bound_claim_id": { "type": ["string", "null"] },
+        "template_id": { "type": "string" }
+      }
+    }
+  }
+}

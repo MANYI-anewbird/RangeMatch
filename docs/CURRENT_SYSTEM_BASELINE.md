@@ -65,6 +65,12 @@ The product has three layers:
 
 Buyer-facing `More evidence needed` maps to Engine `HOLD`. It means evidence is incomplete, not that the parcel is unsuitable. No numeric suitability score or best-use winner is displayed while `ranking_permitted: false`.
 
+## Next product contract (not yet the live UI)
+
+The buyer-facing Agent is being retasked from this baseline report to a three-page Advisor Brief. Shape: `AGENT_THREE_PAGE_WORKFLOW_CONTRACT.md`. LLM reasoning: `ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md`. F01–F08 and the Engine remain the kitchen.
+
+`/advisor-demo` is the Challenge Demo (deterministic Brief + live Mireye; LLM optional). The HOLD-era dashboard in this baseline remains the legacy buyer UI. Do not treat the constrained LLM advisor report as shipped.
+
 ## Current implementation status
 
 ```yaml

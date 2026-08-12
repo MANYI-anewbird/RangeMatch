@@ -1,0 +1,643 @@
+{
+  "schema_version": "RANGEMATCH_BUYER_EVIDENCE_PACKET@0.1.0",
+  "parcel": {
+    "parcel_id": "ENGINEERING_TEST_GEOMETRY_CPER_001",
+    "geometry_hash": "932edc9b3cb36b49b5a8fdd5ffa52cba17874720947865e0916ba069fad5f309",
+    "confirmation_status": "CONFIRMED",
+    "display_label": "CPER engineering test geometry, Weld County, CO",
+    "is_engineering_test_geometry": true
+  },
+  "decision_context": {
+    "current_stage": "TITLE_REVIEW_ACTIVE",
+    "decision_deadline": "THIS_WEEK",
+    "candidate_actions": [
+      "REQUEST_DOCUMENTS"
+    ],
+    "user_question": "Title is already looking at access.",
+    "goal": "CHOOSE_NEXT_DILIGENCE_SPEND_NOT_PURCHASE"
+  },
+  "listing_claims": [
+    {
+      "claim_id": "CLAIM_WATER_001",
+      "category": "LIVESTOCK_WATER",
+      "text": "Excellent year-round water",
+      "source_reference": "cper_listing_fixture#water",
+      "claim_strength": "STRONG",
+      "verification_status": "SELLER_CLAIMED"
+    },
+    {
+      "claim_id": "CLAIM_ACCESS_001",
+      "category": "LEGAL_ACCESS",
+      "text": "Easy county-road access",
+      "source_reference": "cper_listing_fixture#access",
+      "claim_strength": "STRONG",
+      "verification_status": "SELLER_CLAIMED"
+    },
+    {
+      "claim_id": "CLAIM_FORAGE_001",
+      "category": "FORAGE_OR_PRODUCTION",
+      "text": "Productive pasture ready for cattle",
+      "source_reference": "cper_listing_fixture#forage",
+      "claim_strength": "STRONG",
+      "verification_status": "SELLER_CLAIMED"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "OBS_PRECIP",
+      "label": "Mean annual precipitation",
+      "value": 345.74,
+      "display_value": null,
+      "unit": "mm/year",
+      "time_period": null,
+      "evidence_state": "MEASURED",
+      "spatial_meaning": "parcel_aggregate",
+      "source_id": "NOAA_NCEI_DIRECT_CLIMATE_NORMALS_NETCDF",
+      "land_fact_ref": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",
+      "allowed_support": [
+        "canonical climate lookup is complete"
+      ],
+      "prohibited_support": [
+        "climate adequacy",
+        "drought resilience",
+        "future performance"
+      ]
+    },
+    {
+      "observation_id": "OBS_SLOPE",
+      "label": "Median slope",
+      "value": 2.395727249934432,
+      "display_value": null,
+      "unit": "degree",
+      "time_period": null,
+      "evidence_state": "PARCEL_DERIVED",
+      "spatial_meaning": "parcel_aggregate",
+      "source_id": "USGS_3DEP",
+      "land_fact_ref": "VAR_F01_SLOPE_MEDIAN_DEGREES",
+      "allowed_support": [
+        "gentle typical slope context"
+      ],
+      "prohibited_support": [
+        "suitability",
+        "traversability for every animal"
+      ]
+    },
+    {
+      "observation_id": "OBS_AREA",
+      "label": "Mapped geometric area",
+      "value": 1404078.7002779155,
+      "display_value": null,
+      "unit": "m2",
+      "time_period": null,
+      "evidence_state": "PARCEL_DERIVED",
+      "spatial_meaning": "parcel_aggregate",
+      "source_id": "CONFIRMED_GEOMETRY",
+      "land_fact_ref": "VAR_F06_AREA_M2",
+      "allowed_support": [
+        "mapped outline size"
+      ],
+      "prohibited_support": [
+        "grazable acres",
+        "fencing cost",
+        "survey"
+      ]
+    },
+    {
+      "observation_id": "OBS_RAP_PROD",
+      "label": "Modeled annual herbaceous production",
+      "value": 937.6780475452124,
+      "display_value": null,
+      "unit": "pound_per_acre",
+      "time_period": "annual_accumulated_new_growth_2025",
+      "evidence_state": "MODELED",
+      "spatial_meaning": "parcel_mean",
+      "source_id": "RAP_productionV3",
+      "land_fact_ref": "VAR_F02_ANNUAL_HERB_PRODUCTION",
+      "allowed_support": [
+        "modeled vegetation snapshot"
+      ],
+      "prohibited_support": [
+        "available forage",
+        "carrying capacity",
+        "ready for cattle"
+      ]
+    },
+    {
+      "observation_id": "OBS_WATER_COUNT",
+      "label": "Mapped hydrography candidate count",
+      "value": 9,
+      "display_value": null,
+      "unit": "count",
+      "time_period": null,
+      "evidence_state": "MAPPED_CANDIDATE",
+      "spatial_meaning": "parcel_aggregate",
+      "source_id": "USGS_NHDPLUS_HR",
+      "land_fact_ref": "VAR_F03_MAPPED_WATER_CANDIDATE_COUNT",
+      "allowed_support": [
+        "mapped water features exist as leads"
+      ],
+      "prohibited_support": [
+        "usable livestock water",
+        "year-round reliability",
+        "legal right"
+      ]
+    },
+    {
+      "observation_id": "OBS_ROAD",
+      "label": "Nearest mapped road distance",
+      "value": 0.0,
+      "display_value": null,
+      "unit": "m",
+      "time_period": null,
+      "evidence_state": "MAPPED_CANDIDATE",
+      "spatial_meaning": "parcel_aggregate",
+      "source_id": "US_CENSUS_TIGER_LINE_2025_ALL_ROADS",
+      "land_fact_ref": "VAR_F07_NEAREST_MAPPED_ROAD_DISTANCE_M",
+      "allowed_support": [
+        "physical road contact on the map"
+      ],
+      "prohibited_support": [
+        "legal access",
+        "usable entrance"
+      ]
+    }
+  ],
+  "candidate_objects": [
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:120639594",
+      "candidate_type": "WATERBODY",
+      "source_feature_type": "NHDWaterbody",
+      "source_feature_id": "120639594",
+      "display_name": null,
+      "geometry": {
+        "kind": "BBOX",
+        "centroid": null,
+        "bbox": [
+          -104.76110501420337,
+          40.82291046980667,
+          -104.75935221384321,
+          40.82497260274206
+        ],
+        "field_navigation_precision": "AREA_ONLY"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "MAPPED_CANDIDATE",
+      "review_status": "SAMPLED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "review this waterbody area"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638829",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NetworkNHDFlowline",
+      "source_feature_id": "120638829",
+      "display_name": null,
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [
+          -104.76541568070553,
+          40.825831802747125,
+          -104.76061101406769,
+          40.83281027011377
+        ],
+        "field_navigation_precision": "AREA_ONLY"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "REMOTELY_SUPPORTED",
+      "review_status": "SAMPLED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "review this flowline segment as an area"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638830",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NetworkNHDFlowline",
+      "source_feature_id": "120638830",
+      "display_name": "Little Owl Creek",
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [
+          -104.76841921402766,
+          40.825831802747125,
+          -104.76061101406769,
+          40.83201466996486
+        ],
+        "field_navigation_precision": "AREA_ONLY"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "REMOTELY_SUPPORTED",
+      "review_status": "SAMPLED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "review this flowline segment as an area"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638838",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NetworkNHDFlowline",
+      "source_feature_id": "120638838",
+      "display_name": "Little Owl Creek",
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [],
+        "field_navigation_precision": "NOT_NAVIGABLE"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "MAPPED_CANDIDATE",
+      "review_status": "UNREVIEWED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "request a usable location or build a field inventory; this mapped identity cannot be drawn"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638842",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NetworkNHDFlowline",
+      "source_feature_id": "120638842",
+      "display_name": "Little Owl Creek",
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [],
+        "field_navigation_precision": "NOT_NAVIGABLE"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "MAPPED_CANDIDATE",
+      "review_status": "UNREVIEWED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "request a usable location or build a field inventory; this mapped identity cannot be drawn"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614082",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NetworkNHDFlowline",
+      "source_feature_id": "156614082",
+      "display_name": null,
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [],
+        "field_navigation_precision": "NOT_NAVIGABLE"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "MAPPED_CANDIDATE",
+      "review_status": "UNREVIEWED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "request a usable location or build a field inventory; this mapped identity cannot be drawn"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614135",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NetworkNHDFlowline",
+      "source_feature_id": "156614135",
+      "display_name": null,
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [],
+        "field_navigation_precision": "NOT_NAVIGABLE"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "MAPPED_CANDIDATE",
+      "review_status": "UNREVIEWED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "request a usable location or build a field inventory; this mapped identity cannot be drawn"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614136",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NetworkNHDFlowline",
+      "source_feature_id": "156614136",
+      "display_name": "Little Owl Creek",
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [],
+        "field_navigation_precision": "NOT_NAVIGABLE"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "MAPPED_CANDIDATE",
+      "review_status": "UNREVIEWED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "request a usable location or build a field inventory; this mapped identity cannot be drawn"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NonNetworkNHDFlowline:156614070",
+      "candidate_type": "FLOWLINE",
+      "source_feature_type": "NonNetworkNHDFlowline",
+      "source_feature_id": "156614070",
+      "display_name": null,
+      "geometry": {
+        "kind": "LINE",
+        "centroid": null,
+        "bbox": [],
+        "field_navigation_precision": "NOT_NAVIGABLE"
+      },
+      "parcel_relationship": {
+        "intersects": true,
+        "distance_m": null,
+        "relationship_status": "DERIVED"
+      },
+      "evidence_state": "MAPPED_CANDIDATE",
+      "review_status": "UNREVIEWED",
+      "legal_access_status": "NOT_VERIFIED",
+      "livestock_use_status": "NOT_VERIFIED",
+      "allowed_action_language": [
+        "request a usable location or build a field inventory; this mapped identity cannot be drawn"
+      ],
+      "prohibited_inferences": [
+        "usable livestock water",
+        "water-source point",
+        "exact pin",
+        "legal access"
+      ]
+    }
+  ],
+  "claim_evidence_gaps": [
+    {
+      "claim_id": "CLAIM_WATER_001",
+      "claim": "Excellent year-round water",
+      "supported_portion": "Mapped hydrography candidates exist on the tract",
+      "unsupported_portion": [
+        "year-round reliability",
+        "livestock accessibility",
+        "capacity",
+        "quality",
+        "legal right"
+      ],
+      "risk_of_misreading": "HIGH",
+      "recommended_action_id": "ACTION_WATER_FIELD_CATEGORY",
+      "recommended_message_id": "MSG_LISTING_WATER"
+    },
+    {
+      "claim_id": "CLAIM_ACCESS_001",
+      "claim": "Easy county-road access",
+      "supported_portion": "A mapped road contacts the geometry",
+      "unsupported_portion": [
+        "legal entrance",
+        "recorded easement",
+        "buyer right to use"
+      ],
+      "risk_of_misreading": "HIGH",
+      "recommended_action_id": null,
+      "recommended_message_id": null
+    },
+    {
+      "claim_id": "CLAIM_FORAGE_001",
+      "claim": "Productive pasture ready for cattle",
+      "supported_portion": "RAP returned a modeled production snapshot",
+      "unsupported_portion": [
+        "available forage",
+        "carrying capacity",
+        "ready for cattle"
+      ],
+      "risk_of_misreading": "HIGH",
+      "recommended_action_id": null,
+      "recommended_message_id": null
+    }
+  ],
+  "bottlenecks": [
+    {
+      "bottleneck_id": "BOTTLENECK_WATER_EVIDENCE",
+      "bottleneck_rank": 1,
+      "title": "Livestock-water use is the larger operating-evidence gap",
+      "supporting_observation_ids": [
+        "OBS_WATER_COUNT"
+      ],
+      "affected_candidate_ids": [
+        "USGS_NHDPLUS_HR:NHDWaterbody:120639594",
+        "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638829",
+        "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638830",
+        "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638838",
+        "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638842",
+        "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614082",
+        "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614135",
+        "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614136",
+        "USGS_NHDPLUS_HR:NonNetworkNHDFlowline:156614070"
+      ],
+      "blocked_inferences": [
+        "usable livestock water",
+        "seasonal reliability",
+        "missing mapped leads means no water"
+      ],
+      "decision_impact": "HIGH",
+      "information_gain": "HIGH",
+      "cost_class": "FIELD_HALF_DAY",
+      "next_action_ids": [
+        "ACTION_WATER_FIELD_CATEGORY"
+      ]
+    },
+    {
+      "bottleneck_id": "BOTTLENECK_LEGAL_ACCESS",
+      "bottleneck_rank": 2,
+      "title": "Legal entrance review is already in motion",
+      "supporting_observation_ids": [
+        "OBS_ROAD"
+      ],
+      "affected_candidate_ids": [],
+      "blocked_inferences": [
+        "legal access",
+        "usable entrance"
+      ],
+      "decision_impact": "HIGH",
+      "information_gain": "HIGH",
+      "cost_class": "DOCUMENT_REQUEST",
+      "next_action_ids": []
+    },
+    {
+      "bottleneck_id": "BOTTLENECK_FORAGE_LEAP",
+      "bottleneck_rank": 3,
+      "title": "Modeled growth must not be read as stockable forage",
+      "supporting_observation_ids": [
+        "OBS_RAP_PROD"
+      ],
+      "affected_candidate_ids": [],
+      "blocked_inferences": [
+        "carrying capacity",
+        "ready for cattle"
+      ],
+      "decision_impact": "MEDIUM",
+      "information_gain": "MEDIUM",
+      "cost_class": "DESKTOP",
+      "next_action_ids": []
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "ACTION_WATER_FIELD_CATEGORY",
+      "execution_order": 1,
+      "action_type": "FIELD_REVIEW",
+      "specificity": "CATEGORY_LEVEL",
+      "target_category": "LIVESTOCK_WATER",
+      "candidate_id": null,
+      "suggested_executor": "buyer or field representative",
+      "cost_class": "FIELD_HALF_DAY",
+      "why_now": "Largest operating-evidence gap; review mapped water areas, not named pins.",
+      "can_establish": [
+        "whether mapped water features show visible water and access signs on the visit date"
+      ],
+      "cannot_establish": [
+        "year-round reliability",
+        "water quality",
+        "legal right to use"
+      ],
+      "success_transition": "WATER_PRESENCE_OBSERVED",
+      "failure_transition": "KEEP_WATER_AS_LEAD_OR_INVENTORY"
+    }
+  ],
+  "action_policy": {
+    "allowed_first_actions": [
+      "ACTION_WATER_FIELD_CATEGORY"
+    ],
+    "action_dependencies": {},
+    "allowed_permutations": null
+  },
+  "copy_ready_message_specs": [
+    {
+      "message_id": "MSG_LISTING_WATER",
+      "audience": "LISTING_BROKER",
+      "bound_action_id": "ACTION_WATER_FIELD_CATEGORY",
+      "bound_claim_id": "CLAIM_WATER_001",
+      "template_id": "ASK_WATER_TYPE_LOCATION_RECORDS"
+    },
+    {
+      "message_id": "MSG_FIELD_WATER",
+      "audience": "FIELD_VISITOR",
+      "bound_action_id": "ACTION_WATER_FIELD_CATEGORY",
+      "bound_claim_id": "CLAIM_WATER_001",
+      "template_id": "REVIEW_MAPPED_WATER_AREAS"
+    },
+    {
+      "message_id": "MSG_PARTNER",
+      "audience": "PARTNER",
+      "bound_action_id": "ACTION_WATER_FIELD_CATEGORY",
+      "bound_claim_id": "CLAIM_WATER_001",
+      "template_id": "TITLE_REVIEW_ALREADY_ACTIVE"
+    }
+  ],
+  "prohibited_inferences": [
+    "suitability",
+    "carrying_capacity",
+    "species_ranking",
+    "purchase_recommendation",
+    "legal_access_from_road_contact",
+    "usable_water_from_mapped_hydrography",
+    "missing_verification_means_absent",
+    "named_pin_without_candidate_object"
+  ],
+  "technical_references": {
+    "unified_output": "test-data/land-profiles/unified_output_cper_001.json",
+    "f03_status": "AVAILABLE",
+    "f03_candidate_inventory": "test-data/live-results/cper/cper_f03_candidate_distance_result_2026-08-07.json",
+    "f03_remote_pilot": "test-data/cross-parcel-validation/XPV_CPER_001/f03_remote_pilot/remote_pilot_result.json",
+    "candidate_object_count_in_packet": 9,
+    "drawable_object_count": 3,
+    "policy": "build_cper_demo_policy",
+    "policy_scope": "CPER_FIXTURE_ONLY"
+  }
+}

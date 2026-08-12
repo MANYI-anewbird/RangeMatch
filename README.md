@@ -1,12 +1,61 @@
 # RangeMatch
 
-Constrained agricultural land diligence and matching Agent for U.S. parcels.
+**Know what to verify before you visit or spend.**
 
-RangeMatch is **not** a map website. It plans an investigation for one parcel, calls Mireye and approved external data sources, builds a Land Profile, runs frozen F01–F08 deterministic Factors for Cow-Calf and Sheep, and explains unknowns and next diligence — without inventing scores, thresholds, or legal certainty.
+RangeMatch is an AI buyer’s agent for U.S. ranch listings. **Mireye** anchors the physical parcel. RangeMatch combines that parcel context with federal land evidence and listing-claim forensics, then decides the next diligence action — not suitability, not stocking, not buy/no-buy.
 
-Current authority: `docs/CURRENT_SYSTEM_BASELINE.md`.
+This is not a map website. The competition Demo is a deterministic Agent: reason over claims vs evidence, decide bottleneck and action order, act with copy-ready messages.
 
-## Current phase
+- **Primary payer:** buyer-side ranch broker / land advisor
+- **Beneficiary / second payer:** serious ranch buyer
+- **Demo geometry:** CPER is an engineering test geometry, not a real listing
+
+One-pager: `docs/RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md`
+
+## Mireye Challenge Demo (deterministic, no live LLM)
+
+```bash
+# Terminal A — Agent API (load MIREYE_API_TOKEN from .env)
+export PYTHONPATH=src
+uvicorn rangematch.api:app --reload --port 8001 --env-file .env
+
+# Terminal B — Demo UI
+cd web && npm install && npm run dev
+```
+
+Open **http://127.0.0.1:5273/advisor-demo**
+
+RangeMatch pins this Demo to port **5273** (`strictPort: true`) so it does not collide with other Vite apps on 5173/5174. If 5273 is busy, stop that process and restart `npm run dev`.
+
+The page does not load a pre-written Brief. Click **Run investigation**. The API executes:
+
+```text
+Accept place → Resolve parcel → Call Mireye (live HTTP)
+→ Build agenda → Run agenda → Compare claims → Order actions → Validate brief
+```
+
+Mireye is a real `allow_network=true` call (`/v1/lookup` + `/v1/fetch`). Success or `BLOCKED_EXTERNAL` is the HTTP/token/API result. Failed Mireye contexts are not replaced with fixtures. F01–F08 on this Demo still use the CPER engineering land profile.
+
+Each run returns a new `run_id`, `generated_at`, and `packet_hash`. CPER listing claims stay fixed. OpenAI is not required. The legacy HOLD buyer dashboard is unchanged.
+
+```text
+Mireye / parcel context
+→ federal evidence + listing claims
+→ Packet → gaps → bottleneck + action
+→ three-page Brief → Validator → Demo UI
+```
+
+CPER Demo story: a buyer received “excellent water / easy access / ready for cattle,” and is deciding whether to fly this weekend or request title first. Water is the largest evidence gap; access paper is the first action; visit purpose depends on that document.
+
+## Tests
+
+```bash
+export PYTHONPATH=src
+python -m unittest tests.test_advisor_workflow_contract tests.test_advisor_f03_objects tests.test_advisor_boundary_fixtures tests.test_advisor_agent tests.test_advisor_api
+cd web && npm test
+```
+
+## Current phase (engineering baseline)
 
 ```text
 F01–F08 demo Factor scope: CLOSED / FROZEN
@@ -139,7 +188,7 @@ Only reports that pass the deterministic validator are displayed as LLM narrativ
 cd web && npm install && npm run dev
 ```
 
-Open http://127.0.0.1:5173 — Vite proxies `/health` and `/v1` to the API. Details in `web/README.md`.
+Open http://127.0.0.1:5273 — Vite proxies `/health` and `/v1` to the API. Details in `web/README.md`. The Challenge Demo is `/advisor-demo` on the same port.
 
 Docker Compose / Skill packaging remain **planned**, not the current entrypoint.
 

@@ -1,0 +1,62 @@
+{
+  "insights": [
+    {
+      "insight_id": "INSIGHT_ACCESS_FIRST_001",
+      "recommendation": "Request access documents before booking the trip.",
+      "reasoning_type": "INFORMATION_VALUE",
+      "packet_refs": ["OBS_ROAD", "BOTTLENECK_WATER_EVIDENCE"],
+      "context_refs": [],
+      "knowledge_refs": ["LEGAL_ACCESS_DILIGENCE_001"],
+      "llm_recommended_order": [
+        "ACTION_ACCESS_DOCUMENTS",
+        "ACTION_WATER_FIELD_CATEGORY"
+      ],
+      "considered_actions": [
+        "ACTION_ACCESS_DOCUMENTS",
+        "ACTION_WATER_FIELD_CATEGORY",
+        "ACTION_REPEAT_PRECIP"
+      ],
+      "rejected_actions": [
+        {
+          "action_id": "ACTION_REPEAT_PRECIP",
+          "reason": "does_not_reduce_current_decision_uncertainty"
+        }
+      ],
+      "conditions": [
+        {
+          "if_action_id": "ACTION_ACCESS_DOCUMENTS",
+          "if_result": "ENTRANCE_BASIS_SUPPORTED",
+          "then_action_id": "ACTION_WATER_FIELD_CATEGORY",
+          "still_cannot_establish": [
+            "year_round_stock_water",
+            "legal_access_without_documents"
+          ]
+        }
+      ]
+    },
+    {
+      "insight_id": "INSIGHT_WATER_LEAP_001",
+      "recommendation": "Mapped water is a lead, not year-round drinking water.",
+      "reasoning_type": "SUPPORTED_INTERPRETATION",
+      "packet_refs": ["OBS_WATER_COUNT", "CLAIM_WATER_001"],
+      "context_refs": [],
+      "knowledge_refs": ["LIVESTOCK_WATER_DILIGENCE_001"]
+    },
+    {
+      "insight_id": "INSIGHT_RAP_LIMIT_001",
+      "recommendation": "The RAP snapshot is not a stocking plan.",
+      "reasoning_type": "DOMAIN_PRIOR",
+      "packet_refs": ["OBS_RAP_PROD"],
+      "context_refs": [],
+      "knowledge_refs": ["RAP_INTERPRETATION_001"]
+    },
+    {
+      "insight_id": "INSIGHT_MIREYE_CONTEXT_001",
+      "recommendation": "Mireye returned centroid context; that is not a parcel-wide fact.",
+      "reasoning_type": "DOMAIN_PRIOR",
+      "packet_refs": [],
+      "context_refs": ["MIREYE_POINT_LAND_CONTEXT"],
+      "knowledge_refs": []
+    }
+  ]
+}

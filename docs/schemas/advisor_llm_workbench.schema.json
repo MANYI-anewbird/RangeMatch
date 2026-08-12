@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/advisor_llm_workbench.schema.json",
+  "title": "RangeMatchAdvisorLLMWorkbench",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_hash",
+    "report_locale",
+    "audience",
+    "visit_purpose",
+    "observations",
+    "claim_gaps",
+    "candidate_objects",
+    "bottleneck_candidates",
+    "action_candidates",
+    "action_policy",
+    "execution_order",
+    "knowledge_cards",
+    "mireye_contexts",
+    "prohibited_inferences"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "RANGEMATCH_ADVISOR_LLM_WORKBENCH@0.1.0"
+    },
+    "packet_hash": { "type": "string", "minLength": 16 },
+    "report_locale": { "type": "string", "enum": ["en-US", "zh-CN"] },
+    "audience": {
+      "type": "string",
+      "enum": ["ORDINARY_BUYER", "BUYER_SIDE_BROKER"]
+    },
+    "visit_purpose": {
+      "type": "string",
+      "enum": [
+        "VISIT_PURPOSE_DEFINED",
+        "VISIT_DEPENDS_ON_DOCUMENT",
+        "NO_DEFINED_VISIT_PURPOSE_YET"
+      ]
+    },
+    "observations": { "type": "array", "items": { "type": "object" } },
+    "claim_gaps": { "type": "array", "items": { "type": "object" } },
+    "candidate_objects": { "type": "array", "items": { "type": "object" } },
+    "bottleneck_candidates": { "type": "array", "items": { "type": "object" } },
+    "action_candidates": { "type": "array", "items": { "type": "object" } },
+    "action_policy": { "type": "object" },
+    "execution_order": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "knowledge_cards": { "type": "array", "items": { "type": "object" } },
+    "mireye_contexts": { "type": "array", "items": { "type": "object" } },
+    "prohibited_inferences": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "reading_budget": { "type": "object" }
+  }
+}

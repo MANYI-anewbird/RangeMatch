@@ -11,6 +11,10 @@ This index separates current product authority from frozen science and historica
 
 - `MVP_SPEC.md`
 - `CURRENT_SYSTEM_BASELINE.md`
+- `AGENT_THREE_PAGE_WORKFLOW_CONTRACT.md` (three-page buyer shape; Slice A)
+- `ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md` (CPER trial loop: 3 provisional cards + fixture LLM + Validator + six-section report)
+- `ADVISOR_AGENT_IMPLEMENTATION_PLAN.md` (phased engineering plan, gates, and definition of done)
+- `RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md` (Mireye Build Challenge one-pager)
 - `PRODUCT_PROTOTYPE_SCOPE.md`
 - `AGENT_ORCHESTRATION_SPEC.md`
 - `PLANNER_ROUTING_SPEC.md`
@@ -71,7 +75,7 @@ mireye_live_parcel_resolver: IMPLEMENTED
 public_diligence_search: IMPLEMENTED_LIVE_VERIFIED
 buyer_decision_report_v2: IMPLEMENTED
 engine_behavior: HOLD_ONLY_NO_APPROVED_RANKING
-next_slice: COMPETITION_PACKAGING_AND_DEPLOYMENT_READINESS
+next_slice: ADVISOR_INSIGHT_CONTRACT_THEN_CONSTRAINED_LLM
 ```
 
 `HOLD_ONLY_NO_APPROVED_RANKING` is an intentional scientific limitation: the current prototype performs evidence-constrained diligence and does not yet claim a Cow-Calf-versus-Sheep suitability ranking.

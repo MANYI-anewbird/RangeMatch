@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/advisor_three_page_report.schema.json",
+  "title": "RangeMatchAdvisorThreePageReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_hash",
+    "validation_status",
+    "page_one_advisor",
+    "page_two_actions",
+    "page_three_kitchen",
+    "report_provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "RANGEMATCH_ADVISOR_THREE_PAGE@0.1.0"
+    },
+    "packet_hash": { "type": "string", "minLength": 16 },
+    "validation_status": {
+      "type": "string",
+      "enum": ["PASSED", "FAILED", "PENDING"]
+    },
+    "validation_violations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" },
+          "path": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "page_one_advisor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "how_the_tract_reads",
+        "listing_outruns_evidence",
+        "do_today",
+        "visit_purpose",
+        "what_changes_next"
+      ],
+      "properties": {
+        "how_the_tract_reads": { "type": "string", "minLength": 40 },
+        "listing_outruns_evidence": {
+          "type": "array",
+          "maxItems": 3,
+          "items": { "type": "string" }
+        },
+        "do_today": {
+          "type": "array",
+          "maxItems": 2,
+          "items": { "type": "string" }
+        },
+        "visit_purpose": {
+          "type": "string",
+          "enum": [
+            "VISIT_PURPOSE_DEFINED",
+            "VISIT_DEPENDS_ON_DOCUMENT",
+            "NO_DEFINED_VISIT_PURPOSE_YET"
+          ]
+        },
+        "visit_guidance": { "type": "string" },
+        "what_changes_next": { "type": "string", "minLength": 20 },
+        "what_not_to_recheck": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "page_two_actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["messages"],
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "message_id",
+              "audience",
+              "bound_action_id",
+              "body"
+            ],
+            "properties": {
+              "message_id": { "type": "string" },
+              "audience": {
+                "type": "string",
+                "enum": [
+                  "LISTING_BROKER",
+                  "TITLE_OR_COUNSEL",
+                  "FIELD_VISITOR",
+                  "PARTNER"
+                ]
+              },
+              "bound_action_id": { "type": "string" },
+              "bound_claim_id": { "type": ["string", "null"] },
+              "body": { "type": "string", "minLength": 20 }
+            }
+          }
+        }
+      }
+    },
+    "page_three_kitchen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parcel_summary",
+        "map_layers",
+        "observations",
+        "candidate_objects",
+        "source_notes",
+        "coverage_and_limitations",
+        "engine_appendix",
+        "validation_record"
+      ],
+      "properties": {
+        "parcel_summary": { "type": "object" },
+        "map_layers": { "type": "array", "items": { "type": "object" } },
+        "observations": { "type": "array", "items": { "type": "object" } },
+        "candidate_objects": { "type": "array", "items": { "type": "object" } },
+        "source_notes": { "type": "array", "items": { "type": "object" } },
+        "coverage_and_limitations": { "type": "array", "items": { "type": "object" } },
+        "engine_appendix": { "type": "object" },
+        "validation_record": { "type": "object" },
+        "engine_ledger_present": { "type": "boolean" },
+        "unified_output_ref": { "type": "string" },
+        "hold_confined_to_appendix": { "type": "boolean" }
+      }
+    },
+    "report_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["displayable", "generator"],
+      "properties": {
+        "displayable": { "type": "boolean" },
+        "generator": {
+          "type": "string",
+          "enum": ["DETERMINISTIC_TEMPLATE", "LLM_OVERLAY", "FALLBACK_TEMPLATE"]
+        },
+        "llm_used": { "type": "boolean" }
+      }
+    }
+  }
+}

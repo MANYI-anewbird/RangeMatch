@@ -1,0 +1,33 @@
+{
+  "source_date": "2026-08-12",
+  "reviewed_by": "RangeMatch CPER trial",
+  "reviewed_at": "2026-08-12",
+  "effective_jurisdictions": [
+    "US_GENERAL"
+  ],
+  "species_scope": [
+    "cattle",
+    "sheep"
+  ],
+  "review_status": "PROVISIONAL_FOR_CPER_TEST",
+  "prohibited_use": [
+    "parcel_fact",
+    "suitability_verdict",
+    "legal_conclusion"
+  ],
+  "expires_or_review_after": "2026-09-12",
+  "version": "0.1-trial",
+  "knowledge_id": "RAP_INTERPRETATION_001",
+  "topic": "forage_or_rap",
+  "statement": "A RAP production snapshot is modeled biomass. It is not available forage, not carrying capacity, and not a stocking rate. Do not convert the number into a herd size or a ready-for-cattle claim.",
+  "source_id": "SRC_RAP_TRIAL_001",
+  "source_title": "RAP is not stocking advice (CPER trial card)",
+  "source_url_or_citation": "https://rangelands.app/",
+  "source_publisher": "RangeMatch trial card — not an official knowledge base",
+  "review_basis": "Provisional CPER test only; interpretation limit, no formula.",
+  "allowed_use": [
+    "domain_prior",
+    "diligence_question"
+  ],
+  "content_hash": "sha256:8a5fdd264ecf9a1c5c675b88c6eeae0d1e71a5de3c03263dac7f52b735f89c0a"
+}

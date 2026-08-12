@@ -24,7 +24,9 @@ npm install
 npm run dev
 ```
 
-Open the Vite URL printed by the dev server (normally http://127.0.0.1:5173; it may use 5174 when 5173 is occupied).
+Open **http://127.0.0.1:5273**. RangeMatch pins the Vite dev server to port 5273 (`strictPort: true`) so it does not silently move to 5174 when 5173 is occupied by another app.
+
+**Mireye Challenge Demo:** [http://127.0.0.1:5273/advisor-demo](http://127.0.0.1:5273/advisor-demo). Click **Run investigation**. The UI calls `POST /v1/advisor/runs`, which calls live Mireye (`allow_network=true`), then builds the CPER Evidence Packet and three-page Brief. Each run returns `run_id`, `generated_at`, `packet_hash`, and `mireye_live` statuses. Failed Mireye contexts are not replaced with fixtures. It does not replace the HOLD buyer dashboard. Start the API with `--env-file .env` so `MIREYE_API_TOKEN` is visible.
 
 By default the Vite proxy targets `127.0.0.1:8001` (change `web/vite.config.ts` or set `VITE_API_BASE_URL` if you use another API port).
 

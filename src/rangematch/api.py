@@ -20,6 +20,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, model_validator
 
+from rangematch.advisor_agent import (
+    AdvisorAgentStepError,
+    attach_advisor_buyer_explanation,
+    enqueue_advisor_run,
+    execute_advisor_run,
+    get_advisor_run,
+    reset_advisor_runs_for_tests,
+)
 from rangematch.buyer_report import generate_buyer_report
 from rangematch.intent_parser import IntentParseError, parse_intent
 from rangematch.investigation_job import (
@@ -311,6 +319,15 @@ class BuyerReportGenerateRequest(BaseModel):
     provider: Literal["FIXTURE", "OPENAI"] | None = None
 
 
+class AdvisorRunRequest(BaseModel):
+    address: str | None = None
+    fixture_id: str | None = None
+
+
+class AdvisorExplanationRequest(BaseModel):
+    provider: Literal["FIXTURE", "OPENAI"] = "FIXTURE"
+
+
 class DiligenceSearchRequest(BaseModel):
     provider: Literal["FIXTURE", "OPENAI"] | None = None
     topics: list[
@@ -341,6 +358,8 @@ app.add_middleware(
         "http://localhost:5173",
         "http://127.0.0.1:5174",
         "http://localhost:5174",
+        "http://127.0.0.1:5273",
+        "http://localhost:5273",
         "http://127.0.0.1:8000",
         "http://localhost:8000",
         "http://127.0.0.1:8001",
@@ -357,6 +376,51 @@ async def _sanitize_errors(request: Request, exc: Exception):  # noqa: ARG001
     if isinstance(exc, HTTPException):
         return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail})
     return JSONResponse(status_code=500, content={"detail": "internal_error"})
+
+
+@app.post("/v1/advisor/runs")
+def create_advisor_run(
+    body: AdvisorRunRequest,
+    background_tasks: BackgroundTasks,
+) -> dict[str, Any]:
+    """Queue one Advisor run: place → agenda → Packet → Brief."""
+    queued = enqueue_advisor_run(
+        address=body.address,
+        fixture_id=body.fixture_id,
+    )
+    run_id = queued["run_id"]
+    schedule_investigation_job(
+        lambda: execute_advisor_run(run_id),
+        background_tasks=background_tasks,
+    )
+    _assert_no_secrets(queued, where="advisor_run")
+    return queued
+
+
+@app.get("/v1/advisor/runs/{run_id}")
+def get_advisor_run_endpoint(run_id: str) -> dict[str, Any]:
+    record = get_advisor_run(run_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found")
+    _assert_no_secrets(record, where="advisor_run_get")
+    return record
+
+
+@app.post("/v1/advisor/runs/{run_id}/buyer-explanation")
+def create_advisor_buyer_explanation(
+    run_id: str,
+    body: AdvisorExplanationRequest | None = None,
+) -> dict[str, Any]:
+    """Optional structured LLM explanation. Live failure does not swap a fixture."""
+    req = body or AdvisorExplanationRequest()
+    try:
+        view = attach_advisor_buyer_explanation(run_id, provider_name=req.provider)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found") from exc
+    except AdvisorAgentStepError as exc:
+        raise HTTPException(status_code=409, detail=exc.message) from exc
+    _assert_no_secrets(view, where="advisor_buyer_explanation")
+    return view
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -1148,6 +1212,7 @@ def reset_store_for_tests() -> None:
     reset_investigation_store_for_tests()
     reset_investigation_job_hooks_for_tests()
     reset_parcel_resolution_store_for_tests()
+    reset_advisor_runs_for_tests()
 
 
 # Explicitly no list/batch route is registered.

@@ -1,0 +1,30 @@
+{
+  "fixture_id": "CPER_LISTING_CLAIMS_FIXTURE_001",
+  "note": "Synthetic listing language for the CPER engineering geometry. Not a real brochure. Used until PDF parse exists.",
+  "listing_claims": [
+    {
+      "claim_id": "CLAIM_WATER_001",
+      "category": "LIVESTOCK_WATER",
+      "text": "Excellent year-round water",
+      "source_reference": "cper_listing_fixture#water",
+      "claim_strength": "STRONG",
+      "verification_status": "SELLER_CLAIMED"
+    },
+    {
+      "claim_id": "CLAIM_ACCESS_001",
+      "category": "LEGAL_ACCESS",
+      "text": "Easy county-road access",
+      "source_reference": "cper_listing_fixture#access",
+      "claim_strength": "STRONG",
+      "verification_status": "SELLER_CLAIMED"
+    },
+    {
+      "claim_id": "CLAIM_FORAGE_001",
+      "category": "FORAGE_OR_PRODUCTION",
+      "text": "Productive pasture ready for cattle",
+      "source_reference": "cper_listing_fixture#forage",
+      "claim_strength": "STRONG",
+      "verification_status": "SELLER_CLAIMED"
+    }
+  ]
+}

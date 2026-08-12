@@ -1,0 +1,488 @@
+{
+  "schema_version": "RANGEMATCH_ADVISOR_LLM_WORKBENCH@0.1.0",
+  "packet_hash": "5269b7dc8e3bd112675d63e1485c3152e8b12260b2a26ccb1bfd2cc07cdeeaba",
+  "report_locale": "en-US",
+  "audience": "ORDINARY_BUYER",
+  "visit_purpose": "VISIT_DEPENDS_ON_DOCUMENT",
+  "observations": [
+    {
+      "observation_id": "OBS_PRECIP",
+      "label": "Mean annual precipitation",
+      "value": 345.74,
+      "unit": "mm/year",
+      "time_period": null,
+      "evidence_state": "MEASURED",
+      "allowed_support": [
+        "canonical climate lookup is complete"
+      ],
+      "prohibited_support": [
+        "climate adequacy",
+        "drought resilience",
+        "future performance"
+      ]
+    },
+    {
+      "observation_id": "OBS_SLOPE",
+      "label": "Median slope",
+      "value": 2.395727249934432,
+      "unit": "degree",
+      "time_period": null,
+      "evidence_state": "PARCEL_DERIVED",
+      "allowed_support": [
+        "gentle typical slope context"
+      ],
+      "prohibited_support": [
+        "suitability",
+        "traversability for every animal"
+      ]
+    },
+    {
+      "observation_id": "OBS_AREA",
+      "label": "Mapped geometric area",
+      "value": 1404078.7002779155,
+      "unit": "m2",
+      "time_period": null,
+      "evidence_state": "PARCEL_DERIVED",
+      "allowed_support": [
+        "mapped outline size"
+      ],
+      "prohibited_support": [
+        "grazable acres",
+        "fencing cost",
+        "survey"
+      ]
+    },
+    {
+      "observation_id": "OBS_RAP_PROD",
+      "label": "Modeled annual herbaceous production",
+      "value": 937.6780475452124,
+      "unit": "pound_per_acre",
+      "time_period": "annual_accumulated_new_growth_2025",
+      "evidence_state": "MODELED",
+      "allowed_support": [
+        "modeled vegetation snapshot"
+      ],
+      "prohibited_support": [
+        "available forage",
+        "carrying capacity",
+        "ready for cattle"
+      ]
+    },
+    {
+      "observation_id": "OBS_WATER_COUNT",
+      "label": "Mapped hydrography candidate count",
+      "value": 9,
+      "unit": "count",
+      "time_period": null,
+      "evidence_state": "MAPPED_CANDIDATE",
+      "allowed_support": [
+        "mapped water features exist as leads"
+      ],
+      "prohibited_support": [
+        "usable livestock water",
+        "year-round reliability",
+        "legal right"
+      ]
+    },
+    {
+      "observation_id": "OBS_ROAD",
+      "label": "Nearest mapped road distance",
+      "value": 0.0,
+      "unit": "m",
+      "time_period": null,
+      "evidence_state": "MAPPED_CANDIDATE",
+      "allowed_support": [
+        "physical road contact on the map"
+      ],
+      "prohibited_support": [
+        "legal access",
+        "usable entrance"
+      ]
+    }
+  ],
+  "claim_gaps": [
+    {
+      "claim_id": "CLAIM_WATER_001",
+      "claim": "Excellent year-round water",
+      "supported_portion": "Mapped hydrography candidates exist on the tract",
+      "unsupported_portion": [
+        "year-round reliability",
+        "livestock accessibility",
+        "capacity",
+        "quality",
+        "legal right"
+      ],
+      "risk_of_misreading": "HIGH",
+      "recommended_action_id": "ACTION_WATER_FIELD_CATEGORY",
+      "recommended_message_id": "MSG_LISTING_WATER"
+    },
+    {
+      "claim_id": "CLAIM_ACCESS_001",
+      "claim": "Easy county-road access",
+      "supported_portion": "A mapped road contacts the geometry",
+      "unsupported_portion": [
+        "legal entrance",
+        "recorded easement",
+        "buyer right to use"
+      ],
+      "risk_of_misreading": "HIGH",
+      "recommended_action_id": "ACTION_ACCESS_DOCUMENTS",
+      "recommended_message_id": "MSG_TITLE_ACCESS"
+    },
+    {
+      "claim_id": "CLAIM_FORAGE_001",
+      "claim": "Productive pasture ready for cattle",
+      "supported_portion": "RAP returned a modeled production snapshot",
+      "unsupported_portion": [
+        "available forage",
+        "carrying capacity",
+        "ready for cattle"
+      ],
+      "risk_of_misreading": "HIGH",
+      "recommended_action_id": null,
+      "recommended_message_id": null
+    }
+  ],
+  "candidate_objects": [
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NHDWaterbody:120639594",
+      "candidate_type": "WATERBODY",
+      "display_name": null,
+      "review_status": "SAMPLED",
+      "evidence_state": "MAPPED_CANDIDATE",
+      "field_navigation_precision": "AREA_ONLY"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638829",
+      "candidate_type": "FLOWLINE",
+      "display_name": null,
+      "review_status": "SAMPLED",
+      "evidence_state": "REMOTELY_SUPPORTED",
+      "field_navigation_precision": "AREA_ONLY"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638830",
+      "candidate_type": "FLOWLINE",
+      "display_name": "Little Owl Creek",
+      "review_status": "SAMPLED",
+      "evidence_state": "REMOTELY_SUPPORTED",
+      "field_navigation_precision": "AREA_ONLY"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638838",
+      "candidate_type": "FLOWLINE",
+      "display_name": "Little Owl Creek",
+      "review_status": "UNREVIEWED",
+      "evidence_state": "MAPPED_CANDIDATE",
+      "field_navigation_precision": "NOT_NAVIGABLE"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:120638842",
+      "candidate_type": "FLOWLINE",
+      "display_name": "Little Owl Creek",
+      "review_status": "UNREVIEWED",
+      "evidence_state": "MAPPED_CANDIDATE",
+      "field_navigation_precision": "NOT_NAVIGABLE"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614082",
+      "candidate_type": "FLOWLINE",
+      "display_name": null,
+      "review_status": "UNREVIEWED",
+      "evidence_state": "MAPPED_CANDIDATE",
+      "field_navigation_precision": "NOT_NAVIGABLE"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614135",
+      "candidate_type": "FLOWLINE",
+      "display_name": null,
+      "review_status": "UNREVIEWED",
+      "evidence_state": "MAPPED_CANDIDATE",
+      "field_navigation_precision": "NOT_NAVIGABLE"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NetworkNHDFlowline:156614136",
+      "candidate_type": "FLOWLINE",
+      "display_name": "Little Owl Creek",
+      "review_status": "UNREVIEWED",
+      "evidence_state": "MAPPED_CANDIDATE",
+      "field_navigation_precision": "NOT_NAVIGABLE"
+    },
+    {
+      "candidate_id": "USGS_NHDPLUS_HR:NonNetworkNHDFlowline:156614070",
+      "candidate_type": "FLOWLINE",
+      "display_name": null,
+      "review_status": "UNREVIEWED",
+      "evidence_state": "MAPPED_CANDIDATE",
+      "field_navigation_precision": "NOT_NAVIGABLE"
+    }
+  ],
+  "bottleneck_candidates": [
+    {
+      "bottleneck_id": "BOTTLENECK_WATER_EVIDENCE",
+      "bottleneck_rank": 1,
+      "title": "Livestock-water use is the larger operating-evidence gap",
+      "decision_impact": "HIGH",
+      "information_gain": "HIGH",
+      "cost_class": "FIELD_HALF_DAY"
+    },
+    {
+      "bottleneck_id": "BOTTLENECK_LEGAL_ACCESS",
+      "bottleneck_rank": 2,
+      "title": "Legal entrance is unproven",
+      "decision_impact": "HIGH",
+      "information_gain": "HIGH",
+      "cost_class": "DOCUMENT_REQUEST"
+    },
+    {
+      "bottleneck_id": "BOTTLENECK_FORAGE_LEAP",
+      "bottleneck_rank": 3,
+      "title": "Modeled growth must not be read as stockable forage",
+      "decision_impact": "MEDIUM",
+      "information_gain": "MEDIUM",
+      "cost_class": "DESKTOP"
+    }
+  ],
+  "action_candidates": [
+    {
+      "action_id": "ACTION_ACCESS_DOCUMENTS",
+      "execution_order": 1,
+      "action_type": "DOCUMENT_REQUEST",
+      "cost_class": "DESKTOP",
+      "can_establish": [
+        "documentary basis for claimed access"
+      ],
+      "cannot_establish": [
+        "road condition",
+        "seasonal passability",
+        "final legal interpretation"
+      ],
+      "role": "PACKET"
+    },
+    {
+      "action_id": "ACTION_WATER_FIELD_CATEGORY",
+      "execution_order": 2,
+      "action_type": "FIELD_REVIEW",
+      "cost_class": "FIELD_HALF_DAY",
+      "can_establish": [
+        "whether mapped water features show visible water and access signs on the visit date"
+      ],
+      "cannot_establish": [
+        "year-round reliability",
+        "water quality",
+        "legal right to use"
+      ],
+      "role": "PACKET"
+    },
+    {
+      "action_id": "ACTION_REPEAT_PRECIP",
+      "action_type": "DOCUMENT_REQUEST",
+      "cost_class": "DESKTOP",
+      "role": "DEFERRED_COMPARISON",
+      "why_now": "Annual precipitation is already measured; a repeat lookup does not change the current decision.",
+      "can_establish": [],
+      "cannot_establish": [
+        "whether a weekend visit has a job"
+      ]
+    }
+  ],
+  "action_policy": {
+    "allowed_first_actions": [
+      "ACTION_ACCESS_DOCUMENTS"
+    ],
+    "action_dependencies": {
+      "ACTION_WATER_FIELD_CATEGORY": [
+        "ACTION_ACCESS_DOCUMENTS"
+      ]
+    },
+    "allowed_permutations": null
+  },
+  "execution_order": [
+    "ACTION_ACCESS_DOCUMENTS",
+    "ACTION_WATER_FIELD_CATEGORY"
+  ],
+  "knowledge_cards": [
+    {
+      "knowledge_id": "FIELD_TASK_BOUNDARY_001",
+      "topic": "field_task_boundary",
+      "statement": "A field walk can record what is visible on the visit date in mapped water areas or seller-named places. It cannot prove year-round reliability, water quality, legal right, or stocking. If access paper has not supported an entrance, do not send the trip.",
+      "source_id": "SRC_FIELD_BOUND_001",
+      "source_title": "What a ranch visit can and cannot establish",
+      "source_url_or_citation": "docs/ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md",
+      "source_publisher": "RangeMatch Advisor contract",
+      "source_date": "2026-08-12",
+      "reviewed_by": "RangeMatch product review",
+      "reviewed_at": "2026-08-12",
+      "review_basis": "Bound to visit-purpose rails already in the Advisor contract.",
+      "effective_jurisdictions": [
+        "US_GENERAL"
+      ],
+      "species_scope": [
+        "cattle",
+        "sheep"
+      ],
+      "review_status": "APPROVED",
+      "allowed_use": [
+        "conditional_reasoning",
+        "diligence_question",
+        "domain_prior"
+      ],
+      "prohibited_use": [
+        "parcel_fact",
+        "suitability_verdict",
+        "legal_conclusion"
+      ],
+      "expires_or_review_after": "2027-08-12",
+      "version": "1.0",
+      "content_hash": "sha256:0ad30e3eefd74241a47b9e0338826bd17def43131e36723712a350575ca2ddbe"
+    },
+    {
+      "knowledge_id": "LEGAL_ACCESS_DILIGENCE_001",
+      "topic": "legal_access",
+      "statement": "Road contact with a public-road layer is not proof of a recorded legal entrance. Ask title or counsel for the deed, a recorded easement, the entrance location, maintenance duty, and exceptions. Do not treat the answer as a finding that a right exists or is missing.",
+      "source_id": "SRC_ACCESS_QUESTIONS_001",
+      "source_title": "Title and survey questions for ranch access (RangeMatch diligence card)",
+      "source_url_or_citation": "https://www.nrcs.usda.gov/conservation-basics/conservation-by-state/colorado",
+      "source_publisher": "RangeMatch reviewed diligence note; USDA NRCS public conservation context",
+      "source_date": "2026-08-12",
+      "reviewed_by": "RangeMatch product review",
+      "reviewed_at": "2026-08-12",
+      "review_basis": "Statement limited to questions for title/counsel; no legal conclusion.",
+      "effective_jurisdictions": [
+        "US_GENERAL"
+      ],
+      "species_scope": [
+        "cattle",
+        "sheep"
+      ],
+      "review_status": "APPROVED",
+      "allowed_use": [
+        "diligence_question",
+        "conditional_reasoning"
+      ],
+      "prohibited_use": [
+        "parcel_fact",
+        "suitability_verdict",
+        "legal_conclusion"
+      ],
+      "expires_or_review_after": "2027-08-12",
+      "version": "1.0",
+      "content_hash": "sha256:1f1d8009354b03149db395debda2445831db2de42839b094c5c98d4902b20d00"
+    },
+    {
+      "knowledge_id": "RAP_NOT_FORAGE_001",
+      "topic": "forage_or_rap",
+      "statement": "A RAP production snapshot is modeled biomass, not available forage, not a stocking rate, and not proof that the tract is ready for cattle or sheep. Do not convert the number into a herd size.",
+      "source_id": "SRC_RAP_LIMITS_001",
+      "source_title": "Rangeland Analysis Platform production is not stocking advice",
+      "source_url_or_citation": "https://rangelands.app/",
+      "source_publisher": "Rangeland Analysis Platform public product; RangeMatch interpretation card",
+      "source_date": "2026-08-12",
+      "reviewed_by": "RangeMatch product review",
+      "reviewed_at": "2026-08-12",
+      "review_basis": "Matches frozen RangeMatch RAP limitation; no carrying-capacity formula.",
+      "effective_jurisdictions": [
+        "US_GENERAL"
+      ],
+      "species_scope": [
+        "cattle",
+        "sheep"
+      ],
+      "review_status": "APPROVED",
+      "allowed_use": [
+        "domain_prior",
+        "diligence_question"
+      ],
+      "prohibited_use": [
+        "parcel_fact",
+        "suitability_verdict",
+        "legal_conclusion"
+      ],
+      "expires_or_review_after": "2027-08-12",
+      "version": "1.0",
+      "content_hash": "sha256:a2890495b8c7b3596786b1c69b9111289e22c77a88438d9e1b3a5a05040fceed"
+    },
+    {
+      "knowledge_id": "WATER_FEATURE_TYPES_001",
+      "topic": "livestock_water",
+      "statement": "Wells, tanks or ponds, and creeks or ditches need different checks. A well log may support construction history but not current yield, quality, operating condition, or legal right. A tank needs seasonality, recharge, livestock access, silt, and fencing. A reach needs seasonal flow, diversion rights, upstream control, and livestock access. Ask these only for objects that exist or as if-found questions.",
+      "source_id": "SRC_WATER_TYPES_001",
+      "source_title": "Livestock watering sources: checks that differ by type",
+      "source_url_or_citation": "https://www.nrcs.usda.gov/resources/guides-and-instructions/national-range-and-pasture-handbook",
+      "source_publisher": "USDA NRCS National Range and Pasture Handbook (public); RangeMatch card excerpt",
+      "source_date": "2026-08-12",
+      "reviewed_by": "RangeMatch product review",
+      "reviewed_at": "2026-08-12",
+      "review_basis": "Diligence questions only; no parcel water inventory implied.",
+      "effective_jurisdictions": [
+        "US_GENERAL"
+      ],
+      "species_scope": [
+        "cattle",
+        "sheep"
+      ],
+      "review_status": "APPROVED",
+      "allowed_use": [
+        "diligence_question",
+        "conditional_reasoning",
+        "domain_prior"
+      ],
+      "prohibited_use": [
+        "parcel_fact",
+        "suitability_verdict",
+        "legal_conclusion"
+      ],
+      "expires_or_review_after": "2027-08-12",
+      "version": "1.0",
+      "content_hash": "sha256:74d8cee7d5c83f28c1c108eb72ede06aae82c7b07749a629f4836d1289b9b493"
+    }
+  ],
+  "mireye_contexts": [
+    {
+      "context_id": "MIREYE_LOOKUP",
+      "endpoint": "/v1/lookup",
+      "ok": false,
+      "error_class": "INVALID_INPUT",
+      "canonical_for_parcel_facts": false
+    },
+    {
+      "context_id": "MIREYE_PROPERTY_DILIGENCE_CONTEXT",
+      "endpoint": "/v1/lookup",
+      "ok": true,
+      "error_class": null,
+      "canonical_for_parcel_facts": false
+    },
+    {
+      "context_id": "MIREYE_POINT_LAND_CONTEXT",
+      "endpoint": "/v1/fetch",
+      "ok": true,
+      "error_class": null,
+      "canonical_for_parcel_facts": false
+    },
+    {
+      "context_id": "MIREYE_POINT_HAZARD_CONTEXT",
+      "endpoint": "/v1/fetch",
+      "ok": true,
+      "error_class": null,
+      "canonical_for_parcel_facts": false
+    }
+  ],
+  "prohibited_inferences": [
+    "suitability",
+    "carrying_capacity",
+    "species_ranking",
+    "purchase_recommendation",
+    "legal_access_from_road_contact",
+    "usable_water_from_mapped_hydrography",
+    "missing_verification_means_absent",
+    "named_pin_without_candidate_object"
+  ],
+  "reading_budget": {
+    "recommendation_max_chars": 140,
+    "first_screen_sections": [
+      1,
+      2,
+      3
+    ]
+  }
+}

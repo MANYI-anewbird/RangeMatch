@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/advisor_buyer_report.schema.json",
+  "title": "RangeMatchAdvisorBuyerReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_hash",
+    "validation_status",
+    "source",
+    "sections",
+    "insight_ids",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "RANGEMATCH_ADVISOR_BUYER_REPORT@0.1.0"
+    },
+    "packet_hash": { "type": "string", "minLength": 16 },
+    "validation_status": { "type": "string", "enum": ["PASSED", "FAILED"] },
+    "source": {
+      "type": "string",
+      "enum": ["LLM", "DETERMINISTIC_FALLBACK"]
+    },
+    "sections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recommendation",
+        "why",
+        "listing_jumps",
+        "do_now",
+        "if_changes",
+        "professional_reminders"
+      ],
+      "properties": {
+        "recommendation": { "type": "string", "minLength": 8, "maxLength": 140 },
+        "why": { "type": "string", "minLength": 20 },
+        "listing_jumps": { "type": "string" },
+        "do_now": { "type": "string" },
+        "if_changes": { "type": "string" },
+        "professional_reminders": { "type": "string" }
+      }
+    },
+    "insight_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "validation_violations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "llm_used": { "type": "boolean" },
+        "provider": { "type": "string" },
+        "provider_status": { "type": "string" },
+        "model_id": { "type": ["string", "null"] },
+        "prompt_version": { "type": "string" },
+        "knowledge_scope": { "type": "string" },
+        "generated_at": { "type": "string" }
+      }
+    }
+  }
+}

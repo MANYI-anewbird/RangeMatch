@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/advisor_insight_record.schema.json",
+  "title": "RangeMatchAdvisorInsightRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "insight_id",
+    "recommendation",
+    "reasoning_type",
+    "packet_refs",
+    "context_refs",
+    "knowledge_refs"
+  ],
+  "properties": {
+    "insight_id": { "type": "string", "pattern": "^INSIGHT_" },
+    "recommendation": { "type": "string", "minLength": 8, "maxLength": 140 },
+    "reasoning_type": {
+      "type": "string",
+      "enum": [
+        "SUPPORTED_INTERPRETATION",
+        "DOMAIN_PRIOR",
+        "CONDITIONAL_SCENARIO",
+        "DILIGENCE_QUESTION",
+        "INFORMATION_VALUE"
+      ]
+    },
+    "packet_refs": { "type": "array", "items": { "type": "string" } },
+    "context_refs": { "type": "array", "items": { "type": "string" } },
+    "knowledge_refs": { "type": "array", "items": { "type": "string" } },
+    "llm_recommended_order": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "considered_actions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "rejected_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["action_id", "reason"],
+        "properties": {
+          "action_id": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "if_action_id",
+          "if_result",
+          "then_action_id",
+          "still_cannot_establish"
+        ],
+        "properties": {
+          "if_action_id": { "type": "string" },
+          "if_result": { "type": "string" },
+          "then_action_id": { "type": "string" },
+          "still_cannot_establish": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
