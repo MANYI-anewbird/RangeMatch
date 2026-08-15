@@ -286,7 +286,9 @@ describe("Advisor demo route", () => {
     expect(screen.getByRole("button", { name: /Back to report/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/Suggested questions/i)).toBeInTheDocument();
     expect(screen.getByText(/RangeMatch may make mistakes/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Your question/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Ask about water, vegetation, movement/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^Ask$/i })).toBeInTheDocument();
+    expect(screen.queryByText(/^Your question$/i)).not.toBeInTheDocument();
     expect(screen.queryByRole("dialog", { name: /Advisor report/i })).not.toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: /Back to report/i }));
     expect(screen.getByRole("dialog", { name: /Advisor report/i })).toBeInTheDocument();
@@ -302,6 +304,66 @@ describe("Advisor demo route", () => {
         body: expect.stringContaining("4213 Nambe Road, Indian Hills, CO 80454"),
       }),
     );
+  });
+
+  it("shows the user question and a thinking spinner before the answer arrives", async () => {
+    renderDemo();
+    fillPlaceAndRun();
+    await screen.findByRole("heading", {
+      name: /Cattle operating case is conditional on the next cheap diligence step/i,
+    });
+    await userEvent.click(screen.getAllByRole("button", { name: /Start to chat/i })[0]);
+
+    let releaseChat!: (value: unknown) => void;
+    const chatResponse = new Promise((resolve) => {
+      releaseChat = resolve;
+    });
+    const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.includes("/chat")) {
+        const payload = await chatResponse;
+        return {
+          ok: true,
+          status: 200,
+          json: async () => payload,
+        };
+      }
+      return {
+        ok: true,
+        status: 200,
+        json: async () => SUCCESS_RUN,
+      };
+    });
+    globalThis.fetch = fetchMock as unknown as typeof fetch;
+
+    const input = screen.getByPlaceholderText(/Ask about water, vegetation, movement/i);
+    await userEvent.type(input, "What about livestock water?");
+    await userEvent.click(screen.getByRole("button", { name: /^Ask$/i }));
+
+    expect(await screen.findByText("What about livestock water?")).toBeInTheDocument();
+    expect(screen.getByRole("status", { name: /RangeMatch is thinking/i })).toBeInTheDocument();
+    expect(screen.getByText(/Thinking…/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Public water evidence is still thin/i)).not.toBeInTheDocument();
+    expect(input).toHaveValue("");
+
+    releaseChat({
+      turns: [
+        {
+          turn_id: "turn_1",
+          user_message: "What about livestock water?",
+          judgment: "Water is still unresolved.",
+          answer: "Public water evidence is still thin on this tract.",
+        },
+      ],
+      suggested_questions: [
+        { intent: "FEED", prompt: "What about forage?" },
+        { intent: "NEXT_ACTION", prompt: "What should I request next?" },
+      ],
+    });
+
+    expect(await screen.findByText(/Public water evidence is still thin/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Thinking…/i)).not.toBeInTheDocument();
+    expect(screen.getByText("What about livestock water?")).toBeInTheDocument();
   });
 
   it("keeps engineering and legacy brief inside technical evidence", async () => {

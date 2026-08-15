@@ -2348,24 +2348,6 @@ function formatAnswerValue(value: unknown): string {
   return String(value).replaceAll("_", " ");
 }
 
-function chatSuggestionIconSrc(intent?: string): string {
-  switch ((intent || "").toUpperCase()) {
-    case "WATER":
-      return "/assets/chat/icon-water.svg";
-    case "FEED":
-      return "/assets/chat/icon-feed.svg";
-    case "MOVEMENT":
-      return "/assets/chat/icon-terrain.svg";
-    case "ACCESS":
-      return "/assets/chat/icon-access.svg";
-    case "NEXT_ACTION":
-      return "/assets/chat/icon-next.svg";
-    case "OVERALL_CATTLE_CASE":
-    default:
-      return "/assets/chat/icon-cattle.svg";
-  }
-}
-
 function PropertyChatOverlay({
   run,
   onBack,
@@ -2378,6 +2360,7 @@ function PropertyChatOverlay({
   const [chatBusy, setChatBusy] = useState(false);
   const [chatError, setChatError] = useState<string | null>(null);
   const [chatDraft, setChatDraft] = useState("");
+  const [pendingUserMessage, setPendingUserMessage] = useState<string | null>(null);
   const [chatTurns, setChatTurns] = useState(run.chat_turns || []);
   const [chatSuggestions, setChatSuggestions] = useState(
     run.chat_suggestions || [
@@ -2400,13 +2383,15 @@ function PropertyChatOverlay({
     const node = threadRef.current;
     if (!node) return;
     node.scrollTop = node.scrollHeight;
-  }, [chatTurns, chatBusy]);
+  }, [chatTurns, pendingUserMessage, chatBusy]);
 
   async function submitChat(message: string) {
     const text = message.trim();
     if (!text || chatBusy) return;
     setChatBusy(true);
     setChatError(null);
+    setChatDraft("");
+    setPendingUserMessage(text);
     try {
       const response = await fetch(`/v1/advisor/runs/${run.run_id}/chat`, {
         method: "POST",
@@ -2420,13 +2405,15 @@ function PropertyChatOverlay({
       };
       if (!response.ok) {
         setChatError(String(body.detail || `chat_failed_${response.status}`));
+        setChatDraft(text);
+        setPendingUserMessage(null);
         return;
       }
       setChatTurns(body.turns || []);
+      setPendingUserMessage(null);
       if (body.suggested_questions?.length) {
         setChatSuggestions(body.suggested_questions);
       }
-      setChatDraft("");
       onRunUpdate?.({
         ...run,
         chat_turns: body.turns || run.chat_turns,
@@ -2434,12 +2421,15 @@ function PropertyChatOverlay({
       });
     } catch (error) {
       setChatError(error instanceof Error ? error.message : "chat_failed");
+      setChatDraft(text);
+      setPendingUserMessage(null);
     } finally {
       setChatBusy(false);
     }
   }
 
   const visibleSuggestions = chatSuggestions.slice(0, 2);
+  const showEmpty = chatTurns.length === 0 && !pendingUserMessage;
 
   return (
     <div className="advisor-confirm-overlay advisor-chat-overlay" role="presentation">
@@ -2468,7 +2458,7 @@ function PropertyChatOverlay({
         </header>
 
         <div className="advisor-chat-thread" ref={threadRef}>
-          {chatTurns.length === 0 ? (
+          {showEmpty ? (
             <div className="advisor-chat-empty">
               <p className="advisor-chat-empty-title">Ask anything about this parcel</p>
               <p className="advisor-quiet advisor-chat-scope">
@@ -2523,13 +2513,57 @@ function PropertyChatOverlay({
                   </div>
                 </li>
               ))}
+              {pendingUserMessage ? (
+                <li key="pending-turn">
+                  <div className="advisor-chat-row advisor-chat-row-user">
+                    <div className="advisor-chat-bubble advisor-chat-bubble-user">
+                      <p className="advisor-chat-user">
+                        {withMireyeBold(pendingUserMessage)}
+                      </p>
+                    </div>
+                    <span className="advisor-chat-avatar-wrap advisor-chat-avatar-wrap-user">
+                      <img
+                        className="advisor-chat-avatar"
+                        src="/assets/chat/avatar-user-farmer.png?v=3"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                  <div className="advisor-chat-row advisor-chat-row-assistant">
+                    <span className="advisor-chat-avatar-wrap">
+                      <img
+                        className="advisor-chat-avatar"
+                        src="/assets/chat/avatar-cattle.png"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </span>
+                    <div
+                      className="advisor-chat-bubble advisor-chat-bubble-assistant advisor-chat-bubble-thinking"
+                      role="status"
+                      aria-live="polite"
+                      aria-label="RangeMatch is thinking"
+                    >
+                      <p className="advisor-chat-brand">
+                        <img
+                          className="advisor-chat-leaf"
+                          src="/assets/chat/icon-leaf.svg"
+                          alt=""
+                          aria-hidden="true"
+                        />
+                        RangeMatch
+                      </p>
+                      <div className="advisor-chat-thinking">
+                        <span className="advisor-chat-spinner" aria-hidden="true" />
+                        <span>Thinking…</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ) : null}
             </ol>
           )}
-          {chatBusy ? (
-            <p className="advisor-quiet advisor-chat-typing" role="status">
-              Answering…
-            </p>
-          ) : null}
           {chatError ? (
             <p className="advisor-copy-failed" role="alert">
               {chatError}
@@ -2551,16 +2585,7 @@ function PropertyChatOverlay({
                 disabled={chatBusy}
                 onClick={() => void submitChat(row.prompt || "")}
               >
-                <img
-                  className="advisor-chat-suggestion-icon"
-                  src={chatSuggestionIconSrc(row.intent)}
-                  alt=""
-                  aria-hidden="true"
-                />
                 <span className="advisor-chat-suggestion-text">{row.prompt}</span>
-                <span className="advisor-chat-suggestion-chevron" aria-hidden="true">
-                  ›
-                </span>
               </button>
             ))}
           </div>
@@ -2572,16 +2597,10 @@ function PropertyChatOverlay({
               void submitChat(chatDraft);
             }}
           >
-            <label className="advisor-chat-input-label" htmlFor="advisor-chat-input">
-              Your question
+            <label className="advisor-sr-only" htmlFor="advisor-chat-input">
+              Ask about this parcel
             </label>
             <div className="advisor-chat-input-row">
-              <img
-                className="advisor-chat-grass-art"
-                src="/assets/chat/grass-accent.svg"
-                alt=""
-                aria-hidden="true"
-              />
               <input
                 id="advisor-chat-input"
                 className="advisor-chat-input"
@@ -2596,15 +2615,7 @@ function PropertyChatOverlay({
                 className="advisor-chat-send"
                 disabled={chatBusy || !chatDraft.trim()}
               >
-                <span>{chatBusy ? "…" : "Ask"}</span>
-                {!chatBusy ? (
-                  <img
-                    className="advisor-chat-send-icon"
-                    src="/assets/chat/icon-send.svg"
-                    alt=""
-                    aria-hidden="true"
-                  />
-                ) : null}
+                {chatBusy ? "…" : "Ask"}
               </button>
             </div>
           </form>
