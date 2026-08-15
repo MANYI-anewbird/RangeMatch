@@ -5,7 +5,7 @@
 > Phase: Product Prototype + Agent Orchestration
 > Frozen Factors: `F01–F08` (`demo_factor_scope: CLOSED`)
 > F09+: `NOT_AUTHORIZED`
-> Current baseline: `docs/CURRENT_SYSTEM_BASELINE.md`
+> Current baseline: `docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`
 
 ## Purpose
 

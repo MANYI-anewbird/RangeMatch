@@ -253,6 +253,40 @@ class Phase7NaturalFoundationPdfTests(unittest.TestCase):
         self.assertTrue(payload.startswith(b"%PDF"))
         self.assertGreater(len(payload), 1000)
 
+    def test_long_live_narrative_flows_to_continuation_pages_not_rejected(self) -> None:
+        run = copy.deepcopy(self.run)
+        interpretation = run["natural_foundation_interpretation"]
+        interpretation["advisor_judgment"] = (
+            "Moderate terrain and visible herbaceous cover make a bounded cattle use worth examining. "
+            "The climate pattern can compress the useful forage period and increase dependence on timely moisture. "
+            "Livestock water remains the condition that determines whether cattle can use the observed land pattern. "
+        ) * 3
+        interpretation["land_character"] = (
+            "This is open rangeland with moderate slopes, herbaceous cover, a semi-arid climate, and well-drained soils. "
+            "Those features describe a landscape where forage timing and water distribution matter together. "
+        ) * 4
+        interpretation["operating_possibilities"] = [
+            ("Seasonal grazing may be plausible when forage response and livestock water overlap. ") * 4,
+            ("A conservative drought-year role may remain possible with a shorter grazing window. ") * 4,
+            ("The parcel may function as one part of a broader grazing system. ") * 4,
+        ]
+        interpretation["intended_use_interpretation"] = (
+            "Seasonal use asks whether water and forage coincide during the intended months. "
+            "Year-round use carries a materially higher evidence burden through winter and drought. "
+        ) * 5
+        interpretation["conditional_scenarios"] = [
+            ("Reliable livestock water during the intended months would materially strengthen this view. ") * 4,
+            ("Repeated forage failure during those months would materially weaken this view. ") * 4,
+        ]
+        interpretation["refinement_request"] = (
+            "Share the livestock-water sources, normal months of availability, and recent forage condition. "
+        ) * 4
+        payload = render_natural_cattle_foundation_pdf(
+            project_natural_cattle_foundation_report(run)
+        )
+        self.assertTrue(payload.startswith(b"%PDF"))
+        self.assertGreater(len(payload), 1000)
+
     def test_page2_volume_does_not_mutate_page1_text(self) -> None:
         view = project_natural_cattle_foundation_report(self.run)
         page1_before = json.dumps(view["page1"], sort_keys=True)
@@ -270,6 +304,15 @@ class Phase7NaturalFoundationPdfTests(unittest.TestCase):
         # but Page 1 fields must remain the interpretation text.
         view2 = project_natural_cattle_foundation_report(run2)
         self.assertEqual(json.dumps(view2["page1"], sort_keys=True), page1_before)
+
+    def test_appendix_prioritizes_page_one_environmental_evidence(self) -> None:
+        view = project_natural_cattle_foundation_report(self.run)
+        displayed = view["page2"]["environmental_evidence"][:22]
+        labels = " ".join(str(row.get("evidence") or "") for row in displayed).lower()
+        self.assertIn("slope", labels)
+        self.assertTrue("precip" in labels or "drought" in labels)
+        self.assertIn("soil", labels)
+        self.assertTrue("wetland" in labels or "surface water", labels)
 
 
 if __name__ == "__main__":

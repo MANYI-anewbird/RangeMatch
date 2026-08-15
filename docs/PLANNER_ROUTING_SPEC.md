@@ -4,7 +4,7 @@
 > Date: 2026-08-08  
 > Planner version: `RANGEMATCH_PLANNER@0.1.0`  
 > Live execution: controlled by Executor and explicit network authorization  
-> Current product status: see `CURRENT_SYSTEM_BASELINE.md`
+> Current product status: see `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`
 
 ## Purpose
 

@@ -1,6 +1,6 @@
 # F02/F03 Evidence Depth and Verification Upgrade Plan
 
-> **Historical work plan.** F03 demo evidence-depth work was completed and F02 deepening was deferred for the competition demo. Current scope and next work are defined in `CURRENT_SYSTEM_BASELINE.md`.
+> **Historical work plan.** F03 demo evidence-depth work was completed and F02 deepening was deferred for the competition demo. Current scope and next work are defined in `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
 
 > Status: `ACTIVE — NEXT PHASE LOCKED`  
 > Date: 2026-08-08  

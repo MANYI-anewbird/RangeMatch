@@ -48,6 +48,30 @@ PROVIDER_LABELS = {
     "RANGEMATCH_CORE": "Confirmed geometry",
 }
 
+# The appendix is not an arbitrary first-N dump. These buyer-relevant fields
+# are displayed first so the evidence used by Page 1 remains visible on Page 2.
+APPENDIX_PRIORITY_TERMS = (
+    "area",
+    "acre",
+    "slope median",
+    "slope",
+    "elevation",
+    "land use",
+    "ndvi",
+    "production",
+    "tree canopy",
+    "precip",
+    "drought",
+    "temperature",
+    "wetland acres",
+    "wetland fraction",
+    "surface water permanence",
+    "soil drainage",
+    "soil depth",
+    "hydrologic group",
+    "soil map unit",
+)
+
 INTERNAL_LEAK = re.compile(
     r"\b(?:OBS_|BOTTLENECK_|CLAIM_|ACTION_|FACTOR_|F0[1-8]_|"
     r"ADAPTER_|HTTP_|coverage_status|"
@@ -83,6 +107,30 @@ def _clip(text: str, limit: int) -> str:
     return text[: max(0, limit - 3)].rstrip() + "..."
 
 
+def _clip_complete_sentences(text: Any, limit: int) -> str:
+    """Fit advisor prose without leaving an abrupt half-sentence in the PDF."""
+    clean = re.sub(r"\s+", " ", _plain(text)).strip()
+    if len(clean) <= limit:
+        return clean
+    sentences = [
+        part.strip()
+        for part in re.split(r"(?<=[.!?])\s+", clean)
+        if part.strip()
+    ]
+    kept: list[str] = []
+    for sentence in sentences:
+        candidate = " ".join(kept + [sentence]).strip()
+        if len(candidate) > limit:
+            break
+        kept.append(sentence)
+    if kept:
+        return " ".join(kept)
+    # A provider may return one very long sentence. Preserve its meaning at a
+    # word boundary rather than failing the entire download.
+    clipped = clean[: max(0, limit - 1)].rsplit(" ", 1)[0].rstrip(" ,;:")
+    return clipped + "." if clipped else ""
+
+
 def run_has_natural_foundation_report(run: Mapping[str, Any]) -> bool:
     interpretation = run.get("natural_foundation_interpretation")
     packet = run.get("combined_environmental_evidence_packet")
@@ -114,6 +162,24 @@ def _evidence_label(obs: Mapping[str, Any]) -> str:
             cleaned = cleaned[len(prefix) :]
             break
     return cleaned.replace("_", " ").strip().title() or "Evidence"
+
+
+def _appendix_priority(row: Mapping[str, Any], original_index: int) -> tuple[int, int, int]:
+    """Rank cited/buyer-critical evidence without changing any evidence value."""
+    label = str(row.get("evidence") or "").lower()
+    domain = str(row.get("domain") or "")
+    term_rank = next(
+        (index for index, term in enumerate(APPENDIX_PRIORITY_TERMS) if term in label),
+        len(APPENDIX_PRIORITY_TERMS),
+    )
+    domain_rank = {
+        "Terrain": 0,
+        "Forage": 1,
+        "Water": 2,
+        "Climate": 3,
+        "Soil": 4,
+    }.get(domain, 5)
+    return (term_rank, domain_rank, original_index)
 
 
 def project_natural_cattle_foundation_report(run: Mapping[str, Any]) -> dict[str, Any]:
@@ -180,6 +246,17 @@ def project_natural_cattle_foundation_report(run: Mapping[str, Any]) -> dict[str
                 "status": str(obs.get("status") or "RETRIEVED"),
             }
         )
+
+    # Preserve all retrieved rows in provenance, but make the fixed 22-row page
+    # budget useful: area/slope, vegetation, climate, water, and soil evidence
+    # cited by the advisor view should not disappear behind provider ordering.
+    env_rows = [
+        row
+        for _, row in sorted(
+            enumerate(env_rows),
+            key=lambda item: _appendix_priority(item[1], item[0]),
+        )
+    ]
 
     # Property context is isolated from the environmental packet and primary reasoning.
     legacy_packet = run.get("packet") if isinstance(run.get("packet"), Mapping) else {"observations": []}
@@ -333,7 +410,7 @@ def validate_natural_cattle_foundation_report(
 
 
 def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
-    """Render exactly two US Letter pages. Overflow fails closed."""
+    """Render a readable advisor narrative followed by a new-page appendix."""
     try:
         from fpdf import FPDF
     except ModuleNotFoundError as exc:
@@ -355,8 +432,20 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
     pale = (232, 239, 231)
     page_bottom = 272.0
 
-    def new_page_writer():
+    def new_page_writer(*, allow_page_break: bool = False, continuation_title: str = ""):
         state = {"y": 12.0}
+
+        def start_continuation_page() -> None:
+            pdf.add_page()
+            state["y"] = 12.0
+            pdf.set_fill_color(*forest)
+            pdf.rect(0, 0, 216, 3, style="F")
+            if continuation_title:
+                pdf.set_xy(14, state["y"])
+                pdf.set_font("Helvetica", "B", 9.5)
+                pdf.set_text_color(*forest)
+                pdf.cell(182, 4.4, continuation_title, align="C")
+                state["y"] = 20.0
 
         def write(
             text: Any,
@@ -368,9 +457,29 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
             width: float = 182.0,
             align: str = "L",
         ) -> None:
-            pdf.set_xy(14, state["y"])
             pdf.set_font("Helvetica", style, size)
             pdf.set_text_color(*color)
+            measured_height = float(
+                pdf.multi_cell(
+                    width,
+                    leading,
+                    _plain(text),
+                    border=0,
+                    align=align,
+                    dry_run=True,
+                    output="HEIGHT",
+                )
+            )
+            if state["y"] + measured_height > page_bottom:
+                if not allow_page_break:
+                    raise NaturalFoundationReportError(
+                        "FOUNDATION_PAGE_OVERFLOW",
+                        f"content overflow at y={state['y'] + measured_height:.1f}mm",
+                    )
+                start_continuation_page()
+                pdf.set_font("Helvetica", style, size)
+                pdf.set_text_color(*color)
+            pdf.set_xy(14, state["y"])
             pdf.multi_cell(width, leading, _plain(text), border=0, align=align)
             state["y"] = pdf.get_y() + 0.5
             if state["y"] > page_bottom:
@@ -382,10 +491,12 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
         def gap(amount: float = 2.8) -> None:
             state["y"] += amount
             if state["y"] > page_bottom:
-                raise NaturalFoundationReportError(
-                    "FOUNDATION_PAGE_OVERFLOW",
-                    f"content overflow at y={state['y']:.1f}mm",
-                )
+                if not allow_page_break:
+                    raise NaturalFoundationReportError(
+                        "FOUNDATION_PAGE_OVERFLOW",
+                        f"content overflow at y={state['y']:.1f}mm",
+                    )
+                start_continuation_page()
 
         def rule() -> None:
             pdf.set_draw_color(*line)
@@ -407,7 +518,10 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
 
     # --- Page 1 ---
     pdf.add_page()
-    write, gap, rule, state = new_page_writer()
+    write, gap, rule, state = new_page_writer(
+        allow_page_break=True,
+        continuation_title="Natural Cattle Foundation - continued",
+    )
     page1 = view.get("page1") or {}
     pdf.set_fill_color(*forest)
     pdf.rect(0, 0, 216, 3, style="F")
@@ -419,7 +533,11 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
     rule()
 
     write("Advisor's judgment", size=14.2, style="B", color=forest, leading=6.0)
-    write(str(page1.get("advisor_judgment") or ""), size=10.8, leading=4.8)
+    write(
+        str(page1.get("advisor_judgment") or ""),
+        size=10.8,
+        leading=4.8,
+    )
     gap()
 
     write("How this land naturally reads", size=14.2, style="B", color=forest, leading=6.0)
@@ -432,12 +550,16 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
 
     write("What this may support", size=14.2, style="B", color=forest, leading=6.0)
     for item in (page1.get("operating_possibilities") or [])[:3]:
-        write(f"- {str(item)}", size=10.6, leading=4.7)
+        write(
+            f"- {str(item)}",
+            size=10.6,
+            leading=4.7,
+        )
     gap()
 
     write("What your intended cattle use changes", size=14.2, style="B", color=forest, leading=6.0)
     write(
-        _clip(str(page1.get("intended_use_interpretation") or ""), 900),
+        str(page1.get("intended_use_interpretation") or ""),
         size=10.8,
         leading=4.8,
     )
@@ -445,18 +567,26 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
 
     write("What would change my view", size=14.2, style="B", color=forest, leading=6.0)
     for item in (page1.get("conditional_scenarios") or [])[:2]:
-        write(f"- {_clip(str(item), 300)}", size=10.6, leading=4.7)
+        write(
+            f"- {str(item)}",
+            size=10.6,
+            leading=4.7,
+        )
     gap()
 
     write("To refine this assessment", size=14.2, style="B", color=forest, leading=6.0)
-    write(_clip(str(page1.get("refinement_request") or ""), 360), size=10.8, leading=4.8)
+    write(
+        str(page1.get("refinement_request") or ""),
+        size=10.8,
+        leading=4.8,
+    )
     gap(2.2)
 
     write(_clip(str(page1.get("scope_footer") or ""), 420), size=8.7, color=gray, leading=3.9)
     if page1.get("appendix_pointer"):
         write(str(page1.get("appendix_pointer")), size=8.0, color=gray, leading=3.5)
 
-    # --- Page 2 ---
+    # --- Appendix: always starts on a fresh page after the full narrative. ---
     pdf.add_page()
     write, gap, rule, state = new_page_writer()
     page2 = view.get("page2") or {}
@@ -556,12 +686,6 @@ def render_natural_cattle_foundation_pdf(view: Mapping[str, Any]) -> bytes:
         color=gray,
         leading=3.3,
     )
-
-    if pdf.page_no() != 2:
-        raise NaturalFoundationReportError(
-            "FOUNDATION_PAGE_COUNT",
-            f"expected exactly 2 pages, got {pdf.page_no()}",
-        )
 
     buffer = BytesIO()
     pdf.output(buffer)

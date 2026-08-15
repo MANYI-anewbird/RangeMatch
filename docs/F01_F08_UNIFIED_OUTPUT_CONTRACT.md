@@ -427,4 +427,4 @@ Mireye typed contexts are normalized by `MIREYE_UNIFIED_CONTEXT_ADAPTER@0.1.0` (
 
 - `docs/AGENT_ORCHESTRATION_SPEC.md` — point to this contract as the unified output envelope.  
 - `docs/PRODUCT_PROTOTYPE_SCOPE.md` — acknowledge the current buyer decision report projection + contract version.  
-- `docs/RANGEMATCH_AGENT_BUILD_PLAN.md` — mark unified output contract drafted; executable schema next.
+- `docs/archive/product-history/RANGEMATCH_AGENT_BUILD_PLAN.md` — mark unified output contract drafted; executable schema next.

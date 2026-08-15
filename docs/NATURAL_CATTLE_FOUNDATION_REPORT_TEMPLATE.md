@@ -3,8 +3,8 @@
 > Status: `CURRENT_BUYER_REPORT_TEMPLATE`
 > Version: `1.0.0`
 > Effective date: 2026-08-15
-> Product authority: `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` version 2.0.0
-> Output: two-page English PDF
+> Product authority: `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` version 2.1.0
+> Output: English PDF. Advisor narrative may span as many pages as needed. The Appendix always begins on a new page after the narrative. No qualified LLM insight is removed solely to satisfy a fixed page count.
 
 ## 0. Purpose
 
@@ -39,19 +39,20 @@ Every parcel-specific statement must reference accepted evidence from the combin
 
 ## 2. Rendering rules
 
-- Page 1 is buyer narrative.
-- Page 2 is the environmental evidence appendix.
+- Advisor narrative is buyer-facing prose and may continue across pages as needed.
+- The Appendix is the environmental evidence appendix and always begins on a new page after the narrative.
 - Default language is English.
-- Use ordinary professional language; do not expose Factor IDs, observation IDs, hashes, schema names, enum names, adapter names, or internal workflow terminology on Page 1.
+- Use ordinary professional language; do not expose Factor IDs, observation IDs, hashes, schema names, enum names, adapter names, or internal workflow terminology in the advisor narrative.
 - Lead with a conclusion, not a limitation or a description of the investigation.
 - Explain uncertainty only where it changes the judgment.
 - Do not list every missing field.
 - Do not repeat the same limitation in multiple sections.
-- Keep Mireye, adapter, search, fetch, coverage, and provider language off Page 1.
+- Keep Mireye, adapter, search, fetch, coverage, and provider language out of the advisor narrative.
 - Use evidence to describe the land; do not narrate how the evidence was collected.
 - Treat the five environmental domains as an internal reasoning checklist, not mandatory buyer-facing chapter headings.
 - Point, parcel, and context evidence must remain distinguishable.
 - Mireye and supplements must retain separate provider attribution.
+- No qualified LLM insight is removed solely to satisfy a fixed page count.
 - The report must remain readable without opening technical evidence.
 
 ## 3. Allowed conclusion statuses
@@ -479,4 +480,6 @@ The renderer may omit a non-material domain paragraph to protect readability. It
 - [ ] F07 output did not enter the environmental packet, Profile, LLM, conclusion, question, or next action.
 - [ ] Each context row states what it does not establish.
 - [ ] No Appendix-only context entered the Natural Cattle Profile, primary LLM workbench, controlling factor, question, or next action.
-- [ ] PDF renders as exactly two pages without clipping, overflow, or unreadably small type.
+- [ ] PDF renders without clipping, overflow, or unreadably small type.
+- [ ] Advisor narrative may span multiple pages as needed; no qualified insight is dropped only to force a page count.
+- [ ] Appendix begins on a new page after the advisor narrative ends.

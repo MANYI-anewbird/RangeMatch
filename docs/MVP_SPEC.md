@@ -6,7 +6,7 @@
 > Initial validation scope: Selected U.S. environments and reference cases
 > Intended use: Competition MVP and first executable vertical slice
 
-> Current implementation and report status: see `CURRENT_SYSTEM_BASELINE.md`. This specification defines product/scientific scope; later implementation milestones do not reopen its frozen rules.
+> Current implementation and report status: see `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`. This specification defines product/scientific scope; later implementation milestones do not reopen its frozen rules.
 
 ## 1. Product Definition
 

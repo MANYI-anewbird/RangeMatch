@@ -422,6 +422,118 @@ class Phase6NaturalInterpretationTests(unittest.TestCase):
             " ".join(result["operating_possibilities"]).lower(),
         )
 
+    def test_empty_change_list_uses_field_fallback_not_full_report_fallback(self) -> None:
+        baseline = generate_natural_foundation_interpretation(
+            natural_cattle_profile=self.profile,
+            deal_context=self.deal,
+            force_fallback=True,
+        )
+        draft = {
+            key: baseline[key]
+            for key in (
+                "land_character",
+                "advisor_judgment",
+                "operating_possibilities",
+                "conditional_scenarios",
+                "advisor_view",
+                "integrated_natural_reading",
+                "intended_use_interpretation",
+                "refinement_request",
+                "optional_copy_ready_request",
+                "cited_profile_refs",
+                "knowledge_refs",
+            )
+        }
+        draft["what_would_change_the_view"] = []
+        draft["next_question_id"] = baseline["next_question"]["question_id"]
+        provider = MagicMock()
+        provider.complete_json.return_value = LLMCompletion(
+            content={"natural_foundation_interpretation": draft},
+            provider="DEEPSEEK",
+            model_id="deepseek-chat",
+            prompt_version="test",
+            generated_at="2026-08-15T00:00:00+00:00",
+            provider_status="OK",
+        )
+        with patch(
+            "rangematch.advisor_natural_interpretation.get_provider",
+            return_value=provider,
+        ):
+            result = generate_natural_foundation_interpretation(
+                natural_cattle_profile=self.profile,
+                deal_context=self.deal,
+                provider_name="DEEPSEEK",
+            )
+        self.assertEqual(result["source"], SOURCE_LIVE, result.get("provenance"))
+        self.assertEqual(result["validation_status"], "PASSED")
+        self.assertEqual(
+            result["what_would_change_the_view"], result["conditional_scenarios"]
+        )
+
+    def test_spatial_and_professional_overreach_is_removed_without_full_fallback(self) -> None:
+        baseline = generate_natural_foundation_interpretation(
+            natural_cattle_profile=self.profile,
+            deal_context=self.deal,
+            force_fallback=True,
+        )
+        draft = {
+            key: baseline[key]
+            for key in (
+                "land_character",
+                "advisor_judgment",
+                "operating_possibilities",
+                "conditional_scenarios",
+                "advisor_view",
+                "integrated_natural_reading",
+                "intended_use_interpretation",
+                "what_would_change_the_view",
+                "refinement_request",
+                "optional_copy_ready_request",
+                "cited_profile_refs",
+                "knowledge_refs",
+            )
+        }
+        draft["land_character"] = (
+            "The terrain and vegetation describe a dry foothill rangeland. "
+            "There is no mapped surface water on the parcel itself."
+        )
+        draft["advisor_judgment"] = (
+            "The moderate terrain makes a bounded seasonal cattle evaluation plausible. "
+            "The well-drained soil is favorable for hoof health. "
+            "Water is the main limiting factor."
+        )
+        draft["operating_possibilities"] = [
+            "Year-round use would require substantial water development and supplemental feed."
+        ]
+        draft["next_question_id"] = baseline["next_question"]["question_id"]
+        provider = MagicMock()
+        provider.complete_json.return_value = LLMCompletion(
+            content={"natural_foundation_interpretation": draft},
+            provider="DEEPSEEK",
+            model_id="deepseek-chat",
+            prompt_version="test",
+            generated_at="2026-08-15T00:00:00+00:00",
+            provider_status="OK",
+        )
+        with patch(
+            "rangematch.advisor_natural_interpretation.get_provider",
+            return_value=provider,
+        ):
+            result = generate_natural_foundation_interpretation(
+                natural_cattle_profile=self.profile,
+                deal_context=self.deal,
+                provider_name="DEEPSEEK",
+            )
+        self.assertEqual(result["source"], SOURCE_LIVE, result.get("provenance"))
+        self.assertEqual(result["validation_status"], "PASSED")
+        prose = json.dumps(result).lower()
+        self.assertNotIn("no mapped surface water on the parcel", prose)
+        self.assertNotIn("hoof health", prose)
+        self.assertNotIn("substantial water development", prose)
+        self.assertNotIn("supplemental feed", prose)
+        self.assertNotIn("water is the main limiting factor", prose)
+        self.assertIn("combined terrain and vegetation", prose)
+
     def test_live_provider_structured_lists_render_as_natural_language(self) -> None:
         baseline = generate_natural_foundation_interpretation(
             natural_cattle_profile=self.profile,

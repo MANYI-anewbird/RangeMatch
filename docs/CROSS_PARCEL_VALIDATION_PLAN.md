@@ -1,6 +1,6 @@
 # F01–F05 Cross-Parcel and Cross-Environment Validation Plan
 
-> **Historical validation plan.** This plan predates the frozen F01–F08 product scope. Preserve its selection and anti-cherry-picking protocol as audit evidence; use `CURRENT_SYSTEM_BASELINE.md` for current product status.
+> **Historical validation plan.** This plan predates the frozen F01–F08 product scope. Preserve its selection and anti-cherry-picking protocol as audit evidence; use `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` for current product status.
 
 > Status: `PASSED — CONCLUSION LOCKED; NEXT PHASE IS F02/F03 EVIDENCE DEPTH`  
 > Registry: `test-data/cross-parcel-validation/parcel_registry.yaml`  

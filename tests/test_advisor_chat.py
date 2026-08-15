@@ -229,7 +229,7 @@ class ChatSlice6Tests(unittest.TestCase):
         self.assertEqual(turn["source"], SOURCE_FALLBACK)
         self.assertEqual(turn["intent"], "OVERALL_CATTLE_CASE")
 
-    def test_chat_rejects_answered_operation_as_still_unknown(self) -> None:
+    def test_chat_allows_free_form_prose_under_schema_only_gate(self) -> None:
         result = self._nambe()
         deal = dict(result["deal_context"])
         deal["context_version"] = 2
@@ -251,56 +251,20 @@ class ChatSlice6Tests(unittest.TestCase):
             user_message="What does the evidence say about water?",
             classified_intent="WATER",
         )
-        stale = {
+        free_form = {
             "schema_version": "RANGEMATCH_ADVISOR_CHAT_TURN@0.1.0",
-            "turn_id": "chat_stale_context",
+            "turn_id": "chat_free_form",
             "run_id": result["run_id"],
             "deal_context_version": 2,
-            "intent": "WATER",
-            "user_message": "What does the evidence say about water?",
-            "judgment": "The operation still needs one operating answer.",
-            "answer": (
-                "The key unresolved choice remains seasonal or year-round use, so the "
-                "water requirement cannot yet be narrowed for this parcel."
-            ),
-            "evidence_refs": list(conclusion.get("evidence_refs") or [])[:1],
-            "knowledge_refs": [],
-            "missing_evidence": ["Operation type is still unknown."],
-            "suggested_follow_up": "Is the operation seasonal or year-round?",
-            "source": "LIVE_LLM",
-            "validation_status": "PASSED",
-            "validation_violations": [],
-            "created_at": "2026-08-14T00:00:00+00:00",
-        }
-        codes = {
-            row["code"]
-            for row in validate_chat_turn(stale, workbench=workbench)
-        }
-        self.assertIn("CHAT_STALE_DEAL_CONTEXT", codes)
-
-    def test_chat_rejects_internal_ids_in_buyer_prose(self) -> None:
-        result = self._nambe()
-        workbench = build_chat_workbench(
-            packet=result["packet"],
-            deal_context=result["deal_context"],
-            operating_conclusion=result["operating_conclusion"],
-            operating_profile=result.get("operating_profile"),
-            user_message="What does the evidence say about water?",
-            classified_intent="WATER",
-        )
-        turn = {
-            "schema_version": "RANGEMATCH_ADVISOR_CHAT_TURN@0.1.0",
-            "turn_id": "chat_internal_ids",
-            "run_id": result["run_id"],
-            "deal_context_version": 1,
             "intent": "WATER",
             "user_message": "What does the evidence say about water?",
             "judgment": "OBS_WATER_COUNT shows only mapped water leads.",
             "answer": (
                 "The LIVESTOCK_WATER_DILIGENCE_001 card says these mapped features "
-                "do not prove a usable livestock-water system on the parcel."
+                "do not prove a usable livestock-water system, and seasonal or "
+                "year-round use still shapes how to read that gap."
             ),
-            "evidence_refs": list(result["operating_conclusion"].get("evidence_refs") or [])[:1],
+            "evidence_refs": list(conclusion.get("evidence_refs") or [])[:1],
             "knowledge_refs": [],
             "missing_evidence": ["A usable livestock-water source is not verified."],
             "suggested_follow_up": "What seller record should I request next?",
@@ -309,8 +273,9 @@ class ChatSlice6Tests(unittest.TestCase):
             "validation_violations": [],
             "created_at": "2026-08-14T00:00:00+00:00",
         }
-        codes = {row["code"] for row in validate_chat_turn(turn, workbench=workbench)}
-        self.assertIn("CHAT_INTERNAL_ID_IN_PROSE", codes)
+        self.assertEqual(validate_chat_turn(free_form, workbench=workbench), [])
+        self.assertIn("cattle_knowledge", workbench)
+        self.assertIn("place_materials", workbench)
 
     def test_water_fallback_uses_seasonal_context_after_answer(self) -> None:
         result = self._nambe()
@@ -541,6 +506,14 @@ class MireyeFirstChatGroundingTests(unittest.TestCase):
         )
         self.assertTrue(workbench["allowed_evidence_refs"])
         self.assertTrue(workbench["observations"] or workbench["allowed_evidence_refs"])
+        self.assertTrue(workbench["cattle_knowledge"])
+        self.assertTrue(workbench["place_materials"]["natural_cattle_profile"]["domains"])
+        self.assertTrue(
+            all(
+                not str(row.get("knowledge_id") or "").startswith("LEGAL_ACCESS")
+                for row in workbench["cattle_knowledge"]
+            )
+        )
 
 
 if __name__ == "__main__":

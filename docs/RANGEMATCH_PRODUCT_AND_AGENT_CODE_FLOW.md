@@ -1,7 +1,7 @@
 # RangeMatch Mireye-First Product and Agent Execution Plan
 
 > Status: `CURRENT_PRODUCT_AND_IMPLEMENTATION_AUTHORITY`
-> Version: `2.0.0`
+> Version: `2.1.0`
 > Effective date: 2026-08-15
 > Stage: competition-grade product, not a production livestock or purchase-decision system
 
@@ -9,7 +9,7 @@
 
 This is the single authority for product scope, user journey, data precedence, Agent architecture, execution order, gates, Demo story, and definition of done.
 
-It supersedes earlier fixed F01-F08 orchestration, operating-diligence framing, access/title-first recommendations, Feed/Drink/Move-only profiles, HOLD-first reporting, and one-page-only PDF plans. Frozen F01-F08 scientific and engineering contracts remain valid when those modules are invoked as supplements; they no longer make any Factor mandatory.
+It supersedes earlier fixed F01-F08 orchestration, operating-diligence framing, access/title-first recommendations, Feed/Drink/Move-only profiles, HOLD-first reporting, one-page-only PDF plans, fixed two-page PDF mandates, and bounded six-intent chat framing. Frozen F01-F08 scientific and engineering contracts remain valid when those modules are invoked as supplements; they no longer make any Factor mandatory.
 
 Migration rules:
 
@@ -38,8 +38,8 @@ Primary users are ranch buyers, buyer-side land advisors, and acquisition analys
 5. an integrated expert explanation of how the land's natural resources work together;
 6. one question that can refine the conclusion;
 7. revised conclusion after the answer;
-8. bounded parcel-grounded chat;
-9. two-page PDF: advisor narrative and evidence appendix.
+8. open-ended, read-only, parcel-grounded cattle advisor chat powered by two context sources (place materials + reviewed cattle knowledge);
+9. Natural Cattle Foundation PDF: advisor narrative may span multiple pages; evidence appendix always begins on a new page.
 
 ### Out of scope
 
@@ -90,8 +90,8 @@ Natural Cattle Profile + reviewed Cattle Knowledge + Deal Context
   -> one high-information question
   -> user answer updates Deal Context
   -> revised conclusion
-  -> bounded chat
-  -> two-page PDF
+  -> open-ended two-brain grounded chat
+  -> Natural Cattle Foundation PDF (variable-length narrative + new-page Appendix)
 ```
 
 | Component | Owns | Does not own |
@@ -240,7 +240,7 @@ user_supplied_drought_or_supplementation_history
 context_version, geometry_hash, provenance
 ```
 
-The LLM may synthesize evidence, provide a provisional directional view, identify the controlling factor, explain limitations, ask one allowed question, update the conclusion, and answer bounded chat.
+The LLM may synthesize evidence, provide a provisional directional view, identify the controlling factor, explain limitations, ask one allowed question, update the conclusion, and answer open-ended grounded chat from the two-brain workbench (place materials + cattle knowledge). Intent labels are metadata only and do not restrict questions.
 
 It may not invent facts; promote point/context evidence; interpret missing water as no water; convert RAP/NDVI to forage, AUM, or herd size; give legal/purchase/appraisal/water-right conclusions; choose supplements; or alter geometry, values, units, IDs, hashes, and source states.
 
@@ -263,8 +263,8 @@ ENTER_PLACE
 -> ASK_ONE_ENVIRONMENTAL_QUESTION
 -> APPLY_USER_ANSWER
 -> GENERATE_REVISED_CONCLUSION
--> ENABLE_BOUNDED_CHAT
--> EXPORT_TWO_PAGE_PDF
+-> ENABLE_OPEN_GROUNDED_CHAT
+-> EXPORT_NATURAL_FOUNDATION_PDF
 ```
 
 Target outcomes: `PARCEL_NEEDS_CONFIRMATION`, `PARCEL_NOT_FOUND`, `PARCEL_SERVICE_UNAVAILABLE`, `ENVIRONMENTAL_PROFILE_COMPLETED`, `ENVIRONMENTAL_PROFILE_PARTIAL`, `INVESTIGATION_COULD_NOT_COMPLETE`.
@@ -287,17 +287,17 @@ Main UI order:
 4. an integrated expert reading of how the land's natural resources work together;
 5. one question;
 6. answer and updated view;
-7. grounded chat;
+7. open-ended grounded chat (two brains);
 8. report download;
 9. collapsed technical evidence.
 
 Do not show fixed F01-F08 as the default workflow. Show Mireye first, detected gaps, and supplements actually called.
 
-PDF Page 1 is `Natural Cattle Foundation`: Advisor's view, an integrated natural-landscape reading, what the buyer's plan changes, what would strengthen or weaken the view, how to refine the assessment, optional copy-ready request, and scope boundary. The five domains are an internal completeness check, not mandatory visible chapters. Page 1 describes the land and its implications; it does not narrate Mireye, adapters, searches, missing calls, or collection steps.
+PDF advisor narrative is `Natural Cattle Foundation`: Advisor's view, an integrated natural-landscape reading, what the buyer's plan changes, what would strengthen or weaken the view, how to refine the assessment, optional copy-ready request, and scope boundary. The five domains are an internal completeness check, not mandatory visible chapters. The narrative describes the land and its implications; it does not narrate Mireye, adapters, searches, missing calls, or collection steps. **The narrative may continue across as many pages as needed. No qualified LLM insight is removed solely to satisfy a fixed page count.**
 
-PDF Page 2 begins with `Environmental Evidence Retrieved`: evidence, value/unit, spatial semantics, status, provider (`MIREYE`, `RANGEMATCH_CORE`, or `RANGEMATCH_SUPPLEMENT`), and source/vintage. Only retrieved non-empty observations render. Mireye contribution counts are dynamic.
+The Appendix always begins on a **new page** after the narrative ends, titled `Environmental Evidence Retrieved`: evidence, value/unit, spatial semantics, status, provider (`MIREYE`, `RANGEMATCH_CORE`, or `RANGEMATCH_SUPPLEMENT`), and source/vintage. Only retrieved non-empty observations render. Mireye contribution counts are dynamic.
 
-Under `HUMAN_ACCESS_INFRA_APPENDIX_ONLY`, Page 2 may include a separate optional block `Additional Property Context`. After parcel confirmation, F07 is attempted once through an isolated, time-bounded, fail-soft `APPENDIX_CONTEXT_COLLECTOR`. It translates only retrieved, non-empty mapped-road or other approved non-natural observations into short buyer language, paired with an explicit statement of what each observation does not establish. It is omitted when empty and contains at most four material rows. It does not enter the Combined Environmental Evidence Packet, Natural Cattle Profile, primary LLM workbench, Gap Detector, controlling factor, proactive question, next environmental action, or Page 1 narrative. F07 failure cannot fail or alter the report. If rendered, Page 1 may contain only this neutral pointer: `Additional mapped property context is summarized in the Appendix and does not affect the natural-foundation judgment above.`
+Under `HUMAN_ACCESS_INFRA_APPENDIX_ONLY`, the Appendix may include a separate optional block `Additional Property Context`. After parcel confirmation, F07 is attempted once through an isolated, time-bounded, fail-soft `APPENDIX_CONTEXT_COLLECTOR`. It translates only retrieved, non-empty mapped-road or other approved non-natural observations into short buyer language, paired with an explicit statement of what each observation does not establish. It is omitted when empty and contains at most four material rows. It does not enter the Combined Environmental Evidence Packet, Natural Cattle Profile, primary LLM workbench, Gap Detector, controlling factor, proactive question, next environmental action, or advisor narrative. F07 failure cannot fail or alter the report. If rendered, the narrative may contain only this neutral pointer: `Additional mapped property context is summarized in the Appendix and does not affect the natural-foundation judgment above.`
 
 ## 10. Implementation phases and gates
 
@@ -367,9 +367,9 @@ Add environmental cards, conclusion schema, question policy, revised loop, five-
 
 **Status:** `COMPLETE`
 
-Reuse entry, confirmation, answer loop, chat, and the implemented two-page renderer (Page 1 advisor narrative plus Page 2 non-empty evidence appendix). Replace operating/access language; show actual Mireye/supplement roles; add environmental provider and spatial-semantics columns. The earlier one-page Snapshot remains historical compatibility only.
+Reuse entry, confirmation, answer loop, chat, and the implemented variable-length renderer (advisor narrative pages plus Appendix on a new page). Replace operating/access language; show actual Mireye/supplement roles; add environmental provider and spatial-semantics columns. The earlier one-page Snapshot remains historical compatibility only.
 
-**Gate 7 evidence:** `src/rangematch/advisor_natural_foundation_pdf.py`, API branch on `/cattle-operating-snapshot.pdf`, Demo main screen prefers `natural_foundation_interpretation`, `tests/test_advisor_natural_foundation_pdf.py`. Page 1 copies validated interpretation fields verbatim (no re-summary/LLM); Page 2 shows retrieved environmental rows + optional Related Property Context (≤4, omitted when empty); exactly two pages; LEGACY snapshot path unchanged.
+**Gate 7 evidence:** `src/rangematch/advisor_natural_foundation_pdf.py`, API branch on `/cattle-operating-snapshot.pdf`, Demo main screen prefers `natural_foundation_interpretation`, `tests/test_advisor_natural_foundation_pdf.py`. Advisor narrative copies validated interpretation fields (no re-summary/LLM); Appendix begins on a new page and shows retrieved environmental rows + optional Related Property Context (≤4, omitted when empty); narrative may span multiple pages; LEGACY snapshot path unchanged.
 
 ### Phase 8 - Rehearsal/submission
 
@@ -379,7 +379,7 @@ Run Nambe live, optionally one more parcel, test DeepSeek and fallback, download
 
 **Gate 8:** recording shows address -> Mireye parcel -> Mireye Profile -> gaps -> supplements -> judgment -> answer -> revised judgment -> PDF.
 
-**Live rehearsal evidence (2026-08-15):** Nambe completed on `collection_mode=MIREYE_FIRST` with explicit parcel confirmation, live Mireye Profile, deterministic gap plan, conditional supplements, Natural Cattle Profile, `LIVE_LLM` / `PASSED` DeepSeek interpretation, two-page PDF, honest supplement failures, and a successful seasonal-grazing answer update to Deal Context v2. An invalid custom address returned `PARCEL_NOT_FOUND` with no report or Nambe substitution. Phase 8 remains open until the two-minute recording and final submission-form check are completed. DeepSeek validation failure was also exercised and produced a validated deterministic fallback without failing the evidence run.
+**Live rehearsal evidence (2026-08-15):** Nambe completed on `collection_mode=MIREYE_FIRST` with explicit parcel confirmation, live Mireye Profile, deterministic gap plan, conditional supplements, Natural Cattle Profile, `LIVE_LLM` / `PASSED` DeepSeek interpretation, Natural Cattle Foundation PDF, honest supplement failures, and a successful seasonal-grazing answer update to Deal Context v2. An invalid custom address returned `PARCEL_NOT_FOUND` with no report or Nambe substitution. Phase 8 remains open until the two-minute recording and final submission-form check are completed. DeepSeek validation failure was also exercised and produced a validated deterministic fallback without failing the evidence run.
 
 ## 11. Implementation ledger
 
@@ -468,11 +468,11 @@ Migrate `advisor_agent.py`, `advisor_conclusion.py`, `advisor_question.py`, `adv
 
 ## 14. Competition definition of done
 
-Complete means: place entry, Mireye parcel confirmation, Mireye primary environmental Profile, preserved provenance/semantics, deterministic gaps, only necessary supplements, five-domain Profile, directional conclusion, one environmental question and update, grounded chat, two-page report, visible Mireye contribution, honest failures, and a rehearsed Nambe live Demo.
+Complete means: place entry, Mireye parcel confirmation, Mireye primary environmental Profile, preserved provenance/semantics, deterministic gaps, only necessary supplements, five-domain Profile, directional conclusion, one environmental question and update, open-ended two-brain grounded chat, variable-length Natural Cattle Foundation report with Appendix on a new page, visible Mireye contribution, honest failures, and a rehearsed Nambe live Demo.
 
 Until all pass, describe components accurately but do not declare the Mireye-first product complete.
 
-The currently runnable Nambe experience is an `INTERIM_LEGACY_DEMO`: it demonstrates parcel confirmation, the existing evidence chain, adaptive answer, chat, and two-page PDF, but it is not the completed Mireye-first five-domain product. Submission/video language must preserve that distinction until Gate 8 passes.
+The currently runnable Nambe experience is an `INTERIM_LEGACY_DEMO`: it demonstrates parcel confirmation, the existing evidence chain, adaptive answer, chat, and Natural Cattle Foundation PDF, but it is not the completed Mireye-first five-domain product. Submission/video language must preserve that distinction until Gate 8 passes.
 
 ## 15. Stop list
 

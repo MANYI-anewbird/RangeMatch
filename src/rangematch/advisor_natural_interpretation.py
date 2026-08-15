@@ -26,7 +26,7 @@ from rangematch.llm_provider import get_provider, is_live_llm_provider
 from rangematch.natural_cattle_profile import BUYER_LABELS
 
 SCHEMA_VERSION = "advisor_natural_foundation_interpretation@1.1.0"
-PROMPT_VERSION = "RANGEMATCH_NATURAL_FOUNDATION_INTERPRETATION@1.4.0"
+PROMPT_VERSION = "RANGEMATCH_NATURAL_FOUNDATION_INTERPRETATION@1.5.0"
 SOURCE_LIVE = "LIVE_LLM"
 SOURCE_FALLBACK = "DETERMINISTIC_FALLBACK"
 
@@ -54,6 +54,31 @@ AI_SLOP_SENTENCE = re.compile(
     r")"
 )
 
+# These are not forbidden topics; they are conclusions that require evidence
+# RangeMatch does not currently collect. Remove only the affected sentence so
+# the LLM keeps its grounded narrative instead of falling back wholesale.
+UNSUPPORTED_PROFESSIONAL_SENTENCE = re.compile(
+    r"(?i)(?:"
+    r"\bhoof health\b|"
+    r"\b(?:best|optimal|highest-quality)\s+(?:grazing|forage)\s+(?:season|window)\b|"
+    r"\bspring\s*[-–]\s*(?:early\s+)?summer\s+(?:grazing|forage)\s+window\b|"
+    r"\b(?:would|will)\s+require\s+(?:substantial\s+)?water development\b|"
+    r"\b(?:would|will|likely)\s+(?:need|require|plan for)\s+supplemental feed\b|"
+    r"\bconfirm(?:s|ed|ing)?\s+(?:the\s+)?(?:land(?:'s)?\s+)?grazing capacity\b"
+    r")"
+)
+
+# Point samples and nearby context may show that a water feature was not seen
+# at one location. They cannot establish parcel-wide absence. The positive
+# parcel-wide statement remains available when a true parcel observation exists.
+PARCEL_WATER_ABSENCE_SENTENCE = re.compile(
+    r"(?i)(?:"
+    r"\b(?:no|without)\s+mapped\s+(?:surface\s+)?water\s+on\s+(?:the\s+)?parcel\b|"
+    r"\b(?:the\s+)?parcel\s+(?:itself\s+)?(?:has|shows|contains)\s+no\s+mapped\s+(?:surface\s+)?water\b|"
+    r"\b(?:the\s+)?parcel\s+lacks\s+mapped\s+(?:surface\s+)?water\b"
+    r")"
+)
+
 NARRATIVE_LIMITS = {
     "land_character": 1000,
     "advisor_judgment": 700,
@@ -67,6 +92,7 @@ NARRATIVE_LIMITS = {
 LIST_LIMITS = {
     "operating_possibilities": (4, 260),
     "conditional_scenarios": (3, 300),
+    "what_would_change_the_view": (3, 300),
 }
 
 LLM_OUTPUT_SCHEMA: dict[str, Any] = {
@@ -169,6 +195,17 @@ Narrative priorities:
    that more evidence or further investigation is needed, and do not repeat the
    refinement_request.
 5. Put limitations and the one highest-value refinement request at the end.
+
+Spatial and professional interpretation rules:
+- POINT means one sampled location; CONTEXT means nearby. Neither can establish
+  that the entire parcel has or lacks a condition.
+- A parcel-wide mapped wetland footprint is environmental context, not proof of
+  usable livestock water. Describe it as a mapped footprint whose persistence,
+  accessibility, and cattle value are not established.
+- Keep the Profile controlling factor authoritative. Other domains may be
+  interacting risks, but do not rename one as the "main limiting factor."
+- Do not infer hoof health, a best grazing season, required water development,
+  supplemental-feed need, or grazing capacity from the current evidence.
 
 Hard rules:
 - Do not change status, confidence, controlling factor, evidence values, or hashes.
@@ -631,6 +668,16 @@ def _assemble_interpretation(
         for sentence in _sentences(value):
             if AI_SLOP_SENTENCE.match(sentence):
                 continue
+            if UNSUPPORTED_PROFESSIONAL_SENTENCE.search(sentence):
+                continue
+            if PARCEL_WATER_ABSENCE_SENTENCE.search(sentence):
+                continue
+            if re.search(r"(?i)\b(?:main|primary) limiting factor\b", sentence):
+                controlling_label = BUYER_LABELS.get(
+                    str(controlling.get("domain")), ""
+                ).lower()
+                if controlling_label and controlling_label not in sentence.lower():
+                    continue
             # A provider sometimes appends one unnecessary disclaimer such as
             # "this is not a stocking-rate opinion" to otherwise grounded,
             # useful prose.  Removing that sentence is presentation-safe; it
@@ -753,13 +800,24 @@ def _assemble_interpretation(
     operating_possibilities = _narrative_list(
         draft.get("operating_possibilities"), "operating_possibilities"
     ) or [
-        "The observed natural pattern supports evaluating cattle use around the current forage question."
+        (
+            "The combined terrain and vegetation readings make a bounded cattle evaluation "
+            f"plausible, provided the parcel-wide {BUYER_LABELS.get(str(controlling.get('domain')), 'natural').lower()} "
+            "condition and grazing-season livestock water are verified."
+        )
     ]
     conditional_scenarios = _narrative_list(
         draft.get("conditional_scenarios"), "conditional_scenarios"
     ) or [
         "If field forage condition supports the intended grazing window, the current natural-foundation view would strengthen."
     ]
+    # A provider may return an empty change list even when the rest of its
+    # interpretation is useful and grounded.  This presentation defect must
+    # not discard the entire LLM narrative. Reuse the already-normalized
+    # conditional pivots as the safe, evidence-bound field-level fallback.
+    what_would_change_the_view = _narrative_list(
+        draft.get("what_would_change_the_view"), "what_would_change_the_view"
+    ) or list(conditional_scenarios)
     return {
         "schema_version": SCHEMA_VERSION,
         "interpretation_id": f"nfi_{uuid4().hex[:16]}",
@@ -783,9 +841,7 @@ def _assemble_interpretation(
         "intended_use_interpretation": _narrative(
             draft.get("intended_use_interpretation"), "intended_use_interpretation"
         ),
-        "what_would_change_the_view": _list_field(
-            draft.get("what_would_change_the_view")
-        ),
+        "what_would_change_the_view": what_would_change_the_view,
         "refinement_request": _narrative(
             draft.get("refinement_request"), "refinement_request"
         ),
@@ -805,6 +861,7 @@ def _assemble_interpretation(
             "profile_status_authoritative": True,
             "human_access_infra_in_primary_narrative": False,
             "sentence_level_narrative_normalization": True,
+            "field_level_empty_list_fallback": True,
         },
     }
 

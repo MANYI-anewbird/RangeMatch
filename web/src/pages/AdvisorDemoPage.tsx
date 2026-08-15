@@ -3,8 +3,10 @@ import type { FeatureCollection } from "geojson";
 import { AdvisorCopyButton } from "../components/advisor/AdvisorCopyButton";
 import { AdvisorDemoMap } from "../components/advisor/AdvisorDemoMap";
 import {
+  DEMO_EXAMPLE_PLACES,
   NAMBE_DEMO_SCENARIO_ID,
   NAMBE_VERIFIED_DEMO_ADDRESS,
+  findDemoExampleByAddress,
 } from "../data/demoPlaces";
 import "../styles/advisor-demo.css";
 
@@ -690,20 +692,20 @@ function humanOutcomeCopy(run: AgentRun, outcome: InvestigationOutcome) {
   }
   if (outcome === "PARCEL_NOT_FOUND") {
     return {
-      title: "We could not confirm a parcel",
+      title: "Sorry — we couldn’t parse this address yet",
       reached: "The parcel lookup finished without a confirmable boundary.",
-      why: "This is not a network failure — no parcel-quality polygon was returned for this place.",
-      next: "Try a full street address or coordinates, or run the verified Nambe demo as a separate investigation.",
+      why: "RangeMatch couldn’t resolve a parcel boundary here. We’re fixing this for more addresses.",
+      next: "To test the Demo now, copy an example address below — or pick one from the list.",
       report: "No property-level Snapshot was generated. Another property was not substituted.",
       cta: "Edit location",
     };
   }
   if (outcome === "PARCEL_SERVICE_UNAVAILABLE") {
     return {
-      title: "The parcel service could not complete this lookup",
+      title: "Sorry — parcel lookup couldn’t finish",
       reached: "RangeMatch could not reach a trustworthy parcel result from the external service.",
-      why: "Network, TLS, authentication, timeout, or provider failure blocked the lookup. This is not the same as “no parcel matched.”",
-      next: "Retry on a clean network, edit the location, or explicitly run the verified Nambe demo.",
+      why: "The parcel service didn’t complete this lookup. We’ll keep hardening this path.",
+      next: "Retry later, or copy a working example address below to test the Demo.",
       report: "No property-level Snapshot was generated. RangeMatch did not substitute another property.",
       cta: "Retry",
     };
@@ -717,12 +719,12 @@ function humanOutcomeCopy(run: AgentRun, outcome: InvestigationOutcome) {
   }
 
   return {
-    title: "Investigation could not complete",
+    title: "Sorry — this investigation couldn’t complete",
     reached: failedStep
       ? `The run stopped at ${failedStep.replaceAll("_", " ")}.`
       : "The run stopped before a parcel investigation could finish.",
-    why,
-    next: "Edit the place input and try again, or use the verified Nambe demo.",
+    why: `${why} We’ll keep improving address handling.`,
+    next: "Edit the place and try again, or copy an example address below.",
     report: "No cattle operating Snapshot was generated.",
     cta: "Edit input and retry",
   };
@@ -861,19 +863,21 @@ export function AdvisorDemoPage() {
     }
   }
 
-  async function runVerifiedNambeDemo() {
+  async function runExamplePlace(address: string) {
+    const place = String(address || "").trim();
+    if (!place) return;
     setBusy(true);
     setClientError(null);
     setRun(null);
     setConfirmDismissed(false);
     setResultsDismissed(false);
     setReportChatOpen(false);
-    setAddress(NAMBE_VERIFIED_DEMO_ADDRESS);
+    setAddress(place);
     try {
-      // Explicit Nambe opt-in still uses the live custom Mireye-first path;
+      // Explicit example opt-in uses the live custom Mireye-first path;
       // it never substitutes a fixture or inherits the previous run.
       await startAdvisorRun({
-        address: NAMBE_VERIFIED_DEMO_ADDRESS,
+        address: place,
         run_mode: "CUSTOM",
         collection_mode: "MIREYE_FIRST",
       });
@@ -884,6 +888,10 @@ export function AdvisorDemoPage() {
     } finally {
       setBusy(false);
     }
+  }
+
+  async function runVerifiedNambeDemo() {
+    await runExamplePlace(NAMBE_VERIFIED_DEMO_ADDRESS);
   }
   async function confirmSelectedParcel() {
     const resolutionId = run?.parcel_resolution_id;
@@ -986,15 +994,16 @@ export function AdvisorDemoPage() {
       (Boolean(outcome) && outcome !== "PARCEL_NEEDS_CONFIRMATION"));
 
   const showResultsModal = hasResultsContent && !resultsDismissed;
+  const showChatOverlay = reportChatOpen && completed && Boolean(run);
 
   useEffect(() => {
-    if (!showConfirmModal && !showResultsModal) return;
+    if (!showConfirmModal && !showResultsModal && !showChatOverlay) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previous;
     };
-  }, [showConfirmModal, showResultsModal]);
+  }, [showConfirmModal, showResultsModal, showChatOverlay]);
 
   function openResultsModal() {
     if (!hasResultsContent) return;
@@ -1163,14 +1172,31 @@ export function AdvisorDemoPage() {
                 We’ll use <strong className="advisor-mireye-word">Mireye</strong> to
                 identify and confirm the parcel, then run our multi-agent analysis.
                 Don’t have a property ready?{" "}
-                <button
-                  type="button"
-                  className="advisor-text-button"
-                  disabled={busy}
-                  onClick={() => void runVerifiedNambeDemo()}
-                >
-                  Try the verified Nambe example
-                </button>
+                <label className="advisor-example-picker">
+                  <span className="advisor-example-picker-label">Try an example</span>
+                  <select
+                    className="advisor-example-select"
+                    aria-label="Try an example property"
+                    disabled={busy}
+                    defaultValue=""
+                    onChange={(event) => {
+                      const next = event.target.value;
+                      event.target.value = "";
+                      if (!next) return;
+                      void runExamplePlace(next);
+                    }}
+                  >
+                    <option value="" disabled>
+                      Choose a property…
+                    </option>
+                    {DEMO_EXAMPLE_PLACES.map((place) => (
+                      <option key={place.id} value={place.address}>
+                        {place.label}
+                        {place.note ? ` · ${place.note}` : ""}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </span>
             </p>
           </div>
@@ -1237,15 +1263,34 @@ export function AdvisorDemoPage() {
         >
           <div className="advisor-run-main">
             <div className="advisor-run-select">
-              {run?.run_mode === "VERIFIED_DEMO" ||
-              (run?.collection_mode === "MIREYE_FIRST" &&
-                run?.address === NAMBE_VERIFIED_DEMO_ADDRESS) ? (
-                <p className="advisor-demo-banner" role="status">
-                  <strong>Verified Demo Property: Nambe, Colorado</strong>
-                  <br />
-                  This reading uses the Nambe parcel, not your previous location input.
-                </p>
-              ) : null}
+              {(() => {
+                const example = findDemoExampleByAddress(run?.address);
+                if (
+                  run?.run_mode === "VERIFIED_DEMO" ||
+                  (run?.collection_mode === "MIREYE_FIRST" && example)
+                ) {
+                  return (
+                    <p className="advisor-demo-banner" role="status">
+                      <strong>
+                        {example?.verifiedNambe
+                          ? "Verified Demo Property: Nambe, Colorado"
+                          : `Example property: ${example?.label || run?.address}`}
+                      </strong>
+                      <br />
+                      {example?.verifiedNambe
+                        ? "This reading uses the Nambe parcel, not your previous location input."
+                        : "This reading uses the selected example parcel, not your previous location input."}
+                      {example?.note ? (
+                        <>
+                          <br />
+                          <span className="advisor-quiet">{example.note}</span>
+                        </>
+                      ) : null}
+                    </p>
+                  );
+                }
+                return null;
+              })()}
 
               <section
                 className="advisor-agent-team"
@@ -1461,7 +1506,7 @@ export function AdvisorDemoPage() {
         ) : null}
       </section>
 
-      {showResultsModal && run ? (
+      {showResultsModal && run && !reportChatOpen ? (
         <div
           className="advisor-confirm-overlay advisor-report-overlay"
           role="presentation"
@@ -1476,9 +1521,9 @@ export function AdvisorDemoPage() {
             aria-modal="true"
             aria-label={completed ? "Advisor report" : "Investigation outcome"}
           >
-            <div className="advisor-report-toolbar">
+            <header className="advisor-report-toolbar">
               {completed ? (
-                <>
+                <div className="advisor-report-toolbar-actions">
                   <a
                     className="advisor-report-download"
                     href={`/v1/advisor/runs/${run.run_id}/cattle-operating-snapshot.pdf`}
@@ -1488,18 +1533,14 @@ export function AdvisorDemoPage() {
                   <button
                     type="button"
                     className="advisor-report-chat-start"
-                    onClick={() => {
-                      setReportChatOpen(true);
-                      window.setTimeout(() => {
-                        const node = document.getElementById("advisor-report-chat");
-                        node?.scrollIntoView?.({ behavior: "smooth", block: "start" });
-                      }, 40);
-                    }}
+                    onClick={() => setReportChatOpen(true)}
                   >
                     Start to chat
                   </button>
-                </>
-              ) : null}
+                </div>
+              ) : (
+                <span className="advisor-report-toolbar-title">Investigation</span>
+              )}
               <button
                 type="button"
                 className="advisor-confirm-close"
@@ -1508,35 +1549,45 @@ export function AdvisorDemoPage() {
               >
                 <img src="/assets/sprites/confirm-close.png" alt="" />
               </button>
+            </header>
+
+            <div className="advisor-report-scroll">
+              {outcome && !completed ? (
+                <InvestigationOutcomePanel
+                  run={run}
+                  outcome={outcome}
+                  selectedCandidateId={selectedCandidateId}
+                  confirmBusy={busy}
+                  onSelectCandidate={setSelectedCandidateId}
+                  onAction={() => handleOutcomeAction(outcome)}
+                  onRetry={() => void runAgent()}
+                  onVerifiedDemo={() => void runVerifiedNambeDemo()}
+                  onTryExample={(place) => void runExamplePlace(place)}
+                />
+              ) : null}
+
+              {outcome === "EVIDENCE_INVESTIGATION_INCOMPLETE" ? (
+                <LimitedLocationPanel run={run} />
+              ) : null}
+
+              {completed ? (
+                <AdvisorBriefResult
+                  run={run}
+                  onRunUpdate={setRun}
+                  onOpenChat={() => setReportChatOpen(true)}
+                />
+              ) : null}
             </div>
-
-            {outcome && !completed ? (
-              <InvestigationOutcomePanel
-                run={run}
-                outcome={outcome}
-                selectedCandidateId={selectedCandidateId}
-                confirmBusy={busy}
-                onSelectCandidate={setSelectedCandidateId}
-                onAction={() => handleOutcomeAction(outcome)}
-                onRetry={() => void runAgent()}
-                onVerifiedDemo={() => void runVerifiedNambeDemo()}
-              />
-            ) : null}
-
-            {outcome === "EVIDENCE_INVESTIGATION_INCOMPLETE" ? (
-              <LimitedLocationPanel run={run} />
-            ) : null}
-
-            {completed ? (
-              <AdvisorBriefResult
-                run={run}
-                onRunUpdate={setRun}
-                chatOpen={reportChatOpen}
-                onOpenChat={() => setReportChatOpen(true)}
-              />
-            ) : null}
           </main>
         </div>
+      ) : null}
+
+      {reportChatOpen && run && completed ? (
+        <PropertyChatOverlay
+          run={run}
+          onBack={() => setReportChatOpen(false)}
+          onRunUpdate={setRun}
+        />
       ) : null}
     </div>
   );
@@ -1798,6 +1849,7 @@ function InvestigationOutcomePanel({
   onAction,
   onRetry,
   onVerifiedDemo,
+  onTryExample,
 }: {
   run: AgentRun;
   outcome: InvestigationOutcome;
@@ -1807,6 +1859,7 @@ function InvestigationOutcomePanel({
   onAction: () => void;
   onRetry: () => void;
   onVerifiedDemo: () => void;
+  onTryExample?: (address: string) => void;
 }) {
   const copy = humanOutcomeCopy(run, outcome);
   const locationResolved = Boolean(run.location_resolved);
@@ -1831,22 +1884,63 @@ function InvestigationOutcomePanel({
           ? "confirm"
           : "failed";
   const lookup = run.mireye_live?.lookup;
+  const headIcon =
+    tone === "failed"
+      ? "/assets/sprites/confirm-warn.png"
+      : tone === "limited"
+        ? "/assets/sprites/confirm-map-alt.png"
+        : tone === "confirm"
+          ? "/assets/sprites/confirm-leaf.png"
+          : "/assets/sprites/confirm-check.png";
+  const bannerIcon =
+    tone === "failed"
+      ? "/assets/sprites/confirm-detective.png"
+      : "/assets/sprites/confirm-shield.png";
+
   return (
     <section
-      className={`advisor-outcome advisor-outcome-${tone}`}
+      className={`advisor-outcome advisor-outcome-${tone} advisor-outcome-card`}
       aria-label="Investigation outcome"
       data-testid="investigation-outcome"
       data-outcome={outcome}
     >
-      <h2>{withMireyeBold(copy.title)}</h2>
-      <p className="advisor-decision-lead">{withMireyeBold(copy.why)}</p>
-      <p>{withMireyeBold(copy.next)}</p>
-      <p className="advisor-quiet">{withMireyeBold(copy.report)}</p>
+      <img
+        className="advisor-outcome-deco advisor-outcome-deco-hills"
+        src="/assets/sprites/confirm-hills.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <img
+        className="advisor-outcome-deco advisor-outcome-deco-cow"
+        src="/assets/sprites/confirm-peek-cow.png"
+        alt=""
+        aria-hidden="true"
+      />
+
+      <header className="advisor-outcome-head">
+        <p className="advisor-kicker">
+          {tone === "failed" ? "Address issue" : "Investigation update"}
+        </p>
+        <h2>
+          {withMireyeBold(copy.title)}
+          <img src={headIcon} alt="" aria-hidden="true" />
+        </h2>
+        <p className="advisor-decision-lead">{withMireyeBold(copy.why)}</p>
+        <p className="advisor-outcome-next">{withMireyeBold(copy.next)}</p>
+      </header>
+
+      <p className="advisor-outcome-banner" role="status">
+        <img src={bannerIcon} alt="" aria-hidden="true" />
+        <span>{withMireyeBold(copy.report)}</span>
+      </p>
 
       {outcome !== "EVIDENCE_INVESTIGATION_COMPLETED" ? (
-        <dl className="advisor-resolve-flags" aria-label="Location and parcel flags">
-          <div>
-            <dt>Location</dt>
+        <dl className="advisor-confirm-flags" aria-label="Location and parcel flags">
+          <div className="advisor-confirm-flag">
+            <dt>
+              <img src="/assets/sprites/confirm-pin.png" alt="" aria-hidden="true" />
+              Location
+            </dt>
             <dd>
               {locationResolved ? "Location recognized" : "Location not resolved"}
               {!parcelConfirmed ? (
@@ -1857,8 +1951,11 @@ function InvestigationOutcomePanel({
               ) : null}
             </dd>
           </div>
-          <div>
-            <dt>Parcel boundary</dt>
+          <div className="advisor-confirm-flag">
+            <dt>
+              <img src="/assets/sprites/confirm-bounds-icon.png" alt="" aria-hidden="true" />
+              Parcel boundary
+            </dt>
             <dd>
               {parcelConfirmed
                 ? "Parcel boundary confirmed for this investigation"
@@ -1869,18 +1966,25 @@ function InvestigationOutcomePanel({
       ) : null}
 
       {candidates.length > 0 ? (
-        <fieldset className="advisor-outcome-candidates" disabled={confirmBusy}>
+        <fieldset
+          className="advisor-outcome-candidates advisor-confirm-candidates"
+          disabled={confirmBusy}
+        >
           <legend>Parcel candidates</legend>
           {candidates.map((row, index) => {
             const id = row.candidate_id || `cand-${index}`;
             const confirmable = Boolean(row.candidate_id && row.geometry_hash);
+            const checked = selectedCandidateId === row.candidate_id;
             return (
-              <label key={id} className="advisor-candidate-choice">
+              <label
+                key={id}
+                className={`advisor-candidate-choice${checked ? " is-selected" : ""}`}
+              >
                 <input
                   type="radio"
                   name="advisor-parcel-candidate"
                   value={row.candidate_id || ""}
-                  checked={selectedCandidateId === row.candidate_id}
+                  checked={checked}
                   disabled={!confirmable}
                   onChange={() => {
                     if (row.candidate_id) onSelectCandidate(row.candidate_id);
@@ -1905,7 +2009,7 @@ function InvestigationOutcomePanel({
       ) : null}
 
       {outcome === "PARCEL_NEEDS_CONFIRMATION" && run.parcel_resolution_id ? (
-        <p className="advisor-quiet">
+        <p className="advisor-quiet advisor-outcome-techline">
           Staged resolution <code>{run.parcel_resolution_id}</code>. Confirm
           posts{" "}
           <code>selected_candidate_id</code>,{" "}
@@ -1916,50 +2020,106 @@ function InvestigationOutcomePanel({
       ) : null}
 
       {showEntryFailureActions ? (
+        <>
+          <div className="advisor-outcome-examples" aria-label="Working example addresses">
+            <p className="advisor-kicker">Want to test?</p>
+            <p className="advisor-outcome-examples-lead">
+              Copy a working address, paste it above, and run — or start one below.
+            </p>
+            <ul className="advisor-outcome-example-list">
+              {DEMO_EXAMPLE_PLACES.map((place) => (
+                <li key={place.id}>
+                  <div className="advisor-outcome-example-copy">
+                    <p className="advisor-outcome-example-label">
+                      {place.label}
+                      {place.note ? (
+                        <span className="advisor-quiet"> · {place.note}</span>
+                      ) : null}
+                    </p>
+                    <code className="advisor-outcome-example-address">{place.address}</code>
+                  </div>
+                  <div className="advisor-outcome-example-actions">
+                    <AdvisorCopyButton label="Copy address" text={place.address} />
+                    <button
+                      type="button"
+                      className="advisor-outcome-secondary"
+                      disabled={confirmBusy}
+                      onClick={() =>
+                        onTryExample ? onTryExample(place.address) : onVerifiedDemo()
+                      }
+                    >
+                      Run this
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="advisor-outcome-actions">
+            <button
+              type="button"
+              className="advisor-outcome-primary"
+              onClick={onAction}
+              disabled={confirmBusy}
+            >
+              Edit location
+            </button>
+            {outcome === "PARCEL_SERVICE_UNAVAILABLE" ? (
+              <button
+                type="button"
+                className="advisor-outcome-secondary"
+                onClick={onRetry}
+                disabled={confirmBusy || !String(run.address || "").trim()}
+              >
+                Retry
+              </button>
+            ) : null}
+            <label className="advisor-example-picker advisor-example-picker-outcome">
+              <span className="advisor-example-picker-label">Try an example property</span>
+              <select
+                className="advisor-example-select"
+                aria-label="Try an example property"
+                disabled={confirmBusy}
+                defaultValue=""
+                onChange={(event) => {
+                  const next = event.target.value;
+                  event.target.value = "";
+                  if (!next) return;
+                  if (onTryExample) onTryExample(next);
+                  else onVerifiedDemo();
+                }}
+              >
+                <option value="" disabled>
+                  Or pick an example…
+                </option>
+                {DEMO_EXAMPLE_PLACES.map((place) => (
+                  <option key={place.id} value={place.address}>
+                    {place.label}
+                    {place.note ? ` · ${place.note}` : ""}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+        </>
+      ) : (
         <div className="advisor-outcome-actions">
           <button
             type="button"
-            className="advisor-run-button"
+            className="advisor-outcome-primary"
             onClick={onAction}
-            disabled={confirmBusy}
+            disabled={
+              confirmBusy || (outcome === "PARCEL_NEEDS_CONFIRMATION" && !canConfirm)
+            }
           >
-            Edit location
-          </button>
-          {outcome === "PARCEL_SERVICE_UNAVAILABLE" ? (
-            <button
-              type="button"
-              className="advisor-chip"
-              onClick={onRetry}
-              disabled={confirmBusy || !String(run.address || "").trim()}
-            >
-              Retry
-            </button>
-          ) : null}
-          <button
-            type="button"
-            className="advisor-chip"
-            onClick={onVerifiedDemo}
-            disabled={confirmBusy}
-          >
-            Try verified Nambe demo
+            {confirmBusy && outcome === "PARCEL_NEEDS_CONFIRMATION"
+              ? "Confirming parcel…"
+              : copy.cta}
           </button>
         </div>
-      ) : (
-        <button
-          type="button"
-          className="advisor-run-button"
-          onClick={onAction}
-          disabled={
-            confirmBusy || (outcome === "PARCEL_NEEDS_CONFIRMATION" && !canConfirm)
-          }
-        >
-          {confirmBusy && outcome === "PARCEL_NEEDS_CONFIRMATION"
-            ? "Confirming parcel…"
-            : copy.cta}
-        </button>
       )}
 
-      <details className="advisor-tech-details">
+      <details className="advisor-tech-details advisor-outcome-tech">
         <summary>Technical details</summary>
         <dl>
           <div>
@@ -2075,41 +2235,64 @@ function LimitedLocationPanel({ run }: { run: AgentRun }) {
   return (
     <section
       id="advisor-limited-location"
-      className="advisor-limited"
+      className="advisor-limited advisor-outcome-card"
       aria-label="Resolved location"
       data-testid="limited-location"
     >
-      <p className="advisor-kicker">Limited investigation</p>
-      <h2>Resolved location</h2>
-      <p>
-        {limited?.normalized_address || run.address || "Recognized location"}
-      </p>
-      <p className="advisor-quiet">
-        Location recognized does not mean the parcel boundary is confirmed. No
-        cattle operating Snapshot is offered for this place yet.
-      </p>
-      <dl className="advisor-outcome-facts">
+      <img
+        className="advisor-outcome-deco advisor-outcome-deco-hills"
+        src="/assets/sprites/confirm-hills.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <header className="advisor-outcome-head">
+        <p className="advisor-kicker">Limited investigation</p>
+        <h2>
+          Resolved location
+          <img src="/assets/sprites/confirm-map-alt.png" alt="" aria-hidden="true" />
+        </h2>
+        <p className="advisor-decision-lead">
+          {limited?.normalized_address || run.address || "Recognized location"}
+        </p>
+        <p className="advisor-outcome-next">
+          Location recognized does not mean the parcel boundary is confirmed. No
+          cattle operating Snapshot is offered for this place yet.
+        </p>
+      </header>
+      <dl className="advisor-confirm-flags" aria-label="Limited location facts">
         {point ? (
-          <div>
-            <dt>Approximate point</dt>
+          <div className="advisor-confirm-flag">
+            <dt>
+              <img src="/assets/sprites/confirm-pin.png" alt="" aria-hidden="true" />
+              Approximate point
+            </dt>
             <dd>
               {point.lat.toFixed(5)}, {point.lng.toFixed(5)}
             </dd>
           </div>
         ) : null}
-        <div>
-          <dt>{withMireyeBold("Mireye disposition")}</dt>
+        <div className="advisor-confirm-flag">
+          <dt>
+            <img src="/assets/sprites/confirm-leaf.png" alt="" aria-hidden="true" />
+            {withMireyeBold("Mireye disposition")}
+          </dt>
           <dd>{limited?.mireye_disposition || "—"}</dd>
         </div>
-        <div>
-          <dt>Confidence / accuracy</dt>
+        <div className="advisor-confirm-flag">
+          <dt>
+            <img src="/assets/sprites/confirm-shield.png" alt="" aria-hidden="true" />
+            Confidence / accuracy
+          </dt>
           <dd>
             {limited?.confidence != null ? limited.confidence : "—"}
             {limited?.accuracy_type ? ` · ${limited.accuracy_type}` : ""}
           </dd>
         </div>
-        <div>
-          <dt>Demo policy</dt>
+        <div className="advisor-confirm-flag">
+          <dt>
+            <img src="/assets/sprites/confirm-bounds-icon.png" alt="" aria-hidden="true" />
+            Demo policy
+          </dt>
           <dd>
             {limited?.cper_policy_blocked
               ? "CPER listing claims, F03 objects, and demo policy are blocked"
@@ -2165,21 +2348,33 @@ function formatAnswerValue(value: unknown): string {
   return String(value).replaceAll("_", " ");
 }
 
-function AdvisorBriefResult({
+function chatSuggestionIconSrc(intent?: string): string {
+  switch ((intent || "").toUpperCase()) {
+    case "WATER":
+      return "/assets/chat/icon-water.svg";
+    case "FEED":
+      return "/assets/chat/icon-feed.svg";
+    case "MOVEMENT":
+      return "/assets/chat/icon-terrain.svg";
+    case "ACCESS":
+      return "/assets/chat/icon-access.svg";
+    case "NEXT_ACTION":
+      return "/assets/chat/icon-next.svg";
+    case "OVERALL_CATTLE_CASE":
+    default:
+      return "/assets/chat/icon-cattle.svg";
+  }
+}
+
+function PropertyChatOverlay({
   run,
+  onBack,
   onRunUpdate,
-  chatOpen = false,
-  onOpenChat,
 }: {
   run: AgentRun;
+  onBack: () => void;
   onRunUpdate?: (next: AgentRun) => void;
-  chatOpen?: boolean;
-  onOpenChat?: () => void;
 }) {
-  const brief = run.brief;
-  const packet = run.packet;
-  const [answerBusy, setAnswerBusy] = useState(false);
-  const [answerError, setAnswerError] = useState<string | null>(null);
   const [chatBusy, setChatBusy] = useState(false);
   const [chatError, setChatError] = useState<string | null>(null);
   const [chatDraft, setChatDraft] = useState("");
@@ -2192,6 +2387,7 @@ function AdvisorBriefResult({
       { intent: "NEXT_ACTION", prompt: "What should I request next?" },
     ],
   );
+  const threadRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setChatTurns(run.chat_turns || []);
@@ -2201,10 +2397,239 @@ function AdvisorBriefResult({
   }, [run.run_id, run.chat_turns, run.chat_suggestions]);
 
   useEffect(() => {
-    if (!chatOpen) return;
-    const node = document.getElementById("advisor-report-chat");
-    node?.scrollIntoView?.({ behavior: "smooth", block: "start" });
-  }, [chatOpen]);
+    const node = threadRef.current;
+    if (!node) return;
+    node.scrollTop = node.scrollHeight;
+  }, [chatTurns, chatBusy]);
+
+  async function submitChat(message: string) {
+    const text = message.trim();
+    if (!text || chatBusy) return;
+    setChatBusy(true);
+    setChatError(null);
+    try {
+      const response = await fetch(`/v1/advisor/runs/${run.run_id}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ message: text }),
+      });
+      const body = (await response.json()) as {
+        detail?: string;
+        turns?: AgentRun["chat_turns"];
+        suggested_questions?: AgentRun["chat_suggestions"];
+      };
+      if (!response.ok) {
+        setChatError(String(body.detail || `chat_failed_${response.status}`));
+        return;
+      }
+      setChatTurns(body.turns || []);
+      if (body.suggested_questions?.length) {
+        setChatSuggestions(body.suggested_questions);
+      }
+      setChatDraft("");
+      onRunUpdate?.({
+        ...run,
+        chat_turns: body.turns || run.chat_turns,
+        chat_suggestions: body.suggested_questions || run.chat_suggestions,
+      });
+    } catch (error) {
+      setChatError(error instanceof Error ? error.message : "chat_failed");
+    } finally {
+      setChatBusy(false);
+    }
+  }
+
+  const visibleSuggestions = chatSuggestions.slice(0, 2);
+
+  return (
+    <div className="advisor-confirm-overlay advisor-chat-overlay" role="presentation">
+      <section
+        className="advisor-chat-shell"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Property chat"
+        id="advisor-report-chat"
+      >
+        <header className="advisor-chat-topbar">
+          <div className="advisor-chat-topbar-row">
+            <button type="button" className="advisor-chat-back" onClick={onBack}>
+              ← Back to report
+            </button>
+            <div className="advisor-chat-topbar-titles">
+              <span className="advisor-kicker">Property chat</span>
+              <h2>Ask about this analyzed parcel</h2>
+            </div>
+          </div>
+          <p className="advisor-chat-how">
+            RangeMatch Chat is an open-ended cattle advisor grounded in two
+            brains: verified physical evidence for this parcel and reviewed
+            cattle-environment knowledge.
+          </p>
+        </header>
+
+        <div className="advisor-chat-thread" ref={threadRef}>
+          {chatTurns.length === 0 ? (
+            <div className="advisor-chat-empty">
+              <p className="advisor-chat-empty-title">Ask anything about this parcel</p>
+              <p className="advisor-quiet advisor-chat-scope">
+                Start with a suggestion below, or type your own question.
+              </p>
+            </div>
+          ) : (
+            <ol className="advisor-chat-turns advisor-chat-turns-thread">
+              {chatTurns.map((turn) => (
+                <li key={turn.turn_id || turn.user_message}>
+                  <div className="advisor-chat-row advisor-chat-row-user">
+                    <div className="advisor-chat-bubble advisor-chat-bubble-user">
+                      <p className="advisor-chat-user">
+                        {withMireyeBold(turn.user_message || "")}
+                      </p>
+                    </div>
+                    <span className="advisor-chat-avatar-wrap advisor-chat-avatar-wrap-user">
+                      <img
+                        className="advisor-chat-avatar"
+                        src="/assets/chat/avatar-user-farmer.png?v=3"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                  <div className="advisor-chat-row advisor-chat-row-assistant">
+                    <span className="advisor-chat-avatar-wrap">
+                      <img
+                        className="advisor-chat-avatar"
+                        src="/assets/chat/avatar-cattle.png"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </span>
+                    <div className="advisor-chat-bubble advisor-chat-bubble-assistant">
+                      <p className="advisor-chat-brand">
+                        <img
+                          className="advisor-chat-leaf"
+                          src="/assets/chat/icon-leaf.svg"
+                          alt=""
+                          aria-hidden="true"
+                        />
+                        RangeMatch
+                      </p>
+                      {turn.judgment ? (
+                        <p className="advisor-chat-judgment">
+                          {withMireyeBold(turn.judgment)}
+                        </p>
+                      ) : null}
+                      <p>{withMireyeBold(turn.answer || "")}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
+          {chatBusy ? (
+            <p className="advisor-quiet advisor-chat-typing" role="status">
+              Answering…
+            </p>
+          ) : null}
+          {chatError ? (
+            <p className="advisor-copy-failed" role="alert">
+              {chatError}
+            </p>
+          ) : null}
+        </div>
+
+        <footer className="advisor-chat-composer">
+          <div
+            className="advisor-chat-suggestion-list"
+            role="group"
+            aria-label="Suggested questions"
+          >
+            {visibleSuggestions.map((row) => (
+              <button
+                key={`${row.intent}-${row.prompt}`}
+                type="button"
+                className="advisor-chat-suggestion-card"
+                disabled={chatBusy}
+                onClick={() => void submitChat(row.prompt || "")}
+              >
+                <img
+                  className="advisor-chat-suggestion-icon"
+                  src={chatSuggestionIconSrc(row.intent)}
+                  alt=""
+                  aria-hidden="true"
+                />
+                <span className="advisor-chat-suggestion-text">{row.prompt}</span>
+                <span className="advisor-chat-suggestion-chevron" aria-hidden="true">
+                  ›
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <form
+            className="advisor-chat-form advisor-chat-form-dock"
+            onSubmit={(event) => {
+              event.preventDefault();
+              void submitChat(chatDraft);
+            }}
+          >
+            <label className="advisor-chat-input-label" htmlFor="advisor-chat-input">
+              Your question
+            </label>
+            <div className="advisor-chat-input-row">
+              <img
+                className="advisor-chat-grass-art"
+                src="/assets/chat/grass-accent.svg"
+                alt=""
+                aria-hidden="true"
+              />
+              <input
+                id="advisor-chat-input"
+                className="advisor-chat-input"
+                value={chatDraft}
+                disabled={chatBusy}
+                onChange={(event) => setChatDraft(event.target.value)}
+                placeholder="Ask about water, vegetation, movement, or next request…"
+                autoFocus
+              />
+              <button
+                type="submit"
+                className="advisor-chat-send"
+                disabled={chatBusy || !chatDraft.trim()}
+              >
+                <span>{chatBusy ? "…" : "Ask"}</span>
+                {!chatBusy ? (
+                  <img
+                    className="advisor-chat-send-icon"
+                    src="/assets/chat/icon-send.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                ) : null}
+              </button>
+            </div>
+          </form>
+          <p className="advisor-chat-disclaimer">
+            RangeMatch may make mistakes. Verify important details.
+          </p>
+        </footer>
+      </section>
+    </div>
+  );
+}
+
+function AdvisorBriefResult({
+  run,
+  onRunUpdate,
+  onOpenChat,
+}: {
+  run: AgentRun;
+  onRunUpdate?: (next: AgentRun) => void;
+  onOpenChat?: () => void;
+}) {
+  const brief = run.brief;
+  const packet = run.packet;
+  const [answerBusy, setAnswerBusy] = useState(false);
+  const [answerError, setAnswerError] = useState<string | null>(null);
 
   const conclusion = run.operating_conclusion;
   const interpretation = run.natural_foundation_interpretation;
@@ -2281,44 +2706,6 @@ function AdvisorBriefResult({
     }
   }
 
-  async function submitChat(message: string) {
-    const text = message.trim();
-    if (!text) return;
-    setChatBusy(true);
-    setChatError(null);
-    try {
-      const response = await fetch(`/v1/advisor/runs/${run.run_id}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ message: text }),
-      });
-      const body = (await response.json()) as {
-        detail?: string;
-        turns?: AgentRun["chat_turns"];
-        suggested_questions?: AgentRun["chat_suggestions"];
-        turn?: NonNullable<AgentRun["chat_turns"]>[number];
-      };
-      if (!response.ok) {
-        setChatError(String(body.detail || `chat_failed_${response.status}`));
-        return;
-      }
-      setChatTurns(body.turns || []);
-      if (body.suggested_questions?.length) {
-        setChatSuggestions(body.suggested_questions);
-      }
-      setChatDraft("");
-      onRunUpdate?.({
-        ...run,
-        chat_turns: body.turns || run.chat_turns,
-        chat_suggestions: body.suggested_questions || run.chat_suggestions,
-      });
-    } catch (error) {
-      setChatError(error instanceof Error ? error.message : "chat_failed");
-    } finally {
-      setChatBusy(false);
-    }
-  }
-
   const questionField = activeQuestion?.allowed_field;
   const whyLines = [
     water?.title,
@@ -2374,11 +2761,18 @@ function AdvisorBriefResult({
               <dd>{withMireyeBold(interpretation.refinement_request || "")}</dd>
             </div>
           </dl>
-          {(interpretation.conditional_scenarios || interpretation.what_would_change_the_view || []).length > 0 ? (
+          {(interpretation.conditional_scenarios || interpretation.what_would_change_the_view || [])
+            .length > 0 ? (
             <ul className="advisor-why-list">
-              {(interpretation.conditional_scenarios || interpretation.what_would_change_the_view || []).slice(0, 3).map((line) => (
-                <li key={line.slice(0, 48)}>{withMireyeBold(line)}</li>
-              ))}
+              {(
+                interpretation.conditional_scenarios ||
+                interpretation.what_would_change_the_view ||
+                []
+              )
+                .slice(0, 3)
+                .map((line) => (
+                  <li key={line.slice(0, 48)}>{withMireyeBold(line)}</li>
+                ))}
             </ul>
           ) : null}
         </section>
@@ -2505,97 +2899,20 @@ function AdvisorBriefResult({
       ) : null}
 
       {canChat ? (
-        <section
-          id="advisor-report-chat"
-          className="advisor-decision advisor-chat"
-          aria-label="Grounded chat about this report"
-        >
-          {!chatOpen ? (
-            <>
-              <p className="advisor-kicker">After this report</p>
-              <h2>Continue with a grounded chat</h2>
-              <p className="advisor-decision-lead">
-                Chat uses this parcel’s analyzed evidence plus reviewed cattle-land
-                knowledge. It is available only after analysis completes.
-              </p>
-              <button
-                type="button"
-                className="advisor-report-chat-start advisor-report-chat-start-inline"
-                onClick={() => onOpenChat?.()}
-              >
-                Start to chat
-              </button>
-            </>
-          ) : (
-            <>
-              <p className="advisor-kicker">Property chat</p>
-              <h2>Ask about this analyzed parcel</h2>
-              <p className="advisor-quiet advisor-chat-scope">
-                Answers stay grounded in this run’s evidence and approved cattle knowledge —
-                not a general ChatGPT.
-              </p>
-              <div className="advisor-chat-suggestions" role="group" aria-label="Suggested questions">
-                {chatSuggestions.map((row) => (
-                  <button
-                    key={`${row.intent}-${row.prompt}`}
-                    type="button"
-                    className="advisor-chip"
-                    disabled={chatBusy}
-                    onClick={() => void submitChat(row.prompt || "")}
-                  >
-                    {row.prompt}
-                  </button>
-                ))}
-              </div>
-              <form
-                className="advisor-chat-form"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  void submitChat(chatDraft);
-                }}
-              >
-                <label className="advisor-address-label" htmlFor="advisor-chat-input">
-                  Your question
-                </label>
-                <input
-                  id="advisor-chat-input"
-                  className="advisor-address"
-                  value={chatDraft}
-                  disabled={chatBusy}
-                  onChange={(event) => setChatDraft(event.target.value)}
-                  placeholder="Ask about water, vegetation, movement, or next request"
-                />
-                <button
-                  type="submit"
-                  className="advisor-chip"
-                  disabled={chatBusy || !chatDraft.trim()}
-                >
-                  {chatBusy ? "Answering…" : "Ask"}
-                </button>
-              </form>
-              {chatError ? (
-                <p className="advisor-copy-failed" role="alert">
-                  {chatError}
-                </p>
-              ) : null}
-              {chatTurns.length > 0 ? (
-                <ol className="advisor-chat-turns">
-                  {chatTurns.map((turn) => (
-                    <li key={turn.turn_id || turn.user_message}>
-                      <p className="advisor-quiet">You</p>
-                      <p className="advisor-chat-user">
-                        {withMireyeBold(turn.user_message || "")}
-                      </p>
-                      <p className="advisor-chat-judgment">
-                        {withMireyeBold(turn.judgment || "")}
-                      </p>
-                      <p>{withMireyeBold(turn.answer || "")}</p>
-                    </li>
-                  ))}
-                </ol>
-              ) : null}
-            </>
-          )}
+        <section className="advisor-decision advisor-chat" aria-label="Open grounded chat">
+          <p className="advisor-kicker">After this report</p>
+          <h2>Continue with a grounded chat</h2>
+          <p className="advisor-decision-lead">
+            Chat uses this parcel’s analyzed evidence plus reviewed cattle-land knowledge.
+            It opens in a separate window so you can return to the report anytime.
+          </p>
+          <button
+            type="button"
+            className="advisor-report-chat-start advisor-report-chat-start-inline"
+            onClick={() => onOpenChat?.()}
+          >
+            Start to chat
+          </button>
         </section>
       ) : null}
 
@@ -2729,7 +3046,7 @@ function AdvisorBriefResult({
                   </ul>
                 </section>
                 <section>
-                  <h3>Measured observations</h3>
+                  <h3>Public observations ({kitchen.observations.length})</h3>
                   <ul>
                     {kitchen.observations.map((row) => (
                       <li key={String(row.observation_id)}>

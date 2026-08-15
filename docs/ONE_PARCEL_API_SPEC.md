@@ -50,9 +50,9 @@ uvicorn rangematch.api:app --reload --port 8000
 
 No list/batch endpoint. No ICP. No F09. The map is a frontend parcel-confirmation interface, not an API concern.
 
-The buyer-facing product does not expose the raw backend sections as the primary experience. It projects the same authoritative data into: dashboard, readable decision report, and technical evidence appendix. See `CURRENT_SYSTEM_BASELINE.md`.
+The buyer-facing product does not expose the raw backend sections as the primary experience. It projects the same authoritative data into: dashboard, readable decision report, and technical evidence appendix. See `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
 
-LLM authority: see `docs/LLM_AUTHORITY_AND_REPORT_SPEC.md`. Engine decisions are never altered by LLM output.  
+LLM authority for the legacy Constrained Intent + Engine buyer-report path: see `docs/archive/product-history/LLM_AUTHORITY_AND_REPORT_SPEC.md`. Current Advisor Demo chat authority: `docs/TWO_BRAIN_ADVISOR_CHAT_CONTRACT.md`. Engine decisions are never altered by LLM output.  
 Parcel resolution contract: see `docs/PARCEL_RESOLUTION_CONTRACT.md`.
 
 ## Health

@@ -3,7 +3,7 @@
 > Status: `CANONICAL_V0_1`
 > Date: 2026-08-08
 > Product surface: one U.S. parcel per run
-> Current baseline: `docs/CURRENT_SYSTEM_BASELINE.md`
+> Current baseline: `docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`
 
 ## Buyer and problem
 

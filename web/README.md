@@ -1,13 +1,13 @@
-# RangeMatch Web UI (buyer prototype)
+# RangeMatch Web UI (Advisor Demo)
 
-Consumes the One-Parcel API only. No Factor/Planner/Engine logic in the browser.
+Buyer-facing Demo for the Mireye-first cattle natural-environment advisor. The browser consumes Advisor HTTP APIs only — no Factor/Planner/Engine logic in the client.
 
 ## Stack
 
 Vite + React + TypeScript + React Router + **MapLibre GL JS** (2D parcel map).
 Vitest + Testing Library.
 
-Basemap: default embedded OpenStreetMap raster style (`web/src/config/map.ts`). Override with `VITE_MAP_STYLE_URL` (e.g. MapLibre demotiles). No Mapbox/paid credentials. No Cesium / 3D.
+Basemap: default embedded OpenStreetMap raster style (`web/src/config/map.ts`). Override with `VITE_MAP_STYLE_URL`. No Mapbox/paid credentials. No Cesium / 3D.
 
 ## Run (two terminals)
 
@@ -15,10 +15,9 @@ Basemap: default embedded OpenStreetMap raster style (`web/src/config/map.ts`). 
 # Terminal A — API
 cd /path/to/RangeMatch
 python -m pip install -e ".[api]"
-# Includes jsonschema plus live adapter packages (numpy, netCDF4, rasterio).
-# Advisor still fail-softs if an adapter package is missing.
 export PYTHONPATH=src
-uvicorn rangematch.api:app --reload --port 8001 --env-file .env
+.venv/bin/uvicorn rangematch.api:app --reload --port 8001 --env-file .env \
+  --reload-exclude '.venv' --reload-exclude '.venv-livegate' --reload-exclude 'web'
 
 # Terminal B — UI
 cd web
@@ -26,32 +25,25 @@ npm install
 npm run dev
 ```
 
-Open **http://127.0.0.1:5273**. RangeMatch pins the Vite dev server to port 5273 (`strictPort: true`) so it does not silently move to 5174 when 5173 is occupied by another app.
+Open **http://127.0.0.1:5273/advisor-demo**. RangeMatch pins Vite to port **5273** (`strictPort: true`).
 
-**Mireye Challenge Demo:** [http://127.0.0.1:5273/advisor-demo](http://127.0.0.1:5273/advisor-demo). Enter a U.S. address or coordinates and click **Run investigation** (or explicitly use Nambe). The UI requests `collection_mode=MIREYE_FIRST`, requires boundary confirmation, builds the Mireye Environmental Profile, runs deterministic gap planning and only necessary supplements, projects a Natural Cattle Profile, generates a validated LLM interpretation, accepts one buyer answer, and downloads a two-page Natural Cattle Foundation report. Failed calls are never replaced with another parcel or fixture.
+The Demo requests `collection_mode=MIREYE_FIRST`, requires boundary confirmation, builds the Mireye Environmental Profile, runs deterministic gap planning and only necessary supplements, projects a Natural Cattle Profile, generates a validated natural-foundation interpretation, accepts one buyer answer, downloads a Natural Cattle Foundation PDF (variable-length narrative + Appendix on a new page), and opens open-ended two-brain grounded chat. Failed calls are never replaced with another parcel or fixture.
 
-By default the Vite proxy targets `127.0.0.1:8001` (change `web/vite.config.ts` or set `VITE_API_BASE_URL` if you use another API port).
+By default the Vite proxy targets `127.0.0.1:8001` (change `web/vite.config.ts` or set `VITE_API_BASE_URL`).
 
-## Parcel selection flow
-
-Two entries, one confirmation path:
+## Demo flow
 
 ```text
-Select your land
-  [ Search by address ]
-  or
-  [ Drop a pin on the map ] / [ Enter coordinates ]   ← same COORDINATE kind
+Enter U.S. address or lat,lng (or explicit Nambe / example places)
+→ Mireye lookup
+→ Confirm exactly one polygon on the map
+→ Natural cattle foundation view + one refining question
+→ Answer → updated interpretation
+→ Download report PDF
+→ Optional Property chat (place materials + cattle knowledge)
 ```
 
-1. Choose address **or** pin/coordinates
-2. **Resolve property** → `POST /v1/parcel-resolutions` (`input_kind` ADDRESS|COORDINATE)
-3. Select candidate on map / list (multi-candidate required)
-4. **Confirm this parcel** → `POST .../confirm` with geometry hash
-5. Choose General Exploration / Cattle / Sheep
-6. **Start Analysis** → `POST /v1/investigations` returns `QUEUED` immediately → navigate to progress page
-
-Fixture mode is explicitly labeled as demo data. LIVE mode calls the configured Mireye resolver and fails visibly with no silent fixture substitution.
-Not supported: APN, boundary upload, batch, multi-parcel, freehand draw, nationwide search.
+Not supported in this Demo entry: APN-only lookup, cattle-vs-sheep product mode switch, silent Nambe/CPER substitution.
 
 ## Tests
 
@@ -60,14 +52,12 @@ cd web
 npm test
 ```
 
+Current baseline includes Advisor Demo coverage (`tests/advisor-demo.test.tsx`) plus legacy buyer UI tests (`tests/ui.test.tsx`).
+
 ## Notes
 
-- In-memory API store clears on API restart (investigations + parcel resolutions).
-- Map is evidence visualization only — not a suitability decision surface.
-- After navigation, Investigation page polls `GET /investigations/{id}` + `/trace`
-  until terminal (`QUEUED` → `RUNNING` → `COMPLETED|PARTIAL|FAILED|…`).
-- Buyer report is requested only after Unified Output exists.
-- The Public Diligence Agent runs after deterministic evaluation and cannot alter F01–F08 or MatchResult.
-- The result page has a decision dashboard, parcel-specific readable report, and collapsed evidence appendix.
-- Buyer-facing `More evidence needed` maps to Engine `HOLD`; no fit score or winner is invented.
-- Demo screenshots: `web/screenshots/`.
+- In-memory Advisor runs clear when the API process restarts — re-run analysis after restart.
+- Chat is read-only against Packet / Profile / Interpretation / Deal Context.
+- Map is parcel confirmation and evidence visualization — not a suitability score surface.
+- Product authority: `../docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`
+- Chat contract: `../docs/TWO_BRAIN_ADVISOR_CHAT_CONTRACT.md`

@@ -17,7 +17,7 @@ address → Mireye candidates → user confirms outline
 
 Mireye is the parcel entry and context anchor. It is not a substitute for USGS / RAP / NHD / NOAA / TIGER land facts.
 
-Next product layer (does not replace this loop): `docs/LIVESTOCK_OPERATING_PROFILE_CONTRACT.md`. First closed loop is Nambe + Cattle → Operating Profile → ranch story PDF.
+Next product layer (does not replace this loop): `docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`. First closed loop is Nambe + Cattle → Operating Profile → ranch story PDF.
 
 ## Durable evidence
 

@@ -3,7 +3,7 @@
 > Status: `CLOSED`  
 > Date: 2026-08-08  
 > Product scope: time-constrained evidence-constrained screening demo  
-> Current product phase: Competition Packaging + Deployment Readiness (see `CURRENT_SYSTEM_BASELINE.md`)
+> Current product phase: Competition Packaging + Deployment Readiness (see `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`)
 
 ## Canonical scope
 

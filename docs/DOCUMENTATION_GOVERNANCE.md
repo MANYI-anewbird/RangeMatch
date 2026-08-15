@@ -7,13 +7,13 @@
 
 ## 0. Current-state authority
 
-`RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` version 2.0.0 is the canonical authority for the Mireye-first cattle natural-environment product, data-source precedence, user journey, Agent architecture, execution gates, and next milestone. Earlier fixed F01-F08, operating-diligence, access/title-first, and one-page-only product directions are superseded. Scientific freeze records remain authoritative when a Factor is invoked as a conditional supplement; they do not require every Factor to run. Dated records remain audit history and must not override the current authority.
+`RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` version 2.1.0 is the canonical authority for the Mireye-first cattle natural-environment product, data-source precedence, user journey, Agent architecture, execution gates, and next milestone. Earlier fixed F01-F08, operating-diligence, access/title-first, fixed two-page PDF, and bounded-chat product directions are superseded. Scientific freeze records remain authoritative when a Factor is invoked as a conditional supplement; they do not require every Factor to run. Dated records remain audit history and must not override the current authority.
 
 ## 1. Language Policy
 
 All documents used to build, review, validate, or submit RangeMatch must be written in English. This includes scientific evidence, Operation Profiles, variable definitions, data-source mappings, decision logic, limitations, validation records, and Mireye field audits.
 
-`RANGEMATCH_AGENT_BUILD_PLAN.md` is retained in Chinese as a historical owner-facing checklist. It is not current product or execution authority. Product direction and implementation order are governed exclusively by the English `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`. Chinese research notes and prior reports may remain in `backups/`, but they are non-canonical and must not be cited by the runtime or submitted as scientific specifications.
+`archive/product-history/RANGEMATCH_AGENT_BUILD_PLAN.md` is retained in Chinese as a historical owner-facing checklist. It is not current product or execution authority. Product direction and implementation order are governed exclusively by the English `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`. Chinese research notes and prior reports may remain in `backups/`, but they are non-canonical and must not be cited by the runtime or submitted as scientific specifications.
 
 ## 2. Required Traceability Chain
 
@@ -92,17 +92,28 @@ Current product behavior and implementation order are defined first by:
 
 - `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
 
-Supporting runtime and evidence contracts include:
+Supporting buyer-report, chat, and Demo contracts:
+
+- `NATURAL_CATTLE_FOUNDATION_REPORT_TEMPLATE.md`;
+- `TWO_BRAIN_ADVISOR_CHAT_CONTRACT.md`;
+- `ADVISOR_PARCEL_CONFIRMATION_GATE.md`;
+- `ADVISOR_GENERIC_EVIDENCE_PACKET.md`;
+- `ADVISOR_NAMBE_REPORT_LOOP.md`;
+- `RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md`.
+
+Superseded Constrained Intent + Engine buyer-report authority is archived at `archive/product-history/LLM_AUTHORITY_AND_REPORT_SPEC.md`.
+- `RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md`.
+
+Supporting runtime / API / science contracts (details only; they do not redefine product direction):
 
 - `PRODUCT_PROTOTYPE_SCOPE.md`;
 - `AGENT_ORCHESTRATION_SPEC.md`;
 - `ONE_PARCEL_API_SPEC.md`;
 - `PARCEL_RESOLUTION_CONTRACT.md`;
 - `F01_F08_UNIFIED_OUTPUT_CONTRACT.md`;
-- `LIVESTOCK_OPERATING_PROFILE_CONTRACT.md`;
 - `DILIGENCE_SEARCH_AGENT_SPEC.md`;
 - `PACKAGING_AND_DELIVERY_STRATEGY.md`.
 
-`CURRENT_SYSTEM_BASELINE.md`, `RANGEMATCH_AGENT_BUILD_PLAN.md`, `ADVISOR_AGENT_IMPLEMENTATION_PLAN.md`, `AGENT_THREE_PAGE_WORKFLOW_CONTRACT.md`, `ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md`, `RANGEMATCH_PRODUCT_REDEFINITION_2026-08-12.md`, and `BUYER_DASHBOARD_AND_SCORING_SPEC.md` are superseded for current product direction. They remain historical design or acceptance evidence and must not override the current flow.
+Superseded product-direction documents live under `archive/product-history/` (including the former three-page Advisor contracts, buyer dashboard scoring, Chinese build checklist, and Feed/Drink/Move-primary livestock operating profile contract). Dated gate/incident notes live under `archive/dated-gates/`. They must not override the current flow.
 
 When test counts or incident states differ across dated files, the newest verified baseline is current and the older value remains historical evidence only.

@@ -1,7 +1,10 @@
-"""Slice 6: thin grounded chat — six intents, read-only, fail-soft.
+"""Grounded chat: cattle knowledge + this parcel's physical materials.
 
-Never mutates Packet / Combined Evidence Packet, Deal Context, Operating
-Conclusion, Natural Cattle Profile, or Natural Foundation Interpretation.
+Read-only against Packet / Combined Evidence Packet, Deal Context, Operating
+Conclusion, Natural Cattle Profile, and Natural Foundation Interpretation.
+Live answers are ordinary LLM prose over those two sources — not a restricted
+diligence script. Intent labels and deterministic fallback remain for API shape
+and FIXTURE runs only.
 """
 
 from __future__ import annotations
@@ -19,7 +22,7 @@ from rangematch.advisor_schema import _load_schema
 from rangematch.llm_provider import get_provider, is_live_llm_provider
 
 SCHEMA_VERSION = "RANGEMATCH_ADVISOR_CHAT_TURN@0.1.0"
-PROMPT_VERSION = "RANGEMATCH_ADVISOR_CHAT@0.1.0"
+PROMPT_VERSION = "RANGEMATCH_ADVISOR_CHAT@0.2.0"
 SOURCE_LIVE = "LIVE_LLM"
 SOURCE_FALLBACK = "DETERMINISTIC_FALLBACK"
 
@@ -61,19 +64,6 @@ SUGGESTED_QUESTIONS: list[dict[str, str]] = [
     },
 ]
 
-PROHIBITED = re.compile(
-    r"(?:stocking rate|carrying capacity|herd size|buy this|do not buy|"
-    r"has legal access|no legal access|"
-    r"\b(?:a well|the well|wells|stock tank|fences?|gates?|corrals?|barns?)\b)",
-    re.I,
-)
-INTERNAL_ID_IN_PROSE = re.compile(
-    r"\b(?:OBS|VAR|F\d{2}|ACTION|BOTTLENECK|CLAIM|PACKET|"
-    r"LIVESTOCK_WATER_DILIGENCE|LEGAL_ACCESS_DILIGENCE|"
-    r"RAP_INTERPRETATION|EVIDENCE_STATUS_INTERPRETATION)_[A-Z0-9_]+\b",
-    re.I,
-)
-
 CHAT_OUTPUT_SCHEMA: dict[str, Any] = {
     "type": "object",
     "additionalProperties": False,
@@ -104,23 +94,28 @@ CHAT_BUNDLE_SCHEMA: dict[str, Any] = {
     "properties": {"chat_turn": CHAT_OUTPUT_SCHEMA},
 }
 
-SYSTEM_PROMPT = """You are a buyer-side cattle diligence chat for RangeMatch.
-Return JSON: {"chat_turn": {...}} with intent, judgment, answer, evidence_refs,
-knowledge_refs, missing_evidence, suggested_follow_up.
+SYSTEM_PROMPT = """You are a normal helpful assistant for a cattle land question.
 
-Rules:
-- Answer only from the workbench (conclusion, deal context, packet, knowledge).
-- Prefer judgment-first prose. Mention preliminary once.
-- Keep judgment under 180 characters; put explanation in answer.
-- Treat Deal Context as current. Never ask for or describe as unknown a field
-  already present in user_answers or operation_type.
-- Cite only refs present in the workbench.
-- Put refs only in evidence_refs/knowledge_refs. Never expose internal IDs such
-  as OBS_*, ACTION_*, or knowledge-card IDs in judgment, answer, or follow-up.
-- Do not invent wells, fences, gates, drinkers, stocking rates, or legal access.
-- Do not change or propose edits to physical evidence.
-- If the question is outside the six supported intents, set intent=OUT_OF_SCOPE
-  and suggest one supported follow-up question.
+You are given exactly two sources in the user JSON:
+1) cattle_knowledge — short approved cards about how to read cattle/range evidence
+2) place_materials — the physical evidence and reading for THIS parcel only
+   (deal context, natural foundation reading, cattle profile domains, observations)
+
+Answer the user's question the way you would if someone handed you those two
+documents: freely, in plain language, grounded in what is there. Prefer the
+place materials for facts about this parcel; use cattle_knowledge for how to
+interpret them. If something is not in either source, say you do not know from
+these materials — do not invent parcel facts.
+
+Return JSON only: {"chat_turn": {...}} with fields intent, judgment, answer,
+evidence_refs, knowledge_refs, missing_evidence, suggested_follow_up.
+- intent: best-fit label from the workbench list (metadata only; do not refuse
+  a question just because it is awkward to label)
+- judgment: one short takeaway
+- answer: the full natural reply
+- evidence_refs / knowledge_refs: only IDs that appear in the materials
+- missing_evidence: gaps that matter for this question, if any
+- suggested_follow_up: one natural next question
 """
 
 
@@ -233,6 +228,40 @@ def chat_view_from_natural_foundation(
     }
 
 
+def _is_natural_cattle_profile(profile: Mapping[str, Any] | None) -> bool:
+    if not isinstance(profile, Mapping):
+        return False
+    return bool(profile.get("domains") or profile.get("overall_natural_foundation"))
+
+
+def _default_knowledge_cards(
+    operating_profile: Mapping[str, Any] | None,
+) -> list[dict[str, Any]]:
+    if _is_natural_cattle_profile(operating_profile):
+        return load_approved_knowledge_cards(workbench="natural_cattle")
+    return load_approved_knowledge_cards()
+
+
+def _profile_domain_rows(profile: Mapping[str, Any] | None) -> list[dict[str, Any]]:
+    if not isinstance(profile, Mapping):
+        return []
+    rows: list[dict[str, Any]] = []
+    for row in profile.get("domains") or []:
+        if not isinstance(row, Mapping):
+            continue
+        rows.append(
+            {
+                "domain": row.get("domain"),
+                "buyer_label": row.get("buyer_label"),
+                "confidence": row.get("confidence"),
+                "reading": row.get("reading"),
+                "supporting_refs": list(row.get("supporting_refs") or [])[:6],
+                "limitations": list(row.get("limitations") or [])[:4],
+            }
+        )
+    return rows
+
+
 def build_chat_workbench(
     *,
     packet: Mapping[str, Any],
@@ -243,65 +272,86 @@ def build_chat_workbench(
     user_message: str,
     classified_intent: str,
 ) -> dict[str, Any]:
-    cards = knowledge_cards if knowledge_cards is not None else load_approved_knowledge_cards()
+    cards = (
+        knowledge_cards
+        if knowledge_cards is not None
+        else _default_knowledge_cards(operating_profile)
+    )
     observation_rows = _packet_observation_rows(packet)
+    deal = {
+        "context_version": deal_context.get("context_version"),
+        "operation_type": deal_context.get("operation_type"),
+        "diligence_stage": deal_context.get("diligence_stage"),
+        "user_answers": [
+            {"field": row.get("field"), "value": row.get("value")}
+            for row in (deal_context.get("user_answers") or [])
+            if isinstance(row, Mapping)
+        ],
+    }
+    reading = {
+        "status": operating_conclusion.get("status"),
+        "headline": operating_conclusion.get("headline"),
+        "summary": operating_conclusion.get("summary"),
+        "primary_constraint": operating_conclusion.get("primary_constraint"),
+        "next_action": operating_conclusion.get("next_action"),
+        "next_spend_class": operating_conclusion.get("next_spend_class"),
+        "confidence": operating_conclusion.get("confidence"),
+        "next_question": operating_conclusion.get("next_question"),
+        "evidence_refs": list(operating_conclusion.get("evidence_refs") or [])[:8],
+        "knowledge_refs": list(operating_conclusion.get("knowledge_refs") or [])[:8],
+        "missing_evidence": list(operating_conclusion.get("missing_evidence") or [])[:8],
+    }
+    observations = [
+        {
+            "observation_id": row.get("observation_id"),
+            "label": row.get("label") or row.get("title") or row.get("field_id"),
+            "summary": (
+                row.get("summary")
+                or row.get("statement")
+                or str(row.get("value") or "")
+            )[:240],
+        }
+        for row in observation_rows
+        if isinstance(row, Mapping)
+    ][:32]
+    cattle_knowledge = [
+        {
+            "knowledge_id": row.get("knowledge_id"),
+            "topic": row.get("topic"),
+            "statement": row.get("statement"),
+        }
+        for row in cards
+    ][:12]
+    profile_slice = {
+        "domain_attention_order": (operating_profile or {}).get("domain_attention_order"),
+        "action_execution_order": (operating_profile or {}).get("action_execution_order"),
+        "overall_natural_foundation": (operating_profile or {}).get(
+            "overall_natural_foundation"
+        ),
+        "domains": _profile_domain_rows(operating_profile),
+    }
+    place_materials = {
+        "deal_context": deal,
+        "natural_foundation_reading": reading,
+        "natural_cattle_profile": profile_slice,
+        "observations": observations,
+    }
+    allowed = _obs_ids(packet) or ["PACKET"]
     return {
         "user_message": user_message,
         "classified_intent_hint": classified_intent,
-        "supported_intents": sorted(SUPPORTED_INTENTS),
+        "supported_intents": sorted(INTENTS),
         "suggested_questions": suggested_chat_questions(),
-        "deal_context": {
-            "context_version": deal_context.get("context_version"),
-            "operation_type": deal_context.get("operation_type"),
-            "diligence_stage": deal_context.get("diligence_stage"),
-            "user_answers": [
-                {"field": row.get("field"), "value": row.get("value")}
-                for row in (deal_context.get("user_answers") or [])
-                if isinstance(row, Mapping)
-            ],
-        },
-        "operating_conclusion": {
-            "status": operating_conclusion.get("status"),
-            "headline": operating_conclusion.get("headline"),
-            "summary": operating_conclusion.get("summary"),
-            "primary_constraint": operating_conclusion.get("primary_constraint"),
-            "next_action": operating_conclusion.get("next_action"),
-            "next_spend_class": operating_conclusion.get("next_spend_class"),
-            "confidence": operating_conclusion.get("confidence"),
-            "next_question": operating_conclusion.get("next_question"),
-            "evidence_refs": list(operating_conclusion.get("evidence_refs") or [])[:8],
-            "knowledge_refs": list(operating_conclusion.get("knowledge_refs") or [])[:8],
-            "missing_evidence": list(operating_conclusion.get("missing_evidence") or [])[:8],
-        },
-        "operating_profile": {
-            "domain_attention_order": (operating_profile or {}).get("domain_attention_order"),
-            "action_execution_order": (operating_profile or {}).get("action_execution_order"),
-            "overall_natural_foundation": (operating_profile or {}).get(
-                "overall_natural_foundation"
-            ),
-        },
-        "observations": [
-            {
-                "observation_id": row.get("observation_id"),
-                "label": row.get("label") or row.get("title") or row.get("field_id"),
-                "summary": (
-                    row.get("summary")
-                    or row.get("statement")
-                    or str(row.get("value") or "")
-                )[:180],
-            }
-            for row in observation_rows
-            if isinstance(row, Mapping)
-        ][:16],
-        "allowed_evidence_refs": _obs_ids(packet) or ["PACKET"],
-        "knowledge_cards": [
-            {
-                "knowledge_id": row.get("knowledge_id"),
-                "topic": row.get("topic"),
-                "statement": row.get("statement"),
-            }
-            for row in cards
-        ][:12],
+        # Two-brain documents for the live model.
+        "cattle_knowledge": cattle_knowledge,
+        "place_materials": place_materials,
+        # Compatibility aliases used by validators / deterministic fallback.
+        "deal_context": deal,
+        "operating_conclusion": reading,
+        "operating_profile": profile_slice,
+        "observations": observations,
+        "allowed_evidence_refs": allowed,
+        "knowledge_cards": cattle_knowledge,
     }
 
 
@@ -472,6 +522,8 @@ def validate_chat_turn(
     *,
     workbench: Mapping[str, Any],
 ) -> list[dict[str, str]]:
+    """Schema-only gate. Content bans were removed so live chat can answer freely."""
+    del workbench  # retained for call-site compatibility
     violations: list[dict[str, str]] = []
     if not isinstance(turn, Mapping):
         return [
@@ -487,65 +539,35 @@ def validate_chat_turn(
     ):
         path = ".".join(str(part) for part in err.absolute_path) or "$"
         violations.append({"code": "CHAT_SCHEMA_INVALID", "message": f"{path}: {err.message}"})
-    if violations:
-        return violations
+    return violations
 
+
+def _sanitize_chat_refs(
+    assembled: dict[str, Any],
+    *,
+    workbench: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Drop unknown refs quietly so free-form answers are not rejected."""
     allowed = {
         str(ref) for ref in (workbench.get("allowed_evidence_refs") or []) if ref
     } | {"PACKET"}
-    # Also allow refs already on the operating conclusion in the workbench.
     for ref in (workbench.get("operating_conclusion") or {}).get("evidence_refs") or []:
         allowed.add(str(ref))
-    for ref in turn.get("evidence_refs") or []:
-        if str(ref) not in allowed:
-            violations.append({"code": "CHAT_EVIDENCE_REF_UNKNOWN", "message": str(ref)})
-
+    for row in (workbench.get("observations") or []):
+        if isinstance(row, Mapping) and row.get("observation_id"):
+            allowed.add(str(row["observation_id"]))
     card_ids = {
         str(row.get("knowledge_id"))
-        for row in workbench.get("knowledge_cards") or []
+        for row in (workbench.get("cattle_knowledge") or workbench.get("knowledge_cards") or [])
         if isinstance(row, Mapping) and row.get("knowledge_id")
     }
-    for ref in turn.get("knowledge_refs") or []:
-        if str(ref) not in card_ids:
-            violations.append({"code": "CHAT_KNOWLEDGE_REF_UNKNOWN", "message": str(ref)})
-
-    prose = " ".join(
-        [
-            str(turn.get("judgment") or ""),
-            str(turn.get("answer") or ""),
-            str(turn.get("suggested_follow_up") or ""),
-        ]
-    )
-    hit = PROHIBITED.search(prose)
-    if hit:
-        violations.append({"code": "CHAT_PROHIBITED", "message": hit.group(0)})
-    internal_id = INTERNAL_ID_IN_PROSE.search(prose)
-    if internal_id:
-        violations.append(
-            {"code": "CHAT_INTERNAL_ID_IN_PROSE", "message": internal_id.group(0)}
-        )
-
-    operation = str((workbench.get("deal_context") or {}).get("operation_type") or "UNKNOWN").upper()
-    normalized = prose.lower()
-    stale_unknown = (
-        "operation has not yet been defined",
-        "operation is not yet defined",
-        "operation type is still unknown",
-        "needs one operating answer",
-        "seasonal vs year-round",
-        "seasonal or year-round",
-        "before the cattle case is clear",
-    )
-    if operation in {"SEASONAL_GRAZING", "YEAR_ROUND_COW_CALF"} and any(
-        phrase in normalized for phrase in stale_unknown
-    ):
-        violations.append(
-            {
-                "code": "CHAT_STALE_DEAL_CONTEXT",
-                "message": f"chat contradicts current operation_type={operation}",
-            }
-        )
-    return violations
+    assembled["evidence_refs"] = [
+        str(ref) for ref in (assembled.get("evidence_refs") or []) if str(ref) in allowed
+    ]
+    assembled["knowledge_refs"] = [
+        str(ref) for ref in (assembled.get("knowledge_refs") or []) if str(ref) in card_ids
+    ]
+    return assembled
 
 
 def generate_chat_turn(
@@ -559,14 +581,18 @@ def generate_chat_turn(
     provider_name: str | None = None,
     knowledge_cards: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
-    """Return one validated chat turn. Never mutates inputs. Fail-soft on LLM errors."""
+    """Return one chat turn. Never mutates inputs. Fail-soft on LLM errors."""
     message = str(user_message or "").strip()
     if not message:
         raise AdvisorChatError("CHAT_MESSAGE_REQUIRED", "user_message is required")
     if len(message) > 1200:
         raise AdvisorChatError("CHAT_MESSAGE_TOO_LONG", "user_message exceeds 1200 characters")
 
-    cards = knowledge_cards if knowledge_cards is not None else load_approved_knowledge_cards()
+    cards = (
+        knowledge_cards
+        if knowledge_cards is not None
+        else _default_knowledge_cards(operating_profile)
+    )
     classified = classify_chat_intent(message)
     workbench = build_chat_workbench(
         packet=packet,
@@ -657,6 +683,7 @@ def generate_chat_turn(
             "created_at": _utc_now(),
             "provenance": provenance,
         }
+        assembled = _sanitize_chat_refs(assembled, workbench=workbench)
         violations = validate_chat_turn(assembled, workbench=workbench)
         if violations:
             return _fallback(violations, provenance)

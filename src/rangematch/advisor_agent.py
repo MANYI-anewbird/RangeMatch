@@ -2734,6 +2734,8 @@ def post_advisor_chat(
         context_before = copy.deepcopy(deal_context)
         advisor_view = chat_view_from_natural_foundation(interpretation)
 
+        from rangematch.advisor_insight import load_approved_knowledge_cards
+
         turn = generate_chat_turn(
             run_id=run_id,
             user_message=message,
@@ -2741,6 +2743,7 @@ def post_advisor_chat(
             deal_context=deal_context,
             operating_conclusion=advisor_view,
             operating_profile=natural_profile,
+            knowledge_cards=load_approved_knowledge_cards(workbench="natural_cattle"),
             provider_name=provider_name or configured_provider_name(),
         )
 

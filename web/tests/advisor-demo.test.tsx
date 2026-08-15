@@ -235,7 +235,9 @@ describe("Advisor demo route", () => {
     renderDemo();
     expect(screen.getByRole("button", { name: /Run analysis/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/Enter a U\.S\. address or coordinates/i)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Try the verified Nambe example/i })).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: /Try an example property/i })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: /Nambe · Indian Hills, CO/i })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: /Lodi, CA/i })).toBeInTheDocument();
     expect(screen.queryByLabelText(/Demo ranch \/ tract/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/called first on this Demo/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/POST \/v1\/lookup/i)).not.toBeInTheDocument();
@@ -274,8 +276,20 @@ describe("Advisor demo route", () => {
       "/v1/advisor/runs/advisor_test_run_001/cattle-operating-snapshot.pdf",
     );
     await userEvent.click(screen.getAllByRole("button", { name: /Start to chat/i })[0]);
+    expect(screen.getByRole("dialog", { name: /Property chat/i })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /Ask about this analyzed parcel/i })).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /RangeMatch Chat is an open-ended cattle advisor grounded in two brains/i,
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Back to report/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/Suggested questions/i)).toBeInTheDocument();
+    expect(screen.getByText(/RangeMatch may make mistakes/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Your question/i)).toBeInTheDocument();
+    expect(screen.queryByRole("dialog", { name: /Advisor report/i })).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: /Back to report/i }));
+    expect(screen.getByRole("dialog", { name: /Advisor report/i })).toBeInTheDocument();
     expect(screen.getByText(/View technical evidence/i)).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Generate buyer explanation/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Do not send the client yet" })).not.toBeInTheDocument();
@@ -365,8 +379,12 @@ describe("Advisor demo route", () => {
     const outcome = await screen.findByTestId("investigation-outcome");
     expect(outcome).toHaveAttribute("data-outcome", "INVESTIGATION_COULD_NOT_COMPLETE");
     expect(screen.getByRole("button", { name: /Edit location/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Try verified Nambe demo/i })).toBeInTheDocument();
-    expect(screen.getByText(/timed out/i)).toBeInTheDocument();
+    expect(within(outcome).getByText(/Want to test\?/i)).toBeInTheDocument();
+    expect(within(outcome).getByText(/4213 Nambe Road, Indian Hills, CO 80454/i)).toBeInTheDocument();
+    expect(within(outcome).getByText(/18000 N Skaggs Ranch Rd, Lodi, CA 95240/i)).toBeInTheDocument();
+    expect(within(outcome).getByRole("combobox", { name: /Try an example property/i })).toBeInTheDocument();
+    expect(within(outcome).getByText(/timed out/i)).toBeInTheDocument();
+    expect(within(outcome).getByText(/keep improving address handling/i)).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: /Current cattle operating view/i })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Generate buyer explanation/i })).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(/Technical details/i));
