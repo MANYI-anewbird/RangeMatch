@@ -1,5 +1,7 @@
 # RangeMatch Agent 完整建设步骤清单
 
+> **产品方向已于 2026-08-14 被取代。** 本文件保留为历史执行记录；当前产品与代码顺序以 `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` 为准。
+
 > 文档状态：Canonical（项目基准文档）
 > 最后更新：2026-08-08
 > 产品数据范围：United States（Mireye 当前覆盖）

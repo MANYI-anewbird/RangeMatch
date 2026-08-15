@@ -1,0 +1,22 @@
+{
+  "run_id": "advisor_771b3b968a474157",
+  "initial_source": "LIVE_LLM",
+  "revised_source": "LIVE_LLM",
+  "revised_validation": "PASSED",
+  "revised_headline": "Water verification is the controlling next step before this pasture can be relied on for seasonal grazing",
+  "revised_summary": "For a seasonal grazing operation, this parcel shows a plausible forage base and manageable terrain, but the seller's claim of excellent year-round water remains unverified. The mapped water features are only leads, not proof of a usable drinker, and no developed water system has been confirmed. The controlling issue is water: without a documented source and its reliability, the forage cannot be safely utilized for the intended seasonal grazing. The next step is to obtain the seller's water records and access documents, then plan a field visit to inventory actual water sources, rather than running more broad data searches that would not resolve the water question.",
+  "change_status": "CONCLUSION_CHANGED",
+  "deal_context_version": 2,
+  "operation_type": "SEASONAL_GRAZING",
+  "chat_source": "LIVE_LLM",
+  "chat_judgment": "Mapped water features are leads only; no verified source or reliability yet.",
+  "chat_answer": "For this seasonal grazing parcel, the mapped hydrography is only a lead, not proof of usable livestock water. No developed water system—well, tank, pond, or seasonal channel—has been confirmed. The seller's claim of excellent year-round water remains unverified. The controlling issue is water: without a documented source and its reliability, the forage cannot be safely utilized for the intended seasonal grazing. The next step is to request the seller's water source records and access documents, then schedule a field visit to inventory actual water sources.",
+  "pdf": "tmp/pdfs/live-cattle-operating-snapshot-acceptance.pdf",
+  "checks": {
+    "succeeded_has_conclusion": true,
+    "seasonal_in_revised_prose": true,
+    "no_stale_undefined_in_revised": true,
+    "chat_v2_no_stale_operation_question": true,
+    "validation_passed_on_used_conclusion": true
+  }
+}

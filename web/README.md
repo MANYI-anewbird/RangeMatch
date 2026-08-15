@@ -15,6 +15,8 @@ Basemap: default embedded OpenStreetMap raster style (`web/src/config/map.ts`). 
 # Terminal A — API
 cd /path/to/RangeMatch
 python -m pip install -e ".[api]"
+# Includes jsonschema plus live adapter packages (numpy, netCDF4, rasterio).
+# Advisor still fail-softs if an adapter package is missing.
 export PYTHONPATH=src
 uvicorn rangematch.api:app --reload --port 8001 --env-file .env
 
@@ -26,7 +28,7 @@ npm run dev
 
 Open **http://127.0.0.1:5273**. RangeMatch pins the Vite dev server to port 5273 (`strictPort: true`) so it does not silently move to 5174 when 5173 is occupied by another app.
 
-**Mireye Challenge Demo:** [http://127.0.0.1:5273/advisor-demo](http://127.0.0.1:5273/advisor-demo). Click **Run investigation**. The UI calls `POST /v1/advisor/runs`, which calls live Mireye (`allow_network=true`), then builds the CPER Evidence Packet and three-page Brief. Each run returns `run_id`, `generated_at`, `packet_hash`, and `mireye_live` statuses. Failed Mireye contexts are not replaced with fixtures. It does not replace the HOLD buyer dashboard. Start the API with `--env-file .env` so `MIREYE_API_TOKEN` is visible.
+**Mireye Challenge Demo:** [http://127.0.0.1:5273/advisor-demo](http://127.0.0.1:5273/advisor-demo). Enter a U.S. address or coordinates and click **Run investigation** (or explicitly use Nambe). The UI requests `collection_mode=MIREYE_FIRST`, requires boundary confirmation, builds the Mireye Environmental Profile, runs deterministic gap planning and only necessary supplements, projects a Natural Cattle Profile, generates a validated LLM interpretation, accepts one buyer answer, and downloads a two-page Natural Cattle Foundation report. Failed calls are never replaced with another parcel or fixture.
 
 By default the Vite proxy targets `127.0.0.1:8001` (change `web/vite.config.ts` or set `VITE_API_BASE_URL` if you use another API port).
 

@@ -79,14 +79,21 @@ class AdvisorInsightContractTests(unittest.TestCase):
 
     def test_knowledge_cards_have_provenance_and_hash(self) -> None:
         cards = load_approved_knowledge_cards()
-        self.assertEqual(len(cards), 3)
-        self.assertTrue(all(row["review_status"] == "PROVISIONAL_FOR_CPER_TEST" for row in cards))
+        self.assertGreaterEqual(len(cards), 4)
+        self.assertTrue(all(row["review_status"] == "APPROVED" for row in cards))
+        ids = {row["knowledge_id"] for row in cards}
+        self.assertIn("EVIDENCE_STATUS_INTERPRETATION_001", ids)
+        self.assertIn("LEGAL_ACCESS_DILIGENCE_001", ids)
         for card in cards:
             self.assertEqual(validate_knowledge_card(card), [])
             self.assertEqual(card["content_hash"], knowledge_content_hash(card))
             self.assertIn("legal_conclusion", card["prohibited_use"])
             self.assertTrue(card["source_url_or_citation"])
             self.assertTrue(card["reviewed_by"])
+        natural = load_approved_knowledge_cards(workbench="natural_cattle")
+        natural_ids = {row["knowledge_id"] for row in natural}
+        self.assertNotIn("LEGAL_ACCESS_DILIGENCE_001", natural_ids)
+        self.assertIn("TERRAIN_CATTLE_INTERPRETATION_001", natural_ids)
 
     def test_cper_insights_pass(self) -> None:
         self.assertEqual(validate_insight_bundle(self.insights, self.workbench), [])

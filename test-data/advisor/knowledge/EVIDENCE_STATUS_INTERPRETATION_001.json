@@ -1,0 +1,34 @@
+{
+  "knowledge_id": "EVIDENCE_STATUS_INTERPRETATION_001",
+  "topic": "evidence_status",
+  "statement": "SOURCE_UNAVAILABLE, timeout, or a missing adapter dependency means that layer was not obtained on this run. It is not proof the ground lacks the feature, and it is not permission to substitute a fixture, another parcel, or a guessed number. Say what was measured, what is context, and what still needs a document or a visit.",
+  "source_id": "SRC_EVIDENCE_STATUS_DEMO_001",
+  "source_title": "Evidence-status interpretation (Demo-approved card)",
+  "source_url_or_citation": "docs/ADVISOR_GENERIC_EVIDENCE_PACKET.md",
+  "source_publisher": "RangeMatch Demo knowledge card",
+  "source_date": "2026-08-12",
+  "reviewed_by": "RangeMatch Demo review",
+  "reviewed_at": "2026-08-12",
+  "review_basis": "Demo-approved honesty rule for missing/partial sources. Not a scientific Factor.",
+  "effective_jurisdictions": [
+    "US_GENERAL"
+  ],
+  "species_scope": [
+    "cattle",
+    "sheep"
+  ],
+  "review_status": "APPROVED",
+  "allowed_use": [
+    "domain_prior",
+    "diligence_question",
+    "conditional_reasoning"
+  ],
+  "prohibited_use": [
+    "parcel_fact",
+    "suitability_verdict",
+    "legal_conclusion"
+  ],
+  "expires_or_review_after": "2026-11-12",
+  "version": "0.1-demo",
+  "content_hash": "sha256:9c0cb1bf013f45c831c801829b129f2eb37801c71ae3ba10c613f21b172cde0a"
+}

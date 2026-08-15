@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/environmental_gap_plan.schema.json",
+  "title": "RangeMatchEnvironmentalGapPlan",
+  "description": "Deterministic Environmental Gap Detector output. LLM never chooses tools.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "detector_id",
+    "run_id",
+    "profile_hash",
+    "domains",
+    "ordered_supplemental_tool_ids",
+    "excluded_tool_ids",
+    "plan_hash",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "environmental_gap_plan@1.0.0"
+    },
+    "detector_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "profile_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "f06_geometry_hash": { "type": ["string", "null"] },
+    "catalog_drift_fail_closed": { "type": "boolean" },
+    "domains": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/domainDecision" }
+    },
+    "ordered_supplemental_tool_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "F01_3DEP",
+          "F02_RAP",
+          "F03_NHD",
+          "F04_SDA",
+          "F05_NOAA",
+          "F08_RAP_WOODY"
+        ]
+      }
+    },
+    "excluded_tool_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "plan_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["built_at", "llm_tool_routing"],
+      "properties": {
+        "built_at": { "type": "string", "minLength": 1 },
+        "llm_tool_routing": { "const": false },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "domainDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "coverage_status",
+        "available_evidence_refs",
+        "missing_capabilities",
+        "reason_codes",
+        "supplemental_tool_ids"
+      ],
+      "properties": {
+        "domain": {
+          "type": "string",
+          "enum": [
+            "FEED_VEGETATION",
+            "WATER",
+            "TERRAIN",
+            "CLIMATE_HAZARD",
+            "SOIL_ECOLOGY"
+          ]
+        },
+        "coverage_status": {
+          "type": "string",
+          "enum": [
+            "SUFFICIENT_FROM_MIREYE",
+            "MIREYE_CONTEXT_PLUS_SUPPLEMENT",
+            "UNAVAILABLE"
+          ]
+        },
+        "available_evidence_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "missing_capabilities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "supplemental_tool_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "F01_3DEP",
+              "F02_RAP",
+              "F03_NHD",
+              "F04_SDA",
+              "F05_NOAA",
+              "F08_RAP_WOODY"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

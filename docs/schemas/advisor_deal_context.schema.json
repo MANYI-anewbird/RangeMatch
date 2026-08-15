@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/advisor_deal_context.schema.json",
+  "title": "RangeMatchAdvisorDealContext",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "deal_context_id",
+    "run_id",
+    "parcel_resolution_id",
+    "geometry_hash",
+    "species",
+    "operation_type",
+    "diligence_stage",
+    "seller_claims",
+    "user_answers",
+    "current_conclusion_id",
+    "context_version",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "RANGEMATCH_ADVISOR_DEAL_CONTEXT@0.1.0"
+    },
+    "deal_context_id": { "type": "string", "minLength": 8 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "parcel_resolution_id": { "type": ["string", "null"] },
+    "geometry_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "species": { "type": "string", "const": "CATTLE" },
+    "operation_type": {
+      "type": "string",
+      "enum": ["UNKNOWN", "SEASONAL_GRAZING", "YEAR_ROUND_COW_CALF", "OTHER"]
+    },
+    "diligence_stage": {
+      "type": "string",
+      "enum": ["SCREENING", "PRE_VISIT", "FIELD_PLANNED", "TITLE_REVIEW"]
+    },
+    "seller_claims": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sellerClaim" }
+    },
+    "user_answers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/userAnswer" }
+    },
+    "current_conclusion_id": { "type": ["string", "null"] },
+    "context_version": { "type": "integer", "minimum": 1 },
+    "created_at": { "type": "string", "minLength": 8 },
+    "updated_at": { "type": "string", "minLength": 8 },
+    "run_mode": {
+      "type": "string",
+      "enum": ["CUSTOM", "VERIFIED_DEMO"]
+    },
+    "demo_scenario_id": { "type": ["string", "null"] },
+    "version_history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/versionSnapshot" }
+    }
+  },
+  "$defs": {
+    "sellerClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "text", "provenance"],
+      "properties": {
+        "claim_id": { "type": "string" },
+        "category": { "type": ["string", "null"] },
+        "text": { "type": "string" },
+        "source_reference": { "type": ["string", "null"] },
+        "claim_strength": { "type": ["string", "null"] },
+        "verification_status": { "type": ["string", "null"] },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "DEMO_SCENARIO_CLAIM",
+            "USER_SUPPLIED_DEMO_CLAIM",
+            "USER_SUPPLIED_UNVERIFIED",
+            "PACKET_LISTING_CLAIM"
+          ]
+        }
+      }
+    },
+    "userAnswer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["answer_id", "field", "value", "provenance", "answered_at"],
+      "properties": {
+        "answer_id": { "type": "string" },
+        "field": { "type": "string" },
+        "value": { "type": ["string", "number", "boolean", "null"] },
+        "provenance": {
+          "type": "string",
+          "const": "USER_SUPPLIED_UNVERIFIED"
+        },
+        "answered_at": { "type": "string" }
+      }
+    },
+    "versionSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_version",
+        "operation_type",
+        "diligence_stage",
+        "seller_claims",
+        "user_answers",
+        "current_conclusion_id",
+        "recorded_at"
+      ],
+      "properties": {
+        "context_version": { "type": "integer", "minimum": 1 },
+        "operation_type": { "type": "string" },
+        "diligence_stage": { "type": "string" },
+        "seller_claims": { "type": "array" },
+        "user_answers": { "type": "array" },
+        "current_conclusion_id": { "type": ["string", "null"] },
+        "recorded_at": { "type": "string" }
+      }
+    }
+  }
+}

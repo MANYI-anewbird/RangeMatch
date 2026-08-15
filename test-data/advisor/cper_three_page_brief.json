@@ -22,6 +22,8 @@
     ]
   },
   "page_two_actions": {
+    "page_mode": "LISTING_CLAIMS",
+    "headline": "What the listing language actually has behind it",
     "messages": [
       {
         "message_id": "MSG_LISTING_WATER",
@@ -686,6 +688,7 @@
         "spatial_meaning": "sampled remote review"
       }
     ],
+    "mireye_provenance": [],
     "coverage_and_limitations": [
       {
         "land_fact_ref": "VAR_F05_MEAN_ANNUAL_PRECIPITATION",

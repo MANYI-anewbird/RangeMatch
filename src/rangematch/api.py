@@ -17,7 +17,7 @@ from uuid import uuid4
 
 from fastapi import BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, Field, model_validator
 
 from rangematch.advisor_agent import (
@@ -25,9 +25,19 @@ from rangematch.advisor_agent import (
     attach_advisor_buyer_explanation,
     enqueue_advisor_run,
     execute_advisor_run,
+    get_advisor_chat,
+    get_advisor_deal_context,
+    get_advisor_operating_conclusion,
+    get_advisor_report_bundle,
     get_advisor_run,
+    post_advisor_chat,
     reset_advisor_runs_for_tests,
+    submit_advisor_answer,
+    update_advisor_deal_context,
 )
+from rangematch.advisor_deal_context import DealContextError
+from rangematch.advisor_answer import AdvisorAnswerError
+from rangematch.advisor_chat import AdvisorChatError
 from rangematch.buyer_report import generate_buyer_report
 from rangematch.intent_parser import IntentParseError, parse_intent
 from rangematch.investigation_job import (
@@ -291,7 +301,7 @@ class IntentParseRequest(BaseModel):
     ui_mode: Literal["GOAL_DIRECTED", "DISCOVERY"] | None = None
     ui_intended_operation: Literal["COW_CALF_OPERATION", "SHEEP_GRAZING"] | None = None
     ui_planned_actions: list[str] | None = None
-    provider: Literal["FIXTURE", "OPENAI"] | None = None
+    provider: Literal["FIXTURE", "OPENAI", "DEEPSEEK"] | None = None
 
     @model_validator(mode="after")
     def _at_most_one_parcel_input(self) -> IntentParseRequest:
@@ -316,20 +326,87 @@ class IntentParseRequest(BaseModel):
 
 
 class BuyerReportGenerateRequest(BaseModel):
-    provider: Literal["FIXTURE", "OPENAI"] | None = None
+    provider: Literal["FIXTURE", "OPENAI", "DEEPSEEK"] | None = None
 
 
 class AdvisorRunRequest(BaseModel):
     address: str | None = None
     fixture_id: str | None = None
+    parcel_resolution_id: str | None = None
+    run_mode: Literal["CUSTOM", "VERIFIED_DEMO"] | None = None
+    demo_scenario_id: str | None = None
+    collection_mode: Literal["LEGACY", "MIREYE_FIRST"] | None = None
+
+    @model_validator(mode="after")
+    def _validate_advisor_run(self) -> AdvisorRunRequest:
+        mode = (self.run_mode or "CUSTOM").strip().upper()
+        collect = (self.collection_mode or "LEGACY").strip().upper()
+        if collect not in {"LEGACY", "MIREYE_FIRST"}:
+            raise ValueError("collection_mode_must_be_LEGACY_or_MIREYE_FIRST")
+        if mode == "VERIFIED_DEMO":
+            scenario = (self.demo_scenario_id or "NAMBE_CATTLE_V1").strip().upper()
+            if scenario != "NAMBE_CATTLE_V1":
+                raise ValueError("demo_scenario_id_must_be_NAMBE_CATTLE_V1")
+            if collect != "LEGACY":
+                raise ValueError("verified_demo_requires_legacy_collection_mode")
+            self.run_mode = "VERIFIED_DEMO"
+            self.demo_scenario_id = "NAMBE_CATTLE_V1"
+            self.fixture_id = None
+            self.collection_mode = "LEGACY"
+            # Address is forced server-side; client may omit it.
+            return self
+        self.run_mode = "CUSTOM"
+        self.demo_scenario_id = None
+        self.collection_mode = collect  # type: ignore[assignment]
+        if not (self.address and str(self.address).strip()) and not (
+            self.parcel_resolution_id and str(self.parcel_resolution_id).strip()
+        ):
+            if not (self.fixture_id and str(self.fixture_id).strip()):
+                raise ValueError("address_or_parcel_resolution_id_required")
+        return self
 
 
 class AdvisorExplanationRequest(BaseModel):
-    provider: Literal["FIXTURE", "OPENAI"] = "FIXTURE"
+    provider: Literal["FIXTURE", "OPENAI", "DEEPSEEK"] = "FIXTURE"
+
+
+class AdvisorDealContextUpdateRequest(BaseModel):
+    expected_geometry_hash: str = Field(min_length=64, max_length=64)
+    expected_context_version: int | None = Field(default=None, ge=1)
+    operation_type: (
+        Literal["UNKNOWN", "SEASONAL_GRAZING", "YEAR_ROUND_COW_CALF", "OTHER"] | None
+    ) = None
+    diligence_stage: (
+        Literal["SCREENING", "PRE_VISIT", "FIELD_PLANNED", "TITLE_REVIEW"] | None
+    ) = None
+    append_answer: dict[str, Any] | None = None
+
+    @model_validator(mode="after")
+    def _require_mutation(self) -> AdvisorDealContextUpdateRequest:
+        if (
+            self.operation_type is None
+            and self.diligence_stage is None
+            and self.append_answer is None
+        ):
+            raise ValueError("deal_context_mutation_required")
+        return self
+
+
+class AdvisorAnswerRequest(BaseModel):
+    question_id: str = Field(min_length=3)
+    answer: Any
+    expected_context_version: int = Field(ge=1)
+    expected_geometry_hash: str = Field(min_length=64, max_length=64)
+    provider: Literal["FIXTURE", "OPENAI", "DEEPSEEK"] | None = None
+
+
+class AdvisorChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=1200)
+    provider: Literal["FIXTURE", "OPENAI", "DEEPSEEK"] | None = None
 
 
 class DiligenceSearchRequest(BaseModel):
-    provider: Literal["FIXTURE", "OPENAI"] | None = None
+    provider: Literal["FIXTURE", "OPENAI", "DEEPSEEK"] | None = None
     topics: list[
         Literal[
             "REGULATION_AND_PERMITS",
@@ -387,6 +464,10 @@ def create_advisor_run(
     queued = enqueue_advisor_run(
         address=body.address,
         fixture_id=body.fixture_id,
+        parcel_resolution_id=body.parcel_resolution_id,
+        run_mode=body.run_mode,
+        demo_scenario_id=body.demo_scenario_id,
+        collection_mode=body.collection_mode,
     )
     run_id = queued["run_id"]
     schedule_investigation_job(
@@ -406,6 +487,105 @@ def get_advisor_run_endpoint(run_id: str) -> dict[str, Any]:
     return record
 
 
+@app.get("/v1/advisor/runs/{run_id}/report-bundle")
+def get_advisor_report_bundle_endpoint(run_id: str) -> dict[str, Any]:
+    """Durable evidence packet for one Advisor run. Secrets are redacted."""
+    bundle = get_advisor_report_bundle(run_id)
+    if bundle is None:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found")
+    _assert_no_secrets(bundle, where="advisor_report_bundle")
+    return bundle
+
+
+@app.get("/v1/advisor/runs/{run_id}/buyer-brief.pdf")
+def get_advisor_buyer_brief_pdf(run_id: str) -> Response:
+    """Legacy three-page PDF. Prefer cattle-operating-snapshot.pdf for Demo."""
+    record = get_advisor_run(run_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found")
+    brief = record.get("brief") or {}
+    if brief.get("validation_status") != "PASSED":
+        raise HTTPException(status_code=409, detail="brief_not_validated")
+    from rangematch.advisor_pdf import project_buyer_brief_pdf_model, render_three_page_pdf
+
+    view = project_buyer_brief_pdf_model(record)
+    try:
+        payload = render_three_page_pdf(view)
+    except RuntimeError as exc:
+        if "DEPENDENCY_MISSING" in str(exc):
+            raise HTTPException(status_code=503, detail="pdf_dependency_missing:fpdf2") from exc
+        raise
+    _assert_no_secrets({"run_id": run_id, "packet_hash": record.get("packet_hash")}, where="advisor_pdf")
+    filename = f"{run_id}_buyer_brief.pdf"
+    return Response(
+        content=payload,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@app.get("/v1/advisor/runs/{run_id}/cattle-operating-snapshot.pdf")
+def get_advisor_cattle_operating_snapshot_pdf(run_id: str) -> Response:
+    """Two-page buyer PDF: Natural Cattle Foundation (MIREYE_FIRST) or Cattle Operating Snapshot (LEGACY)."""
+    record = get_advisor_run(run_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found")
+    if record.get("status") != "SUCCEEDED":
+        raise HTTPException(status_code=409, detail="advisor_run_not_ready")
+
+    from rangematch.advisor_natural_foundation_pdf import (
+        NaturalFoundationReportError,
+        project_natural_cattle_foundation_report,
+        render_natural_cattle_foundation_pdf,
+        run_has_natural_foundation_report,
+    )
+    from rangematch.advisor_snapshot import (
+        SnapshotError,
+        project_cattle_operating_snapshot,
+        render_cattle_operating_snapshot_pdf,
+    )
+
+    try:
+        if run_has_natural_foundation_report(record):
+            view = project_natural_cattle_foundation_report(record)
+            payload = render_natural_cattle_foundation_pdf(view)
+            filename = f"{run_id}_natural_cattle_foundation.pdf"
+        else:
+            view = project_cattle_operating_snapshot(record)
+            payload = render_cattle_operating_snapshot_pdf(view)
+            filename = f"{run_id}_cattle_operating_snapshot.pdf"
+    except NaturalFoundationReportError as exc:
+        status = 409 if "REQUIRED" in exc.code or "MISMATCH" in exc.code else 400
+        if exc.code in {"FOUNDATION_PAGE_OVERFLOW", "FOUNDATION_PAGE_COUNT"}:
+            status = 500
+        raise HTTPException(status_code=status, detail=exc.code) from exc
+    except SnapshotError as exc:
+        status = 409 if "REQUIRED" in exc.code or "MISMATCH" in exc.code else 400
+        if exc.code == "SNAPSHOT_PAGE_OVERFLOW" or exc.code == "SNAPSHOT_PAGE_COUNT":
+            status = 500
+        raise HTTPException(status_code=status, detail=exc.code) from exc
+    except RuntimeError as exc:
+        if "DEPENDENCY_MISSING" in str(exc):
+            raise HTTPException(status_code=503, detail="pdf_dependency_missing:fpdf2") from exc
+        raise
+    _assert_no_secrets(
+        {
+            "run_id": run_id,
+            "packet_hash": record.get("packet_hash"),
+            "deal_context_version": (record.get("deal_context") or {}).get("context_version"),
+            "natural_cattle_profile_hash": (
+                (record.get("natural_cattle_profile") or {}).get("profile_hash")
+            ),
+        },
+        where="advisor_snapshot_pdf",
+    )
+    return Response(
+        content=payload,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
 @app.post("/v1/advisor/runs/{run_id}/buyer-explanation")
 def create_advisor_buyer_explanation(
     run_id: str,
@@ -421,6 +601,127 @@ def create_advisor_buyer_explanation(
         raise HTTPException(status_code=409, detail=exc.message) from exc
     _assert_no_secrets(view, where="advisor_buyer_explanation")
     return view
+
+
+@app.get("/v1/advisor/runs/{run_id}/deal-context")
+def get_advisor_deal_context_endpoint(run_id: str) -> dict[str, Any]:
+    """Return the Deal Context for one Advisor run (Slice 3)."""
+    try:
+        context = get_advisor_deal_context(run_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found") from exc
+    except DealContextError as exc:
+        raise HTTPException(status_code=404, detail=exc.code) from exc
+    _assert_no_secrets(context, where="advisor_deal_context")
+    return context
+
+
+@app.get("/v1/advisor/runs/{run_id}/conclusion")
+def get_advisor_operating_conclusion_endpoint(run_id: str) -> dict[str, Any]:
+    """Return the latest Operating Conclusion for one Advisor run."""
+    try:
+        conclusion = get_advisor_operating_conclusion(run_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found") from exc
+    except AdvisorAgentStepError as exc:
+        raise HTTPException(status_code=409, detail=exc.message) from exc
+    _assert_no_secrets(conclusion, where="advisor_operating_conclusion")
+    return conclusion
+
+
+@app.post("/v1/advisor/runs/{run_id}/answers")
+def post_advisor_answer_endpoint(
+    run_id: str,
+    body: AdvisorAnswerRequest,
+) -> dict[str, Any]:
+    """Answer the live next_question, bump Deal Context, and revise the conclusion."""
+    try:
+        view = submit_advisor_answer(
+            run_id,
+            question_id=body.question_id,
+            answer=body.answer,
+            expected_context_version=body.expected_context_version,
+            expected_geometry_hash=body.expected_geometry_hash,
+            provider_name=body.provider,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found") from exc
+    except AdvisorAnswerError as exc:
+        status = 409 if (
+            "MISMATCH" in exc.code
+            or "STALE" in exc.code
+            or exc.code.endswith("NOT_READY")
+            or exc.code.endswith("INCOMPLETE")
+        ) else 400
+        raise HTTPException(status_code=status, detail=exc.code) from exc
+    except DealContextError as exc:
+        status = 409 if exc.code.endswith("MISMATCH") or exc.code.endswith("NOT_READY") else 400
+        raise HTTPException(status_code=status, detail=exc.code) from exc
+    _assert_no_secrets(view, where="advisor_answer")
+    return view
+
+
+@app.get("/v1/advisor/runs/{run_id}/chat")
+def get_advisor_chat_endpoint(run_id: str) -> dict[str, Any]:
+    """Return suggested questions and chat turn history (Slice 6)."""
+    try:
+        body = get_advisor_chat(run_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found") from exc
+    _assert_no_secrets(body, where="advisor_chat_get")
+    return body
+
+
+@app.post("/v1/advisor/runs/{run_id}/chat")
+def post_advisor_chat_endpoint(
+    run_id: str,
+    body: AdvisorChatRequest,
+) -> dict[str, Any]:
+    """Grounded chat turn. Read-only: does not mutate Packet, Context, or Conclusion."""
+    try:
+        view = post_advisor_chat(
+            run_id,
+            message=body.message,
+            provider_name=body.provider,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found") from exc
+    except AdvisorChatError as exc:
+        status = 409 if (
+            "NOT_READY" in exc.code
+            or "INCOMPLETE" in exc.code
+            or "REQUIRED" in exc.code
+            or "FORBIDDEN" in exc.code
+        ) else 400
+        raise HTTPException(status_code=status, detail=exc.code) from exc
+    _assert_no_secrets(view, where="advisor_chat_post")
+    return view
+
+
+@app.patch("/v1/advisor/runs/{run_id}/deal-context")
+def patch_advisor_deal_context_endpoint(
+    run_id: str,
+    body: AdvisorDealContextUpdateRequest,
+) -> dict[str, Any]:
+    """Update Deal Context. Increments context_version. No LLM rewrite in Slice 3."""
+    try:
+        context = update_advisor_deal_context(
+            run_id,
+            expected_geometry_hash=body.expected_geometry_hash,
+            expected_context_version=body.expected_context_version,
+            operation_type=body.operation_type,
+            diligence_stage=body.diligence_stage,
+            append_answer=body.append_answer,
+        )
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="advisor_run_not_found") from exc
+    except DealContextError as exc:
+        status = 409 if exc.code.endswith("MISMATCH") or exc.code.endswith("NOT_READY") else 400
+        if exc.code == "DEAL_CONTEXT_NOT_FOUND":
+            status = 404
+        raise HTTPException(status_code=status, detail=exc.code) from exc
+    _assert_no_secrets(context, where="advisor_deal_context_patch")
+    return context
 
 
 @app.get("/health", response_model=HealthResponse)

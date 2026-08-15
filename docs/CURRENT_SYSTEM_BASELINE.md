@@ -1,5 +1,7 @@
 # RangeMatch Current System Baseline
 
+> **Superseded for current product direction on 2026-08-14.** This file is retained as a 2026-08-08 runtime snapshot. Use `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` for the current product, Agent flow, and execution order.
+
 > Status: `CURRENT_CANONICAL`
 > Effective date: 2026-08-08
 > Audience: product, engineering, scientific review, competition submission

@@ -90,18 +90,51 @@ F03_NOT_PROVIDED = "NOT_PROVIDED"
 
 
 def project_observations(
-    unified_output: dict[str, Any], *, f03_status: str = F03_AVAILABLE
+    unified_output: dict[str, Any],
+    *,
+    f03_status: str = F03_AVAILABLE,
+    allow_missing: bool = False,
 ) -> list[dict[str, Any]]:
     facts = land_fact_index(unified_output)
     observations: list[dict[str, Any]] = []
     for spec in OBSERVATION_SPECS:
         variable_id = spec["variable_id"]
         if variable_id not in facts:
-            raise KeyError(f"Unified Output is missing {variable_id}")
+            if not allow_missing:
+                raise KeyError(f"Unified Output is missing {variable_id}")
+            observations.append(
+                {
+                    "observation_id": spec["observation_id"],
+                    "label": spec["label"],
+                    "value": None,
+                    "display_value": None,
+                    "unit": None,
+                    "time_period": None,
+                    "evidence_state": "SOURCE_UNAVAILABLE",
+                    "spatial_meaning": "parcel_aggregate",
+                    "source_id": spec["source_fallback"],
+                    "land_fact_ref": variable_id,
+                    "allowed_support": [
+                        "canonical land fact is missing from Unified Output"
+                    ],
+                    "prohibited_support": list(spec["prohibited_support"]),
+                }
+            )
+            continue
         fact = facts[variable_id]
         evidence_state = spec["evidence_state"]
         value = fact.get("value")
         allowed = list(spec["allowed_support"])
+        coverage = fact.get("coverage")
+        if isinstance(coverage, Mapping) and str(coverage.get("status") or "").upper() in {
+            "FAILED",
+            "UNAVAILABLE",
+            "SOURCE_UNAVAILABLE",
+        }:
+            evidence_state = "SOURCE_UNAVAILABLE"
+            allowed = [
+                f"coverage status={coverage.get('status')}; value is not treated as complete"
+            ]
         if spec["observation_id"] == "OBS_WATER_COUNT" and f03_status == F03_FAILED:
             evidence_state = "SOURCE_UNAVAILABLE"
             allowed = ["mapped-water inventory is currently unavailable"]
@@ -252,13 +285,15 @@ def constrain_actions_to_objects(
 
 def rank_bottlenecks(*_args: Any, **_kwargs: Any) -> list[dict[str, Any]]:
     raise NotImplementedError(
-        "generic bottleneck ranking is not a production policy; use build_cper_demo_policy"
+        "use build_generic_minimal_policy or build_cper_demo_policy via "
+        "project_buyer_evidence_packet / project_generic_buyer_evidence_packet"
     )
 
 
 def order_actions(*_args: Any, **_kwargs: Any) -> list[dict[str, Any]]:
     raise NotImplementedError(
-        "generic action ordering is not a production policy; use build_cper_demo_policy"
+        "use build_generic_minimal_policy or build_cper_demo_policy via "
+        "project_buyer_evidence_packet / project_generic_buyer_evidence_packet"
     )
 
 
@@ -748,6 +783,9 @@ def project_buyer_evidence_packet(
     remote_pilot: Mapping[str, Any] | None = None,
     policy: PolicyBuilder | None = None,
     f03_status: str | None = None,
+    allow_missing_observations: bool = False,
+    f03_inventory_ref: str | None = None,
+    f03_remote_pilot_ref: str | None = None,
 ) -> dict[str, Any]:
     if policy is None:
         raise MissingPolicyError(
@@ -792,6 +830,19 @@ def project_buyer_evidence_packet(
         }
         for row in graph["bottlenecks"]
     ]
+    cper_fixture = is_cper_engineering_fixture(unified_output)
+    if policy_name == "build_cper_demo_policy":
+        inventory_ref = F03_INVENTORY_REF if objects else None
+        remote_ref = F03_REMOTE_PILOT_REF if objects else None
+        policy_scope = "CPER_FIXTURE_ONLY"
+    else:
+        inventory_ref = f03_inventory_ref if objects else None
+        remote_ref = f03_remote_pilot_ref if objects else None
+        policy_scope = (
+            "GENERIC_MINIMAL"
+            if policy_name == "build_generic_minimal_policy"
+            else "EXPLICIT_NON_DEMO"
+        )
     return {
         "schema_version": PACKET_SCHEMA,
         "parcel": {
@@ -799,13 +850,17 @@ def project_buyer_evidence_packet(
             "geometry_hash": parcel_in.get("geometry_hash"),
             "confirmation_status": confirmation_status,
             "display_label": "CPER engineering test geometry, Weld County, CO"
-            if is_cper_engineering_fixture(unified_output)
+            if cper_fixture
             else None,
-            "is_engineering_test_geometry": is_cper_engineering_fixture(unified_output),
+            "is_engineering_test_geometry": cper_fixture,
         },
         "decision_context": decision_context or _default_decision_context(None),
         "listing_claims": claims,
-        "observations": project_observations(unified_output, f03_status=resolved_f03),
+        "observations": project_observations(
+            unified_output,
+            f03_status=resolved_f03,
+            allow_missing=allow_missing_observations,
+        ),
         "candidate_objects": objects,
         "claim_evidence_gaps": graph["claim_evidence_gaps"],
         "bottlenecks": bottlenecks,
@@ -825,15 +880,13 @@ def project_buyer_evidence_packet(
         "technical_references": {
             "unified_output": unified_output_ref,
             "f03_status": resolved_f03,
-            "f03_candidate_inventory": F03_INVENTORY_REF if objects else None,
-            "f03_remote_pilot": F03_REMOTE_PILOT_REF if objects else None,
+            "f03_candidate_inventory": inventory_ref,
+            "f03_remote_pilot": remote_ref,
             "candidate_object_count_in_packet": len(objects),
             "drawable_object_count": sum(
                 1 for row in objects if has_drawable_geometry(row.get("geometry") or {})
             ),
             "policy": policy_name,
-            "policy_scope": "CPER_FIXTURE_ONLY"
-            if policy_name == "build_cper_demo_policy"
-            else "EXPLICIT_NON_DEMO",
+            "policy_scope": policy_scope,
         },
     }

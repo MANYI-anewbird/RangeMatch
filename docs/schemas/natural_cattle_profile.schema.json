@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/natural_cattle_profile.schema.json",
+  "title": "RangeMatchNaturalCattleProfile",
+  "description": "Deterministic five-domain cattle natural-environment foundation profile. LLM may explain it later but never author it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "projector_id",
+    "run_id",
+    "parcel_ref",
+    "packet_hash",
+    "plan_hash",
+    "domains",
+    "overall_natural_foundation",
+    "prohibited_inferences",
+    "profile_hash",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "natural_cattle_profile@1.0.0"
+    },
+    "projector_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "parcel_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parcel_resolution_id", "geometry_hash", "confirmed"],
+      "properties": {
+        "parcel_resolution_id": { "type": "string", "minLength": 1 },
+        "geometry_hash": { "type": "string", "minLength": 1 },
+        "confirmed": { "const": true }
+      }
+    },
+    "packet_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "plan_hash": { "type": ["string", "null"], "minLength": 64, "maxLength": 64 },
+    "domains": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/domainReading" }
+    },
+    "overall_natural_foundation": {
+      "$ref": "#/$defs/overallFoundation"
+    },
+    "prohibited_inferences": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "profile_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["built_at", "llm_authored", "hard_constraint_registry_size"],
+      "properties": {
+        "built_at": { "type": "string", "minLength": 1 },
+        "llm_authored": { "const": false },
+        "hard_constraint_registry_size": { "type": "integer", "minimum": 0 },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "domainId": {
+      "type": "string",
+      "enum": [
+        "TERRAIN",
+        "FEED_VEGETATION",
+        "WATER",
+        "CLIMATE_HAZARD",
+        "SOIL_ECOLOGY"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW", "INSUFFICIENT"]
+    },
+    "foundationStatus": {
+      "type": "string",
+      "enum": [
+        "PROMISING_NATURAL_FOUNDATION",
+        "CONDITIONAL_NATURAL_FOUNDATION",
+        "ENVIRONMENTALLY_CONSTRAINED",
+        "INSUFFICIENT_ENVIRONMENTAL_EVIDENCE"
+      ]
+    },
+    "domainReading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "buyer_label",
+        "reading",
+        "supporting_refs",
+        "limitations",
+        "confidence",
+        "evidence_classes",
+        "conflict_refs"
+      ],
+      "properties": {
+        "domain": { "$ref": "#/$defs/domainId" },
+        "buyer_label": { "type": "string", "minLength": 1 },
+        "reading": { "type": "string", "minLength": 1 },
+        "supporting_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "limitations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "evidence_classes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "parcel_count",
+            "point_count",
+            "context_count",
+            "unavailable_count",
+            "conflict_count"
+          ],
+          "properties": {
+            "parcel_count": { "type": "integer", "minimum": 0 },
+            "point_count": { "type": "integer", "minimum": 0 },
+            "context_count": { "type": "integer", "minimum": 0 },
+            "unavailable_count": { "type": "integer", "minimum": 0 },
+            "conflict_count": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "conflict_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "overallFoundation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "headline",
+        "judgment",
+        "controlling_factor",
+        "supporting_refs",
+        "limitations",
+        "evidence_needed",
+        "confidence",
+        "approved_hard_constraint_rule_id"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/foundationStatus" },
+        "headline": { "type": "string", "minLength": 1 },
+        "judgment": { "type": "string", "minLength": 1 },
+        "controlling_factor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["domain", "reason", "supporting_refs", "resolved"],
+          "properties": {
+            "domain": {
+              "anyOf": [
+                { "$ref": "#/$defs/domainId" },
+                { "type": "null" }
+              ]
+            },
+            "reason": { "type": "string", "minLength": 1 },
+            "supporting_refs": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "resolved": { "type": "boolean" }
+          }
+        },
+        "supporting_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "limitations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evidence_needed": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "approved_hard_constraint_rule_id": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

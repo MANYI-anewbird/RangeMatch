@@ -1,5 +1,7 @@
 # RangeMatch Buyer Dashboard and Scoring Spec
 
+> **Superseded for current product direction on 2026-08-14.** Retained as presentation history. The current experience is conclusion-first and interactive; use `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
+
 Status: `IMPLEMENTED_V0_1_PRESENTATION_CONTRACT`
 
 Current report implementation: `BUYER_DECISION_REPORT_V2` (see `docs/CURRENT_SYSTEM_BASELINE.md`).

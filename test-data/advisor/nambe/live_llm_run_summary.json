@@ -1,0 +1,42 @@
+{
+  "run_id": "advisor_7c341d9320c242d9",
+  "operating_conclusion": {
+    "source": "LIVE_LLM",
+    "validation_status": "PASSED",
+    "headline": "The property shows promising forage and water leads, but the water claim needs on-the-ground verification before cattle can be committed.",
+    "summary": "The parcel presents a moderate-sized area with gentle slopes and a modeled forage production snapshot that suggests reasonable grass growth, though this is only a modeled estimate and not a guarantee of available forage. The seller claims excellent year-round water and easy county-road access, but the mapped hydrography only provides leads, not proof of a usable livestock water source. The nearest mapped road is close, but this does not confirm a legal entrance. The controlling operating issue is the uncertainty around livestock water: without a verified water source, the property cannot support cattle regardless of forage quality. The recommended next step is to clarify the intended operation type, as this directly affects how water demand and the purpose of a field visit should be interpreted. This is more useful than further broad data searches because the water question requires site-specific verification, and knowing whether the operation is seasonal or year-round will shape the urgency and scope of that verification.",
+    "primary_constraint": "Livestock water availability is unverified; mapped hydrography is only a lead and does not confirm a usable, year-round source.",
+    "confidence": "LOW",
+    "next_spend_class": "DOCUMENT_REVIEW",
+    "next_action": "Ask the buyer whether they are evaluating the property for seasonal grazing or a year-round cow-calf operation.",
+    "what_would_change_view": [
+      "Knowing whether the operation is seasonal or year-round cow-calf changes how water demand and visit purpose should be read. For example, a seasonal operation might tolerate a less reliable water source, while a year-round cow-calf operation would require a more robust and reliable supply."
+    ],
+    "next_question": {
+      "question_id": "Q_OPERATION_TYPE",
+      "prompt": "Are you evaluating this property for seasonal grazing or a year-round cow-calf operation?",
+      "allowed_field": "operation_type",
+      "what_would_change_view_ref": "CHANGE_OPERATION_TYPE"
+    },
+    "provenance": {
+      "provider": "DEEPSEEK",
+      "prompt_version": "RANGEMATCH_OPERATING_CONCLUSION@0.1.0",
+      "selected_question_id": "Q_OPERATION_TYPE",
+      "revision": false,
+      "llm_used": true,
+      "provider_status": "OK",
+      "model_id": "deepseek-chat",
+      "generated_at": "2026-08-15T02:25:23.858190+00:00",
+      "error_code": null,
+      "request_id": null,
+      "retry_count": 0
+    },
+    "validation_violations": []
+  },
+  "buyer_explanation": {
+    "source": null,
+    "provenance": null
+  },
+  "snapshot_url": "http://127.0.0.1:8001/v1/advisor/runs/advisor_7c341d9320c242d9/cattle-operating-snapshot.pdf",
+  "demo_url": "http://127.0.0.1:5273/advisor-demo"
+}

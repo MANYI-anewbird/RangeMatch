@@ -4,15 +4,18 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 from rangematch.advisor_contract import (
     REPO_ROOT,
-    drawable_objects,
     has_drawable_geometry,
     land_fact_index,
     packet_hash,
     validate_packet,
+)
+from rangematch.advisor_visit import (
+    derive_authoritative_visit_purpose,
+    field_drawable_objects,
 )
 
 BRIEF_SCHEMA = "RANGEMATCH_ADVISOR_THREE_PAGE@0.1.0"
@@ -53,6 +56,11 @@ MESSAGE_BODIES = {
         "lines still lack supporting materials. We will get the access paper first, then "
         "decide whether a site visit is worth the time and airfare."
     ),
+    "WAIT_FOR_ACCESS_PAPER_PUBLIC_EVIDENCE": (
+        "We are not deciding to abandon this tract. Public maps show road contact and "
+        "hydrography leads, but they do not prove a recorded entrance or usable drinking "
+        "water. Get the access paper first, then decide whether a site visit is worth the trip."
+    ),
     "ASK_SELLER_DEVELOPED_WATER": (
         "Does anyone claim a developed livestock-water source on this tract — a well, tank, "
         "pond, or similar — and if so, where is it and what records exist? A mapped-hydrography "
@@ -74,6 +82,10 @@ MESSAGE_BODIES = {
     "TITLE_REVIEW_ALREADY_ACTIVE": (
         "Title or counsel is already reviewing the entrance question. Do not send a second "
         "copy of the same access request. Use that cycle; the next new spend is water evidence."
+    ),
+    "INTERPRET_RAP_NOT_STOCKING": (
+        "The modeled vegetation / RAP production figure is a snapshot only. Do not treat it as "
+        "available forage or a herd-size plan."
     ),
 }
 
@@ -100,10 +112,18 @@ def _obs_map(packet: dict[str, Any]) -> dict[str, dict[str, Any]]:
     }
 
 
+def _obs_has_value(row: dict[str, Any] | None) -> bool:
+    if not row:
+        return False
+    if row.get("evidence_state") == "SOURCE_UNAVAILABLE":
+        return False
+    return row.get("value") is not None
+
+
 def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
     obs = _obs_map(packet)
     objects = list(packet.get("candidate_objects") or [])
-    drawable = drawable_objects(objects)
+    drawable = field_drawable_objects(objects)
     f03_status = (packet.get("technical_references") or {}).get("f03_status")
     water = obs.get("OBS_WATER_COUNT") or {}
     if f03_status == "FAILED" or water.get("evidence_state") == "SOURCE_UNAVAILABLE":
@@ -124,14 +144,34 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
         )
     else:
         water_clause = "mapped-water evidence still needs a next ask"
-    tract = (
-        "This tract already has a usable public-data portrait: gentle typical slope, "
-        f"measured rainfall, a recent vegetation snapshot, {water_clause}, "
-        "and a road that meets the boundary. The useful question is whether drinking water "
-        "and a legal entrance can be established, not whether the public maps look complete."
-    )
+    slope_ok = _obs_has_value(obs.get("OBS_SLOPE"))
+    precip_ok = _obs_has_value(obs.get("OBS_PRECIP"))
+    rap_ok = _obs_has_value(obs.get("OBS_RAP_PROD"))
+    road_ok = _obs_has_value(obs.get("OBS_ROAD"))
+    if slope_ok and precip_ok and rap_ok and road_ok:
+        tract = (
+            "This tract already has a usable public-data portrait: gentle typical slope, "
+            f"measured rainfall, a recent vegetation snapshot, {water_clause}, "
+            "and a road that meets the boundary. The useful question is whether drinking water "
+            "and a legal entrance can be established, not whether the public maps look complete."
+        )
+    else:
+        portrait = [
+            "slope is on file" if slope_ok else "slope is not yet available",
+            "rainfall is measured" if precip_ok else "rainfall is not yet available",
+            "a vegetation snapshot is on file" if rap_ok else "no vegetation snapshot yet",
+            "a mapped-road distance is on file" if road_ok else "no mapped-road distance yet",
+        ]
+        tract = (
+            "This tract has a confirmed outline. "
+            f"{'; '.join(portrait)}. Water: {water_clause}. "
+            "The useful question is whether drinking water and a legal entrance can be "
+            "established, not whether missing public layers can be invented."
+        )
     gaps = list(packet.get("claim_evidence_gaps") or [])
     outruns: list[str] = []
+    if not gaps and not packet.get("listing_claims"):
+        outruns = []
     for gap in gaps[:3]:
         claim_id = str(gap.get("claim_id") or "")
         if claim_id in CLAIM_OUTRUN_LINES:
@@ -169,6 +209,9 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
         "ACTION_CONFIRM_PARCEL": (
             "Confirm the parcel outline before spending on documents or a visit."
         ),
+        "ACTION_INTERPRET_RAP_FORAGE": (
+            "Treat modeled RAP / herbaceous production as a snapshot only — not a herd-size plan."
+        ),
     }
     for action in actions[:2]:
         line = today_copy.get(str(action.get("action_id"))) or str(action.get("why_now") or "").strip()
@@ -179,8 +222,9 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
 
     action_ids = {row.get("action_id") for row in actions}
     stage = str((packet.get("decision_context") or {}).get("current_stage") or "")
+    visit = derive_authoritative_visit_purpose(packet)
+    visit_purpose = visit["visit_state"]
     if "ACTION_CONFIRM_PARCEL" in action_ids:
-        visit_purpose = "NO_DEFINED_VISIT_PURPOSE_YET"
         visit_guidance = (
             "Do not fly or start field work on an unconfirmed outline. Confirm the parcel first."
         )
@@ -189,7 +233,6 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
             "Do not convert the RAP number into a herd size."
         )
     elif stage in {"FIELD_VISIT_ALREADY_BOOKED", "FIELD_FOLLOW_UP"} and drawable:
-        visit_purpose = "VISIT_PURPOSE_DEFINED"
         visit_guidance = (
             "The visit is already booked and has a defined purpose: inspect mapped water areas "
             "and any seller-named supply. This walk cannot prove year-round use or legal right."
@@ -199,7 +242,6 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
             "Do not convert the RAP number into a herd size."
         )
     elif "ACTION_ACCESS_DOCUMENTS" in action_ids:
-        visit_purpose = "VISIT_DEPENDS_ON_DOCUMENT"
         visit_guidance = (
             "The trip depends on access documentation. If the entrance basis holds, the visit "
             "has a defined purpose: inspect mapped water areas and any seller-claimed infrastructure."
@@ -210,7 +252,6 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
             "do not convert the RAP number into a herd size."
         )
     elif drawable:
-        visit_purpose = "VISIT_PURPOSE_DEFINED"
         visit_guidance = (
             "A visit has a defined purpose: inspect mapped water areas and any seller-named supply. "
             "Do not treat map areas as drinkers or pins."
@@ -220,7 +261,6 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
             "Do not convert the RAP number into a herd size."
         )
     else:
-        visit_purpose = "NO_DEFINED_VISIT_PURPOSE_YET"
         visit_guidance = (
             "Do not fly to look for water that the map cannot yet place. Get a location, a "
             "seller-claimed source, or a confirmed entrance first."
@@ -237,12 +277,20 @@ def _page_one(packet: dict[str, Any]) -> dict[str, Any]:
         "visit_guidance": visit_guidance,
         "what_changes_next": what_changes,
         "what_not_to_recheck": [
-            "Do not pay for another annual-precipitation lookup. That number is already measured."
+            (
+                "Do not pay for another annual-precipitation lookup. That number is already measured."
+                if precip_ok
+                else (
+                    "Do not invent a precipitation number. The climate lookup is not "
+                    "available on this run."
+                )
+            )
         ],
     }
 
 
 def _page_two(packet: dict[str, Any]) -> dict[str, Any]:
+    has_listing = bool(packet.get("listing_claims") or packet.get("claim_evidence_gaps"))
     messages = []
     for spec in packet.get("copy_ready_message_specs") or []:
         template_id = str(spec.get("template_id") or "")
@@ -271,7 +319,15 @@ def _page_two(packet: dict[str, Any]) -> dict[str, Any]:
                 "body": body,
             }
         )
-    return {"messages": messages}
+    return {
+        "page_mode": "LISTING_CLAIMS" if has_listing else "PUBLIC_EVIDENCE",
+        "headline": (
+            "What the listing language actually has behind it"
+            if has_listing
+            else "What public evidence supports — and what still requires transaction documents"
+        ),
+        "messages": messages,
+    }
 
 
 def _map_layer(obj: dict[str, Any]) -> dict[str, Any]:
@@ -316,6 +372,41 @@ def _kitchen_observation(
     }
 
 
+def _mireye_provenance(mireye_live: Mapping[str, Any] | None) -> list[dict[str, Any]]:
+    live = dict(mireye_live or {})
+    rows: list[dict[str, Any]] = []
+    lookup = live.get("lookup") or {}
+    if lookup:
+        rows.append(
+            {
+                "source_id": "MIREYE_LOOKUP",
+                "role": "PARCEL_ENTRY",
+                "ok": bool(lookup.get("ok")),
+                "canonical_for_parcel_facts": False,
+                "spatial_meaning": "address_or_location_recognition",
+            }
+        )
+    labels = {
+        "PROPERTY_DILIGENCE_CONTEXT": "property_context",
+        "POINT_LAND_CONTEXT": "centroid_land_context",
+        "POINT_HAZARD_CONTEXT": "centroid_hazard_context",
+    }
+    for key, meaning in labels.items():
+        row = (live.get("contexts") or {}).get(key)
+        if row is None:
+            continue
+        rows.append(
+            {
+                "source_id": f"MIREYE_{key}",
+                "role": "CONTEXT_ONLY",
+                "ok": (row or {}).get("status") == "SUCCEEDED",
+                "canonical_for_parcel_facts": False,
+                "spatial_meaning": meaning,
+            }
+        )
+    return rows
+
+
 def _source_notes(packet: dict[str, Any], facts: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     notes: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -356,6 +447,19 @@ def _source_notes(packet: dict[str, Any], facts: dict[str, dict[str, Any]]) -> l
                 "artifact_ref": refs.get("f03_remote_pilot"),
                 "time_period": None,
                 "spatial_meaning": "sampled remote review",
+            }
+        )
+    for row in refs.get("mireye_context_refs") or []:
+        if not isinstance(row, Mapping):
+            continue
+        notes.append(
+            {
+                "source_id": str(row.get("source_id") or "MIREYE_CONTEXT"),
+                "source_version": None,
+                "land_fact_ref": None,
+                "role": row.get("role") or "CONTEXT_ONLY",
+                "canonical_for_parcel_facts": False,
+                "spatial_meaning": row.get("spatial_meaning") or "mireye_context",
             }
         )
     return notes
@@ -434,6 +538,7 @@ def _page_three(
     unified_output: dict[str, Any] | None,
     packet_violations: list[dict[str, str]],
     bound_hash: str,
+    mireye_live: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     parcel = packet.get("parcel") or {}
     objects = list(packet.get("candidate_objects") or [])
@@ -455,6 +560,8 @@ def _page_three(
         "observations": observations,
         "candidate_objects": objects,
         "source_notes": _source_notes(packet, facts),
+        "mireye_provenance": _mireye_provenance(mireye_live)
+        or list((packet.get("technical_references") or {}).get("mireye_context_refs") or []),
         "coverage_and_limitations": _coverage_and_limitations(packet, facts),
         "engine_appendix": _engine_appendix(packet, unified_output),
         "validation_record": {
@@ -475,6 +582,7 @@ def generate_deterministic_brief(
     land_facts: dict[str, dict[str, Any]] | None = None,
     unified_output: dict[str, Any] | None = None,
     repo_root: Path | None = None,
+    mireye_live: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build a complete three-page Brief from a Packet. Fail-closed facts preferred."""
     uo = unified_output if unified_output is not None else _load_unified_output(
@@ -497,6 +605,7 @@ def generate_deterministic_brief(
             unified_output=uo,
             packet_violations=packet_violations,
             bound_hash=bound_hash,
+            mireye_live=mireye_live,
         ),
         "report_provenance": {
             "displayable": passed,

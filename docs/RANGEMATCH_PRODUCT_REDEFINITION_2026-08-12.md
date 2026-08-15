@@ -1,5 +1,7 @@
 # RangeMatch Product Redefinition
 
+> **Superseded for current product direction on 2026-08-14.** Retained as design history. Use `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
+
 > Status: Product definition closed 2026-08-12. Next work is Slice A (contracts, tests, code).
 > Date: 2026-08-12
 > Intended review repository: `/Users/hongmanyi/RangeMatch`
@@ -1181,4 +1183,3 @@ To: a living parcel Evidence Deal Room
 From: a low-frequency consumer tool first
 To: a repeatable buyer-side broker/advisor workflow first
 ```
-

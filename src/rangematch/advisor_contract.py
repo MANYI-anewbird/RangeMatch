@@ -222,6 +222,9 @@ def validate_packet(
             _add(violations, "LAND_FACT_REF_MISSING", f"{obs.get('observation_id')} has no land_fact_ref")
             continue
         if facts is not None and ref not in facts:
+            if obs.get("evidence_state") == "SOURCE_UNAVAILABLE":
+                # Generic packets may honestly report missing facts without inventing values.
+                continue
             _add(violations, "LAND_FACT_REF_UNKNOWN", f"{ref} is not in Unified Output")
             continue
         if facts is not None:

@@ -1,0 +1,182 @@
+{
+  "parcel_ref": {
+    "parcel_resolution_id": "0af266d7-2c10-4628-a990-bd881c4b9357",
+    "geometry_hash": "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7",
+    "confirmed": true
+  },
+  "fetched_at": "2026-08-15T16:30:00+00:00",
+  "fields": {
+    "elevation": {
+      "value": 1842.0,
+      "unit": "meters",
+      "source": "USGS_3DEP",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "slope_degrees": {
+      "value": 6.4,
+      "unit": "degrees",
+      "source": "USGS_3DEP",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "aspect_degrees": {
+      "value": 210.0,
+      "unit": "degrees",
+      "source": "USGS_3DEP",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "aspect_cardinal": {
+      "value": "SW",
+      "source": "USGS_3DEP",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "lcms_class": {
+      "value": "Grass/Shrub",
+      "source": "USFS_LCMS",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "land_use_class": {
+      "value": "Rangeland",
+      "source": "USFS_LCMS",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "ndvi_current": {
+      "value": 0.28,
+      "source": "SENTINEL2_NDVI",
+      "confidence": "low",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "ndvi_change_5y": {
+      "value": -0.04,
+      "source": "SENTINEL2_NDVI",
+      "confidence": "low",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "tree_canopy_pct": {
+      "value": 3.1,
+      "unit": "percent",
+      "source": "USFS_NLCD_TCC",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "intersects_nhd_area": {
+      "value": true,
+      "source": "USGS_NHDPLUS_HR",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "surface_water_permanence_pct": {
+      "value": 12.0,
+      "unit": "percent",
+      "source": "JRC_GSW",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "nearest_flowline_name": {
+      "value": "Nambe Creek",
+      "source": "USGS_NHDPLUS_HR",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "nearest_waterbody_name": {
+      "value": null
+    },
+    "nearest_groundwater_well_depth_to_water_m": {
+      "value": 18.5,
+      "unit": "meters",
+      "source": "USGS_NWIS_OGC",
+      "confidence": "low",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "intersects_wetland": {
+      "value": false,
+      "source": "USFWS_NWI",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "wetland_fraction_of_parcel": {
+      "value": 0.02,
+      "source": "USFWS_NWI",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00",
+      "spatial_semantics": "PARCEL",
+      "geometry_hash": "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7"
+    },
+    "wetland_acres_on_parcel": {
+      "value": 1.4,
+      "source": "USFWS_NWI",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00",
+      "spatial_semantics": "PARCEL",
+      "geometry_hash": "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7"
+    },
+    "soil_drainage_class": {
+      "value": "Well drained",
+      "source": "USDA_SSURGO",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "soil_hydrologic_group": {
+      "value": "B",
+      "source": "USDA_SSURGO",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "soil_map_unit_name": {
+      "value": "Pojoaque sandy loam",
+      "source": "USDA_SSURGO",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "soil_available_water_capacity": {
+      "value": 0.12,
+      "unit": "cm/cm",
+      "source": "USDA_SSURGO",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "drought_category": {
+      "value": "D0",
+      "source": "USDM_CURRENT",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "mean_annual_dry_bulb_temperature_degc": {
+      "value": 10.8,
+      "unit": "degC",
+      "source": "NOAA_NCEI_NORMALS_GRIDDED",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "days_above_32c_annual_count": {
+      "value": 28,
+      "unit": "days",
+      "source": "NOAA_NCEI_NCLIMGRID_DAILY",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "within_floodplain_polygon": {
+      "value": false,
+      "source": "FEMA_NFHL",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "fema_flood_zone": {
+      "value": "X",
+      "source": "FEMA_NFHL",
+      "confidence": "medium",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    },
+    "wildfire_annual_frequency": {
+      "value": 0.004,
+      "source": "FEMA_NRI",
+      "confidence": "low",
+      "fetched_at": "2026-08-15T16:30:00+00:00"
+    }
+  }
+}

@@ -13,6 +13,11 @@ mireye/*token*
 test-data/live-results/cper/cache/
 test-data/live-results/cper/tiger2025_cache/
 
+# Generated / scratch artifacts — never commit run outputs
+output/
+tmp/
+**/__pycache__/
+
 # Buyer UI
 web/node_modules/
 web/dist/

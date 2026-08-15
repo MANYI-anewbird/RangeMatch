@@ -19,6 +19,21 @@ TRIAL_CARD_IDS = frozenset(
         "LEGAL_ACCESS_DILIGENCE_001",
         "LIVESTOCK_WATER_DILIGENCE_001",
         "RAP_INTERPRETATION_001",
+        "EVIDENCE_STATUS_INTERPRETATION_001",
+        "TERRAIN_CATTLE_INTERPRETATION_001",
+        "CLIMATE_HAZARD_CATTLE_INTERPRETATION_001",
+        "SOIL_ECOLOGY_CATTLE_INTERPRETATION_001",
+    }
+)
+# Primary natural-foundation workbench: LEGAL_ACCESS / title cards excluded.
+NATURAL_FOUNDATION_CARD_IDS = frozenset(
+    {
+        "LIVESTOCK_WATER_DILIGENCE_001",
+        "RAP_INTERPRETATION_001",
+        "EVIDENCE_STATUS_INTERPRETATION_001",
+        "TERRAIN_CATTLE_INTERPRETATION_001",
+        "CLIMATE_HAZARD_CATTLE_INTERPRETATION_001",
+        "SOIL_ECOLOGY_CATTLE_INTERPRETATION_001",
     }
 )
 TRIAL_STATUSES = frozenset({"APPROVED", "PROVISIONAL_FOR_CPER_TEST"})
@@ -40,7 +55,7 @@ LEGAL_VERDICT = re.compile(
     r"\b(has legal access|no legal access|easement is valid|you own a right)\b",
     re.I,
 )
-KITCHEN_LEAK = re.compile(r"\b(F0[1-8]|HOLD|VAR_F\d|geometry_hash)\b", re.I)
+KITCHEN_LEAK = re.compile(r"\b(F0[1-8]|HOLD|VAR_F\d|ACTION_[A-Z0-9_]+|geometry_hash)\b", re.I)
 WELL_AS_FACT = re.compile(r"\b(this (tract|parcel|ranch) has a well|there is a well)\b", re.I)
 
 CARD_REQUIRED = (
@@ -96,18 +111,39 @@ def knowledge_content_hash(card: dict[str, Any]) -> str:
     return f"sha256:{digest}"
 
 
-def load_approved_knowledge_cards(*, repo_root: Path | None = None) -> list[dict[str, Any]]:
-    """Load the three CPER trial cards. Not an official knowledge base."""
+def load_approved_knowledge_cards(
+    *,
+    repo_root: Path | None = None,
+    workbench: str = "legacy",
+) -> list[dict[str, Any]]:
+    """Load Demo-approved Knowledge Cards. Not a national knowledge base.
+
+    workbench:
+      - legacy: historical trial set (includes LEGAL_ACCESS for LEGACY Demo)
+      - natural_cattle: primary environmental selector; excludes LEGAL_ACCESS_*
+    """
     root = (repo_root or REPO_ROOT) / "test-data" / "advisor" / "knowledge"
+    allowed = (
+        NATURAL_FOUNDATION_CARD_IDS
+        if workbench == "natural_cattle"
+        else TRIAL_CARD_IDS
+    )
     cards = []
     if not root.is_dir():
         return cards
     for path in sorted(root.glob("*.json")):
         card = json.loads(path.read_text(encoding="utf-8"))
-        if card.get("knowledge_id") not in TRIAL_CARD_IDS:
+        if card.get("knowledge_id") not in allowed:
             continue
         if card.get("review_status") not in TRIAL_STATUSES:
             continue
+        if workbench == "natural_cattle":
+            topic = str(card.get("topic") or "").lower()
+            kid = str(card.get("knowledge_id") or "").upper()
+            if topic in {"legal_access", "title", "access"} or kid.startswith(
+                "LEGAL_ACCESS"
+            ):
+                continue
         cards.append(card)
     return cards
 
@@ -157,6 +193,7 @@ def project_advisor_llm_workbench(
     report_locale: str = "en-US",
     audience: str = "ORDINARY_BUYER",
     unified_output: dict[str, Any] | None = None,
+    operating_profile: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     actions = list(packet.get("actions") or [])
     policy = packet.get("action_policy") or build_cper_action_policy(actions)
@@ -204,6 +241,15 @@ def project_advisor_llm_workbench(
     ]
     if not any(row.get("action_id") == DEFERRED_PRECIP["action_id"] for row in candidates):
         candidates.append(dict(DEFERRED_PRECIP))
+    profile_slice = None
+    profile_hash = None
+    thesis_inputs: list[str] = []
+    if operating_profile:
+        from rangematch.livestock_operating_profile import profile_for_llm
+
+        profile_slice = profile_for_llm(operating_profile)
+        profile_hash = operating_profile.get("profile_hash")
+        thesis_inputs = list(profile_slice.get("operating_thesis_inputs") or [])
     return {
         "schema_version": WORKBENCH_SCHEMA,
         "packet_hash": packet_hash(packet),
@@ -237,6 +283,9 @@ def project_advisor_llm_workbench(
             "recommendation_max_chars": 140,
             "first_screen_sections": [1, 2, 3],
         },
+        "operating_profile": profile_slice,
+        "operating_profile_hash": profile_hash,
+        "operating_thesis_inputs": thesis_inputs,
     }
 
 

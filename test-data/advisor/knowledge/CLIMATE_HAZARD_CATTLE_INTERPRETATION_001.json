@@ -1,0 +1,34 @@
+{
+  "knowledge_id": "CLIMATE_HAZARD_CATTLE_INTERPRETATION_001",
+  "topic": "climate_hazard",
+  "statement": "Climate and natural-hazard context (precipitation normals, drought category, heat, wildfire or flood context) shapes how forage and water reliability should be read. It is not a weather forecast, insurance opinion, or carry capacity. Missing climate layers reduce confidence; they do not by themselves prove the parcel is environmentally constrained.",
+  "source_id": "SRC_CLIMATE_DEMO_001",
+  "source_title": "Climate/hazard interpretation for cattle natural foundation (Demo-approved)",
+  "source_url_or_citation": "docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md",
+  "source_publisher": "RangeMatch Demo knowledge card",
+  "source_date": "2026-08-15",
+  "reviewed_by": "RangeMatch Demo review",
+  "reviewed_at": "2026-08-15",
+  "review_basis": "Demo-approved cattle natural-environment interpretation limit.",
+  "effective_jurisdictions": [
+    "US_GENERAL"
+  ],
+  "species_scope": [
+    "cattle"
+  ],
+  "review_status": "APPROVED",
+  "allowed_use": [
+    "domain_prior",
+    "diligence_question",
+    "conditional_reasoning"
+  ],
+  "prohibited_use": [
+    "parcel_fact",
+    "suitability_verdict",
+    "legal_conclusion",
+    "stocking_advice"
+  ],
+  "expires_or_review_after": "2026-11-15",
+  "version": "0.1-demo",
+  "content_hash": "sha256:46d5c90a6f44eabe11fd5168ca474402f7df13d096ace861b2048ae4562e71d7"
+}

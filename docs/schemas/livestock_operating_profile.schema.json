@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rangematch.local/schemas/livestock_operating_profile.schema.json",
+  "title": "RangeMatchLivestockOperatingProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_hash",
+    "unified_output_hash",
+    "profile_hash",
+    "parcel_ref",
+    "species_lens",
+    "available_domains",
+    "operating_domains",
+    "operating_thesis_inputs",
+    "domain_attention_order",
+    "action_execution_order",
+    "field_visit_purpose",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "RANGEMATCH_LIVESTOCK_OPERATING_PROFILE@0.1.0"
+    },
+    "packet_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "unified_output_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "profile_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "parcel_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parcel_id",
+        "geometry_hash",
+        "confirmation_status",
+        "policy_scope"
+      ],
+      "properties": {
+        "parcel_id": { "type": ["string", "null"] },
+        "geometry_id": { "type": ["string", "null"] },
+        "geometry_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+        "confirmation_status": { "type": "string" },
+        "policy_scope": { "type": "string" },
+        "is_engineering_test_geometry": { "type": "boolean" }
+      }
+    },
+    "species_lens": { "type": "string", "enum": ["CATTLE", "SHEEP"] },
+    "available_domains": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["FEED", "DRINK", "MOVE"] }
+    },
+    "operating_domains": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "feed": { "$ref": "#/$defs/domainBucket" },
+        "drink": { "$ref": "#/$defs/domainBucket" },
+        "move": { "$ref": "#/$defs/domainBucket" }
+      }
+    },
+    "operating_thesis_inputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "domain_attention_order": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["FEED", "DRINK", "MOVE"] }
+    },
+    "action_execution_order": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "field_visit_purpose": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["visit_state", "bound_action_ids", "purpose_type", "object_refs"],
+      "properties": {
+        "visit_state": {
+          "type": "string",
+          "enum": [
+            "VISIT_PURPOSE_DEFINED",
+            "VISIT_DEPENDS_ON_DOCUMENT",
+            "NO_DEFINED_VISIT_PURPOSE_YET"
+          ]
+        },
+        "bound_action_ids": { "type": "array", "items": { "type": "string" } },
+        "purpose_type": {
+          "type": "string",
+          "enum": [
+            "CONFIRM_PARCEL",
+            "WATER_INVENTORY_AFTER_ACCESS_DOCUMENT",
+            "WATER_FIELD_REVIEW_AFTER_ACCESS_DOCUMENT",
+            "WATER_FIELD_REVIEW",
+            "NO_DEFINED_VISIT_PURPOSE"
+          ]
+        },
+        "object_refs": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projector", "llm_used", "policy_scope"],
+      "properties": {
+        "projector": { "type": "string" },
+        "llm_used": { "type": "boolean", "const": false },
+        "policy_scope": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "domainBucket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statements"],
+      "properties": {
+        "statements": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/statement" }
+        }
+      }
+    },
+    "statement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement_id",
+        "domain",
+        "statement_type",
+        "value_refs",
+        "evidence_refs",
+        "object_refs",
+        "qualifiers",
+        "evidence_state",
+        "spatial_scope",
+        "allowed_inferences",
+        "prohibited_inferences",
+        "displayable",
+        "narrative_role"
+      ],
+      "properties": {
+        "statement_id": { "type": "string", "pattern": "^[A-Z0-9_]+$" },
+        "domain": { "type": "string", "enum": ["FEED", "DRINK", "MOVE"] },
+        "statement_type": {
+          "type": "string",
+          "enum": [
+            "MODELED_PRODUCTION_SNAPSHOT",
+            "PRECIPITATION_CONTEXT",
+            "MAPPED_HYDROGRAPHY_LEAD_COUNT",
+            "DRAWABLE_WATER_LEAD_COUNT",
+            "DRAWABLE_WATER_NONE",
+            "WATER_INVENTORY_UNAVAILABLE",
+            "NO_MAPPED_HYDROGRAPHY_LEADS",
+            "PARCEL_AREA_CONTEXT",
+            "SLOPE_MEDIAN_CONTEXT",
+            "ROAD_BOUNDARY_RELATIONSHIP",
+            "PARCEL_COMPACTNESS",
+            "PARCEL_FRAGMENTATION",
+            "DRAWABLE_WATER_DISTRIBUTION"
+          ]
+        },
+        "value_refs": { "type": "array", "items": { "type": "string" } },
+        "evidence_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "object_refs": { "type": "array", "items": { "type": "string" } },
+        "qualifiers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TOUCHES_BOUNDARY",
+              "NEARBY_NOT_TOUCHING",
+              "NOT_OBTAINED",
+              "LEADS_NOT_INFRASTRUCTURE",
+              "NOT_ABSENCE_FINDING",
+              "SINGLE_YEAR_SNAPSHOT",
+              "CATEGORY_LEVEL_PURPOSE_ONLY",
+              "COMPACT",
+              "ELONGATED",
+              "FRAGMENTED_MULTIPART",
+              "SINGLE_PART",
+              "MULTIPART",
+              "DISTRIBUTED",
+              "CONCENTRATED",
+              "BOUNDARY_ADJACENT"
+            ]
+          }
+        },
+        "evidence_state": { "type": "string" },
+        "spatial_scope": { "type": "string", "enum": ["PARCEL", "OBJECT", "CENTROID_CONTEXT"] },
+        "allowed_inferences": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/inference" }
+        },
+        "prohibited_inferences": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/inference" }
+        },
+        "displayable": { "type": "boolean" },
+        "narrative_role": {
+          "type": "string",
+          "enum": ["PORTRAIT_INPUT", "ACTION_INPUT", "GUARDRAIL_ONLY"]
+        }
+      }
+    },
+    "inference": {
+      "type": "string",
+      "enum": [
+        "MODELED_VEGETATION_CONTEXT",
+        "CLIMATE_LOOKUP_CONTEXT",
+        "TERRAIN_MEDIAN_CONTEXT",
+        "PARCEL_AREA_CONTEXT",
+        "MAPPED_HYDROGRAPHY_LEADS",
+        "DRAWABLE_WATER_ROUTE_LEADS",
+        "PHYSICAL_ROAD_CONTACT",
+        "PARCEL_SHAPE_CONTEXT",
+        "WATER_LEAD_SPATIAL_CONTEXT",
+        "AVAILABLE_FORAGE",
+        "CARRYING_CAPACITY",
+        "HERD_SIZE",
+        "USABLE_LIVESTOCK_WATER",
+        "YEAR_ROUND_RELIABILITY",
+        "LEGAL_WATER_RIGHT",
+        "LEGAL_ACCESS",
+        "USABLE_ENTRANCE",
+        "GRAZABLE_ACRES",
+        "CLIMATE_ADEQUACY",
+        "DROUGHT_RESILIENCE",
+        "SUITABILITY",
+        "ABSENCE_FROM_FAILED_INVENTORY",
+        "FACILITY_INVENTION",
+        "TREND_OR_RESILIENCE"
+      ]
+    }
+  }
+}

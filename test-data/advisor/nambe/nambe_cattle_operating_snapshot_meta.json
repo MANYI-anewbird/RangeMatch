@@ -1,0 +1,10 @@
+{
+  "run_id": "advisor_7dd65066aa054ae9",
+  "deal_context_version": 2,
+  "geometry_hash": "6ed54dc96210c4841698b88aab087799039272e189eabd879540d813c6384470",
+  "packet_hash": "f6339dc073fa82c096d50db441c2f406e3a8eb7cef3b0155605a1ffd740222ed",
+  "operating_profile_hash": "2c2ce4ae0f54b105a782419e81ffdb466d14754502d6953e64e5f73f97ef49a4",
+  "conclusion_source": "DETERMINISTIC_FALLBACK",
+  "change_status": "CONCLUSION_CHANGED",
+  "headline": "Seasonal grazing reading is open, but livestock-water use is still unverified"
+}

@@ -1,7 +1,15 @@
 {
+  "knowledge_id": "LIVESTOCK_WATER_DILIGENCE_001",
+  "topic": "livestock_water",
+  "statement": "Mapped hydrography identities are leads. They do not establish usable livestock water, year-round reliability, water quality, or a legal right to drink or divert. Ask what source is claimed — well, tank, pond, or seasonal channel — and for any records. Do not invent a well or drinker.",
+  "source_id": "SRC_WATER_DEMO_001",
+  "source_title": "Mapped water is not stock water (Demo-approved card)",
+  "source_url_or_citation": "docs/ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md",
+  "source_publisher": "RangeMatch Demo knowledge card — not a water-rights opinion",
   "source_date": "2026-08-12",
-  "reviewed_by": "RangeMatch CPER trial",
+  "reviewed_by": "RangeMatch Demo review",
   "reviewed_at": "2026-08-12",
+  "review_basis": "Demo-approved diligence questions. Not a parcel water inventory.",
   "effective_jurisdictions": [
     "US_GENERAL"
   ],
@@ -9,26 +17,18 @@
     "cattle",
     "sheep"
   ],
-  "review_status": "PROVISIONAL_FOR_CPER_TEST",
-  "prohibited_use": [
-    "parcel_fact",
-    "suitability_verdict",
-    "legal_conclusion"
-  ],
-  "expires_or_review_after": "2026-09-12",
-  "version": "0.1-trial",
-  "knowledge_id": "LIVESTOCK_WATER_DILIGENCE_001",
-  "topic": "livestock_water",
-  "statement": "Mapped hydrography identities are leads. They do not establish usable livestock water, year-round reliability, water quality, or a legal right to drink or divert. Ask what source is claimed — well, tank, pond, or seasonal channel — and for any records. Do not invent a well or drinker.",
-  "source_id": "SRC_WATER_TRIAL_001",
-  "source_title": "Mapped water is not stock water (CPER trial card)",
-  "source_url_or_citation": "docs/ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md",
-  "source_publisher": "RangeMatch trial card — not an official knowledge base",
-  "review_basis": "Provisional CPER test only; diligence questions, not parcel inventory.",
+  "review_status": "APPROVED",
   "allowed_use": [
     "diligence_question",
     "conditional_reasoning",
     "domain_prior"
   ],
-  "content_hash": "sha256:2c82167c49a9a559545c71baf16f4e377f052b6cdca75f39be9872fffe9820f6"
+  "prohibited_use": [
+    "parcel_fact",
+    "suitability_verdict",
+    "legal_conclusion"
+  ],
+  "expires_or_review_after": "2026-11-12",
+  "version": "0.2-demo",
+  "content_hash": "sha256:d8c7fff3361144e42c0edb100fb398831ee1a3f364ff00b3435ed19b538c07e1"
 }

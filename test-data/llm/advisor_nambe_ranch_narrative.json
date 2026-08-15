@@ -1,0 +1,17 @@
+{
+  "ranch_narrative": {
+    "operating_thesis": "This tract already has a preliminary cattle operating picture from public evidence. Water investigation is the largest operating theme; access documents remain the first spend.",
+    "ranch_reading": "Read this as a cattle diligence object, not a scored ranch. Modeled herbaceous production and rainfall are feed context only. Mapped hydrography identities are investigation leads, not drinkers. Movement context comes from the confirmed outline, median slope, and mapped road relationship. The useful question is which cheap document or field job comes next.",
+    "how_livestock_would_use_it": "Feed context sets a modeled snapshot that must not become a herd plan. Water leads give the later visit a category-level inventory job when none of the mapped identities can be drawn yet. Movement context from outline, slope, and road contact decides only that access paper comes before travel. Together they define a water-inventory visit after the entrance file, not a general ranch tour.",
+    "attention_pivot": {
+      "largest_operating_theme": "Water investigation is the largest cattle-operating theme on this tract.",
+      "first_action_id": "ACTION_ACCESS_DOCUMENTS",
+      "why_theme_and_action_differ": "Access documents still come first because they are cheaper than travel and decide whether a water-focused visit has a defined job."
+    },
+    "conditional_path": {
+      "if_access_holds": "If the entrance basis holds, schedule a water-inventory visit and keep RAP as a modeled snapshot only.",
+      "if_access_fails": "If the entrance basis cannot be shown, pause travel and give title the question. Do not spend on a search for absence."
+    },
+    "client_summary": "Request the access paper first. If it holds, use the trip for a water inventory. Public feed and movement layers already did their job: they set the order."
+  }
+}

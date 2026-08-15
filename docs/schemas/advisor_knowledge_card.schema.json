@@ -33,7 +33,11 @@
         "livestock_water",
         "legal_access",
         "forage_or_rap",
-        "field_task_boundary"
+        "field_task_boundary",
+        "evidence_status",
+        "climate_hazard",
+        "soil_ecology",
+        "terrain"
       ]
     },
     "statement": { "type": "string", "minLength": 40 },
@@ -69,7 +73,12 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["parcel_fact", "suitability_verdict", "legal_conclusion"]
+        "enum": [
+          "parcel_fact",
+          "suitability_verdict",
+          "legal_conclusion",
+          "stocking_advice"
+        ]
       }
     },
     "content_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },

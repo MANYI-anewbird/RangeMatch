@@ -1,5 +1,7 @@
 # Agent Three-Page Workflow Contract
 
+> **Superseded as the top-level product contract on 2026-08-14.** The three-page shape remains historical design input; the current product is an interactive, Deal-Context-updating Agent defined in `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
+
 > Status: `LOCKED_PRODUCT_CONTRACT` — product locked; packet projection and graph Validator in progress
 > Note: The three-page *product* contract is locked. A hand-written fixture is not a safe Agent
 > contract. Packet numbers must come from Unified Output; the Validator must resolve the

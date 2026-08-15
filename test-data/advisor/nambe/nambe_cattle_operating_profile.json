@@ -1,0 +1,304 @@
+{
+  "schema_version": "RANGEMATCH_LIVESTOCK_OPERATING_PROFILE@0.1.0",
+  "packet_hash": "a1fd7ea3d0ab4b77a81eae2e7b365248bd84e5c36f3244c24f121f5579893904",
+  "unified_output_hash": "7b2419457692e7472bb2dfd09dc7149c1737ac58b35e98e4a77cd7bd3289a36b",
+  "parcel_ref": {
+    "parcel_id": "0af266d7-2c10-4628-a990-bd881c4b9357",
+    "geometry_id": "0af266d7-2c10-4628-a990-bd881c4b9357",
+    "geometry_hash": "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7",
+    "confirmation_status": "CONFIRMED",
+    "policy_scope": "GENERIC_MINIMAL",
+    "is_engineering_test_geometry": false
+  },
+  "species_lens": "CATTLE",
+  "available_domains": [
+    "FEED",
+    "DRINK",
+    "MOVE"
+  ],
+  "operating_domains": {
+    "feed": {
+      "statements": [
+        {
+          "statement_id": "FEED_MODELED_PRODUCTION_SNAPSHOT",
+          "domain": "FEED",
+          "statement_type": "MODELED_PRODUCTION_SNAPSHOT",
+          "value_refs": [
+            "OBS_RAP_PROD"
+          ],
+          "evidence_refs": [
+            "OBS_RAP_PROD"
+          ],
+          "object_refs": [],
+          "qualifiers": [
+            "SINGLE_YEAR_SNAPSHOT"
+          ],
+          "evidence_state": "MODELED",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "MODELED_VEGETATION_CONTEXT"
+          ],
+          "prohibited_inferences": [
+            "AVAILABLE_FORAGE",
+            "CARRYING_CAPACITY",
+            "HERD_SIZE",
+            "TREND_OR_RESILIENCE"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        },
+        {
+          "statement_id": "FEED_PRECIPITATION_CONTEXT",
+          "domain": "FEED",
+          "statement_type": "PRECIPITATION_CONTEXT",
+          "value_refs": [
+            "OBS_PRECIP"
+          ],
+          "evidence_refs": [
+            "OBS_PRECIP"
+          ],
+          "object_refs": [],
+          "qualifiers": [],
+          "evidence_state": "MEASURED",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "CLIMATE_LOOKUP_CONTEXT"
+          ],
+          "prohibited_inferences": [
+            "CLIMATE_ADEQUACY",
+            "DROUGHT_RESILIENCE",
+            "TREND_OR_RESILIENCE"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        }
+      ]
+    },
+    "drink": {
+      "statements": [
+        {
+          "statement_id": "DRINK_MAPPED_HYDROGRAPHY_LEAD_COUNT",
+          "domain": "DRINK",
+          "statement_type": "MAPPED_HYDROGRAPHY_LEAD_COUNT",
+          "value_refs": [
+            "OBS_WATER_COUNT"
+          ],
+          "evidence_refs": [
+            "OBS_WATER_COUNT"
+          ],
+          "object_refs": [],
+          "qualifiers": [
+            "LEADS_NOT_INFRASTRUCTURE"
+          ],
+          "evidence_state": "MAPPED_CANDIDATE",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "MAPPED_HYDROGRAPHY_LEADS"
+          ],
+          "prohibited_inferences": [
+            "LEGAL_WATER_RIGHT",
+            "USABLE_LIVESTOCK_WATER",
+            "YEAR_ROUND_RELIABILITY"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        },
+        {
+          "statement_id": "DRINK_DRAWABLE_WATER_NONE",
+          "domain": "DRINK",
+          "statement_type": "DRAWABLE_WATER_NONE",
+          "value_refs": [
+            "OBS_WATER_COUNT"
+          ],
+          "evidence_refs": [
+            "OBS_WATER_COUNT"
+          ],
+          "object_refs": [],
+          "qualifiers": [
+            "CATEGORY_LEVEL_PURPOSE_ONLY"
+          ],
+          "evidence_state": "MAPPED_CANDIDATE",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [],
+          "prohibited_inferences": [
+            "DRAWABLE_WATER_ROUTE_LEADS",
+            "USABLE_LIVESTOCK_WATER"
+          ],
+          "displayable": false,
+          "narrative_role": "GUARDRAIL_ONLY"
+        }
+      ]
+    },
+    "move": {
+      "statements": [
+        {
+          "statement_id": "MOVE_PARCEL_AREA_CONTEXT",
+          "domain": "MOVE",
+          "statement_type": "PARCEL_AREA_CONTEXT",
+          "value_refs": [
+            "OBS_AREA"
+          ],
+          "evidence_refs": [
+            "OBS_AREA",
+            "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7"
+          ],
+          "object_refs": [],
+          "qualifiers": [],
+          "evidence_state": "PARCEL_DERIVED",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "PARCEL_AREA_CONTEXT"
+          ],
+          "prohibited_inferences": [
+            "FACILITY_INVENTION",
+            "GRAZABLE_ACRES"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        },
+        {
+          "statement_id": "MOVE_SLOPE_MEDIAN_CONTEXT",
+          "domain": "MOVE",
+          "statement_type": "SLOPE_MEDIAN_CONTEXT",
+          "value_refs": [
+            "OBS_SLOPE"
+          ],
+          "evidence_refs": [
+            "OBS_SLOPE",
+            "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7"
+          ],
+          "object_refs": [],
+          "qualifiers": [],
+          "evidence_state": "PARCEL_DERIVED",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "TERRAIN_MEDIAN_CONTEXT"
+          ],
+          "prohibited_inferences": [
+            "SUITABILITY"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        },
+        {
+          "statement_id": "MOVE_ROAD_BOUNDARY_RELATIONSHIP",
+          "domain": "MOVE",
+          "statement_type": "ROAD_BOUNDARY_RELATIONSHIP",
+          "value_refs": [
+            "OBS_ROAD"
+          ],
+          "evidence_refs": [
+            "OBS_ROAD",
+            "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7"
+          ],
+          "object_refs": [],
+          "qualifiers": [
+            "TOUCHES_BOUNDARY"
+          ],
+          "evidence_state": "MAPPED_CANDIDATE",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "PHYSICAL_ROAD_CONTACT"
+          ],
+          "prohibited_inferences": [
+            "LEGAL_ACCESS",
+            "USABLE_ENTRANCE"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        },
+        {
+          "statement_id": "MOVE_PARCEL_COMPACTNESS",
+          "domain": "MOVE",
+          "statement_type": "PARCEL_COMPACTNESS",
+          "value_refs": [
+            "OBS_AREA"
+          ],
+          "evidence_refs": [
+            "OBS_AREA",
+            "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7"
+          ],
+          "object_refs": [],
+          "qualifiers": [
+            "ELONGATED"
+          ],
+          "evidence_state": "PARCEL_DERIVED",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "PARCEL_SHAPE_CONTEXT"
+          ],
+          "prohibited_inferences": [
+            "FACILITY_INVENTION",
+            "GRAZABLE_ACRES",
+            "SUITABILITY"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        },
+        {
+          "statement_id": "MOVE_PARCEL_FRAGMENTATION",
+          "domain": "MOVE",
+          "statement_type": "PARCEL_FRAGMENTATION",
+          "value_refs": [
+            "OBS_AREA"
+          ],
+          "evidence_refs": [
+            "OBS_AREA",
+            "78b8062b6e02e071b73d6d77f210916cbfbb60ccd960f27d3488c806e9f18fa7"
+          ],
+          "object_refs": [],
+          "qualifiers": [
+            "SINGLE_PART"
+          ],
+          "evidence_state": "PARCEL_DERIVED",
+          "spatial_scope": "PARCEL",
+          "allowed_inferences": [
+            "PARCEL_SHAPE_CONTEXT"
+          ],
+          "prohibited_inferences": [
+            "FACILITY_INVENTION",
+            "GRAZABLE_ACRES",
+            "SUITABILITY"
+          ],
+          "displayable": true,
+          "narrative_role": "PORTRAIT_INPUT"
+        }
+      ]
+    }
+  },
+  "operating_thesis_inputs": [
+    "FEED_MODELED_PRODUCTION_SNAPSHOT",
+    "FEED_PRECIPITATION_CONTEXT",
+    "DRINK_MAPPED_HYDROGRAPHY_LEAD_COUNT",
+    "MOVE_PARCEL_AREA_CONTEXT",
+    "MOVE_SLOPE_MEDIAN_CONTEXT",
+    "MOVE_ROAD_BOUNDARY_RELATIONSHIP",
+    "MOVE_PARCEL_COMPACTNESS",
+    "MOVE_PARCEL_FRAGMENTATION"
+  ],
+  "domain_attention_order": [
+    "DRINK",
+    "MOVE",
+    "FEED"
+  ],
+  "action_execution_order": [
+    "ACTION_ACCESS_DOCUMENTS",
+    "ACTION_WATER_LOCATION_OR_INVENTORY",
+    "ACTION_INTERPRET_RAP_FORAGE"
+  ],
+  "field_visit_purpose": {
+    "visit_state": "VISIT_DEPENDS_ON_DOCUMENT",
+    "bound_action_ids": [
+      "ACTION_ACCESS_DOCUMENTS",
+      "ACTION_WATER_LOCATION_OR_INVENTORY"
+    ],
+    "purpose_type": "WATER_INVENTORY_AFTER_ACCESS_DOCUMENT",
+    "object_refs": []
+  },
+  "provenance": {
+    "projector": "DETERMINISTIC_OPERATING_PROFILE@0.1.0",
+    "llm_used": false,
+    "policy_scope": "GENERIC_MINIMAL"
+  },
+  "profile_hash": "7148ca3bd55be43f020ff2170324aeba47e978990ed217501210606953d21910"
+}

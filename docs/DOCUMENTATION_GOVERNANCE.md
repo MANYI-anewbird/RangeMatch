@@ -3,17 +3,17 @@
 > Status: `CANONICAL`
 > Audience: RangeMatch builders, scientific reviewers, and Mireye reviewers
 > Submission language: English
-> Last updated: 2026-08-08
+> Last updated: 2026-08-15
 
 ## 0. Current-state authority
 
-`CURRENT_SYSTEM_BASELINE.md` is the canonical index for current product scope, runtime status, report shape, and next milestone. Scientific freeze records remain authoritative for their individual Factor contracts. Dated live-gate, incident, portfolio-review, and milestone documents are immutable audit records; they must be labeled historical and must not override the current baseline.
+`RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` version 2.0.0 is the canonical authority for the Mireye-first cattle natural-environment product, data-source precedence, user journey, Agent architecture, execution gates, and next milestone. Earlier fixed F01-F08, operating-diligence, access/title-first, and one-page-only product directions are superseded. Scientific freeze records remain authoritative when a Factor is invoked as a conditional supplement; they do not require every Factor to run. Dated records remain audit history and must not override the current authority.
 
 ## 1. Language Policy
 
 All documents used to build, review, validate, or submit RangeMatch must be written in English. This includes scientific evidence, Operation Profiles, variable definitions, data-source mappings, decision logic, limitations, validation records, and Mireye field audits.
 
-The only canonical document maintained in Chinese is `RANGEMATCH_AGENT_BUILD_PLAN.md`, which is the owner-facing execution checklist. Chinese research notes and prior reports may remain in `backups/`, but they are non-canonical and must not be cited by the runtime or submitted as scientific specifications.
+`RANGEMATCH_AGENT_BUILD_PLAN.md` is retained in Chinese as a historical owner-facing checklist. It is not current product or execution authority. Product direction and implementation order are governed exclusively by the English `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`. Chinese research notes and prior reports may remain in `backups/`, but they are non-canonical and must not be cited by the runtime or submitted as scientific specifications.
 
 ## 2. Required Traceability Chain
 
@@ -88,16 +88,21 @@ The review package should include the four canonical scientific deliverables, th
 
 ## 7. Current product documentation set
 
-Current product behavior is defined by:
+Current product behavior and implementation order are defined first by:
 
-- `CURRENT_SYSTEM_BASELINE.md`;
+- `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
+
+Supporting runtime and evidence contracts include:
+
 - `PRODUCT_PROTOTYPE_SCOPE.md`;
 - `AGENT_ORCHESTRATION_SPEC.md`;
 - `ONE_PARCEL_API_SPEC.md`;
+- `PARCEL_RESOLUTION_CONTRACT.md`;
 - `F01_F08_UNIFIED_OUTPUT_CONTRACT.md`;
-- `LLM_AUTHORITY_AND_REPORT_SPEC.md`;
+- `LIVESTOCK_OPERATING_PROFILE_CONTRACT.md`;
 - `DILIGENCE_SEARCH_AGENT_SPEC.md`;
-- `BUYER_DASHBOARD_AND_SCORING_SPEC.md`;
 - `PACKAGING_AND_DELIVERY_STRATEGY.md`.
+
+`CURRENT_SYSTEM_BASELINE.md`, `RANGEMATCH_AGENT_BUILD_PLAN.md`, `ADVISOR_AGENT_IMPLEMENTATION_PLAN.md`, `AGENT_THREE_PAGE_WORKFLOW_CONTRACT.md`, `ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md`, `RANGEMATCH_PRODUCT_REDEFINITION_2026-08-12.md`, and `BUYER_DASHBOARD_AND_SCORING_SPEC.md` are superseded for current product direction. They remain historical design or acceptance evidence and must not override the current flow.
 
 When test counts or incident states differ across dated files, the newest verified baseline is current and the older value remains historical evidence only.

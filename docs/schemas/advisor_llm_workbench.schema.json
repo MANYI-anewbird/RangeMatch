@@ -56,6 +56,12 @@
       "type": "array",
       "items": { "type": "string" }
     },
-    "reading_budget": { "type": "object" }
+    "reading_budget": { "type": "object" },
+    "operating_profile": { "type": ["object", "null"] },
+    "operating_profile_hash": { "type": ["string", "null"] },
+    "operating_thesis_inputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
   }
 }

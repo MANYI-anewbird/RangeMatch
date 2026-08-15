@@ -80,6 +80,65 @@ class MireyeLookupMappingTests(unittest.TestCase):
         mapped = map_mireye_lookup_to_parcel(raw)
         self.assertEqual(mapped.terminal_status, "NO_MATCH")
 
+    def test_current_lookup_contract_uses_resolved_address_and_match_method(self):
+        raw = {
+            "disposition": "resolved",
+            "lat": 30.199699,
+            "lng": -97.496411,
+            "resolved_address": "480 BERDOLL LN, CEDAR CREEK, TX 78612",
+            "resolved_location": {
+                "lat": 30.199699,
+                "lng": -97.496411,
+                "source": "address",
+            },
+            "match_method": "geocode_rooftop+point_in_parcel",
+            "confidence": 0.95,
+            "parcel": {
+                "parcel_id": "R123456",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [-97.50, 30.21],
+                            [-97.49, 30.21],
+                            [-97.49, 30.20],
+                            [-97.50, 30.20],
+                            [-97.50, 30.21],
+                        ]
+                    ],
+                },
+            },
+        }
+        mapped = map_mireye_lookup_to_parcel(raw)
+        self.assertIsNone(mapped.terminal_status)
+        self.assertEqual(mapped.normalized_address, "480 BERDOLL LN, CEDAR CREEK, TX 78612")
+        self.assertEqual(mapped.accuracy_type, "rooftop")
+        self.assertEqual(len(mapped.candidates), 1)
+
+    def test_clarify_points_only_keeps_location_hints(self):
+        raw = {
+            "disposition": "clarify",
+            "candidates": [
+                {
+                    "resolved_address": "1100 King St W, Toronto, ON, Canada",
+                    "lat": 43.6394,
+                    "lng": -79.4223,
+                    "confidence": 0.82,
+                },
+                {
+                    "resolved_address": "1100 King St W, Toronto, OH 45871",
+                    "lat": 41.0284,
+                    "lng": -84.3247,
+                    "confidence": 0.80,
+                },
+            ],
+        }
+        mapped = map_mireye_lookup_to_parcel(raw)
+        self.assertEqual(mapped.terminal_status, "AMBIGUOUS")
+        self.assertEqual(mapped.candidates, [])
+        self.assertEqual(len(mapped.location_hints), 2)
+        self.assertIn("Toronto, OH", mapped.location_hints[1]["label"])
+
     def test_geocode_quality_blocks_even_if_parcel_present(self):
         raw = _scenario("geocode_range_interpolation")["lookup_response"]
         mapped = map_mireye_lookup_to_parcel(raw)

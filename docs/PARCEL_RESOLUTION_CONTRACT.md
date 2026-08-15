@@ -1,7 +1,7 @@
 # Parcel Resolution Contract
 
 > Status: `IMPLEMENTED — DUAL_LAND_ENTRY; LIVE_MIREYE_RESOLVER + FIXTURE_MODE + MAP_CONFIRMATION`  
-> Date: 2026-08-08  
+> Date: 2026-08-08 (Advisor gate amendment 2026-08-12)  
 > Schema: `docs/schemas/parcel_resolution.schema.json`  
 > Module: `src/rangematch/parcel_resolution.py`  
 > Coordinates: `src/rangematch/coordinates.py`  
@@ -9,6 +9,7 @@
 > API: `src/rangematch/api.py` (`/v1/parcel-resolutions*`)  
 > Fixtures: `test-data/parcel-resolution/`  
 > Live contract: `docs/MIREYE_LIVE_PARCEL_RESOLVER_CONTRACT.md`  
+> Advisor gate: `docs/ADVISOR_PARCEL_CONFIRMATION_GATE.md` (`GATED`)  
 > Scope: address **or** coordinates → parcel candidate → user confirmation → Planner-ready geometry → investigation binding  
 > Non-goals: APN-only lookup; boundary upload; batch; multi-parcel selection; freehand boundary drawing; F09; 3D
 

@@ -68,3 +68,19 @@ class AdvisorApiTests(unittest.TestCase):
     def test_missing_run_is_404(self) -> None:
         response = self.client.get("/v1/advisor/runs/advisor_missing")
         self.assertEqual(response.status_code, 404)
+
+    def test_report_bundle_and_pdf_after_validated_brief(self) -> None:
+        created = self.client.post(
+            "/v1/advisor/runs", json={"address": CPER_DEMO_ADDRESS}
+        )
+        run_id = created.json()["run_id"]
+        self.client.get(f"/v1/advisor/runs/{run_id}")
+        bundle = self.client.get(f"/v1/advisor/runs/{run_id}/report-bundle")
+        self.assertEqual(bundle.status_code, 200, bundle.text)
+        body = bundle.json()
+        self.assertEqual(body["schema_version"], "RANGEMATCH_ADVISOR_REPORT_BUNDLE@0.1.0")
+        self.assertIsNotNone(body.get("generic_evidence_packet") or body.get("deterministic_brief"))
+        pdf = self.client.get(f"/v1/advisor/runs/{run_id}/buyer-brief.pdf")
+        self.assertEqual(pdf.status_code, 200, pdf.text)
+        self.assertTrue(pdf.content.startswith(b"%PDF"))
+        self.assertIn("application/pdf", pdf.headers.get("content-type", ""))

@@ -2,11 +2,54 @@
 
 from __future__ import annotations
 
-from typing import Any
+import re
+from typing import Any, Mapping
 
 from rangematch.advisor_brief import MESSAGE_BODIES
 
 REPORT_SCHEMA = "RANGEMATCH_ADVISOR_BUYER_REPORT@0.1.0"
+COPY_INTERNAL_ID = re.compile(
+    r"\b(?:ACTION|OBS|BOTTLENECK|CLAIM|VAR_F|INSIGHT)_[A-Z0-9_]+\b"
+)
+
+
+def validate_buyer_copy_quality(report: Mapping[str, Any]) -> list[dict[str, str]]:
+    """Reject structurally valid prose that still reads like internal model output."""
+    sections = report.get("sections") or {}
+    violations: list[dict[str, str]] = []
+    recommendation = str(sections.get("recommendation") or "").strip()
+    why = str(sections.get("why") or "").strip()
+    all_copy = " ".join(str(value or "") for value in sections.values())
+    if recommendation and recommendation.rstrip(".!").lower() in why.lower():
+        violations.append(
+            {
+                "code": "BUYER_COPY_REPEATS_RECOMMENDATION",
+                "message": "why repeats the recommendation instead of explaining it",
+            }
+        )
+    if "not first:" in all_copy.lower():
+        violations.append(
+            {
+                "code": "BUYER_COPY_INTERNAL_REASONING_LABEL",
+                "message": "buyer copy exposes the internal 'Not first' comparison label",
+            }
+        )
+    leaked = COPY_INTERNAL_ID.search(all_copy)
+    if leaked:
+        violations.append(
+            {
+                "code": "BUYER_COPY_INTERNAL_ID",
+                "message": leaked.group(0),
+            }
+        )
+    if why and why[-1] not in ".!?":
+        violations.append(
+            {
+                "code": "BUYER_COPY_INCOMPLETE_SENTENCE",
+                "message": "why must end as a complete sentence",
+            }
+        )
+    return violations
 
 
 def render_buyer_report(
@@ -55,10 +98,11 @@ def render_buyer_report(
             "professional_reminders": reminders,
         },
         "insight_ids": [str(row.get("insight_id")) for row in insights if row.get("insight_id")],
+        "insights": list(insights or []),
         "validation_violations": list(violations or []),
         "provenance": {
             **provenance,
-            "knowledge_scope": "PROVISIONAL_CPER_TRIAL_THREE_CARDS",
+            "knowledge_scope": "DEMO_APPROVED_FOUR_CARDS",
             "fallback_first_action": first_action,
         },
     }
@@ -91,15 +135,24 @@ def _why(info: dict[str, Any] | None, workbench: dict[str, Any]) -> str:
         None,
     )
     title = (water or {}).get("title") or "Livestock water is the larger operating-evidence gap"
-    if info and info.get("rejected_actions"):
+    rejected = []
+    for row in (info or {}).get("rejected_actions") or []:
+        if isinstance(row, Mapping):
+            reason = str(row.get("reason") or "").strip()
+            if reason:
+                rejected.append(reason)
+        elif str(row).strip():
+            rejected.append(str(row).strip())
+    title = title.rstrip(". ") + "."
+    if rejected:
+        deferred = rejected[0].rstrip(". ")
         return (
-            f"{title}. Access paper is usually cheaper than a field trip and decides "
-            "whether a visit has a job, so request it first. Repeating the precipitation "
-            "lookup would not reduce the current decision uncertainty."
+            f"{title} Access documents can be reviewed before travel and determine whether "
+            f"a visit has a defined job. Defer the competing step for now because {deferred.lower()}."
         )
     return (
-        f"{title}. Access documents can be requested before travel and decide whether "
-        "a weekend visit has a defined job."
+        f"{title} Access documents can be reviewed before travel and determine whether "
+        "a visit has a defined job."
     )
 
 
@@ -108,7 +161,11 @@ def _listing_jumps(leaps: list[dict[str, Any]], packet: dict[str, Any]) -> str:
         return " ".join(str(row.get("recommendation") or "").strip() for row in leaps if row.get("recommendation"))
     gaps = list(packet.get("claim_evidence_gaps") or [])
     if not gaps:
-        return "No listing claims were supplied. Read the public evidence, not a brochure."
+        return (
+            "No listing packet was supplied. Public evidence can support slope, rainfall, "
+            "a vegetation snapshot, mapped hydrography leads, and road contact. "
+            "A legal entrance and operating water still require transaction documents."
+        )
     parts = []
     for gap in gaps[:3]:
         claim = gap.get("claim") or gap.get("claim_id")

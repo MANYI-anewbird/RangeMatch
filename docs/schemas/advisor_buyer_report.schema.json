@@ -48,6 +48,13 @@
       "type": "array",
       "items": { "type": "string" }
     },
+    "insights": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "narrative": { "type": "object" },
+    "ranch_narrative": { "type": "object" },
+    "operating_profile_hash": { "type": ["string", "null"] },
     "validation_violations": {
       "type": "array",
       "items": {
@@ -69,6 +76,8 @@
         "prompt_version": { "type": "string" },
         "knowledge_scope": { "type": "string" },
         "generated_at": { "type": "string" }
+        ,"request_id": { "type": ["string", "null"] }
+        ,"retry_count": { "type": "integer", "minimum": 0 }
       }
     }
   }

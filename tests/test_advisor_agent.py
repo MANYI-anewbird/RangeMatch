@@ -8,8 +8,14 @@ from pathlib import Path
 
 from rangematch.advisor_agent import (
     CPER_DEMO_ADDRESS,
+    OUTCOME_EVIDENCE_INVESTIGATION_COMPLETED,
+    OUTCOME_EVIDENCE_INVESTIGATION_INCOMPLETE,
+    OUTCOME_PARCEL_SERVICE_UNAVAILABLE,
     reset_advisor_runs_for_tests,
     run_cper_advisor_agent,
+    set_advisor_mireye_hooks_for_tests,
+    _lookup_transport_result,
+    _unit_test_mireye_request,
 )
 from rangematch.advisor_contract import packet_hash, validate_three_page
 
@@ -43,7 +49,13 @@ class AdvisorAgentRunTests(unittest.TestCase):
         self.assertEqual([row["status"] for row in first["steps"]], ["SUCCEEDED"] * 8)
         self.assertEqual(first["mireye_live"]["mode"], "UNIT_TEST_HOOK")
         self.assertTrue(first["mireye_live"]["allow_network"])
-        self.assertEqual(first["mireye_live"]["lookup"]["error_class"], "UNIT_TEST_HOOK")
+        self.assertTrue(first["mireye_live"]["lookup"]["ok"])
+        self.assertEqual(first["mireye_live"]["lookup"]["disposition"], "resolved")
+        self.assertEqual(
+            first["investigation_outcome"], OUTCOME_EVIDENCE_INVESTIGATION_COMPLETED
+        )
+        self.assertTrue(first["location_resolved"])
+        self.assertTrue(first["parcel_geometry_confirmed"])
         self.assertGreaterEqual(len(first["agenda"]), 8)
         self.assertTrue(all(row["status"] != "PENDING" for row in first["agenda"]))
         mireye = next(
@@ -82,6 +94,9 @@ class AdvisorAgentRunTests(unittest.TestCase):
         result = run_cper_advisor_agent(address="Unknown Ranch, Nowhere, WY")
         self.assertEqual(result["status"], "FAILED")
         self.assertEqual(result["failed_step"], "RESOLVE_PARCEL")
+        self.assertEqual(
+            result["investigation_outcome"], OUTCOME_PARCEL_SERVICE_UNAVAILABLE
+        )
         self.assertIsNone(result["brief"])
 
     def test_empty_place_fails_at_accept(self) -> None:
@@ -90,12 +105,50 @@ class AdvisorAgentRunTests(unittest.TestCase):
         self.assertEqual(result["failed_step"], "ACCEPT_PLACE")
         self.assertIsNone(result["brief"])
 
-    def test_non_cper_demo_place_resolves_then_stops(self) -> None:
-        result = run_cper_advisor_agent(address="100 Demo Ranch Rd, Weld County, CO 80701")
-        self.assertEqual(result["status"], "FAILED")
-        self.assertEqual(result["failed_step"], "BUILD_AGENDA")
-        self.assertIn("CPER", result["error"])
+    def test_non_cper_unique_resolve_returns_limited_investigation(self) -> None:
+        address = "100 Demo Ranch Rd, Weld County, CO 80701"
+
+        def lookup_fn(addr: str, **kwargs):
+            return _lookup_transport_result(
+                ok=True,
+                address=addr,
+                disposition="resolved",
+                sanitized_response={
+                    "disposition": "resolved",
+                    "confidence": 0.9,
+                    "normalized_address": address,
+                    "accuracy_type": "rooftop",
+                    "accuracy": 1.0,
+                    "match_type": "address",
+                    "fetched_at": "2026-08-08T16:00:00+00:00",
+                    "request_id": "advisor_non_cper_demo",
+                    "lat": 40.5,
+                    "lng": -104.9,
+                    "resolved_location": {
+                        "lat": 40.5,
+                        "lng": -104.9,
+                        "source": "geocode",
+                    },
+                    "parcel_unavailable": True,
+                    "parcel_unavailable_reason": "no_parcel_at_point",
+                    "fields": {},
+                    "partial_failures": [],
+                },
+            )
+
+        set_advisor_mireye_hooks_for_tests(
+            request_fn=_unit_test_mireye_request, lookup_fn=lookup_fn
+        )
+        result = run_cper_advisor_agent(address=address)
+        self.assertEqual(result["status"], "SUCCEEDED")
+        self.assertEqual(
+            result["investigation_outcome"], OUTCOME_EVIDENCE_INVESTIGATION_INCOMPLETE
+        )
+        self.assertTrue(result["location_resolved"])
+        self.assertFalse(result["parcel_geometry_confirmed"])
         self.assertIsNone(result["brief"])
+        self.assertIsNone(result["packet"])
+        self.assertTrue(result["limited_investigation"]["cper_policy_blocked"])
 
     def test_cper_packet_stays_bound_to_this_run(self) -> None:
         live = run_cper_advisor_agent()

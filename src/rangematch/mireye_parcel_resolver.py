@@ -61,6 +61,9 @@ class MireyeLookupMapping:
     limitations: list[str] = field(default_factory=list)
     errors: list[dict[str, str]] = field(default_factory=list)
     raw_disposition: str | None = None
+    location_hints: list[dict[str, Any]] = field(default_factory=list)
+    no_match_reason: str | None = None
+    no_match_hint: str | None = None
 
 
 def load_mireye_parcel_lookup_scenario(scenario_id: str) -> dict[str, Any]:
@@ -77,6 +80,20 @@ def load_mireye_parcel_lookup_scenario(scenario_id: str) -> dict[str, Any]:
             f"fixture must be an object: {scenario_id}",
         )
     return data
+
+
+def _accuracy_from_match_method(match_method: Any) -> str | None:
+    """Latest /v1/lookup often sends match_method instead of accuracy_type."""
+    text = str(match_method or "").strip().lower()
+    if not text:
+        return None
+    if "nearest_rooftop" in text:
+        return "nearest_rooftop_match"
+    if "rooftop" in text:
+        return "rooftop"
+    if "range_interpolation" in text:
+        return "range_interpolation"
+    return None
 
 
 def _as_float(value: Any) -> float | None:
@@ -102,12 +119,34 @@ def _redact_owner_fields(obj: Any) -> Any:
     return obj
 
 
+def _wkt_to_geojson(text: str) -> dict[str, Any] | None:
+    raw = (text or "").strip()
+    if not raw.upper().startswith(("POLYGON", "MULTIPOLYGON")):
+        return None
+    try:
+        from shapely import from_wkt
+        from shapely.geometry import mapping
+    except ImportError:
+        return None
+    try:
+        mapped = mapping(from_wkt(raw))
+    except Exception:  # noqa: BLE001 — WKT is optional live-contract sugar
+        return None
+    if isinstance(mapped, Mapping):
+        return dict(mapped)
+    return None
+
+
 def _geometry_to_feature_collection(geom: Any) -> dict[str, Any] | None:
     if isinstance(geom, str):
-        try:
-            geom = json.loads(geom)
-        except json.JSONDecodeError:
-            return None
+        wkt = _wkt_to_geojson(geom)
+        if wkt is not None:
+            geom = wkt
+        else:
+            try:
+                geom = json.loads(geom)
+            except json.JSONDecodeError:
+                return None
     if not isinstance(geom, Mapping):
         return None
     gtype = geom.get("type")
@@ -135,6 +174,7 @@ def _extract_geocode_fields(raw: Mapping[str, Any]) -> dict[str, Any]:
         raw.get("accuracy_type")
         or geocode.get("accuracy_type")
         or raw.get("geocode_accuracy_type")
+        or _accuracy_from_match_method(raw.get("match_method") or geocode.get("match_method"))
     )
     accuracy = _as_float(
         raw.get("accuracy") if raw.get("accuracy") is not None else geocode.get("accuracy")
@@ -181,6 +221,7 @@ def _candidate_from_parcel_block(
         parcel.get("geometry")
         or parcel.get("parcel_geometry")
         or parcel.get("boundary")
+        or parcel.get("geometry_wkt")
     )
     fc = _geometry_to_feature_collection(geom_raw)
     if fc is None:
@@ -232,6 +273,36 @@ def _candidate_from_parcel_block(
     }
 
 
+def _location_hints_from_clarify(raw: Mapping[str, Any]) -> list[dict[str, Any]]:
+    hints: list[dict[str, Any]] = []
+    for item in list(raw.get("candidates") or [])[:3]:
+        if not isinstance(item, Mapping):
+            continue
+        lat = _as_float(item.get("lat"))
+        lng = _as_float(item.get("lng"))
+        has_geom = bool(
+            item.get("geometry")
+            or item.get("parcel_geometry")
+            or item.get("boundary")
+            or (isinstance(item.get("parcel"), Mapping) and item["parcel"].get("geometry"))
+        )
+        hints.append(
+            {
+                "label": item.get("resolved_address")
+                or item.get("normalized_address")
+                or item.get("label")
+                or item.get("address"),
+                "lat": lat,
+                "lng": lng,
+                "confidence": _as_float(item.get("confidence")),
+                "has_geometry": has_geom,
+                "candidate_id": None,
+                "geometry_hash": None,
+            }
+        )
+    return hints
+
+
 def _candidates_from_clarify(
     raw: Mapping[str, Any], *, request_id: str, retrieved_at: str | None
 ) -> list[dict[str, Any]]:
@@ -271,7 +342,11 @@ def map_mireye_lookup_to_parcel(raw_lookup: Mapping[str, Any]) -> MireyeLookupMa
     disposition = str(disposition_raw).strip().lower() if disposition_raw is not None else None
     retrieved_at = raw.get("fetched_at") or raw.get("retrieved_at")
     request_id = str(raw.get("request_id") or raw.get("id") or "mireye:lookup")
-    normalized = raw.get("normalized_address") or raw.get("address")
+    normalized = (
+        raw.get("normalized_address")
+        or raw.get("resolved_address")
+        or raw.get("address")
+    )
     if normalized is not None:
         normalized = str(normalized)
 
@@ -338,6 +413,8 @@ def map_mireye_lookup_to_parcel(raw_lookup: Mapping[str, Any]) -> MireyeLookupMa
 
     if disposition == "no_match":
         reason = str(raw.get("reason") or "no_match")
+        hint = raw.get("hint")
+        hint_text = str(hint).strip() if hint else None
         return MireyeLookupMapping(
             disposition=disposition,
             raw_disposition=str(disposition_raw),
@@ -353,14 +430,19 @@ def map_mireye_lookup_to_parcel(raw_lookup: Mapping[str, Any]) -> MireyeLookupMa
             retrieved_at=str(retrieved_at) if retrieved_at else None,
             parcel_unavailable=parcel_unavailable,
             parcel_unavailable_reason=parcel_unavailable_reason,
-            limitations=limitations + [f"Mireye no_match reason={reason}."],
+            limitations=limitations
+            + [f"Mireye no_match reason={reason}."]
+            + ([f"Mireye hint: {hint_text}"] if hint_text else []),
             errors=[{"code": "NO_MATCH", "message": reason}],
+            no_match_reason=reason,
+            no_match_hint=hint_text,
         )
 
     if disposition == "clarify":
         candidates = _candidates_from_clarify(
             raw, request_id=request_id, retrieved_at=str(retrieved_at) if retrieved_at else None
         )
+        location_hints = _location_hints_from_clarify(raw)
         if not candidates:
             # Clarify without parcel polygons — cannot auto-pick points as boundaries.
             return MireyeLookupMapping(
@@ -376,6 +458,7 @@ def map_mireye_lookup_to_parcel(raw_lookup: Mapping[str, Any]) -> MireyeLookupMa
                 confidence=confidence,
                 request_id=request_id,
                 retrieved_at=str(retrieved_at) if retrieved_at else None,
+                location_hints=location_hints,
                 limitations=limitations
                 + [
                     "clarify returned candidates without parcel polygons; "
@@ -402,6 +485,7 @@ def map_mireye_lookup_to_parcel(raw_lookup: Mapping[str, Any]) -> MireyeLookupMa
             request_id=request_id,
             retrieved_at=str(retrieved_at) if retrieved_at else None,
             candidates=candidates[:3],
+            location_hints=location_hints,
             limitations=limitations
             + ["Multiple Mireye clarify candidates — user must select exactly one."],
             errors=errors,

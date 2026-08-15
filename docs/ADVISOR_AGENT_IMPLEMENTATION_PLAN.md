@@ -1,5 +1,7 @@
 # RangeMatch Advisor Agent Implementation Plan
 
+> **Superseded for current execution order on 2026-08-14.** Retained as implementation history. Use `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`.
+
 > Status: `ACTIVE_IMPLEMENTATION_PLAN`  
 > Date: 2026-08-12  
 > Product authority: `docs/AGENT_THREE_PAGE_WORKFLOW_CONTRACT.md` (buyer shape); `docs/ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md` (LLM reasoning)  

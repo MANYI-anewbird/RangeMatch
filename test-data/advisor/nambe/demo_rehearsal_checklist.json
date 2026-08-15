@@ -1,0 +1,105 @@
+{
+  "checks": [
+    {
+      "name": "happy_path_run",
+      "status": "PASS",
+      "detail": "advisor_7dd65066aa054ae9"
+    },
+    {
+      "name": "initial_conclusion_v1",
+      "status": "PASS",
+      "detail": "Cattle operating case is conditional on the next cheap diligence step"
+    },
+    {
+      "name": "snapshot_initial_one_page",
+      "status": "PASS",
+      "detail": "bytes=2786"
+    },
+    {
+      "name": "answer_revises_conclusion",
+      "status": "PASS",
+      "detail": "CONCLUSION_CHANGED"
+    },
+    {
+      "name": "grounded_chat_readonly",
+      "status": "PASS",
+      "detail": "WATER"
+    },
+    {
+      "name": "snapshot_revised_no_leaks",
+      "status": "PASS",
+      "detail": "clean"
+    },
+    {
+      "name": "snapshot_revised_one_page",
+      "status": "PASS",
+      "detail": "saved standby Snapshot"
+    },
+    {
+      "name": "failure_parcel_not_found",
+      "status": "PASS",
+      "detail": "PARCEL_NOT_FOUND"
+    },
+    {
+      "name": "failure_parcel_service_unavailable",
+      "status": "PASS",
+      "detail": "PARCEL_SERVICE_UNAVAILABLE"
+    },
+    {
+      "name": "deepseek_fallback_conclusion",
+      "status": "PASS",
+      "detail": "DETERMINISTIC_FALLBACK"
+    },
+    {
+      "name": "deepseek_fallback_snapshot",
+      "status": "PASS",
+      "detail": "1 page"
+    },
+    {
+      "name": "env_example_no_secrets",
+      "status": "PASS",
+      "detail": "placeholders only"
+    },
+    {
+      "name": "readme_mentions_snapshot",
+      "status": "PASS",
+      "detail": "yes"
+    },
+    {
+      "name": "one_pager_aligned",
+      "status": "PASS",
+      "detail": "current loop"
+    }
+  ],
+  "blockers": [],
+  "notes": [],
+  "snapshot_meta": {
+    "run_id": "advisor_7dd65066aa054ae9",
+    "deal_context_version": 2,
+    "geometry_hash": "6ed54dc96210c4841698b88aab087799039272e189eabd879540d813c6384470",
+    "packet_hash": "f6339dc073fa82c096d50db441c2f406e3a8eb7cef3b0155605a1ffd740222ed",
+    "operating_profile_hash": "2c2ce4ae0f54b105a782419e81ffdb466d14754502d6953e64e5f73f97ef49a4",
+    "conclusion_source": "DETERMINISTIC_FALLBACK",
+    "change_status": "CONCLUSION_CHANGED",
+    "headline": "Seasonal grazing reading is open, but livestock-water use is still unverified"
+  },
+  "snapshot_view_excerpt": {
+    "headline": "Seasonal grazing reading is open, but livestock-water use is still unverified",
+    "summary": "With seasonal grazing as the buyer frame, the public evidence still supports only a provisional cattle operating picture. The drink theme remains visible, yet developed drinkers are not established from remote layers. The first spend stays ",
+    "what_changed": {
+      "mode": "ANSWERED",
+      "agent_asked": "Are you evaluating this property for seasonal grazing or a year-round cow-calf operation?",
+      "buyer_answered": "SEASONAL GRAZING",
+      "update_summary": "The operating reading changed in confidence, headline, primary_constraint, summary after incorporating the unverified user answer.",
+      "change_status": "CONCLUSION_CHANGED"
+    },
+    "next_action": "Ask whether the seller claims a developed livestock-water system, then keep access paper ahead of travel.",
+    "spend_class": "REMOTE_INFORMATION_REQUEST",
+    "footer_version": 2
+  },
+  "summary": {
+    "pass": 14,
+    "fail": 0,
+    "blockers": []
+  }
+}

@@ -1,5 +1,7 @@
 # Advisor Insight and Reasoning Contract
 
+> **Superseded as the current LLM product contract on 2026-08-14.** Retained for earlier safety rationale. Current authority is `RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`: interpretation may be provisional and directional, while physical facts remain strict.
+
 > Status: `IMPLEMENTABLE_PRODUCT_CONTRACT` — P0 review 2026-08-12 incorporated; not `LOCKED` until schema + CPER fixtures exist  
 > Date: 2026-08-12  
 > Product authority: this document for LLM reasoning; `AGENT_THREE_PAGE_WORKFLOW_CONTRACT.md` for the three-page buyer shape  

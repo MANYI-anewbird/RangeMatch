@@ -1,0 +1,34 @@
+{
+  "knowledge_id": "TERRAIN_CATTLE_INTERPRETATION_001",
+  "topic": "terrain",
+  "statement": "Parcel terrain readings describe elevation, slope, and related configuration context for cattle movement and usable ground. They are not a legal-access finding, fence inventory, or stocking-rate calculation. Steep or fragmented ground may condition the view only when parcel evidence supports it; missing terrain depth is not proof the land is unusable.",
+  "source_id": "SRC_TERRAIN_DEMO_001",
+  "source_title": "Terrain interpretation for cattle natural foundation (Demo-approved)",
+  "source_url_or_citation": "docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md",
+  "source_publisher": "RangeMatch Demo knowledge card",
+  "source_date": "2026-08-15",
+  "reviewed_by": "RangeMatch Demo review",
+  "reviewed_at": "2026-08-15",
+  "review_basis": "Demo-approved cattle natural-environment interpretation limit.",
+  "effective_jurisdictions": [
+    "US_GENERAL"
+  ],
+  "species_scope": [
+    "cattle"
+  ],
+  "review_status": "APPROVED",
+  "allowed_use": [
+    "domain_prior",
+    "diligence_question",
+    "conditional_reasoning"
+  ],
+  "prohibited_use": [
+    "parcel_fact",
+    "suitability_verdict",
+    "legal_conclusion",
+    "stocking_advice"
+  ],
+  "expires_or_review_after": "2026-11-15",
+  "version": "0.1-demo",
+  "content_hash": "sha256:3bbd1043e27d7e155d3c85ccf65ee99f7b3f412f466acbab0bff4488e9c8fb0c"
+}

@@ -1,7 +1,15 @@
 {
+  "knowledge_id": "LEGAL_ACCESS_DILIGENCE_001",
+  "topic": "legal_access",
+  "statement": "Road contact with a mapped public-road layer is not a recorded legal entrance. Generate questions for title or counsel about the deed, a recorded easement, the entrance location, maintenance duty, and exceptions. Do not state that a right exists, is missing, or is defective.",
+  "source_id": "SRC_ACCESS_DEMO_001",
+  "source_title": "Access questions for title/counsel (Demo-approved card)",
+  "source_url_or_citation": "docs/ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md",
+  "source_publisher": "RangeMatch Demo knowledge card — not legal advice",
   "source_date": "2026-08-12",
-  "reviewed_by": "RangeMatch CPER trial",
+  "reviewed_by": "RangeMatch Demo review",
   "reviewed_at": "2026-08-12",
+  "review_basis": "Demo-approved for buyer diligence questions only. Not a title opinion.",
   "effective_jurisdictions": [
     "US_GENERAL"
   ],
@@ -9,25 +17,17 @@
     "cattle",
     "sheep"
   ],
-  "review_status": "PROVISIONAL_FOR_CPER_TEST",
+  "review_status": "APPROVED",
+  "allowed_use": [
+    "diligence_question",
+    "conditional_reasoning"
+  ],
   "prohibited_use": [
     "parcel_fact",
     "suitability_verdict",
     "legal_conclusion"
   ],
-  "expires_or_review_after": "2026-09-12",
-  "version": "0.1-trial",
-  "knowledge_id": "LEGAL_ACCESS_DILIGENCE_001",
-  "topic": "legal_access",
-  "statement": "Road contact with a mapped public-road layer is not a recorded legal entrance. Generate questions for title or counsel about the deed, a recorded easement, the entrance location, maintenance duty, and exceptions. Do not state that a right exists, is missing, or is defective.",
-  "source_id": "SRC_ACCESS_QUESTIONS_TRIAL_001",
-  "source_title": "Access questions for title/counsel (CPER trial card)",
-  "source_url_or_citation": "docs/ADVISOR_INSIGHT_AND_REASONING_CONTRACT.md",
-  "source_publisher": "RangeMatch trial card — not an official knowledge base",
-  "review_basis": "Provisional CPER test only; questions, not legal advice.",
-  "allowed_use": [
-    "diligence_question",
-    "conditional_reasoning"
-  ],
-  "content_hash": "sha256:463eaba3812ba4ae9cf8c7ddcd4d12e4e938a6fee0867b8043e597fdf299ab2d"
+  "expires_or_review_after": "2026-11-12",
+  "version": "0.2-demo",
+  "content_hash": "sha256:82b051fe88d86fa6059bdad4c41f90df266899a6b44f5b848bebaefa3daf589f"
 }

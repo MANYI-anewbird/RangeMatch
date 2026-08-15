@@ -1,8 +1,8 @@
 # RangeMatch
 
-**Know what to verify before you visit or spend.**
+**Understand a parcel's natural foundation for cattle before deeper field work.**
 
-RangeMatch is an AI buyer’s agent for U.S. ranch listings. **Mireye** anchors the physical parcel. RangeMatch combines that parcel context with federal land evidence and listing-claim forensics, then decides the next diligence action — not suitability, not stocking, not buy/no-buy.
+RangeMatch is an AI natural-environment advisor for U.S. cattle-land screening. **Mireye** confirms the parcel and supplies the primary physical-world profile. A deterministic Gap Detector calls RangeMatch supplements only for missing capabilities; a validated LLM then explains the resulting Terrain, Forage, Water, Climate, and Soil picture for the buyer's intended cattle use.
 
 This is not a map website. The competition Demo is a deterministic Agent: reason over claims vs evidence, decide bottleneck and action order, act with copy-ready messages.
 
@@ -12,12 +12,50 @@ This is not a map website. The competition Demo is a deterministic Agent: reason
 
 One-pager: `docs/RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md`
 
-## Mireye Challenge Demo (deterministic, no live LLM)
+## Competition Demo
+
+RangeMatch confirms a parcel through Mireye, builds a five-domain Natural Cattle Profile, combines it with reviewed cattle-environment knowledge and buyer context, asks one question that can change the interpretation, and exports a validated two-page Natural Cattle Foundation report.
+
+**Nambe is not a product prerequisite.** It is the verified Demo path, a regression fixture, and a standby exhibit if the network is down. CPER is an engineering fixture only.
+
+**Demo entry is free-form** U.S. address or `lat,lng`. Failed lookups stay failed. The Agent never silently substitutes Nambe or CPER. Judges may opt into the verified Nambe Demo explicitly; that creates a new isolated run.
+
+```text
+free-form address / lat,lng
+→ Mireye POST /v1/lookup
+→ judge confirms exactly one polygon
+→ Mireye cattle-environment Profile + confirmed-geometry core
+→ deterministic Gap Detector
+→ only planned F01–F05/F08 supplements
+→ Combined Environmental Evidence → Natural Cattle Profile
+→ Deal Context v1 + validated LLM interpretation + one question
+→ answer → Deal Context v2 → revised interpretation
+→ two-page Natural Cattle Foundation report
+```
+
+It does **not** claim a complete livestock operating assessment, cattle/sheep comparison, fence/facility detection, stocking rates, legal conclusions, or national production validation.
+
+### Environment
+
+Copy `.env.example` to `.env`. Required for live Demo:
+
+| Variable | Role |
+|---|---|
+| `MIREYE_API_BASE_URL` | Mireye API origin |
+| `MIREYE_API_TOKEN` | Bearer token (canonical). `MIREYE_API_KEY` is a legacy alias |
+| `RANGEMATCH_LLM_PROVIDER` | `DEEPSEEK` or `OPENAI` for live prose, otherwise `FIXTURE` / omit |
+| `DEEPSEEK_API_KEY` | DeepSeek key when provider is `DEEPSEEK` |
+| `RANGEMATCH_LLM_API_KEY` | Shared live-LLM key alias (DeepSeek or OpenAI) |
+
+Never commit `.env`.
+
+### Start
 
 ```bash
-# Terminal A — Agent API (load MIREYE_API_TOKEN from .env)
+# Terminal A — Agent API (ports are fixed: API 8001, UI 5273)
 export PYTHONPATH=src
-uvicorn rangematch.api:app --reload --port 8001 --env-file .env
+.venv/bin/uvicorn rangematch.api:app --reload --port 8001 --env-file .env \
+  --reload-exclude '.venv' --reload-exclude '.venv-livegate' --reload-exclude 'web'
 
 # Terminal B — Demo UI
 cd web && npm install && npm run dev
@@ -25,27 +63,31 @@ cd web && npm install && npm run dev
 
 Open **http://127.0.0.1:5273/advisor-demo**
 
-RangeMatch pins this Demo to port **5273** (`strictPort: true`) so it does not collide with other Vite apps on 5173/5174. If 5273 is busy, stop that process and restart `npm run dev`.
+RangeMatch pins this Demo to port **5273** (`strictPort: true`). If 5273 is busy, stop that process and restart `npm run dev`.
 
-The page does not load a pre-written Brief. Click **Run investigation**. The API executes:
+### Support scope and confirmation
+
+- **Demo entry:** free-form U.S. street address or `lat,lng`. APN-only lookup is not supported. Verified Nambe is an explicit opt-in Demo run, not a silent fallback.
+- **Messy language:** a standard street (`4213 Nambe Rd`) or `lat,lng` goes straight to Mireye. Phrases like `near Nunn Colorado` may be tidied by the LLM into a structured lookup. The LLM cannot invent coordinates, polygons, or pick a parcel. Mireye still locates the place; you still confirm the boundary. If cleanup fails, add a state, ZIP, or coordinates.
+- **Required confirm:** if Mireye returns one or more parcel polygons, the judge must confirm exactly one boundary. The Agent does not auto-pick.
+- **After confirm:** Mireye builds the primary Profile; the Gap Detector invokes only the F01–F05/F08 supplements needed for missing capabilities. F06 geometry is always-on core and F07 is never triggered by this path.
+- **Adapter miss:** a timed-out or missing federal source still yields an honest limited investigation or Snapshot path. It does not swap another parcel.
+- **Lookup miss:** `PARCEL_NOT_FOUND` vs `PARCEL_SERVICE_UNAVAILABLE` fail closed with named outcomes. No fake report.
+- **LLM miss:** DeepSeek/OpenAI failure fails soft to a validated deterministic conclusion and Snapshot.
+- **CPER:** engineering fixture only, not a nationwide confirmation model.
+- **Standby PDF:** keep a saved Snapshot from a successful Nambe run for network-down exhibit (do not substitute it for a failed live parcel).
+
+Buyer-facing progress:
 
 ```text
-Accept place → Resolve parcel → Call Mireye (live HTTP)
-→ Build agenda → Run agenda → Compare claims → Order actions → Validate brief
+Confirm parcel
+Build ranch picture
+Trace feed, water and movement
+Write advisor brief
+Validate report
 ```
 
-Mireye is a real `allow_network=true` call (`/v1/lookup` + `/v1/fetch`). Success or `BLOCKED_EXTERNAL` is the HTTP/token/API result. Failed Mireye contexts are not replaced with fixtures. F01–F08 on this Demo still use the CPER engineering land profile.
-
-Each run returns a new `run_id`, `generated_at`, and `packet_hash`. CPER listing claims stay fixed. OpenAI is not required. The legacy HOLD buyer dashboard is unchanged.
-
-```text
-Mireye / parcel context
-→ federal evidence + listing claims
-→ Packet → gaps → bottleneck + action
-→ three-page Brief → Validator → Demo UI
-```
-
-CPER Demo story: a buyer received “excellent water / easy access / ready for cattle,” and is deciding whether to fly this weekend or request title first. Water is the largest evidence gap; access paper is the first action; visit purpose depends on that document.
+If the OpenAI key is missing or validation fails, the Agent uses a deterministic cattle story for **this** confirmed parcel. It does not silently swap Nambe or CPER.
 
 ## Tests
 
@@ -93,6 +135,8 @@ cp .env.example .env
 # set MIREYE_API_TOKEN when calling Mireye (legacy MIREYE_API_KEY also accepted); never commit secrets
 
 python -m pip install -e ".[api]"
+# `.[api]` includes jsonschema plus live adapter extras: numpy, netCDF4, rasterio.
+# Missing adapter packages must not crash Advisor; Factors become SOURCE_UNAVAILABLE.
 export PYTHONPATH=src
 python -m unittest discover -s tests
 python -m rangematch.cli evaluate test-data/land-profiles/land_profile_cper_001.json
@@ -106,6 +150,10 @@ Supports fixture replay, existing Land Profiles, and confirmed live parcel resol
 python -m pip install -e ".[api]"
 export PYTHONPATH=src
 uvicorn rangematch.api:app --reload --port 8001 --env-file .env
+# Use the same venv that installed netCDF4/rasterio. A missing optional
+# adapter dependency marks that Factor SOURCE_UNAVAILABLE; it does not abort RUN_AGENDA.
+# After a validated Brief: GET /v1/advisor/runs/{id}/buyer-brief.pdf
+# Persist a run: GET /v1/advisor/runs/{id}/report-bundle
 ```
 
 Health:
@@ -172,10 +220,10 @@ Default provider is `FIXTURE` (no network, no key).
 
 ```bash
 export RANGEMATCH_LLM_PROVIDER=FIXTURE
-# Live (optional):
-# export RANGEMATCH_LLM_PROVIDER=OPENAI
-# export RANGEMATCH_LLM_MODEL=<supported configured model>
-# export RANGEMATCH_LLM_API_KEY=...   # never commit
+# Live (optional — DeepSeek is the current Demo live path):
+# export RANGEMATCH_LLM_PROVIDER=DEEPSEEK
+# export RANGEMATCH_LLM_MODEL=deepseek-chat
+# export DEEPSEEK_API_KEY=...   # never commit
 ```
 
 Only reports that pass the deterministic validator are displayed as LLM narratives. If the provider is unavailable or validation fails, the UI preserves the investigation and presents a clearly labeled deterministic fallback assembled from Engine output. See `docs/LLM_AUTHORITY_AND_REPORT_SPEC.md`.
