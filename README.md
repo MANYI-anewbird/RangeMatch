@@ -1,64 +1,109 @@
 # RangeMatch
 
-**Understand a parcel's natural foundation for cattle before deeper field work.**
+**The question:** A listing says “good grass, good water, ready for cattle.” Before you spend on a site visit, is this *parcel’s* natural environment actually a foundation for cattle — or just a story?
 
-RangeMatch is an AI natural-environment advisor for U.S. cattle-land screening. **Mireye** confirms the parcel and supplies the **primary Physical World Layer**. A deterministic Gap Detector calls RangeMatch supplements only for missing capabilities. Reviewed cattle-environment knowledge then combines with that parcel evidence so a grounded LLM can produce a directional natural-foundation assessment and support open-ended conversation about **this** property.
+RangeMatch is a **parcel-grounded land advisor** for U.S. ranch buyers and buyer-side brokers. Confirm the boundary, read terrain / forage / water / climate / soil for **this** property, get a directional natural-foundation report, then ask follow-up questions that stay on this parcel.
 
-Unified product sentence:
+**How we built that:** **Mireye** confirms the polygon and supplies the physical-world layer; a Gap Detector calls public supplements only where evidence is missing; a grounded LLM writes the buyer narrative and **cannot invent** wells, fences, stocking rates, or a buy/no-buy.
 
-> RangeMatch confirms a parcel with Mireye, builds a parcel-specific physical-world profile, fills material evidence gaps with targeted public sources, and combines that evidence with reviewed cattle knowledge. A grounded LLM then produces a directional natural-foundation assessment and supports open-ended conversation about that specific property. The advisor narrative may span multiple pages; the evidence appendix always begins on a new page.
+One-pager: [`docs/RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md`](docs/RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md)
 
-- **Primary payer:** buyer-side ranch broker / land advisor
-- **Beneficiary / second payer:** serious ranch buyer
-- **Demo geometry:** CPER is an engineering test geometry, not a real listing
+---
 
-One-pager: `docs/RANGEMATCH_MIREYE_CHALLENGE_ONE_PAGER.md`  
-Docs map: `docs/README.md`  
-Canonical product + Agent flow: `docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`  
-Chat contract: `docs/TWO_BRAIN_ADVISOR_CHAT_CONTRACT.md`
+## Decision this supports
 
-## Competition Demo
+Buyers already have a process: pick a region, short-list listings, then hit the expensive question — **is this land credible enough to justify travel and specialists?**
 
-RangeMatch confirms a parcel through Mireye, builds a five-domain Natural Cattle Profile (Terrain / Forage / Water / Climate / Soil), combines it with reviewed cattle-environment knowledge and buyer Deal Context, asks one question that can change the interpretation, exports a Natural Cattle Foundation PDF (variable-length advisor narrative + new-page Appendix), and offers open-ended grounded chat over the same two brains.
+That check is supposed to be cheap desk work. Today it is ChatGPT plus a pile of unconnected maps. Listings sell. Generic AI talks. GIS dumps layers. Nobody translates *this parcel’s* physics into an operating reading.
 
-**Nambe is not a product prerequisite.** It is the verified Demo path, a regression fixture, and a standby exhibit if the network is down. CPER is an engineering fixture only.
+Two decisions RangeMatch is built for:
 
-**Demo entry is free-form** U.S. address or `lat,lng`. Failed lookups stay failed. The Agent never silently substitutes Nambe or CPER. Judges may opt into the verified Nambe Demo explicitly; that creates a new isolated run.
+1. **Go deeper or stop** — does the natural environment look Promising, Conditional, or Insufficient for cattle, and what factor is in control?
+2. **What to verify next** — one high-value environmental question, then a revised reading after you answer.
 
-```text
-free-form address / lat,lng
-→ Mireye POST /v1/lookup
-→ judge confirms exactly one polygon
-→ Mireye cattle-environment Profile + confirmed-geometry core
-→ deterministic Gap Detector
-→ only planned F01–F05/F08 supplements (F06 always-on; F07 Appendix-only)
-→ Combined Environmental Evidence → Natural Cattle Profile
-→ Deal Context v1 + validated LLM interpretation + one question
-→ answer → Deal Context v2 → revised interpretation
-→ Natural Cattle Foundation PDF (narrative pages + Appendix on a new page)
-→ open-ended two-brain grounded chat (read-only)
-```
+Primary payer: buyer-side ranch broker / land advisor. Beneficiary: the serious ranch buyer.
 
-It does **not** claim a complete livestock operating assessment, cattle/sheep comparison, fence/facility detection, stocking rates, legal conclusions, or national production validation.
+---
 
-### Environment
+## What you get
 
-Copy `.env.example` to `.env`. Required for live Demo:
+1. A **confirmed parcel** — you pick the polygon; the agent does not auto-pick.
+2. A **Natural Cattle Profile** — Terrain, Forage, Water, Climate, Soil — with honest gaps.
+3. A **directional judgment** plus the controlling natural factor.
+4. **One refining question**, then an updated view.
+5. A **Natural Cattle Foundation PDF** — advisor narrative (variable length) + evidence appendix on a new page.
+6. **Grounded chat** — read-only, this parcel only.
+
+Demo geometry: enter a free-form U.S. address or `lat,lng`. **Nambe** is an explicit opt-in demo path, not a silent fallback. **CPER** is an engineering fixture, not a listing.
+
+---
+
+## What it will not claim
+
+No suitability score. No stocking rate / AUM. No title, easement, or legal-access opinion. No water-rights or drinker capacity. No fence / facility detection. No cattle-vs-sheep ranking. No buy / no-buy.
+
+The land did not fail. The *match* to an intended use is what we read — and even that reading stays directional.
+
+---
+
+## How we got there (short)
+
+| Step | Why it matters |
+|---|---|
+| Confirm one Mireye polygon | Generic AI has language; it does not have *this* boundary |
+| Mireye environmental profile first | Physical facts stay deterministic |
+| Gap Detector + only missing F01–F08 supplements | No mandatory full Factor tour; F06 geometry always-on; F07 appendix-only |
+| Cattle knowledge + Deal Context | The LLM interprets evidence; it does not invent the physical world |
+| One question → revised interpretation → PDF + chat | The output a broker would actually send a buyer |
+
+Failed lookup stays failed (`PARCEL_NOT_FOUND` vs `PARCEL_SERVICE_UNAVAILABLE`). LLM failure fails soft to validated deterministic prose for this parcel — not another property.
+
+---
+
+## What’s in the repo
+
+| Path | |
+|---|---|
+| [`docs/README.md`](docs/README.md) | Read order for judges / new readers |
+| [`docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md`](docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md) | Canonical product + agent authority |
+| [`docs/TWO_BRAIN_ADVISOR_CHAT_CONTRACT.md`](docs/TWO_BRAIN_ADVISOR_CHAT_CONTRACT.md) | Chat grounding |
+| [`docs/NATURAL_CATTLE_FOUNDATION_REPORT_TEMPLATE.md`](docs/NATURAL_CATTLE_FOUNDATION_REPORT_TEMPLATE.md) | Buyer report contract |
+| `src/rangematch/` | Agent API |
+| `web/` | Advisor Demo UI (`/advisor-demo`) |
+| `docs/archive/` | Superseded product notes and dated gates — not current authority |
+
+---
+
+## How we built it (technical)
+
+Stack: **Mireye** `POST /v1/lookup` + environmental profile → FastAPI agent (`rangematch.api`) → deterministic Gap Detector → optional F01–F08 adapters → Combined Environmental Evidence → Natural Cattle Profile → Deal Context v1/v2 → DeepSeek or OpenAI (or `FIXTURE`) for interpretation and chat → `fpdf2` PDF. UI: Vite on port **5273**.
+
+**Two brains.** Physical brain: Mireye + targeted public supplements. Cattle brain: reviewed cattle-environment knowledge. The advisor layer may write prose; it may not create wells, fences, stocking rates, legal access, or a purchase recommendation. Malformed LLM output fails soft.
+
+**Supplements.** F01–F08 run only for deterministic gaps. F06 (parcel configuration / geometry) is always-on core. F07 (roads / physical access) is appendix-only and cannot control the natural-foundation judgment (`HUMAN_ACCESS_INFRA_APPENDIX_ONLY`).
+
+**Demo contract.** Free-form U.S. street address or `lat,lng`. APN-only lookup is not supported. Messy phrases (`near Nunn Colorado`) may be tidied into a structured lookup; the LLM still cannot invent coordinates or pick a parcel. You confirm exactly one polygon. The agent never silently substitutes Nambe or CPER.
+
+**Legacy path.** The frozen F01–F08 Factor stack, Planner/Executor, and One-Parcel investigation API remain for science and regression. They are not the Advisor Demo story. Do not restore product behavior from `docs/archive/` without an explicit reopen.
+
+**Current Demo status (2026-08-15):** Mireye-first collection, five-domain Profile, interpretation + one question, variable-length PDF + new-page appendix, two-brain chat, DeepSeek fail-soft, `/advisor-demo` UI — all shipped. Local baseline: **687** backend tests, **34** UI tests.
+
+---
+
+## Setup
+
+Copy `.env.example` to `.env`. Never commit `.env`.
 
 | Variable | Role |
 |---|---|
 | `MIREYE_API_BASE_URL` | Mireye API origin |
-| `MIREYE_API_TOKEN` | Bearer token (canonical). `MIREYE_API_KEY` is a legacy alias |
-| `RANGEMATCH_LLM_PROVIDER` | `DEEPSEEK` or `OPENAI` for live prose, otherwise `FIXTURE` / omit |
-| `DEEPSEEK_API_KEY` | DeepSeek key when provider is `DEEPSEEK` |
-| `RANGEMATCH_LLM_API_KEY` | Shared live-LLM key alias (DeepSeek or OpenAI) |
-
-Never commit `.env`.
-
-### Start
+| `MIREYE_API_TOKEN` | Bearer token (`MIREYE_API_KEY` is a legacy alias) |
+| `RANGEMATCH_LLM_PROVIDER` | `DEEPSEEK` or `OPENAI` for live prose; otherwise `FIXTURE` |
+| `DEEPSEEK_API_KEY` | When provider is `DEEPSEEK` |
+| `RANGEMATCH_LLM_API_KEY` | Shared live-LLM alias |
 
 ```bash
-# Terminal A — Agent API (ports are fixed: API 8001, UI 5273)
+# Terminal A — Agent API (API 8001, UI 5273)
 export PYTHONPATH=src
 .venv/bin/uvicorn rangematch.api:app --reload --port 8001 --env-file .env \
   --reload-exclude '.venv' --reload-exclude '.venv-livegate' --reload-exclude 'web'
@@ -67,33 +112,7 @@ export PYTHONPATH=src
 cd web && npm install && npm run dev
 ```
 
-Open **http://127.0.0.1:5273/advisor-demo**
-
-RangeMatch pins this Demo to port **5273** (`strictPort: true`). If 5273 is busy, stop that process and restart `npm run dev`.
-
-### Support scope and confirmation
-
-- **Demo entry:** free-form U.S. street address or `lat,lng`. APN-only lookup is not supported. Verified Nambe is an explicit opt-in Demo run, not a silent fallback.
-- **Messy language:** a standard street or `lat,lng` goes straight to Mireye. Phrases like `near Nunn Colorado` may be tidied by the LLM into a structured lookup. The LLM cannot invent coordinates, polygons, or pick a parcel. Mireye still locates the place; you still confirm the boundary.
-- **Required confirm:** if Mireye returns one or more parcel polygons, the judge must confirm exactly one boundary. The Agent does not auto-pick.
-- **After confirm:** Mireye builds the primary Profile; the Gap Detector invokes only the supplements needed for missing capabilities. F06 geometry is always-on core; F07 is Appendix-only and cannot control the natural-foundation judgment.
-- **Adapter miss:** a timed-out or missing federal source still yields an honest limited investigation. It does not swap another parcel.
-- **Lookup miss:** `PARCEL_NOT_FOUND` vs `PARCEL_SERVICE_UNAVAILABLE` fail closed with named outcomes. No fake report.
-- **LLM miss:** DeepSeek/OpenAI failure fails soft. Interpretation and chat keep a validated deterministic fallback for this parcel; field-level soft fallbacks may apply inside natural-foundation prose without discarding the whole run.
-- **CPER:** engineering fixture only, not a nationwide confirmation model.
-- **Standby PDF:** keep a saved report from a successful Nambe run for network-down exhibit (do not substitute it for a failed live parcel).
-
-Buyer-facing progress:
-
-```text
-Confirm parcel
-Build natural cattle foundation
-Ask one refining question
-Download report
-Open grounded chat
-```
-
-## Tests
+Open **http://127.0.0.1:5273/advisor-demo**. Port 5273 is pinned (`strictPort: true`).
 
 ```bash
 export PYTHONPATH=src
@@ -101,44 +120,8 @@ export PYTHONPATH=src
 cd web && npm test
 ```
 
-Current baseline (2026-08-15 local): **687** backend tests passed; **34** UI tests passed.
+---
 
-## Current Demo status
+## License
 
-```text
-Mireye-first collection (MIREYE_FIRST): DONE
-Natural Cattle Profile (Terrain / Forage / Water / Climate / Soil): DONE
-Natural Foundation Interpretation + one refining question: DONE
-Variable-length Natural Cattle Foundation PDF + new-page Appendix: DONE
-Open-ended two-brain grounded chat (read-only): DONE
-DeepSeek fail-soft + field-level soft fallbacks: DONE
-Advisor Demo UI (/advisor-demo): DONE
-```
-
-See:
-
-- `docs/README.md` — judge documentation map
-- `docs/RANGEMATCH_PRODUCT_AND_AGENT_CODE_FLOW.md` — product + Agent authority
-- `docs/TWO_BRAIN_ADVISOR_CHAT_CONTRACT.md` — chat grounding contract
-- `docs/NATURAL_CATTLE_FOUNDATION_REPORT_TEMPLATE.md` — buyer report template
-- `web/README.md` — Demo UI run notes
-
-## Secrets
-
-- Use `.env` locally (gitignored).
-- Only `.env.example` is committed.
-- Do not put API keys in docs, fixtures, or Skills.
-
-<details>
-<summary>Legacy engineering interfaces (not the competition Demo narrative)</summary>
-
-The frozen F01–F08 Factor stack, Planner/Executor, One-Parcel investigation API, Constrained Intent Parser, and Engine HOLD buyer-report path remain in the repo for science and regression. They are **not** the Mireye-first Advisor Demo story.
-
-- Factor / Planner contracts: `docs/F01_F08_UNIFIED_OUTPUT_CONTRACT.md`, `docs/PLANNER_EXECUTOR_SPEC.md`, `docs/PLANNER_ROUTING_SPEC.md`, `docs/AGENT_ORCHESTRATION_SPEC.md`
-- Parcel resolution + One-Parcel API: `docs/PARCEL_RESOLUTION_CONTRACT.md`, `docs/ONE_PARCEL_API_SPEC.md`
-- Legacy LLM buyer-report authority (archived): `docs/archive/product-history/LLM_AUTHORITY_AND_REPORT_SPEC.md`
-- CPER fixture CLI / investigation replay: `python -m rangematch.cli evaluate …`, `POST /v1/investigations` with `execution_source: DEMO_FIXTURE`
-
-Do not restore product behavior from these files without an explicit governance reopen.
-
-</details>
+See [LICENSE](LICENSE).
